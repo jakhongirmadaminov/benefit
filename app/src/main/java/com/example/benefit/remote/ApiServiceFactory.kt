@@ -3,6 +3,7 @@ package com.example.benefit.remote
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.example.benefit.util.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -24,7 +25,7 @@ object ApiServiceFactory {
             .build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://domvet.sab-lab.com/")
+            .baseUrl(Constants.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(makeGson()))
             .build()

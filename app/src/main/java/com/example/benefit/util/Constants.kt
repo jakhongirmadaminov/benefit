@@ -1,34 +1,36 @@
-package com.sablab.domvetdoctor.util
+package com.example.benefit.util
 
 /**
  * Created by jahon on 06-May-20
  */
 object Constants {
 
-   const val CODE_STATUS_ACTIVE="1"
-    const val YANDEX_API = "522fb9ba-acc3-4c2a-ad64-371448cace44"
-    const val CLOUD_PAYMENTS_PUB_KEY = "pk_0fdbf3e5b0232679716834777af31"
-    val months = arrayOf("Январь",
-                         "Февраль",
-                         "Март",
-                         "Апрель",
-                         "Май",
-                         "Июнь",
-                         "Июль",
-                         "Август",
-                         "Сентябрь",
-                         "Октябрь",
-                         "Ноябрь",
-                         "Декабрь",
-                         "December")
+    const val BASE_URL = "http://ben.khm473.ru/"
+    val months = arrayOf(
+        "Январь",
+        "Февраль",
+        "Март",
+        "Апрель",
+        "Май",
+        "Июнь",
+        "Июль",
+        "Август",
+        "Сентябрь",
+        "Октябрь",
+        "Ноябрь",
+        "Декабрь",
+        "December"
+    )
 
-    val weekDays = arrayOf("Понедельник",
-                           "Вторник",
-                           "Среда",
-                           "Четверг",
-                           "Пятница",
-                           "Суббота",
-                           "Воскресенье")
+    val weekDays = arrayOf(
+        "Понедельник",
+        "Вторник",
+        "Среда",
+        "Четверг",
+        "Пятница",
+        "Суббота",
+        "Воскресенье"
+    )
 
 
     const val APP_DATABASE_NAME = "com.sablab.domvetdoctor.cache.db"
