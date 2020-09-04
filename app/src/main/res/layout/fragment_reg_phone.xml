@@ -42,7 +42,7 @@
         android:layout_marginLeft="7dp"
         android:layout_marginRight="40dp"
         android:fontFamily="sans-serif"
-        android:text="@string/enter_with_phone_number"
+        android:text="@string/registration_by_phone"
         android:textColor="#000000"
         android:textSize="26sp"
         android:textStyle="bold"

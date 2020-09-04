@@ -7,7 +7,17 @@
 
     <fragment
         android:id="@+id/phoneFragment"
-        android:name="com.example.benefit.ui.auth.PhoneFragment"
+        android:name="com.example.benefit.ui.auth.login.PhoneFragment"
+        android:label=""
+        tools:layout="@layout/fragment_phone" >
+        <action
+            android:id="@+id/action_phoneFragment_to_codeFragment"
+            app:destination="@id/codeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/codeFragment"
+        android:name="com.example.benefit.ui.auth.login.PhoneFragment"
         android:label=""
         tools:layout="@layout/fragment_phone" />
 

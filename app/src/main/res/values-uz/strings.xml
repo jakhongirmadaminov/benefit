@@ -6,4 +6,12 @@
     <string name="login">Login</string>
     <string name="register">register</string>
     <string name="LoginNavHost">LoginNavHost</string>
+    <string name="registration">Registration</string>
+    <string name="enter_with_phone_number">Войти по номеру телефона</string>
+    <string name="enter_phone_number">Введите номер телефона:</string>
+    <string name="get_code">Get code</string>
+    <string name="confirm">Подтверждение</string>
+    <string name="enter_code">Введите 4-значный смс-код:</string>
+    <string name="you_will_receive_code">В течении минуты на указанный номер %1$s вы получите 4-значный смс-код</string>
+    <string name="registration_by_phone">Регистрация по номеру</string>
 </resources>

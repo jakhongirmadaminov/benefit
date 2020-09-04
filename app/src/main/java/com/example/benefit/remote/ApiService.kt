@@ -12,6 +12,10 @@ interface ApiService {
 
 
 
+    @POST("api/user/loginnumber")
+    @FormUrlEncoded
+    suspend fun login(@Field("phone_number") phone_number: String): Response<Any>
+
 //    @Headers("Content-Type:application/json", "Accept: application/json")
 //    @POST("v1/site/register")
 //    suspend fun userLogin(@Body loginReq: LoginRequest): Response<Any>

@@ -42,7 +42,7 @@ object ApiServiceFactory {
             .build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://domvet.sab-lab.com/")
+            .baseUrl(Constants.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(makeGson()))
             .build()

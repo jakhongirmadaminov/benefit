@@ -2,6 +2,7 @@ package com.example.benefit.di
 
 import com.example.benefit.remote.ApiService
 import com.example.benefit.remote.ApiServiceFactory
+import com.example.benefit.remote.AuthorizedApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,8 +16,15 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideApiService(retrofit: Retrofit.Builder): ApiService {
+    fun provideApiService(): ApiService {
         return ApiServiceFactory.makeApiService(false)
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideAuthorizedApiService(): AuthorizedApiService {
+        return ApiServiceFactory.makeAuthorizedApiService(false)
     }
 
 

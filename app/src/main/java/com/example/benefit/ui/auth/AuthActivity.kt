@@ -2,12 +2,11 @@ package com.example.benefit.ui.auth
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentFactory
 import com.example.benefit.R
+import com.example.benefit.ui.auth.login.LoginBSD
+import com.example.benefit.ui.auth.registration.RegistrationBSD
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_auth.*
-import javax.inject.Inject
-import javax.inject.Named
 
 @AndroidEntryPoint
 class AuthActivity : AppCompatActivity() {
@@ -42,6 +41,10 @@ class AuthActivity : AppCompatActivity() {
         btnLogin.setOnClickListener {
             val bsdLogin = LoginBSD()
             bsdLogin.show(supportFragmentManager, "")
+        }
+        btnRegister.setOnClickListener {
+            val bsdRegister = RegistrationBSD()
+            bsdRegister.show(supportFragmentManager, "")
         }
     }
 }
