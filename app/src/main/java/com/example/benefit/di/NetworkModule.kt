@@ -13,7 +13,6 @@ import javax.inject.Singleton
 @InstallIn(ApplicationComponent::class)
 object NetworkModule {
 
-
     @Singleton
     @Provides
     fun provideApiService(retrofit: Retrofit.Builder): ApiService {
