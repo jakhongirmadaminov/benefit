@@ -62,8 +62,18 @@
     <string name="passport_photo">Фото паспорта</string>
     <string name="photo_with_passport">Фото с паспортом</string>
     <string name="with_passport_photo_subtitle">Сделайте селфи с главной страницей Вашего паспорта. Убедитесь, что информация на фото отчётливо видна.</string>
-    <string name="place_of_residence">Place of residence</string>
+    <string name="place_of_residence">Адрес прописки</string>
     <string name="inn">ИНН</string>
     <string name="work_prove">Справка с места работы</string>
     <string name="work_prove_subtitle">Сделайте фото справки с места работы. Убедитесь, что информация на фото отчётливо видна.</string>
+    <string name="select_branch">Выберите филиал</string>
+    <string name="select_branch_subtitle">Выберите филиал для обслуживания из списка или укажите на карте.</string>
+    <string name="select_from_list">Выбрать из списка</string>
+    <string name="select_on_map">Указать на карте</string>
+    <string name="required_limit">Требуемый лимит</string>
+    <string name="required_limit_subtitle">Укажите желаемую сумму лимита. Вы получите ответ после рассмотрения заявки.</string>
+    <string name="enter_limit">Укажите лимит</string>
+    <string name="close">Закрыть</string>
+    <string name="send_req_end_text">Спасибо! После рассмотрения заявки с Вами свяжется специалист технической поддержки.</string>
+    <string name="send_req_pre_end_text">Ваша заявка на открытие карты %1$s готова. Вы можете вернуться назад и проверить правильность заполнения полей, если это необходимо. Продолжим?</string>
 </resources>

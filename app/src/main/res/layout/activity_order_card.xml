@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:id="@+id/scrollView"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -26,6 +27,7 @@
             android:textStyle="bold" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/contentParent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -34,10 +36,22 @@
             android:paddingRight="26dp">
 
             <View
+                android:id="@+id/lineProgressBg"
                 android:layout_width="5dp"
                 android:layout_height="0dp"
                 android:background="@color/white"
-                app:layout_constraintBottom_toBottomOf="@id/tvNum8"
+                app:layout_constraintBottom_toTopOf="@id/tvNum9"
+                app:layout_constraintEnd_toEndOf="@id/ivTermsChecked"
+                app:layout_constraintStart_toStartOf="@id/ivTermsChecked"
+                app:layout_constraintTop_toTopOf="@id/ivTermsChecked"
+                app:layout_constraintVertical_weight="1" />
+
+            <View
+                android:id="@+id/lineProgress"
+                android:layout_width="6dp"
+                android:layout_height="0dp"
+                android:background="@color/orange"
+                app:layout_constraintBottom_toTopOf="@id/lineProgressBg"
                 app:layout_constraintEnd_toEndOf="@id/ivTermsChecked"
                 app:layout_constraintStart_toStartOf="@id/ivTermsChecked"
                 app:layout_constraintTop_toTopOf="@id/ivTermsChecked"
@@ -81,9 +95,9 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/userTermsContent"
                 android:layout_width="0dp"
-                android:clipChildren="false"
                 android:layout_height="wrap_content"
                 android:animateLayoutChanges="true"
+                android:clipChildren="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/titleUserTerms"
                 app:layout_constraintTop_toBottomOf="@id/titleUserTerms">
@@ -135,6 +149,7 @@
                     android:background="@drawable/selector_left_more_rounded"
                     android:text="@string/back"
                     android:textAllCaps="false"
+                    android:visibility="invisible"
                     app:layout_constraintEnd_toStartOf="@id/btnNextTerms"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toStartOf="parent"
@@ -212,8 +227,8 @@
                 android:id="@+id/photoPassportContent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:clipChildren="false"
                 android:animateLayoutChanges="true"
+                android:clipChildren="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/titlePhotoPassport"
                 app:layout_constraintTop_toBottomOf="@id/titlePhotoPassport">
@@ -331,8 +346,8 @@
                 android:id="@+id/photoWithPassportContent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:clipChildren="false"
                 android:animateLayoutChanges="true"
+                android:clipChildren="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/titlePhotoWithPassport"
                 app:layout_constraintTop_toBottomOf="@id/titlePhotoWithPassport">
@@ -392,7 +407,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
             <TextView
                 android:id="@+id/tvNum4"
                 android:layout_width="30dp"
@@ -446,8 +460,8 @@
                 android:id="@+id/workProveContent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:clipChildren="false"
                 android:animateLayoutChanges="true"
+                android:clipChildren="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/titleWorkProve"
                 app:layout_constraintTop_toBottomOf="@id/titleWorkProve">
@@ -537,20 +551,20 @@
                 android:padding="5dp"
                 android:src="@drawable/ic_check"
                 android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@id/tvNum4"
-                app:layout_constraintEnd_toEndOf="@id/tvNum4"
-                app:layout_constraintStart_toStartOf="@id/tvNum4"
-                app:layout_constraintTop_toTopOf="@id/tvNum4" />
+                app:layout_constraintBottom_toBottomOf="@id/tvNum5"
+                app:layout_constraintEnd_toEndOf="@id/tvNum5"
+                app:layout_constraintStart_toStartOf="@id/tvNum5"
+                app:layout_constraintTop_toTopOf="@id/tvNum5" />
 
             <ImageView
                 android:id="@+id/icOvalAddress"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:src="@drawable/ic_oval_photo_with_passport"
-                app:layout_constraintBottom_toBottomOf="@id/tvNum4"
-                app:layout_constraintEnd_toEndOf="@id/tvNum4"
-                app:layout_constraintStart_toStartOf="@id/tvNum4"
-                app:layout_constraintTop_toTopOf="@id/tvNum4" />
+                app:layout_constraintBottom_toBottomOf="@id/tvNum5"
+                app:layout_constraintEnd_toEndOf="@id/tvNum5"
+                app:layout_constraintStart_toStartOf="@id/tvNum5"
+                app:layout_constraintTop_toTopOf="@id/tvNum5" />
 
             <TextView
                 android:id="@+id/titleAddress"
@@ -569,8 +583,8 @@
                 android:id="@+id/addressContent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:clipChildren="false"
                 android:animateLayoutChanges="true"
+                android:clipChildren="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/titleAddress"
                 app:layout_constraintTop_toBottomOf="@id/titleAddress">
@@ -589,16 +603,19 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/ivAddress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+
+                <EditText
+                    android:id="@+id/edtAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
                     android:layout_marginTop="20dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:selectableItemBackground"
-                    android:src="@drawable/ic_photo_with_passport_eg"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="@drawable/selector_white"
+                    android:hint="@string/place_of_residence"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     app:layout_constraintTop_toBottomOf="@id/subTitleAddress" />
 
                 <Button
@@ -613,7 +630,7 @@
                     app:layout_constraintEnd_toStartOf="@id/btnNextAddress"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ivAddress" />
+                    app:layout_constraintTop_toBottomOf="@id/edtAddress" />
 
                 <Button
                     android:id="@+id/btnNextAddress"
@@ -631,7 +648,6 @@
 
             <!--            ssssssssssssssssssssssssssssssssssssss-->
             <!--           SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
-
 
 
             <TextView
@@ -655,21 +671,21 @@
                 android:padding="5dp"
                 android:src="@drawable/ic_check"
                 android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@id/tvNum5"
-                app:layout_constraintEnd_toEndOf="@id/tvNum5"
-                app:layout_constraintStart_toStartOf="@id/tvNum5"
-                app:layout_constraintTop_toTopOf="@id/tvNum5" />
+                app:layout_constraintBottom_toBottomOf="@id/tvNum6"
+                app:layout_constraintEnd_toEndOf="@id/tvNum6"
+                app:layout_constraintStart_toStartOf="@id/tvNum6"
+                app:layout_constraintTop_toTopOf="@id/tvNum6" />
 
 
             <ImageView
                 android:id="@+id/icOvalINN"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/ic_oval_photo_with_passport"
-                app:layout_constraintBottom_toBottomOf="@id/tvNum5"
-                app:layout_constraintEnd_toEndOf="@id/tvNum5"
-                app:layout_constraintStart_toStartOf="@id/tvNum5"
-                app:layout_constraintTop_toTopOf="@id/tvNum5" />
+                android:src="@drawable/ic_oval_address"
+                app:layout_constraintBottom_toBottomOf="@id/tvNum6"
+                app:layout_constraintEnd_toEndOf="@id/tvNum6"
+                app:layout_constraintStart_toStartOf="@id/tvNum6"
+                app:layout_constraintTop_toTopOf="@id/tvNum6" />
 
 
             <TextView
@@ -690,8 +706,8 @@
                 android:id="@+id/iNNContent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:clipChildren="false"
                 android:animateLayoutChanges="true"
+                android:clipChildren="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/titleINN"
                 app:layout_constraintTop_toBottomOf="@id/titleINN">
@@ -778,10 +794,10 @@
                 android:padding="5dp"
                 android:src="@drawable/ic_check"
                 android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@id/tvNum6"
-                app:layout_constraintEnd_toEndOf="@id/tvNum6"
-                app:layout_constraintStart_toStartOf="@id/tvNum6"
-                app:layout_constraintTop_toTopOf="@id/tvNum6" />
+                app:layout_constraintBottom_toBottomOf="@id/tvNum7"
+                app:layout_constraintEnd_toEndOf="@id/tvNum7"
+                app:layout_constraintStart_toStartOf="@id/tvNum7"
+                app:layout_constraintTop_toTopOf="@id/tvNum7" />
 
 
             <ImageView
@@ -789,10 +805,10 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:src="@drawable/ic_oval_photo_with_passport"
-                app:layout_constraintBottom_toBottomOf="@id/tvNum6"
-                app:layout_constraintEnd_toEndOf="@id/tvNum6"
-                app:layout_constraintStart_toStartOf="@id/tvNum6"
-                app:layout_constraintTop_toTopOf="@id/tvNum6" />
+                app:layout_constraintBottom_toBottomOf="@id/tvNum7"
+                app:layout_constraintEnd_toEndOf="@id/tvNum7"
+                app:layout_constraintStart_toStartOf="@id/tvNum7"
+                app:layout_constraintTop_toTopOf="@id/tvNum7" />
 
 
             <TextView
@@ -801,7 +817,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="?android:actionBarSize"
                 android:fontFamily="sans-serif-medium"
-                android:text="@string/photo_with_passport"
+                android:text="@string/select_branch"
                 android:textColor="#ffffff"
                 android:textSize="18sp"
                 android:textStyle="normal"
@@ -812,13 +828,12 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/selectBranchContent"
                 android:layout_width="0dp"
-                android:clipChildren="false"
                 android:layout_height="wrap_content"
                 android:animateLayoutChanges="true"
+                android:clipChildren="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/titleSelectBranch"
                 app:layout_constraintTop_toBottomOf="@id/titleSelectBranch">
-
 
                 <TextView
                     android:id="@+id/subTitleSelectBranch"
@@ -826,24 +841,37 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:fontFamily="sans-serif"
-                    android:text="@string/with_passport_photo_subtitle"
+                    android:text="@string/select_branch_subtitle"
                     android:textColor="#e6ffffff"
                     android:textSize="14sp"
                     android:textStyle="normal"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/ivSelectBranch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <EditText
+                    android:id="@+id/edtSelectBranch"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
                     android:layout_marginTop="20dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:selectableItemBackground"
-                    android:src="@drawable/ic_photo_with_passport_eg"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="@drawable/selector_white"
+                    android:hint="@string/select_from_list"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     app:layout_constraintTop_toBottomOf="@id/subTitleSelectBranch" />
+
+                <Button
+                    android:id="@+id/btnSelectBranchOnMap"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/selector_turquoise"
+                    android:text="@string/select_on_map"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    app:layout_constraintTop_toBottomOf="@id/edtSelectBranch" />
 
                 <Button
                     android:id="@+id/btnBackSelectBranch"
@@ -857,7 +885,7 @@
                     app:layout_constraintEnd_toStartOf="@id/btnNextSelectBranch"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ivSelectBranch" />
+                    app:layout_constraintTop_toBottomOf="@id/btnSelectBranchOnMap" />
 
                 <Button
                     android:id="@+id/btnNextSelectBranch"
@@ -873,12 +901,8 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
             <!--            ssssssssssssssssssssssssssssssssssssss-->
-
-
             <!--           SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
-
 
             <TextView
                 android:id="@+id/tvNum8"
@@ -901,21 +925,21 @@
                 android:padding="5dp"
                 android:src="@drawable/ic_check"
                 android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@id/tvNum7"
-                app:layout_constraintEnd_toEndOf="@id/tvNum7"
-                app:layout_constraintStart_toStartOf="@id/tvNum7"
-                app:layout_constraintTop_toTopOf="@id/tvNum7" />
+                app:layout_constraintBottom_toBottomOf="@id/tvNum8"
+                app:layout_constraintEnd_toEndOf="@id/tvNum8"
+                app:layout_constraintStart_toStartOf="@id/tvNum8"
+                app:layout_constraintTop_toTopOf="@id/tvNum8" />
 
 
             <ImageView
                 android:id="@+id/icOvalLimit"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/ic_oval_photo_with_passport"
-                app:layout_constraintBottom_toBottomOf="@id/tvNum7"
-                app:layout_constraintEnd_toEndOf="@id/tvNum7"
-                app:layout_constraintStart_toStartOf="@id/tvNum7"
-                app:layout_constraintTop_toTopOf="@id/tvNum7" />
+                android:src="@drawable/ic_oval_select_branch"
+                app:layout_constraintBottom_toBottomOf="@id/tvNum8"
+                app:layout_constraintEnd_toEndOf="@id/tvNum8"
+                app:layout_constraintStart_toStartOf="@id/tvNum8"
+                app:layout_constraintTop_toTopOf="@id/tvNum8" />
 
 
             <TextView
@@ -924,7 +948,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="?android:actionBarSize"
                 android:fontFamily="sans-serif-medium"
-                android:text="@string/photo_with_passport"
+                android:text="@string/required_limit"
                 android:textColor="#ffffff"
                 android:textSize="18sp"
                 android:textStyle="normal"
@@ -936,8 +960,8 @@
                 android:id="@+id/limitContent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:clipChildren="false"
                 android:animateLayoutChanges="true"
+                android:clipChildren="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/titleLimit"
                 app:layout_constraintTop_toBottomOf="@id/titleLimit">
@@ -949,24 +973,28 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:fontFamily="sans-serif"
-                    android:text="@string/with_passport_photo_subtitle"
+                    android:text="@string/required_limit_subtitle"
                     android:textColor="#e6ffffff"
                     android:textSize="14sp"
                     android:textStyle="normal"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/ivLimit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+
+                <EditText
+                    android:id="@+id/edtLimit"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
                     android:layout_marginTop="20dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:selectableItemBackground"
-                    android:src="@drawable/ic_photo_with_passport_eg"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="@drawable/selector_white"
+                    android:hint="@string/enter_limit"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     app:layout_constraintTop_toBottomOf="@id/subTitleLimit" />
+
 
                 <Button
                     android:id="@+id/btnBackLimit"
@@ -980,7 +1008,7 @@
                     app:layout_constraintEnd_toStartOf="@id/btnNextLimit"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ivLimit" />
+                    app:layout_constraintTop_toBottomOf="@id/edtLimit" />
 
                 <Button
                     android:id="@+id/btnNextLimit"
@@ -1021,10 +1049,10 @@
                 android:padding="5dp"
                 android:src="@drawable/ic_check"
                 android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@id/tvNum8"
-                app:layout_constraintEnd_toEndOf="@id/tvNum8"
-                app:layout_constraintStart_toStartOf="@id/tvNum8"
-                app:layout_constraintTop_toTopOf="@id/tvNum8" />
+                app:layout_constraintBottom_toBottomOf="@id/tvNum9"
+                app:layout_constraintEnd_toEndOf="@id/tvNum9"
+                app:layout_constraintStart_toStartOf="@id/tvNum9"
+                app:layout_constraintTop_toTopOf="@id/tvNum9" />
 
 
             <ImageView
@@ -1032,10 +1060,10 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:src="@drawable/ic_oval_send_req"
-                app:layout_constraintBottom_toBottomOf="@id/tvNum8"
-                app:layout_constraintEnd_toEndOf="@id/tvNum8"
-                app:layout_constraintStart_toStartOf="@id/tvNum8"
-                app:layout_constraintTop_toTopOf="@id/tvNum8" />
+                app:layout_constraintBottom_toBottomOf="@id/tvNum9"
+                app:layout_constraintEnd_toEndOf="@id/tvNum9"
+                app:layout_constraintStart_toStartOf="@id/tvNum9"
+                app:layout_constraintTop_toTopOf="@id/tvNum9" />
 
 
             <TextView
@@ -1056,8 +1084,8 @@
                 android:id="@+id/sendReqContent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:clipChildren="false"
                 android:animateLayoutChanges="true"
+                android:clipChildren="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/titleSendReq"
                 app:layout_constraintTop_toBottomOf="@id/titleSendReq">
@@ -1090,6 +1118,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/subTitleSendReq" />
 
+
                 <Button
                     android:id="@+id/btnNextSendReq"
                     android:layout_width="0dp"
@@ -1101,6 +1130,22 @@
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toEndOf="@id/btnBackSendReq"
                     app:layout_constraintTop_toTopOf="@id/btnBackSendReq" />
+
+
+                <Button
+                    android:id="@+id/btnClose"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/selector_grey_rounded"
+                    android:text="@string/close"
+                    android:textAllCaps="false"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toStartOf="@id/btnNextSendReq"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/subTitleSendReq" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

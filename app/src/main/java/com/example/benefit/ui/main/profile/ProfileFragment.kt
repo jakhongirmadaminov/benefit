@@ -1,20 +1,34 @@
 package com.example.benefit.ui.main.profile
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.example.benefit.R
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_reg_profile_setup.*
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private lateinit var profileViewModel: ProfileViewModel
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupViews()
+        attachListeners()
+    }
+
+    private fun attachListeners() {
+
+
+    }
+
+    private fun setupViews() {
+
+        cardPhoto.setBackgroundResource(R.drawable.shape_round_window_bg_color)
+        cardPhotoIcon.setBackgroundResource(R.drawable.shape_round_window_bg_color)
+
+    }
 
 }
