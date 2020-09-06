@@ -1,0 +1,1113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/llParent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:background="@drawable/gradient_purple"
+        android:minHeight="700dp"
+        android:orientation="vertical"
+        android:paddingBottom="?android:actionBarSize">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:layout_marginTop="?android:actionBarSize"
+            android:fontFamily="sans-serif"
+            android:text="@string/order_card"
+            android:textColor="#ffffff"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:animateLayoutChanges="true"
+            android:paddingLeft="26dp"
+            android:paddingRight="26dp">
+
+            <View
+                android:layout_width="5dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/tvNum8"
+                app:layout_constraintEnd_toEndOf="@id/ivTermsChecked"
+                app:layout_constraintStart_toStartOf="@id/ivTermsChecked"
+                app:layout_constraintTop_toTopOf="@id/ivTermsChecked"
+                app:layout_constraintVertical_weight="1" />
+
+            <ImageView
+                android:id="@+id/icOvalUserTerms"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_user_terms"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivTermsChecked"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/shape_oval_orange"
+                android:padding="5dp"
+                android:src="@drawable/ic_check"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/icOvalUserTerms"
+                app:layout_constraintEnd_toEndOf="@id/icOvalUserTerms"
+                app:layout_constraintStart_toStartOf="@id/icOvalUserTerms"
+                app:layout_constraintTop_toTopOf="@id/icOvalUserTerms" />
+
+            <TextView
+                android:id="@+id/titleUserTerms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/user_terms"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toEndOf="@id/icOvalUserTerms"
+                app:layout_constraintTop_toTopOf="@id/icOvalUserTerms" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/userTermsContent"
+                android:layout_width="0dp"
+                android:clipChildren="false"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/titleUserTerms"
+                app:layout_constraintTop_toBottomOf="@id/titleUserTerms">
+
+
+                <TextView
+                    android:id="@+id/subTitleUserTerms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/user_terms_subtitle"
+                    android:textColor="#e6ffffff"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/btnTerms"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/selector_turquoise"
+                    android:text="@string/terms_and_conditions"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    app:layout_constraintTop_toBottomOf="@id/subTitleUserTerms" />
+
+                <CheckBox
+                    android:id="@+id/cbTermsAgree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:buttonTint="@color/white"
+                    android:text="@string/yes_i_agree"
+                    android:textColor="@color/white"
+                    app:buttonTint="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btnTerms" />
+
+
+                <Button
+                    android:id="@+id/btnBackTerms"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/selector_left_more_rounded"
+                    android:text="@string/back"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toStartOf="@id/btnNextTerms"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cbTermsAgree" />
+
+                <Button
+                    android:id="@+id/btnNextTerms"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/selector_right_more_rounded"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/btnBackTerms"
+                    app:layout_constraintTop_toTopOf="@id/btnBackTerms" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--           SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+            <TextView
+                android:id="@+id/tvNum2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/shape_oval_white"
+                android:gravity="center"
+                android:text="2"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/titlePhotoPassport"
+                app:layout_constraintEnd_toEndOf="@id/icOvalUserTerms"
+                app:layout_constraintStart_toStartOf="@id/icOvalUserTerms"
+                app:layout_constraintTop_toTopOf="@id/titlePhotoPassport" />
+
+            <ImageView
+                android:id="@+id/ivPhotoPassportChecked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_oval_orange"
+                android:padding="5dp"
+                android:src="@drawable/ic_check"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/tvNum2"
+                app:layout_constraintEnd_toEndOf="@id/tvNum2"
+                app:layout_constraintStart_toStartOf="@id/tvNum2"
+                app:layout_constraintTop_toTopOf="@id/tvNum2" />
+
+
+            <ImageView
+                android:id="@+id/icOvalPhotoPassport"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_oval_passport"
+                app:layout_constraintBottom_toBottomOf="@id/tvNum2"
+                app:layout_constraintEnd_toEndOf="@id/tvNum2"
+                app:layout_constraintStart_toStartOf="@id/tvNum2"
+                app:layout_constraintTop_toTopOf="@id/tvNum2" />
+
+
+            <TextView
+                android:id="@+id/titlePhotoPassport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="?android:actionBarSize"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/passport_photo"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="@id/titleUserTerms"
+                app:layout_constraintTop_toBottomOf="@id/userTermsContent" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/photoPassportContent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:animateLayoutChanges="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/titlePhotoPassport"
+                app:layout_constraintTop_toBottomOf="@id/titlePhotoPassport">
+
+
+                <TextView
+                    android:id="@+id/subTitlePhotoPassport"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/passport_photo_subtitle"
+                    android:textColor="#e6ffffff"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/ivPassportPhoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:selectableItemBackground"
+                    android:src="@drawable/ic_passport_eg"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/subTitlePhotoPassport" />
+
+                <Button
+                    android:id="@+id/btnBackPhotoPassport"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/selector_left_more_rounded"
+                    android:text="@string/back"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toStartOf="@id/btnNextPhotoPassport"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivPassportPhoto" />
+
+                <Button
+                    android:id="@+id/btnNextPhotoPassport"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/selector_right_more_rounded"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/btnBackPhotoPassport"
+                    app:layout_constraintTop_toTopOf="@id/btnBackPhotoPassport" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--            ssssssssssssssssssssssssssssssssssssss-->
+            <!--           SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+            <TextView
+                android:id="@+id/tvNum3"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/shape_oval_white"
+                android:gravity="center"
+                android:text="3"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/titlePhotoWithPassport"
+                app:layout_constraintEnd_toEndOf="@id/icOvalUserTerms"
+                app:layout_constraintStart_toStartOf="@id/icOvalUserTerms"
+                app:layout_constraintTop_toTopOf="@id/titlePhotoWithPassport" />
+
+            <ImageView
+                android:id="@+id/ivPhotoWithPassportChecked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_oval_orange"
+                android:padding="5dp"
+                android:src="@drawable/ic_check"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/tvNum3"
+                app:layout_constraintEnd_toEndOf="@id/tvNum3"
+                app:layout_constraintStart_toStartOf="@id/tvNum3"
+                app:layout_constraintTop_toTopOf="@id/tvNum3" />
+
+
+            <ImageView
+                android:id="@+id/icOvalPhotoWithPassport"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_oval_photo_with_passport"
+                app:layout_constraintBottom_toBottomOf="@id/tvNum3"
+                app:layout_constraintEnd_toEndOf="@id/tvNum3"
+                app:layout_constraintStart_toStartOf="@id/tvNum3"
+                app:layout_constraintTop_toTopOf="@id/tvNum3" />
+
+
+            <TextView
+                android:id="@+id/titlePhotoWithPassport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="?android:actionBarSize"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/photo_with_passport"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="@id/titleUserTerms"
+                app:layout_constraintTop_toBottomOf="@id/photoPassportContent" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/photoWithPassportContent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:animateLayoutChanges="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/titlePhotoWithPassport"
+                app:layout_constraintTop_toBottomOf="@id/titlePhotoWithPassport">
+
+
+                <TextView
+                    android:id="@+id/subTitlePhotoWithPassport"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/with_passport_photo_subtitle"
+                    android:textColor="#e6ffffff"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/ivPhotoWithPassport"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:selectableItemBackground"
+                    android:src="@drawable/ic_photo_with_passport_eg"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/subTitlePhotoWithPassport" />
+
+                <Button
+                    android:id="@+id/btnBackPhotoWithPassport"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/selector_left_more_rounded"
+                    android:text="@string/back"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toStartOf="@id/btnNextPhotoWithPassport"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivPhotoWithPassport" />
+
+                <Button
+                    android:id="@+id/btnNextPhotoWithPassport"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/selector_right_more_rounded"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/btnBackPhotoWithPassport"
+                    app:layout_constraintTop_toTopOf="@id/btnBackPhotoWithPassport" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+            <TextView
+                android:id="@+id/tvNum4"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/shape_oval_white"
+                android:gravity="center"
+                android:text="4"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/titleWorkProve"
+                app:layout_constraintEnd_toEndOf="@id/icOvalUserTerms"
+                app:layout_constraintStart_toStartOf="@id/icOvalUserTerms"
+                app:layout_constraintTop_toTopOf="@id/titleWorkProve" />
+
+            <ImageView
+                android:id="@+id/ivWorkProveChecked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_oval_orange"
+                android:padding="5dp"
+                android:src="@drawable/ic_check"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/tvNum4"
+                app:layout_constraintEnd_toEndOf="@id/tvNum4"
+                app:layout_constraintStart_toStartOf="@id/tvNum4"
+                app:layout_constraintTop_toTopOf="@id/tvNum4" />
+
+            <ImageView
+                android:id="@+id/icOvalWorkProve"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_oval_work_prove"
+                app:layout_constraintBottom_toBottomOf="@id/tvNum4"
+                app:layout_constraintEnd_toEndOf="@id/tvNum4"
+                app:layout_constraintStart_toStartOf="@id/tvNum4"
+                app:layout_constraintTop_toTopOf="@id/tvNum4" />
+
+            <TextView
+                android:id="@+id/titleWorkProve"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="?android:actionBarSize"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/work_prove"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="@id/titleUserTerms"
+                app:layout_constraintTop_toBottomOf="@id/photoWithPassportContent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/workProveContent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:animateLayoutChanges="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/titleWorkProve"
+                app:layout_constraintTop_toBottomOf="@id/titleWorkProve">
+
+
+                <TextView
+                    android:id="@+id/subTitleWorkProve"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/work_prove_subtitle"
+                    android:textColor="#e6ffffff"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/ivWorkProve"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:selectableItemBackground"
+                    android:src="@drawable/ic_work_prove_eg"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/subTitleWorkProve" />
+
+                <Button
+                    android:id="@+id/btnBackWorkProve"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/selector_left_more_rounded"
+                    android:text="@string/back"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toStartOf="@id/btnNextWorkProve"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivWorkProve" />
+
+                <Button
+                    android:id="@+id/btnNextWorkProve"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/selector_right_more_rounded"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/btnBackWorkProve"
+                    app:layout_constraintTop_toTopOf="@id/btnBackWorkProve" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--            ssssssssssssssssssssssssssssssssssssss-->
+            <!--           SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+
+            <!--            ssssssssssssssssssssssssssssssssssssss-->
+
+
+            <!--           SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+
+            <TextView
+                android:id="@+id/tvNum5"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/shape_oval_white"
+                android:gravity="center"
+                android:text="5"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/titleAddress"
+                app:layout_constraintEnd_toEndOf="@id/icOvalUserTerms"
+                app:layout_constraintStart_toStartOf="@id/icOvalUserTerms"
+                app:layout_constraintTop_toTopOf="@id/titleAddress" />
+
+            <ImageView
+                android:id="@+id/ivAddressChecked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_oval_orange"
+                android:padding="5dp"
+                android:src="@drawable/ic_check"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/tvNum4"
+                app:layout_constraintEnd_toEndOf="@id/tvNum4"
+                app:layout_constraintStart_toStartOf="@id/tvNum4"
+                app:layout_constraintTop_toTopOf="@id/tvNum4" />
+
+            <ImageView
+                android:id="@+id/icOvalAddress"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_oval_photo_with_passport"
+                app:layout_constraintBottom_toBottomOf="@id/tvNum4"
+                app:layout_constraintEnd_toEndOf="@id/tvNum4"
+                app:layout_constraintStart_toStartOf="@id/tvNum4"
+                app:layout_constraintTop_toTopOf="@id/tvNum4" />
+
+            <TextView
+                android:id="@+id/titleAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="?android:actionBarSize"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/place_of_residence"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="@id/titleUserTerms"
+                app:layout_constraintTop_toBottomOf="@id/workProveContent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/addressContent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:animateLayoutChanges="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/titleAddress"
+                app:layout_constraintTop_toBottomOf="@id/titleAddress">
+
+
+                <TextView
+                    android:id="@+id/subTitleAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/with_passport_photo_subtitle"
+                    android:textColor="#e6ffffff"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/ivAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:selectableItemBackground"
+                    android:src="@drawable/ic_photo_with_passport_eg"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/subTitleAddress" />
+
+                <Button
+                    android:id="@+id/btnBackAddress"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/selector_left_more_rounded"
+                    android:text="@string/back"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toStartOf="@id/btnNextAddress"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivAddress" />
+
+                <Button
+                    android:id="@+id/btnNextAddress"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/selector_right_more_rounded"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/btnBackAddress"
+                    app:layout_constraintTop_toTopOf="@id/btnBackAddress" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--            ssssssssssssssssssssssssssssssssssssss-->
+            <!--           SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+
+
+            <TextView
+                android:id="@+id/tvNum6"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/shape_oval_white"
+                android:gravity="center"
+                android:text="6"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/titleINN"
+                app:layout_constraintEnd_toEndOf="@id/icOvalUserTerms"
+                app:layout_constraintStart_toStartOf="@id/icOvalUserTerms"
+                app:layout_constraintTop_toTopOf="@id/titleINN" />
+
+            <ImageView
+                android:id="@+id/ivINNChecked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_oval_orange"
+                android:padding="5dp"
+                android:src="@drawable/ic_check"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/tvNum5"
+                app:layout_constraintEnd_toEndOf="@id/tvNum5"
+                app:layout_constraintStart_toStartOf="@id/tvNum5"
+                app:layout_constraintTop_toTopOf="@id/tvNum5" />
+
+
+            <ImageView
+                android:id="@+id/icOvalINN"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_oval_photo_with_passport"
+                app:layout_constraintBottom_toBottomOf="@id/tvNum5"
+                app:layout_constraintEnd_toEndOf="@id/tvNum5"
+                app:layout_constraintStart_toStartOf="@id/tvNum5"
+                app:layout_constraintTop_toTopOf="@id/tvNum5" />
+
+
+            <TextView
+                android:id="@+id/titleINN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="?android:actionBarSize"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/inn"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="@id/titleUserTerms"
+                app:layout_constraintTop_toBottomOf="@id/addressContent" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/iNNContent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:animateLayoutChanges="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/titleINN"
+                app:layout_constraintTop_toBottomOf="@id/titleINN">
+
+
+                <TextView
+                    android:id="@+id/subTitleINN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/with_passport_photo_subtitle"
+                    android:textColor="#e6ffffff"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/ivINN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:selectableItemBackground"
+                    android:src="@drawable/ic_photo_with_passport_eg"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/subTitleINN" />
+
+                <Button
+                    android:id="@+id/btnBackINN"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/selector_left_more_rounded"
+                    android:text="@string/back"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toStartOf="@id/btnNextINN"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivINN" />
+
+                <Button
+                    android:id="@+id/btnNextINN"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/selector_right_more_rounded"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/btnBackINN"
+                    app:layout_constraintTop_toTopOf="@id/btnBackINN" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <!--            ssssssssssssssssssssssssssssssssssssss-->
+
+
+            <!--           SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+
+            <TextView
+                android:id="@+id/tvNum7"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/shape_oval_white"
+                android:gravity="center"
+                android:text="7"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/titleSelectBranch"
+                app:layout_constraintEnd_toEndOf="@id/icOvalUserTerms"
+                app:layout_constraintStart_toStartOf="@id/icOvalUserTerms"
+                app:layout_constraintTop_toTopOf="@id/titleSelectBranch" />
+
+            <ImageView
+                android:id="@+id/ivSelectBranchChecked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_oval_orange"
+                android:padding="5dp"
+                android:src="@drawable/ic_check"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/tvNum6"
+                app:layout_constraintEnd_toEndOf="@id/tvNum6"
+                app:layout_constraintStart_toStartOf="@id/tvNum6"
+                app:layout_constraintTop_toTopOf="@id/tvNum6" />
+
+
+            <ImageView
+                android:id="@+id/icOvalSelectBranch"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_oval_photo_with_passport"
+                app:layout_constraintBottom_toBottomOf="@id/tvNum6"
+                app:layout_constraintEnd_toEndOf="@id/tvNum6"
+                app:layout_constraintStart_toStartOf="@id/tvNum6"
+                app:layout_constraintTop_toTopOf="@id/tvNum6" />
+
+
+            <TextView
+                android:id="@+id/titleSelectBranch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="?android:actionBarSize"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/photo_with_passport"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="@id/titleUserTerms"
+                app:layout_constraintTop_toBottomOf="@id/iNNContent" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/selectBranchContent"
+                android:layout_width="0dp"
+                android:clipChildren="false"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/titleSelectBranch"
+                app:layout_constraintTop_toBottomOf="@id/titleSelectBranch">
+
+
+                <TextView
+                    android:id="@+id/subTitleSelectBranch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/with_passport_photo_subtitle"
+                    android:textColor="#e6ffffff"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/ivSelectBranch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:selectableItemBackground"
+                    android:src="@drawable/ic_photo_with_passport_eg"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/subTitleSelectBranch" />
+
+                <Button
+                    android:id="@+id/btnBackSelectBranch"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/selector_left_more_rounded"
+                    android:text="@string/back"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toStartOf="@id/btnNextSelectBranch"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivSelectBranch" />
+
+                <Button
+                    android:id="@+id/btnNextSelectBranch"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/selector_right_more_rounded"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/btnBackSelectBranch"
+                    app:layout_constraintTop_toTopOf="@id/btnBackSelectBranch" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <!--            ssssssssssssssssssssssssssssssssssssss-->
+
+
+            <!--           SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+
+            <TextView
+                android:id="@+id/tvNum8"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/shape_oval_white"
+                android:gravity="center"
+                android:text="8"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/titleLimit"
+                app:layout_constraintEnd_toEndOf="@id/icOvalUserTerms"
+                app:layout_constraintStart_toStartOf="@id/icOvalUserTerms"
+                app:layout_constraintTop_toTopOf="@id/titleLimit" />
+
+            <ImageView
+                android:id="@+id/ivLimitChecked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_oval_orange"
+                android:padding="5dp"
+                android:src="@drawable/ic_check"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/tvNum7"
+                app:layout_constraintEnd_toEndOf="@id/tvNum7"
+                app:layout_constraintStart_toStartOf="@id/tvNum7"
+                app:layout_constraintTop_toTopOf="@id/tvNum7" />
+
+
+            <ImageView
+                android:id="@+id/icOvalLimit"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_oval_photo_with_passport"
+                app:layout_constraintBottom_toBottomOf="@id/tvNum7"
+                app:layout_constraintEnd_toEndOf="@id/tvNum7"
+                app:layout_constraintStart_toStartOf="@id/tvNum7"
+                app:layout_constraintTop_toTopOf="@id/tvNum7" />
+
+
+            <TextView
+                android:id="@+id/titleLimit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="?android:actionBarSize"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/photo_with_passport"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="@id/titleUserTerms"
+                app:layout_constraintTop_toBottomOf="@id/selectBranchContent" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/limitContent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:animateLayoutChanges="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/titleLimit"
+                app:layout_constraintTop_toBottomOf="@id/titleLimit">
+
+
+                <TextView
+                    android:id="@+id/subTitleLimit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/with_passport_photo_subtitle"
+                    android:textColor="#e6ffffff"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/ivLimit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:selectableItemBackground"
+                    android:src="@drawable/ic_photo_with_passport_eg"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/subTitleLimit" />
+
+                <Button
+                    android:id="@+id/btnBackLimit"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/selector_left_more_rounded"
+                    android:text="@string/back"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toStartOf="@id/btnNextLimit"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivLimit" />
+
+                <Button
+                    android:id="@+id/btnNextLimit"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/selector_right_more_rounded"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/btnBackLimit"
+                    app:layout_constraintTop_toTopOf="@id/btnBackLimit" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <!--            ssssssssssssssssssssssssssssssssssssss-->
+
+
+            <TextView
+                android:id="@+id/tvNum9"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/shape_oval_white"
+                android:gravity="center"
+                android:text="9"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/titleSendReq"
+                app:layout_constraintEnd_toEndOf="@id/icOvalUserTerms"
+                app:layout_constraintStart_toStartOf="@id/icOvalUserTerms"
+                app:layout_constraintTop_toTopOf="@id/titleSendReq" />
+
+            <ImageView
+                android:id="@+id/ivSendRequestChecked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_oval_orange"
+                android:padding="5dp"
+                android:src="@drawable/ic_check"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/tvNum8"
+                app:layout_constraintEnd_toEndOf="@id/tvNum8"
+                app:layout_constraintStart_toStartOf="@id/tvNum8"
+                app:layout_constraintTop_toTopOf="@id/tvNum8" />
+
+
+            <ImageView
+                android:id="@+id/icOvalSendReq"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_oval_send_req"
+                app:layout_constraintBottom_toBottomOf="@id/tvNum8"
+                app:layout_constraintEnd_toEndOf="@id/tvNum8"
+                app:layout_constraintStart_toStartOf="@id/tvNum8"
+                app:layout_constraintTop_toTopOf="@id/tvNum8" />
+
+
+            <TextView
+                android:id="@+id/titleSendReq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="?android:actionBarSize"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/send_request"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="@id/titleUserTerms"
+                app:layout_constraintTop_toBottomOf="@id/limitContent" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/sendReqContent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:animateLayoutChanges="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/titleSendReq"
+                app:layout_constraintTop_toBottomOf="@id/titleSendReq">
+
+
+                <TextView
+                    android:id="@+id/subTitleSendReq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/send_req_subtitle"
+                    android:textColor="#e6ffffff"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/btnBackSendReq"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/selector_left_more_rounded"
+                    android:text="@string/back"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toStartOf="@id/btnNextSendReq"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/subTitleSendReq" />
+
+                <Button
+                    android:id="@+id/btnNextSendReq"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/selector_right_more_rounded"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/btnBackSendReq"
+                    app:layout_constraintTop_toTopOf="@id/btnBackSendReq" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+
+</ScrollView>

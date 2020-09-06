@@ -9,7 +9,7 @@
         android:id="@+id/regPhoneFragment"
         android:name="com.example.benefit.ui.auth.registration.RegPhoneFragment"
         android:label=""
-        tools:layout="@layout/fragment_reg_phone" >
+        tools:layout="@layout/fragment_reg_phone">
         <action
             android:id="@+id/action_regPhoneFragment_to_regCodeFragment"
             app:destination="@id/regCodeFragment" />
@@ -19,7 +19,47 @@
         android:id="@+id/regCodeFragment"
         android:name="com.example.benefit.ui.auth.registration.RegCodeFragment"
         android:label=""
-        tools:layout="@layout/fragment_reg_code" />
+        tools:layout="@layout/fragment_reg_code" >
+        <action
+            android:id="@+id/action_regCodeFragment_to_regProfileSetupFragment"
+            app:destination="@id/regProfileSetupFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/regProfileSetupFragment"
+        android:name="com.example.benefit.ui.auth.registration.RegProfileSetupFragment"
+        android:label=""
+        tools:layout="@layout/fragment_reg_profile_setup" >
+        <action
+            android:id="@+id/action_regProfileSetupFragment_to_regPasswordFragment"
+            app:destination="@id/regPasswordFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/regPasswordFragment"
+        android:name="com.example.benefit.ui.auth.registration.RegPasswordFragment"
+        android:label=""
+        tools:layout="@layout/fragment_reg_password" >
+        <action
+            android:id="@+id/action_regPasswordFragment_to_regCardActivationFragment"
+            app:destination="@id/regCardActivationFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/regCardActivationFragment"
+        android:name="com.example.benefit.ui.auth.registration.RegCardActivationFragment"
+        android:label=""
+        tools:layout="@layout/fragment_reg_card_activation" >
+        <action
+            android:id="@+id/action_regCardActivationFragment_to_regEndFragment"
+            app:destination="@id/regEndFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/regEndFragment"
+        android:name="com.example.benefit.ui.auth.registration.RegEndFragment"
+        android:label=""
+        tools:layout="@layout/fragment_reg_end" />
 
 
 </navigation>

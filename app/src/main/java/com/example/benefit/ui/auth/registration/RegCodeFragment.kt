@@ -5,8 +5,11 @@ import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_reg_code.*
+import kotlinx.android.synthetic.main.fragment_reg_code.ivBack
 import javax.inject.Inject
 
 /**
@@ -25,22 +28,21 @@ class RegCodeFragment @Inject constructor() : Fragment(R.layout.fragment_reg_cod
     }
 
     private fun attachListeners() {
-//        edtPhone.doOnTextChanged { text, start, before, count ->
-//            if (!text.isNullOrBlank() && text.length == 9) {
-//                btnGetCode.myEnabled(true)
-//                lblYoullReceiveCode.visibility = View.VISIBLE
-//                lblYoullReceiveCode.text =
-//                    getString(R.string.you_will_receive_code, tvPhoneStart.text.toString() + text)
-//            } else {
-//                btnGetCode.myEnabled(false)
-//                lblYoullReceiveCode.visibility = View.GONE
-//            }
-//
-//        }
-//
-//        btnGetCode.setOnClickListener {
-//            loginViewModel.login("998" + edtPhone.text.toString())
-//        }
+        edtCode.doOnTextChanged { text, start, before, count ->
+            if (!text.isNullOrBlank() && text.length == 4) {
+                btnConfirm.myEnabled(true)
+            } else {
+                btnConfirm.myEnabled(false)
+            }
+        }
+
+        btnConfirm.setOnClickListener {
+            findNavController().navigate(R.id.action_regCodeFragment_to_regProfileSetupFragment)
+        }
+
+        ivBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
 }

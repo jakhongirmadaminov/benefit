@@ -2,11 +2,11 @@ package com.example.benefit.ui.auth.login
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.benefit.R
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_code.*
 import javax.inject.Inject
 
 /**
@@ -38,9 +38,11 @@ class CodeFragment @Inject constructor() : Fragment(R.layout.fragment_code) {
 //
 //        }
 //
-//        btnGetCode.setOnClickListener {
+        btnConfirm.setOnClickListener {
 //            loginViewModel.login("998" + edtPhone.text.toString())
-//        }
+
+            (parentFragment as LoginBSD).dismiss()
+        }
     }
 
 }

@@ -90,4 +90,10 @@ dependencies {
     implementation 'joda-time:joda-time:2.10.6'
 
 
+    implementation 'com.redmadrobot:input-mask-android:6.0.0'
+
+
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+
+    implementation 'com.romandanylyk:pageindicatorview:1.0.3'
 }

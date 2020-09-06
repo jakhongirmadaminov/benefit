@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_phone.*
@@ -41,6 +42,8 @@ class PhoneFragment @Inject constructor() : Fragment(R.layout.fragment_phone) {
 
         btnGetCode.setOnClickListener {
             loginViewModel.login("998" + edtPhone.text.toString())
+            findNavController().navigate(R.id.action_regPhoneFragment_to_regCodeFragment)
+
         }
     }
 
