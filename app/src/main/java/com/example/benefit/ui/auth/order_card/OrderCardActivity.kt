@@ -59,9 +59,7 @@ class OrderCardActivity : AppCompatActivity() {
 
             when (step) {
                 1 -> {
-                    scrollView.post {
-                        scrollView.scrollTo(0, userTermsContent.top)
-                    }
+
                     userTermsContent.visibility = View.VISIBLE
                     photoPassportContent.visibility = View.GONE
                     photoWithPassportContent.visibility = View.GONE
@@ -104,11 +102,9 @@ class OrderCardActivity : AppCompatActivity() {
                     )
 
                     constraintSet.applyTo(contentParent)
+                    scrollToView(userTermsContent)
                 }
                 2 -> {
-                    scrollView.post {
-                        scrollView.scrollTo(0, photoPassportContent.top)
-                    }
                     userTermsContent.visibility = View.GONE
                     photoPassportContent.visibility = View.VISIBLE
                     photoWithPassportContent.visibility = View.GONE
@@ -151,13 +147,10 @@ class OrderCardActivity : AppCompatActivity() {
                     )
 
                     constraintSet.applyTo(contentParent)
-
-
+                    scrollToView(photoPassportContent)
                 }
                 3 -> {
-                    scrollView.post {
-                        scrollView.scrollTo(0, photoWithPassportContent.top)
-                    }
+
                     userTermsContent.visibility = View.GONE
                     photoPassportContent.visibility = View.GONE
                     photoWithPassportContent.visibility = View.VISIBLE
@@ -199,15 +192,10 @@ class OrderCardActivity : AppCompatActivity() {
                     )
 
                     constraintSet.applyTo(contentParent)
+                    scrollToView(photoWithPassportContent)
                 }
                 4 -> {
-                    scrollView.post {
-                        if (workProveContent.top + SizeUtils.getScreenHeight(this) < llParent.height - SizeUtils.dpToPx(
-                                this,
-                                100
-                            )
-                        )     scrollView.scrollTo(0, workProveContent.top)
-                    }
+
                     userTermsContent.visibility = View.GONE
                     photoPassportContent.visibility = View.GONE
                     photoWithPassportContent.visibility = View.GONE
@@ -250,15 +238,10 @@ class OrderCardActivity : AppCompatActivity() {
                     )
 
                     constraintSet.applyTo(contentParent)
+
+                    scrollToView(workProveContent)
                 }
                 5 -> {
-                    scrollView.post {
-                        if (addressContent.top + SizeUtils.getScreenHeight(this) < llParent.height - SizeUtils.dpToPx(
-                                this,
-                                100
-                            )
-                        )    scrollView.scrollTo(0, addressContent.top)
-                    }
                     userTermsContent.visibility = View.GONE
                     photoPassportContent.visibility = View.GONE
                     photoWithPassportContent.visibility = View.GONE
@@ -300,15 +283,9 @@ class OrderCardActivity : AppCompatActivity() {
                     )
 
                     constraintSet.applyTo(contentParent)
+                    scrollToView(addressContent)
                 }
                 6 -> {
-                    scrollView.post {
-                        if (iNNContent.top + SizeUtils.getScreenHeight(this) < llParent.height - SizeUtils.dpToPx(
-                                this,
-                                100
-                            )
-                        )     scrollView.scrollTo(0, iNNContent.top)
-                    }
                     userTermsContent.visibility = View.GONE
                     photoPassportContent.visibility = View.GONE
                     photoWithPassportContent.visibility = View.GONE
@@ -350,16 +327,9 @@ class OrderCardActivity : AppCompatActivity() {
                     )
 
                     constraintSet.applyTo(contentParent)
+                    scrollToView(iNNContent)
                 }
                 7 -> {
-                    scrollView.post {
-                        if (selectBranchContent.top + SizeUtils.getScreenHeight(this) < llParent.height - SizeUtils.dpToPx(
-                                this,
-                                100
-                            )
-                        )
-                            scrollView.scrollTo(0, selectBranchContent.top)
-                    }
                     userTermsContent.visibility = View.GONE
                     photoPassportContent.visibility = View.GONE
                     photoWithPassportContent.visibility = View.GONE
@@ -401,15 +371,9 @@ class OrderCardActivity : AppCompatActivity() {
                     )
 
                     constraintSet.applyTo(contentParent)
+//                    scrollToView(selectBranchContent)
                 }
                 8 -> {
-                    scrollView.post {
-                        if (limitContent.top + SizeUtils.getScreenHeight(this) < llParent.height - SizeUtils.dpToPx(
-                                this,
-                                100
-                            )
-                        ) scrollView.scrollTo(0, limitContent.top)
-                    }
                     userTermsContent.visibility = View.GONE
                     photoPassportContent.visibility = View.GONE
                     photoWithPassportContent.visibility = View.GONE
@@ -451,15 +415,9 @@ class OrderCardActivity : AppCompatActivity() {
                     )
 
                     constraintSet.applyTo(contentParent)
+//                    scrollToView(limitContent)
                 }
                 9 -> {
-                    scrollView.post {
-                        if (sendReqContent.top + SizeUtils.getScreenHeight(this) < llParent.height - SizeUtils.dpToPx(
-                                this,
-                                100
-                            )
-                        )  scrollView.scrollTo(0, sendReqContent.top)
-                    }
                     userTermsContent.visibility = View.GONE
                     photoPassportContent.visibility = View.GONE
                     photoWithPassportContent.visibility = View.GONE
@@ -501,20 +459,10 @@ class OrderCardActivity : AppCompatActivity() {
                     )
 
                     constraintSet.applyTo(contentParent)
-
                     subTitleSendReq.text = getString(R.string.send_req_pre_end_text, cardType)
-
+//                    scrollToView(sendReqContent)
                 }
                 10 -> {
-
-                    scrollView.post {
-                        if (sendReqContent.top + SizeUtils.getScreenHeight(this) < llParent.height - SizeUtils.dpToPx(
-                                this,
-                                100
-                            )
-                        )  scrollView.scrollTo(0, sendReqContent.top)
-                    }
-
                     userTermsContent.visibility = View.GONE
                     photoPassportContent.visibility = View.GONE
                     photoWithPassportContent.visibility = View.GONE
@@ -561,12 +509,21 @@ class OrderCardActivity : AppCompatActivity() {
                     btnClose.visibility = View.VISIBLE
                     btnNextSendReq.visibility = View.INVISIBLE
                     btnBackSendReq.visibility = View.INVISIBLE
+//                    scrollToView(sendReqContent)
                 }
 
             }
 
         })
 
+    }
+
+    private fun scrollToView(view: View) {
+        scrollView.post {
+            if (view.top < llParent.height - SizeUtils.getScreenHeight(this)) {
+                scrollView.scrollTo(0, view.top)
+            }
+        }
     }
 
     private fun setupViews() {
