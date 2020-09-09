@@ -6,9 +6,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.PagerAdapter
 import com.example.benefit.R
+import com.example.benefit.ui.main.home.loans.LoanActivity
 import com.example.benefit.util.SizeUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
+import splitties.fragments.start
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -20,7 +22,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
         setupViews()
+        attachListeners()
 
+    }
+
+    private fun attachListeners() {
+        cardOvalLoans.setOnClickListener { start<LoanActivity> {} }
 
     }
 
@@ -42,12 +49,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         servicesPager.adapter = WizardPagerAdapter()
         servicesPager.offscreenPageLimit = 2
         servicesPager.clipToPadding = false
-        servicesPager.setPadding(SizeUtils.dpToPx(requireContext(), 26).toInt(), 0, SizeUtils.dpToPx(requireContext(), 26).toInt(), 0)
+        servicesPager.setPadding(
+            SizeUtils.dpToPx(requireContext(), 26).toInt(),
+            0,
+            SizeUtils.dpToPx(requireContext(), 26).toInt(),
+            0
+        )
         servicesPager.pageMargin = SizeUtils.dpToPx(requireContext(), 15).toInt()
 
         page_one.setOnClickListener {
             val dialog = DialogCashBack()
-            dialog.show(childFragmentManager,"")
+            dialog.show(childFragmentManager, "")
         }
 
     }

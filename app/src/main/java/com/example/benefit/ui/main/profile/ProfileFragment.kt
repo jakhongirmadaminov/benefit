@@ -34,6 +34,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             requireActivity().finish()
         }
 
+        cardInviteFriend.setOnClickListener {
+            InviteFriendsBSD().show(childFragmentManager, "")
+        }
+
     }
 
     private fun setupViews() {
