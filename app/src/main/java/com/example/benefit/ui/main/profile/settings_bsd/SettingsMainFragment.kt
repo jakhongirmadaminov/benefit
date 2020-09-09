@@ -6,12 +6,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
-import com.example.benefit.ui.auth.login.LoginBSD
 import com.example.benefit.ui.auth.login.LoginViewModel
-import com.example.benefit.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_reg_end.*
-import splitties.fragments.start
+import kotlinx.android.synthetic.main.fragment_settings_main.*
 import javax.inject.Inject
 
 /**
@@ -26,14 +23,32 @@ class SettingsMainFragment @Inject constructor() : Fragment(R.layout.fragment_se
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupViews()
         attachListeners()
         subscribeObservers()
+    }
+
+    private fun setupViews() {
+
+        cardPhoto.setBackgroundResource(R.drawable.shape_oval)
+        cardPhotoIcon.setBackgroundResource(R.drawable.shape_oval)
     }
 
     private fun subscribeObservers() {
     }
 
     private fun attachListeners() {
+
+        llChangePhoneNum.setOnClickListener {
+            findNavController().navigate(R.id.action_profileSettingsMainFragment_to_profileSettingsCodeFragment)
+        }
+        tvChangeCode.setOnClickListener {
+            findNavController().navigate(R.id.action_profileSettingsMainFragment_to_profileSettingsChangeCodeFragment)
+        }
+        tvChangeLang.setOnClickListener {
+            findNavController().navigate(R.id.action_profileSettingsMainFragment_to_profileSettingsLangFragment)
+        }
+
     }
 
 }

@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     android:background="@drawable/shape_top_rounded">
 
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="15dp"
+        android:src="@drawable/ic_baseline_keyboard_backspace_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,10 +32,9 @@
         android:layout_width="?android:actionBarSize"
         android:layout_height="?android:actionBarSize"
         android:layout_marginLeft="26dp"
-        android:layout_marginTop="45dp"
         app:cardCornerRadius="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/ivBack">
 
 
         <ImageView
@@ -42,7 +53,7 @@
         android:layout_marginLeft="7dp"
         android:layout_marginRight="30dp"
         android:fontFamily="sans-serif"
-        android:text="@string/confirmation"
+        android:text="@string/change_code"
         android:textColor="#000000"
         android:textSize="26sp"
         android:textStyle="bold"
@@ -59,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:fontFamily="sans-serif"
-        android:text="@string/enter_code"
+        android:text="@string/enter_new_code"
         android:textColor="#000000"
         android:textSize="14sp"
         android:textStyle="normal"
@@ -69,12 +80,16 @@
 
     <EditText
         android:id="@+id/edtCode"
-        android:layout_width="240dp"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="26dp"
         android:layout_marginRight="26dp"
         android:background="@drawable/shape_input_bg"
         android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:imeOptions="actionDone"
+        android:inputType="numberPassword"
+        android:letterSpacing="0.5"
         android:maxLength="4"
         android:paddingStart="15dp"
         android:paddingTop="5dp"
@@ -87,19 +102,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread" />
+        app:layout_constraintVertical_chainStyle="spread"
+        app:passwordToggleEnabled="true" />
 
 
-    <Button
+    <com.example.benefit.util.ButtonMain
         android:id="@+id/btnConfirm"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="26dp"
         android:layout_marginRight="26dp"
         android:layout_marginBottom="?android:actionBarSize"
-        android:background="@drawable/selector_btn_main"
         android:enabled="false"
-        android:text="@string/confirmation"
+        android:text="@string/replace"
         android:textAllCaps="false"
         android:textColor="@color/grey_text"
         app:layout_constraintBottom_toBottomOf="parent" />

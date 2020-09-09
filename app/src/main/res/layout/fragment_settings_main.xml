@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
+        android:visibility="gone"
         android:padding="15dp"
         android:src="@drawable/ic_baseline_keyboard_backspace_24"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,20 +66,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cardPhoto"
         android:layout_width="105dp"
         android:layout_height="105dp"
+        android:layout_marginLeft="26dp"
         android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginLeft="26dp"
         app:layout_constraintTop_toBottomOf="@id/title">
 
         <ImageView
             android:id="@+id/ivPhoto"
             android:layout_width="match_parent"
+            android:src="@drawable/ic_avatar_sample"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:background="@drawable/shape_round_window_bg_color" />
@@ -103,11 +103,202 @@
             android:layout_margin="5dp"
             android:background="@drawable/shape_round_window_bg_color"
             android:padding="5dp"
-            android:src="@drawable/ic_pencil" />
+            android:src="@drawable/ic_photo_camera_" />
 
     </androidx.cardview.widget.CardView>
 
 
+    <EditText
+        android:id="@+id/edtSurname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="26dp"
+        android:fontFamily="sans-serif"
+        android:text="Кучкаров"
+        android:textColor="#cc5c5c5c"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@id/edtName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cardPhoto" />
+
+    <EditText
+        android:id="@+id/edtName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="26dp"
+        android:fontFamily="sans-serif"
+        android:text="Стас"
+        android:textColor="#cc5c5c5c"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@id/cardPhoto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cardPhoto" />
+
+
+    <ImageView
+        android:id="@+id/icPhoneNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="?android:actionBarSize"
+        android:src="@drawable/ic_phone_num"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardPhoto" />
+
+    <LinearLayout
+        android:id="@+id/llChangePhoneNum"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:selectableItemBackground"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/icPhoneNum"
+        app:layout_constraintTop_toTopOf="@id/icPhoneNum">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="@string/change_phone_num"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/lblPhoneNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="sans-serif-light"
+            android:text="+998 (90) *** -55-93"
+            android:textColor="#cc5c5c5c"
+            android:textSize="14sp"
+            android:textStyle="normal" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/bg_grey" />
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/icPhoneCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="13dp"
+        android:src="@drawable/ic_phone_password"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llChangePhoneNum" />
+
+
+    <TextView
+        android:id="@+id/tvChangeCode"
+        android:layout_width="0dp"
+        android:layout_height="?android:actionBarSize"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="sans-serif"
+
+        android:foreground="?android:selectableItemBackground"
+        android:gravity="center_vertical"
+        android:text="@string/change_code"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@id/icPhoneCode"
+        app:layout_constraintEnd_toEndOf="@id/llChangePhoneNum"
+        app:layout_constraintStart_toStartOf="@id/llChangePhoneNum"
+        app:layout_constraintTop_toTopOf="@id/icPhoneCode" />
+
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/bg_grey"
+        app:layout_constraintEnd_toEndOf="@id/tvChangeCode"
+        app:layout_constraintStart_toStartOf="@id/tvChangeCode"
+        app:layout_constraintTop_toBottomOf="@id/tvChangeCode" />
+
+
+    <ImageView
+        android:id="@+id/icLang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="13dp"
+        android:src="@drawable/ic_lang"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvChangeCode" />
+
+
+    <TextView
+        android:id="@+id/tvChangeLang"
+        android:layout_width="0dp"
+        android:layout_height="?android:actionBarSize"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="sans-serif"
+        android:foreground="?android:selectableItemBackground"
+        android:gravity="center_vertical"
+        android:text="@string/change_lang"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@id/icLang"
+        app:layout_constraintEnd_toEndOf="@id/llChangePhoneNum"
+        app:layout_constraintStart_toStartOf="@id/llChangePhoneNum"
+        app:layout_constraintTop_toTopOf="@id/icLang" />
+
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/bg_grey"
+        app:layout_constraintEnd_toEndOf="@id/tvChangeLang"
+        app:layout_constraintStart_toStartOf="@id/tvChangeLang"
+        app:layout_constraintTop_toBottomOf="@id/tvChangeLang" />
+
+
+    <ImageView
+        android:id="@+id/icFaceId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="13dp"
+        android:src="@drawable/ic_face_id"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvChangeLang" />
+
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/tvFaceId"
+        android:layout_width="0dp"
+        android:layout_height="?android:actionBarSize"
+        android:checked="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="sans-serif"
+        android:foreground="?android:selectableItemBackground"
+        android:gravity="center_vertical"
+        android:text="Face ID"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@id/icFaceId"
+        app:layout_constraintEnd_toEndOf="@id/llChangePhoneNum"
+        app:layout_constraintStart_toStartOf="@id/llChangePhoneNum"
+        app:layout_constraintTop_toTopOf="@id/icFaceId" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

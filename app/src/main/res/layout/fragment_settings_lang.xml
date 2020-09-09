@@ -65,7 +65,152 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <LinearLayout
+        android:id="@+id/llLangs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?android:actionBarSize"
+        android:layout_marginBottom="?android:actionBarSize"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/title">
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:id="@+id/llRussian"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:gravity="center_vertical"
+            android:paddingLeft="26dp"
+            android:paddingRight="26dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic__flag_ru" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:gravity="center_vertical"
+                android:text="@string/russian"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <RadioButton
+                android:id="@+id/rbRu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/rb_orange"
+                android:checked="true"
+                android:clickable="false" />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="26dp"
+            android:background="@color/bg_grey" />
+
+
+        <LinearLayout
+            android:id="@+id/llUzbek"
+
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="26dp"
+            android:paddingRight="26dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_flag_uz" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:gravity="center_vertical"
+                android:text="@string/uzbek"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <RadioButton
+                android:id="@+id/rbUz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/rb_orange"
+                android:checked="false"
+                android:clickable="false" />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="26dp"
+            android:background="@color/bg_grey" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+android:id="@+id/llEnglish"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="26dp"
+            android:paddingRight="26dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_flag_en" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:gravity="center_vertical"
+                android:text="@string/english"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <RadioButton
+                android:id="@+id/rbEn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/rb_orange"
+                android:checked="false"
+                android:clickable="false" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

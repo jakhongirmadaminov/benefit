@@ -69,12 +69,15 @@
 
     <EditText
         android:id="@+id/edtCode"
-        android:layout_width="240dp"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="26dp"
         android:layout_marginRight="26dp"
         android:background="@drawable/shape_input_bg"
         android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:imeOptions="actionDone"
+        android:inputType="number"
         android:maxLength="4"
         android:paddingStart="15dp"
         android:paddingTop="5dp"
@@ -90,14 +93,28 @@
         app:layout_constraintVertical_chainStyle="spread" />
 
 
-    <Button
+
+    <TextView
+        android:id="@+id/tvResend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/send_code_again_after"
+        android:textColor="@color/textlightGrey"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@id/btnConfirm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edtCode" />
+
+    <com.example.benefit.util.ButtonMain
         android:id="@+id/btnConfirm"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="26dp"
         android:layout_marginRight="26dp"
         android:layout_marginBottom="?android:actionBarSize"
-        android:background="@drawable/selector_btn_main"
         android:enabled="false"
         android:text="@string/confirmation"
         android:textAllCaps="false"

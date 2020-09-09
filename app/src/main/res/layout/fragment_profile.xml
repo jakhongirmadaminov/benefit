@@ -17,6 +17,9 @@
             android:layout_height="wrap_content"
             android:padding="26dp"
             android:src="@drawable/ic_logout"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,8 +38,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardPhoto"
-            android:layout_width="105dp"
-            android:layout_height="105dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:layout_marginTop="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,14 +50,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
-                android:background="@drawable/shape_round_window_bg_color" />
+                android:background="@drawable/shape_round_window_bg_color"
+                android:src="@drawable/ic_avatar_sample" />
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardPhotoIcon"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:selectableItemBackground"
@@ -163,7 +167,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_oval_address"
+                    android:src="@drawable/ic_invite_friends"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

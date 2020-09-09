@@ -84,5 +84,15 @@
     <string name="increased_cashback">Повышенный кэшбэк</string>
     <string name="settings">Настройки</string>
     <string name="select">Выбрать</string>
+    <string name="russian">Русский</string>
+    <string name="uzbek">Узбекский</string>
+    <string name="english">Английский</string>
+    <string name="change_phone_num">Сменить номер телефона</string>
+    <string name="change_code">Сменить код входа</string>
+    <string name="change_lang">Сменить язык</string>
+    <string name="enter_new_phone_number">Введите новый номер телефона:</string>
+    <string name="enter_old_entrance_code">Введите старый код входа:</string>
+    <string name="enter_new_code">Введите новый код входа:</string>
+    <string name="replace">Сменить</string>
 
 </resources>

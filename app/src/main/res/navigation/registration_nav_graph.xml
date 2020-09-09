@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_reg_phone">
         <action
             android:id="@+id/action_regPhoneFragment_to_regCodeFragment"
-            app:destination="@id/regCodeFragment" />
+            app:destination="@id/regCodeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -22,7 +26,11 @@
         tools:layout="@layout/fragment_reg_code" >
         <action
             android:id="@+id/action_regCodeFragment_to_regProfileSetupFragment"
-            app:destination="@id/regProfileSetupFragment" />
+            app:destination="@id/regProfileSetupFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -32,7 +40,11 @@
         tools:layout="@layout/fragment_reg_profile_setup" >
         <action
             android:id="@+id/action_regProfileSetupFragment_to_regPasswordFragment"
-            app:destination="@id/regPasswordFragment" />
+            app:destination="@id/regPasswordFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
 
@@ -43,7 +55,11 @@
         tools:layout="@layout/fragment_reg_password" >
         <action
             android:id="@+id/action_regPasswordFragment_to_regCardActivationFragment"
-            app:destination="@id/regCardActivationFragment" />
+            app:destination="@id/regCardActivationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -53,7 +69,11 @@
         tools:layout="@layout/fragment_reg_card_activation" >
         <action
             android:id="@+id/action_regCardActivationFragment_to_regEndFragment"
-            app:destination="@id/regEndFragment" />
+            app:destination="@id/regEndFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/regEndFragment"

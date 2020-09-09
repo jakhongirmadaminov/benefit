@@ -6,12 +6,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
-import com.example.benefit.ui.auth.login.LoginBSD
 import com.example.benefit.ui.auth.login.LoginViewModel
-import com.example.benefit.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_reg_end.*
-import splitties.fragments.start
+import kotlinx.android.synthetic.main.fragment_settings_lang.*
 import javax.inject.Inject
 
 /**
@@ -34,6 +31,26 @@ class SettingsLangFragment @Inject constructor() : Fragment(R.layout.fragment_se
     }
 
     private fun attachListeners() {
+        ivBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        llRussian.setOnClickListener {
+            rbRu.isChecked = true
+            rbUz.isChecked = false
+            rbEn.isChecked = false
+        }
+        llUzbek.setOnClickListener {
+            rbUz.isChecked = true
+            rbRu.isChecked = false
+            rbEn.isChecked = false
+        }
+        llEnglish.setOnClickListener {
+            rbEn.isChecked = true
+            rbRu.isChecked = false
+            rbUz.isChecked = false
+        }
+
     }
 
 }

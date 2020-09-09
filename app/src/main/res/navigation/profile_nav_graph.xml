@@ -3,13 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/profile_nav_graph.xml"
-    app:startDestination="profileSettingsMainFragment">
+    app:startDestination="@id/profileSettingsMainFragment"
+    >
 
     <fragment
         android:id="@+id/profileSettingsMainFragment"
         android:name="com.example.benefit.ui.main.profile.settings_bsd.SettingsMainFragment"
         android:label=""
-        tools:layout="@layout/fragment_settings_main"></fragment>
+
+        tools:layout="@layout/fragment_settings_main">
+        <action
+            android:id="@+id/action_profileSettingsMainFragment_to_profileSettingsLangFragment"
+            app:destination="@id/profileSettingsLangFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_profileSettingsMainFragment_to_profileSettingsCodeFragment"
+            app:destination="@id/profileSettingsCodeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_profileSettingsMainFragment_to_profileSettingsChangeCodeFragment"
+            app:destination="@id/profileSettingsChangeCodeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 
     <fragment
         android:id="@+id/profileSettingsLangFragment"
@@ -21,7 +45,15 @@
         android:id="@+id/profileSettingsCodeFragment"
         android:name="com.example.benefit.ui.main.profile.settings_bsd.SettingsCodeFragment"
         android:label=""
-        tools:layout="@layout/fragment_settings_code"></fragment>
+        tools:layout="@layout/fragment_settings_code">
+        <action
+            android:id="@+id/action_profileSettingsCodeFragment_to_profileSettingsPhoneFragment"
+            app:destination="@id/profileSettingsPhoneFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 
     <fragment
         android:id="@+id/profileSettingsNewCodeFragment"
@@ -39,6 +71,14 @@
         android:id="@+id/profileSettingsChangeCodeFragment"
         android:name="com.example.benefit.ui.main.profile.settings_bsd.SettingsChangeCodeFragment"
         android:label=""
-        tools:layout="@layout/fragment_settings_change_code"></fragment>
+        tools:layout="@layout/fragment_settings_change_code">
+        <action
+            android:id="@+id/action_profileSettingsChangeCodeFragment_to_profileSettingsNewCodeFragment"
+            app:destination="@id/profileSettingsNewCodeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 
 </navigation>
