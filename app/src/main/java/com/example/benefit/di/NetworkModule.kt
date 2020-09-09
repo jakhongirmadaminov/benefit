@@ -1,5 +1,6 @@
 package com.example.benefit.di
 
+import com.example.benefit.BuildConfig
 import com.example.benefit.remote.ApiService
 import com.example.benefit.remote.ApiServiceFactory
 import com.example.benefit.remote.AuthorizedApiService
@@ -17,14 +18,14 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideApiService(): ApiService {
-        return ApiServiceFactory.makeApiService(false)
+        return ApiServiceFactory.makeApiService(BuildConfig.DEBUG)
     }
 
 
     @Singleton
     @Provides
     fun provideAuthorizedApiService(): AuthorizedApiService {
-        return ApiServiceFactory.makeAuthorizedApiService(false)
+        return ApiServiceFactory.makeAuthorizedApiService(BuildConfig.DEBUG)
     }
 
 

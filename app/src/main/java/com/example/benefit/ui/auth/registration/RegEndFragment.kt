@@ -8,8 +8,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.ui.auth.login.LoginBSD
 import com.example.benefit.ui.auth.login.LoginViewModel
+import com.example.benefit.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_reg_end.*
+import splitties.fragments.start
 import javax.inject.Inject
 
 /**
@@ -28,25 +30,9 @@ class RegEndFragment @Inject constructor() : Fragment(R.layout.fragment_reg_end)
     }
 
     private fun attachListeners() {
-//        edtPhone.doOnTextChanged { text, start, before, count ->
-//            if (!text.isNullOrBlank() && text.length == 9) {
-//                btnGetCode.myEnabled(true)
-//                lblYoullReceiveCode.visibility = View.VISIBLE
-//                lblYoullReceiveCode.text =
-//                    getString(R.string.you_will_receive_code, tvPhoneStart.text.toString() + text)
-//            } else {
-//                btnGetCode.myEnabled(false)
-//                lblYoullReceiveCode.visibility = View.GONE
-//            }
-//
-//        }
-//
-//        btnGetCode.setOnClickListener {
-//            loginViewModel.login("998" + edtPhone.text.toString())
-//        }
-
         tvSkip.setOnClickListener {
-            (parentFragment as LoginBSD).dismiss()
+            start<MainActivity> {}
+            (parentFragment as RegistrationBSD).dismiss()
         }
         ivBack.setOnClickListener {
             findNavController().popBackStack()

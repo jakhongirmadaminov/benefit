@@ -14,6 +14,7 @@
     <color name="yellow">#FFDC47</color>
     <color name="dark_blue">#32579b</color>
     <color name="turquoise">#5ac0ab</color>
+    <color name="error_red">#ff3b30</color>
 </resources>
     <!---->
     <!---->

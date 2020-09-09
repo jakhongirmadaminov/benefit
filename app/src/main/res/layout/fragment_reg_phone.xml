@@ -115,6 +115,17 @@
         app:layout_constraintVertical_chainStyle="spread" />
 
 
+    <CheckBox
+        android:id="@+id/cbTermsAgree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/i_accept_terms"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edtPhone" />
+
+
     <TextView
         android:id="@+id/lblYoullReceiveCode"
         android:layout_width="match_parent"
@@ -124,11 +135,22 @@
         android:fontFamily="sans-serif-light"
         android:gravity="center"
         android:text="@string/you_will_receive_code"
-        android:textColor="#cc5c5c5c"
+        android:textColor="@color/textlightGrey"
         android:textSize="14sp"
         android:textStyle="normal"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/btnGetCode"
+        app:layout_constraintTop_toBottomOf="@id/tvPhoneStart" />
+
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/btnGetCode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvPhoneStart" />
 
 

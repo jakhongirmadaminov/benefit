@@ -13,17 +13,32 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 open class MyBSDialog : BottomSheetDialogFragment() {
 
 
-    override fun getTheme(): Int = R.style.BottomSheetDialogTheme
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
         dialog?.setOnShowListener {
             val d = dialog as BottomSheetDialog
             val bottomSheet = d.findViewById<View>(R.id.design_bottom_sheet) as FrameLayout
-            val coordinatorLayout = bottomSheet.parent as CoordinatorLayout
-            val bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
-            bottomSheetBehavior.peekHeight = bottomSheet.height
+            bottomSheet.setBackgroundResource(android.R.color.transparent)
+            val coordinatorLayout =
+                d.findViewById<View>(R.id.locUXCoordinatorLayout) as CoordinatorLayout?
+            val bottomSheetInternal = d.findViewById<View>(R.id.locUXView)
+            val bottomSheetBehavior = BottomSheetBehavior.from<View>(bottomSheetInternal!!)
+            bottomSheetBehavior.isHideable = false
+
+            val vHeight =
+                SizeUtils.getScreenHeight(requireActivity()) - SizeUtils.getActionBarHeight(
+                    requireActivity()
+                )
+
+
+            BottomSheetBehavior.from(coordinatorLayout!!.parent as View).peekHeight =
+                vHeight
+            bottomSheetBehavior.peekHeight = vHeight
+            coordinatorLayout.layoutParams = coordinatorLayout.layoutParams.apply {
+                height = vHeight
+            }
             coordinatorLayout.parent.requestLayout()
         }
     }

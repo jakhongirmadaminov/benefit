@@ -1,7 +1,5 @@
 package com.example.benefit.remote
 
-import okhttp3.RequestBody
-import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -11,7 +9,17 @@ import retrofit2.http.*
 interface AuthorizedApiService {
 
 
+    @POST("api/user/edit")
+    @Multipart
+    suspend fun editUserInfo(@Field("phone_number") phone_number: String): Response<Any>
 
+    @POST("api/user/setpassword")
+    @FormUrlEncoded
+    suspend fun setPassword(@Field("phone_number") phone_number: String): Response<Any>
+
+    @Multipart
+    @POST("api/user/loginnumber")
+    suspend fun uploadAvatar(@Part("phone_number") phone_number: String): Response<Any>
 
 //    @Headers("Content-Type:application/json", "Accept: application/json")
 //    @POST("v1/doctor/profile/city")

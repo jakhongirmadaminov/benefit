@@ -17,9 +17,9 @@
 
     <fragment
         android:id="@+id/codeFragment"
-        android:name="com.example.benefit.ui.auth.login.PhoneFragment"
+        android:name="com.example.benefit.ui.auth.login.CodeFragment"
         android:label=""
-        tools:layout="@layout/fragment_phone" />
+        tools:layout="@layout/fragment_code" />
 
 
 </navigation>

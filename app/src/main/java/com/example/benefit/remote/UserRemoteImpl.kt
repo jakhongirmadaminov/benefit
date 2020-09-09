@@ -19,7 +19,6 @@ class UserRemoteImpl @Inject constructor(
     UserRemote {
 
 
-
     override suspend fun login(phoneNum: String): ResultWrapper<String> {
         return try {
             val response = apiService.login(phoneNum)
@@ -30,6 +29,51 @@ class UserRemoteImpl @Inject constructor(
                     response.errorBody()!!
                         .string()
                 )["message"].toString()
+            )
+        } catch (e: Exception) {
+            ErrorWrapper.SystemError(e)
+        }
+    }
+
+    override suspend fun signup(phoneNum: String): ResultWrapper<String> {
+        return try {
+            val response = apiService.signup(phoneNum)
+            if (response.isSuccessful) ResultWrapper.Success("")
+            else ErrorWrapper.ResponseError(
+                response.code(),
+                JSONObject(
+                    response.errorBody()!!
+                        .string()
+                )["message"].toString()
+            )
+        } catch (e: Exception) {
+            ErrorWrapper.SystemError(e)
+        }
+    }
+
+    override suspend fun loginCode(phoneNum: String, code: String): ResultWrapper<String> {
+        return try {
+            val response = apiService.loginsms(phoneNum, code)
+            if (response.isSuccessful) ResultWrapper.Success("")
+            else ErrorWrapper.ResponseError(
+                response.code(),
+                JSONObject(
+                    response.errorBody()!!
+                        .string()
+                )["message"].toString()
+            )
+        } catch (e: Exception) {
+            ErrorWrapper.SystemError(e)
+        }
+    }
+
+    override suspend fun resendCode(phoneNum: String): ResultWrapper<String> {
+        return try {
+            val response = apiService.sendcode(phoneNum)
+            if (response.isSuccessful) ResultWrapper.Success("")
+            else ErrorWrapper.ResponseError(
+                response.code(),
+                JSONObject(response.errorBody()!!.string())["message"].toString()
             )
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)

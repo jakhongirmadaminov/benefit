@@ -16,15 +16,45 @@ import kotlinx.coroutines.withContext
 class RegistrationViewModel @ViewModelInject constructor(private val userRemoteImpl: UserRemoteImpl) :
     ViewModel() {
 
-    val loginResp = SingleLiveEvent<ResultWrapper<String>>()
-    fun login(phoneNumber: String) {
-        loginResp.value = ResultWrapper.InProgress
+
+    var phone = ""
+
+    val signUpResp = SingleLiveEvent<ResultWrapper<String>>()
+    val resendCodeResp = SingleLiveEvent<ResultWrapper<String>>()
+    val loginCodeResp = SingleLiveEvent<ResultWrapper<String>>()
+
+
+    fun signup(phoneNumber: String) {
+        phone = phoneNumber
+        signUpResp.value = ResultWrapper.InProgress
         viewModelScope.launch(Dispatchers.IO) {
-            val response = userRemoteImpl.login(phoneNumber)
+            val response = userRemoteImpl.signup(phoneNumber)
             withContext(Dispatchers.Main) {
-                loginResp.value = response
+                signUpResp.value = response
             }
         }
+    }
+
+    fun resendCode() {
+        resendCodeResp.value = ResultWrapper.InProgress
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = userRemoteImpl.resendCode(phone)
+            withContext(Dispatchers.Main) {
+                resendCodeResp.value = response
+            }
+        }
+
+    }
+
+    fun loginCode(code: String) {
+        loginCodeResp.value = ResultWrapper.InProgress
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = userRemoteImpl.loginCode(phone, code)
+            withContext(Dispatchers.Main) {
+                loginCodeResp.value = response
+            }
+        }
+
     }
 
 }

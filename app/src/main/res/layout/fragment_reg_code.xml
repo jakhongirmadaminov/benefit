@@ -88,13 +88,13 @@
         android:layout_marginRight="26dp"
         android:background="@drawable/shape_input_bg"
         android:fontFamily="sans-serif"
-        android:maxLength="4"
         android:gravity="center"
+        android:imeOptions="actionDone"
         android:inputType="number"
+        android:maxLength="4"
         android:paddingStart="15dp"
         android:paddingTop="5dp"
         android:paddingEnd="15dp"
-        android:imeOptions="actionDone"
         android:paddingBottom="5dp"
         android:textColor="#cc5c5c5c"
         android:textSize="24sp"
@@ -107,7 +107,35 @@
         app:layout_constraintVertical_chainStyle="spread" />
 
 
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/tvResend"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edtCode" />
+
+
     <TextView
+        android:id="@+id/tvError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:textColor="@color/error_red"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/tvResend"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edtCode" />
+
+
+    <TextView
+        android:id="@+id/tvResend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"

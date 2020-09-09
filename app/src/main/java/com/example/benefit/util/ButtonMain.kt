@@ -3,12 +3,13 @@ package com.example.benefit.util
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
+import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.content.ContextCompat
 import com.example.benefit.R
 
 
 class ButtonMain constructor(context: Context, attrs: AttributeSet) :
-    androidx.appcompat.widget.AppCompatButton(context, attrs) {
+    androidx.appcompat.widget.AppCompatButton(ContextThemeWrapper(context, R.style.ButtonMainStyle), attrs, R.style.ButtonMainStyle) {
 
 
     init {
@@ -26,6 +27,7 @@ class ButtonMain constructor(context: Context, attrs: AttributeSet) :
 //            }
 //        }
 //        a.recycle()
+
     }
 
     private fun setTextColor(enabled: Boolean) {

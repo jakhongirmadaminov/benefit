@@ -5,8 +5,10 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.benefit.R
+import com.example.benefit.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_code.*
+import splitties.fragments.start
 import javax.inject.Inject
 
 /**
@@ -40,7 +42,7 @@ class CodeFragment @Inject constructor() : Fragment(R.layout.fragment_code) {
 //
         btnConfirm.setOnClickListener {
 //            loginViewModel.login("998" + edtPhone.text.toString())
-
+            start<MainActivity> {}
             (parentFragment as LoginBSD).dismiss()
         }
     }

@@ -42,9 +42,11 @@ class PhoneFragment @Inject constructor() : Fragment(R.layout.fragment_phone) {
 
         btnGetCode.setOnClickListener {
             loginViewModel.login("998" + edtPhone.text.toString())
-            findNavController().navigate(R.id.action_regPhoneFragment_to_regCodeFragment)
+            findNavController().navigate(R.id.action_phoneFragment_to_codeFragment)
 
         }
+
+
     }
 
 }

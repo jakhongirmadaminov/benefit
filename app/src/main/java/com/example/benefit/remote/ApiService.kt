@@ -9,12 +9,24 @@ import retrofit2.http.*
  */
 interface ApiService {
 
-
-
-
     @POST("api/user/loginnumber")
     @FormUrlEncoded
     suspend fun login(@Field("phone_number") phone_number: String): Response<Any>
+
+    @POST("api/user/signup")
+    @FormUrlEncoded
+    suspend fun signup(@Field("phone") phone: String,@Field("created") created: String = "232323",@Field("ip") ip: String="127.0.0.1"): Response<Any>
+
+    @POST("api/user/loginsms")
+    @FormUrlEncoded
+    suspend fun loginsms(@Field("phone_number") phone_number: String,@Field("sms_code") sms_code: String): Response<Any>
+
+    @POST("api/user/sendcode")
+    @FormUrlEncoded
+    suspend fun sendcode(@Field("phone_number") phone_number: String): Response<Any>
+
+
+
 
 //    @Headers("Content-Type:application/json", "Accept: application/json")
 //    @POST("v1/site/register")

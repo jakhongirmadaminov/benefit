@@ -13,7 +13,14 @@ interface UserRemote {
      * Retrieve a list of Bufferoos, from the cache
      */
     suspend fun login(phoneNum: String): ResultWrapper<String>
-//
+    suspend fun signup(phoneNum: String): ResultWrapper<String>
+    suspend fun loginCode(phoneNum: String,code: String): ResultWrapper<String>
+    suspend fun resendCode(phoneNum: String): ResultWrapper<String>
+//    suspend fun loginSms(phoneNum: String, code: String): ResultWrapper<String>
+//    suspend fun setPassword(token: String, phoneNum: String, password: String): ResultWrapper<String>
+//    suspend fun editUserInfo(phoneNum: String): ResultWrapper<String>
+
+
 //    //    suspend fun registerUser(user: User): ResultWrapper<String>
 //    suspend fun confirmUser(user: UserCredentials): ResultWrapper<NUser>
 //    suspend fun saveUserCity(cityId: Int): ResultWrapper<NUser>
