@@ -82,5 +82,7 @@
     <string name="resend_timer_sms">"Отправить снова через %1$s"</string>
     <string name="invite_friend">Пригласить друга</string>
     <string name="increased_cashback">Повышенный кэшбэк</string>
+    <string name="settings">Настройки</string>
+    <string name="select">Выбрать</string>
 
 </resources>

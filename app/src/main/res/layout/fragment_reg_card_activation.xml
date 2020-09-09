@@ -243,7 +243,7 @@
         android:layout_marginRight="26dp"
         android:layout_marginBottom="?android:actionBarSize"
         android:background="@drawable/selector_grey"
-        android:enabled="false"
+        android:enabled="true"
         android:text="@string/order_card"
         android:textAllCaps="false"
         android:textColor="@color/black"

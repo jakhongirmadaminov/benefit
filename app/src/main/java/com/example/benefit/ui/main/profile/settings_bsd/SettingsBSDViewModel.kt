@@ -1,4 +1,4 @@
-package com.example.benefit.ui.main.profile.profile_bsd
+package com.example.benefit.ui.main.profile.settings_bsd
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
@@ -13,7 +13,7 @@ import kotlinx.coroutines.withContext
 /**
  * Created by jahon on 03-Sep-20
  */
-class ProfileBSDViewModel @ViewModelInject constructor(private val userRemoteImpl: UserRemoteImpl) :
+class SettingsBSDViewModel @ViewModelInject constructor(private val userRemoteImpl: UserRemoteImpl) :
     ViewModel() {
 
     val loginResp = SingleLiveEvent<ResultWrapper<String>>()

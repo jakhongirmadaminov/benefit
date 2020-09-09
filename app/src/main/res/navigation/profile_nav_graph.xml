@@ -1,5 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/profile_nav_graph.xml">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profile_nav_graph.xml"
+    app:startDestination="profileSettingsMainFragment">
+
+    <fragment
+        android:id="@+id/profileSettingsMainFragment"
+        android:name="com.example.benefit.ui.main.profile.settings_bsd.SettingsMainFragment"
+        android:label=""
+        tools:layout="@layout/fragment_settings_main"></fragment>
+
+    <fragment
+        android:id="@+id/profileSettingsLangFragment"
+        android:name="com.example.benefit.ui.main.profile.settings_bsd.SettingsLangFragment"
+        android:label=""
+        tools:layout="@layout/fragment_settings_lang"></fragment>
+
+    <fragment
+        android:id="@+id/profileSettingsCodeFragment"
+        android:name="com.example.benefit.ui.main.profile.settings_bsd.SettingsCodeFragment"
+        android:label=""
+        tools:layout="@layout/fragment_settings_code"></fragment>
+
+    <fragment
+        android:id="@+id/profileSettingsNewCodeFragment"
+        android:name="com.example.benefit.ui.main.profile.settings_bsd.SettingsNewCodeFragment"
+        android:label=""
+        tools:layout="@layout/fragment_settings_new_code"></fragment>
+
+    <fragment
+        android:id="@+id/profileSettingsPhoneFragment"
+        android:name="com.example.benefit.ui.main.profile.settings_bsd.SettingsPhoneFragment"
+        android:label=""
+        tools:layout="@layout/fragment_settings_phone"></fragment>
+
+    <fragment
+        android:id="@+id/profileSettingsChangeCodeFragment"
+        android:name="com.example.benefit.ui.main.profile.settings_bsd.SettingsChangeCodeFragment"
+        android:label=""
+        tools:layout="@layout/fragment_settings_change_code"></fragment>
 
 </navigation>
