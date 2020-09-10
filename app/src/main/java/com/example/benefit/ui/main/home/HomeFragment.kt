@@ -28,7 +28,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun attachListeners() {
         cardOvalLoans.setOnClickListener { start<LoanActivity> {} }
-
+        cardOvalCashback.setOnClickListener {
+            val dialog = DialogCashBack()
+            dialog.show(childFragmentManager, "")
+        }
     }
 
     private fun setupViews() {
@@ -57,10 +60,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         )
         servicesPager.pageMargin = SizeUtils.dpToPx(requireContext(), 15).toInt()
 
-        page_one.setOnClickListener {
-            val dialog = DialogCashBack()
-            dialog.show(childFragmentManager, "")
-        }
+
 
     }
 

@@ -1,5 +1,6 @@
 package com.example.benefit.ui.main.home
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,11 @@ import kotlinx.android.synthetic.main.dialog_cashback.*
  */
 class DialogCashBack : DialogFragment() {
 
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        setStyle(STYLE_NO_TITLE, android.R.style.Theme)
+        return super.onCreateDialog(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
