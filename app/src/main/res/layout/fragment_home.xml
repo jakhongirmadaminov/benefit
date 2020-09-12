@@ -14,10 +14,11 @@
         android:orientation="vertical"
         android:paddingBottom="15dp">
 
-        <androidx.viewpager2.widget.ViewPager2
+        <androidx.viewpager.widget.ViewPager
             android:id="@+id/cardsPager"
+            android:layout_marginTop="46dp"
             android:layout_width="match_parent"
-            android:layout_height="185dp" />
+            android:layout_height="190dp" />
 
         <com.rd.PageIndicatorView
             android:id="@+id/pageIndicatorView"

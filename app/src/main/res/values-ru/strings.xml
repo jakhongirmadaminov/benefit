@@ -109,5 +109,8 @@
     <string name="active_until">Действует до</string>
     <string name="more_details">Подробнее</string>
     <string name="creadit_history">Кредитная история</string>
+    <string name="balance">Баланс</string>
+    <string name="add_or_order_new_card">Добавить карту или заказать новую</string>
+    <string name="add_card_sub_title">Активруйте новую банковскую карту Orient Finans Bank или Benefit</string>
 
 </resources>

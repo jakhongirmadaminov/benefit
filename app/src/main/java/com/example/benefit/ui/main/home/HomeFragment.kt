@@ -42,11 +42,40 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         setupServicesPager()
 
+        setupCardsPager()
+
+    }
+
+    private fun setupCardsPager() {
+
+        val cardView = layoutInflater.inflate(R.layout.item_card, null)
+
+        cardView.setOnClickListener {
+            CardOptionsBSD().show(childFragmentManager, "")
+        }
+
+        cardsPager.addView(cardView)
+        val cardView2 = layoutInflater.inflate(R.layout.item_add_card, null)
+        cardsPager.addView(cardView2)
+
+
+        cardsPager.adapter = WizardPagerAdapter(listOf(cardView, cardView2))
+        cardsPager.offscreenPageLimit = 2
+        cardsPager.clipToPadding = false
+        cardsPager.setPadding(
+            SizeUtils.dpToPx(requireContext(), 26).toInt(),
+            0,
+            SizeUtils.dpToPx(requireContext(), 26).toInt(),
+            0
+        )
+        cardsPager.pageMargin = SizeUtils.dpToPx(requireContext(), 15).toInt()
+
+
     }
 
     private fun setupServicesPager() {
 
-        servicesPager.adapter = WizardPagerAdapter()
+        servicesPager.adapter = WizardPagerAdapter(listOf(page_one, page_two, page_three))
         servicesPager.offscreenPageLimit = 2
         servicesPager.clipToPadding = false
         servicesPager.setPadding(
@@ -65,21 +94,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
 
-    inner class WizardPagerAdapter : PagerAdapter() {
+    class WizardPagerAdapter(val views: List<View>) : PagerAdapter() {
 
 
         override fun instantiateItem(collection: ViewGroup, position: Int): Any {
-            var resId = 0
-            when (position) {
-                0 -> resId = R.id.page_one
-                1 -> resId = R.id.page_two
-                2 -> resId = R.id.page_three
-            }
-            return servicesPager.findViewById(resId)
+            return views[position]
+//            return servicesPager.findViewById(resId)
         }
 
         override fun getCount(): Int {
-            return 3
+            return views.size
         }
 
         override fun isViewFromObject(arg0: View, arg1: Any): Boolean {
