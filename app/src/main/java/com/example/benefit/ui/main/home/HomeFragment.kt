@@ -6,10 +6,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.PagerAdapter
 import com.example.benefit.R
-import com.example.benefit.ui.main.home.loans.LoanActivity
+import com.example.benefit.ui.loans.LoanActivity
+import com.example.benefit.ui.main.home.card_options.CardOptionsBSD
+import com.example.benefit.ui.main.home.fill_card.FillCardBSD
 import com.example.benefit.util.SizeUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.item_card.view.*
 import splitties.fragments.start
 
 @AndroidEntryPoint
@@ -53,6 +56,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         val cardView = layoutInflater.inflate(R.layout.item_card, null)
 
+        cardView.icPlus.setOnClickListener {
+            FillCardBSD().show(childFragmentManager, "")
+        }
         cardView.setOnClickListener {
             CardOptionsBSD().show(childFragmentManager, "")
         }
@@ -88,7 +94,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             0
         )
         servicesPager.pageMargin = SizeUtils.dpToPx(requireContext(), 15).toInt()
-
 
 
     }

@@ -9,10 +9,18 @@
         android:id="@+id/cardOptionsFragment"
         android:name="com.example.benefit.ui.main.home.card_options.CardOptionsFragment"
         android:label=""
-        tools:layout="@layout/fragment_card_options" >
+        tools:layout="@layout/fragment_card_options">
+
         <action
-            android:id="@+id/action_phoneFragment_to_codeFragment"
-            app:destination="@id/codeFragment"
+            android:id="@+id/action_cardOptionsFragment_to_cardChangeDesignFragment"
+            app:destination="@id/cardChangeDesignFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_cardOptionsFragment_to_cardNotificationsFragment"
+            app:destination="@id/cardNotificationsFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -20,10 +28,25 @@
     </fragment>
 
     <fragment
-        android:id="@+id/codeFragment"
-        android:name="com.example.benefit.ui.auth.login.CodeFragment"
+        android:id="@+id/cardChangeDesignFragment"
+        android:name="com.example.benefit.ui.main.home.card_options.CardChangeDesignFragment"
         android:label=""
-        tools:layout="@layout/fragment_code" />
+        tools:layout="@layout/fragment_card_change_design">
+
+    </fragment>
+
+
+
+
+    <fragment
+        android:id="@+id/cardNotificationsFragment"
+        android:name="com.example.benefit.ui.main.home.card_options.CardNotificationsFragment"
+        android:label=""
+        tools:layout="@layout/fragment_card_notifications">
+
+    </fragment>
+
+
 
 
 </navigation>

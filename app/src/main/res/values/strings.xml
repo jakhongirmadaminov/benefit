@@ -112,5 +112,33 @@
     <string name="balance">Баланс</string>
     <string name="add_or_order_new_card">Добавить карту или заказать новую</string>
     <string name="add_card_sub_title">Активруйте новую банковскую карту Orient Finans Bank или Benefit</string>
+    <string name="payments_brline_and_transfers">Платежи\nи переводы</string>
+    <string name="top_up">Пополнить</string>
+    <string name="make_depo_to_cards_of_benefit">Пополнение средств на карты Benefit</string>
+    <string name="transfer_to_card">Перевод на карту</string>
+    <string name="transfer_to_bank_cards">Перевод средств на банковские карты</string>
+    <string name="transfer_to_friend">Перевод другу</string>
+    <string name="transfer_fund_or_cashback_to_friends_from_contacts">Перевод средств или кэшбэка друзьям из списка контактов</string>
+    <string name="pay">Оплатить</string>
+    <string name="pay_services_mobile_operators_internet_providers">Оплата коммунальных услуг, мобильных операторов, интернет-провайдеров</string>
+    <string name="game_gap">Игра “Гап”</string>
+    <string name="ptwop_game_share_fund_between_friends">Командная P2P-игра. Делите между друзьями общий накопленный банк</string>
+    <string name="phone">Телефон</string>
+    <string name="actions_history">История операций</string>
+    <string name="top_up_card">Пополнить карту</string>
+    <string name="change_card_design">Сменить дизайн карты</string>
+    <string name="block_card">Заблокировать карту</string>
+    <string name="block_card_subtitle">Внимание!\nПосле блокировки вы не сможете расплачиваться картой и осуществлять переводы.</string>
+    <string name="block">Заблокировать</string>
+    <string name="cancel">Отмена</string>
+    <string name="push_notifications">Push - уведомления</string>
+    <string name="push_notifications_subtitle">Для Push - уведомлений Вам понадобится соединение с интернетом</string>
+    <string name="sms_subtitle">Стоимость SMS - уведомлений 5 000 UZS в месяц</string>
+    <string name="fill">Пополнить</string>
+    <string name="from_own_cards">Со своих карт</string>
+    <string name="from_any_bank_card">С любой банковской карты</string>
+    <string name="by_cash">Наличными</string>
+    <string name="request_friends">Запросить у друзей</string>
+    <string name="bonused">Бонусная</string>
 
 </resources>

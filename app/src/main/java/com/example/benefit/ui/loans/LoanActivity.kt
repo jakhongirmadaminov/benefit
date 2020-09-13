@@ -1,6 +1,5 @@
-package com.example.benefit.ui.main.home.loans
+package com.example.benefit.ui.loans
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.benefit.R
 import com.example.benefit.ui.base.BaseActionbarActivity

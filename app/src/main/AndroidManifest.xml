@@ -26,8 +26,17 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.main.home.loans.LoanActivity"
+            android:name=".ui.branches_atms.BranchesAtmsActivity"
             android:theme="@style/NoActionBar"></activity>
+        <activity
+            android:name=".ui.analytics.AnalyticsActivity"
+            android:theme="@style/NoActionBar"></activity>
+        <activity
+            android:name="com.example.benefit.ui.loans.LoanActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name="com.example.benefit.ui.transactions_history.TransactionsHistoryActivity"
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.auth.AuthActivity"
             android:theme="@style/NoActionBar">

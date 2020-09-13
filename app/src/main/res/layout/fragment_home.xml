@@ -52,7 +52,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_bell" />
+                    android:src="@drawable/ic_bell_ringing" />
 
                 <TextView
                     android:id="@+id/tvNotification"
@@ -269,7 +269,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_message" />
+                            android:src="@drawable/ic_message_big" />
 
 
                     </androidx.cardview.widget.CardView>

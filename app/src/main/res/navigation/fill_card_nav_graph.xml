@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fill_card_nav_graph.xml"
+    app:startDestination="@id/fillCardFragment">
+
+
+
+    <fragment
+        android:id="@+id/fillCardFragment"
+        android:name="com.example.benefit.ui.main.home.fill_card.FillCardFragment"
+        android:label=""
+        tools:layout="@layout/fragment_fill_card">
+
+    </fragment>
+    <fragment
+        android:id="@+id/cardMakeDepositFromAnyCardFragment"
+        android:name="com.example.benefit.ui.main.home.fill_card.FillCardFromAnyCardFragment"
+        android:label=""
+        tools:layout="@layout/fragment_card_make_deposit_from_any_card">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/cardMakeDepositFromMyCardFragment"
+        android:name="com.example.benefit.ui.main.home.fill_card.FillCardFromMyCardsFragment"
+        android:label=""
+        tools:layout="@layout/fragment_card_make_deposit_from_my_cards">
+    </fragment>
+
+
+
+    <fragment
+        android:id="@+id/cardDepositAnyCardTransferFragment"
+        android:name="com.example.benefit.ui.main.home.fill_card.FillCardAnyCardTransferFragment"
+        android:label=""
+        tools:layout="@layout/fragment_card_deposit_any_card_transfer">
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/cardDepositAskFriendsFragment"
+        android:name="com.example.benefit.ui.main.home.fill_card.FillCardAskFriendsFragment"
+        android:label=""
+        tools:layout="@layout/fragment_card_deposit_ask_friends">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/cardDepositAskFriendsTransferFragment"
+        android:name="com.example.benefit.ui.main.home.fill_card.FillCardAskFriendsTransferFragment"
+        android:label=""
+        tools:layout="@layout/fragment_card_deposit_ask_friends_transfer">
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/cardDepositSearchFriendsFragment"
+        android:name="com.example.benefit.ui.main.home.fill_card.FillCardSearchFriendsFragment"
+        android:label=""
+        tools:layout="@layout/fragment_card_deposit_search_friends">
+
+    </fragment>
+
+</navigation>

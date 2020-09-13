@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ivServiceLogo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/shape_white_rounded_grey_stroke"
+        android:padding="1dp"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/phone"
+        android:textColor="#5c5c5c"
+        android:textSize="12sp"
+        android:textStyle="normal" />
+
+</LinearLayout>

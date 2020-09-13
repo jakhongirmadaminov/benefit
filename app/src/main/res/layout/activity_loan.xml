@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.main.home.loans.LoanActivity">
+    tools:context=".ui.loans.LoanActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
@@ -268,7 +268,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context=".ui.main.home.loans.LoanActivity">
+                tools:context=".ui.loans.LoanActivity">
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
