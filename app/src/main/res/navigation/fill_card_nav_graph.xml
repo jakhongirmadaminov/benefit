@@ -6,36 +6,62 @@
     app:startDestination="@id/fillCardFragment">
 
 
-
     <fragment
         android:id="@+id/fillCardFragment"
         android:name="com.example.benefit.ui.main.home.fill_card.FillCardFragment"
         android:label=""
         tools:layout="@layout/fragment_fill_card">
 
+        <action
+            android:id="@+id/action_fillCardFragment_to_cardMakeDepositFromAnyCardFragment"
+            app:destination="@id/cardMakeDepositFromAnyCardFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_fillCardFragment_to_cardMakeDepositFromMyCardFragment"
+            app:destination="@id/cardMakeDepositFromMyCardFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_fillCardFragment_to_cardDepositAskFriendsFragment"
+            app:destination="@id/cardDepositAskFriendsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/cardMakeDepositFromAnyCardFragment"
         android:name="com.example.benefit.ui.main.home.fill_card.FillCardFromAnyCardFragment"
         android:label=""
-        tools:layout="@layout/fragment_card_make_deposit_from_any_card">
+        tools:layout="@layout/fragment_fill_from_any_card">
 
+        <action
+            android:id="@+id/action_cardMakeDepositFromAnyCardFragment_to_cardDepositAnyCardTransferFragment"
+            app:destination="@id/cardDepositAnyCardTransferFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
         android:id="@+id/cardMakeDepositFromMyCardFragment"
         android:name="com.example.benefit.ui.main.home.fill_card.FillCardFromMyCardsFragment"
         android:label=""
-        tools:layout="@layout/fragment_card_make_deposit_from_my_cards">
-    </fragment>
-
+        tools:layout="@layout/fragment_fill_from_my_cards"></fragment>
 
 
     <fragment
         android:id="@+id/cardDepositAnyCardTransferFragment"
         android:name="com.example.benefit.ui.main.home.fill_card.FillCardAnyCardTransferFragment"
         android:label=""
-        tools:layout="@layout/fragment_card_deposit_any_card_transfer">
+        tools:layout="@layout/fragment_fill_from_any_card_transfer">
 
     </fragment>
 
@@ -44,15 +70,29 @@
         android:id="@+id/cardDepositAskFriendsFragment"
         android:name="com.example.benefit.ui.main.home.fill_card.FillCardAskFriendsFragment"
         android:label=""
-        tools:layout="@layout/fragment_card_deposit_ask_friends">
+        tools:layout="@layout/fragment_fill_card_ask_friends">
 
+        <action
+            android:id="@+id/action_cardDepositAskFriendsFragment_to_cardDepositSearchFriendsFragment"
+            app:destination="@id/cardDepositSearchFriendsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_cardDepositAskFriendsFragment_to_cardDepositAskFriendsTransferFragment"
+            app:destination="@id/cardDepositAskFriendsTransferFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
         android:id="@+id/cardDepositAskFriendsTransferFragment"
         android:name="com.example.benefit.ui.main.home.fill_card.FillCardAskFriendsTransferFragment"
         android:label=""
-        tools:layout="@layout/fragment_card_deposit_ask_friends_transfer">
+        tools:layout="@layout/fragment_fill_card_ask_friends_transfer">
 
     </fragment>
 
@@ -61,7 +101,7 @@
         android:id="@+id/cardDepositSearchFriendsFragment"
         android:name="com.example.benefit.ui.main.home.fill_card.FillCardSearchFriendsFragment"
         android:label=""
-        tools:layout="@layout/fragment_card_deposit_search_friends">
+        tools:layout="@layout/fragment_fill_card_search_friends">
 
     </fragment>
 

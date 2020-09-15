@@ -8,14 +8,14 @@ import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.ui.main.home.card_options.CardOptionsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_card_change_design.*
+import kotlinx.android.synthetic.main.fragment_fill_card_ask_friends.*
 import javax.inject.Inject
 
 /**
  * Created by jahon on 03-Sep-20
  */
 @AndroidEntryPoint
-class FillCardAskFriendsFragment @Inject constructor() : Fragment(R.layout.fragment_card_deposit_ask_friends) {
+class FillCardAskFriendsFragment @Inject constructor() : Fragment(R.layout.fragment_fill_card_ask_friends) {
 
 
     private val viewModel: CardOptionsViewModel by viewModels()
@@ -35,6 +35,10 @@ class FillCardAskFriendsFragment @Inject constructor() : Fragment(R.layout.fragm
     private fun attachListeners() {
         ivBack.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        ivLocation.setOnClickListener {
+
         }
 
     }

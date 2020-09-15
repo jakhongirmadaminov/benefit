@@ -140,5 +140,15 @@
     <string name="by_cash">Наличными</string>
     <string name="request_friends">Запросить у друзей</string>
     <string name="bonused">Бонусная</string>
+    <string name="latest_deposits">Последние пополнения</string>
+    <string name="transfer_from_card">Перевод с карты</string>
+    <string name="take_card_photo">Сфотографировать карту</string>
+    <string name="enter_card_number">Введите номер карты</string>
+    <string name="minimum_sum_is">Минимальная сумма</string>
+    <string name="search">Найти</string>
+    <string name="from_contacts">Из телефонной книги</string>
+    <string name="search_friends_nearby">Поиск друзей\nпоблизости...</string>
+    <string name="friends_nearby">Друзья\nпоблизости</string>
+    <string name="request">Запросить</string>
 
 </resources>

@@ -15,7 +15,7 @@ import javax.inject.Inject
  * Created by jahon on 03-Sep-20
  */
 @AndroidEntryPoint
-class FillCardSearchFriendsFragment @Inject constructor() : Fragment(R.layout.fragment_card_deposit_search_friends) {
+class FillCardSearchFriendsFragment @Inject constructor() : Fragment(R.layout.fragment_fill_card_search_friends) {
 
 
     private val viewModel: CardOptionsViewModel by viewModels()
