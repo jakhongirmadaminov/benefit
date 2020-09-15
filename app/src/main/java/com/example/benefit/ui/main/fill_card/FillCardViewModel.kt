@@ -1,14 +1,8 @@
-package com.example.benefit.ui.main.home.fill_card
+package com.example.benefit.ui.main.fill_card
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.benefit.remote.UserRemoteImpl
-import com.example.benefit.util.ResultWrapper
-import com.example.benefit.util.SingleLiveEvent
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 /**
  * Created by jahon on 03-Sep-20

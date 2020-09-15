@@ -1,4 +1,4 @@
-package com.example.benefit.ui.main.home.fill_card
+package com.example.benefit.ui.main.fill_card
 
 import android.os.Bundle
 import android.view.View
@@ -11,14 +11,15 @@ import com.example.benefit.ui.main.home.card_options.CardOptionsBSD
 import com.example.benefit.ui.main.home.card_options.CardOptionsViewModel
 import com.example.benefit.util.SizeUtils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_fill_from_my_cards.*
+import kotlinx.android.synthetic.main.fragment_fill_card_ask_friends_transfer.*
 import javax.inject.Inject
 
 /**
  * Created by jahon on 03-Sep-20
  */
 @AndroidEntryPoint
-class FillCardFromMyCardsFragment @Inject constructor() : Fragment(R.layout.fragment_fill_from_my_cards) {
+class FillCardAskFriendsTransferFragment @Inject constructor() :
+    Fragment(R.layout.fragment_fill_card_ask_friends_transfer) {
 
 
     private val viewModel: CardOptionsViewModel by viewModels()
@@ -26,16 +27,33 @@ class FillCardFromMyCardsFragment @Inject constructor() : Fragment(R.layout.frag
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         setupViews()
         attachListeners()
         subscribeObservers()
     }
 
+    private fun subscribeObservers() {
+
+
+    }
+
+    private fun attachListeners() {
+        ivBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+    }
+
+
     private fun setupViews() {
 
-        val cardView = layoutInflater.inflate(R.layout.item_card_small, null)
-        val cardView2 = layoutInflater.inflate(R.layout.item_card_small, null)
+
+        val cardView = layoutInflater.inflate(R.layout.item_contact_square, null)
+        val cardView2 = layoutInflater.inflate(R.layout.item_contact_square, null)
+
+        cardView.setOnClickListener {
+            CardOptionsBSD().show(childFragmentManager, "")
+        }
 
         cardsToPagerSmall.addView(cardView)
         cardsToPagerSmall.addView(cardView2)
@@ -51,38 +69,6 @@ class FillCardFromMyCardsFragment @Inject constructor() : Fragment(R.layout.frag
         )
         cardsToPagerSmall.pageMargin = SizeUtils.dpToPx(requireContext(), 15).toInt()
 
-
-
-        val cardView3 = layoutInflater.inflate(R.layout.item_card_small, null)
-        val cardView4 = layoutInflater.inflate(R.layout.item_card_small, null)
-
-        cardsFromPagerSmall.addView(cardView3)
-        cardsFromPagerSmall.addView(cardView4)
-
-        cardsFromPagerSmall.adapter = HomeFragment.WizardPagerAdapter(listOf(cardView3, cardView4))
-        cardsFromPagerSmall.offscreenPageLimit = 2
-        cardsFromPagerSmall.clipToPadding = false
-        cardsFromPagerSmall.setPadding(
-            SizeUtils.dpToPx(requireContext(), 26).toInt(),
-            0,
-            SizeUtils.dpToPx(requireContext(), 26).toInt(),
-            0
-        )
-        cardsFromPagerSmall.pageMargin = SizeUtils.dpToPx(requireContext(), 15).toInt()
-
-
-
-    }
-
-    private fun subscribeObservers() {
-
-
-    }
-
-    private fun attachListeners() {
-        ivBack.setOnClickListener {
-            findNavController().popBackStack()
-        }
 
     }
 

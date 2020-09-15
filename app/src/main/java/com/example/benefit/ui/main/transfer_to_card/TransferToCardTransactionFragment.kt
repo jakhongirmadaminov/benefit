@@ -1,4 +1,4 @@
-package com.example.benefit.ui.main.home.fill_card
+package com.example.benefit.ui.main.transfer_to_card
 
 import android.os.Bundle
 import android.view.View
@@ -6,41 +6,33 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
+import com.example.benefit.ui.branches_atms.BranchesAtmsActivity
 import com.example.benefit.ui.main.home.HomeFragment
 import com.example.benefit.ui.main.home.card_options.CardOptionsBSD
-import com.example.benefit.ui.main.home.card_options.CardOptionsViewModel
 import com.example.benefit.util.SizeUtils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_fill_from_any_card_transfer.*
+import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.*
+import splitties.fragments.start
 import javax.inject.Inject
+
 
 /**
  * Created by jahon on 03-Sep-20
  */
 @AndroidEntryPoint
-class FillCardAnyCardTransferFragment @Inject constructor() : Fragment(R.layout.fragment_fill_from_any_card_transfer) {
+class TransferToCardTransactionFragment @Inject constructor() : Fragment(R.layout.fragment_transfer_to_card_transaction) {
 
 
-    private val viewModel: CardOptionsViewModel by viewModels()
+    private val viewModel: TransferToCardViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         setupViews()
+
         attachListeners()
         subscribeObservers()
-    }
-
-    private fun subscribeObservers() {
-
-
-    }
-
-    private fun attachListeners() {
-        ivBack.setOnClickListener {
-            findNavController().popBackStack()
-        }
-
     }
 
     private fun setupViews() {
@@ -69,5 +61,29 @@ class FillCardAnyCardTransferFragment @Inject constructor() : Fragment(R.layout.
 
 
     }
-    
+
+
+    private fun subscribeObservers() {
+
+
+    }
+
+    private fun attachListeners() {
+
+//        llAskFriends.setOnClickListener {
+//            findNavController().navigate(R.id.action_fillCardFragment_to_cardDepositAskFriendsFragment)
+//        }
+//        llWithCash.setOnClickListener {
+//            start<BranchesAtmsActivity> {}
+//        }
+//        llFromAnyCard.setOnClickListener {
+//            findNavController().navigate(R.id.action_fillCardFragment_to_cardMakeDepositFromAnyCardFragment)
+//        }
+//        llFromOwnCards.setOnClickListener {
+//            findNavController().navigate(R.id.action_fillCardFragment_to_cardMakeDepositFromMyCardFragment)
+//
+//        }
+
+    }
+
 }

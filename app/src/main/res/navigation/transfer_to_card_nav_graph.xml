@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/transfer_to_card_nav_graph.xml"
+    app:startDestination="@id/transferToCardFragment">
+
+
+    <fragment
+        android:id="@+id/transferToCardFragment"
+        android:name="com.example.benefit.ui.main.transfer_to_card.TransferToCardFragment"
+        android:label=""
+        tools:layout="@layout/fragment_transfer_to_card">
+
+        <action
+            android:id="@+id/action_fillCardFragment_to_cardMakeDepositFromAnyCardFragment"
+            app:destination="@id/cardMakeDepositFromAnyCardFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_fillCardFragment_to_cardMakeDepositFromMyCardFragment"
+            app:destination="@id/cardMakeDepositFromMyCardFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_fillCardFragment_to_cardDepositAskFriendsFragment"
+            app:destination="@id/cardDepositAskFriendsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/transferToCardFragment"
+        android:name="com.example.benefit.ui.main.transfer_to_card.TransferToCardFragment"
+        android:label=""
+        tools:layout="@layout/fragment_transfer_to_card">
+
+        <action
+            android:id="@+id/action_fillCardFragment_to_cardMakeDepositFromAnyCardFragment"
+            app:destination="@id/cardMakeDepositFromAnyCardFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_fillCardFragment_to_cardMakeDepositFromMyCardFragment"
+            app:destination="@id/cardMakeDepositFromMyCardFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_fillCardFragment_to_cardDepositAskFriendsFragment"
+            app:destination="@id/cardDepositAskFriendsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+</navigation>

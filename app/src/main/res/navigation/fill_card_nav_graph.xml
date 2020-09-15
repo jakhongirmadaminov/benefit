@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/fillCardFragment"
-        android:name="com.example.benefit.ui.main.home.fill_card.FillCardFragment"
+        android:name="com.example.benefit.ui.main.fill_card.FillCardFragment"
         android:label=""
         tools:layout="@layout/fragment_fill_card">
 
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/cardMakeDepositFromAnyCardFragment"
-        android:name="com.example.benefit.ui.main.home.fill_card.FillCardFromAnyCardFragment"
+        android:name="com.example.benefit.ui.main.fill_card.FillCardFromAnyCardFragment"
         android:label=""
         tools:layout="@layout/fragment_fill_from_any_card">
 
@@ -52,14 +52,14 @@
 
     <fragment
         android:id="@+id/cardMakeDepositFromMyCardFragment"
-        android:name="com.example.benefit.ui.main.home.fill_card.FillCardFromMyCardsFragment"
+        android:name="com.example.benefit.ui.main.fill_card.FillCardFromMyCardsFragment"
         android:label=""
         tools:layout="@layout/fragment_fill_from_my_cards"></fragment>
 
 
     <fragment
         android:id="@+id/cardDepositAnyCardTransferFragment"
-        android:name="com.example.benefit.ui.main.home.fill_card.FillCardAnyCardTransferFragment"
+        android:name="com.example.benefit.ui.main.fill_card.FillCardAnyCardTransferFragment"
         android:label=""
         tools:layout="@layout/fragment_fill_from_any_card_transfer">
 
@@ -68,7 +68,7 @@
 
     <fragment
         android:id="@+id/cardDepositAskFriendsFragment"
-        android:name="com.example.benefit.ui.main.home.fill_card.FillCardAskFriendsFragment"
+        android:name="com.example.benefit.ui.main.fill_card.FillCardAskFriendsFragment"
         android:label=""
         tools:layout="@layout/fragment_fill_card_ask_friends">
 
@@ -90,7 +90,7 @@
 
     <fragment
         android:id="@+id/cardDepositAskFriendsTransferFragment"
-        android:name="com.example.benefit.ui.main.home.fill_card.FillCardAskFriendsTransferFragment"
+        android:name="com.example.benefit.ui.main.fill_card.FillCardAskFriendsTransferFragment"
         android:label=""
         tools:layout="@layout/fragment_fill_card_ask_friends_transfer">
 
@@ -99,7 +99,7 @@
 
     <fragment
         android:id="@+id/cardDepositSearchFriendsFragment"
-        android:name="com.example.benefit.ui.main.home.fill_card.FillCardSearchFriendsFragment"
+        android:name="com.example.benefit.ui.main.fill_card.FillCardSearchFriendsFragment"
         android:label=""
         tools:layout="@layout/fragment_fill_card_search_friends">
 

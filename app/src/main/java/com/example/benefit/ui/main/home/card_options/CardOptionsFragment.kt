@@ -7,7 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
-import com.example.benefit.ui.main.home.fill_card.FillCardBSD
+import com.example.benefit.ui.main.fill_card.FillCardBSD
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_card_options.*
 import javax.inject.Inject

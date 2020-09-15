@@ -8,7 +8,7 @@ import androidx.viewpager.widget.PagerAdapter
 import com.example.benefit.R
 import com.example.benefit.ui.loans.LoanActivity
 import com.example.benefit.ui.main.home.card_options.CardOptionsBSD
-import com.example.benefit.ui.main.home.fill_card.FillCardBSD
+import com.example.benefit.ui.main.fill_card.FillCardBSD
 import com.example.benefit.util.SizeUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*

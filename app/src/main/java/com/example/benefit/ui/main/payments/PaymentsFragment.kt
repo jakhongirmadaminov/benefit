@@ -1,20 +1,35 @@
 package com.example.benefit.ui.main.payments
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.example.benefit.R
+import com.example.benefit.ui.main.fill_card.FillCardBSD
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_payments.*
 
 @AndroidEntryPoint
 class PaymentsFragment : Fragment(R.layout.fragment_payments) {
 
     private lateinit var paymentsViewModel: PaymentsViewModel
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        attachListeners()
+    }
+
+    private fun attachListeners() {
+
+        clMakeDepo.setOnClickListener {
+            val bsd = FillCardBSD()
+            bsd.navigateToCardTransfer()
+            bsd.show(childFragmentManager, "")
+
+        }
+
+        clTransferToCard.setOnClickListener {
+
+        }
+    }
 }

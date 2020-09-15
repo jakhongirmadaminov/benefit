@@ -150,5 +150,9 @@
     <string name="search_friends_nearby">Поиск друзей\nпоблизости...</string>
     <string name="friends_nearby">Друзья\nпоблизости</string>
     <string name="request">Запросить</string>
+    <string name="transfer">Перевести</string>
+    <string name="write_tag_or_comment">Напишите #тег или комментарий</string>
+    <string name="ongoing_money_transaction">Идёт отправка\nденег</string>
+    <string name="transaction_completed_successfully">Перевод прошёл\nуспешно</string>
 
 </resources>

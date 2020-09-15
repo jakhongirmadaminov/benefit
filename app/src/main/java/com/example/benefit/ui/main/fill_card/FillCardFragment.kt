@@ -1,4 +1,4 @@
-package com.example.benefit.ui.main.home.fill_card
+package com.example.benefit.ui.main.fill_card
 
 import android.os.Bundle
 import android.view.View
