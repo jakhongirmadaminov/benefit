@@ -1,8 +1,11 @@
 package com.example.benefit.remote
 
-import okhttp3.MultipartBody
+import com.example.benefit.remote.models.PartnerDTO
 import retrofit2.Response
-import retrofit2.http.*
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
+import retrofit2.http.POST
 
 /**
  * Defines the abstract methods used for interacting with the Bufferoo API
@@ -16,17 +19,25 @@ interface ApiService {
 
     @POST("api/user/signup")
     @FormUrlEncoded
-    suspend fun signup(@Field("phone") phone: String,@Field("created") created: String = "232323",@Field("ip") ip: String="127.0.0.1"): Response<Any>
+    suspend fun signup(
+        @Field("phone") phone: String,
+        @Field("created") created: String = "232323",
+        @Field("ip") ip: String = "127.0.0.1"
+    ): Response<Any>
 
     @POST("api/user/loginsms")
     @FormUrlEncoded
-    suspend fun loginsms(@Field("phone_number") phone_number: String,@Field("sms_code") sms_code: String): Response<Any>
+    suspend fun loginsms(
+        @Field("phone_number") phone_number: String,
+        @Field("sms_code") sms_code: String
+    ): Response<Any>
 
     @POST("api/user/sendcode")
     @FormUrlEncoded
     suspend fun sendcode(@Field("phone_number") phone_number: String): Response<Any>
 
-
+    @GET("api/partners")
+    suspend fun getPartners(): Response<List<PartnerDTO>>
 
 
 //    @Headers("Content-Type:application/json", "Accept: application/json")

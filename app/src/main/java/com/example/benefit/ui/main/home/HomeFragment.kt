@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.viewpager.widget.PagerAdapter
 import com.example.benefit.R
 import com.example.benefit.ui.loans.LoanActivity
@@ -18,7 +19,7 @@ import splitties.fragments.start
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
-    private lateinit var homeViewModel: HomeViewModel
+   val viewModel: HomeViewModel by viewModels()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -3,6 +3,7 @@ package com.example.benefit.ui.main.profile
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.benefit.R
 import com.example.benefit.ui.auth.AuthActivity
 import com.example.benefit.ui.main.profile.settings_bsd.SettingsBSD
@@ -14,7 +15,7 @@ import splitties.fragments.start
 @AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
-    private lateinit var profileViewModel: ProfileViewModel
+    val viewModel: ProfileViewModel by viewModels()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

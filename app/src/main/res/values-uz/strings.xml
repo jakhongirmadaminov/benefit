@@ -154,5 +154,6 @@
     <string name="write_tag_or_comment">Напишите #тег или комментарий</string>
     <string name="ongoing_money_transaction">Идёт отправка\nденег</string>
     <string name="transaction_completed_successfully">Перевод прошёл\nуспешно</string>
+    <string name="categories">Категории</string>
 
 </resources>

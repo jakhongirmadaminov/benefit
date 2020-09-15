@@ -37,7 +37,6 @@ class TransferToCardTransactionFragment @Inject constructor() : Fragment(R.layou
 
     private fun setupViews() {
 
-
         val cardView = layoutInflater.inflate(R.layout.item_card_small, null)
         val cardView2 = layoutInflater.inflate(R.layout.item_card_small, null)
 
@@ -58,7 +57,6 @@ class TransferToCardTransactionFragment @Inject constructor() : Fragment(R.layou
             0
         )
         cardsPagerSmall.pageMargin = SizeUtils.dpToPx(requireContext(), 15).toInt()
-
 
     }
 

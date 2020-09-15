@@ -13,57 +13,22 @@
         tools:layout="@layout/fragment_transfer_to_card">
 
         <action
-            android:id="@+id/action_fillCardFragment_to_cardMakeDepositFromAnyCardFragment"
-            app:destination="@id/cardMakeDepositFromAnyCardFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_fillCardFragment_to_cardMakeDepositFromMyCardFragment"
-            app:destination="@id/cardMakeDepositFromMyCardFragment"
+            android:id="@+id/action_transferToCardFragment_to_transferToCardTransactionFragment"
+            app:destination="@id/transferToCardTransactionFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
 
-        <action
-            android:id="@+id/action_fillCardFragment_to_cardDepositAskFriendsFragment"
-            app:destination="@id/cardDepositAskFriendsFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
-        android:id="@+id/transferToCardFragment"
-        android:name="com.example.benefit.ui.main.transfer_to_card.TransferToCardFragment"
+        android:id="@+id/transferToCardTransactionFragment"
+        android:name="com.example.benefit.ui.main.transfer_to_card.TransferToCardTransactionFragment"
         android:label=""
-        tools:layout="@layout/fragment_transfer_to_card">
+        tools:layout="@layout/fragment_transfer_to_card_transaction">
 
-        <action
-            android:id="@+id/action_fillCardFragment_to_cardMakeDepositFromAnyCardFragment"
-            app:destination="@id/cardMakeDepositFromAnyCardFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_fillCardFragment_to_cardMakeDepositFromMyCardFragment"
-            app:destination="@id/cardMakeDepositFromMyCardFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
 
-        <action
-            android:id="@+id/action_fillCardFragment_to_cardDepositAskFriendsFragment"
-            app:destination="@id/cardDepositAskFriendsFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
 </navigation>

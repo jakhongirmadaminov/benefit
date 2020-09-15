@@ -1,6 +1,8 @@
 package com.example.benefit.di
 //import com.example.benefit.ui.auth.LoginFragmentFactory
+import com.example.benefit.remote.PartnersRemoteImpl
 import com.example.benefit.remote.UserRemoteImpl
+import com.example.benefit.remote.repository.PartnersRemote
 import com.example.benefit.remote.repository.UserRemote
 import dagger.Binds
 import dagger.Module
@@ -23,6 +25,9 @@ abstract class FragmentModule {
 
     @Binds
     abstract fun provideUserRepository(userRemoteImpl: UserRemoteImpl): UserRemote
+
+    @Binds
+    abstract fun providePartnersRepository(partnersRemoteImpl: PartnersRemoteImpl): PartnersRemote
 
 
 }

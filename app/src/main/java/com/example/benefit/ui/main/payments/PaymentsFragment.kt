@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.benefit.R
 import com.example.benefit.ui.main.fill_card.FillCardBSD
+import com.example.benefit.ui.main.transfer_to_card.TransferToCardBSD
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_payments.*
 
@@ -23,13 +24,12 @@ class PaymentsFragment : Fragment(R.layout.fragment_payments) {
 
         clMakeDepo.setOnClickListener {
             val bsd = FillCardBSD()
-            bsd.navigateToCardTransfer()
+//            bsd.navigateToCardTransfer()
             bsd.show(childFragmentManager, "")
-
         }
 
         clTransferToCard.setOnClickListener {
-
+            TransferToCardBSD().show(childFragmentManager, "")
         }
     }
 }

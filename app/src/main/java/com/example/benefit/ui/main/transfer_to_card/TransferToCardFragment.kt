@@ -6,12 +6,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
-import com.example.benefit.ui.branches_atms.BranchesAtmsActivity
-import com.example.benefit.ui.main.home.HomeFragment
-import com.example.benefit.ui.main.home.card_options.CardOptionsBSD
-import com.example.benefit.util.SizeUtils
 import dagger.hilt.android.AndroidEntryPoint
-import splitties.fragments.start
+import kotlinx.android.synthetic.main.fragment_transfer_to_card.*
 import javax.inject.Inject
 
 
@@ -69,9 +65,9 @@ class TransferToCardFragment @Inject constructor() : Fragment(R.layout.fragment_
 
     private fun attachListeners() {
 
-//        llAskFriends.setOnClickListener {
-//            findNavController().navigate(R.id.action_fillCardFragment_to_cardDepositAskFriendsFragment)
-//        }
+        tvNext.setOnClickListener {
+            findNavController().navigate(R.id.action_transferToCardFragment_to_transferToCardTransactionFragment)
+        }
 //        llWithCash.setOnClickListener {
 //            start<BranchesAtmsActivity> {}
 //        }
