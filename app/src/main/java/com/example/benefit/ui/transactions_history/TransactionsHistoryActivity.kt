@@ -46,7 +46,9 @@ class TransactionsHistoryActivity : AppCompatActivity() {
 //        dataSet.setValueTextColor()
 
 
+        dataSet.cubicIntensity = 0.5F
         val lineData = LineData(dataSet)
+
         chart.data = lineData
         chart.invalidate() // refresh
 
