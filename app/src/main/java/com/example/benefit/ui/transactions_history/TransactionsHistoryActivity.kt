@@ -45,7 +45,7 @@ class TransactionsHistoryActivity : AppCompatActivity() {
         dataSet.color = ContextCompat.getColor(this, R.color.colorAccent)
 //        dataSet.setValueTextColor()
 
-
+        dataSet.mode = LineDataSet.Mode.CUBIC_BEZIER
         dataSet.cubicIntensity = 0.5F
         val lineData = LineData(dataSet)
 
