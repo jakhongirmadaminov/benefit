@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
+import com.example.benefit.ui.main.home.card_options.CardOptionsBSD
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_transfer_to_card.*
+import kotlinx.android.synthetic.main.fragment_transfer_to_card.ivBack
 import javax.inject.Inject
 
 
@@ -64,6 +67,12 @@ class TransferToCardFragment @Inject constructor() : Fragment(R.layout.fragment_
     }
 
     private fun attachListeners() {
+
+        ivBack.setOnClickListener {
+            ((parentFragment as NavHostFragment).parentFragment as TransferToCardBSD).dismiss()
+        }
+
+
 
         tvNext.setOnClickListener {
             findNavController().navigate(R.id.action_transferToCardFragment_to_transferToCardTransactionFragment)

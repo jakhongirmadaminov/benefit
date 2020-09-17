@@ -10,6 +10,7 @@ import com.example.benefit.R
 import com.example.benefit.ui.loans.LoanActivity
 import com.example.benefit.ui.main.home.card_options.CardOptionsBSD
 import com.example.benefit.ui.main.fill_card.FillCardBSD
+import com.example.benefit.ui.transactions_history.TransactionsHistoryActivity
 import com.example.benefit.util.SizeUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -36,6 +37,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             val dialog = DialogCashBack()
             dialog.show(childFragmentManager, "")
         }
+
+        cardPayments.setOnClickListener {
+            start<TransactionsHistoryActivity>{}
+        }
+
     }
 
     private fun setupViews() {

@@ -12,6 +12,7 @@ import com.example.benefit.ui.main.home.card_options.CardOptionsBSD
 import com.example.benefit.util.SizeUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.*
+import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.ivBack
 import splitties.fragments.start
 import javax.inject.Inject
 
@@ -67,6 +68,10 @@ class TransferToCardTransactionFragment @Inject constructor() : Fragment(R.layou
     }
 
     private fun attachListeners() {
+
+        ivBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
 //        llAskFriends.setOnClickListener {
 //            findNavController().navigate(R.id.action_fillCardFragment_to_cardDepositAskFriendsFragment)

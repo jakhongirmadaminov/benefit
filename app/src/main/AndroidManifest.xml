@@ -36,7 +36,8 @@
             android:theme="@style/NoActionBar" />
         <activity
             android:name="com.example.benefit.ui.transactions_history.TransactionsHistoryActivity"
-            android:theme="@style/NoActionBar" />
+            android:theme="@style/AppTheme"
+            android:label=""/>
         <activity
             android:name=".ui.auth.AuthActivity"
             android:theme="@style/NoActionBar">
