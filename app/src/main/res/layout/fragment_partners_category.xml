@@ -36,10 +36,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <SearchView
+    <EditText
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:drawableLeft="@drawable/ic_baseline_search_24"
+        android:drawablePadding="10dp"
+        android:paddingLeft="10dp"
         android:layout_margin="26dp"
         android:background="@drawable/selector_grey"
         app:layout_constraintTop_toBottomOf="@id/title" />

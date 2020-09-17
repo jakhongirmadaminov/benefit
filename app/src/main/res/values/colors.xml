@@ -15,6 +15,9 @@
     <color name="dark_blue">#32579b</color>
     <color name="turquoise">#5ac0ab</color>
     <color name="error_red">#ff3b30</color>
+    <color name="light_blue_chart">#30d0ed</color>
+    <color name="dark_blue_chart">#f03ab2c7</color>
+    <color name="peach">#ffc7bb</color>
 </resources>
     <!---->
     <!---->
