@@ -94,6 +94,8 @@
         android:label=""
         tools:layout="@layout/fragment_fill_card_ask_friends_transfer">
 
+        <argument android:name="argSelection" app:nullable="true" app:argType="com.example.benefit.remote.models.FriendDTOs"/>
+
     </fragment>
 
 

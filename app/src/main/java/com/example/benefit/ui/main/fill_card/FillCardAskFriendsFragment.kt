@@ -8,9 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.view.View
-import android.widget.AdapterView
 import androidx.core.content.ContextCompat
-import androidx.cursoradapter.widget.CursorAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.loader.app.LoaderManager
@@ -18,9 +16,7 @@ import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
-import com.example.benefit.remote.models.FriendDTO
 import com.example.benefit.ui.main.home.card_options.CardOptionsViewModel
-import com.example.benefit.ui.viewgroups.FriendItem
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,8 +52,7 @@ private val TO_IDS: IntArray = intArrayOf(android.R.id.text1)
 @AndroidEntryPoint
 class FillCardAskFriendsFragment @Inject constructor() :
     Fragment(R.layout.fragment_fill_card_ask_friends),
-    LoaderManager.LoaderCallbacks<Cursor>,
-    AdapterView.OnItemClickListener {
+    LoaderManager.LoaderCallbacks<Cursor> {
 
     // Define variables for the contact the user selects
     // The contact's _ID value
@@ -91,21 +86,10 @@ class FillCardAskFriendsFragment @Inject constructor() :
 
     private fun setupViews() {
 
-
-//        rvContacts.adapter = adapter
-
-        val data = listOf(
-            FriendDTO("Doniyor", "Zuparov"),
-            FriendDTO("Name", "LastName"),
-            FriendDTO("Name", "LastName"),
-            FriendDTO("Name", "LastName"),
-            FriendDTO("Name", "LastName"),
-            FriendDTO("Name", "LastName"),
-        )
-        loadContacts(data)
+        loadContacts()
     }
 
-    private fun loadContacts(data: List<FriendDTO>) {
+    private fun loadContacts() {
 
         checkForReadContactsPermission {
 
@@ -115,19 +99,17 @@ class FillCardAskFriendsFragment @Inject constructor() :
         }
 
 
+//        adapter.clear()
 
-
-        adapter.clear()
-
-        if (data.isEmpty()) {
-
-//            adapter.add(InfoItem(getString(R.string.no_friends_found)))
-        } else {
-            data.forEach {
-                adapter.add(FriendItem(it))
-            }
-        }
-        adapter.notifyDataSetChanged()
+//        if (data.isEmpty()) {
+//
+////            adapter.add(InfoItem(getString(R.string.no_friends_found)))
+//        } else {
+//            data.forEach {
+//                adapter.add(FriendItem(it))
+//            }
+//        }
+//        adapter.notifyDataSetChanged()
     }
 
     private fun checkForReadContactsPermission(action: () -> Unit) {
@@ -164,6 +146,13 @@ class FillCardAskFriendsFragment @Inject constructor() :
         }
         tvSelect.setOnClickListener {
 
+            findNavController().navigate(R.id.action_cardDepositAskFriendsFragment_to_cardDepositAskFriendsTransferFragment,
+                Bundle().apply {
+                    putParcelableArrayList(
+                        FillCardAskFriendsTransferFragment.ARG_SELECTION,
+                        cursorAdapter.selectionList
+                    )
+                })
         }
 
 
@@ -213,22 +202,22 @@ class FillCardAskFriendsFragment @Inject constructor() :
 //        rvContacts.onItemClickListener = this
     }
 
-    @SuppressLint("InlinedApi")
-    private val PROJECTION: Array<out String> = arrayOf(
-        ContactsContract.Contacts._ID,
-        ContactsContract.Contacts.LOOKUP_KEY,
-        ContactsContract.Contacts.DISPLAY_NAME
-    )
-
-    // Defines the text expression
-    @SuppressLint("InlinedApi")
-    private val SELECTION: String = "${ContactsContract.Contacts.DISPLAY_NAME} LIKE ?"
+//    @SuppressLint("InlinedApi")
+//    private val PROJECTION: Array<out String> = arrayOf(
+//        ContactsContract.Contacts._ID,
+//        ContactsContract.Contacts.LOOKUP_KEY,
+//        ContactsContract.Contacts.DISPLAY_NAME
+//    )
+//
+//    // Defines the text expression
+//    @SuppressLint("InlinedApi")
+//    private val SELECTION: String = "${ContactsContract.Contacts.DISPLAY_NAME} LIKE ?"
 
     // Defines a variable for the search string
-    private val searchString: String = ""
+//    private val searchString: String = ""
 
     // Defines the array to hold values that replace the ?
-    private val selectionArgs = arrayOf(searchString)
+//    private val selectionArgs = arrayOf(searchString)
 
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
@@ -236,7 +225,7 @@ class FillCardAskFriendsFragment @Inject constructor() :
            * Makes search string into pattern and
            * stores it in the selection array
            */
-        selectionArgs[0] = "%$searchString%"
+//        selectionArgs[0] = "%$searchString%"
         // Starts the query
         return activity?.let {
             contactsLoader()!!
@@ -245,13 +234,18 @@ class FillCardAskFriendsFragment @Inject constructor() :
 
     private fun contactsLoader(): Loader<Cursor>? {
         val contactsUri =
-            ContactsContract.Contacts.CONTENT_URI // The content URI of the phone contacts
+            ContactsContract.CommonDataKinds.Phone.CONTENT_URI // The content URI of the phone contacts
         val projection = arrayOf( // The columns to return for each row
-            ContactsContract.Contacts.DISPLAY_NAME
+            ContactsContract.Contacts._ID,
+            ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+            ContactsContract.CommonDataKinds.Phone.NUMBER,
+            ContactsContract.Contacts.DISPLAY_NAME_PRIMARY,
+            ContactsContract.Contacts.PHOTO_THUMBNAIL_URI,
+            ContactsContract.Contacts.LOOKUP_KEY
         )
         val selection: String? = null //Selection criteria
         val selectionArgs = arrayOf<String>() //Selection criteria
-        val sortOrder: String? = null //The sort order for the returned rows
+        val sortOrder: String? = "${ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME} ASC"
         return CursorLoader(
             requireContext(),
             contactsUri,
@@ -263,9 +257,10 @@ class FillCardAskFriendsFragment @Inject constructor() :
     }
 
 
-    override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
+    override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor) {
         // Put the result Cursor in the adapter for the ListView
         cursorAdapter?.swapCursor(data)
+
     }
 
     override fun onLoaderReset(loader: Loader<Cursor>) {
@@ -273,22 +268,5 @@ class FillCardAskFriendsFragment @Inject constructor() :
         cursorAdapter?.swapCursor(null)
     }
 
-    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        // Get the Cursor
-        val cursor: Cursor? = (parent!!.adapter as? CursorAdapter)?.cursor?.apply {
-            // Move to the selected contact
-            moveToPosition(position)
-            // Get the _ID value
-            contactId = getLong(CONTACT_ID_INDEX)
-            // Get the selected LOOKUP KEY
-            contactKey = getString(CONTACT_KEY_INDEX)
-            // Create the contact's content Uri
-            contactUri = ContactsContract.Contacts.getLookupUri(contactId, null)
-            /*
-             * You can use contactUri as the content URI for retrieving
-             * the details for a contact.
-             */
-        }
-    }
 
 }

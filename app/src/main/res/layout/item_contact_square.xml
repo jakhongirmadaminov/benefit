@@ -5,14 +5,14 @@
     android:layout_height="wrap_content">
 
 
+
+
     <ImageView
         android:id="@+id/ivImage"
         android:layout_width="80dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:layout_height="80dp"
-        android:src="@drawable/ic_avatar_sample"
-        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginLeft="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,24 +21,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <ImageView
-        android:id="@+id/ivDelete"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:padding="10dp"
-        android:src="@drawable/ic_close_round"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/black" />
 
 
     <LinearLayout
         android:id="@+id/llAdd"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="20dp"
         android:background="@drawable/shape_grey_rounded"
         android:clickable="true"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -57,4 +48,16 @@
 
     </LinearLayout>
 
+
+
+    <ImageView
+        android:id="@+id/ivDelete"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_close_round"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/black" />
 </androidx.constraintlayout.widget.ConstraintLayout>

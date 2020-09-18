@@ -10,7 +10,7 @@ class FriendItem(var friend: FriendDTO) : Item() {
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
 
-        viewHolder.itemView.tvNameLastName.text = friend.name + " " + friend.lastName
+        viewHolder.itemView.tvNameLastName.text = friend.name + " " + friend.phone
     }
 
     override fun getLayout() = R.layout.item_contact_with_cb

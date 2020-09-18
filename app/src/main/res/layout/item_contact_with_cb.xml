@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/llContact"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:selectableItemBackground"
     android:gravity="center_vertical"
     android:paddingTop="10dp"
     android:paddingBottom="10dp">
 
-    <ImageView
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardPhoto"
+        android:layout_marginLeft="26dp"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="26dp"
-        android:src="@drawable/ic_avatar_sample" />
+        app:cardCornerRadius="25dp">
+
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_avatar_sample" />
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/tvNameLastName"
