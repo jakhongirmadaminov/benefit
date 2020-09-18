@@ -5,7 +5,10 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.benefit.R
+import com.example.benefit.ui.main.home.HomeFragment
 import com.example.benefit.ui.viewgroups.CardTagItem
+import com.example.benefit.util.SizeUtils
+import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
@@ -14,6 +17,7 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_transactions_history.*
+import kotlinx.android.synthetic.main.item_line_chart.view.*
 import kotlin.random.Random
 
 
@@ -48,7 +52,36 @@ class TransactionsHistoryActivity : AppCompatActivity() {
 
         cbMonthSpent.performClick()
         setupCardTags()
-        makeChart()
+        setupChartPager()
+    }
+
+    private fun setupChartPager() {
+
+        val chartView = layoutInflater.inflate(R.layout.item_line_chart, null)
+        val chartView2 = layoutInflater.inflate(R.layout.item_line_chart, null)
+
+        chartView.rbMonth1.isChecked = true
+
+
+
+        makeChart(chartView.chart)
+        makeChart(chartView2.chart)
+
+        chartPager.addView(chartView)
+        chartPager.addView(chartView2)
+
+
+        chartPager.adapter = HomeFragment.WizardPagerAdapter(listOf(chartView, chartView2))
+        chartPager.offscreenPageLimit = 2
+        chartPager.clipToPadding = false
+        chartPager.setPadding(
+            SizeUtils.dpToPx(this, 26).toInt(),
+            0,
+            SizeUtils.dpToPx(this, 26).toInt(),
+            0
+        )
+        chartPager.pageMargin = SizeUtils.dpToPx(this, 26).toInt()
+
     }
 
 
@@ -73,7 +106,7 @@ class TransactionsHistoryActivity : AppCompatActivity() {
         adapter.notifyDataSetChanged()
     }
 
-    private fun makeChart() {
+    private fun makeChart(chart: LineChart) {
         val entries = ArrayList<Entry>()
         for (i in 0..20) {
             // turn your data into Entry objects
@@ -96,7 +129,7 @@ class TransactionsHistoryActivity : AppCompatActivity() {
         dataSet.disableDashedLine()
         dataSet.disableDashedHighlightLine()
 
-        dataSet.fillDrawable = ContextCompat.getDrawable(this, R.drawable.gradient_turquoise)
+        dataSet.fillDrawable = ContextCompat.getDrawable(this, R.drawable.gradient_line_chart)
         dataSet.setDrawFilled(true)
         dataSet.label = ""
         dataSet.lineWidth = 0F
@@ -142,7 +175,6 @@ class TransactionsHistoryActivity : AppCompatActivity() {
         chart.setDrawGridBackground(true)
         chart.setGridBackgroundColor(ContextCompat.getColor(this, R.color.peach))
         chart.legend.isEnabled = false
-        chart.setBackgroundResource(R.drawable.gradient_fuchsia)
         chart.invalidate() // refresh
 
 

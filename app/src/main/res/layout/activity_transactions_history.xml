@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,21 +27,20 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCardTags"
             android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="26dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
             android:paddingLeft="26dp"
             android:paddingRight="26dp"
-            android:clipChildren="false"
-            android:layout_marginTop="26dp"
-            android:clipToPadding="false"
-            android:layout_height="40dp"
-            android:orientation="horizontal"
-            tools:listitem="@layout/item_card_tag"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_card_tag" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_marginTop="26dp"
-            >
+            android:layout_marginTop="26dp">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardMonthSpent"
@@ -154,27 +153,61 @@
         </LinearLayout>
 
 
-        <androidx.cardview.widget.CardView
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/chartPager"
             android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="26dp" />
+
+        <com.rd.PageIndicatorView
+            android:id="@+id/pageIndicatorView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardsPager"
+            app:piv_animationType="scale"
+            app:piv_dynamicCount="true"
+            app:piv_interactiveAnimation="true"
+            app:piv_selectedColor="@color/colorAccent"
+            app:piv_unselectedColor="@color/bg_grey"
+            app:piv_viewPager="@id/chartPager" />
+
+
+        <EditText
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="26dp"
+            android:background="@drawable/selector_grey"
+            android:drawableLeft="@drawable/ic_baseline_search_24"
+            android:drawablePadding="10dp"
+            android:fontFamily="sans-serif"
+            android:paddingLeft="10dp"
+            android:hint="@string/search_by_name_or_num"
+            android:textColor="#805c5c5c"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="26dp"
-            android:layout_marginTop="26dp"
-            android:layout_marginRight="26dp"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="3dp">
-
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/chart"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginLeft="-17dp"
-                android:layout_marginTop="-17dp"
-                android:layout_marginRight="-17dp"
-                android:layout_marginBottom="-17dp" />
+            android:layout_marginBottom="26dp"
+            android:fontFamily="sans-serif"
+            android:text="4 марта 2019"
+            android:textColor="#ab5c5c5c"
+            android:textSize="14sp"
+            android:textStyle="normal" />
 
 
-        </androidx.cardview.widget.CardView>
-
+        <include layout="@layout/item_transaction"/>
+        <include layout="@layout/item_transaction"/>
+        <include layout="@layout/item_transaction"/>
+        <include layout="@layout/item_transaction"/>
 
     </LinearLayout>
 </ScrollView>

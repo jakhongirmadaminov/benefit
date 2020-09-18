@@ -155,5 +155,6 @@
     <string name="ongoing_money_transaction">Идёт отправка\nденег</string>
     <string name="transaction_completed_successfully">Перевод прошёл\nуспешно</string>
     <string name="categories">Категории</string>
+    <string name="search_by_name_or_num">Найти по названию или #</string>
 
 </resources>

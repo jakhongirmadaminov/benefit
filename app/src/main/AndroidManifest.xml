@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -25,19 +26,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ui.partners_map.PartnersMapActivity"></activity>
         <activity
             android:name=".ui.branches_atms.BranchesAtmsActivity"
-            android:theme="@style/NoActionBar"></activity>
-        <activity
-            android:name=".ui.analytics.AnalyticsActivity"
-            android:theme="@style/NoActionBar"></activity>
-        <activity
-            android:name="com.example.benefit.ui.loans.LoanActivity"
             android:theme="@style/NoActionBar" />
         <activity
-            android:name="com.example.benefit.ui.transactions_history.TransactionsHistoryActivity"
-            android:theme="@style/AppTheme"
-            android:label=""/>
+            android:name=".ui.analytics.AnalyticsActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".ui.loans.LoanActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".ui.transactions_history.TransactionsHistoryActivity"
+            android:label=""
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.auth.AuthActivity"
             android:theme="@style/NoActionBar">
@@ -67,6 +69,10 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDPbntOEiERS6B1bIzhuQhikzOLwZVWtWY" />
     </application>
 
 </manifest>
