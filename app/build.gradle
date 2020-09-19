@@ -99,5 +99,8 @@ dependencies {
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation "com.google.android.gms:play-services-location:17.0.0"
+    implementation 'cards.pay:paycardsrecognizer:1.1.0'
+    implementation 'com.redmadrobot:input-mask-android:6.0.0'
+
 
 }
