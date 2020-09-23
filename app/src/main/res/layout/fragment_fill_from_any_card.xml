@@ -60,10 +60,17 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="26dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
             android:layout_marginRight="26dp"
             android:background="@drawable/shape_white_rounded_grey_stroke"
+            android:digits="0123456789 "
+            android:gravity="center"
+            android:imeOptions="actionNext"
+            android:textSize="16dp"
+            android:inputType="number"
+            android:maxLines="1"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:hint="@string/card_number"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -73,11 +80,33 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="true"
+            android:foreground="?android:selectableItemBackground"
             android:padding="10dp"
             android:src="@drawable/ic_clear"
             app:layout_constraintBottom_toBottomOf="@id/edtCardNumber"
             app:layout_constraintEnd_toEndOf="@id/edtCardNumber"
             app:layout_constraintTop_toTopOf="@id/edtCardNumber" />
+
+
+        <EditText
+            android:id="@+id/edtCardExpiry"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="26dp"
+            android:layout_marginRight="26dp"
+            android:background="@drawable/shape_white_rounded_grey_stroke"
+            android:gravity="center"
+            android:hint="@string/mm_slash_yy"
+            android:imeOptions="actionDone"
+            android:digits="0123456789/"
+            android:inputType="date"
+            android:textSize="16dp"
+            android:maxLines="1"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edtCardNumber" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -88,6 +117,7 @@
             android:textColor="#ab5c5c5c"
             android:textSize="14sp"
             android:textStyle="normal"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/edtCardNumber" />

@@ -156,5 +156,7 @@
     <string name="transaction_completed_successfully">Перевод прошёл\nуспешно</string>
     <string name="categories">Категории</string>
     <string name="search_by_name_or_num">Найти по названию или #</string>
+    <string name="card_number">Номер банковской карты</string>
+    <string name="mm_slash_yy">ММ/ГГ</string>
 
 </resources>
