@@ -26,7 +26,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.partners_map.PartnersMapActivity"></activity>
+        <activity android:name=".ui.loans.loans_chart.LoansChartActivity">
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+        </activity>
+        <activity android:name=".ui.partners_map.PartnersMapActivity" />
         <activity
             android:name=".ui.branches_atms.BranchesAtmsActivity"
             android:theme="@style/NoActionBar" />
@@ -53,11 +59,11 @@
             android:name=".ui.main.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!---->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".ui.auth.order_card.OrderCardActivity"
