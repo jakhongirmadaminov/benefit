@@ -7,7 +7,7 @@ object CanvasUtil {
         val paint = Paint()
         paint.isAntiAlias = true
         paint.strokeCap = Paint.Cap.SQUARE
-        paint.strokeWidth = width.toFloat()
+        paint.strokeWidth = width
         paint.style = Paint.Style.STROKE
         paint.color = color
         return paint
