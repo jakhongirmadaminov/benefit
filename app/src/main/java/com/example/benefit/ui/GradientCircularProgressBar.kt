@@ -1,4 +1,5 @@
-package com.example.benefit.ui//
+package com.example.benefit.ui
+//
 //  CircularIndicator.swift
 //  Benefit
 //
@@ -11,20 +12,46 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
-import com.example.benefit.util.CanvasUtil
+import com.example.benefit.R
 import com.example.benefit.util.SizeUtils
+import kotlin.math.cos
 import kotlin.math.min
+import kotlin.math.sin
 
 
 class GradientCircularProgressBar(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
 
-    /**
-     * Thickness of the arc
-     */
-    private var thickness = SizeUtils.dpToPx(context, 40)
-    var progressGradientPaint = CanvasUtil.makeStrokePaint(thickness, -1)
-    var progressShaderPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    var whiteCirclePaint = CanvasUtil.makeFillPaint(Color.parseColor("#E8E5E5"))
+    private var progressInPercentage: Float = 0.0F
+        set(value) {
+            progressAngle = 360F * value
+            field = value
+        }
+    private var progressAngle: Float = 360F * progressInPercentage
+
+    private var pThickness = SizeUtils.dpToPx(context, 40)
+
+    private val innerStrokePaint = Paint().apply {
+        isAntiAlias = true
+        strokeCap = Paint.Cap.BUTT
+        strokeWidth = pThickness / 3F
+        style = Paint.Style.STROKE
+        color = Color.parseColor("#cfcfcf")
+    }
+    private val shadowColor = Color.parseColor("#4D000000")
+
+    val bgColor = Color.parseColor("#E8E8E8")
+    var progressGradientPaint = Paint().apply {
+        isAntiAlias = true
+        strokeCap = Paint.Cap.ROUND
+        strokeWidth = pThickness
+        style = Paint.Style.STROKE
+    }
+
+    var whiteCirclePaint = Paint().apply {
+        isAntiAlias = true
+        style = Paint.Style.FILL
+        color = bgColor
+    }
     var baseArcRect = RectF(0F, 0F, 0F, 0F)
 
     //    private var progressGradientColourStart = 0
@@ -37,62 +64,133 @@ class GradientCircularProgressBar(ctx: Context, attrs: AttributeSet) : View(ctx,
     )
 
     init {
-//        progressGradientColourStart = Color.parseColor("#F25353")
-//        progressGradientColourEnd = Color.parseColor("#C165DD")
+        context.theme.obtainStyledAttributes(
+            attrs,
+            R.styleable.GradientCircularProgressBar,
+            0, 0
+        ).apply {
 
-        //We do not want a colour for this because we will set a gradient
+            try {
+                progressInPercentage =
+                    getFloat(R.styleable.GradientCircularProgressBar_cgProgress, 0F)
 
-        //We do not want a colour for this because we will set a gradient
-
-        setProgressColourAsGradient(false)
+            } finally {
+                recycle()
+            }
+        }
     }
 
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        //Ensures arc is within the rectangle
 
         //Ensures arc is within the rectangle
         val radius = (min(width, height) / 2).toFloat() //
 
-
         //I do radius - thickness so that the arc is within the rectangle
-
-        //I do radius - thickness so that the arc is within the rectangle
-        val baseArcLeft = width / 2 - (radius - thickness)
-        val baseArcTop = height / 2 - (radius - thickness)
-        val baseArcRight = width / 2 + (radius - thickness)
-        val baseArcBottom = height / 2 + (radius - thickness)
+        val baseArcLeft = width / 2 - (radius - pThickness)
+        val baseArcTop = height / 2 - (radius - pThickness)
+        val baseArcRight = width / 2 + (radius - pThickness)
+        val baseArcBottom = height / 2 + (radius - pThickness)
 
         baseArcRect[baseArcLeft, baseArcTop, baseArcRight] = baseArcBottom
-        //Recalculate the gradient
         //Recalculate the gradient
         setProgressColourAsGradient(false)
     }
 
     override fun onDraw(canvas: Canvas) {
-        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-        val original = Canvas(bitmap)
+        super.onDraw(canvas)
+        drawBg(canvas)
 
+        val result = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val tempCanvas = Canvas(result)
 
+        drawProgress(tempCanvas)
 
+        drawGradientDST_IN(tempCanvas)
 
-        canvas.drawArc(baseArcRect, -90F, 360F, false, progressGradientPaint)
+        canvas.drawBitmap(result, 0F, 0F, Paint())
         makeStartSpot(canvas)
 
-
-        super.onDraw(original)
-
-        canvas.drawBitmap(bitmap, 0F, 0F, null)
-        overlayGray(canvas)
-
-        val maskPaint = Paint()
-        maskPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_IN)
-        canvas.drawBitmap(mask, 0F, 0F, maskPaint)
+        putProgressSpot(canvas)
     }
 
-    private fun overlayGray(canvas: Canvas) {
-        canvas.drawArc(baseArcRect, -90F, 320F, false, progressShaderPaint)
+    private fun putProgressSpot(canvas: Canvas) {
+
+        val angle = progressAngle - 90
+
+        val r = width / 2 - pThickness
+
+        val x: Double = width / 2 + r * cos(angle * Math.PI / 180)
+        val y: Double = height / 2 + r * sin(angle * Math.PI / 180)
+
+
+        canvas.drawCircle(
+            x.toFloat(),
+            y.toFloat(),
+            pThickness / 2F,
+            Paint().apply {
+                setShadowLayer(
+                    SizeUtils.dpToPx(context, 3), 0F, 0F, shadowColor
+                )
+                isAntiAlias = true
+                strokeCap = Paint.Cap.BUTT
+                strokeWidth = pThickness / 10
+                style = Paint.Style.STROKE
+                color = Color.WHITE
+
+            }
+        )
+
+    }
+
+    private fun drawGradientDST_IN(canvas: Canvas) {
+        progressGradientPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_IN)
+        canvas.drawArc(baseArcRect, -90F, 360F, false, progressGradientPaint)
+        progressGradientPaint.xfermode = null
+    }
+
+    private fun drawBg(canvas: Canvas) {
+
+        //MAIN BG RING
+        canvas.drawCircle(width / 2F,
+            height / 2F,
+            width / 2F - pThickness,
+            Paint().apply {
+                isAntiAlias = true
+                strokeCap = Paint.Cap.BUTT
+                strokeWidth = pThickness
+                style = Paint.Style.STROKE
+                color = bgColor
+            })
+
+
+//INNER OVAL
+        canvas.drawCircle(
+            width / 2F,
+            height / 2F,
+            width / 2F - pThickness * 2.1F,
+            Paint().apply {
+                color = Color.parseColor("#e9e9e9")
+                style = Paint.Style.FILL
+
+            }
+        )
+
+        //INNER DARK RING
+
+        canvas.drawCircle(
+            width / 2F,
+            height / 2F,
+            (width / 2F - pThickness * 2) + pThickness * 0.2F,
+            innerStrokePaint
+        )
+
+
+    }
+
+    private fun drawProgress(canvas: Canvas) {
+        canvas.drawArc(baseArcRect, -90F, progressAngle, false, progressGradientPaint)
 
 
 //        val original = BitmapFactory.decodeResource(context.resources, R.drawable.original_image)
@@ -121,12 +219,12 @@ class GradientCircularProgressBar(ctx: Context, attrs: AttributeSet) : View(ctx,
             SizeUtils.dpToPx(context, 3),
             SizeUtils.dpToPx(context, 3),
             0F,
-            Color.parseColor("#4D000000")
+            shadowColor
         )
         canvas.drawCircle(
             width / 2F,
-            height / 2F - width / 2 + thickness,
-            thickness / 2F,
+            height / 2F - width / 2 + pThickness,
+            pThickness / 2F,
             whiteCirclePaint
         )
     }
@@ -154,6 +252,16 @@ class GradientCircularProgressBar(ctx: Context, attrs: AttributeSet) : View(ctx,
         if (invalidateNow) {
             invalidate()
         }
+    }
+
+    fun getProgressInPercentage(): Float {
+        return progressInPercentage
+    }
+
+    fun setProgress(progress: Float) {
+        progressInPercentage = progress
+        invalidate()
+        requestLayout()
     }
 
 }

@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--    <declare-styleable name="ButtonMain">-->
-<!--        <attr name="myEnabled" format="boolean"/>-->
-<!--    </declare-styleable>-->
+    <declare-styleable name="GradientCircularProgressBar">
+        <attr name="cgProgress" format="float" />
 
+        <!--        <attr name="progress" format="enum">-->
+        <!--            <enum name="left" value="0"/>-->
+        <!--            <enum name="right" value="1"/>-->
+        <!--        </attr>-->
+
+    </declare-styleable>
 
 </resources>
