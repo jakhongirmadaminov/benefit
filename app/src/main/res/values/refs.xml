@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="peach">#ffc7bb</color>
+    <drawable name="orange">#f47964</drawable>
 </resources>

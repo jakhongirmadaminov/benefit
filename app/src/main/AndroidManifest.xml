@@ -26,7 +26,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.loans.loans_chart.LoansChartActivity">
+        <activity android:name=".ui.loans.loans_chart.LoansChartActivity" android:theme="@style/NoActionBar">
+<!--             <intent-filter>-->
+<!--             <action android:name="android.intent.action.MAIN" />-->
+<!--             <category android:name="android.intent.category.LAUNCHER" />-->
+<!--             </intent-filter>-->
+        </activity>
+        <activity android:name=".ui.expenses_by_categories.ExpensesByCategoriesActivity" android:theme="@style/NoActionBar">
              <intent-filter>
              <action android:name="android.intent.action.MAIN" />
              <category android:name="android.intent.category.LAUNCHER" />

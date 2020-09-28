@@ -158,5 +158,11 @@
     <string name="search_by_name_or_num">Найти по названию или #</string>
     <string name="card_number">Номер банковской карты</string>
     <string name="mm_slash_yy">ММ/ГГ</string>
+    <string name="main_loan">Основной долг</string>
+    <string name="warning_monthly_payment_must_be_paid_until_tenth">Ежемесячный платёж необходимо внести до 10 числа грядущего месяца</string>
+    <string name="repayment_for">Погашение за январь</string>
+    <string name="analytics">Аналитика</string>
+    <string name="percentages">Проценты</string>
+    <string name="to_payment">К оплате</string>
 
 </resources>

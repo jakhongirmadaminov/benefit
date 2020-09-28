@@ -80,6 +80,53 @@ class GradientCircularProgressBar(ctx: Context, attrs: AttributeSet) : View(ctx,
         }
     }
 
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+
+        val desiredWidth = 400
+        val desiredHeight = 400
+
+        val widthMode = MeasureSpec.getMode(widthMeasureSpec)
+        val widthSize = MeasureSpec.getSize(widthMeasureSpec)
+        val heightMode = MeasureSpec.getMode(heightMeasureSpec)
+        val heightSize = MeasureSpec.getSize(heightMeasureSpec)
+
+        val width: Int
+        val height: Int
+
+        //Measure Width
+
+        //Measure Width
+        width = if (widthMode == MeasureSpec.EXACTLY) {
+            //Must be this size
+            widthSize
+        } else if (widthMode == MeasureSpec.AT_MOST) {
+            //Can't be bigger than...
+            Math.min(desiredWidth, widthSize)
+        } else {
+            //Be whatever you want
+            desiredWidth
+        }
+
+        //Measure Height
+
+        //Measure Height
+        height = if (heightMode == MeasureSpec.EXACTLY) {
+            //Must be this size
+            heightSize
+        } else if (heightMode == MeasureSpec.AT_MOST) {
+            //Can't be bigger than...
+            Math.min(desiredHeight, heightSize)
+        } else {
+            //Be whatever you want
+            desiredHeight
+        }
+
+        //MUST CALL THIS
+
+        //MUST CALL THIS
+        setMeasuredDimension(width, width)
+    }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
@@ -100,6 +147,8 @@ class GradientCircularProgressBar(ctx: Context, attrs: AttributeSet) : View(ctx,
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+
+
         drawBg(canvas)
 
         val result = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
