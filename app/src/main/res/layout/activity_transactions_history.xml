@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -184,8 +184,8 @@
             android:drawableLeft="@drawable/ic_baseline_search_24"
             android:drawablePadding="10dp"
             android:fontFamily="sans-serif"
-            android:paddingLeft="10dp"
             android:hint="@string/search_by_name_or_num"
+            android:paddingLeft="10dp"
             android:textColor="#805c5c5c"
             android:textSize="14sp"
             android:textStyle="normal"
@@ -196,7 +196,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="26dp"
-            android:layout_marginBottom="26dp"
+            android:layout_marginBottom="16dp"
             android:fontFamily="sans-serif"
             android:text="4 марта 2019"
             android:textColor="#ab5c5c5c"
@@ -204,10 +204,13 @@
             android:textStyle="normal" />
 
 
-        <include layout="@layout/item_transaction"/>
-        <include layout="@layout/item_transaction"/>
-        <include layout="@layout/item_transaction"/>
-        <include layout="@layout/item_transaction"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTransactions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_transaction" />
 
     </LinearLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

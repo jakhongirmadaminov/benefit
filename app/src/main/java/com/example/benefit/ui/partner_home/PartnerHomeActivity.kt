@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.benefit.R
 import com.example.benefit.remote.models.PartnerCategoryDTO
+import com.example.benefit.ui.partner_story.StoryActivity
 import com.example.benefit.util.loadImageUrl
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_partner_home.*
+import splitties.activities.start
 import java.util.ArrayList
 
 class PartnerHomeActivity : AppCompatActivity() {
@@ -38,6 +40,15 @@ class PartnerHomeActivity : AppCompatActivity() {
     }
 
     private fun attachListeners() {
+        ivBrandLogo.setOnClickListener {
+            start<StoryActivity> {
+                putExtra(StoryActivity.EXTRA_PARTNER, partner)
+            }
+        }
+
+        ivBack.setOnClickListener {
+            finish()
+        }
 
     }
 

@@ -170,16 +170,23 @@
                 android:paddingRight="26dp"
                 android:paddingBottom="40dp">
 
-                <ImageView
-                    android:id="@+id/ivBrandLogo"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:selectableItemBackground"
-                    android:layout_width="?android:actionBarSize"
-                    android:layout_height="?android:actionBarSize"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/ivBrandLogo"
+                        android:layout_width="?android:actionBarSize"
+                        android:layout_height="?android:actionBarSize"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:selectableItemBackground" />
+                </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:id="@+id/tvBrandName"
@@ -191,7 +198,7 @@
                     android:textColor="#ffffff"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@id/ivBrandLogo"
+                    app:layout_constraintStart_toEndOf="@id/cardImg"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView

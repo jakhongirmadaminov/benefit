@@ -1,15 +1,16 @@
-package com.example.benefit.ui.transactions_history
+package com.example.benefit.ui.transactions_history.transaction_bsd
 
 import android.os.Bundle
-import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.benefit.R
-import com.example.benefit.remote.models.TransactionDTO
+import com.example.benefit.ui.branches_atms.BranchesAtmsActivity
 import com.example.benefit.ui.main.home.HomeFragment
-import com.example.benefit.ui.transactions_history.transaction_bsd.TransactionType
-import com.example.benefit.ui.viewgroups.CardTagItem
-import com.example.benefit.ui.viewgroups.ItemTransaction
+import com.example.benefit.ui.main.home.card_options.CardOptionsBSD
 import com.example.benefit.util.SizeUtils
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
@@ -17,29 +18,40 @@ import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_transactions_history.*
+import kotlinx.android.synthetic.main.fragment_transaction.*
+import kotlinx.android.synthetic.main.fragment_transaction.chartPager
 import kotlinx.android.synthetic.main.item_line_chart.view.*
+import splitties.fragments.start
+import javax.inject.Inject
 import kotlin.random.Random
 
+/**
+ * Created by jahon on 03-Sep-20
+ */
 @AndroidEntryPoint
-class TransactionsHistoryActivity : AppCompatActivity() {
+class TransactionFragment @Inject constructor() : Fragment(R.layout.fragment_transaction) {
 
+//    val args by navArgs<TransactionFragmentArgs>()
+//    val productId = args.productId
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_transactions_history)
+    private val viewModel: TransactionViewModel by viewModels()
 
-        supportActionBar?.setHomeButtonEnabled(true)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.elevation = 0F
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
 
         setupViews()
+
         attachListeners()
         subscribeObservers()
+    }
+
+    private fun setupViews() {
+
+
+        setupChartPager()
 
     }
 
@@ -50,22 +62,9 @@ class TransactionsHistoryActivity : AppCompatActivity() {
 
     private fun attachListeners() {
 
-        cardMonthIncome.setOnClickListener {
-            cbMonthIncome.isChecked = true
-            cbMonthSpent.isChecked = false
-        }
-        cardMonthSpent.setOnClickListener {
-            cbMonthSpent.isChecked = true
-            cbMonthIncome.isChecked = false
-        }
+
     }
 
-    private fun setupViews() {
-        rvCardTags.adapter = cardsAdapter
-        cbMonthSpent.performClick()
-        setupCardTags()
-        setupChartPager()
-    }
 
     private fun setupChartPager() {
 
@@ -87,73 +86,13 @@ class TransactionsHistoryActivity : AppCompatActivity() {
         chartPager.offscreenPageLimit = 2
         chartPager.clipToPadding = false
         chartPager.setPadding(
-            SizeUtils.dpToPx(this, 26).toInt(),
+            SizeUtils.dpToPx(requireContext(), 26).toInt(),
             0,
-            SizeUtils.dpToPx(this, 26).toInt(),
+            SizeUtils.dpToPx(requireContext(), 26).toInt(),
             0
         )
-        chartPager.pageMargin = SizeUtils.dpToPx(this, 26).toInt()
+        chartPager.pageMargin = SizeUtils.dpToPx(requireContext(), 26).toInt()
 
-    }
-
-
-    val cardsAdapter = GroupAdapter<GroupieViewHolder>()
-    val transactionsAdapter = GroupAdapter<GroupieViewHolder>()
-    private fun setupCardTags() {
-
-        rvTransactions.adapter = transactionsAdapter
-
-        val data = arrayListOf(
-            TransactionDTO(
-                "Amphora",
-                "Еда и продукты",
-                100000,
-                "",
-                TransactionType.COMMERCIAL_PAYMENT
-            ),
-            TransactionDTO(
-                "ЧП “Nuraliev”",
-                "Категория не выбрана",
-                250000,
-                "",
-                TransactionType.NONE
-            ),
-            TransactionDTO(
-                "Перевод на карту",
-                "Kapital Bank",
-                300000,
-                "",
-                TransactionType.TRANSFER_TO_CARD
-            ),
-            TransactionDTO(
-                "Infinity Roses",
-                "Магазины Цветов",
-                120000,
-                "",
-                TransactionType.COMMERCIAL_PAYMENT
-            )
-        )
-        transactionsAdapter.clear()
-
-        data.forEach {
-            transactionsAdapter.add(ItemTransaction(it))
-        }
-        transactionsAdapter.notifyDataSetChanged()
-
-        val tempVals = arrayListOf("Benefit", "Zoom", "Cashback", "Детям", "Общее", "...")
-
-        tempVals.forEach {
-            cardsAdapter.add(CardTagItem(it) { cardItem ->
-                for (i in 0 until cardsAdapter.itemCount) {
-                    (cardsAdapter.getItem(i) as CardTagItem).selected = false
-                }
-                cardItem.selected = true
-                cardsAdapter.notifyDataSetChanged()
-            })
-        }
-
-
-        cardsAdapter.notifyDataSetChanged()
     }
 
     private fun makeChart(chart: LineChart) {
@@ -179,7 +118,10 @@ class TransactionsHistoryActivity : AppCompatActivity() {
         dataSet.disableDashedLine()
         dataSet.disableDashedHighlightLine()
 
-        dataSet.fillDrawable = ContextCompat.getDrawable(this, R.drawable.gradient_line_chart)
+
+
+        dataSet.fillDrawable =
+            ContextCompat.getDrawable(requireContext(), R.drawable.gradient_line_chart)
         dataSet.setDrawFilled(true)
         dataSet.label = ""
         dataSet.lineWidth = 0F
@@ -223,17 +165,15 @@ class TransactionsHistoryActivity : AppCompatActivity() {
 
         chart.description = null
         chart.setDrawGridBackground(true)
-        chart.setGridBackgroundColor(ContextCompat.getColor(this, R.color.peach))
+        chart.setGridBackgroundColor(ContextCompat.getColor(requireContext(), R.color.peach))
         chart.legend.isEnabled = false
         chart.invalidate() // refresh
 
 
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> finish()
-        }
-        return super.onOptionsItemSelected(item)
-    }
+}
+
+enum class TransactionType {
+    NONE, TRANSFER_TO_CARD, COMMERCIAL_PAYMENT
 }

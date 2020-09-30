@@ -21,18 +21,31 @@ class StoryActivity : AppCompatActivity(), StoriesListener {
 
     lateinit var partner: PartnerCategoryDTO
 
-    private var storiesProgressView: StoriesProgressView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_story)
 
         partner = intent.getParcelableExtra(EXTRA_PARTNER)!!
-        image.loadImageUrl(partner.image)
 
+        setupViews()
+
+        attachListeners()
+    }
+
+    private fun setupViews() {
+        image.loadImageUrl(partner.image)
         storiesProgressView!!.setStoriesCount(5) // <- set stories
         storiesProgressView!!.setStoryDuration(1200L) // <- set a story duration
         storiesProgressView!!.setStoriesListener(this) // <- set listener
         storiesProgressView!!.startStories() // <- start progress
+        ivBrandLogo.loadImageUrl(partner.icon_image)
+        tvBrand.text = partner.title_ru
+    }
+
+    private fun attachListeners() {
+        icClose.setOnClickListener {
+            finish()
+        }
     }
 
     override fun onNext() {
