@@ -16,12 +16,15 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_transactions_history.*
 import kotlinx.android.synthetic.main.item_line_chart.view.*
 import kotlin.random.Random
 
-
+@AndroidEntryPoint
 class TransactionsHistoryActivity : AppCompatActivity() {
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +37,13 @@ class TransactionsHistoryActivity : AppCompatActivity() {
 
         setupViews()
         attachListeners()
+        subscribeObservers()
+
+    }
+
+    private fun subscribeObservers() {
+
+
     }
 
     private fun attachListeners() {

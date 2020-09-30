@@ -1,5 +1,6 @@
 package com.example.benefit.remote
 
+import com.example.benefit.remote.models.PartnerCategoryDTO
 import com.example.benefit.remote.models.PartnerDTO
 import com.example.benefit.remote.repository.PartnersRemote
 import com.example.benefit.util.ErrorWrapper
@@ -22,6 +23,32 @@ class PartnersRemoteImpl @Inject constructor(
     override suspend fun getPartners(): ResultWrapper<List<PartnerDTO>> {
         return try {
             val response = apiService.getPartners()
+            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
+            else ErrorWrapper.ResponseError(
+                response.code(),
+                JSONObject(response.errorBody()!!.string())["message"].toString()
+            )
+        } catch (e: Exception) {
+            ErrorWrapper.SystemError(e)
+        }
+    }
+
+    override suspend fun getPartnersCategory(): ResultWrapper<List<PartnerCategoryDTO>> {
+        return try {
+            val response = apiService.getPartnersCategory()
+            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
+            else ErrorWrapper.ResponseError(
+                response.code(),
+                JSONObject(response.errorBody()!!.string())["message"].toString()
+            )
+        } catch (e: Exception) {
+            ErrorWrapper.SystemError(e)
+        }
+    }
+
+    override suspend fun getPartnersForCategory(id: Int): ResultWrapper<List<PartnerCategoryDTO>> {
+        return try {
+            val response = apiService.getPartnersForCategory(id)
             if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
             else ErrorWrapper.ResponseError(
                 response.code(),

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="26dp"
+    android:paddingTop="5dp"
+    android:paddingRight="26dp"
+    android:paddingBottom="5dp">
+
+
+    <ImageView
+        android:id="@+id/ivIconBg"
+        android:layout_width="?android:actionBarSize"
+        android:layout_height="?android:actionBarSize"
+        android:background="@drawable/shape_grey_rounded"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="?android:actionBarSize"
+        android:layout_height="?android:actionBarSize"
+        android:padding="10dp"
+        android:src="@drawable/ic__flag_ru"
+        app:layout_constraintBottom_toBottomOf="@id/ivIconBg"
+        app:layout_constraintEnd_toEndOf="@id/ivIconBg"
+        app:layout_constraintStart_toStartOf="@id/ivIconBg"
+        app:layout_constraintTop_toTopOf="@id/ivIconBg" />
+
+
+    <TextView
+        android:id="@+id/tvCategoryTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:fontFamily="sans-serif"
+        android:text="Еда и продукты"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@id/tvCategoryTotalExpense"
+        app:layout_constraintEnd_toStartOf="@id/tvPercentage"
+        app:layout_constraintStart_toEndOf="@id/ivIconBg"
+        app:layout_constraintTop_toTopOf="@id/ivIconBg"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tvCategoryTotalExpense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="1 234 000 UZS"
+        android:textColor="#cc5c5c5c"
+        android:textSize="14dp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tvCategoryTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvCategoryTitle"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+
+    <TextView
+        android:id="@+id/tvPercentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="55 %"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.benefit.remote.PartnersRemoteImpl
-import com.example.benefit.remote.models.PartnerDTO
+import com.example.benefit.remote.models.PartnerCategoryDTO
 import com.example.benefit.util.ResultWrapper
 import com.example.benefit.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
@@ -17,20 +17,16 @@ import kotlinx.coroutines.withContext
 class PartnersCategoryViewModel @ViewModelInject constructor(private val partnersRepository: PartnersRemoteImpl) :
     ViewModel() {
 
-    val partnersResp = SingleLiveEvent<ResultWrapper<List<PartnerDTO>>>()
+    val partnersResp = SingleLiveEvent<ResultWrapper<List<PartnerCategoryDTO>>>()
 
     fun getPartners() {
         partnersResp.value = ResultWrapper.InProgress
         viewModelScope.launch(Dispatchers.IO) {
-            val response = partnersRepository.getPartners()
+            val response = partnersRepository.getPartnersCategory()
             withContext(Main) {
                 partnersResp.value = response
             }
         }
     }
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
-    }
-    val text: LiveData<String> = _text
 }

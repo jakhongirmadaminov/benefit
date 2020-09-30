@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.viewpager.widget.PagerAdapter
 import com.example.benefit.R
+import com.example.benefit.ui.branches_atms.BranchesAtmsActivity
+import com.example.benefit.ui.expenses_by_categories.ExpensesByCategoriesActivity
 import com.example.benefit.ui.loans.LoanActivity
 import com.example.benefit.ui.main.home.card_options.CardOptionsBSD
 import com.example.benefit.ui.main.fill_card.FillCardBSD
@@ -20,7 +22,7 @@ import splitties.fragments.start
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
-   val viewModel: HomeViewModel by viewModels()
+    val viewModel: HomeViewModel by viewModels()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,14 +34,24 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun attachListeners() {
-        cardOvalLoans.setOnClickListener { start<LoanActivity> {} }
-        cardOvalCashback.setOnClickListener {
+
+        page_one.setOnClickListener {
             val dialog = DialogCashBack()
             dialog.show(childFragmentManager, "")
         }
 
         cardPayments.setOnClickListener {
-            start<TransactionsHistoryActivity>{}
+            start<TransactionsHistoryActivity> {}
+        }
+
+        page_two.setOnClickListener {
+            start<LoanActivity> {}
+        }
+        cardBranches.setOnClickListener {
+            start<BranchesAtmsActivity> {}
+        }
+        cardExpenses.setOnClickListener {
+            start<ExpensesByCategoriesActivity> {}
         }
 
     }

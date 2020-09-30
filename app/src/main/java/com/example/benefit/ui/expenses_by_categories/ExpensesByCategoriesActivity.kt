@@ -3,26 +3,32 @@ package com.example.benefit.ui.expenses_by_categories
 import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import com.example.benefit.R
+import com.example.benefit.remote.models.PartnerCategoryDTO
 import com.example.benefit.ui.base.BaseActionbarActivity
 import com.example.benefit.ui.main.home.HomeFragment
 import com.example.benefit.ui.viewgroups.CardTagItem
-import com.example.benefit.util.MyBarChartRenderer
-import com.example.benefit.util.SizeUtils
+import com.example.benefit.ui.viewgroups.ItemCategorySmall
+import com.example.benefit.util.*
 import com.github.mikephil.charting.charts.BarChart
-import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.*
-import com.github.mikephil.charting.highlight.ChartHighlighter
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_expenses_by_categories.*
 import kotlinx.android.synthetic.main.item_bar_chart.view.*
 import kotlin.random.Random
 
+@AndroidEntryPoint
 class ExpensesByCategoriesActivity : BaseActionbarActivity() {
+
+    private val viewModel: ExpensesByCategoriesViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_expenses_by_categories)
         setSupportActionBar(tool_bar)
@@ -32,9 +38,12 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity() {
         setupViews()
         attachListeners()
         subscribeObservers()
+        viewModel.getPartnerCategories()
+
     }
 
     private fun setupViews() {
+        rvCategories.adapter = categoriesAdapter
 
         setupChartPager()
         setupCardTags()
@@ -50,27 +59,56 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity() {
     private fun subscribeObservers() {
 
 
+        viewModel.partnerCategoriesResp.observe(this, Observer {
+
+            val response = it ?: return@Observer
+            when (response) {
+                is ErrorWrapper.ResponseError -> {
+                }
+                is ErrorWrapper.SystemError -> {
+                }
+                is ResultWrapper.Success -> {
+                    loadData(response.value)
+
+                }
+                ResultWrapper.InProgress -> {
+                }
+            }.exhaustive
+
+
+        })
+
     }
 
-    val adapter = GroupAdapter<GroupieViewHolder>()
+    private fun loadData(value: List<PartnerCategoryDTO>) {
+
+        categoriesAdapter.clear()
+        value.forEach {
+            categoriesAdapter.add(ItemCategorySmall(it))
+        }
+        categoriesAdapter.notifyDataSetChanged()
+    }
+
+    val tagsAdapter = GroupAdapter<GroupieViewHolder>()
+    val categoriesAdapter = GroupAdapter<GroupieViewHolder>()
     private fun setupCardTags() {
 
-        rvCardTags.adapter = adapter
+        rvCardTags.adapter = tagsAdapter
 
         val tempVals = arrayListOf("Benefit", "Zoom", "Cashback", "Детям", "Общее", "...")
 
         tempVals.forEach {
-            adapter.add(CardTagItem(it) { cardItem ->
-                for (i in 0 until adapter.itemCount) {
-                    (adapter.getItem(i) as CardTagItem).selected = false
+            tagsAdapter.add(CardTagItem(it) { cardItem ->
+                for (i in 0 until tagsAdapter.itemCount) {
+                    (tagsAdapter.getItem(i) as CardTagItem).selected = false
                 }
                 cardItem.selected = true
-                adapter.notifyDataSetChanged()
+                tagsAdapter.notifyDataSetChanged()
             })
         }
 
 
-        adapter.notifyDataSetChanged()
+        tagsAdapter.notifyDataSetChanged()
     }
 
 
@@ -108,29 +146,11 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity() {
         }
 
         val dataSet = BarDataSet(entries, "") // add entries to dataset
-//        dataSet.color = ContextCompat.getColor(this, R.color.colorAccent)
-//        dataSet.setValueTextColor()
-
-//        dataSet.mode = LineDataSet.Mode.HORIZONTAL_BEZIER
-//        dataSet.cubicIntensity = 0.3F
-//        dataSet.setDrawCircleHole(false)
-//        dataSet.setDrawCircles(false)
-//        dataSet.setDrawHighlightIndicators(false)
-//        dataSet.setDrawHorizontalHighlightIndicator(false)
         dataSet.setDrawIcons(false)
-//        dataSet.setDrawVerticalHighlightIndicator(false)
         dataSet.setDrawValues(false)
-//        dataSet.disableDashedLine()
-//        dataSet.disableDashedHighlightLine()
-
-//        dataSet.fillDrawable = ContextCompat.getDrawable(this, R.drawable.gradient_line_chart)
-//        dataSet.setDrawFilled(true)
         dataSet.label = ""
-//        dataSet.lineWidth = 0F
-//        dataSet.fillDrawable = ContextCompat.getDrawable(this, R.drawable.gradient_peach)
         dataSet.highLightColor = Color.parseColor("#f47964")
-        dataSet.color = ContextCompat.getColor(this, R.color.grey_bar)
-        dataSet.setGradientColor()
+        dataSet.setGradientColor(Color.parseColor("#b9b2b2"), Color.parseColor("#d4cfcf"))
         dataSet.highLightAlpha = 255
 
         val lineData = BarData(dataSet)
@@ -176,7 +196,7 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity() {
         chart.setDrawBarShadow(false)
 
 //                chart.minOffset = SizeUtils.dpToPx(this, 10)
-//        chart.renderer = MyBarChartRenderer(this, chart, chart.animator, chart.viewPortHandler)
+        chart.renderer = MyBarChartRenderer(this, chart, chart.animator, chart.viewPortHandler)
         chart.isDoubleTapToZoomEnabled = false
         chart.legend.isEnabled = false
         chart.invalidate() // refresh

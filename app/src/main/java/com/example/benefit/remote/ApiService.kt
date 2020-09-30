@@ -1,11 +1,9 @@
 package com.example.benefit.remote
 
+import com.example.benefit.remote.models.PartnerCategoryDTO
 import com.example.benefit.remote.models.PartnerDTO
 import retrofit2.Response
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 /**
  * Defines the abstract methods used for interacting with the Bufferoo API
@@ -38,6 +36,14 @@ interface ApiService {
 
     @GET("api/partners")
     suspend fun getPartners(): Response<List<PartnerDTO>>
+
+
+    @GET("/api/category")
+    suspend fun getPartnersCategory(): Response<List<PartnerCategoryDTO>>
+
+
+    @GET("/api/category/children/{id}")
+    suspend fun getPartnersForCategory(@Path(value = "id", encoded = true) id: Int): Response<List<PartnerCategoryDTO>>
 
 
 //    @Headers("Content-Type:application/json", "Accept: application/json")

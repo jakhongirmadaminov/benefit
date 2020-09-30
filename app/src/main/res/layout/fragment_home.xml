@@ -16,9 +16,9 @@
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/cardsPager"
-            android:layout_marginTop="46dp"
             android:layout_width="match_parent"
-            android:layout_height="190dp" />
+            android:layout_height="190dp"
+            android:layout_marginTop="46dp" />
 
         <com.rd.PageIndicatorView
             android:id="@+id/pageIndicatorView"
@@ -84,6 +84,10 @@
                 android:layout_height="100dp"
                 android:layout_marginLeft="26dp"
                 android:layout_marginTop="15dp"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
                 android:layout_marginRight="26dp"
                 app:cardCornerRadius="10dp">
 
@@ -125,9 +129,6 @@
                         android:layout_marginRight="30dp"
                         app:cardBackgroundColor="@color/yellow"
                         app:cardElevation="2dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:selectableItemBackground"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
@@ -152,6 +153,9 @@
                 android:layout_marginLeft="26dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="26dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
                 app:cardCornerRadius="10dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -192,10 +196,6 @@
                         android:layout_height="50dp"
                         android:layout_marginRight="30dp"
                         app:cardBackgroundColor="@color/yellow"
-
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:selectableItemBackground"
                         app:cardElevation="2dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -221,6 +221,9 @@
                 android:layout_marginLeft="26dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="26dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
                 app:cardCornerRadius="10dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -395,7 +398,6 @@
                 android:id="@+id/cardExpenses"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-
                 android:layout_marginLeft="30dp"
                 android:clickable="true"
                 android:focusable="true"
@@ -451,7 +453,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginLeft="30dp"
-
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:selectableItemBackground"

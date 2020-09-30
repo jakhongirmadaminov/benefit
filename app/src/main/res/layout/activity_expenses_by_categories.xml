@@ -9,6 +9,8 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
+        app:elevation="0dp"
+        android:elevation="0dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:animateLayoutChanges="true">
@@ -19,6 +21,8 @@
             android:layout_height="?attr/actionBarSize"
             android:theme="@style/ToolBarStyle"
             app:contentInsetLeft="0dp"
+            app:elevation="0dp"
+            android:elevation="0dp"
             app:layout_scrollFlags="scroll|enterAlways">
 
             <LinearLayout
@@ -29,12 +33,13 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="?android:actionBarSize"
                     android:layout_weight="1"
                     android:fontFamily="sans-serif"
                     android:gravity="center"
                     android:text="@string/analytics"
                     android:textColor="#000000"
-                    android:textSize="20sp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
 
@@ -45,7 +50,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -58,21 +63,22 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="22sp"
+                android:layout_marginLeft="26dp"
                 android:fontFamily="sans-serif"
-                android:textStyle="bold"
+                android:text="750 000 UZS"
                 android:textColor="#000000"
-                tools:text="750 000 UZS"
-                />
+                android:textSize="22dp"
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:layout_marginLeft="26dp"
                 android:fontFamily="sans-serif"
-                android:textStyle="normal"
+                android:text="Потрачено за март"
                 android:textColor="#cc5c5c5c"
-                tools:text="Потрачено за март"
-                />
+                android:textSize="14dp"
+                android:textStyle="normal" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvCardTags"
@@ -90,7 +96,7 @@
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/chartPager"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="150dp"
                 android:layout_marginTop="26dp" />
 
             <com.rd.PageIndicatorView
@@ -98,6 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardsPager"
@@ -109,7 +116,27 @@
                 app:piv_viewPager="@id/chartPager" />
 
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="26dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/by_categories"
+                android:textColor="#de000000"
+                android:textSize="16dp"
+                android:textStyle="normal" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCategories"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_category_small" />
+
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

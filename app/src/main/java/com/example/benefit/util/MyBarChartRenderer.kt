@@ -6,13 +6,19 @@ import android.graphics.LinearGradient
 import android.graphics.RectF
 import android.graphics.Shader
 import com.github.mikephil.charting.animation.ChartAnimator
+import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.interfaces.dataprovider.BarDataProvider
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import com.github.mikephil.charting.renderer.BarChartRenderer
 import com.github.mikephil.charting.utils.Utils
 import com.github.mikephil.charting.utils.ViewPortHandler
 
-class MyBarChartRenderer(val context: Context, chart: BarDataProvider, animator: ChartAnimator, viewPortHandler: ViewPortHandler) : BarChartRenderer(chart, animator, viewPortHandler){
+class MyBarChartRenderer(
+    val context: Context,
+    chart: BarDataProvider,
+    animator: ChartAnimator,
+    viewPortHandler: ViewPortHandler
+) : BarChartRenderer(chart, animator, viewPortHandler) {
 
     private val mBarShadowRectBuffer = RectF()
 
@@ -49,7 +55,12 @@ class MyBarChartRenderer(val context: Context, chart: BarDataProvider, animator:
                 if (!mViewPortHandler.isInBoundsRight(mBarShadowRectBuffer.left)) break
                 mBarShadowRectBuffer.top = mViewPortHandler.contentTop()
                 mBarShadowRectBuffer.bottom = mViewPortHandler.contentBottom()
-                c.drawRoundRect(mBarShadowRectBuffer, SizeUtils.dpToPx(context, 5), SizeUtils.dpToPx(context, 5), mShadowPaint)
+                c.drawRoundRect(
+                    mBarShadowRectBuffer,
+                    SizeUtils.dpToPx(context, 5),
+                    SizeUtils.dpToPx(context, 5),
+                    mShadowPaint
+                )
                 i++
             }
         }
@@ -101,17 +112,54 @@ class MyBarChartRenderer(val context: Context, chart: BarDataProvider, animator:
                     Shader.TileMode.MIRROR
                 )
             }
-            c.drawRect(
-                buffer.buffer[j], buffer.buffer[j + 1], buffer.buffer[j + 2],
-                buffer.buffer[j + 3], mRenderPaint
+            c.drawRoundRect(
+                RectF(
+                    buffer.buffer[j], buffer.buffer[j + 1], buffer.buffer[j + 2],
+                    buffer.buffer[j + 3]
+                ), SizeUtils.dpToPx(context, 5), SizeUtils.dpToPx(context, 5), mRenderPaint
             )
             if (drawBorder) {
-                c.drawRect(
-                    buffer.buffer[j], buffer.buffer[j + 1], buffer.buffer[j + 2],
-                    buffer.buffer[j + 3], mBarBorderPaint
+                c.drawRoundRect(
+                    RectF(
+                        buffer.buffer[j], buffer.buffer[j + 1], buffer.buffer[j + 2],
+                        buffer.buffer[j + 3]
+                    ), SizeUtils.dpToPx(context, 5), SizeUtils.dpToPx(context, 5), mBarBorderPaint
                 )
             }
             j += 4
+        }
+    }
+
+
+    override fun drawHighlighted(c: Canvas, indices: Array<Highlight>) {
+        val barData = mChart.barData
+        for (high in indices) {
+            val set = barData.getDataSetByIndex(high.dataSetIndex)
+            if (set == null || !set.isHighlightEnabled) continue
+            val e = set.getEntryForXValue(high.x, high.y)
+            if (!isInBoundsX(e, set)) continue
+            val trans = mChart.getTransformer(set.axisDependency)
+            mHighlightPaint.color = set.highLightColor
+            mHighlightPaint.alpha = set.highLightAlpha
+            val isStack = if (high.stackIndex >= 0 && e.isStacked) true else false
+            val y1: Float
+            val y2: Float
+            if (isStack) {
+                if (mChart.isHighlightFullBarEnabled) {
+                    y1 = e.positiveSum
+                    y2 = -e.negativeSum
+                } else {
+                    val range = e.ranges[high.stackIndex]
+                    y1 = range.from
+                    y2 = range.to
+                }
+            } else {
+                y1 = e.y
+                y2 = 0f
+            }
+            prepareBarHighlight(e.x, y1, y2, barData.barWidth / 2f, trans)
+            setHighlightDrawPos(high, mBarRect)
+            c.drawRoundRect(mBarRect,SizeUtils.dpToPx(context, 5),SizeUtils.dpToPx(context, 5), mHighlightPaint)
         }
     }
 

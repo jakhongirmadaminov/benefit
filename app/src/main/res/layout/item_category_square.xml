@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/ivIconBg"
+        android:layout_width="?android:actionBarSize"
+        android:layout_height="?android:actionBarSize"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_grey_rounded"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="?android:actionBarSize"
+        android:layout_height="?android:actionBarSize"
+        android:padding="10dp"
+        android:src="@drawable/ic__flag_ru"
+        app:layout_constraintBottom_toBottomOf="@id/ivIconBg"
+        app:layout_constraintEnd_toEndOf="@id/ivIconBg"
+        app:layout_constraintStart_toStartOf="@id/ivIconBg"
+        app:layout_constraintTop_toTopOf="@id/ivIconBg" />
+
+
+    <TextView
+        android:id="@+id/tvCategoryTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center_horizontal"
+        android:text="Еда и продукты"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="@id/ivIconBg"
+        app:layout_constraintStart_toStartOf="@id/ivIconBg"
+        app:layout_constraintTop_toBottomOf="@id/ivIconBg" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -164,5 +164,12 @@
     <string name="analytics">Аналитика</string>
     <string name="percentages">Проценты</string>
     <string name="to_payment">К оплате</string>
+    <string name="by_categories">По категориям</string>
+    <string name="fill_with_cash">Пополнение\nналичными</string>
+    <string name="now_working">Работающие\nсейчас</string>
+    <string name="withdraw_cash">Снятие\nналичных</string>
+    <string name="cashback">Кэшбэк</string>
+    <string name="installment">Рассрочка</string>
+    <string name="we_are_searching_partners_subtitle">Внимание! Мы в поисках партнёров по данной категории. С предложениями и пожеланиями обращайтесь в службу технической поддержки.</string>
 
 </resources>

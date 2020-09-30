@@ -26,19 +26,28 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.loans.loans_chart.LoansChartActivity" android:theme="@style/NoActionBar">
-<!--             <intent-filter>-->
-<!--             <action android:name="android.intent.action.MAIN" />-->
-<!--             <category android:name="android.intent.category.LAUNCHER" />-->
-<!--             </intent-filter>-->
+        <activity android:name=".ui.partner_story.StoryActivity"></activity>
+        <activity
+            android:name=".ui.loans.loans_chart.LoansChartActivity"
+            android:theme="@style/NoActionBar">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".ui.expenses_by_categories.ExpensesByCategoriesActivity" android:theme="@style/NoActionBar">
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+        <activity
+            android:name=".ui.expenses_by_categories.ExpensesByCategoriesActivity"
+            android:theme="@style/NoActionBar">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".ui.partners_map.PartnersMapActivity" />
+        <activity
+            android:name=".ui.partners_map.PartnersMapActivity"
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.branches_atms.BranchesAtmsActivity"
             android:theme="@style/NoActionBar" />
@@ -47,6 +56,12 @@
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.loans.LoanActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".ui.selected_partners_category.SelectedPartnersCategoryActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".ui.partner_home.PartnerHomeActivity"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.transactions_history.TransactionsHistoryActivity"
@@ -63,15 +78,15 @@
         </activity>
         <activity
             android:name=".ui.main.MainActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"
             android:label="@string/app_name"
-            android:theme="@style/NoActionBar">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!---->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.auth.order_card.OrderCardActivity"
@@ -86,9 +101,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDPbntOEiERS6B1bIzhuQhikzOLwZVWtWY" />
-
-
+            android:value="AIzaSyDU-f8N_zlCnq0o0VduRQ7GDDqiXPaADxE" />
     </application>
 
 </manifest>

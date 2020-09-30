@@ -5,6 +5,7 @@
     <color name="colorAccent">#f15b40</color>
     <color name="black">#000000</color>
     <color name="black_opacity_ten">#1A000000</color>
+    <color name="white_opacity_sixty">#99ffffff</color>
     <color name="white">#ffffff</color>
     <color name="grey_text">#e65c5c5c</color>
     <color name="window_background">#f8f8f8</color>
@@ -19,6 +20,7 @@
     <color name="peach">#ffc7bb</color>
     <color name="dark_purple">#52486c</color>
     <color name="grey_bar">#b9b2b2</color>
+    <color name="light_pink">#99F9B2AF</color>
 </resources>
     <!---->
     <!---->

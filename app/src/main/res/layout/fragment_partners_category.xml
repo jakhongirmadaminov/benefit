@@ -24,11 +24,13 @@
 
 
     <ImageView
+        android:id="@+id/ivMap"
         android:layout_width="?android:actionBarSize"
         android:layout_height="?android:actionBarSize"
         android:layout_margin="11dp"
         android:clickable="true"
         android:focusable="true"
+        android:visibility="gone"
         android:foreground="?android:selectableItemBackground"
         android:padding="15dp"
         android:src="@drawable/ic_map_sheet"
