@@ -17,7 +17,15 @@ class PaymentsFragment : Fragment(R.layout.fragment_payments) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupViews()
         attachListeners()
+    }
+
+    private fun setupViews() {
+
+        layoutInflater.inflate(R.layout.item_contact_square, gridRegularPayments, false)
+
+
     }
 
     private fun attachListeners() {

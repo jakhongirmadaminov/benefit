@@ -176,5 +176,6 @@
     <string name="selected">Выбрано:</string>
     <string name="select_at_least_one_contact">Выберите хотя бы один контакт</string>
     <string name="divide">Разделить</string>
+    <string name="regular_payments">Регулярные платежи</string>
 
 </resources>
