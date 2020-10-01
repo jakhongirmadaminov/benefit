@@ -97,6 +97,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_transactionSharePaymentFragment_to_transactionSearchFriendNearbyFragment"
+            app:destination="@id/transactionSearchFriendNearbyFragment" />
 
         <!--        <action-->
         <!--            android:id="@+id/action_transactionFragment_to_cardMakeDepositFromAnyCardFragment"-->
@@ -147,6 +150,28 @@
         <!--            app:exitAnim="@anim/slide_out_left"-->
         <!--            app:popEnterAnim="@anim/slide_in_left"-->
         <!--            app:popExitAnim="@anim/slide_out_right" />-->
+    </fragment>
+
+    <fragment
+        android:id="@+id/transactionSearchFriendNearbyFragment"
+        android:name="com.example.benefit.ui.transactions_history.transaction_bsd.TransactionSearchFriendNearbyFragment"
+        android:label=""
+        tools:layout="@layout/fragment_transaction_search_friends_nearby">
+
+<!--        <argument-->
+<!--            android:name="contacts"-->
+<!--            app:argType="com.example.benefit.remote.models.FriendDTOs" />-->
+
+        <!--        <action-->
+        <!--            android:id="@+id/action_transactionFragment_to_cardMakeDepositFromAnyCardFragment"-->
+        <!--            app:destination="@id/cardMakeDepositFromAnyCardFragment"-->
+        <!--            app:enterAnim="@anim/slide_in_right"-->
+        <!--            app:exitAnim="@anim/slide_out_left"-->
+        <!--            app:popEnterAnim="@anim/slide_in_left"-->
+        <!--            app:popExitAnim="@anim/slide_out_right" />-->
+        <action
+            android:id="@+id/action_transactionSearchFriendNearbyFragment_to_transactionSharePaymentEndFragment"
+            app:destination="@id/transactionSharePaymentEndFragment" />
     </fragment>
 
 </navigation>

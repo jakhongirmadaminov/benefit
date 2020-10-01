@@ -48,6 +48,9 @@
         <ImageView
             android:id="@+id/ivLocation"
             android:layout_width="50dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackground"
             android:layout_height="50dp"
             android:layout_marginRight="16dp"
             android:padding="15dp"

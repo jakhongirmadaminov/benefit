@@ -45,16 +45,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <ImageView
-            android:id="@+id/ivLocation"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginRight="16dp"
-            android:padding="15dp"
-            android:src="@drawable/ic_pin"
-            app:layout_constraintBottom_toBottomOf="@id/lblSelectCategory"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/lblSelectCategory" />
+
 
 
         <ImageView
