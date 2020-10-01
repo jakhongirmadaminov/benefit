@@ -171,5 +171,10 @@
     <string name="cashback">Кэшбэк</string>
     <string name="installment">Рассрочка</string>
     <string name="we_are_searching_partners_subtitle">Внимание! Мы в поисках партнёров по данной категории. С предложениями и пожеланиями обращайтесь в службу технической поддержки.</string>
+    <string name="select_category">Выбор категории</string>
+    <string name="share_payment">Разделить счёт</string>
+    <string name="selected">Выбрано:</string>
+    <string name="select_at_least_one_contact">Выберите хотя бы один контакт</string>
+    <string name="divide">Разделить</string>
 
 </resources>

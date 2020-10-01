@@ -11,5 +11,6 @@ data class TransactionDTO(
     @SerializedName("type") val type: String? = null,
     @SerializedName("sum") val sum: Int? = null,
     @SerializedName("image") val image: String? = null,
+    @SerializedName("date") val date: Long? = null,
     var transactionType: TransactionType = TransactionType.NONE
 ) : Parcelable

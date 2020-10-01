@@ -106,9 +106,10 @@ class TransactionsHistoryActivity : AppCompatActivity() {
         val data = arrayListOf(
             TransactionDTO(
                 "Amphora",
-                "Еда и продукты",
+                "#заинтернет",
                 100000,
                 "",
+                1593863236,
                 TransactionType.COMMERCIAL_PAYMENT
             ),
             TransactionDTO(
@@ -116,6 +117,7 @@ class TransactionsHistoryActivity : AppCompatActivity() {
                 "Категория не выбрана",
                 250000,
                 "",
+                1593863236,
                 TransactionType.NONE
             ),
             TransactionDTO(
@@ -123,6 +125,7 @@ class TransactionsHistoryActivity : AppCompatActivity() {
                 "Kapital Bank",
                 300000,
                 "",
+                1593863236,
                 TransactionType.TRANSFER_TO_CARD
             ),
             TransactionDTO(
@@ -130,6 +133,7 @@ class TransactionsHistoryActivity : AppCompatActivity() {
                 "Магазины Цветов",
                 120000,
                 "",
+                1593863236,
                 TransactionType.COMMERCIAL_PAYMENT
             )
         )

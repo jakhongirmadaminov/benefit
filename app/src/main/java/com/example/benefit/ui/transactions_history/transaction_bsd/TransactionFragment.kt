@@ -1,16 +1,17 @@
 package com.example.benefit.ui.transactions_history.transaction_bsd
 
+import android.content.Context
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.benefit.R
-import com.example.benefit.ui.branches_atms.BranchesAtmsActivity
+import com.example.benefit.remote.models.TransactionDTO
 import com.example.benefit.ui.main.home.HomeFragment
-import com.example.benefit.ui.main.home.card_options.CardOptionsBSD
+import com.example.benefit.ui.viewgroups.ItemTransactionTxtOnly
 import com.example.benefit.util.SizeUtils
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
@@ -18,14 +19,14 @@ import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_transactions_history.*
 import kotlinx.android.synthetic.main.fragment_transaction.*
-import kotlinx.android.synthetic.main.fragment_transaction.chartPager
 import kotlinx.android.synthetic.main.item_line_chart.view.*
-import splitties.fragments.start
 import javax.inject.Inject
 import kotlin.random.Random
+
 
 /**
  * Created by jahon on 03-Sep-20
@@ -36,6 +37,14 @@ class TransactionFragment @Inject constructor() : Fragment(R.layout.fragment_tra
 //    val args by navArgs<TransactionFragmentArgs>()
 //    val productId = args.productId
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        transactionDTO = requireArguments().getParcelable(TransactionBSD.ARG_TRANSACTION_DTO)!!
+    }
+
+    private val adapter = GroupAdapter<GroupieViewHolder>()
+    lateinit var transactionDTO: TransactionDTO
     private val viewModel: TransactionViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,6 +59,46 @@ class TransactionFragment @Inject constructor() : Fragment(R.layout.fragment_tra
 
     private fun setupViews() {
 
+        rvAllTransactions.adapter = adapter
+
+        val data = arrayListOf(
+            TransactionDTO(
+                "Amphora",
+                "#заинтернет",
+                100000,
+                "",
+                1593863236,
+                TransactionType.COMMERCIAL_PAYMENT
+            ),
+            TransactionDTO(
+                "ЧП “Nuraliev”",
+                "Категория не выбрана",
+                250000,
+                "",
+                1593863236,
+                TransactionType.NONE
+            ),
+            TransactionDTO(
+                "Перевод на карту",
+                "Kapital Bank",
+                300000,
+                "",
+                1593863236,
+                TransactionType.TRANSFER_TO_CARD
+            ),
+            TransactionDTO(
+                "Infinity Roses",
+                "Магазины Цветов",
+                120000,
+                "",
+                1593863236,
+                TransactionType.COMMERCIAL_PAYMENT
+            )
+        )
+
+        data.forEach {
+            adapter.add(ItemTransactionTxtOnly(it))
+        }
 
         setupChartPager()
 
@@ -62,7 +111,27 @@ class TransactionFragment @Inject constructor() : Fragment(R.layout.fragment_tra
 
     private fun attachListeners() {
 
-
+        ivMore.setOnClickListener {
+            findNavController().navigate(
+                TransactionFragmentDirections.actionTransactionFragmentToTransactionMoreInfoFragment(
+                    transactionDTO
+                )
+            )
+        }
+        ivSelectCategories.setOnClickListener {
+            findNavController().navigate(
+                TransactionFragmentDirections.actionTransactionFragmentToTransactionSelectCategoryFragment(
+                    transactionDTO
+                )
+            )
+        }
+        ivPeople.setOnClickListener {
+            findNavController().navigate(
+                TransactionFragmentDirections.actionTransactionFragmentToTransactionSharePaymentFragment(
+                    transactionDTO
+                )
+            )
+        }
     }
 
 
@@ -119,9 +188,21 @@ class TransactionFragment @Inject constructor() : Fragment(R.layout.fragment_tra
         dataSet.disableDashedHighlightLine()
 
 
+        val gradientColor =
+            when (transactionDTO.transactionType) {
+                TransactionType.TRANSFER_TO_CARD -> {
+                    R.drawable.gradient_line_chart_orange
+                }
+                TransactionType.COMMERCIAL_PAYMENT -> {
+                    R.drawable.gradient_line_chart_pink
+                }
+                else -> {
+                    R.drawable.gradient_line_chart_pink
+                }
+            }
 
         dataSet.fillDrawable =
-            ContextCompat.getDrawable(requireContext(), R.drawable.gradient_line_chart)
+            ContextCompat.getDrawable(requireContext(), gradientColor)
         dataSet.setDrawFilled(true)
         dataSet.label = ""
         dataSet.lineWidth = 0F
@@ -165,7 +246,9 @@ class TransactionFragment @Inject constructor() : Fragment(R.layout.fragment_tra
 
         chart.description = null
         chart.setDrawGridBackground(true)
-        chart.setGridBackgroundColor(ContextCompat.getColor(requireContext(), R.color.peach))
+
+
+        chart.setGridBackgroundColor(ContextCompat.getColor(requireContext(), R.color.light_grey))
         chart.legend.isEnabled = false
         chart.invalidate() // refresh
 

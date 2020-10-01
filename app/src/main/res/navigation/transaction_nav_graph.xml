@@ -12,30 +12,141 @@
         android:label=""
         tools:layout="@layout/fragment_transaction">
 
-        <argument android:name="argTransactionDTO" app:argType="com.example.benefit.remote.models.TransactionDTO"  />
+        <argument
+            android:name="transactionDTO"
+            app:argType="com.example.benefit.remote.models.TransactionDTO" />
 
         <action
-            android:id="@+id/action_transactionFragment_to_cardMakeDepositFromAnyCardFragment"
-            app:destination="@id/cardMakeDepositFromAnyCardFragment"
+            android:id="@+id/action_transactionFragment_to_transactionMoreInfoFragment"
+            app:destination="@id/transactionMoreInfoFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_transactionFragment_to_cardMakeDepositFromMyCardFragment"
-            app:destination="@id/cardMakeDepositFromMyCardFragment"
+            android:id="@+id/action_transactionFragment_to_transactionSelectCategoryFragment"
+            app:destination="@id/transactionSelectCategoryFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_transactionFragment_to_transactionSharePaymentFragment"
+            app:destination="@id/transactionSharePaymentFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
 
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/transactionMoreInfoFragment"
+        android:name="com.example.benefit.ui.transactions_history.transaction_bsd.TransactionMoreInfoFragment"
+        android:label=""
+        tools:layout="@layout/fragment_transaction_more_info">
+
+        <argument
+            android:name="transactionDTO"
+            app:argType="com.example.benefit.remote.models.TransactionDTO" />
+
+        <!--        <action-->
+        <!--            android:id="@+id/action_transactionFragment_to_cardMakeDepositFromAnyCardFragment"-->
+        <!--            app:destination="@id/cardMakeDepositFromAnyCardFragment"-->
+        <!--            app:enterAnim="@anim/slide_in_right"-->
+        <!--            app:exitAnim="@anim/slide_out_left"-->
+        <!--            app:popEnterAnim="@anim/slide_in_left"-->
+        <!--            app:popExitAnim="@anim/slide_out_right" />-->
+    </fragment>
+
+    <fragment
+        android:id="@+id/transactionSelectCategoryFragment"
+        android:name="com.example.benefit.ui.transactions_history.transaction_bsd.TransactionSelectCategoryFragment"
+        android:label=""
+        tools:layout="@layout/fragment_transaction_select_category">
+
+        <argument
+            android:name="transactionDTO"
+            app:argType="com.example.benefit.remote.models.TransactionDTO" />
+
+        <!--        <action-->
+        <!--            android:id="@+id/action_transactionFragment_to_cardMakeDepositFromAnyCardFragment"-->
+        <!--            app:destination="@id/cardMakeDepositFromAnyCardFragment"-->
+        <!--            app:enterAnim="@anim/slide_in_right"-->
+        <!--            app:exitAnim="@anim/slide_out_left"-->
+        <!--            app:popEnterAnim="@anim/slide_in_left"-->
+        <!--            app:popExitAnim="@anim/slide_out_right" />-->
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/transactionSharePaymentFragment"
+        android:name="com.example.benefit.ui.transactions_history.transaction_bsd.TransactionSharePaymentFragment"
+        android:label=""
+        tools:layout="@layout/fragment_transaction_share_payment">
+
+        <argument
+            android:name="transactionDTO"
+            app:argType="com.example.benefit.remote.models.TransactionDTO" />
         <action
-            android:id="@+id/action_transactionFragment_to_cardDepositAskFriendsFragment"
-            app:destination="@id/cardDepositAskFriendsFragment"
+            android:id="@+id/action_transactionSharePaymentFragment_to_transactionSharePaymentSelectedFragment"
+            app:destination="@id/transactionSharePaymentSelectedFragment"
+
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"/>
+
+        <!--        <action-->
+        <!--            android:id="@+id/action_transactionFragment_to_cardMakeDepositFromAnyCardFragment"-->
+        <!--            app:destination="@id/cardMakeDepositFromAnyCardFragment"-->
+        <!--            app:enterAnim="@anim/slide_in_right"-->
+        <!--            app:exitAnim="@anim/slide_out_left"-->
+        <!--            app:popEnterAnim="@anim/slide_in_left"-->
+        <!--            app:popExitAnim="@anim/slide_out_right" />-->
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/transactionSharePaymentSelectedFragment"
+        android:name="com.example.benefit.ui.transactions_history.transaction_bsd.TransactionSharePaymentSelectedFragment"
+        android:label=""
+        tools:layout="@layout/fragment_transaction_share_payment_selected">
+
+        <argument
+            android:name="contacts"
+            app:argType="com.example.benefit.remote.models.FriendDTOs" />
+        <action
+            android:id="@+id/action_transactionSharePaymentSelectedFragment_to_transactionSharePaymentEndFragment"
+            app:destination="@id/transactionSharePaymentEndFragment" />
+
+        <!--        <action-->
+        <!--            android:id="@+id/action_transactionFragment_to_cardMakeDepositFromAnyCardFragment"-->
+        <!--            app:destination="@id/cardMakeDepositFromAnyCardFragment"-->
+        <!--            app:enterAnim="@anim/slide_in_right"-->
+        <!--            app:exitAnim="@anim/slide_out_left"-->
+        <!--            app:popEnterAnim="@anim/slide_in_left"-->
+        <!--            app:popExitAnim="@anim/slide_out_right" />-->
+    </fragment>
+
+    <fragment
+        android:id="@+id/transactionSharePaymentEndFragment"
+        android:name="com.example.benefit.ui.transactions_history.transaction_bsd.TransactionSharePaymentEndFragment"
+        android:label=""
+        tools:layout="@layout/fragment_transaction_share_payment_end">
+
+        <argument
+            android:name="contacts"
+            app:argType="com.example.benefit.remote.models.FriendDTOs" />
+
+        <!--        <action-->
+        <!--            android:id="@+id/action_transactionFragment_to_cardMakeDepositFromAnyCardFragment"-->
+        <!--            app:destination="@id/cardMakeDepositFromAnyCardFragment"-->
+        <!--            app:enterAnim="@anim/slide_in_right"-->
+        <!--            app:exitAnim="@anim/slide_out_left"-->
+        <!--            app:popEnterAnim="@anim/slide_in_left"-->
+        <!--            app:popExitAnim="@anim/slide_out_right" />-->
     </fragment>
 
 </navigation>

@@ -15,6 +15,7 @@ import com.example.benefit.util.MyBSDialog
 import com.example.benefit.util.MyNestedScrollBSDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.bsd_transaction.*
+import kotlinx.android.synthetic.main.bsd_transaction.view.*
 
 
 @AndroidEntryPoint
@@ -31,6 +32,7 @@ class TransactionBSD : MyNestedScrollBSDialog() {
         super.onAttach(context)
 
         transactionDTO = requireArguments().getParcelable(ARG_TRANSACTION_DTO)!!
+
     }
 
     override fun onCreateView(
@@ -40,13 +42,22 @@ class TransactionBSD : MyNestedScrollBSDialog() {
     ): View? {
         val view = inflater.inflate(R.layout.bsd_transaction, null)
 
-        findNavController().setGraph(R.navigation.transaction_nav_graph, Bundle().apply {
-            putParcelable(ARG_TRANSACTION_DTO, transactionDTO)
-        })
-
         return view
     }
 
+
+
+
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (childFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment). findNavController()
+            .setGraph(R.navigation.transaction_nav_graph, Bundle().apply {
+                putParcelable(ARG_TRANSACTION_DTO, transactionDTO)
+            })
+
+    }
 
     fun navigateToCardTransfer() {
 //        nav_host_fragment.findNavController()
