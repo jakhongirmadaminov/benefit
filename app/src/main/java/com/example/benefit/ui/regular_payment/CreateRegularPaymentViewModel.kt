@@ -1,4 +1,4 @@
-package com.example.benefit.ui.create_regular_payment
+package com.example.benefit.ui.regular_payment
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel

@@ -26,11 +26,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-
+        <activity android:name=".ui.gap.GapActivity"></activity>
         <activity
             android:name=".ui.partner_story.StoryActivity"
-            android:theme="@style/NoActionBar"></activity>
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.loans.loans_chart.LoansChartActivity"
             android:theme="@style/NoActionBar">

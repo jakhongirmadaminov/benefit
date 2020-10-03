@@ -1,5 +1,6 @@
 package com.example.benefit.util
 
+import android.animation.LayoutTransition.CHANGING
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -23,6 +24,7 @@ open class MyNestedScrollBSDialog : BottomSheetDialogFragment() {
             bottomSheet.setBackgroundResource(android.R.color.transparent)
             val coordinatorLayout =
                 d.findViewById<View>(R.id.locUXCoordinatorLayout) as CoordinatorLayout?
+            coordinatorLayout?.layoutTransition?.enableTransitionType(CHANGING)
             val bottomSheetInternal = d.findViewById<View>(R.id.locUXView)
             val bottomSheetBehavior = BottomSheetBehavior.from<View>(bottomSheetInternal!!)
             bottomSheetBehavior.isHideable = false

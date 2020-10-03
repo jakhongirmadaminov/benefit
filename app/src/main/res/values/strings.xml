@@ -177,5 +177,20 @@
     <string name="select_at_least_one_contact">Выберите хотя бы один контакт</string>
     <string name="divide">Разделить</string>
     <string name="regular_payments">Регулярные платежи</string>
+    <string name="create_payment">Создать платёж</string>
+    <string name="how_it_works">Как это работает?</string>
+    <string name="create_regular_payment_subtitle">Выберите нужную операцию из списка и добавьте её в “Календарь платежей”. Укажите дату и сумму предстоящих операций. Включите уведомления, чтобы за день до списания мы вас предупредили.</string>
+    <string name="create">Создать</string>
+    <string name="designation">Название</string>
+    <string name="phone_number">Номер телефона</string>
+    <string name="date_and_time_of_coming_payment">Дата и время ближайшего платежа</string>
+    <string name="payment_type">Способ оплаты</string>
+    <string name="sum">Сумма</string>
+    <string name="without_comissions">Без комиссии</string>
+    <string name="one_time">Разово</string>
+    <string name="once_a_week">Раз в неделю</string>
+    <string name="once_a_month">Раз в месяц</string>
+    <string name="once_a_year">Раз в год</string>
+    <string name="reminder">Напоминание</string>
 
 </resources>

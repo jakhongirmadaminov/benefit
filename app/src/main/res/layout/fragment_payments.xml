@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <TextView
@@ -320,15 +319,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
                 android:fontFamily="sans-serif"
                 android:text="@string/ptwop_game_share_fund_between_friends"
                 android:textColor="#5c5c5c"
                 android:textSize="14sp"
                 android:textStyle="normal"
-                android:layout_marginBottom="15dp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="@id/tvTitleGap"
                 app:layout_constraintTop_toBottomOf="@id/tvTitleGap" />
 
@@ -338,23 +337,29 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:fontFamily="sans-serif-medium"
-            android:textStyle="normal"
-            android:textColor="#000000"
-            android:text="@string/regular_payments"
             android:layout_marginLeft="26dp"
             android:layout_marginTop="26dp"
-            />
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/regular_payments"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="normal" />
 
-        <GridView
-            android:id="@+id/gridRegularPayments"
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRegularPayments"
             android:layout_width="match_parent"
-            tools:listitem="@layout/item_regular_payments"
-            android:paddingLeft="26dp"
-            android:paddingRight="26dp"
-            android:layout_marginTop="16dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingBottom="26dp"
+            android:paddingRight="6dp"
+            android:paddingTop="6dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="4"
+            tools:listitem="@layout/item_payment_square" />
+
+
 
     </LinearLayout>
 
