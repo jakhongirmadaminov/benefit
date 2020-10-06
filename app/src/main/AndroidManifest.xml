@@ -26,7 +26,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.gap.GapActivity"></activity>
+        <activity android:name=".ui.gap.gap_chart.GapChartActivity" android:theme="@style/NoActionBar">
+
+<!--             <intent-filter>-->
+<!--             <action android:name="android.intent.action.MAIN" />-->
+<!--             <category android:name="android.intent.category.LAUNCHER" />-->
+<!--             </intent-filter>-->
+
+
+        </activity>
+        <activity
+            android:name=".ui.gap.GapActivity"
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.partner_story.StoryActivity"
             android:theme="@style/NoActionBar" />

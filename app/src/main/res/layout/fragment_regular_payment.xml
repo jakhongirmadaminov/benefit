@@ -312,7 +312,6 @@
             <TextView
                 android:id="@+id/tvTwo"
                 android:layout_width="0dp"
-
                 android:layout_height="0dp"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
@@ -346,7 +345,6 @@
             <TextView
                 android:id="@+id/tvFour"
                 android:layout_width="0dp"
-
                 android:layout_height="0dp"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
@@ -364,7 +362,6 @@
             <TextView
                 android:id="@+id/tvFive"
                 android:layout_width="0dp"
-
                 android:layout_height="0dp"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
@@ -381,7 +378,6 @@
             <TextView
                 android:id="@+id/tvSix"
                 android:layout_width="0dp"
-
                 android:layout_height="0dp"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
@@ -399,7 +395,6 @@
             <TextView
                 android:id="@+id/tvSeven"
                 android:layout_width="0dp"
-
                 android:layout_height="0dp"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
@@ -417,7 +412,6 @@
             <TextView
                 android:id="@+id/tvEight"
                 android:layout_width="0dp"
-
                 android:layout_height="0dp"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
@@ -434,7 +428,6 @@
             <TextView
                 android:id="@+id/tvNine"
                 android:layout_width="0dp"
-
                 android:layout_height="0dp"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
@@ -481,7 +474,6 @@
                 android:id="@+id/backspace"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill_horizontal"
