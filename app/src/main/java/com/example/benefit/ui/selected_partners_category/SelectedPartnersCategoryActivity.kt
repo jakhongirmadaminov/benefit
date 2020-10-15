@@ -41,7 +41,7 @@ class SelectedPartnersCategoryActivity : BaseActivity() {
         setContentView(R.layout.activity_selected_partners_category)
 
 
-        categoryDTO = intent.getParcelableExtra(EXTRA_CATEGORY)
+        categoryDTO = intent.getParcelableExtra(EXTRA_CATEGORY)!!
         setupViews()
         attachListeners()
         subscribeObservers()

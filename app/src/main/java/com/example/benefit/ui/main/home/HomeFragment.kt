@@ -38,6 +38,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         page_one.setOnClickListener {
             val dialog = DialogCashBack()
             dialog.show(childFragmentManager, "")
+
         }
 
         cardPayments.setOnClickListener {

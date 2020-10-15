@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:layout_margin="20dp"
+    android:gravity="center">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="20dp"
+        android:background="@drawable/shape_grey_rounded">
+
+
+        <NumberPicker
+            android:id="@+id/monthPicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="?android:actionBarSize"
+            app:layout_constraintBottom_toTopOf="@id/btnSelect"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <Button
+            android:id="@+id/btnSelect"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="?android:actionBarSize"
+            android:layout_marginEnd="?android:actionBarSize"
+            android:layout_marginBottom="?android:actionBarSize"
+            android:background="@drawable/selector_orange"
+            android:text="@string/select"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/monthPicker" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

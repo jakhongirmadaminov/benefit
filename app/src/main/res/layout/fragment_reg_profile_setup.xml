@@ -163,6 +163,8 @@
                 android:layout_marginRight="4dp"
                 android:layout_weight="1"
                 android:background="@drawable/shape_input_bg"
+                android:clickable="true"
+                android:focusable="false"
                 android:fontFamily="sans-serif"
                 android:hint="октября"
                 android:imeOptions="actionNext"
@@ -236,6 +238,9 @@
         android:id="@+id/cardPhoto"
         android:layout_width="105dp"
         android:layout_height="105dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:selectableItemBackground"
         app:layout_constraintBottom_toTopOf="@id/llContent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -246,7 +251,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
-            android:src="@drawable/ic_avatar_sample"/>
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_avatar_sample" />
 
     </androidx.cardview.widget.CardView>
 

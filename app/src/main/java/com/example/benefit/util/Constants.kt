@@ -5,7 +5,8 @@ package com.example.benefit.util
  */
 object Constants {
 
-    const val BASE_URL = "http://ben.khm473.ru/"
+    const val BASE_URL = "http://benefitbank.uz/"
+//    const val FILE_PROVIDER = "com.example.benefit.fileprovider"
     val months = arrayOf(
         "Январь",
         "Февраль",

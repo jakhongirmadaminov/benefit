@@ -93,7 +93,7 @@ class FillCardFromAnyCardFragment @Inject constructor() :
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_SCAN_CARD) {
             if (resultCode == Activity.RESULT_OK) {
-                val card: Card = data!!.getParcelableExtra(ScanCardIntent.RESULT_PAYCARDS_CARD)
+                val card: Card = data!!.getParcelableExtra(ScanCardIntent.RESULT_PAYCARDS_CARD)!!
                 val cardData = """
                 Card number: ${card.cardNumberRedacted}
                 Card holder: ${card.cardHolderName.toString()}
