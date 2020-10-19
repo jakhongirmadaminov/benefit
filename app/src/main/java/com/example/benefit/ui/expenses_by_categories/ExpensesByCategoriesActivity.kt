@@ -63,15 +63,15 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity() {
 
             val response = it ?: return@Observer
             when (response) {
-                is ErrorWrapper.ResponseError -> {
+                is ResultError -> {
                 }
-                is ErrorWrapper.SystemError -> {
+                is ResultError -> {
                 }
-                is ResultWrapper.Success -> {
+                is ResultSuccess -> {
                     loadData(response.value)
 
                 }
-                ResultWrapper.InProgress -> {
+                InProgress -> {
                 }
             }.exhaustive
 

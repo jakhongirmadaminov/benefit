@@ -30,7 +30,6 @@ class RegProfileSetupFragment @Inject constructor() :
     Fragment(R.layout.fragment_reg_profile_setup), BSImagePicker.OnSingleImageSelectedListener,
     BSImagePicker.ImageLoaderDelegate, IOnMonthSelected {
 
-
     private val viewModel: LoginViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

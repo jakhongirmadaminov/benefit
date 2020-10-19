@@ -3,7 +3,8 @@ package com.example.benefit.remote
 import com.example.benefit.remote.models.PartnerCategoryDTO
 import com.example.benefit.remote.models.PartnerDTO
 import com.example.benefit.remote.repository.PartnersRemote
-import com.example.benefit.util.ErrorWrapper
+import com.example.benefit.util.ResultError
+import com.example.benefit.util.ResultSuccess
 import com.example.benefit.util.ResultWrapper
 import org.json.JSONObject
 import javax.inject.Inject
@@ -23,39 +24,39 @@ class PartnersRemoteImpl @Inject constructor(
     override suspend fun getPartners(): ResultWrapper<List<PartnerDTO>> {
         return try {
             val response = apiService.getPartners()
-            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-            else ErrorWrapper.ResponseError(
-                response.code(),
-                JSONObject(response.errorBody()!!.string())["message"].toString()
+            if (response.isSuccessful) ResultSuccess(response.body()!!)
+            else ResultError(
+                JSONObject(response.errorBody()!!.string())["message"].toString(),
+                response.code()
             )
         } catch (e: Exception) {
-            ErrorWrapper.SystemError(e)
+            ResultError(message = e.localizedMessage)
         }
     }
 
     override suspend fun getPartnersCategory(): ResultWrapper<List<PartnerCategoryDTO>> {
         return try {
             val response = apiService.getPartnersCategory()
-            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-            else ErrorWrapper.ResponseError(
-                response.code(),
-                JSONObject(response.errorBody()!!.string())["message"].toString()
+            if (response.isSuccessful) ResultSuccess(response.body()!!)
+            else ResultError(
+                JSONObject(response.errorBody()!!.string())["message"].toString(),
+                response.code()
             )
         } catch (e: Exception) {
-            ErrorWrapper.SystemError(e)
+            ResultError(message = e.localizedMessage)
         }
     }
 
     override suspend fun getPartnersForCategory(id: Int): ResultWrapper<List<PartnerCategoryDTO>> {
         return try {
             val response = apiService.getPartnersForCategory(id)
-            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-            else ErrorWrapper.ResponseError(
-                response.code(),
-                JSONObject(response.errorBody()!!.string())["message"].toString()
+            if (response.isSuccessful) ResultSuccess(response.body()!!)
+            else ResultError(
+                JSONObject(response.errorBody()!!.string())["message"].toString(),
+                response.code()
             )
         } catch (e: Exception) {
-            ErrorWrapper.SystemError(e)
+            ResultError(message = e.localizedMessage)
         }
     }
 
@@ -63,11 +64,11 @@ class PartnersRemoteImpl @Inject constructor(
 //        return try {
 //            val response = apiService.smsConfirm(user)
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -75,11 +76,11 @@ class PartnersRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.saveUserCity(mapOf("city_id" to cityId.toString()))
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -109,11 +110,11 @@ class PartnersRemoteImpl @Inject constructor(
 //
 //            val response = authorizedApiService.saveUser(map)
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -122,11 +123,11 @@ class PartnersRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.updateProfileInfo(/*"Bearer "+token,*/ userInfo)
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -135,11 +136,11 @@ class PartnersRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.getProfileInfo()
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -147,11 +148,11 @@ class PartnersRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.deleteDoc(docId)
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -159,11 +160,11 @@ class PartnersRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.getAllDocs()
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -171,11 +172,11 @@ class PartnersRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.getMySchedule()
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -183,11 +184,11 @@ class PartnersRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.getMyServicePrices()
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -195,11 +196,11 @@ class PartnersRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.getMyVisitAddresses()
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -207,11 +208,11 @@ class PartnersRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.getMyVisitPrices()
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -219,11 +220,11 @@ class PartnersRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.updateVisitPrices(body)
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -231,11 +232,11 @@ class PartnersRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.toggleStatus()
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -253,11 +254,11 @@ class PartnersRemoteImpl @Inject constructor(
 //            val response =
 //                authorizedApiService.updateSchedule(/*"Bearer "+token,*/   body)
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -265,11 +266,11 @@ class PartnersRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.getMyReviews()
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -287,11 +288,11 @@ class PartnersRemoteImpl @Inject constructor(
 //
 //            val response = authorizedApiService.updateUserAvatar(map)
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -299,11 +300,11 @@ class PartnersRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.addEducation(educationBody)
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -330,11 +331,11 @@ class PartnersRemoteImpl @Inject constructor(
 //
 //            val response = authorizedApiService.addPassport(map)
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -354,11 +355,11 @@ class PartnersRemoteImpl @Inject constructor(
 //
 //            val response = authorizedApiService.addDocFiles(map)
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -366,11 +367,11 @@ class PartnersRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.addServicePrices(body)
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -378,11 +379,11 @@ class PartnersRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.updateMyAreas(areas)
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 

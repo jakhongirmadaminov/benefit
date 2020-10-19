@@ -97,7 +97,7 @@
         android:background="@drawable/shape_input_bg"
         android:fontFamily="sans-serif"
         android:imeOptions="actionDone"
-        android:inputType="number"
+        android:inputType="phone"
         android:maxLength="9"
         android:maxLines="1"
         android:paddingStart="15dp"

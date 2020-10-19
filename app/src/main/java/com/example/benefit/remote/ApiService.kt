@@ -2,6 +2,8 @@ package com.example.benefit.remote
 
 import com.example.benefit.remote.models.PartnerCategoryDTO
 import com.example.benefit.remote.models.PartnerDTO
+import com.example.benefit.remote.models.PlainResp
+import com.example.benefit.remote.models.RegPhoneResp
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -21,7 +23,7 @@ interface ApiService {
         @Field("phone") phone: String,
         @Field("created") created: String = "232323",
         @Field("ip") ip: String = "127.0.0.1"
-    ): Response<Any>
+    ): RegPhoneResp
 
     @POST("api/user/loginsms")
     @FormUrlEncoded
@@ -29,6 +31,16 @@ interface ApiService {
         @Field("phone_number") phone_number: String,
         @Field("sms_code") sms_code: String
     ): Response<Any>
+
+
+    @POST("api/user/checkcode")
+    @FormUrlEncoded
+    suspend fun checkcode(
+        @Field("user_token") user_token: String,
+        @Field("user_id") user_id: Int,
+        @Field("phone_number") phone_number: String,
+        @Field("sms_code") sms_code: String
+    ): PlainResp
 
     @POST("api/user/sendcode")
     @FormUrlEncoded
@@ -43,7 +55,12 @@ interface ApiService {
 
 
     @GET("/api/category/children/{id}")
-    suspend fun getPartnersForCategory(@Path(value = "id", encoded = true) id: Int): Response<List<PartnerCategoryDTO>>
+    suspend fun getPartnersForCategory(
+        @Path(
+            value = "id",
+            encoded = true
+        ) id: Int
+    ): Response<List<PartnerCategoryDTO>>
 
 
 //    @Headers("Content-Type:application/json", "Accept: application/json")

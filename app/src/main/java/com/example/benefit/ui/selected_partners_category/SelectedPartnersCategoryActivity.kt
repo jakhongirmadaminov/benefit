@@ -8,20 +8,16 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.example.benefit.R
 import com.example.benefit.remote.models.PartnerCategoryDTO
-import com.example.benefit.ui.base.BaseActionbarActivity
 import com.example.benefit.ui.base.BaseActivity
-import com.example.benefit.ui.loans.loans_chart.LoansChartActivity
-import com.example.benefit.ui.partners_map.PartnersMapActivity
 import com.example.benefit.ui.viewgroups.ItemPartnerCashback
-import com.example.benefit.ui.viewgroups.ItemPartnerCategory
-import com.example.benefit.util.ErrorWrapper
-import com.example.benefit.util.ResultWrapper
+import com.example.benefit.util.InProgress
+import com.example.benefit.util.ResultError
+import com.example.benefit.util.ResultSuccess
 import com.example.benefit.util.exhaustive
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_selected_partners_category.*
-import splitties.activities.start
 
 @AndroidEntryPoint
 class SelectedPartnersCategoryActivity : BaseActivity() {
@@ -59,14 +55,12 @@ class SelectedPartnersCategoryActivity : BaseActivity() {
             val response = it ?: return@Observer
 
             when (response) {
-                is ErrorWrapper.ResponseError -> {
+                is ResultError -> {
                 }
-                is ErrorWrapper.SystemError -> {
-                }
-                is ResultWrapper.Success -> {
+                is ResultSuccess -> {
                     loadData(response.value)
                 }
-                ResultWrapper.InProgress -> {
+                InProgress -> {
 
                 }
             }.exhaustive

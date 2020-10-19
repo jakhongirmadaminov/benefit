@@ -12,7 +12,7 @@ import splitties.experimental.ExperimentalSplittiesApi
 class AuthInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val requestBuilder = chain.request().newBuilder()
-        if (AppPrefs.token.isBlank()) throw Exception()
+        if (AppPrefs.token.isNullOrBlank()) throw Exception()
         requestBuilder.addHeader("Authorization", "Bearer ${AppPrefs.token}")
         return chain.proceed(requestBuilder.build())
     }

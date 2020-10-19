@@ -8,26 +8,17 @@ package com.example.benefit.util
 import splitties.experimental.ExperimentalSplittiesApi
 import splitties.preferences.Preferences
 
-@ExperimentalSplittiesApi object AppPrefs : Preferences("myPrefs") {
-    //    @ExperimentalSplittiesApi
-//    var isUserLoggedIn by boolPref(false)
+@ExperimentalSplittiesApi
+object AppPrefs : Preferences("myPrefs") {
+
     @ExperimentalSplittiesApi
-    var token by stringPref("")
+    var token by stringOrNullPref(null)
 
     @ExperimentalSplittiesApi
     var language by stringPref("uz")
 
     @ExperimentalSplittiesApi
-    var status by stringOrNullPref(null)
-
-    @ExperimentalSplittiesApi
-    var statusName by stringOrNullPref(null)
-
-    @ExperimentalSplittiesApi
-    var id by stringOrNullPref(null)
-
-    @ExperimentalSplittiesApi
-    var phoneNumber by stringPref("")
+    var phoneNumber by stringOrNullPref(null)
 
     @ExperimentalSplittiesApi
     var avatar by stringOrNullPref(null)
@@ -45,42 +36,6 @@ import splitties.preferences.Preferences
     var lastName by stringPref("")
 
     @ExperimentalSplittiesApi
-    var passport by stringOrNullPref(null)
-
-    @ExperimentalSplittiesApi
-    var passportRegistration by stringPref("")
-
-    @ExperimentalSplittiesApi
-    var education by stringPref("")
-
-    @ExperimentalSplittiesApi
-    var graduatedYear by stringOrNullPref(null)
-
-    @ExperimentalSplittiesApi
-    var workXP by stringOrNullPref()
-
-    @ExperimentalSplittiesApi
-    var biography by stringOrNullPref()
-
-    @ExperimentalSplittiesApi
     var email by stringOrNullPref(null)
 
-    @ExperimentalSplittiesApi
-    var region_id by intPref(0)
-
-    @ExperimentalSplittiesApi
-    var cityId by stringOrNullPref(null)
-
-    @ExperimentalSplittiesApi
-    var city_name by stringOrNullPref(null)
-
-    @ExperimentalSplittiesApi
-    var commission by stringOrNullPref(null)
-
-    @ExperimentalSplittiesApi
-    var balance by intPref(0)
-
-
-    @ExperimentalSplittiesApi
-    var createdAt by stringOrNullPref(null)
 }

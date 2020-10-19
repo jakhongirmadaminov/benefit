@@ -10,9 +10,7 @@ import com.example.benefit.remote.models.PartnerCategoryDTO
 import com.example.benefit.ui.partners_map.PartnersMapActivity
 import com.example.benefit.ui.viewgroups.ItemPartnerCategory
 import com.example.benefit.ui.viewgroups.ItemProgress
-import com.example.benefit.util.ErrorWrapper
-import com.example.benefit.util.ResultWrapper
-import com.example.benefit.util.exhaustive
+import com.example.benefit.util.*
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,7 +38,7 @@ class PartnersCategoryFragment : Fragment(R.layout.fragment_partners_category) {
             start<PartnersMapActivity> {
                 putParcelableArrayListExtra(
                     PartnersMapActivity.EXTRA_CATEGORIES,
-                    ArrayList((viewModel.partnersResp.value!! as ResultWrapper.Success).value)
+                    ArrayList((viewModel.partnersResp.value!! as ResultSuccess).value)
                 )
             }
         }
@@ -55,17 +53,14 @@ class PartnersCategoryFragment : Fragment(R.layout.fragment_partners_category) {
             val response = it ?: return@Observer
 
             when (response) {
-                is ErrorWrapper.ResponseError -> {
+                is ResultError -> {
                     ivMap.visibility = View.INVISIBLE
                 }
-                is ErrorWrapper.SystemError -> {
-                    ivMap.visibility = View.INVISIBLE
-                }
-                is ResultWrapper.Success -> {
+                is ResultSuccess -> {
                     ivMap.visibility = View.VISIBLE
                     loadData(response.value)
                 }
-                ResultWrapper.InProgress -> {
+                InProgress -> {
                     ivMap.visibility = View.INVISIBLE
                     adapter.clear()
                     adapter.add(ItemProgress())

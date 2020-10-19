@@ -12,7 +12,7 @@ class TransferToCardViewModel @ViewModelInject constructor(private val userRemot
 
 //    val loginResp = SingleLiveEvent<ResultWrapper<String>>()
 //    fun login(phoneNumber: String) {
-//        loginResp.value = ResultWrapper.InProgress
+//        loginResp.value = InProgress
 //        viewModelScope.launch(Dispatchers.IO) {
 //            val response = userRemoteImpl.login(phoneNumber)
 //            withContext(Dispatchers.Main) {

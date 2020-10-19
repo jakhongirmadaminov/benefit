@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.benefit.remote.UserRemoteImpl
+import com.example.benefit.util.InProgress
 import com.example.benefit.util.ResultWrapper
 import com.example.benefit.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +19,7 @@ class SettingsBSDViewModel @ViewModelInject constructor(private val userRemoteIm
 
     val loginResp = SingleLiveEvent<ResultWrapper<String>>()
     fun login(phoneNumber: String) {
-        loginResp.value = ResultWrapper.InProgress
+        loginResp.value = InProgress
         viewModelScope.launch(Dispatchers.IO) {
             val response = userRemoteImpl.login(phoneNumber)
             withContext(Dispatchers.Main) {

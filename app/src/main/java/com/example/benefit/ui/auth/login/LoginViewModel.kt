@@ -5,12 +5,10 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.benefit.remote.repository.UserRemote
-import com.example.benefit.util.ResultWrapper
-import com.example.benefit.util.SingleLiveEvent
+import com.example.benefit.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.File
 
 /**
  * Created by jahon on 03-Sep-20
@@ -18,21 +16,29 @@ import java.io.File
 class LoginViewModel @ViewModelInject constructor(private val userRemote: UserRemote) :
     ViewModel() {
 
-    val loginResp = SingleLiveEvent<ResultWrapper<String>>()
+    val loginResp = SingleLiveEvent<String>()
+    val errorMessage = SingleLiveEvent<String>()
+    val isLoading = SingleLiveEvent<Boolean>()
+
     fun login(phoneNumber: String) {
-        loginResp.value = ResultWrapper.InProgress
+        isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
             val response = userRemote.login(phoneNumber)
             withContext(Dispatchers.Main) {
-                loginResp.value = response
+                isLoading.value = false
+                when (response) {
+                    InProgress -> {}
+                    is ResultError -> {
+                        errorMessage.value = response.message
+                    }
+                    is ResultSuccess -> {
+                        loginResp.value = response.value
+                    }
+                }.exhaustive
             }
         }
     }
 
-    fun uploadAvatar(bitmap: Bitmap) {
-
-
-    }
 
 
 }

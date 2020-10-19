@@ -1,7 +1,10 @@
 package com.example.benefit.remote
 
+import com.example.benefit.remote.models.PlainResp
+import com.example.benefit.remote.models.RegPhoneResp
 import com.example.benefit.remote.repository.UserRemote
-import com.example.benefit.util.ErrorWrapper
+import com.example.benefit.util.ResultError
+import com.example.benefit.util.ResultSuccess
 import com.example.benefit.util.ResultWrapper
 import org.json.JSONObject
 import javax.inject.Inject
@@ -22,73 +25,84 @@ class UserRemoteImpl @Inject constructor(
     override suspend fun login(phoneNum: String): ResultWrapper<String> {
         return try {
             val response = apiService.login(phoneNum)
-            if (response.isSuccessful) ResultWrapper.Success("")
-            else ErrorWrapper.ResponseError(
-                response.code(),
+            if (response.isSuccessful) ResultSuccess("")
+            else ResultError(
+
                 JSONObject(
                     response.errorBody()!!
                         .string()
-                )["message"].toString()
+                )["message"].toString(),
+                response.code()
             )
         } catch (e: Exception) {
-            ErrorWrapper.SystemError(e)
+            ResultError(message = e.localizedMessage)
         }
     }
 
-    override suspend fun signup(phoneNum: String): ResultWrapper<String> {
+    override suspend fun signup(phoneNum: String): ResultWrapper<RegPhoneResp> {
         return try {
             val response = apiService.signup(phoneNum)
-            if (response.isSuccessful) ResultWrapper.Success("")
-            else ErrorWrapper.ResponseError(
-                response.code(),
-                JSONObject(
-                    response.errorBody()!!
-                        .string()
-                )["message"].toString()
-            )
+            if (response.msg == null) ResultSuccess(response)
+            else ResultError(message = response.msg)
         } catch (e: Exception) {
-            ErrorWrapper.SystemError(e)
+            ResultError(message = e.localizedMessage)
         }
     }
 
     override suspend fun loginCode(phoneNum: String, code: String): ResultWrapper<String> {
         return try {
             val response = apiService.loginsms(phoneNum, code)
-            if (response.isSuccessful) ResultWrapper.Success("")
-            else ErrorWrapper.ResponseError(
-                response.code(),
+            if (response.isSuccessful) ResultSuccess("")
+            else ResultError(
                 JSONObject(
                     response.errorBody()!!
                         .string()
-                )["message"].toString()
+                )["message"].toString(),
+                response.code()
             )
         } catch (e: Exception) {
-            ErrorWrapper.SystemError(e)
+            ResultError(message = e.localizedMessage)
         }
     }
 
     override suspend fun resendCode(phoneNum: String): ResultWrapper<String> {
         return try {
             val response = apiService.sendcode(phoneNum)
-            if (response.isSuccessful) ResultWrapper.Success("")
-            else ErrorWrapper.ResponseError(
-                response.code(),
-                JSONObject(response.errorBody()!!.string())["message"].toString()
+            if (response.isSuccessful) ResultSuccess("")
+            else ResultError(
+                JSONObject(response.errorBody()!!.string())["message"].toString(),
+                response.code()
             )
         } catch (e: Exception) {
-            ErrorWrapper.SystemError(e)
+            ResultError(message = e.localizedMessage)
         }
     }
+
+    override suspend fun checkcode(
+        user_token: String,
+        user_id: Int,
+        phone_number: String,
+        sms_code: String
+    ): ResultWrapper<PlainResp> {
+        return try {
+            val response = apiService.checkcode(user_token, user_id, phone_number, sms_code)
+            if (response.message == null) ResultSuccess(response)
+            else ResultError(message = response.message)
+        } catch (e: Exception) {
+            ResultError(message = e.localizedMessage)
+        }
+    }
+
 
 //    override suspend fun confirmUser(user: UserCredentials): ResultWrapper<NUser> {
 //        return try {
 //            val response = apiService.smsConfirm(user)
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -96,11 +110,11 @@ class UserRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.saveUserCity(mapOf("city_id" to cityId.toString()))
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -130,11 +144,11 @@ class UserRemoteImpl @Inject constructor(
 //
 //            val response = authorizedApiService.saveUser(map)
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -143,11 +157,11 @@ class UserRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.updateProfileInfo(/*"Bearer "+token,*/ userInfo)
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -156,11 +170,11 @@ class UserRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.getProfileInfo()
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -168,11 +182,11 @@ class UserRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.deleteDoc(docId)
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -180,11 +194,11 @@ class UserRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.getAllDocs()
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -192,11 +206,11 @@ class UserRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.getMySchedule()
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -204,11 +218,11 @@ class UserRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.getMyServicePrices()
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -216,11 +230,11 @@ class UserRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.getMyVisitAddresses()
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -228,11 +242,11 @@ class UserRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.getMyVisitPrices()
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -240,11 +254,11 @@ class UserRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.updateVisitPrices(body)
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -252,11 +266,11 @@ class UserRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.toggleStatus()
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -274,11 +288,11 @@ class UserRemoteImpl @Inject constructor(
 //            val response =
 //                authorizedApiService.updateSchedule(/*"Bearer "+token,*/   body)
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -286,11 +300,11 @@ class UserRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.getMyReviews()
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -308,11 +322,11 @@ class UserRemoteImpl @Inject constructor(
 //
 //            val response = authorizedApiService.updateUserAvatar(map)
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -320,11 +334,11 @@ class UserRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.addEducation(educationBody)
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -351,11 +365,11 @@ class UserRemoteImpl @Inject constructor(
 //
 //            val response = authorizedApiService.addPassport(map)
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -375,11 +389,11 @@ class UserRemoteImpl @Inject constructor(
 //
 //            val response = authorizedApiService.addDocFiles(map)
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -387,11 +401,11 @@ class UserRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.addServicePrices(body)
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 //
@@ -399,11 +413,11 @@ class UserRemoteImpl @Inject constructor(
 //        return try {
 //            val response = authorizedApiService.updateMyAreas(areas)
 //            if (response.isSuccessful) ResultWrapper.Success(response.body()!!)
-//            else ErrorWrapper.ResponseError(response.code(),
+//            else ResultError(response.code(),
 //                                            JSONObject(response.errorBody()!!
 //                                                           .string())["message"].toString())
 //        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
+//            ResultError(message = e.localizedMessage)
 //        }
 //    }
 
