@@ -69,9 +69,6 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity() {
                 }
                 is ResultSuccess -> {
                     loadData(response.value)
-
-                }
-                InProgress -> {
                 }
             }.exhaustive
 

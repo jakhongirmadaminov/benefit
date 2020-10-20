@@ -15,6 +15,12 @@ object AppPrefs : Preferences("myPrefs") {
     var token by stringOrNullPref(null)
 
     @ExperimentalSplittiesApi
+    var userToken by stringOrNullPref(null)
+
+    @ExperimentalSplittiesApi
+    var userId by intPref(0)
+
+    @ExperimentalSplittiesApi
     var language by stringPref("uz")
 
     @ExperimentalSplittiesApi

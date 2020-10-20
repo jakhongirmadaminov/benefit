@@ -35,8 +35,6 @@ class RegistrationViewModel @ViewModelInject constructor(private val userRemoteI
             val response = userRemoteImpl.signup(phoneNumber)
             withContext(Dispatchers.Main) {
                 when (response) {
-                    InProgress -> {
-                    }
                     is ResultError -> {
                         errorMessage.value = response.message
                         isLoading.value = false
@@ -56,8 +54,6 @@ class RegistrationViewModel @ViewModelInject constructor(private val userRemoteI
             val response = userRemoteImpl.resendCode(phone)
             withContext(Dispatchers.Main) {
                 when (response) {
-                    InProgress -> {
-                    }
                     is ResultError -> {
                         errorMessage.value = response.message
                         isLoading.value = false
@@ -83,8 +79,6 @@ class RegistrationViewModel @ViewModelInject constructor(private val userRemoteI
             )
             withContext(Dispatchers.Main) {
                 when (response) {
-                    InProgress -> {
-                    }
                     is ResultError -> {
                         errorMessage.value = response.message
                         isLoading.value = false

@@ -60,12 +60,12 @@ class PartnersCategoryFragment : Fragment(R.layout.fragment_partners_category) {
                     ivMap.visibility = View.VISIBLE
                     loadData(response.value)
                 }
-                InProgress -> {
-                    ivMap.visibility = View.INVISIBLE
-                    adapter.clear()
-                    adapter.add(ItemProgress())
-                    adapter.notifyDataSetChanged()
-                }
+//                InProgress -> {
+//                    ivMap.visibility = View.INVISIBLE
+//                    adapter.clear()
+//                    adapter.add(ItemProgress())
+//                    adapter.notifyDataSetChanged()
+//                }
             }.exhaustive
 
 

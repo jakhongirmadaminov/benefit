@@ -67,9 +67,7 @@ class PaymentsFragment : Fragment(R.layout.fragment_payments) {
     private fun attachListeners() {
 
         clMakeDepo.setOnClickListener {
-            val bsd = FillCardBSD()
-//            bsd.navigateToCardTransfer()
-            bsd.show(childFragmentManager, "")
+         FillCardBSD() .show(childFragmentManager, "")
         }
 
         clTransferToCard.setOnClickListener {

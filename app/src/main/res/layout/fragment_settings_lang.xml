@@ -76,10 +76,13 @@
 
 
         <LinearLayout
+            android:id="@+id/llRussian"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:clickable="true"
-            android:id="@+id/llRussian"
+
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:focusable="true"
             android:foreground="?android:selectableItemBackground"
             android:gravity="center_vertical"
@@ -124,12 +127,13 @@
 
         <LinearLayout
             android:id="@+id/llUzbek"
-
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:selectableItemBackground"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:clickable="true"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackground"
             android:gravity="center_vertical"
             android:paddingLeft="26dp"
             android:paddingRight="26dp">
@@ -171,12 +175,15 @@
 
 
         <LinearLayout
+            android:id="@+id/llEnglish"
             android:layout_width="match_parent"
-android:id="@+id/llEnglish"
+            android:layout_height="50dp"
             android:clickable="true"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+
             android:focusable="true"
             android:foreground="?android:selectableItemBackground"
-            android:layout_height="50dp"
             android:gravity="center_vertical"
             android:paddingLeft="26dp"
             android:paddingRight="26dp">

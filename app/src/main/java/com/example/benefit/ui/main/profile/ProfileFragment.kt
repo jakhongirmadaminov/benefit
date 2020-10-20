@@ -7,10 +7,12 @@ import androidx.fragment.app.viewModels
 import com.example.benefit.R
 import com.example.benefit.ui.auth.AuthActivity
 import com.example.benefit.ui.main.profile.settings_bsd.SettingsBSD
+import com.example.benefit.util.AppPrefs
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.item_news_and_promos.*
 import splitties.fragments.start
+import splitties.preferences.edit
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
@@ -31,6 +33,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
 
         ivLogOut.setOnClickListener {
+            AppPrefs.edit {
+                token = null
+                userToken = null
+            }
             start<AuthActivity> {}
             requireActivity().finish()
         }

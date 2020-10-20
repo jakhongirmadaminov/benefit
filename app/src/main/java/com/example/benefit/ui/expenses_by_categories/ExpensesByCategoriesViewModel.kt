@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.benefit.remote.PartnersRemoteImpl
 import com.example.benefit.remote.models.PartnerCategoryDTO
-import com.example.benefit.util.InProgress
 import com.example.benefit.util.ResultWrapper
 import com.example.benefit.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +18,6 @@ class ExpensesByCategoriesViewModel @ViewModelInject constructor(val partnersRem
 
 
     fun getPartnerCategories() {
-        partnerCategoriesResp.value = InProgress
         viewModelScope.launch(Dispatchers.IO) {
             val response = partnersRemoteImpl.getPartnersCategory()
             withContext(Dispatchers.Main) {

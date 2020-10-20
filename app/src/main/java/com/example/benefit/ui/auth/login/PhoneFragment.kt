@@ -6,7 +6,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
@@ -20,7 +20,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class PhoneFragment @Inject constructor() : Fragment(R.layout.fragment_phone) {
 
-    private val viewModel: LoginViewModel by viewModels()
+    private val viewModel: LoginViewModel by activityViewModels()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -76,7 +76,7 @@ class PhoneFragment @Inject constructor() : Fragment(R.layout.fragment_phone) {
         }
 
         btnGetCode.setOnClickListener {
-            viewModel.login("998" + edtPhone.text.toString())
+            viewModel.login(edtPhone.text.toString())
 
         }
 

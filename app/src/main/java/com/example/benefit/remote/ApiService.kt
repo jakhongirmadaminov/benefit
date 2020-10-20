@@ -1,9 +1,7 @@
 package com.example.benefit.remote
 
-import com.example.benefit.remote.models.PartnerCategoryDTO
-import com.example.benefit.remote.models.PartnerDTO
-import com.example.benefit.remote.models.PlainResp
-import com.example.benefit.remote.models.RegPhoneResp
+import com.example.benefit.remote.models.*
+import com.example.benefit.util.AppPrefs
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -15,23 +13,29 @@ interface ApiService {
 
     @POST("api/user/loginnumber")
     @FormUrlEncoded
-    suspend fun login(@Field("phone_number") phone_number: String): Response<Any>
+    suspend fun login(@Field("phone_number") phone_number: String): RespLogin
 
     @POST("api/user/signup")
     @FormUrlEncoded
     suspend fun signup(
         @Field("phone") phone: String,
-        @Field("created") created: String = "232323",
+        @Field("created") created: String = "1601573398",
         @Field("ip") ip: String = "127.0.0.1"
     ): RegPhoneResp
 
     @POST("api/user/loginsms")
-    @FormUrlEncoded
-    suspend fun loginsms(
-        @Field("phone_number") phone_number: String,
-        @Field("sms_code") sms_code: String
-    ): Response<Any>
+    suspend fun loginsms(@Body body: ReqLoginSms): RespLoginSms
 
+    @POST("api/user/logincode")
+    suspend fun logincode(@Body body: ReqLoginCode): RespLoginCode
+
+    @POST("api/ordercard/one")
+    @FormUrlEncoded
+    suspend fun termsAccept(
+        @Field("is_agree") is_agree: Boolean = true,
+        @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
+        @Field("user_id") user_id: Int = AppPrefs.userId,
+    ): RespAcceptTerms
 
     @POST("api/user/checkcode")
     @FormUrlEncoded
@@ -45,22 +49,6 @@ interface ApiService {
     @POST("api/user/sendcode")
     @FormUrlEncoded
     suspend fun sendcode(@Field("phone_number") phone_number: String): Response<Any>
-
-    @GET("api/partners")
-    suspend fun getPartners(): Response<List<PartnerDTO>>
-
-
-    @GET("/api/category")
-    suspend fun getPartnersCategory(): Response<List<PartnerCategoryDTO>>
-
-
-    @GET("/api/category/children/{id}")
-    suspend fun getPartnersForCategory(
-        @Path(
-            value = "id",
-            encoded = true
-        ) id: Int
-    ): Response<List<PartnerCategoryDTO>>
 
 
 //    @Headers("Content-Type:application/json", "Accept: application/json")

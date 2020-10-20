@@ -85,10 +85,10 @@
                 android:layout_marginLeft="26dp"
                 android:layout_marginTop="15dp"
 
+                android:layout_marginRight="26dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:selectableItemBackground"
-                android:layout_marginRight="26dp"
                 app:cardCornerRadius="10dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -299,7 +299,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:orientation="horizontal"
+            android:paddingLeft="21dp"
+            android:paddingRight="21dp"
+            tools:listitem="@layout/item_news"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <TextView
@@ -317,9 +322,14 @@
             android:id="@+id/rvPayments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="16dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_paynet_category" />
 
         <TextView
             android:layout_width="wrap_content"

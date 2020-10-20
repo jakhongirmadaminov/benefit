@@ -5,13 +5,13 @@ sealed class ResultWrapper<out V> {
         return when (this) {
             is ResultSuccess<*> -> "Success [data = ${this.value}]"
             is Error -> "Error [exception=${this.localizedMessage}]"
-            InProgress -> "Loading"
+//            InProgress -> "Loading"
             else -> ""
         }
     }
 }
 
-object InProgress : ResultWrapper<Nothing>()
+//object InProgress : ResultWrapper<Nothing>()
 data class ResultError(val message: String? = null, val code: Int? = null) :
     ResultWrapper<Nothing>()
 

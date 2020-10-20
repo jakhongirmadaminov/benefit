@@ -1,18 +1,31 @@
 package com.example.benefit.remote.repository
 
-import com.example.benefit.remote.models.PlainResp
-import com.example.benefit.remote.models.RegPhoneResp
+import android.graphics.Bitmap
+import com.example.benefit.remote.models.*
 import com.example.benefit.util.ResultWrapper
 
 interface UserRemote {
 
-    suspend fun login(phoneNum: String): ResultWrapper<String>
+    suspend fun login(phoneNum: String): ResultWrapper<RespLogin>
     suspend fun signup(phoneNum: String): ResultWrapper<RegPhoneResp>
-    suspend fun loginCode(phoneNum: String, code: String): ResultWrapper<String>
+    suspend fun loginSms(phoneNum: String, code: String): ResultWrapper<RespLoginSms>
+    suspend fun loginCode(
+        user_id: Int,
+        user_token: String,
+        phoneNum: String,
+        device_code: String
+    ): ResultWrapper<RespLoginCode>
+
     suspend fun resendCode(phoneNum: String): ResultWrapper<String>
     suspend fun checkcode(
         user_token: String, user_id: Int, phone_number: String, sms_code: String
     ): ResultWrapper<PlainResp>
 
+    suspend fun paymentCategories(): ResultWrapper<List<PaynetCategory>>
+
+    suspend fun getNews(page: Int, perPage: Int = 10): ResultWrapper<List<NewsDTO>>
+
+    suspend fun termsAccept(): ResultWrapper<RespAcceptTerms>
+    suspend fun addPassportPhoto(order_card_id: Int, image: Bitmap): ResultWrapper<RespAcceptTerms>
 
 }

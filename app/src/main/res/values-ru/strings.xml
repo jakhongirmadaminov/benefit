@@ -200,5 +200,6 @@
     <string name="name_of_game">Название игры</string>
     <string name="add_players">Добавить игроков</string>
     <string name="place_randomly">Расположить рандомно</string>
+    <string name="password">Пароль</string>
 
 </resources>

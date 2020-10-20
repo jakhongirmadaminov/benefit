@@ -10,7 +10,6 @@ import com.example.benefit.R
 import com.example.benefit.remote.models.PartnerCategoryDTO
 import com.example.benefit.ui.base.BaseActivity
 import com.example.benefit.ui.viewgroups.ItemPartnerCashback
-import com.example.benefit.util.InProgress
 import com.example.benefit.util.ResultError
 import com.example.benefit.util.ResultSuccess
 import com.example.benefit.util.exhaustive
@@ -59,9 +58,6 @@ class SelectedPartnersCategoryActivity : BaseActivity() {
                 }
                 is ResultSuccess -> {
                     loadData(response.value)
-                }
-                InProgress -> {
-
                 }
             }.exhaustive
 

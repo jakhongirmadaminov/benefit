@@ -23,7 +23,7 @@ class PartnersRemoteImpl @Inject constructor(
 
     override suspend fun getPartners(): ResultWrapper<List<PartnerDTO>> {
         return try {
-            val response = apiService.getPartners()
+            val response = authorizedApiService.getPartners()
             if (response.isSuccessful) ResultSuccess(response.body()!!)
             else ResultError(
                 JSONObject(response.errorBody()!!.string())["message"].toString(),
@@ -36,7 +36,7 @@ class PartnersRemoteImpl @Inject constructor(
 
     override suspend fun getPartnersCategory(): ResultWrapper<List<PartnerCategoryDTO>> {
         return try {
-            val response = apiService.getPartnersCategory()
+            val response = authorizedApiService.getPartnersCategory()
             if (response.isSuccessful) ResultSuccess(response.body()!!)
             else ResultError(
                 JSONObject(response.errorBody()!!.string())["message"].toString(),
@@ -49,7 +49,7 @@ class PartnersRemoteImpl @Inject constructor(
 
     override suspend fun getPartnersForCategory(id: Int): ResultWrapper<List<PartnerCategoryDTO>> {
         return try {
-            val response = apiService.getPartnersForCategory(id)
+            val response = authorizedApiService.getPartnersForCategory(id)
             if (response.isSuccessful) ResultSuccess(response.body()!!)
             else ResultError(
                 JSONObject(response.errorBody()!!.string())["message"].toString(),

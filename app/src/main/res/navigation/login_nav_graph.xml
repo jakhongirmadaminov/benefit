@@ -21,9 +21,24 @@
 
     <fragment
         android:id="@+id/codeFragment"
-        android:name="com.example.benefit.ui.auth.login.CodeFragment"
+        android:name="com.example.benefit.ui.auth.login.SmsCodeFragment"
         android:label=""
-        tools:layout="@layout/fragment_code" />
+        tools:layout="@layout/fragment_code" >
+        <action
+            android:id="@+id/action_codeFragment_to_deviceCodeFragment"
+            app:destination="@id/deviceCodeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/deviceCodeFragment"
+        android:name="com.example.benefit.ui.auth.login.DeviceCodeFragment"
+        android:label=""
+        tools:layout="@layout/fragment_device_code" />
 
 
 </navigation>

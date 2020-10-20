@@ -1,13 +1,19 @@
 package com.example.benefit.remote
 
-import com.example.benefit.remote.models.PlainResp
-import com.example.benefit.remote.models.RegPhoneResp
+import android.graphics.Bitmap
+import com.example.benefit.remote.models.*
 import com.example.benefit.remote.repository.UserRemote
 import com.example.benefit.util.ResultError
 import com.example.benefit.util.ResultSuccess
 import com.example.benefit.util.ResultWrapper
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
+import retrofit2.HttpException
+import splitties.experimental.ExperimentalSplittiesApi
+import java.io.ByteArrayOutputStream
 import javax.inject.Inject
+
 
 /**
  * Remote implementation for retrieving Bufferoo instances. This class implements the
@@ -15,25 +21,17 @@ import javax.inject.Inject
  * operations in which data store implementation layers can carry out.
  */
 
+@ExperimentalSplittiesApi
 class UserRemoteImpl @Inject constructor(
     private val apiService: ApiService,
     private val authorizedApiService: AuthorizedApiService
-) :
-    UserRemote {
+) : UserRemote {
 
 
-    override suspend fun login(phoneNum: String): ResultWrapper<String> {
+    override suspend fun login(phoneNum: String): ResultWrapper<RespLogin> {
         return try {
             val response = apiService.login(phoneNum)
-            if (response.isSuccessful) ResultSuccess("")
-            else ResultError(
-
-                JSONObject(
-                    response.errorBody()!!
-                        .string()
-                )["message"].toString(),
-                response.code()
-            )
+            ResultSuccess(response)
         } catch (e: Exception) {
             ResultError(message = e.localizedMessage)
         }
@@ -44,22 +42,37 @@ class UserRemoteImpl @Inject constructor(
             val response = apiService.signup(phoneNum)
             if (response.msg == null) ResultSuccess(response)
             else ResultError(message = response.msg)
+        } catch (e: HttpException) {
+            ResultError(
+                JSONObject(e.response()!!.errorBody()!!.string())["message"].toString(),
+                e.code()
+            )
         } catch (e: Exception) {
             ResultError(message = e.localizedMessage)
         }
     }
 
-    override suspend fun loginCode(phoneNum: String, code: String): ResultWrapper<String> {
+    override suspend fun loginSms(phoneNum: String, code: String): ResultWrapper<RespLoginSms> {
         return try {
-            val response = apiService.loginsms(phoneNum, code)
-            if (response.isSuccessful) ResultSuccess("")
-            else ResultError(
-                JSONObject(
-                    response.errorBody()!!
-                        .string()
-                )["message"].toString(),
-                response.code()
-            )
+            val response = apiService.loginsms(ReqLoginSms(phoneNum, code))
+            if (response.msg == null) ResultSuccess(response)
+            else ResultError(message = response.msg)
+        } catch (e: Exception) {
+            ResultError(message = e.localizedMessage)
+        }
+    }
+
+    override suspend fun loginCode(
+        user_id: Int,
+        user_token: String,
+        phoneNum: String,
+        device_code: String
+    ): ResultWrapper<RespLoginCode> {
+        return try {
+            val response =
+                apiService.logincode(ReqLoginCode(user_id, user_token, phoneNum, device_code))
+            if (response.msg == null) ResultSuccess(response)
+            else ResultError(message = response.msg)
         } catch (e: Exception) {
             ResultError(message = e.localizedMessage)
         }
@@ -91,6 +104,53 @@ class UserRemoteImpl @Inject constructor(
         } catch (e: Exception) {
             ResultError(message = e.localizedMessage)
         }
+    }
+
+    override suspend fun paymentCategories(): ResultWrapper<List<PaynetCategory>> {
+        return try {
+            val response = authorizedApiService.paymentCategories()
+            ResultSuccess(response)
+        } catch (e: Exception) {
+            ResultError(message = e.localizedMessage)
+        }
+    }
+
+    override suspend fun getNews(page: Int, perPage: Int): ResultWrapper<List<NewsDTO>> {
+        return try {
+            val response = authorizedApiService.getNews(page, perPage)
+            ResultSuccess(response)
+        } catch (e: Exception) {
+            ResultError(message = e.localizedMessage)
+        }
+    }
+
+    override suspend fun termsAccept() = getFormattedResponse { authorizedApiService.termsAccept() }
+    override suspend fun addPassportPhoto(
+        order_card_id: Int,
+        bitmap: Bitmap
+    ): ResultWrapper<RespAcceptTerms> {
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream)
+        val image = stream.toByteArray().toRequestBody()
+
+        val body = MultipartBody.Part.createFormData("image", "image.jpg", image)
+
+        return getFormattedResponse { authorizedApiService.addPassportPhoto(order_card_id, body) }
+    }
+
+    private suspend fun <T> getFormattedResponse(action: suspend () -> T): ResultWrapper<T> {
+        return try {
+            ResultSuccess(action())
+//            else ResultError(message = action.result)
+        } catch (e: HttpException) {
+            ResultError(
+                JSONObject(e.response()!!.errorBody()!!.string())["message"].toString(),
+                e.code()
+            )
+        } catch (e: Exception) {
+            ResultError(message = e.localizedMessage)
+        }
+
     }
 
 

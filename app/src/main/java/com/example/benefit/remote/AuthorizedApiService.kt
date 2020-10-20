@@ -1,13 +1,27 @@
 package com.example.benefit.remote
 
+import com.example.benefit.remote.models.*
+import com.example.benefit.util.AppPrefs
+import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
+import splitties.experimental.ExperimentalSplittiesApi
 
 /**
  * Defines the abstract methods used for interacting with the Bufferoo API
  */
+@ExperimentalSplittiesApi
 interface AuthorizedApiService {
 
+
+    @GET("api/paynet/categories")
+    suspend fun paymentCategories(): List<PaynetCategory>
+
+    @GET("api/news")
+    suspend fun getNews(
+        @Query("page", encoded = true) page: Int,
+        @Query("per-page", encoded = true) per_page: Int
+    ): List<NewsDTO>
 
     @POST("api/user/edit")
     @Multipart
@@ -17,9 +31,43 @@ interface AuthorizedApiService {
     @FormUrlEncoded
     suspend fun setPassword(@Field("phone_number") phone_number: String): Response<Any>
 
+    @POST("api/ordercard/one")
+    @FormUrlEncoded
+    suspend fun termsAccept(
+        @Field("is_agree") is_agree: Boolean = true,
+        @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
+        @Field("user_id") user_id: Int = AppPrefs.userId,
+    ): RespAcceptTerms
+
+    @POST("api/ordercard/two")
+    @Multipart
+    suspend fun addPassportPhoto(
+        @Part("order_card_id") order_card_id: Int,
+        @Part image: MultipartBody.Part,
+        @Part("user_id") user_id: Int = AppPrefs.userId,
+        @Part("user_auth") user_auth: String = AppPrefs.userToken!!
+    ): RespAcceptTerms
+
     @Multipart
     @POST("api/user/loginnumber")
     suspend fun uploadAvatar(@Part("phone_number") phone_number: String): Response<Any>
+
+
+    @GET("api/partners")
+    suspend fun getPartners(): Response<List<PartnerDTO>>
+
+
+    @GET("/api/category")
+    suspend fun getPartnersCategory(): Response<List<PartnerCategoryDTO>>
+
+
+    @GET("/api/category/children/{id}")
+    suspend fun getPartnersForCategory(
+        @Path(
+            value = "id",
+            encoded = true
+        ) id: Int
+    ): Response<List<PartnerCategoryDTO>>
 
 //    @Headers("Content-Type:application/json", "Accept: application/json")
 //    @POST("v1/doctor/profile/city")
