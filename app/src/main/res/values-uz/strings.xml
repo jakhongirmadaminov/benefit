@@ -201,5 +201,7 @@
     <string name="add_players">Добавить игроков</string>
     <string name="place_randomly">Расположить рандомно</string>
     <string name="password">Пароль</string>
+    <string name="card_types_subtitle">Оплачивайте покупки данной картой у наших партнеров и получайте кэшбэк до 25% на свой виртуальный счет в бенетонах</string>
+    <string name="order">Заказать</string>
 
 </resources>

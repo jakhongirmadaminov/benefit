@@ -127,15 +127,55 @@ class UserRemoteImpl @Inject constructor(
     override suspend fun termsAccept() = getFormattedResponse { authorizedApiService.termsAccept() }
     override suspend fun addPassportPhoto(
         order_card_id: Int,
-        bitmap: Bitmap
+        image: Bitmap
     ): ResultWrapper<RespAcceptTerms> {
         val stream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream)
-        val image = stream.toByteArray().toRequestBody()
-
-        val body = MultipartBody.Part.createFormData("image", "image.jpg", image)
-
+        image.compress(Bitmap.CompressFormat.JPEG, 90, stream)
+        val file = stream.toByteArray().toRequestBody()
+        val body = MultipartBody.Part.createFormData("image", "image.jpg", file)
         return getFormattedResponse { authorizedApiService.addPassportPhoto(order_card_id, body) }
+    }
+
+    override suspend fun addPhotoWithPassport(
+        order_card_id: Int,
+        image: Bitmap
+    ): ResultWrapper<RespAcceptTerms> {
+        val stream = ByteArrayOutputStream()
+        image.compress(Bitmap.CompressFormat.JPEG, 90, stream)
+        val file = stream.toByteArray().toRequestBody()
+        val body = MultipartBody.Part.createFormData("image", "image.jpg", file)
+        return getFormattedResponse { authorizedApiService.addPhotoWithPassport(order_card_id, body) }
+    }
+
+    override suspend fun addWorkProof(
+        order_card_id: Int,
+        image: Bitmap
+    ): ResultWrapper<RespAcceptTerms> {
+        val stream = ByteArrayOutputStream()
+        image.compress(Bitmap.CompressFormat.JPEG, 90, stream)
+        val file = stream.toByteArray().toRequestBody()
+        val body = MultipartBody.Part.createFormData("image", "image.jpg", file)
+        return getFormattedResponse { authorizedApiService.addWorkProof(order_card_id, body) }
+    }
+
+    override suspend fun addOrderCardAddress(
+        order_card_id: Int,
+        address: String
+    ): ResultWrapper<RespAcceptTerms> {
+        return getFormattedResponse { authorizedApiService.orderCardAddress(order_card_id, address) }
+    }
+
+    override suspend fun addLimitSum(
+        order_card_id: Int,
+        sum: String
+    ): ResultWrapper<RespAcceptTerms> {
+        return getFormattedResponse { authorizedApiService.orderCardLimit(order_card_id, sum) }
+    }
+
+    override suspend fun completeAddCard(
+        order_card_id: Int
+    ): ResultWrapper<RespAcceptTerms> {
+        return getFormattedResponse { authorizedApiService.completeOrderCard(order_card_id) }
     }
 
     private suspend fun <T> getFormattedResponse(action: suspend () -> T): ResultWrapper<T> {

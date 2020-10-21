@@ -7,8 +7,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.ui.auth.login.LoginViewModel
-import com.example.benefit.ui.auth.order_card.OrderCardActivity
 import com.example.benefit.ui.main.MainActivity
+import com.example.benefit.ui.main.home.bsd_add_card.AddCardBSD
+import com.example.benefit.ui.select_card_type.SelectCardTypeActivity
 import com.redmadrobot.inputmask.MaskedTextChangedListener
 import com.redmadrobot.inputmask.MaskedTextChangedListener.Companion.installOn
 import dagger.hilt.android.AndroidEntryPoint
@@ -70,11 +71,13 @@ class RegCardActivationFragment @Inject constructor() :
 //
         tvNext.setOnClickListener {
 //            loginViewModel.login("998" + edtPhone.text.toString())
-            start<MainActivity> {}
-            (parentFragment as RegistrationBSD).dismiss()
+            if ((parentFragment is RegistrationBSD)) {
+                (parentFragment as RegistrationBSD).dismiss()
+                start<MainActivity> {}
+            } else if ((parentFragment is AddCardBSD)) (parentFragment as AddCardBSD).dismiss()
         }
         btnOrderCard.setOnClickListener {
-            start<OrderCardActivity> {}
+            start<SelectCardTypeActivity> {}
         }
         btnActivate.setOnClickListener {
             findNavController().navigate(R.id.action_regCardActivationFragment_to_regEndFragment)

@@ -5,16 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.viewpager.widget.PagerAdapter
 import com.example.benefit.R
 import com.example.benefit.remote.models.EPaymentType
 import com.example.benefit.remote.models.PaynetCategory
-import com.example.benefit.ui.auth.order_card.OrderCardActivity
 import com.example.benefit.ui.branches_atms.BranchesAtmsActivity
 import com.example.benefit.ui.expenses_by_categories.ExpensesByCategoriesActivity
 import com.example.benefit.ui.loans.LoanActivity
 import com.example.benefit.ui.main.fill_card.FillCardBSD
+import com.example.benefit.ui.main.home.bsd_add_card.AddCardBSD
 import com.example.benefit.ui.main.home.card_options.CardOptionsBSD
 import com.example.benefit.ui.main.transfer_to_card.TransferToCardBSD
 import com.example.benefit.ui.transactions_history.TransactionsHistoryActivity
@@ -48,20 +47,20 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun subscribeObservers() {
 
-        viewModel.isLoadingPaynetCategories.observe(viewLifecycleOwner,  {
+        viewModel.isLoadingPaynetCategories.observe(viewLifecycleOwner, {
             when (it ?: return@observe) {
                 true -> paynetCatgAdapter.add(ItemLoading())
                 else -> paynetCatgAdapter.clear()
             }
         })
-        viewModel.isLoadingNews.observe(viewLifecycleOwner,  {
+        viewModel.isLoadingNews.observe(viewLifecycleOwner, {
             when (it ?: return@observe) {
                 true -> newsAdapter.add(ItemLoading())
                 else -> newsAdapter.clear()
             }
         })
 
-        viewModel.errorMessage.observe(viewLifecycleOwner,  {
+        viewModel.errorMessage.observe(viewLifecycleOwner, {
 //            lblYoullReceiveCode.text = it ?: return@observe
 //            lblYoullReceiveCode.setTextColor(Color.RED)
         })
@@ -96,7 +95,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         })
 
-        viewModel.newsResp.observe(viewLifecycleOwner,  {
+        viewModel.newsResp.observe(viewLifecycleOwner, {
             it ?: return@observe
             it.forEach { news ->
                 newsAdapter.add(ItemNews(news))
@@ -161,7 +160,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         cardsPager.addView(cardView)
         val cardView2 = layoutInflater.inflate(R.layout.item_add_card, null)
         cardView2.cardParent.setOnClickListener {
-            start<OrderCardActivity>()
+            AddCardBSD().show(childFragmentManager, "")
+//            start<OrderCardActivity>()
         }
         cardsPager.addView(cardView2)
 

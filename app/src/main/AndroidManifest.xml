@@ -47,11 +47,16 @@
             android:name=".ui.loans.loans_chart.LoansChartActivity"
             android:theme="@style/NoActionBar">
 
+
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
+
+        <activity
+            android:name=".ui.select_card_type.SelectCardTypeActivity"
+            android:theme="@style/NoActionBar"/>
         <activity
             android:name=".ui.expenses_by_categories.ExpensesByCategoriesActivity"
             android:theme="@style/NoActionBar">
@@ -104,7 +109,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.auth.order_card.OrderCardActivity"
+            android:name=".ui.order_card.OrderCardActivity"
             android:label="@string/app_name"
             android:theme="@style/NoActionBar">
 

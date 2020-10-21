@@ -1,4 +1,4 @@
-package com.example.benefit.ui.auth.order_card
+package com.example.benefit.ui.select_card_type
 
 import android.graphics.Bitmap
 import androidx.hilt.lifecycle.ViewModelInject
@@ -19,7 +19,7 @@ import kotlinx.coroutines.withContext
 /**
  * Created by jahon on 06-Sep-20
  */
-class OrderCardViewModel @ViewModelInject constructor(private val userRemote: UserRemote) :
+class SelectCardTypeViewModel @ViewModelInject constructor(private val userRemote: UserRemote) :
     ViewModel() {
 
     var passportBitmap: Bitmap? = null

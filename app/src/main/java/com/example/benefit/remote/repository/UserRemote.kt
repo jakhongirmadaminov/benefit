@@ -27,5 +27,10 @@ interface UserRemote {
 
     suspend fun termsAccept(): ResultWrapper<RespAcceptTerms>
     suspend fun addPassportPhoto(order_card_id: Int, image: Bitmap): ResultWrapper<RespAcceptTerms>
+    suspend fun addPhotoWithPassport(order_card_id: Int, image: Bitmap): ResultWrapper<RespAcceptTerms>
+    suspend fun addWorkProof(order_card_id: Int, image: Bitmap): ResultWrapper<RespAcceptTerms>
+    suspend fun addOrderCardAddress(order_card_id: Int, address: String): ResultWrapper<RespAcceptTerms>
+    suspend fun addLimitSum(order_card_id: Int, sum: String): ResultWrapper<RespAcceptTerms>
+    suspend fun completeAddCard(order_card_id: Int): ResultWrapper<RespAcceptTerms>
 
 }

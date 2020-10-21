@@ -36,7 +36,7 @@ interface AuthorizedApiService {
     suspend fun termsAccept(
         @Field("is_agree") is_agree: Boolean = true,
         @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
-        @Field("user_id") user_id: Int = AppPrefs.userId,
+        @Field("user_id") user_id: Int = AppPrefs.userId
     ): RespAcceptTerms
 
     @POST("api/ordercard/two")
@@ -46,6 +46,52 @@ interface AuthorizedApiService {
         @Part image: MultipartBody.Part,
         @Part("user_id") user_id: Int = AppPrefs.userId,
         @Part("user_auth") user_auth: String = AppPrefs.userToken!!
+    ): RespAcceptTerms
+
+    @POST("api/ordercard/three")
+    @Multipart
+    suspend fun addPhotoWithPassport(
+        @Part("order_card_id") order_card_id: Int,
+        @Part image: MultipartBody.Part,
+        @Part("user_id") user_id: Int = AppPrefs.userId,
+        @Part("user_auth") user_auth: String = AppPrefs.userToken!!
+    ): RespAcceptTerms
+
+    @POST("api/ordercard/four")
+    @Multipart
+    suspend fun addWorkProof(
+        @Part("order_card_id") order_card_id: Int,
+        @Part image: MultipartBody.Part,
+        @Part("user_id") user_id: Int = AppPrefs.userId,
+        @Part("user_auth") user_auth: String = AppPrefs.userToken!!
+    ): RespAcceptTerms
+
+    @POST("api/ordercard/five")
+    @FormUrlEncoded
+    suspend fun orderCardAddress(
+        @Part("order_card_id") order_card_id: Int,
+        @Field("adress_text") adress_text: String,
+        @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
+        @Field("user_id") user_id: Int = AppPrefs.userId
+    ): RespAcceptTerms
+
+
+    @POST("api/ordercard/seven")
+    @FormUrlEncoded
+    suspend fun orderCardLimit(
+        @Part("order_card_id") order_card_id: Int,
+        @Field("summa") summa: String,
+        @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
+        @Field("user_id") user_id: Int = AppPrefs.userId
+    ): RespAcceptTerms
+
+    @POST("api/ordercard/close")
+    @FormUrlEncoded
+    suspend fun completeOrderCard(
+        @Part("order_card_id") order_card_id: Int,
+        @Field("status") status: Int = 1,
+        @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
+        @Field("user_id") user_id: Int = AppPrefs.userId
     ): RespAcceptTerms
 
     @Multipart

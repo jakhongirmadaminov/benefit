@@ -249,17 +249,26 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/ivPassportPhoto"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardPassportPhoto"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_marginTop="20dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:selectableItemBackground"
-                    android:src="@drawable/ic_passport_eg"
+                    app:cardCornerRadius="10dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/subTitlePhotoPassport" />
+                    app:layout_constraintTop_toBottomOf="@id/subTitlePhotoPassport">
+
+                    <ImageView
+                        android:id="@+id/ivPassportPhoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:selectableItemBackground"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_passport_eg" />
+
+                </androidx.cardview.widget.CardView>
 
                 <Button
                     android:id="@+id/btnBackPhotoPassport"
@@ -273,7 +282,7 @@
                     app:layout_constraintEnd_toStartOf="@id/btnNextPhotoPassport"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ivPassportPhoto" />
+                    app:layout_constraintTop_toBottomOf="@id/cardPassportPhoto" />
 
                 <Button
                     android:id="@+id/btnNextPhotoPassport"
@@ -281,8 +290,8 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="5dp"
                     android:background="@drawable/selector_right_more_rounded"
-                    android:textAllCaps="false"
                     android:enabled="false"
+                    android:textAllCaps="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toEndOf="@id/btnBackPhotoPassport"
@@ -369,17 +378,28 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/ivPhotoWithPassport"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardPhotoWithPassport"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
                     android:layout_marginTop="20dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:selectableItemBackground"
-                    android:src="@drawable/ic_photo_with_passport_eg"
+                    app:cardCornerRadius="10dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/subTitlePhotoWithPassport" />
+                    app:layout_constraintTop_toBottomOf="@id/subTitlePhotoWithPassport">
+
+
+                    <ImageView
+                        android:id="@+id/ivPhotoWithPassport"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:selectableItemBackground"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_photo_with_passport_eg" />
+
+                </androidx.cardview.widget.CardView>
 
                 <Button
                     android:id="@+id/btnBackPhotoWithPassport"
@@ -393,15 +413,15 @@
                     app:layout_constraintEnd_toStartOf="@id/btnNextPhotoWithPassport"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ivPhotoWithPassport" />
+                    app:layout_constraintTop_toBottomOf="@id/cardPhotoWithPassport" />
 
                 <Button
                     android:id="@+id/btnNextPhotoWithPassport"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:enabled="false"
                     android:layout_marginLeft="5dp"
                     android:background="@drawable/selector_right_more_rounded"
+                    android:enabled="false"
                     android:textAllCaps="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_weight="1"
@@ -484,17 +504,28 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/ivWorkProve"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardWorkProve"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
                     android:layout_marginTop="20dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:selectableItemBackground"
-                    android:src="@drawable/ic_work_prove_eg"
+                    app:cardCornerRadius="10dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/subTitleWorkProve" />
+                    app:layout_constraintTop_toBottomOf="@id/subTitleWorkProve">
+
+
+                    <ImageView
+                        android:id="@+id/ivWorkProve"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:selectableItemBackground"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_work_prove_eg" />
+
+                </androidx.cardview.widget.CardView>
 
                 <Button
                     android:id="@+id/btnBackWorkProve"
@@ -508,7 +539,7 @@
                     app:layout_constraintEnd_toStartOf="@id/btnNextWorkProve"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ivWorkProve" />
+                    app:layout_constraintTop_toBottomOf="@id/cardWorkProve" />
 
                 <Button
                     android:id="@+id/btnNextWorkProve"
@@ -732,18 +763,28 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardINN"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="20dp"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/subTitleINN" >
+
+
                 <ImageView
                     android:id="@+id/ivINN"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:clickable="true"
                     android:focusable="true"
+                    android:scaleType="centerCrop"
                     android:foreground="?android:selectableItemBackground"
-                    android:src="@drawable/ic_photo_with_passport_eg"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/subTitleINN" />
+                    android:src="@drawable/ic_photo_with_passport_eg"/>
 
+                </androidx.cardview.widget.CardView>
                 <Button
                     android:id="@+id/btnBackINN"
                     android:layout_width="0dp"
@@ -756,7 +797,7 @@
                     app:layout_constraintEnd_toStartOf="@id/btnNextINN"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ivINN" />
+                    app:layout_constraintTop_toBottomOf="@id/cardINN" />
 
                 <Button
                     android:id="@+id/btnNextINN"
@@ -900,8 +941,8 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="5dp"
                     android:background="@drawable/selector_right_more_rounded"
-                    android:textAllCaps="false"
                     android:enabled="false"
+                    android:textAllCaps="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toEndOf="@id/btnBackSelectBranch"
@@ -997,7 +1038,7 @@
                     android:background="@drawable/selector_white"
                     android:hint="@string/enter_limit"
                     android:imeOptions="actionDone"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:maxLines="1"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
@@ -1131,10 +1172,10 @@
                 <Button
                     android:id="@+id/btnNextSendReq"
                     android:layout_width="0dp"
-                    android:enabled="false"
                     android:layout_height="40dp"
                     android:layout_marginLeft="5dp"
                     android:background="@drawable/selector_right_more_rounded"
+                    android:enabled="false"
                     android:textAllCaps="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_weight="1"

@@ -1,4 +1,4 @@
-package com.example.benefit.ui.auth.order_card
+package com.example.benefit.ui.order_card
 
 import android.animation.LayoutTransition
 import android.net.Uri
@@ -9,9 +9,11 @@ import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.widget.doOnTextChanged
 import com.asksira.bsimagepicker.BSImagePicker
 import com.bumptech.glide.Glide
 import com.example.benefit.R
+import com.example.benefit.ui.select_card_type.ECardType
 import com.example.benefit.util.SizeUtils
 import com.example.benefit.util.loadBitmap
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,16 +28,20 @@ class OrderCardActivity : AppCompatActivity(), BSImagePicker.OnSingleImageSelect
     companion object {
         const val EXTRA_CARD_TYPE = "EXTRA_CARD_TYPE"
         const val PASSPORT = "PASSPORT"
+        const val PASSPORT_WITH_PHOTO = "PASSPORT_WITH_PHOTO"
+        const val INN = "INN"
+        const val WORK_PROOF = "WORK_PROOF"
+        const val REQ_ORDER_CARD = 83
     }
 
-    private var cardType: String? = null
+    private var cardType: ECardType? = null
     private val viewModel: OrderCardViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_card)
 
-        cardType = intent.getStringExtra(EXTRA_CARD_TYPE)
+        cardType = intent.getSerializableExtra(EXTRA_CARD_TYPE) as ECardType
 
         setupViews()
         attachListeners()
@@ -64,27 +70,59 @@ class OrderCardActivity : AppCompatActivity(), BSImagePicker.OnSingleImageSelect
                 .show(supportFragmentManager, "")
         }
 
+
+        ivPhotoWithPassport.setOnClickListener {
+            BSImagePicker.Builder("com.example.benefit.fileprovider").setTag(PASSPORT_WITH_PHOTO)
+                .build()
+                .show(supportFragmentManager, "")
+        }
+
+        ivINN.setOnClickListener {
+            BSImagePicker.Builder("com.example.benefit.fileprovider").setTag(INN).build()
+                .show(supportFragmentManager, "")
+        }
+
+        ivWorkProve.setOnClickListener {
+            BSImagePicker.Builder("com.example.benefit.fileprovider").setTag(WORK_PROOF).build()
+                .show(supportFragmentManager, "")
+        }
+
         btnNextPhotoPassport.setOnClickListener {
             viewModel.addPassportPhoto()
         }
 
         btnNextPhotoWithPassport.setOnClickListener {
-            viewModel.nextStep()
+            viewModel.addWithPassportPhoto()
         }
+
         btnNextWorkProve.setOnClickListener {
-            viewModel.nextStep()
+            viewModel.addWorkProof()
         }
+
+        edtAddress.doOnTextChanged { text, start, before, count ->
+            btnNextAddress.isEnabled = !text.isNullOrBlank()
+        }
+
         btnNextAddress.setOnClickListener {
-            viewModel.nextStep()
+            viewModel.addAddress(edtAddress.text.toString())
         }
+
         btnNextINN.setOnClickListener {
             viewModel.nextStep()
         }
+
         btnNextSelectBranch.setOnClickListener {
             viewModel.nextStep()
         }
+
+
+        edtAddress.doOnTextChanged { text, start, before, count ->
+            btnNextLimit.isEnabled = !(text.isNullOrBlank() || text.toString().toInt() >= 0)
+        }
+
         btnNextLimit.setOnClickListener {
-            viewModel.nextStep()
+            viewModel.addLimitSum(edtLimit.text.toString())
+
         }
         btnNextSendReq.setOnClickListener {
             viewModel.nextStep()
@@ -258,10 +296,25 @@ class OrderCardActivity : AppCompatActivity(), BSImagePicker.OnSingleImageSelect
     override fun onSingleImageSelected(uri: Uri, tag: String?) {
         val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
 
-        if (tag == PASSPORT) {
-           viewModel.passportBitmap = bitmap
-            ivPassportPhoto.loadBitmap(bitmap)
+        when (tag) {
+            PASSPORT -> {
+                viewModel.passportBitmap = bitmap
+                ivPassportPhoto.loadBitmap(bitmap)
+            }
+            PASSPORT_WITH_PHOTO -> {
+                viewModel.withPassportBitmap = bitmap
+                ivPhotoWithPassport.loadBitmap(bitmap)
+            }
+            WORK_PROOF -> {
+                viewModel.workProofBitmap = bitmap
+                ivWorkProve.loadBitmap(bitmap)
+            }
+            INN -> {
+                viewModel.innBitmap = bitmap
+                ivINN.loadBitmap(bitmap)
+            }
         }
+
     }
 
     override fun loadImage(imageUri: Uri, ivImage: ImageView) {

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/add_card_nav_graph.xml"
+    app:startDestination="@id/regCardActivationFragment">
+
+
+    <fragment
+        android:id="@+id/regCardActivationFragment"
+        android:name="com.example.benefit.ui.auth.registration.RegCardActivationFragment"
+        android:label=""
+        tools:layout="@layout/fragment_reg_card_activation">
+        <action
+            android:id="@+id/action_regCardActivationFragment_to_regEndFragment"
+            app:destination="@id/regEndFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/regEndFragment"
+        android:name="com.example.benefit.ui.auth.registration.RegEndFragment"
+        android:label=""
+        tools:layout="@layout/fragment_reg_end" />
+
+
+</navigation>
