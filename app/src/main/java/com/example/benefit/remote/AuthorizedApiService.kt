@@ -94,6 +94,17 @@ interface AuthorizedApiService {
         @Field("user_id") user_id: Int = AppPrefs.userId
     ): RespAcceptTerms
 
+
+    @POST("api/card/new")
+    @FormUrlEncoded
+    suspend fun addCard(
+        @Part("title") title: String,
+        @Part("expiry") expiry: Int,
+        @Field("pan") pan: Long,
+        @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
+        @Field("user_id") user_id: Int = AppPrefs.userId
+    ): RespAcceptTerms
+
     @Multipart
     @POST("api/user/loginnumber")
     suspend fun uploadAvatar(@Part("phone_number") phone_number: String): Response<Any>
