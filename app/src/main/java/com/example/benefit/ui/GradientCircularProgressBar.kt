@@ -69,11 +69,9 @@ class GradientCircularProgressBar(ctx: Context, attrs: AttributeSet) : View(ctx,
             R.styleable.GradientCircularProgressBar,
             0, 0
         ).apply {
-
             try {
                 progressInPercentage =
                     getFloat(R.styleable.GradientCircularProgressBar_cgProgress, 0F)
-
             } finally {
                 recycle()
             }
@@ -93,8 +91,6 @@ class GradientCircularProgressBar(ctx: Context, attrs: AttributeSet) : View(ctx,
 
         val width: Int
         val height: Int
-
-        //Measure Width
 
         //Measure Width
         width = if (widthMode == MeasureSpec.EXACTLY) {
