@@ -28,6 +28,7 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".ui.gap.gap_chart.GapChartActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoActionBar">
 
             <!--             <intent-filter>-->
@@ -39,12 +40,15 @@
         </activity>
         <activity
             android:name=".ui.gap.GapActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.partner_story.StoryActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.loans.loans_chart.LoansChartActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoActionBar">
 
 
@@ -56,9 +60,11 @@
 
         <activity
             android:name=".ui.select_card_type.SelectCardTypeActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoActionBar"/>
         <activity
             android:name=".ui.expenses_by_categories.ExpensesByCategoriesActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoActionBar">
 
             <!-- <intent-filter> -->
@@ -68,28 +74,36 @@
         </activity>
         <activity
             android:name=".ui.partners_map.PartnersMapActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.branches_atms.BranchesAtmsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.analytics.AnalyticsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.loans.LoanActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.selected_partners_category.SelectedPartnersCategoryActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.partner_home.PartnerHomeActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.transactions_history.TransactionsHistoryActivity"
+            android:screenOrientation="portrait"
             android:label=""
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.auth.AuthActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoActionBar">
 
 <!--             <intent-filter>-->
@@ -111,6 +125,7 @@
         <activity
             android:name=".ui.order_card.OrderCardActivity"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/NoActionBar">
 
             <!-- <intent-filter> -->

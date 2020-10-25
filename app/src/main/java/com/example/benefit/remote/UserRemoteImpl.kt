@@ -3,10 +3,12 @@ package com.example.benefit.remote
 import android.graphics.Bitmap
 import com.example.benefit.remote.models.*
 import com.example.benefit.remote.repository.UserRemote
+import com.example.benefit.util.AppPrefs
 import com.example.benefit.util.ResultError
 import com.example.benefit.util.ResultSuccess
 import com.example.benefit.util.ResultWrapper
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import retrofit2.HttpException
@@ -133,7 +135,7 @@ class UserRemoteImpl @Inject constructor(
         image.compress(Bitmap.CompressFormat.JPEG, 90, stream)
         val file = stream.toByteArray().toRequestBody()
         val body = MultipartBody.Part.createFormData("image", "image.jpg", file)
-        return getFormattedResponse { authorizedApiService.addPassportPhoto(order_card_id, body) }
+        return getFormattedResponse { authorizedApiService.addPassportPhoto(order_card_id /*body*/) }
     }
 
     override suspend fun addPhotoWithPassport(
@@ -144,25 +146,39 @@ class UserRemoteImpl @Inject constructor(
         image.compress(Bitmap.CompressFormat.JPEG, 90, stream)
         val file = stream.toByteArray().toRequestBody()
         val body = MultipartBody.Part.createFormData("image", "image.jpg", file)
-        return getFormattedResponse { authorizedApiService.addPhotoWithPassport(order_card_id, body) }
+        return getFormattedResponse { authorizedApiService.addPhotoWithPassport(order_card_id /*body*/) }
     }
 
     override suspend fun addWorkProof(
         order_card_id: Int,
         image: Bitmap
     ): ResultWrapper<RespAcceptTerms> {
-        val stream = ByteArrayOutputStream()
-        image.compress(Bitmap.CompressFormat.JPEG, 90, stream)
-        val file = stream.toByteArray().toRequestBody()
-        val body = MultipartBody.Part.createFormData("image", "image.jpg", file)
-        return getFormattedResponse { authorizedApiService.addWorkProof(order_card_id, body) }
+        val map: MutableMap<String, RequestBody> = HashMap()
+        map["order_card_id"] = order_card_id.toString().toRequestBody()
+        map["user_id"] = AppPrefs.userId.toString().toRequestBody()
+        map["user_auth"] =AppPrefs.userToken.toString().toRequestBody()
+
+        val bos = ByteArrayOutputStream()
+        image.compress(Bitmap.CompressFormat.JPEG, 100, bos)
+
+        if (bos.size() > 0) {
+            val fileBody: RequestBody = bos.toByteArray().toRequestBody()
+            map["image"] = fileBody
+        }
+//        val body = MultipartBody.Part.createFormData("image", "image.jpg", file)
+        return getFormattedResponse { authorizedApiService.addWorkProof(map/*, body*/) }
     }
 
     override suspend fun addOrderCardAddress(
         order_card_id: Int,
         address: String
     ): ResultWrapper<RespAcceptTerms> {
-        return getFormattedResponse { authorizedApiService.orderCardAddress(order_card_id, address) }
+        return getFormattedResponse {
+            authorizedApiService.orderCardAddress(
+                order_card_id,
+                address
+            )
+        }
     }
 
     override suspend fun addLimitSum(

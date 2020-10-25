@@ -116,7 +116,7 @@ class OrderCardActivity : AppCompatActivity(), BSImagePicker.OnSingleImageSelect
         }
 
 
-        edtAddress.doOnTextChanged { text, start, before, count ->
+        edtLimit.doOnTextChanged { text, start, before, count ->
             btnNextLimit.isEnabled = !(text.isNullOrBlank() || text.toString().toInt() >= 0)
         }
 

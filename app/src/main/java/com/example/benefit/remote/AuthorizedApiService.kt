@@ -3,6 +3,7 @@ package com.example.benefit.remote
 import com.example.benefit.remote.models.*
 import com.example.benefit.util.AppPrefs
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 import splitties.experimental.ExperimentalSplittiesApi
@@ -43,7 +44,7 @@ interface AuthorizedApiService {
     @Multipart
     suspend fun addPassportPhoto(
         @Part("order_card_id") order_card_id: Int,
-        @Part image: MultipartBody.Part,
+//        @Part image: MultipartBody.Part,
         @Part("user_id") user_id: Int = AppPrefs.userId,
         @Part("user_auth") user_auth: String = AppPrefs.userToken!!
     ): RespAcceptTerms
@@ -52,7 +53,7 @@ interface AuthorizedApiService {
     @Multipart
     suspend fun addPhotoWithPassport(
         @Part("order_card_id") order_card_id: Int,
-        @Part image: MultipartBody.Part,
+//        @Part image: MultipartBody.Part,
         @Part("user_id") user_id: Int = AppPrefs.userId,
         @Part("user_auth") user_auth: String = AppPrefs.userToken!!
     ): RespAcceptTerms
@@ -60,16 +61,13 @@ interface AuthorizedApiService {
     @POST("api/ordercard/four")
     @Multipart
     suspend fun addWorkProof(
-        @Part("order_card_id") order_card_id: Int,
-        @Part image: MultipartBody.Part,
-        @Part("user_id") user_id: Int = AppPrefs.userId,
-        @Part("user_auth") user_auth: String = AppPrefs.userToken!!
+        @PartMap body: MutableMap<String, @JvmSuppressWildcards RequestBody>
     ): RespAcceptTerms
 
     @POST("api/ordercard/five")
     @FormUrlEncoded
     suspend fun orderCardAddress(
-        @Part("order_card_id") order_card_id: Int,
+        @Field("order_card_id") order_card_id: Int,
         @Field("adress_text") adress_text: String,
         @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
         @Field("user_id") user_id: Int = AppPrefs.userId
@@ -79,7 +77,7 @@ interface AuthorizedApiService {
     @POST("api/ordercard/seven")
     @FormUrlEncoded
     suspend fun orderCardLimit(
-        @Part("order_card_id") order_card_id: Int,
+        @Field("order_card_id") order_card_id: Int,
         @Field("summa") summa: String,
         @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
         @Field("user_id") user_id: Int = AppPrefs.userId
@@ -88,7 +86,7 @@ interface AuthorizedApiService {
     @POST("api/ordercard/close")
     @FormUrlEncoded
     suspend fun completeOrderCard(
-        @Part("order_card_id") order_card_id: Int,
+        @Field("order_card_id") order_card_id: Int,
         @Field("status") status: Int = 1,
         @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
         @Field("user_id") user_id: Int = AppPrefs.userId
@@ -98,8 +96,8 @@ interface AuthorizedApiService {
     @POST("api/card/new")
     @FormUrlEncoded
     suspend fun addCard(
-        @Part("title") title: String,
-        @Part("expiry") expiry: Int,
+        @Field("title") title: String,
+        @Field("expiry") expiry: Int,
         @Field("pan") pan: Long,
         @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
         @Field("user_id") user_id: Int = AppPrefs.userId
@@ -107,7 +105,7 @@ interface AuthorizedApiService {
 
     @Multipart
     @POST("api/user/loginnumber")
-    suspend fun uploadAvatar(@Part("phone_number") phone_number: String): Response<Any>
+    suspend fun uploadAvatar(@Field("phone_number") phone_number: String): Response<Any>
 
 
     @GET("api/partners")
