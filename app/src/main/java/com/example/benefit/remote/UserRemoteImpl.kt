@@ -3,10 +3,7 @@ package com.example.benefit.remote
 import android.graphics.Bitmap
 import com.example.benefit.remote.models.*
 import com.example.benefit.remote.repository.UserRemote
-import com.example.benefit.util.AppPrefs
-import com.example.benefit.util.ResultError
-import com.example.benefit.util.ResultSuccess
-import com.example.benefit.util.ResultWrapper
+import com.example.benefit.util.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -135,7 +132,7 @@ class UserRemoteImpl @Inject constructor(
         image.compress(Bitmap.CompressFormat.JPEG, 90, stream)
         val file = stream.toByteArray().toRequestBody()
         val body = MultipartBody.Part.createFormData("image", "image.jpg", file)
-        return getFormattedResponse { authorizedApiService.addPassportPhoto(order_card_id /*body*/) }
+        return getFormattedResponse { authorizedApiService.addPassportPhoto(order_card_id, body) }
     }
 
     override suspend fun addPhotoWithPassport(
@@ -146,7 +143,7 @@ class UserRemoteImpl @Inject constructor(
         image.compress(Bitmap.CompressFormat.JPEG, 90, stream)
         val file = stream.toByteArray().toRequestBody()
         val body = MultipartBody.Part.createFormData("image", "image.jpg", file)
-        return getFormattedResponse { authorizedApiService.addPhotoWithPassport(order_card_id /*body*/) }
+        return getFormattedResponse { authorizedApiService.addPhotoWithPassport(order_card_id, body) }
     }
 
     override suspend fun addWorkProof(
@@ -156,7 +153,7 @@ class UserRemoteImpl @Inject constructor(
         val map: MutableMap<String, RequestBody> = HashMap()
         map["order_card_id"] = order_card_id.toString().toRequestBody()
         map["user_id"] = AppPrefs.userId.toString().toRequestBody()
-        map["user_auth"] =AppPrefs.userToken.toString().toRequestBody()
+        map["user_auth"] = AppPrefs.userToken.toString().toRequestBody()
 
         val bos = ByteArrayOutputStream()
         image.compress(Bitmap.CompressFormat.JPEG, 100, bos)
@@ -165,49 +162,22 @@ class UserRemoteImpl @Inject constructor(
             val fileBody: RequestBody = bos.toByteArray().toRequestBody()
             map["image"] = fileBody
         }
-//        val body = MultipartBody.Part.createFormData("image", "image.jpg", file)
-        return getFormattedResponse { authorizedApiService.addWorkProof(map/*, body*/) }
+        return getFormattedResponse { authorizedApiService.addWorkProof(map) }
     }
 
-    override suspend fun addOrderCardAddress(
-        order_card_id: Int,
-        address: String
-    ): ResultWrapper<RespAcceptTerms> {
-        return getFormattedResponse {
-            authorizedApiService.orderCardAddress(
-                order_card_id,
-                address
-            )
-        }
-    }
+    override suspend fun addOrderCardAddress(order_card_id: Int, address: String) =
+        getFormattedResponse { authorizedApiService.orderCardAddress(order_card_id, address) }
 
-    override suspend fun addLimitSum(
-        order_card_id: Int,
-        sum: String
-    ): ResultWrapper<RespAcceptTerms> {
-        return getFormattedResponse { authorizedApiService.orderCardLimit(order_card_id, sum) }
-    }
+    override suspend fun addLimitSum(order_card_id: Int, sum: String) =
+        getFormattedResponse { authorizedApiService.orderCardLimit(order_card_id, sum) }
 
-    override suspend fun completeAddCard(
-        order_card_id: Int
-    ): ResultWrapper<RespAcceptTerms> {
-        return getFormattedResponse { authorizedApiService.completeOrderCard(order_card_id) }
-    }
 
-    private suspend fun <T> getFormattedResponse(action: suspend () -> T): ResultWrapper<T> {
-        return try {
-            ResultSuccess(action())
-//            else ResultError(message = action.result)
-        } catch (e: HttpException) {
-            ResultError(
-                JSONObject(e.response()!!.errorBody()!!.string())["message"].toString(),
-                e.code()
-            )
-        } catch (e: Exception) {
-            ResultError(message = e.localizedMessage)
-        }
+    override suspend fun completeAddCard(order_card_id: Int) =
+        getFormattedResponse { authorizedApiService.completeOrderCard(order_card_id) }
 
-    }
+
+    override suspend fun getMyCards() = getFormattedResponse { authorizedApiService.getMyCards() }
+
 
 
 //    override suspend fun confirmUser(user: UserCredentials): ResultWrapper<NUser> {

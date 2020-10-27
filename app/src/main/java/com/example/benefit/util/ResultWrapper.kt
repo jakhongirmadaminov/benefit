@@ -1,5 +1,8 @@
 package com.example.benefit.util
 
+import org.json.JSONObject
+import retrofit2.HttpException
+
 sealed class ResultWrapper<out V> {
     override fun toString(): String {
         return when (this) {
@@ -16,6 +19,22 @@ data class ResultError(val message: String? = null, val code: Int? = null) :
     ResultWrapper<Nothing>()
 
 data class ResultSuccess<out V>(val value: V) : ResultWrapper<V>()
+
+ suspend fun <T> getFormattedResponse(action: suspend () -> T): ResultWrapper<T> {
+    return try {
+        ResultSuccess(action())
+//            else ResultError(message = action.result)
+    } catch (e: HttpException) {
+        ResultError(
+            JSONObject(e.response()!!.errorBody()!!.string())["message"].toString(),
+            e.code()
+        )
+    } catch (e: Exception) {
+        ResultError(message = e.localizedMessage)
+    }
+
+}
+
 
 //sealed class ErrorWrapper : ResultWrapper<Nothing>() {
 //    data class ResponseError(val code: Int? = null, val message: String? = null) : ErrorWrapper()

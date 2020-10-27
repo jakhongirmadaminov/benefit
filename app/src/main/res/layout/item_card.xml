@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardParent"
     android:layout_width="match_parent"
     android:layout_height="190dp"
@@ -12,9 +13,16 @@
     app:cardBackgroundColor="@color/turquoise"
     app:cardCornerRadius="15dp">
 
+    <ImageView
+        android:id="@+id/cardBg"
+        android:layout_width="match_parent"
+        android:scaleType="fitXY"
+        android:layout_height="match_parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
 
         <ImageView
             android:id="@+id/icB"
@@ -32,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:fontFamily="sans-serif"
-            android:text="Zoom"
+            tools:text="Zoom"
             android:textColor="#ffffff"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -46,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:fontFamily="sans-serif"
-            android:text="*5027"
+            tools:text="*5027"
             android:textColor="#b8ffffff"
             android:textSize="18sp"
             android:textStyle="normal"
@@ -56,27 +64,31 @@
 
         <TextView
             android:id="@+id/tvCardName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
             android:layout_marginRight="26dp"
             android:fontFamily="sans-serif"
-            android:text="Бонусная"
+            android:gravity="end"
+            android:maxLines="2"
             android:textColor="#ffffff"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/tvMultiplySum"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tvMultiplySum" />
+            app:layout_constraintStart_toEndOf="@id/tvMultiplySum"
+            app:layout_constraintTop_toTopOf="@id/tvMultiplySum"
+            tools:text="Бонусная" />
 
         <ImageView
             android:id="@+id/icPlus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="11dp"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:selectableItemBackground"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:padding="15dp"
-            android:layout_marginRight="11dp"
             android:src="@drawable/ic_plus_square"
             app:layout_constraintBottom_toTopOf="@id/icSignal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -101,7 +113,7 @@
             android:fontFamily="sans-serif-medium"
             android:text="@string/balance"
             android:textColor="#b8ffffff"
-            android:textSize="14sp"
+            android:textSize="14dp"
             android:textStyle="normal"
             app:layout_constraintBottom_toTopOf="@id/tvBalance"
             app:layout_constraintStart_toStartOf="parent" />
@@ -112,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="26dp"
             android:fontFamily="sans-serif"
-            android:text="750 000 UZS"
+            tools:text="750 000 UZS"
             android:textColor="#ffffff"
             android:textSize="22sp"
             android:textStyle="bold"
@@ -121,15 +133,28 @@
             app:layout_constraintTop_toTopOf="@id/icPlus" />
 
         <TextView
+            android:id="@+id/tvCardNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#ffffff"
+            android:textSize="13dp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toTopOf="@id/tvCardOwner"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <TextView
             android:id="@+id/tvCardOwner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="26dp"
             android:layout_marginBottom="20dp"
             android:fontFamily="sans-serif-medium"
-            android:text="STANISLAV KUCHKAROV"
+            tools:text="STANISLAV KUCHKAROV"
             android:textColor="#ffffff"
-            android:textSize="14sp"
+            android:textSize="14dp"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

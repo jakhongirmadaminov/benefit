@@ -29,12 +29,13 @@ class OrderCardActivity : AppCompatActivity(), BSImagePicker.OnSingleImageSelect
         const val EXTRA_CARD_TYPE = "EXTRA_CARD_TYPE"
         const val PASSPORT = "PASSPORT"
         const val PASSPORT_WITH_PHOTO = "PASSPORT_WITH_PHOTO"
-        const val INN = "INN"
+
+        //        const val INN = "INN"
         const val WORK_PROOF = "WORK_PROOF"
         const val REQ_ORDER_CARD = 83
     }
 
-    private var cardType: ECardType? = null
+    lateinit var cardType: ECardType
     private val viewModel: OrderCardViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,11 +53,13 @@ class OrderCardActivity : AppCompatActivity(), BSImagePicker.OnSingleImageSelect
 
     private fun attachListeners() {
 
-        btnNextTerms.setOnClickListener {
-            viewModel.acceptTerms()
+        edtLimit.doOnTextChanged { text, _, _, _ ->
+            btnNextLimit.isEnabled = !text.isNullOrBlank() && text.toString().toInt() > 0
         }
 
-        cbTermsAgree.setOnCheckedChangeListener { buttonView, isChecked ->
+        btnNextTerms.setOnClickListener { viewModel.acceptTerms() }
+
+        cbTermsAgree.setOnCheckedChangeListener { _, isChecked ->
             btnNextTerms.isEnabled = isChecked
         }
 
@@ -66,95 +69,57 @@ class OrderCardActivity : AppCompatActivity(), BSImagePicker.OnSingleImageSelect
         }
 
         ivPassportPhoto.setOnClickListener {
-            BSImagePicker.Builder("com.example.benefit.fileprovider").setTag(PASSPORT).build()
+            BSImagePicker.Builder("com.example.benefit.fileprovider")
+                .setTag(PASSPORT).build()
                 .show(supportFragmentManager, "")
         }
-
 
         ivPhotoWithPassport.setOnClickListener {
-            BSImagePicker.Builder("com.example.benefit.fileprovider").setTag(PASSPORT_WITH_PHOTO)
-                .build()
-                .show(supportFragmentManager, "")
-        }
-
-        ivINN.setOnClickListener {
-            BSImagePicker.Builder("com.example.benefit.fileprovider").setTag(INN).build()
+            BSImagePicker.Builder("com.example.benefit.fileprovider")
+                .setTag(PASSPORT_WITH_PHOTO).build()
                 .show(supportFragmentManager, "")
         }
 
         ivWorkProve.setOnClickListener {
-            BSImagePicker.Builder("com.example.benefit.fileprovider").setTag(WORK_PROOF).build()
+            BSImagePicker.Builder("com.example.benefit.fileprovider")
+                .setTag(WORK_PROOF).build()
                 .show(supportFragmentManager, "")
         }
 
-        btnNextPhotoPassport.setOnClickListener {
-            viewModel.addPassportPhoto()
-        }
+        btnNextPhotoPassport.setOnClickListener { viewModel.addPassportPhoto() }
+        btnNextPhotoWithPassport.setOnClickListener { viewModel.addWithPassportPhoto() }
+        btnNextWorkProve.setOnClickListener { viewModel.addWorkProof() }
 
-        btnNextPhotoWithPassport.setOnClickListener {
-            viewModel.addWithPassportPhoto()
-        }
-
-        btnNextWorkProve.setOnClickListener {
-            viewModel.addWorkProof()
-        }
-
-        edtAddress.doOnTextChanged { text, start, before, count ->
+        edtAddress.doOnTextChanged { text, _, _, _ ->
             btnNextAddress.isEnabled = !text.isNullOrBlank()
         }
 
-        btnNextAddress.setOnClickListener {
-            viewModel.addAddress(edtAddress.text.toString())
-        }
-
-        btnNextINN.setOnClickListener {
-            viewModel.nextStep()
-        }
-
+        btnNextAddress.setOnClickListener { viewModel.addAddress(edtAddress.text.toString()) }
         btnNextSelectBranch.setOnClickListener {
             viewModel.nextStep()
+            if (cardType.isZoom()) viewModel.nextStep()
         }
-
-
-        edtLimit.doOnTextChanged { text, start, before, count ->
-            btnNextLimit.isEnabled = !(text.isNullOrBlank() || text.toString().toInt() >= 0)
-        }
-
-        btnNextLimit.setOnClickListener {
-            viewModel.addLimitSum(edtLimit.text.toString())
-
-        }
-        btnNextSendReq.setOnClickListener {
-            viewModel.nextStep()
-        }
-        btnBackLimit.setOnClickListener {
-            viewModel.previousStep()
-        }
-        btnBackAddress.setOnClickListener {
-            viewModel.previousStep()
-        }
-        btnBackINN.setOnClickListener {
-            viewModel.previousStep()
-        }
-        btnBackPhotoPassport.setOnClickListener {
-            viewModel.previousStep()
-        }
-        btnBackPhotoWithPassport.setOnClickListener {
-            viewModel.previousStep()
-        }
-        btnBackSelectBranch.setOnClickListener {
-            viewModel.previousStep()
-        }
-        btnBackWorkProve.setOnClickListener {
-            viewModel.previousStep()
-        }
+        btnNextLimit.setOnClickListener { viewModel.addLimitSum(edtLimit.text.toString()) }
+        btnNextSendReq.setOnClickListener { viewModel.complete() }
+        btnBackLimit.setOnClickListener { viewModel.previousStep() }
+        btnBackAddress.setOnClickListener { viewModel.previousStep() }
+        btnBackPhotoPassport.setOnClickListener { viewModel.previousStep() }
+        btnBackPhotoWithPassport.setOnClickListener { viewModel.previousStep() }
+        btnBackSelectBranch.setOnClickListener { viewModel.previousStep() }
+        btnBackWorkProve.setOnClickListener { viewModel.previousStep() }
         btnBackSendReq.setOnClickListener {
             viewModel.previousStep()
+            if (cardType.isZoom()) viewModel.previousStep()
         }
 
     }
 
     private fun subscribeObservers() {
+        viewModel.isCompleted.observe(this, {
+            val completed = it ?: return@observe
+            btnClose.visibility = View.VISIBLE
+            viewModel.nextStep()
+        })
 
         viewModel.acceptTermsResp.observe(this, {
             val response = it ?: return@observe
@@ -232,28 +197,15 @@ class OrderCardActivity : AppCompatActivity(), BSImagePicker.OnSingleImageSelect
                     hideAllTermsContent()
                     showAllChecked()
                     hideAllIcOval()
-                    iNNContent.visibility = View.VISIBLE
-                    icOvalINN.visibility = View.VISIBLE
-                    ivINNChecked.visibility = View.INVISIBLE
-                    ivSelectBranchChecked.visibility = View.INVISIBLE
-                    ivLimitChecked.visibility = View.INVISIBLE
-                    ivSendRequestChecked.visibility = View.INVISIBLE
-
-                    fixConstraints(R.id.tvNum6)
-                    scrollToView(iNNContent)
-                }
-                7 -> {
-                    hideAllTermsContent()
-                    showAllChecked()
-                    hideAllIcOval()
                     selectBranchContent.visibility = View.VISIBLE
                     icOvalSelectBranch.visibility = View.VISIBLE
                     ivSelectBranchChecked.visibility = View.INVISIBLE
-                    ivLimitChecked.visibility = View.INVISIBLE
+                    if (!cardType.isZoom()) ivLimitChecked.visibility = View.INVISIBLE
                     ivSendRequestChecked.visibility = View.INVISIBLE
                     fixConstraints(R.id.tvNum7)
                 }
-                8 -> {
+                7 -> {
+                    if (cardType.isZoom()) return@observe
                     hideAllTermsContent()
                     showAllChecked()
                     hideAllIcOval()
@@ -263,7 +215,7 @@ class OrderCardActivity : AppCompatActivity(), BSImagePicker.OnSingleImageSelect
                     ivSendRequestChecked.visibility = View.INVISIBLE
                     fixConstraints(R.id.tvNum8)
                 }
-                9 -> {
+                8 -> {
                     hideAllTermsContent()
                     hideAllChecked()
                     hideAllIcOval()
@@ -274,7 +226,7 @@ class OrderCardActivity : AppCompatActivity(), BSImagePicker.OnSingleImageSelect
                     fixConstraints(R.id.tvNum9)
                     subTitleSendReq.text = getString(R.string.send_req_pre_end_text, cardType)
                 }
-                10 -> {
+                9 -> {
                     hideAllTermsContent()
                     hideAllIcOval()
                     showAllChecked()
@@ -309,10 +261,6 @@ class OrderCardActivity : AppCompatActivity(), BSImagePicker.OnSingleImageSelect
                 viewModel.workProofBitmap = bitmap
                 ivWorkProve.loadBitmap(bitmap)
             }
-            INN -> {
-                viewModel.innBitmap = bitmap
-                ivINN.loadBitmap(bitmap)
-            }
         }
 
     }
@@ -326,13 +274,11 @@ class OrderCardActivity : AppCompatActivity(), BSImagePicker.OnSingleImageSelect
         btnNextPhotoPassport.isEnabled = true
         btnNextWorkProve.isEnabled = true
         btnNextPhotoWithPassport.isEnabled = true
-        btnNextINN.isEnabled = true
         btnNextAddress.isEnabled = true
         btnNextSelectBranch.isEnabled = true
         btnBackSendReq.isEnabled = true
-        btnBackLimit.isEnabled = true
+        if (!cardType.isZoom()) btnBackLimit.isEnabled = true
         btnBackAddress.isEnabled = true
-        btnBackINN.isEnabled = true
         btnBackPhotoPassport.isEnabled = true
         btnBackPhotoWithPassport.isEnabled = true
         btnBackSelectBranch.isEnabled = true
@@ -345,13 +291,11 @@ class OrderCardActivity : AppCompatActivity(), BSImagePicker.OnSingleImageSelect
         btnNextPhotoPassport.isEnabled = false
         btnNextWorkProve.isEnabled = false
         btnNextPhotoWithPassport.isEnabled = false
-        btnNextINN.isEnabled = false
         btnNextAddress.isEnabled = false
         btnNextSelectBranch.isEnabled = false
         btnBackSendReq.isEnabled = false
-        btnBackLimit.isEnabled = false
+        if (!cardType.isZoom()) btnBackLimit.isEnabled = false
         btnBackAddress.isEnabled = false
-        btnBackINN.isEnabled = false
         btnBackPhotoPassport.isEnabled = false
         btnBackPhotoWithPassport.isEnabled = false
         btnBackSelectBranch.isEnabled = false
@@ -365,9 +309,8 @@ class OrderCardActivity : AppCompatActivity(), BSImagePicker.OnSingleImageSelect
         ivPhotoWithPassportChecked.visibility = View.VISIBLE
         ivWorkProveChecked.visibility = View.VISIBLE
         ivAddressChecked.visibility = View.VISIBLE
-        ivINNChecked.visibility = View.VISIBLE
         ivSelectBranchChecked.visibility = View.VISIBLE
-        ivLimitChecked.visibility = View.VISIBLE
+        if (!cardType.isZoom()) ivLimitChecked.visibility = View.VISIBLE
         ivSendRequestChecked.visibility = View.VISIBLE
     }
 
@@ -385,9 +328,8 @@ class OrderCardActivity : AppCompatActivity(), BSImagePicker.OnSingleImageSelect
         icOvalPhotoWithPassport.visibility = View.INVISIBLE
         icOvalWorkProve.visibility = View.INVISIBLE
         icOvalAddress.visibility = View.INVISIBLE
-        icOvalINN.visibility = View.INVISIBLE
         icOvalSelectBranch.visibility = View.INVISIBLE
-        icOvalLimit.visibility = View.INVISIBLE
+        if (!cardType.isZoom()) icOvalLimit.visibility = View.INVISIBLE
         icOvalSendReq.visibility = View.INVISIBLE
     }
 
@@ -400,14 +342,21 @@ class OrderCardActivity : AppCompatActivity(), BSImagePicker.OnSingleImageSelect
     }
 
     private fun setupViews() {
+
         llParent.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
         userTermsContent.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
         photoPassportContent.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
         photoWithPassportContent.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
         workProveContent.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
         addressContent.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
-        iNNContent.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
-        limitContent.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
+        if (!cardType.isZoom()) {
+            limitContent.visibility = View.VISIBLE
+            tvNum8.visibility = View.VISIBLE
+            ivLimitChecked.visibility = View.VISIBLE
+            icOvalLimit.visibility = View.VISIBLE
+            titleLimit.visibility = View.VISIBLE
+            limitContent.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
+        }
         selectBranchContent.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
         sendReqContent.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
 
@@ -420,9 +369,8 @@ class OrderCardActivity : AppCompatActivity(), BSImagePicker.OnSingleImageSelect
         ivPhotoWithPassportChecked.visibility = View.INVISIBLE
         ivWorkProveChecked.visibility = View.INVISIBLE
         ivAddressChecked.visibility = View.INVISIBLE
-        ivINNChecked.visibility = View.INVISIBLE
         ivSelectBranchChecked.visibility = View.INVISIBLE
-        ivLimitChecked.visibility = View.INVISIBLE
+        if (!cardType.isZoom()) ivLimitChecked.visibility = View.INVISIBLE
         ivSendRequestChecked.visibility = View.INVISIBLE
     }
 
@@ -432,9 +380,8 @@ class OrderCardActivity : AppCompatActivity(), BSImagePicker.OnSingleImageSelect
         photoWithPassportContent.visibility = View.GONE
         workProveContent.visibility = View.GONE
         addressContent.visibility = View.GONE
-        iNNContent.visibility = View.GONE
         selectBranchContent.visibility = View.GONE
-        limitContent.visibility = View.GONE
+        if (!cardType.isZoom()) limitContent.visibility = View.GONE
         sendReqContent.visibility = View.GONE
     }
 }

@@ -1,14 +1,18 @@
 package com.example.benefit.ui.auth.registration
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.ui.auth.login.LoginViewModel
 import com.example.benefit.ui.main.MainActivity
 import com.example.benefit.ui.main.home.bsd_add_card.AddCardBSD
+import com.example.benefit.ui.order_card.OrderCardActivity
 import com.example.benefit.ui.select_card_type.SelectCardTypeActivity
 import com.redmadrobot.inputmask.MaskedTextChangedListener
 import com.redmadrobot.inputmask.MaskedTextChangedListener.Companion.installOn
@@ -76,12 +80,29 @@ class RegCardActivationFragment @Inject constructor() :
                 start<MainActivity> {}
             } else if ((parentFragment is AddCardBSD)) (parentFragment as AddCardBSD).dismiss()
         }
+
         btnOrderCard.setOnClickListener {
-            start<SelectCardTypeActivity> {}
+            startActivityForResult(
+                Intent(requireActivity(), SelectCardTypeActivity::class.java),
+                OrderCardActivity.REQ_ORDER_CARD
+            )
+//            start<SelectCardTypeActivity> {}
         }
+
         btnActivate.setOnClickListener {
             findNavController().navigate(R.id.action_regCardActivationFragment_to_regEndFragment)
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == AppCompatActivity.RESULT_OK) {
+            if (requestCode == OrderCardActivity.REQ_ORDER_CARD) {
+                if (((parentFragment as NavHostFragment).parentFragment is RegistrationBSD)) {
+                    ((parentFragment as NavHostFragment).parentFragment as RegistrationBSD).dismiss()
+                    start<MainActivity> {}
+                } else if (((parentFragment as NavHostFragment).parentFragment is AddCardBSD)) ((parentFragment as NavHostFragment).parentFragment as AddCardBSD).dismiss()
+            }
+        }
+    }
 }

@@ -6,6 +6,7 @@ import com.example.benefit.remote.repository.PartnersRemote
 import com.example.benefit.util.ResultError
 import com.example.benefit.util.ResultSuccess
 import com.example.benefit.util.ResultWrapper
+import com.example.benefit.util.getFormattedResponse
 import org.json.JSONObject
 import javax.inject.Inject
 
@@ -59,6 +60,9 @@ class PartnersRemoteImpl @Inject constructor(
             ResultError(message = e.localizedMessage)
         }
     }
+
+    override suspend fun getAllBankBranches() =
+        getFormattedResponse { authorizedApiService.getAllBankBranches() }
 
 //    override suspend fun confirmUser(user: UserCredentials): ResultWrapper<NUser> {
 //        return try {

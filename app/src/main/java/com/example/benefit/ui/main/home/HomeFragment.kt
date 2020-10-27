@@ -7,12 +7,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.viewpager.widget.PagerAdapter
 import com.example.benefit.R
+import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.remote.models.EPaymentType
 import com.example.benefit.remote.models.PaynetCategory
 import com.example.benefit.ui.branches_atms.BranchesAtmsActivity
 import com.example.benefit.ui.expenses_by_categories.ExpensesByCategoriesActivity
 import com.example.benefit.ui.loans.LoanActivity
 import com.example.benefit.ui.main.fill_card.FillCardBSD
+import com.example.benefit.ui.main.fill_card.FillCardFragment.Companion.ARG_CARD
+import com.example.benefit.ui.main.fill_card.FillCardFragment.Companion.ARG_CARDS
 import com.example.benefit.ui.main.home.bsd_add_card.AddCardBSD
 import com.example.benefit.ui.main.home.card_options.CardOptionsBSD
 import com.example.benefit.ui.main.transfer_to_card.TransferToCardBSD
@@ -20,13 +23,15 @@ import com.example.benefit.ui.transactions_history.TransactionsHistoryActivity
 import com.example.benefit.ui.viewgroups.ItemLoading
 import com.example.benefit.ui.viewgroups.ItemNews
 import com.example.benefit.ui.viewgroups.ItemPaynetCatg
-import com.example.benefit.util.SizeUtils
+import com.example.benefit.util.loadImageUrl
+import com.rd.utils.DensityUtils.dpToPx
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.item_card.view.*
 import splitties.fragments.start
+import java.text.DecimalFormat
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -43,6 +48,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         subscribeObservers()
         viewModel.getPaynetCategories()
         viewModel.getNews(1)
+        viewModel.getMyCards()
     }
 
     private fun subscribeObservers() {
@@ -57,6 +63,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             when (it ?: return@observe) {
                 true -> newsAdapter.add(ItemLoading())
                 else -> newsAdapter.clear()
+            }
+        })
+        viewModel.isLoadingCards.observe(viewLifecycleOwner, {
+            when (it ?: return@observe) {
+                true -> {
+                    cardsProgress.visibility = View.VISIBLE
+                    cardsPager.visibility = View.INVISIBLE
+                }
+                else -> {
+                    cardsProgress.visibility = View.INVISIBLE
+                    cardsPager.visibility = View.VISIBLE
+                }
             }
         })
 
@@ -101,6 +119,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 newsAdapter.add(ItemNews(news))
             }
         })
+        viewModel.cardsResp.observe(viewLifecycleOwner, {
+            it ?: return@observe
+            setupCardsPager(it)
+        })
 
     }
 
@@ -142,42 +164,48 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         setupServicesPager()
 
-        setupCardsPager()
 
     }
 
-    private fun setupCardsPager() {
+    private fun setupCardsPager(cardsDTO: List<CardDTO>) {
 
-        val cardView = layoutInflater.inflate(R.layout.item_card, null)
-
-        cardView.icPlus.setOnClickListener {
-            FillCardBSD().show(childFragmentManager, "")
-        }
-        cardView.setOnClickListener {
-            CardOptionsBSD().show(childFragmentManager, "")
+        val cardViews = arrayListOf<View>()
+        cardsDTO.forEach {
+            val cardView = makeCardView(it)
+            cardsPager.addView(cardView)
+            cardViews.add(cardView)
         }
 
-        cardsPager.addView(cardView)
-        val cardView2 = layoutInflater.inflate(R.layout.item_add_card, null)
-        cardView2.cardParent.setOnClickListener {
-            AddCardBSD().show(childFragmentManager, "")
-//            start<OrderCardActivity>()
-        }
+        val cardView2 = layoutInflater.inflate(R.layout.item_add_card, cardsPager, false)
+        cardView2.cardParent.setOnClickListener { AddCardBSD().show(childFragmentManager, "") }
         cardsPager.addView(cardView2)
+        cardViews.add(cardView2)
 
-
-        cardsPager.adapter = WizardPagerAdapter(listOf(cardView, cardView2))
-        cardsPager.offscreenPageLimit = 2
+        cardsPager.adapter = WizardPagerAdapter(cardViews)
+        cardsPager.offscreenPageLimit = cardViews.size
         cardsPager.clipToPadding = false
-        cardsPager.setPadding(
-            SizeUtils.dpToPx(requireContext(), 26).toInt(),
-            0,
-            SizeUtils.dpToPx(requireContext(), 26).toInt(),
-            0
-        )
-        cardsPager.pageMargin = SizeUtils.dpToPx(requireContext(), 15).toInt()
+        cardsPager.setPadding(dpToPx(26), 0, dpToPx(26), 0)
+        cardsPager.pageMargin = dpToPx(15)
 
+    }
 
+    private fun makeCardView(cardDTO: CardDTO): View {
+        val view = layoutInflater.inflate(R.layout.item_card, cardsPager, false)
+        view.tvCardOwner.text = cardDTO.fullName
+        view.tvCardNumber.text = cardDTO.pan
+        view.tvCardName.text = cardDTO.card_title
+        if (cardDTO.background_link != null) view.cardBg.loadImageUrl(cardDTO.background_link)
+        view.tvBalance.text = "${DecimalFormat("#,###").format(cardDTO.balance!!.toInt())} UZS"
+        view.icPlus.setOnClickListener {
+            val dialog = FillCardBSD()
+            dialog.arguments = Bundle().apply {
+                putParcelable(ARG_CARD, cardDTO)
+                putParcelableArrayList(ARG_CARDS, ArrayList(viewModel.cardsResp.value!!))
+            }
+            dialog.show(childFragmentManager, "")
+        }
+        view.setOnClickListener { CardOptionsBSD().show(childFragmentManager, "") }
+        return view
     }
 
     private fun setupServicesPager() {
@@ -185,21 +213,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         servicesPager.adapter = WizardPagerAdapter(listOf(page_one, page_two, page_three))
         servicesPager.offscreenPageLimit = 2
         servicesPager.clipToPadding = false
-        servicesPager.setPadding(
-            SizeUtils.dpToPx(requireContext(), 26).toInt(),
-            0,
-            SizeUtils.dpToPx(requireContext(), 26).toInt(),
-            0
-        )
-        servicesPager.pageMargin = SizeUtils.dpToPx(requireContext(), 15).toInt()
+        servicesPager.setPadding(dpToPx(26), 0, dpToPx(26), 0)
+        servicesPager.pageMargin = dpToPx(15)
 
 
     }
 
-
     class WizardPagerAdapter(val views: List<View>) : PagerAdapter() {
-
-
         override fun instantiateItem(collection: ViewGroup, position: Int): Any {
             return views[position]
 //            return servicesPager.findViewById(resId)
@@ -218,4 +238,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        cardsPager?.adapter = null
+    }
 }

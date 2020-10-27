@@ -10,9 +10,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.remote.models.RegularPaymentDTO
-import com.example.benefit.ui.transactions_history.transaction_bsd.TransactionBSD
 import com.example.benefit.util.MyBSDialog
-import com.example.benefit.util.MyNestedScrollBSDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -20,8 +18,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class RegularPaymentBSD : MyBSDialog() {
 
 
-    companion object{
-        const val ARG_REGULAR_PAYMENT_DTO="REGULAR_PAYMENT_DTO"
+    companion object {
+        const val ARG_REGULAR_PAYMENT_DTO = "REGULAR_PAYMENT_DTO"
     }
 
     private val viewModel: RegularPaymentViewModel by viewModels()
@@ -33,12 +31,13 @@ class RegularPaymentBSD : MyBSDialog() {
         regularPaymentDTO = requireArguments().getParcelable(ARG_REGULAR_PAYMENT_DTO)!!
 
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.bsd_regular_payment, null)
+        val view = inflater.inflate(R.layout.bsd_regular_payment, container)
 
         return view
     }

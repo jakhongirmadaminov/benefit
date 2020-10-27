@@ -1,11 +1,13 @@
 package com.example.benefit.ui.main.fill_card
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
+import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.ui.branches_atms.BranchesAtmsActivity
 import com.example.benefit.ui.main.home.HomeFragment
 import com.example.benefit.ui.main.home.card_options.CardOptionsBSD
@@ -21,8 +23,22 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class FillCardFragment @Inject constructor() : Fragment(R.layout.fragment_fill_card) {
 
+    companion object {
+        const val ARG_CARD = "CARD"
+        const val ARG_CARDS = "CARDS"
+    }
+
 
     private val viewModel: FillCardViewModel by viewModels()
+    lateinit var cardBeingFilled: CardDTO
+    lateinit var selectableCards: List<CardDTO>
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        cardBeingFilled = requireArguments().getParcelable(ARG_CARD)!!
+        selectableCards = requireArguments().getParcelableArrayList(ARG_CARDS)!!
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -44,7 +44,7 @@ interface AuthorizedApiService {
     @Multipart
     suspend fun addPassportPhoto(
         @Part("order_card_id") order_card_id: Int,
-//        @Part image: MultipartBody.Part,
+        @Part image: MultipartBody.Part,
         @Part("user_id") user_id: Int = AppPrefs.userId,
         @Part("user_auth") user_auth: String = AppPrefs.userToken!!
     ): RespAcceptTerms
@@ -53,16 +53,14 @@ interface AuthorizedApiService {
     @Multipart
     suspend fun addPhotoWithPassport(
         @Part("order_card_id") order_card_id: Int,
-//        @Part image: MultipartBody.Part,
+        @Part image: MultipartBody.Part,
         @Part("user_id") user_id: Int = AppPrefs.userId,
         @Part("user_auth") user_auth: String = AppPrefs.userToken!!
     ): RespAcceptTerms
 
     @POST("api/ordercard/four")
     @Multipart
-    suspend fun addWorkProof(
-        @PartMap body: MutableMap<String, @JvmSuppressWildcards RequestBody>
-    ): RespAcceptTerms
+    suspend fun addWorkProof(@PartMap body: MutableMap<String, @JvmSuppressWildcards RequestBody>): RespAcceptTerms
 
     @POST("api/ordercard/five")
     @FormUrlEncoded
@@ -91,6 +89,18 @@ interface AuthorizedApiService {
         @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
         @Field("user_id") user_id: Int = AppPrefs.userId
     ): RespAcceptTerms
+
+
+    @POST("api/card/my")
+    @FormUrlEncoded
+    suspend fun getMyCards(
+        @Field("user_token") user_auth: String = AppPrefs.userToken!!,
+        @Field("user_id") user_id: Int = AppPrefs.userId
+    ): List<CardDTO>
+
+
+    @GET("api/other/branches")
+    suspend fun getAllBankBranches(): List<BankBranchDTO>
 
 
     @POST("api/card/new")

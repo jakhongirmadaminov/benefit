@@ -3,6 +3,7 @@ package com.example.benefit.ui.main.home
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.remote.models.NewsDTO
 import com.example.benefit.remote.models.PaynetCategory
 import com.example.benefit.remote.repository.UserRemote
@@ -45,6 +46,25 @@ class HomeViewModel @ViewModelInject constructor(private val userRemote: UserRem
                 when (response) {
                     is ResultError -> errorMessage.value = response.message
                     is ResultSuccess -> newsResp.value = response.value
+                }.exhaustive
+            }
+        }
+    }
+
+
+
+
+    val cardsResp = SingleLiveEvent<List<CardDTO>>()
+    val isLoadingCards = SingleLiveEvent<Boolean>()
+    fun getMyCards() {
+        isLoadingCards.value = true
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = userRemote.getMyCards()
+            withContext(Dispatchers.Main) {
+                isLoadingCards.value = false
+                when (response) {
+                    is ResultError -> errorMessage.value = response.message
+                    is ResultSuccess -> cardsResp.value = response.value
                 }.exhaustive
             }
         }

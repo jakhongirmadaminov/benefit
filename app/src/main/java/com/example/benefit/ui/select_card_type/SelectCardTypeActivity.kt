@@ -83,9 +83,22 @@ class SelectCardTypeActivity : AppCompatActivity() {
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQ_ORDER_CARD) {
+                setResult(RESULT_OK)
+                finish()
+            }
+        }
+    }
 }
 
 enum class ECardType {
-    ZOOM, SUPREME
+    ZOOM, SUPREME;
+
+    fun isZoom(): Boolean {
+        return this == ZOOM
+    }
 }

@@ -45,6 +45,7 @@ class OrderCardViewModel @ViewModelInject constructor(private val userRemote: Us
     val acceptTermsResp = SingleLiveEvent<RespAcceptTerms>()
     val errorMessage = SingleLiveEvent<String>()
     val isLoading = SingleLiveEvent<Boolean>()
+    val isCompleted = SingleLiveEvent<Boolean>()
 
     fun acceptTerms() {
         isLoading.value = true
@@ -162,7 +163,7 @@ class OrderCardViewModel @ViewModelInject constructor(private val userRemote: Us
         }
     }
 
-    fun complete(sum: String) {
+    fun complete() {
         isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
             val response =
@@ -175,6 +176,7 @@ class OrderCardViewModel @ViewModelInject constructor(private val userRemote: Us
                     }
                     is ResultSuccess -> {
                         acceptTermsResp.value = response.value
+                        isCompleted.value = true
                     }
                 }.exhaustive
             }

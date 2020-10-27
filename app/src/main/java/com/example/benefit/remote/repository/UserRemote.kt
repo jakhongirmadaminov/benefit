@@ -32,5 +32,6 @@ interface UserRemote {
     suspend fun addOrderCardAddress(order_card_id: Int, address: String): ResultWrapper<RespAcceptTerms>
     suspend fun addLimitSum(order_card_id: Int, sum: String): ResultWrapper<RespAcceptTerms>
     suspend fun completeAddCard(order_card_id: Int): ResultWrapper<RespAcceptTerms>
+    suspend fun getMyCards(): ResultWrapper<List<CardDTO>>
 
 }
