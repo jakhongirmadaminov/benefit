@@ -8,12 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.benefit.R
-import kotlinx.android.synthetic.main.dialog_block_card.*
+import kotlinx.android.synthetic.main.dialog_delete_card.*
 
 /**
  * Created by jahon on 14-Sep-20
  */
-class DialogBlockCard : DialogFragment() {
+class DialogDeleteCard : DialogFragment() {
 
     lateinit var listener: IOnCardAction
     override fun onAttach(context: Context) {
@@ -25,7 +25,6 @@ class DialogBlockCard : DialogFragment() {
         }
     }
 
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         setStyle(STYLE_NO_TITLE, android.R.style.Theme)
         return super.onCreateDialog(savedInstanceState)
@@ -36,7 +35,7 @@ class DialogBlockCard : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.dialog_block_card, container)
+        return inflater.inflate(R.layout.dialog_delete_card, container)
 
 
     }
@@ -47,8 +46,8 @@ class DialogBlockCard : DialogFragment() {
         btnCancel.setOnClickListener {
             dismiss()
         }
-        btnBlock.setOnClickListener {
-            listener.onCardBlockClick()
+        btnDelete.setOnClickListener {
+            listener.onCardDeleteClick()
             dismiss()
         }
     }

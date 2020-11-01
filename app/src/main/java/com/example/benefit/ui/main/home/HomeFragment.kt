@@ -204,7 +204,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
             dialog.show(childFragmentManager, "")
         }
-        view.setOnClickListener { CardOptionsBSD().show(childFragmentManager, "") }
+        view.setOnClickListener {
+            val dialog = CardOptionsBSD()
+            dialog.arguments = Bundle().apply {
+                putParcelable(ARG_CARD, cardDTO)
+                putParcelableArrayList(ARG_CARDS, ArrayList(viewModel.cardsResp.value!!))
+            }
+            dialog.show(childFragmentManager, "")
+        }
         return view
     }
 

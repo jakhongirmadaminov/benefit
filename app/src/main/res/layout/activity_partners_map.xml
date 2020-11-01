@@ -77,10 +77,10 @@
 
 
         <RelativeLayout
-            android:layout_width="match_parent"
             android:id="@+id/rlParent"
-            android:animateLayoutChanges="true"
-            android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clContent"
@@ -132,4 +132,27 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </RelativeLayout>
     </com.wunderlist.slidinglayer.SlidingLayer>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tvMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progress"
+        tools:visibility="visible" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

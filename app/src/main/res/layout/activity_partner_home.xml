@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -185,7 +186,8 @@
                         android:layout_height="?android:actionBarSize"
                         android:clickable="true"
                         android:focusable="true"
-                        android:foreground="?android:selectableItemBackground" />
+                        android:foreground="?android:selectableItemBackground"
+                        android:scaleType="centerCrop" />
                 </androidx.cardview.widget.CardView>
 
                 <TextView
@@ -206,7 +208,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
-                    android:text="Кэшбэк 15%"
+                    tools:text="Кэшбэк 15%"
                     android:textColor="#abffffff"
                     android:textSize="14sp"
                     android:textStyle="normal"
@@ -218,7 +220,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
-                    android:text="Товары и услуги в рассрочку"
+                    tools:text="Товары и услуги в рассрочку"
                     android:textColor="#abffffff"
                     android:textSize="14sp"
                     android:textStyle="normal"
@@ -251,20 +253,22 @@
                 android:paddingBottom="40dp">
 
                 <TextView
+                    android:id="@+id/tvContentTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-medium"
-                    android:text="Рекомендовано"
+                    tools:text="Рекомендовано"
                     android:textColor="#000000"
                     android:textSize="16sp"
                     android:textStyle="normal" />
 
                 <TextView
+                    android:id="@+id/tvContentDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:fontFamily="sans-serif"
-                    android:text="Магазин эксклюзивной мебели «Commodum» более 20 лет представляет лучшие европейские модели интерьера. За продолжительное время работы магазин зарекомендовал себя среди широкого круга клиентов своим сервисом и качественными товарами."
+                    tools:text="Магазин эксклюзивной мебели «Commodum» более 20 лет представляет лучшие европейские модели интерьера. За продолжительное время работы магазин зарекомендовал себя среди широкого круга клиентов своим сервисом и качественными товарами."
                     android:textColor="#cc5c5c5c"
                     android:textSize="16sp"
                     android:textStyle="normal" />

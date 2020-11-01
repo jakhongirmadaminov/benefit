@@ -128,7 +128,7 @@
     <string name="top_up_card">Пополнить карту</string>
     <string name="change_card_design">Сменить дизайн карты</string>
     <string name="block_card">Заблокировать карту</string>
-    <string name="block_card_subtitle">Внимание!\nПосле блокировки вы не сможете расплачиваться картой и осуществлять переводы.</string>
+    <string name="block_card_subtitle">Внимание! После блокировки вы не сможете расплачиваться картой и осуществлять переводы.</string>
     <string name="block">Заблокировать</string>
     <string name="cancel">Отмена</string>
     <string name="push_notifications">Push - уведомления</string>
@@ -203,5 +203,9 @@
     <string name="password">Пароль</string>
     <string name="card_types_subtitle">Оплачивайте покупки данной картой у наших партнеров и получайте кэшбэк до 25% на свой виртуальный счет в бенетонах</string>
     <string name="order">Заказать</string>
+    <string name="there_are_no_partners_in_this_category">В этой категории нет партнеров</string>
+    <string name="delete_card">Удалить карту</string>
+    <string name="delete">Удалить</string>
+    <string name="are_you_sure_to_delete_card">Внимание! Вы действительно хотите удалить эту карту?</string>
 
 </resources>

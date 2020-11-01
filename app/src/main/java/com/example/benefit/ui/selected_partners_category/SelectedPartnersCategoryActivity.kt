@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.example.benefit.R
+import com.example.benefit.remote.models.Partner
 import com.example.benefit.remote.models.PartnerCategoryDTO
 import com.example.benefit.ui.base.BaseActivity
 import com.example.benefit.ui.viewgroups.ItemPartnerCashback
@@ -46,7 +47,7 @@ class SelectedPartnersCategoryActivity : BaseActivity() {
     private fun setupViews() {
         tvTitle.text = categoryDTO.title_ru
         rvPartners.adapter = adapter
-
+        tool_bar.setBackgroundColor(Color.parseColor(categoryDTO.color))
     }
 
     private fun subscribeObservers() {
@@ -65,7 +66,7 @@ class SelectedPartnersCategoryActivity : BaseActivity() {
 
     }
 
-    private fun loadData(value: List<PartnerCategoryDTO>) {
+    private fun loadData(value: List<Partner>) {
 
         adapter.clear()
         value.forEach {

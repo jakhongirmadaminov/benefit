@@ -1,24 +1,26 @@
 package com.example.benefit.ui.partner_home
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.benefit.R
-import com.example.benefit.remote.models.PartnerCategoryDTO
+import com.example.benefit.remote.models.Partner
 import com.example.benefit.ui.partner_story.StoryActivity
 import com.example.benefit.util.loadImageUrl
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_partner_home.*
 import splitties.activities.start
-import java.util.ArrayList
+
 
 class PartnerHomeActivity : AppCompatActivity() {
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
-    lateinit var partner: PartnerCategoryDTO
+    lateinit var partner: Partner
+
 
     companion object {
-
         const val EXTRA_PARTNER = "PARTNER"
     }
 
@@ -33,9 +35,13 @@ class PartnerHomeActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
-        imageViewCollapsing.loadImageUrl(partner.image)
-        ivBrandLogo.loadImageUrl(partner.icon_image)
-        tvBrandName.text = partner.title_ru
+        imageViewCollapsing.loadImageUrl(partner.image!!)
+        ivBrandLogo.loadImageUrl(partner.icon_image!!)
+        tvBrandName.text = partner.title
+        tvContentDesc.text = partner.desc_ru
+        tvContentTitle.text = partner.title
+        tvBrandSubtitle.text = partner.type_name
+//        tvCashBackPercentage.text = partner.title
 
     }
 
@@ -48,6 +54,12 @@ class PartnerHomeActivity : AppCompatActivity() {
 
         ivBack.setOnClickListener {
             finish()
+        }
+
+        ivCall.setOnClickListener {
+            startActivity(Intent(Intent.ACTION_DIAL).apply {
+                data = Uri.parse("tel:${partner.phone}")
+            })
         }
 
     }

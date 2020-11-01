@@ -17,7 +17,8 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right" >
+        </action>
         <action
             android:id="@+id/action_cardOptionsFragment_to_cardNotificationsFragment"
             app:destination="@id/cardNotificationsFragment"
@@ -32,6 +33,10 @@
         android:name="com.example.benefit.ui.main.home.card_options.CardChangeDesignFragment"
         android:label=""
         tools:layout="@layout/fragment_card_change_design">
+
+        <argument android:name="cards" app:nullable="true" app:argType="com.example.benefit.remote.models.CardsDTO"/>
+        <argument android:name="card" app:nullable="true" app:argType="com.example.benefit.remote.models.CardDTO"/>
+
 
     </fragment>
 

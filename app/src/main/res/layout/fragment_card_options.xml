@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/clParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/shape_top_rounded"
     android:orientation="vertical">
-
 
 
     <androidx.cardview.widget.CardView
@@ -48,13 +48,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:fontFamily="sans-serif"
-                android:text="Zoom"
                 android:textColor="#ffffff"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/icB"
                 app:layout_constraintStart_toEndOf="@id/icB"
-                app:layout_constraintTop_toTopOf="@id/icB" />
+                app:layout_constraintTop_toTopOf="@id/icB"
+                tools:text="Zoom" />
 
             <TextView
                 android:id="@+id/tvMultiplySum"
@@ -76,13 +76,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="26dp"
                 android:fontFamily="sans-serif"
-                android:text="Бонусная"
                 android:textColor="#ffffff"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/tvMultiplySum"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tvMultiplySum" />
+                app:layout_constraintTop_toTopOf="@id/tvMultiplySum"
+                tools:text="Бонусная" />
 
 
             <TextView
@@ -106,12 +106,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="26dp"
                 android:fontFamily="sans-serif"
-                android:text="750 000 UZS"
                 android:textColor="#ffffff"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lblBalance" />
+                app:layout_constraintTop_toBottomOf="@id/lblBalance"
+                tools:text="750 000 UZS" />
 
 
             <TextView
@@ -120,12 +120,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="26dp"
                 android:fontFamily="sans-serif-medium"
-                android:text="8600 16** **** 5027"
                 android:textColor="#ffffff"
                 android:textSize="14sp"
                 android:textStyle="normal"
                 app:layout_constraintBottom_toTopOf="@id/tvCardOwner"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="8600 16** **** 5027" />
 
 
             <TextView
@@ -135,12 +135,12 @@
                 android:layout_marginLeft="26dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="sans-serif-medium"
-                android:text="STANISLAV KUCHKAROV"
                 android:textColor="#ffffff"
                 android:textSize="14sp"
                 android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="STANISLAV KUCHKAROV" />
 
 
             <TextView
@@ -149,12 +149,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="26dp"
                 android:fontFamily="sans-serif"
-                android:text="01/24"
                 android:textColor="#ffffff"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tvCardNumber" />
+                app:layout_constraintTop_toTopOf="@id/tvCardNumber"
+                tools:text="01/24" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -345,6 +345,43 @@
                 android:layout_marginLeft="10dp"
                 android:fontFamily="sans-serif"
                 android:text="@string/block_card"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="75dp"
+            android:background="@color/bg_grey" />
+
+
+        <LinearLayout
+            android:id="@+id/llDeleteCard"
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackground">
+
+            <ImageView
+                android:layout_width="?android:actionBarSize"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:padding="16dp"
+                android:rotation="-45"
+                android:src="@drawable/ic_plus_small" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/delete_card"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="normal" />

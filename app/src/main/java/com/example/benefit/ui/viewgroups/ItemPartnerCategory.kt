@@ -2,7 +2,6 @@ package com.example.benefit.ui.viewgroups
 
 import com.example.benefit.R
 import com.example.benefit.remote.models.PartnerCategoryDTO
-import com.example.benefit.remote.models.PartnerDTO
 import com.example.benefit.ui.selected_partners_category.SelectedPartnersCategoryActivity
 import com.example.benefit.util.loadImageUrl
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder

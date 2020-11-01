@@ -1,36 +1,48 @@
 package com.example.benefit.ui.main.home.card_options
 
-import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
+import com.example.benefit.remote.models.CardDTO
+import com.example.benefit.ui.main.fill_card.FillCardFragment
 import com.example.benefit.util.MyBSDialog
-import com.example.benefit.util.SizeUtils
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class CardOptionsBSD : MyBSDialog() {
 
-    private val viewModel: CardOptionsViewModel by viewModels()
+    lateinit var cardBeingFilled: CardDTO
+    lateinit var selectableCards: List<CardDTO>
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        cardBeingFilled = requireArguments().getParcelable(FillCardFragment.ARG_CARD)!!
+        selectableCards = requireArguments().getParcelableArrayList(FillCardFragment.ARG_CARDS)!!
+    }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.bsd_card_options, null)
+        val view = inflater.inflate(R.layout.bsd_card_options, container)
 
         return view
     }
 
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (childFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).findNavController()
+            .setGraph(R.navigation.card_options_nav_graph, Bundle().apply {
+                putParcelable(FillCardFragment.ARG_CARD, cardBeingFilled)
+                putParcelableArrayList(FillCardFragment.ARG_CARDS, ArrayList(selectableCards))
+            })
+
+    }
 }

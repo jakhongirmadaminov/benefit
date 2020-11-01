@@ -22,3 +22,8 @@ data class CardDTO(
     @SerializedName("phone") val phone: String? = null,
     @SerializedName("status") val status: Int? = null
 ) : Parcelable
+
+
+
+@Parcelize
+class CardsDTO : ArrayList<CardDTO>(), Parcelable

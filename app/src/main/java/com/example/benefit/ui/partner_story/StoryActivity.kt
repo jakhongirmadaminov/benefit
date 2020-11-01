@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.benefit.R
-import com.example.benefit.remote.models.PartnerCategoryDTO
+import com.example.benefit.remote.models.Partner
 import com.example.benefit.util.loadImageUrl
 import jp.shts.android.storiesprogressview.StoriesProgressView
 import jp.shts.android.storiesprogressview.StoriesProgressView.StoriesListener
@@ -19,7 +19,7 @@ class StoryActivity : AppCompatActivity(), StoriesListener {
         const val EXTRA_PARTNER = "PARTNER"
     }
 
-    lateinit var partner: PartnerCategoryDTO
+    lateinit var partner: Partner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,13 +33,13 @@ class StoryActivity : AppCompatActivity(), StoriesListener {
     }
 
     private fun setupViews() {
-        image.loadImageUrl(partner.image)
+        image.loadImageUrl(partner.image!!)
         storiesProgressView!!.setStoriesCount(5) // <- set stories
         storiesProgressView!!.setStoryDuration(1200L) // <- set a story duration
         storiesProgressView!!.setStoriesListener(this) // <- set listener
         storiesProgressView!!.startStories() // <- start progress
-        ivBrandLogo.loadImageUrl(partner.icon_image)
-        tvBrand.text = partner.title_ru
+        ivBrandLogo.loadImageUrl(partner.icon_image!!)
+        tvBrand.text = partner.title
     }
 
     private fun attachListeners() {

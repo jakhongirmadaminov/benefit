@@ -18,6 +18,14 @@ interface AuthorizedApiService {
     @GET("api/paynet/categories")
     suspend fun paymentCategories(): List<PaynetCategory>
 
+    @GET("api/background")
+    suspend fun getCardBackgrounds(): List<CardBgDTO>
+
+    @GET("api/partners/category/{id}")
+    suspend fun getPartnersByCategory(
+        @Path(value = "id", encoded = true) id: Int
+    ): RespPartnerInCategory
+
     @GET("api/news")
     suspend fun getNews(
         @Query("page", encoded = true) page: Int,
@@ -31,6 +39,12 @@ interface AuthorizedApiService {
     @POST("api/user/setpassword")
     @FormUrlEncoded
     suspend fun setPassword(@Field("phone_number") phone_number: String): Response<Any>
+
+    @POST("api/refer/get")
+    @FormUrlEncoded
+    suspend fun getMyReferralLink(
+        @Field("user_token") user_token: String = AppPrefs.userToken!!,
+        @Field("user_id") user_id: Int = AppPrefs.userId): RespMyReferralLink
 
     @POST("api/ordercard/one")
     @FormUrlEncoded
@@ -99,6 +113,33 @@ interface AuthorizedApiService {
     ): List<CardDTO>
 
 
+    @POST("api/card/title")
+    @FormUrlEncoded
+    suspend fun changeCardTitle(
+        @Field("title") title: String,
+        @Field("card_id") card_id: Int
+    ): RespChangeCardTitle
+
+    @POST("api/card/design")
+    @FormUrlEncoded
+    suspend fun changeCardDesign(
+        @Field("background_id") background_id: Int,
+        @Field("card_id") card_id: Int,
+        @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
+        @Field("user_id") user_id: Int = AppPrefs.userId
+    ): RespChangeCardTitle
+
+    @POST("api/card/transhistory")
+    @FormUrlEncoded
+    suspend fun cardTransactionHistory(
+        @Field("card_id") ownId: Int,
+        @Field("endDate") endDate: Long,
+        @Field("startDate") startDate: Long,
+        @Field("pageNumber") pageNumber: Int,
+        @Field("pageSize") pageSize: Int
+    ): RespChangeCardTitle
+
+
     @GET("api/other/branches")
     suspend fun getAllBankBranches(): List<BankBranchDTO>
 
@@ -119,7 +160,7 @@ interface AuthorizedApiService {
 
 
     @GET("api/partners")
-    suspend fun getPartners(): Response<List<PartnerDTO>>
+    suspend fun getPartners(): Response<List<Partner>>
 
 
     @GET("/api/category")
@@ -127,12 +168,25 @@ interface AuthorizedApiService {
 
 
     @GET("/api/category/children/{id}")
-    suspend fun getPartnersForCategory(
+    suspend fun getCategoryChildren(
         @Path(
             value = "id",
             encoded = true
         ) id: Int
     ): Response<List<PartnerCategoryDTO>>
+
+
+    @POST("api/card/statusactive")
+    @FormUrlEncoded
+    suspend fun activateCard(@Field("card_id") card_id: Int): RespActivateCard
+
+    @POST("api/card/status")
+    @FormUrlEncoded
+    suspend fun blockCard(@Field("card_id") card_id: Int): RespActivateCard
+
+    @POST("api/card/remove")
+    @FormUrlEncoded
+    suspend fun deleteCard(@Field("card_id") card_id: Int): RespActivateCard
 
 //    @Headers("Content-Type:application/json", "Accept: application/json")
 //    @POST("v1/doctor/profile/city")

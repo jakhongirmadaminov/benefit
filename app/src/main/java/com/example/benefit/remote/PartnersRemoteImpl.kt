@@ -1,13 +1,11 @@
 package com.example.benefit.remote
 
+import com.example.benefit.remote.models.Partner
 import com.example.benefit.remote.models.PartnerCategoryDTO
-import com.example.benefit.remote.models.PartnerDTO
 import com.example.benefit.remote.repository.PartnersRemote
-import com.example.benefit.util.ResultError
-import com.example.benefit.util.ResultSuccess
-import com.example.benefit.util.ResultWrapper
-import com.example.benefit.util.getFormattedResponse
+import com.example.benefit.util.*
 import org.json.JSONObject
+import splitties.experimental.ExperimentalSplittiesApi
 import javax.inject.Inject
 
 /**
@@ -16,13 +14,14 @@ import javax.inject.Inject
  * operations in which data store implementation layers can carry out.
  */
 
+@ExperimentalSplittiesApi
 class PartnersRemoteImpl @Inject constructor(
     private val apiService: ApiService,
     private val authorizedApiService: AuthorizedApiService
 ) :
     PartnersRemote {
 
-    override suspend fun getPartners(): ResultWrapper<List<PartnerDTO>> {
+    override suspend fun getPartners(): ResultWrapper<List<Partner>> {
         return try {
             val response = authorizedApiService.getPartners()
             if (response.isSuccessful) ResultSuccess(response.body()!!)
@@ -50,7 +49,7 @@ class PartnersRemoteImpl @Inject constructor(
 
     override suspend fun getPartnersForCategory(id: Int): ResultWrapper<List<PartnerCategoryDTO>> {
         return try {
-            val response = authorizedApiService.getPartnersForCategory(id)
+            val response = authorizedApiService.getCategoryChildren(id)
             if (response.isSuccessful) ResultSuccess(response.body()!!)
             else ResultError(
                 JSONObject(response.errorBody()!!.string())["message"].toString(),
@@ -63,6 +62,14 @@ class PartnersRemoteImpl @Inject constructor(
 
     override suspend fun getAllBankBranches() =
         getFormattedResponse { authorizedApiService.getAllBankBranches() }
+
+    override suspend fun getPartnersByCategoryId(id: Int): ResultWrapper<List<Partner>> {
+        val resp = getFormattedResponse { authorizedApiService.getPartnersByCategory(id) }
+        return when (resp) {
+            is ResultError -> resp
+            is ResultSuccess -> ResultSuccess(resp.value.partners!!)
+        }.exhaustive
+    }
 
 //    override suspend fun confirmUser(user: UserCredentials): ResultWrapper<NUser> {
 //        return try {
