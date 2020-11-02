@@ -7,11 +7,11 @@ import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_card_design.*
 
-class ItemCardDesign(val it: CardBgDTO, val onClick: () -> Unit) : Item() {
+class ItemCardDesign(val obj: CardBgDTO, val onClick: () -> Unit) : Item() {
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
 
-        viewHolder.ivCardPattern.loadImageUrl(it.image)
+        viewHolder.ivCardPattern.loadImageUrl(obj.image)
         viewHolder.cardDesignItem.setOnClickListener {
             onClick()
         }

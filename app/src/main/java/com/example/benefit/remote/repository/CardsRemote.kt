@@ -1,6 +1,7 @@
 package com.example.benefit.remote.repository
 
 import com.example.benefit.remote.models.CardBgDTO
+import com.example.benefit.remote.models.CardDesignDTO
 import com.example.benefit.remote.models.RespActivateCard
 import com.example.benefit.remote.models.RespChangeCardTitle
 import com.example.benefit.util.ResultWrapper

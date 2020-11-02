@@ -16,6 +16,7 @@ import com.example.benefit.ui.main.fill_card.FillCardFragment
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_card_options.*
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 /**
@@ -45,7 +46,7 @@ class CardOptionsFragment @Inject constructor() : Fragment(R.layout.fragment_car
 
     private fun setupViews() {
         cardParent.setBackgroundResource(R.drawable.shape_top_rounded)
-        tvBalance.text = card.balance
+        tvBalance.text =  "${DecimalFormat("#,###").format(card.balance!!.toInt())} UZS"
         tvCardNumber.text = card.pan
         tvCardOwner.text = card.fullName
         tvExpiryDate.text = card.expiry.toString()

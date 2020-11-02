@@ -10,9 +10,6 @@ interface UserRemote {
     suspend fun signup(phoneNum: String): ResultWrapper<RegPhoneResp>
     suspend fun loginSms(phoneNum: String, code: String): ResultWrapper<RespLoginSms>
     suspend fun loginCode(
-        user_id: Int,
-        user_token: String,
-        phoneNum: String,
         device_code: String
     ): ResultWrapper<RespLoginCode>
 

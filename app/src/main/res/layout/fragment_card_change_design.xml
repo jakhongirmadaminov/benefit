@@ -48,10 +48,11 @@
 
 
     <TextView
-        android:id="@+id/tvSkip"
+        android:id="@+id/tvDone"
         android:layout_width="wrap_content"
         android:layout_height="?android:actionBarSize"
         android:clickable="true"
+        android:enabled="false"
         android:focusable="true"
         android:fontFamily="sans-serif-medium"
         android:foreground="?android:selectableItemBackground"
@@ -59,7 +60,6 @@
         android:paddingLeft="28dp"
         android:paddingRight="28dp"
         android:text="@string/ready"
-        android:textColor="#cc000000"
         android:textSize="16sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"

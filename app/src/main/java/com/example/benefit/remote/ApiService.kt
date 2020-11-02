@@ -13,7 +13,7 @@ interface ApiService {
 
     @POST("api/user/loginnumber")
     @FormUrlEncoded
-    suspend fun login(@Field("phone_number") phone_number: String): RespLogin
+    suspend fun login(@Field("phone_number") phone_number: String): RespFormatter< RespLogin>
 
     @POST("api/user/signup")
     @FormUrlEncoded
@@ -24,10 +24,10 @@ interface ApiService {
     ): RegPhoneResp
 
     @POST("api/user/loginsms")
-    suspend fun loginsms(@Body body: ReqLoginSms): RespLoginSms
+    suspend fun loginsms(@Body body: ReqLoginSms): RespFormatter<RespLoginSms>
 
     @POST("api/user/logincode")
-    suspend fun logincode(@Body body: ReqLoginCode): RespLoginCode
+    suspend fun logincode(@Body body: ReqLoginCode):RespFormatter< RespLoginCode>
 
     @POST("api/ordercard/one")
     @FormUrlEncoded

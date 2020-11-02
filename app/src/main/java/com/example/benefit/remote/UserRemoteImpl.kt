@@ -27,14 +27,8 @@ class UserRemoteImpl @Inject constructor(
 ) : UserRemote {
 
 
-    override suspend fun login(phoneNum: String): ResultWrapper<RespLogin> {
-        return try {
-            val response = apiService.login(phoneNum)
-            ResultSuccess(response)
-        } catch (e: Exception) {
-            ResultError(message = e.localizedMessage)
-        }
-    }
+    override suspend fun login(phoneNum: String) =
+        getFormattedResponse { apiService.login(phoneNum) }
 
     override suspend fun signup(phoneNum: String): ResultWrapper<RegPhoneResp> {
         return try {
@@ -51,31 +45,11 @@ class UserRemoteImpl @Inject constructor(
         }
     }
 
-    override suspend fun loginSms(phoneNum: String, code: String): ResultWrapper<RespLoginSms> {
-        return try {
-            val response = apiService.loginsms(ReqLoginSms(phoneNum, code))
-            if (response.msg == null) ResultSuccess(response)
-            else ResultError(message = response.msg)
-        } catch (e: Exception) {
-            ResultError(message = e.localizedMessage)
-        }
-    }
+    override suspend fun loginSms(phoneNum: String, code: String) =
+        getFormattedResponse { apiService.loginsms(ReqLoginSms(phoneNum, code)) }
 
-    override suspend fun loginCode(
-        user_id: Int,
-        user_token: String,
-        phoneNum: String,
-        device_code: String
-    ): ResultWrapper<RespLoginCode> {
-        return try {
-            val response =
-                apiService.logincode(ReqLoginCode(user_id, user_token, phoneNum, device_code))
-            if (response.msg == null) ResultSuccess(response)
-            else ResultError(message = response.msg)
-        } catch (e: Exception) {
-            ResultError(message = e.localizedMessage)
-        }
-    }
+    override suspend fun loginCode(device_code: String) =
+        getFormattedResponse { apiService.logincode(ReqLoginCode(device_code)) }
 
     override suspend fun resendCode(phoneNum: String): ResultWrapper<String> {
         return try {
@@ -105,25 +79,13 @@ class UserRemoteImpl @Inject constructor(
         }
     }
 
-    override suspend fun paymentCategories(): ResultWrapper<List<PaynetCategory>> {
-        return try {
-            val response = authorizedApiService.paymentCategories()
-            ResultSuccess(response)
-        } catch (e: Exception) {
-            ResultError(message = e.localizedMessage)
-        }
-    }
+    override suspend fun paymentCategories() =
+        getFormattedResponse { authorizedApiService.paymentCategories() }
 
-    override suspend fun getNews(page: Int, perPage: Int): ResultWrapper<List<NewsDTO>> {
-        return try {
-            val response = authorizedApiService.getNews(page, perPage)
-            ResultSuccess(response)
-        } catch (e: Exception) {
-            ResultError(message = e.localizedMessage)
-        }
-    }
+    override suspend fun getNews(page: Int, perPage: Int) =
+        getFormattedResponse { authorizedApiService.getNews(page, perPage) }
 
-    override suspend fun termsAccept() = getFormattedResponse { authorizedApiService.termsAccept() }
+    override suspend fun termsAccept() = getParsedResponse { authorizedApiService.termsAccept() }
     override suspend fun addPassportPhoto(
         order_card_id: Int,
         image: Bitmap
@@ -132,7 +94,7 @@ class UserRemoteImpl @Inject constructor(
         image.compress(Bitmap.CompressFormat.JPEG, 90, stream)
         val file = stream.toByteArray().toRequestBody()
         val body = MultipartBody.Part.createFormData("image", "image.jpg", file)
-        return getFormattedResponse { authorizedApiService.addPassportPhoto(order_card_id, body) }
+        return getParsedResponse { authorizedApiService.addPassportPhoto(order_card_id, body) }
     }
 
     override suspend fun addPhotoWithPassport(
@@ -143,7 +105,7 @@ class UserRemoteImpl @Inject constructor(
         image.compress(Bitmap.CompressFormat.JPEG, 90, stream)
         val file = stream.toByteArray().toRequestBody()
         val body = MultipartBody.Part.createFormData("image", "image.jpg", file)
-        return getFormattedResponse {
+        return getParsedResponse {
             authorizedApiService.addPhotoWithPassport(
                 order_card_id,
                 body
@@ -167,23 +129,23 @@ class UserRemoteImpl @Inject constructor(
             val fileBody: RequestBody = bos.toByteArray().toRequestBody()
             map["image"] = fileBody
         }
-        return getFormattedResponse { authorizedApiService.addWorkProof(map) }
+        return getParsedResponse { authorizedApiService.addWorkProof(map) }
     }
 
     override suspend fun addOrderCardAddress(order_card_id: Int, address: String) =
-        getFormattedResponse { authorizedApiService.orderCardAddress(order_card_id, address) }
+        getParsedResponse { authorizedApiService.orderCardAddress(order_card_id, address) }
 
     override suspend fun addLimitSum(order_card_id: Int, sum: String) =
-        getFormattedResponse { authorizedApiService.orderCardLimit(order_card_id, sum) }
+        getParsedResponse { authorizedApiService.orderCardLimit(order_card_id, sum) }
 
 
     override suspend fun completeAddCard(order_card_id: Int) =
-        getFormattedResponse { authorizedApiService.completeOrderCard(order_card_id) }
+        getParsedResponse { authorizedApiService.completeOrderCard(order_card_id) }
 
     override suspend fun getMyCards() = getFormattedResponse { authorizedApiService.getMyCards() }
 
     override suspend fun getMyReferralLink(): ResultWrapper<String> {
-        val resp = getFormattedResponse { authorizedApiService.getMyReferralLink() }
+        val resp = getParsedResponse { authorizedApiService.getMyReferralLink() }
         return when (resp) {
             is ResultError -> resp
             is ResultSuccess -> ResultSuccess(resp.value.referal_link_token)

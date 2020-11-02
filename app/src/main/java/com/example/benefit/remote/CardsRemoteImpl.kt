@@ -2,6 +2,7 @@ package com.example.benefit.remote
 
 import com.example.benefit.remote.repository.CardsRemote
 import com.example.benefit.util.getFormattedResponse
+import com.example.benefit.util.getParsedResponse
 import splitties.experimental.ExperimentalSplittiesApi
 import javax.inject.Inject
 
@@ -21,13 +22,13 @@ class CardsRemoteImpl @Inject constructor(
         getFormattedResponse { authApi.getCardBackgrounds() }
 
     override suspend fun deleteCard(cardId: Int) =
-        getFormattedResponse { authApi.deleteCard(cardId) }
+        getParsedResponse { authApi.deleteCard(cardId) }
 
     override suspend fun blockCard(cardId: Int) =
         getFormattedResponse { authApi.blockCard(cardId) }
 
     override suspend fun activateCard(cardId: Int) =
-        getFormattedResponse { authApi.activateCard(cardId) }
+        getParsedResponse { authApi.activateCard(cardId) }
 
     override suspend fun cardTransactionHistory(
         ownId: Int,
@@ -35,12 +36,12 @@ class CardsRemoteImpl @Inject constructor(
         startDate: Long,
         pageNumber: Int,
         pageSize: Int
-    ) = getFormattedResponse {
+    ) = getParsedResponse {
         authApi.cardTransactionHistory(ownId, endDate, startDate, pageNumber, pageSize)
     }
 
     override suspend fun changeCardTitle(title: String, card_id: Int) =
-        getFormattedResponse { authApi.changeCardTitle(title, card_id) }
+        getParsedResponse { authApi.changeCardTitle(title, card_id) }
 
     override suspend fun changeCardDesign(bgId: Int, card_id: Int) =
         getFormattedResponse { authApi.changeCardDesign(bgId, card_id) }

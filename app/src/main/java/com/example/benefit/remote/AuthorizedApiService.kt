@@ -16,10 +16,10 @@ interface AuthorizedApiService {
 
 
     @GET("api/paynet/categories")
-    suspend fun paymentCategories(): List<PaynetCategory>
+    suspend fun paymentCategories(): RespFormatter<List<PaynetCategory>>
 
     @GET("api/background")
-    suspend fun getCardBackgrounds(): List<CardBgDTO>
+    suspend fun getCardBackgrounds(): RespFormatter<List<CardBgDTO>>
 
     @GET("api/partners/category/{id}")
     suspend fun getPartnersByCategory(
@@ -30,7 +30,7 @@ interface AuthorizedApiService {
     suspend fun getNews(
         @Query("page", encoded = true) page: Int,
         @Query("per-page", encoded = true) per_page: Int
-    ): List<NewsDTO>
+    ): RespFormatter<List<NewsDTO>>
 
     @POST("api/user/edit")
     @Multipart
@@ -44,7 +44,8 @@ interface AuthorizedApiService {
     @FormUrlEncoded
     suspend fun getMyReferralLink(
         @Field("user_token") user_token: String = AppPrefs.userToken!!,
-        @Field("user_id") user_id: Int = AppPrefs.userId): RespMyReferralLink
+        @Field("user_id") user_id: Int = AppPrefs.userId
+    ): RespMyReferralLink
 
     @POST("api/ordercard/one")
     @FormUrlEncoded
@@ -110,7 +111,7 @@ interface AuthorizedApiService {
     suspend fun getMyCards(
         @Field("user_token") user_auth: String = AppPrefs.userToken!!,
         @Field("user_id") user_id: Int = AppPrefs.userId
-    ): List<CardDTO>
+    ): RespFormatter<List<CardDTO>>
 
 
     @POST("api/card/title")
@@ -127,7 +128,7 @@ interface AuthorizedApiService {
         @Field("card_id") card_id: Int,
         @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
         @Field("user_id") user_id: Int = AppPrefs.userId
-    ): RespChangeCardTitle
+    ): RespFormatter<RespChangeCardTitle>
 
     @POST("api/card/transhistory")
     @FormUrlEncoded
@@ -154,10 +155,6 @@ interface AuthorizedApiService {
         @Field("user_id") user_id: Int = AppPrefs.userId
     ): RespAcceptTerms
 
-    @Multipart
-    @POST("api/user/loginnumber")
-    suspend fun uploadAvatar(@Field("phone_number") phone_number: String): Response<Any>
-
 
     @GET("api/partners")
     suspend fun getPartners(): Response<List<Partner>>
@@ -182,7 +179,7 @@ interface AuthorizedApiService {
 
     @POST("api/card/status")
     @FormUrlEncoded
-    suspend fun blockCard(@Field("card_id") card_id: Int): RespActivateCard
+    suspend fun blockCard(@Field("card_id") card_id: Int): RespFormatter<RespActivateCard>
 
     @POST("api/card/remove")
     @FormUrlEncoded

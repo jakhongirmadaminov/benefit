@@ -78,12 +78,7 @@ class LoginViewModel @ViewModelInject constructor(private val userRemote: UserRe
     fun loginCode(code: String) {
         isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
-            val response = userRemote.loginCode(
-                AppPrefs.userId,
-                AppPrefs.userToken!!,
-                AppPrefs.phoneNumber!!,
-                code
-            )
+            val response = userRemote.loginCode(code)
             withContext(Dispatchers.Main) {
                 isLoading.value = false
                 when (response) {

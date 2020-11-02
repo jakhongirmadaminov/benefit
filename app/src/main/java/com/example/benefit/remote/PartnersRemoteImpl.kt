@@ -61,10 +61,10 @@ class PartnersRemoteImpl @Inject constructor(
     }
 
     override suspend fun getAllBankBranches() =
-        getFormattedResponse { authorizedApiService.getAllBankBranches() }
+        getParsedResponse { authorizedApiService.getAllBankBranches() }
 
     override suspend fun getPartnersByCategoryId(id: Int): ResultWrapper<List<Partner>> {
-        val resp = getFormattedResponse { authorizedApiService.getPartnersByCategory(id) }
+        val resp = getParsedResponse { authorizedApiService.getPartnersByCategory(id) }
         return when (resp) {
             is ResultError -> resp
             is ResultSuccess -> ResultSuccess(resp.value.partners!!)

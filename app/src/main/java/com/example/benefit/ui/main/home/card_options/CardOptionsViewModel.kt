@@ -23,6 +23,7 @@ class CardOptionsViewModel @ViewModelInject constructor(private val cardsRemote:
     val errorMessage = SingleLiveEvent<String?>()
     val deleteCardResp = SingleLiveEvent<Boolean>()
     val cardBgs = SingleLiveEvent<List<CardBgDTO>>()
+    val setCardDesignResp = SingleLiveEvent<String>()
     val blockCardResp = SingleLiveEvent<Boolean>()
 
     fun deleteCard(cardId: Int) {
@@ -54,7 +55,7 @@ class CardOptionsViewModel @ViewModelInject constructor(private val cardsRemote:
                         errorMessage.value = response.message
                     }
                     is ResultSuccess -> {
-                        deleteCardResp.value = true
+                        blockCardResp.value = true
                     }
                 }.exhaustive
             }
@@ -80,16 +81,23 @@ class CardOptionsViewModel @ViewModelInject constructor(private val cardsRemote:
         }
     }
 
-//    val loginResp = SingleLiveEvent<ResultWrapper<String>>()
-//    fun login(phoneNumber: String) {
-//        loginResp.value = InProgress
-//        viewModelScope.launch(Dispatchers.IO) {
-//            val response = userRemoteImpl.login(phoneNumber)
-//            withContext(Dispatchers.Main) {
-//                loginResp.value = response
-//            }
-//        }
-//    }
 
+    fun setCardDesign(bgId: Int, cardId: Int) {
+        isLoading.value = true
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = cardsRemote.changeCardDesign(bgId, cardId)
+            withContext(Dispatchers.Main) {
+                isLoading.value = false
+                when (response) {
+                    is ResultError -> {
+                        errorMessage.value = response.message
+                    }
+                    is ResultSuccess -> {
+                        setCardDesignResp.value = ""
+                    }
+                }.exhaustive
+            }
+        }
+    }
 
 }

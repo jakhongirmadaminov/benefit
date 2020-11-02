@@ -1,5 +1,6 @@
 package com.example.benefit.util
 
+import com.example.benefit.remote.models.RespFormatter
 import org.json.JSONObject
 import retrofit2.HttpException
 
@@ -20,7 +21,7 @@ data class ResultError(val message: String? = null, val code: Int? = null) :
 
 data class ResultSuccess<out V>(val value: V) : ResultWrapper<V>()
 
- suspend fun <T> getFormattedResponse(action: suspend () -> T): ResultWrapper<T> {
+suspend fun <T> getParsedResponse(action: suspend () -> T): ResultWrapper<T> {
     return try {
         ResultSuccess(action())
 //            else ResultError(message = action.result)
@@ -32,7 +33,23 @@ data class ResultSuccess<out V>(val value: V) : ResultWrapper<V>()
     } catch (e: Exception) {
         ResultError(message = e.localizedMessage)
     }
+}
 
+suspend fun <T> getFormattedResponse(action: suspend () -> RespFormatter<T>): ResultWrapper<T> {
+    return try {
+        val resp = action()
+        if (resp.result != null) {
+            ResultSuccess(action().result!!)
+        } else if (resp.error != null) ResultError(resp.error.message)
+        else ResultError(resp.message)
+    } catch (e: HttpException) {
+        ResultError(
+            JSONObject(e.response()!!.errorBody()!!.string())["message"].toString(),
+            e.code()
+        )
+    } catch (e: Exception) {
+        ResultError(message = e.localizedMessage)
+    }
 }
 
 
