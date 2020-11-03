@@ -13,9 +13,11 @@ import com.example.benefit.remote.models.CardsDTO
 import com.example.benefit.ui.DialogLoading
 import com.example.benefit.ui.main.fill_card.FillCardBSD
 import com.example.benefit.ui.main.fill_card.FillCardFragment
+import com.example.benefit.ui.transactions_history.TransactionsHistoryActivity
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_card_options.*
+import splitties.fragments.start
 import java.text.DecimalFormat
 import javax.inject.Inject
 
@@ -46,7 +48,7 @@ class CardOptionsFragment @Inject constructor() : Fragment(R.layout.fragment_car
 
     private fun setupViews() {
         cardParent.setBackgroundResource(R.drawable.shape_top_rounded)
-        tvBalance.text =  "${DecimalFormat("#,###").format(card.balance!!.toInt())} UZS"
+        tvBalance.text = "${DecimalFormat("#,###").format(card.balance!!.toInt())} UZS"
         tvCardNumber.text = card.pan
         tvCardOwner.text = card.fullName
         tvExpiryDate.text = card.expiry.toString()
@@ -81,6 +83,13 @@ class CardOptionsFragment @Inject constructor() : Fragment(R.layout.fragment_car
             dialog.show(parentFragmentManager, "")
         }
         llHistory.setOnClickListener {
+            start<TransactionsHistoryActivity> {
+                putParcelableArrayListExtra(
+                    TransactionsHistoryActivity.EXTRA_CARDS,
+                    ArrayList(selectableCards)
+                )
+                putExtra(TransactionsHistoryActivity.EXTRA_CARD, card)
+            }
         }
         llMakeDeposit.setOnClickListener {
             ((parentFragment as NavHostFragment).parentFragment as CardOptionsBSD).dismiss()

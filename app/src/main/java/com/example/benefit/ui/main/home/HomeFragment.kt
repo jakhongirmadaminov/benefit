@@ -135,7 +135,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
         cardPayments.setOnClickListener {
-            start<TransactionsHistoryActivity> {}
+            start<TransactionsHistoryActivity> {
+
+            }
         }
 
         page_two.setOnClickListener {

@@ -27,6 +27,10 @@ import kotlin.random.Random
 @AndroidEntryPoint
 class TransactionsHistoryActivity : AppCompatActivity() {
 
+    companion object {
+        const val EXTRA_CARD = "CARD"
+        const val EXTRA_CARDS = "CARDS"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
