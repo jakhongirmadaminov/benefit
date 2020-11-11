@@ -3,7 +3,10 @@ package com.example.benefit.remote
 import com.example.benefit.remote.models.*
 import com.example.benefit.util.AppPrefs
 import retrofit2.Response
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.POST
 
 /**
  * Defines the abstract methods used for interacting with the Bufferoo API
@@ -13,21 +16,32 @@ interface ApiService {
 
     @POST("api/user/loginnumber")
     @FormUrlEncoded
-    suspend fun login(@Field("phone_number") phone_number: String): RespFormatter< RespLogin>
+    suspend fun login(@Field("phone_number") phone_number: String): RespFormatter<RespLogin>
 
     @POST("api/user/signup")
     @FormUrlEncoded
     suspend fun signup(
         @Field("phone") phone: String,
+        @Field("referal_code") referal_code: String?,
         @Field("created") created: String = "1601573398",
         @Field("ip") ip: String = "127.0.0.1"
-    ): RegPhoneResp
+    ): RespFormatter<RegPhoneResp>
+
+
+    @POST("api/user/setpassword")
+    @FormUrlEncoded
+    suspend fun setPassword(
+        @Field("phone_number") phone_number: String,
+        @Field("password") password: String,
+        @Field("user_token") user_token: String,
+        @Field("user_id") user_id: Int
+    ): RespFormatter<RespUserInfo>
 
     @POST("api/user/loginsms")
     suspend fun loginsms(@Body body: ReqLoginSms): RespFormatter<RespLoginSms>
 
     @POST("api/user/logincode")
-    suspend fun logincode(@Body body: ReqLoginCode):RespFormatter< RespLoginCode>
+    suspend fun logincode(@Body body: ReqLoginCode): RespFormatter<RespLoginCode>
 
     @POST("api/ordercard/one")
     @FormUrlEncoded
@@ -44,7 +58,7 @@ interface ApiService {
         @Field("user_id") user_id: Int,
         @Field("phone_number") phone_number: String,
         @Field("sms_code") sms_code: String
-    ): PlainResp
+    ): RespFormatter<RespUserInfo>
 
     @POST("api/user/sendcode")
     @FormUrlEncoded

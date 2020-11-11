@@ -65,7 +65,7 @@ class RegCodeFragment @Inject constructor() : Fragment(R.layout.fragment_reg_cod
             respState = ResponseState.SUCCESS
             progress.visibility = View.GONE
 
-            findNavController().navigate(R.id.action_regCodeFragment_to_regProfileSetupFragment)
+            findNavController().navigate(R.id.action_regCodeFragment_to_regPasswordFragment)
 
         })
 

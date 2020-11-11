@@ -57,7 +57,7 @@ class OrderCardActivity : AppCompatActivity(), BSImagePicker.OnSingleImageSelect
             btnNextLimit.isEnabled = !text.isNullOrBlank() && text.toString().toInt() > 0
         }
 
-        btnNextTerms.setOnClickListener { viewModel.acceptTerms() }
+        btnNextTerms.setOnClickListener { viewModel.acceptTerms(if (cardType == ECardType.ZOOM) 2 else 1) }
 
         cbTermsAgree.setOnCheckedChangeListener { _, isChecked ->
             btnNextTerms.isEnabled = isChecked

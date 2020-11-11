@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
@@ -19,12 +20,20 @@ import javax.inject.Inject
 class RegPasswordFragment @Inject constructor() : Fragment(R.layout.fragment_reg_password) {
 
 
-    private val loginViewModel: LoginViewModel by viewModels()
+    private val viewModel: RegistrationViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         attachListeners()
+        subscribeObservers()
+    }
+
+    private fun subscribeObservers() {
+
+        viewModel.setPasswordResp.observe(viewLifecycleOwner, {
+            findNavController().navigate(R.id.action_regPasswordFragment_to_regProfileSetupFragment)
+        })
     }
 
     private fun attachListeners() {
@@ -38,8 +47,7 @@ class RegPasswordFragment @Inject constructor() : Fragment(R.layout.fragment_reg
         }
 
         btnConfirm.setOnClickListener {
-//            loginViewModel.login("998" + edtCode.text.toString())
-            findNavController().navigate(R.id.action_regPasswordFragment_to_regCardActivationFragment)
+            viewModel.setPassword( edtCode.text.toString())
         }
     }
 

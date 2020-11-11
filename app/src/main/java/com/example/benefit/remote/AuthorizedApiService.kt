@@ -32,9 +32,16 @@ interface AuthorizedApiService {
         @Query("per-page", encoded = true) per_page: Int
     ): RespFormatter<List<NewsDTO>>
 
-    @POST("api/user/edit")
+    @POST("api/user/refresh")
     @Multipart
-    suspend fun editUserInfo(@Field("phone_number") phone_number: String): Response<Any>
+    suspend fun updateUserInfo(
+        @Field("first_name") first_name: String,
+        @Field("last_name") last_name: String,
+        @Field("gender") gender: Int,
+        @Field("birth_day") birth_day: Long,
+        @Field("user_id") user_id: Int = AppPrefs.userId,
+        @Field("user_token") user_token: String = AppPrefs.userToken!!
+    ): RespFormatter<RespUserInfo>
 
     @POST("api/user/setpassword")
     @FormUrlEncoded
@@ -50,6 +57,7 @@ interface AuthorizedApiService {
     @POST("api/ordercard/one")
     @FormUrlEncoded
     suspend fun termsAccept(
+        @Field("type_id") type_id: Int,
         @Field("is_agree") is_agree: Boolean = true,
         @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
         @Field("user_id") user_id: Int = AppPrefs.userId
@@ -76,6 +84,10 @@ interface AuthorizedApiService {
     @POST("api/ordercard/four")
     @Multipart
     suspend fun addWorkProof(@PartMap body: MutableMap<String, @JvmSuppressWildcards RequestBody>): RespAcceptTerms
+
+    @POST("api/user/avatar")
+    @Multipart
+    suspend fun uploadAvatar(@PartMap body: MutableMap<String, @JvmSuppressWildcards RequestBody>): RespFormatter<RespUserInfo>
 
     @POST("api/ordercard/five")
     @FormUrlEncoded

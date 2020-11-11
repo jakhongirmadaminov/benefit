@@ -21,7 +21,6 @@ class SelectCardTypeActivity : AppCompatActivity() {
     companion object {
     }
 
-    private val viewModel: SelectCardTypeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

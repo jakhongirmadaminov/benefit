@@ -1,14 +1,16 @@
 package com.example.benefit.remote
 
 import android.graphics.Bitmap
-import com.example.benefit.remote.models.*
+import com.example.benefit.remote.models.ReqLoginCode
+import com.example.benefit.remote.models.ReqLoginSms
+import com.example.benefit.remote.models.RespAcceptTerms
+import com.example.benefit.remote.models.RespUserInfo
 import com.example.benefit.remote.repository.UserRemote
 import com.example.benefit.util.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
-import retrofit2.HttpException
 import splitties.experimental.ExperimentalSplittiesApi
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
@@ -30,23 +32,18 @@ class UserRemoteImpl @Inject constructor(
     override suspend fun login(phoneNum: String) =
         getFormattedResponse { apiService.login(phoneNum) }
 
-    override suspend fun signup(phoneNum: String): ResultWrapper<RegPhoneResp> {
-        return try {
-            val response = apiService.signup(phoneNum)
-            if (response.msg == null) ResultSuccess(response)
-            else ResultError(message = response.msg)
-        } catch (e: HttpException) {
-            ResultError(
-                JSONObject(e.response()!!.errorBody()!!.string())["message"].toString(),
-                e.code()
-            )
-        } catch (e: Exception) {
-            ResultError(message = e.localizedMessage)
-        }
-    }
+    override suspend fun signup(phoneNum: String, referal: String?) =
+        getFormattedResponse { apiService.signup(phoneNum, referal) }
 
     override suspend fun loginSms(phoneNum: String, code: String) =
         getFormattedResponse { apiService.loginsms(ReqLoginSms(phoneNum, code)) }
+
+    override suspend fun setPassword(
+        password: String,
+        phone_number: String,
+        user_token: String,
+        user_id: Int
+    ) = getFormattedResponse { apiService.setPassword(phone_number, password, user_token, user_id) }
 
     override suspend fun loginCode(device_code: String) =
         getFormattedResponse { apiService.logincode(ReqLoginCode(device_code)) }
@@ -69,15 +66,7 @@ class UserRemoteImpl @Inject constructor(
         user_id: Int,
         phone_number: String,
         sms_code: String
-    ): ResultWrapper<PlainResp> {
-        return try {
-            val response = apiService.checkcode(user_token, user_id, phone_number, sms_code)
-            if (response.message == null) ResultSuccess(response)
-            else ResultError(message = response.message)
-        } catch (e: Exception) {
-            ResultError(message = e.localizedMessage)
-        }
-    }
+    ) = getFormattedResponse { apiService.checkcode(user_token, user_id, phone_number, sms_code) }
 
     override suspend fun paymentCategories() =
         getFormattedResponse { authorizedApiService.paymentCategories() }
@@ -85,7 +74,9 @@ class UserRemoteImpl @Inject constructor(
     override suspend fun getNews(page: Int, perPage: Int) =
         getFormattedResponse { authorizedApiService.getNews(page, perPage) }
 
-    override suspend fun termsAccept() = getParsedResponse { authorizedApiService.termsAccept() }
+    override suspend fun termsAccept(type_id: Int) =
+        getParsedResponse { authorizedApiService.termsAccept(type_id) }
+
     override suspend fun addPassportPhoto(
         order_card_id: Int,
         image: Bitmap
@@ -131,6 +122,28 @@ class UserRemoteImpl @Inject constructor(
         }
         return getParsedResponse { authorizedApiService.addWorkProof(map) }
     }
+
+    override suspend fun uploadAvatar(bitmap: Bitmap): ResultWrapper<RespUserInfo> {
+        val map: MutableMap<String, RequestBody> = HashMap()
+        map["user_id"] = AppPrefs.userId.toString().toRequestBody()
+        map["user_token"] = AppPrefs.userToken.toString().toRequestBody()
+
+        val bos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos)
+
+        if (bos.size() > 0) {
+            val fileBody: RequestBody = bos.toByteArray().toRequestBody()
+            map["avatar"] = fileBody
+        }
+        return getFormattedResponse { authorizedApiService.uploadAvatar(map) }
+    }
+
+    override suspend fun updateUserInfo(
+        name: String,
+        lastName: String,
+        gender: Int,
+        dobMillis: Long
+    ) = getFormattedResponse { authorizedApiService.updateUserInfo(name, lastName, gender, dobMillis) }
 
     override suspend fun addOrderCardAddress(order_card_id: Int, address: String) =
         getParsedResponse { authorizedApiService.orderCardAddress(order_card_id, address) }

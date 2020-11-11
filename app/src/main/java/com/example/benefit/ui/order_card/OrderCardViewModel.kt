@@ -47,10 +47,10 @@ class OrderCardViewModel @ViewModelInject constructor(private val userRemote: Us
     val isLoading = SingleLiveEvent<Boolean>()
     val isCompleted = SingleLiveEvent<Boolean>()
 
-    fun acceptTerms() {
+    fun acceptTerms(type_id:Int) {
         isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
-            val response = userRemote.termsAccept()
+            val response = userRemote.termsAccept(type_id)
             withContext(Dispatchers.Main) {
                 isLoading.value = false
                 when (response) {

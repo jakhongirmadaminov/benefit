@@ -136,7 +136,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
+            <TextView
                 android:id="@+id/edtDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -155,7 +155,7 @@
                 android:textSize="24sp"
                 android:textStyle="normal" />
 
-            <EditText
+            <TextView
                 android:id="@+id/edtMonth"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -179,7 +179,7 @@
                 android:textSize="24sp"
                 android:textStyle="normal" />
 
-            <EditText
+            <TextView
                 android:id="@+id/edtYear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

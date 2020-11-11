@@ -6,7 +6,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
@@ -56,11 +55,8 @@ class RegPhoneFragment @Inject constructor() : Fragment(R.layout.fragment_reg_ph
             )
         })
 
-        viewModel.signUpResp.observe(viewLifecycleOwner, Observer {
-
+        viewModel.signUpResp.observe(viewLifecycleOwner, {
             findNavController().navigate(R.id.action_regPhoneFragment_to_regCodeFragment)
-
-
         })
 
 
@@ -103,7 +99,10 @@ class RegPhoneFragment @Inject constructor() : Fragment(R.layout.fragment_reg_ph
             }
         }
         btnGetCode.setOnClickListener {
-            viewModel.signup(edtPhone.text.toString())
+            viewModel.signup(
+                edtPhone.text.toString(),
+                if (edtReferal.text.isNullOrBlank()) null else edtReferal.text.toString()
+            )
         }
     }
 

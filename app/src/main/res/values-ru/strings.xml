@@ -207,5 +207,6 @@
     <string name="delete_card">Удалить карту</string>
     <string name="delete">Удалить</string>
     <string name="are_you_sure_to_delete_card">Внимание! Вы действительно хотите удалить эту карту?</string>
+    <string name="referal">Referal code</string>
 
 </resources>

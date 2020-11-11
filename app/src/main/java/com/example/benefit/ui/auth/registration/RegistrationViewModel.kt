@@ -1,38 +1,42 @@
 package com.example.benefit.ui.auth.registration
 
+import android.graphics.Bitmap
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.benefit.remote.UserRemoteImpl
-import com.example.benefit.remote.models.PlainResp
 import com.example.benefit.remote.models.RegPhoneResp
+import com.example.benefit.remote.models.RespUserInfo
+import com.example.benefit.remote.repository.UserRemote
 import com.example.benefit.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import splitties.preferences.edit
 
 /**
  * Created by jahon on 03-Sep-20
  */
-class RegistrationViewModel @ViewModelInject constructor(private val userRemoteImpl: UserRemoteImpl) :
+class RegistrationViewModel @ViewModelInject constructor(private val userRemote: UserRemote) :
     ViewModel() {
 
 
     var phone = ""
 
     var signUpResp = MutableLiveData<RegPhoneResp>()
+    var setPasswordResp = MutableLiveData<RespUserInfo>()
+    var uploadAvatarResp = MutableLiveData<RespUserInfo>()
     val isLoading = SingleLiveEvent<Boolean>()
     val errorMessage = SingleLiveEvent<String>()
     val resendCodeResp = SingleLiveEvent<String>()
-    val checkCodeResp = SingleLiveEvent<PlainResp>()
+    val checkCodeResp = SingleLiveEvent<RespUserInfo>()
 
 
-    fun signup(phoneNumber: String) {
+    fun signup(phoneNumber: String, referal: String? = null) {
         phone = phoneNumber
         isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
-            val response = userRemoteImpl.signup(phoneNumber)
+            val response = userRemote.signup(phoneNumber, referal)
             withContext(Dispatchers.Main) {
                 when (response) {
                     is ResultError -> {
@@ -51,7 +55,7 @@ class RegistrationViewModel @ViewModelInject constructor(private val userRemoteI
     fun resendCode() {
         isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
-            val response = userRemoteImpl.resendCode(phone)
+            val response = userRemote.resendCode(phone)
             withContext(Dispatchers.Main) {
                 when (response) {
                     is ResultError -> {
@@ -71,7 +75,7 @@ class RegistrationViewModel @ViewModelInject constructor(private val userRemoteI
     fun checkCode(code: String) {
         isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
-            val response = userRemoteImpl.checkcode(
+            val response = userRemote.checkcode(
                 signUpResp.value!!.user_token!!,
                 signUpResp.value!!.user_id!!,
                 signUpResp.value!!.phone_number!!,
@@ -91,6 +95,82 @@ class RegistrationViewModel @ViewModelInject constructor(private val userRemoteI
             }
         }
 
+    }
+
+
+    fun setPassword(password: String) {
+        isLoading.value = true
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = userRemote.setPassword(
+                password,
+                checkCodeResp.value!!.phone_number!!,
+                checkCodeResp.value!!.user_token,
+                checkCodeResp.value!!.user_id
+            )
+            withContext(Dispatchers.Main) {
+                when (response) {
+                    is ResultError -> {
+                        errorMessage.value = response.message
+                        isLoading.value = false
+                    }
+                    is ResultSuccess -> {
+                        AppPrefs.edit {
+                            userId = response.value.user_id
+                            userToken = response.value.user_token
+                            phoneNumber = response.value.phone_number
+                            token = response.value.access_token
+                        }
+                        setPasswordResp.value = response.value
+                        isLoading.value = false
+                    }
+                }.exhaustive
+            }
+        }
+
+    }
+
+    fun uploadAvatar(bitmap: Bitmap) {
+        isLoading.value = true
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = userRemote.uploadAvatar(bitmap)
+            withContext(Dispatchers.Main) {
+                when (response) {
+                    is ResultError -> {
+                        errorMessage.value = response.message
+                        isLoading.value = false
+                    }
+                    is ResultSuccess -> {
+                        AppPrefs.edit {
+                            avatar = Constants.BASE_URL + "upload/" + response.value.avatar
+                        }
+                        uploadAvatarResp.value = response.value
+                        isLoading.value = false
+                    }
+                }.exhaustive
+            }
+        }
+    }
+
+    fun uploadProfileInfo(name: String, lastName: String, gender: Int, dobMillis: Long) {
+        isLoading.value = true
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = userRemote.updateUserInfo(name, lastName, gender, dobMillis)
+            withContext(Dispatchers.Main) {
+                when (response) {
+                    is ResultError -> {
+                        errorMessage.value = response.message
+                        isLoading.value = false
+                    }
+                    is ResultSuccess -> {
+                        AppPrefs.edit {
+                            avatar = Constants.BASE_URL + "upload/" + response.value.avatar
+                        }
+                        uploadAvatarResp.value = response.value
+                        isLoading.value = false
+                    }
+                }.exhaustive
+            }
+        }
     }
 
 }

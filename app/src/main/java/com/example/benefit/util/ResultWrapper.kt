@@ -39,7 +39,7 @@ suspend fun <T> getFormattedResponse(action: suspend () -> RespFormatter<T>): Re
     return try {
         val resp = action()
         if (resp.result != null) {
-            ResultSuccess(action().result!!)
+            ResultSuccess(resp.result)
         } else if (resp.error != null) ResultError(resp.error.message)
         else ResultError(resp.message)
     } catch (e: HttpException) {

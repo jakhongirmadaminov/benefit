@@ -25,12 +25,8 @@
         android:label=""
         tools:layout="@layout/fragment_reg_code" >
         <action
-            android:id="@+id/action_regCodeFragment_to_regProfileSetupFragment"
-            app:destination="@id/regProfileSetupFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            android:id="@+id/action_regCodeFragment_to_regPasswordFragment"
+            app:destination="@id/regPasswordFragment" />
     </fragment>
 
     <fragment
@@ -39,12 +35,8 @@
         android:label=""
         tools:layout="@layout/fragment_reg_profile_setup" >
         <action
-            android:id="@+id/action_regProfileSetupFragment_to_regPasswordFragment"
-            app:destination="@id/regPasswordFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            android:id="@+id/action_regProfileSetupFragment_to_regCardActivationFragment"
+            app:destination="@id/regCardActivationFragment" />
     </fragment>
 
 
@@ -54,12 +46,8 @@
         android:label=""
         tools:layout="@layout/fragment_reg_password" >
         <action
-            android:id="@+id/action_regPasswordFragment_to_regCardActivationFragment"
-            app:destination="@id/regCardActivationFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            android:id="@+id/action_regPasswordFragment_to_regProfileSetupFragment"
+            app:destination="@id/regProfileSetupFragment" />
     </fragment>
 
     <fragment

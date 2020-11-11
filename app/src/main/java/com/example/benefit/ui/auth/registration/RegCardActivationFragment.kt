@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -29,7 +30,7 @@ class RegCardActivationFragment @Inject constructor() :
     Fragment(R.layout.fragment_reg_card_activation) {
 
 
-    private val loginViewModel: LoginViewModel by viewModels()
+    private val viewModel: RegistrationViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

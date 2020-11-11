@@ -115,6 +115,27 @@
         app:layout_constraintVertical_chainStyle="spread" />
 
 
+    <EditText
+        android:id="@+id/edtReferal"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="26dp"
+        android:background="@drawable/shape_input_bg"
+        android:fontFamily="sans-serif"
+        android:hint="@string/referal"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:maxLength="6"
+        android:maxLines="1"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textColor="#cc5c5c5c"
+        android:textSize="18dp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@id/edtPhone"
+        app:layout_constraintTop_toBottomOf="@id/edtPhone" />
+
     <CheckBox
         android:id="@+id/cbTermsAgree"
         android:layout_width="wrap_content"
@@ -123,7 +144,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/i_accept_terms"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edtPhone" />
+        app:layout_constraintTop_toBottomOf="@id/edtReferal" />
 
 
     <TextView
@@ -140,7 +161,7 @@
         android:textStyle="normal"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/btnGetCode"
-        app:layout_constraintTop_toBottomOf="@id/tvPhoneStart" />
+        app:layout_constraintTop_toBottomOf="@id/edtReferal" />
 
 
     <ProgressBar
@@ -148,10 +169,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/btnGetCode"
+        app:layout_constraintBottom_toBottomOf="@id/lblYoullReceiveCode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvPhoneStart" />
+        app:layout_constraintTop_toTopOf="@id/lblYoullReceiveCode" />
 
 
     <com.example.benefit.util.ButtonMain

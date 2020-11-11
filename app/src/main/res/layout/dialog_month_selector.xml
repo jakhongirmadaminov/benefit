@@ -4,39 +4,41 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
-    android:layout_margin="20dp"
-    android:gravity="center">
+    android:gravity="center"
+    android:minWidth="1000dp"
+    android:minHeight="1000dp">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_margin="20dp"
         android:background="@drawable/shape_grey_rounded">
 
 
-        <NumberPicker
-            android:id="@+id/monthPicker"
+        <DatePicker
+            android:id="@+id/datePicker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="?android:actionBarSize"
             app:layout_constraintBottom_toTopOf="@id/btnSelect"
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <Button
             android:id="@+id/btnSelect"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:layout_marginStart="?android:actionBarSize"
-            android:layout_marginEnd="?android:actionBarSize"
             android:layout_marginBottom="?android:actionBarSize"
             android:background="@drawable/selector_orange"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
             android:text="@string/select"
             android:textAllCaps="false"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/monthPicker" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
