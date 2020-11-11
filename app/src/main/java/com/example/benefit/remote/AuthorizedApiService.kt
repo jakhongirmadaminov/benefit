@@ -33,15 +33,7 @@ interface AuthorizedApiService {
     ): RespFormatter<List<NewsDTO>>
 
     @POST("api/user/refresh")
-    @FormUrlEncoded
-    suspend fun updateUserInfo(
-        @Field("first_name") first_name: String,
-        @Field("last_name") last_name: String,
-        @Field("gender") gender: Int,
-        @Field("birth_day") birth_day: Long,
-        @Field("user_id") user_id: Int = AppPrefs.userId,
-        @Field("user_token") user_token: String = AppPrefs.userToken!!
-    ): RespFormatter<RespUserInfo>
+    suspend fun updateUserInfo(@Body body: ReqUserInfo): RespFormatter<RespUserInfo>
 
     @POST("api/user/setpassword")
     @FormUrlEncoded

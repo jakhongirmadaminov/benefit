@@ -1,10 +1,7 @@
 package com.example.benefit.remote
 
 import android.graphics.Bitmap
-import com.example.benefit.remote.models.ReqLoginCode
-import com.example.benefit.remote.models.ReqLoginSms
-import com.example.benefit.remote.models.RespAcceptTerms
-import com.example.benefit.remote.models.RespUserInfo
+import com.example.benefit.remote.models.*
 import com.example.benefit.remote.repository.UserRemote
 import com.example.benefit.util.*
 import okhttp3.MultipartBody
@@ -143,7 +140,9 @@ class UserRemoteImpl @Inject constructor(
         lastName: String,
         gender: Int,
         dobMillis: Long
-    ) = getFormattedResponse { authorizedApiService.updateUserInfo(name, lastName, gender, dobMillis) }
+    ) = getFormattedResponse {
+        authorizedApiService.updateUserInfo(ReqUserInfo(name, lastName, gender, dobMillis))
+    }
 
     override suspend fun addOrderCardAddress(order_card_id: Int, address: String) =
         getParsedResponse { authorizedApiService.orderCardAddress(order_card_id, address) }
