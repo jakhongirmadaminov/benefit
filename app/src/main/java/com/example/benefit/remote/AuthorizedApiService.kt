@@ -33,7 +33,7 @@ interface AuthorizedApiService {
     ): RespFormatter<List<NewsDTO>>
 
     @POST("api/user/refresh")
-    @Multipart
+    @FormUrlEncoded
     suspend fun updateUserInfo(
         @Field("first_name") first_name: String,
         @Field("last_name") last_name: String,

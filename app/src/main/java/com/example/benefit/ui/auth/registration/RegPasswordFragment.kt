@@ -5,10 +5,8 @@ import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
-import com.example.benefit.ui.auth.login.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_reg_password.*
 import javax.inject.Inject
@@ -34,11 +32,36 @@ class RegPasswordFragment @Inject constructor() : Fragment(R.layout.fragment_reg
         viewModel.setPasswordResp.observe(viewLifecycleOwner, {
             findNavController().navigate(R.id.action_regPasswordFragment_to_regProfileSetupFragment)
         })
+
+
+        viewModel.isLoading.observe(viewLifecycleOwner, {
+            when (it ?: return@observe) {
+                true -> {
+                    tvError.visibility = View.GONE
+                    progress.visibility = View.VISIBLE
+                }
+                else -> {
+                    progress.visibility = View.GONE
+                }
+            }
+        })
+
+        viewModel.errorMessage.observe(viewLifecycleOwner, {
+            tvError.text = it ?: return@observe
+            tvError.visibility = View.VISIBLE
+
+        })
+
     }
 
     private fun attachListeners() {
+
+        ivBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         edtCode.doOnTextChanged { text, start, before, count ->
-            if (!text.isNullOrBlank()) {
+            if (!text.isNullOrBlank() && text.length == 4) {
                 btnConfirm.myEnabled(true)
             } else {
                 btnConfirm.myEnabled(false)
@@ -47,7 +70,7 @@ class RegPasswordFragment @Inject constructor() : Fragment(R.layout.fragment_reg
         }
 
         btnConfirm.setOnClickListener {
-            viewModel.setPassword( edtCode.text.toString())
+            viewModel.setPassword(edtCode.text.toString())
         }
     }
 

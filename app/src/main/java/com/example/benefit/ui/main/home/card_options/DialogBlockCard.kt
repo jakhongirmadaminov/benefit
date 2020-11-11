@@ -27,7 +27,7 @@ class DialogBlockCard : DialogFragment() {
 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        setStyle(STYLE_NO_TITLE, android.R.style.Theme)
+        setStyle(STYLE_NO_TITLE, R.style.AppTheme)
         return super.onCreateDialog(savedInstanceState)
     }
 

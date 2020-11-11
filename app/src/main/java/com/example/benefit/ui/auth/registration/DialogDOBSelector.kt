@@ -44,7 +44,7 @@ class DialogDOBSelector : DialogFragment() {
 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        setStyle(STYLE_NO_TITLE, android.R.style.Theme)
+        setStyle(STYLE_NO_TITLE, R.style.AppTheme)
         return super.onCreateDialog(savedInstanceState)
     }
 
@@ -60,8 +60,10 @@ class DialogDOBSelector : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        dialog!!.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         btnSelect.setOnClickListener {
             listener.onDOBSelected(datePicker.dayOfMonth, datePicker.month, datePicker.year)
+            dismiss()
         }
 
     }

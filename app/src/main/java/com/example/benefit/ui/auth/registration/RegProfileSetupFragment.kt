@@ -15,7 +15,6 @@ import com.example.benefit.R
 import com.example.benefit.util.AppPrefs
 import com.example.benefit.util.Constants.MONTHS
 import com.example.benefit.util.loadBitmap
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_reg_profile_setup.*
 import org.joda.time.DateTime
@@ -42,6 +41,10 @@ class RegProfileSetupFragment @Inject constructor() :
 
     private fun subscribeObservers() {
 
+        viewModel.uploadUserInfoResp.observe(viewLifecycleOwner, {
+            findNavController().navigate(R.id.action_regProfileSetupFragment_to_regCardActivationFragment)
+        })
+
         viewModel.uploadAvatarResp.observe(viewLifecycleOwner, {
 
         })
@@ -49,18 +52,18 @@ class RegProfileSetupFragment @Inject constructor() :
         viewModel.isLoading.observe(viewLifecycleOwner, {
             when (it ?: return@observe) {
                 true -> {
-//                    progress.visibility = View.VISIBLE
-//                    lblYoullReceiveCode.visibility = View.INVISIBLE
+                    tvError.visibility = View.GONE
+                    progress.visibility = View.VISIBLE
                 }
                 else -> {
-//                    progress.visibility = View.GONE
-//                    lblYoullReceiveCode.visibility = View.VISIBLE
+                    progress.visibility = View.GONE
                 }
             }
         })
 
         viewModel.errorMessage.observe(viewLifecycleOwner, {
-            Snackbar.make(clParent, it ?: return@observe, Snackbar.LENGTH_SHORT).show()
+            tvError.visibility = View.VISIBLE
+            tvError.text = it ?: return@observe
         })
 
 
@@ -74,20 +77,16 @@ class RegProfileSetupFragment @Inject constructor() :
     }
 
     private fun attachListeners() {
-//        edtPhone.doOnTextChanged { text, start, before, count ->
-//            if (!text.isNullOrBlank() && text.length == 9) {
-//                btnGetCode.myEnabled(true)
-//                lblYoullReceiveCode.visibility = View.VISIBLE
-//                lblYoullReceiveCode.text =
-//                    getString(R.string.you_will_receive_code, tvPhoneStart.text.toString() + text)
-//            } else {
-//                btnGetCode.myEnabled(false)
-//                lblYoullReceiveCode.visibility = View.GONE
-//            }
-//
-//        }
-//
+
         edtDay.doOnTextChanged { text, start, before, count ->
+            validateFields()
+        }
+
+        edtName.doOnTextChanged { text, start, before, count ->
+            validateFields()
+        }
+
+        edtLastName.doOnTextChanged { text, start, before, count ->
             validateFields()
         }
 
@@ -99,7 +98,6 @@ class RegProfileSetupFragment @Inject constructor() :
                 dob!!.millis
             )
 
-            findNavController().navigate(R.id.action_regProfileSetupFragment_to_regCardActivationFragment)
         }
 
 
@@ -109,6 +107,12 @@ class RegProfileSetupFragment @Inject constructor() :
 
 
         edtMonth.setOnClickListener {
+            DialogDOBSelector.newInstance(this).show(parentFragmentManager, "")
+        }
+        edtYear.setOnClickListener {
+            DialogDOBSelector.newInstance(this).show(parentFragmentManager, "")
+        }
+        edtDay.setOnClickListener {
             DialogDOBSelector.newInstance(this).show(parentFragmentManager, "")
         }
 

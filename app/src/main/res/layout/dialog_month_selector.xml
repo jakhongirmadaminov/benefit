@@ -21,7 +21,10 @@
             android:id="@+id/datePicker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             app:layout_constraintBottom_toTopOf="@id/btnSelect"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -29,7 +32,8 @@
             android:id="@+id/btnSelect"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:layout_marginBottom="?android:actionBarSize"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp"
             android:background="@drawable/selector_orange"
             android:paddingStart="25dp"
             android:paddingEnd="25dp"
@@ -38,8 +42,7 @@
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/monthPicker" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

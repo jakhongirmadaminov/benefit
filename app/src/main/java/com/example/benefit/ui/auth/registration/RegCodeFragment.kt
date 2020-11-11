@@ -8,7 +8,6 @@ import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import dagger.hilt.android.AndroidEntryPoint
@@ -75,6 +74,26 @@ class RegCodeFragment @Inject constructor() : Fragment(R.layout.fragment_reg_cod
             progress.visibility = View.GONE
             timer.cancel()
             timer.start()
+
+        })
+
+
+
+        viewModel.isLoading.observe(viewLifecycleOwner, {
+            when (it ?: return@observe) {
+                true -> {
+                    tvError.visibility = View.GONE
+                    progress.visibility = View.VISIBLE
+                }
+                else -> {
+                    progress.visibility = View.GONE
+                }
+            }
+        })
+
+        viewModel.errorMessage.observe(viewLifecycleOwner, {
+            tvError.text = it ?: return@observe
+            tvError.visibility = View.VISIBLE
 
         })
 

@@ -13,7 +13,7 @@ import com.example.benefit.R
 class DialogLoading : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        setStyle(STYLE_NO_TITLE, android.R.style.Theme)
+        setStyle(STYLE_NO_TITLE, R.style.AppTheme)
         isCancelable = false
         return super.onCreateDialog(savedInstanceState)
     }

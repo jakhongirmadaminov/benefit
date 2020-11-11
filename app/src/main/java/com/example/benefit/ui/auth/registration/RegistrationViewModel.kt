@@ -23,9 +23,10 @@ class RegistrationViewModel @ViewModelInject constructor(private val userRemote:
 
     var phone = ""
 
-    var signUpResp = MutableLiveData<RegPhoneResp>()
-    var setPasswordResp = MutableLiveData<RespUserInfo>()
-    var uploadAvatarResp = MutableLiveData<RespUserInfo>()
+    var signUpResp = SingleLiveEvent<RegPhoneResp>()
+    var setPasswordResp = SingleLiveEvent<RespUserInfo>()
+    var uploadAvatarResp = SingleLiveEvent<RespUserInfo>()
+    var uploadUserInfoResp = SingleLiveEvent<RespUserInfo>()
     val isLoading = SingleLiveEvent<Boolean>()
     val errorMessage = SingleLiveEvent<String>()
     val resendCodeResp = SingleLiveEvent<String>()
@@ -162,10 +163,7 @@ class RegistrationViewModel @ViewModelInject constructor(private val userRemote:
                         isLoading.value = false
                     }
                     is ResultSuccess -> {
-                        AppPrefs.edit {
-                            avatar = Constants.BASE_URL + "upload/" + response.value.avatar
-                        }
-                        uploadAvatarResp.value = response.value
+                        uploadUserInfoResp.value = response.value
                         isLoading.value = false
                     }
                 }.exhaustive
