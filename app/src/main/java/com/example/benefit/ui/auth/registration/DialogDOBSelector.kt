@@ -10,6 +10,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.example.benefit.R
 import kotlinx.android.synthetic.main.dialog_month_selector.*
+import org.joda.time.DateTime
 
 class DialogDOBSelector : DialogFragment() {
 
@@ -65,6 +66,8 @@ class DialogDOBSelector : DialogFragment() {
             listener.onDOBSelected(datePicker.dayOfMonth, datePicker.month, datePicker.year)
             dismiss()
         }
+
+        datePicker.maxDate = DateTime.now().millis
 
     }
 }

@@ -2,7 +2,6 @@ package com.example.benefit.ui.auth.registration
 
 import android.graphics.Bitmap
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.benefit.remote.models.RegPhoneResp
@@ -13,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import splitties.preferences.edit
+import java.math.BigInteger
 
 /**
  * Created by jahon on 03-Sep-20
@@ -27,6 +27,7 @@ class RegistrationViewModel @ViewModelInject constructor(private val userRemote:
     var setPasswordResp = SingleLiveEvent<RespUserInfo>()
     var uploadAvatarResp = SingleLiveEvent<RespUserInfo>()
     var uploadUserInfoResp = SingleLiveEvent<RespUserInfo>()
+    var addNewCardResp = SingleLiveEvent<Any>()
     val isLoading = SingleLiveEvent<Boolean>()
     val errorMessage = SingleLiveEvent<String>()
     val resendCodeResp = SingleLiveEvent<String>()
@@ -152,7 +153,7 @@ class RegistrationViewModel @ViewModelInject constructor(private val userRemote:
         }
     }
 
-    fun uploadProfileInfo(name: String, lastName: String, gender: Int, dobMillis: Long) {
+    fun uploadProfileInfo(name: String, lastName: String, gender: String, dobMillis: BigInteger) {
         isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
             val response = userRemote.updateUserInfo(name, lastName, gender, dobMillis)
@@ -164,6 +165,25 @@ class RegistrationViewModel @ViewModelInject constructor(private val userRemote:
                     }
                     is ResultSuccess -> {
                         uploadUserInfoResp.value = response.value
+                        isLoading.value = false
+                    }
+                }.exhaustive
+            }
+        }
+    }
+
+    fun addNewCard( title: String,cardNumber: String, expiry: Int) {
+        isLoading.value = true
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = userRemote.addNewCard(title, cardNumber, expiry)
+            withContext(Dispatchers.Main) {
+                when (response) {
+                    is ResultError -> {
+                        errorMessage.value = response.message
+                        isLoading.value = false
+                    }
+                    is ResultSuccess -> {
+                        addNewCardResp.value = response.value
                         isLoading.value = false
                     }
                 }.exhaustive

@@ -4,13 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
-import com.example.benefit.ui.auth.login.LoginViewModel
 import com.example.benefit.ui.main.MainActivity
 import com.example.benefit.ui.main.home.bsd_add_card.AddCardBSD
 import com.example.benefit.ui.order_card.OrderCardActivity
@@ -38,6 +37,38 @@ class RegCardActivationFragment @Inject constructor() :
 
         setupViews()
         attachListeners()
+        subscribeObservers()
+    }
+
+    private fun subscribeObservers() {
+
+        viewModel.addNewCardResp.observe(viewLifecycleOwner, {
+            val result = it ?: return@observe
+            findNavController().navigate(R.id.action_regCardActivationFragment_to_regEndFragment)
+        })
+
+
+        viewModel.isLoading.observe(viewLifecycleOwner, {
+            when (it ?: return@observe) {
+                true -> {
+                    tvInfo.visibility = View.GONE
+                    progress.visibility = View.VISIBLE
+                }
+                else -> {
+                    tvInfo.visibility = View.VISIBLE
+                    tvInfo.text = getString(R.string.warning_card_activation)
+                    progress.visibility = View.GONE
+                }
+            }
+        })
+
+        viewModel.errorMessage.observe(viewLifecycleOwner,
+            {
+                tvInfo.visibility = View.VISIBLE
+                tvInfo.text = it ?: return@observe
+            })
+
+
     }
 
     private fun setupViews() {
@@ -58,24 +89,50 @@ class RegCardActivationFragment @Inject constructor() :
         edtCardNumber.hint = "0000 0000 0000 0000"
         edtCardNumber.onFocusChangeListener = listener
         edtCardNumber.addTextChangedListener(listener)
+
+        installOn(edtExpiryDate, "[00]/[00]")
+        val listener2 = MaskedTextChangedListener(
+            "[00]/[00]",
+            edtExpiryDate,
+            object : MaskedTextChangedListener.ValueListener {
+                override fun onTextChanged(
+                    maskFilled: Boolean,
+                    extractedValue: String,
+                    formattedValue: String
+                ) {
+                }
+            }
+        )
+        edtExpiryDate.hint = "01/01"
+        edtExpiryDate.onFocusChangeListener = listener2
+        edtExpiryDate.addTextChangedListener(listener2)
     }
 
     private fun attachListeners() {
-//        edtPhone.doOnTextChanged { text, start, before, count ->
-//            if (!text.isNullOrBlank() && text.length == 9) {
-//                btnGetCode.myEnabled(true)
-//                lblYoullReceiveCode.visibility = View.VISIBLE
-//                lblYoullReceiveCode.text =
-//                    getString(R.string.you_will_receive_code, tvPhoneStart.text.toString() + text)
-//            } else {
-//                btnGetCode.myEnabled(false)
-//                lblYoullReceiveCode.visibility = View.GONE
-//            }
-//
-//        }
-//
+
+        edtCardNumber.doOnTextChanged { text, start, before, count ->
+            if (text.isNullOrBlank()) {
+                ivClearCardNumber.visibility = View.INVISIBLE
+            } else {
+                ivClearCardNumber.visibility = View.VISIBLE
+            }
+            validateInputs()
+        }
+
+        edtCardName.doOnTextChanged { text, start, before, count ->
+            validateInputs()
+        }
+
+        edtExpiryDate.doOnTextChanged { text, start, before, count ->
+            validateInputs()
+        }
+
+        ivClearCardNumber.setOnClickListener {
+            edtCardNumber.text.clear()
+            ivClearCardNumber.visibility = View.INVISIBLE
+        }
+
         tvNext.setOnClickListener {
-//            loginViewModel.login("998" + edtPhone.text.toString())
             if ((parentFragment is RegistrationBSD)) {
                 (parentFragment as RegistrationBSD).dismiss()
                 start<MainActivity> {}
@@ -87,12 +144,25 @@ class RegCardActivationFragment @Inject constructor() :
                 Intent(requireActivity(), SelectCardTypeActivity::class.java),
                 OrderCardActivity.REQ_ORDER_CARD
             )
-//            start<SelectCardTypeActivity> {}
         }
 
         btnActivate.setOnClickListener {
-            findNavController().navigate(R.id.action_regCardActivationFragment_to_regEndFragment)
+            viewModel.addNewCard(
+                edtCardName.text.toString(),
+                edtCardNumber.text.toString().replace(" ", ""),
+                edtExpiryDate.text.toString().replace("/", "").toInt()
+            )
         }
+    }
+
+    private fun validateInputs() {
+        btnActivate.myEnabled(
+            !edtCardNumber.text.isNullOrBlank() &&
+                    edtCardNumber.text.length == 19 &&
+                    !edtExpiryDate.text.isNullOrBlank() &&
+                    edtExpiryDate.text.length == 5 &&
+                    !edtCardName.text.isNullOrBlank()
+        )
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

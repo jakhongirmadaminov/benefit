@@ -27,7 +27,6 @@ class RegCodeFragment @Inject constructor() : Fragment(R.layout.fragment_reg_cod
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         setupViews()
         attachListeners()
         subscribeObservers()

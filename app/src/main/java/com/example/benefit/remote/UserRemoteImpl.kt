@@ -10,6 +10,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import splitties.experimental.ExperimentalSplittiesApi
 import java.io.ByteArrayOutputStream
+import java.math.BigInteger
 import javax.inject.Inject
 
 
@@ -138,11 +139,17 @@ class UserRemoteImpl @Inject constructor(
     override suspend fun updateUserInfo(
         name: String,
         lastName: String,
-        gender: Int,
-        dobMillis: Long
+        gender: String,
+        dobMillis: BigInteger
     ) = getFormattedResponse {
         authorizedApiService.updateUserInfo(ReqUserInfo(name, lastName, gender, dobMillis))
     }
+
+    override suspend fun addNewCard(
+        title: String,
+        cardNumber: String,
+        expiry: Int
+    ) = getFormattedResponse { authorizedApiService.addNewCard(ReqCard(cardNumber, title, expiry)) }
 
     override suspend fun addOrderCardAddress(order_card_id: Int, address: String) =
         getParsedResponse { authorizedApiService.orderCardAddress(order_card_id, address) }

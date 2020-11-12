@@ -7,6 +7,7 @@ import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 import splitties.experimental.ExperimentalSplittiesApi
+import java.math.BigInteger
 
 /**
  * Defines the abstract methods used for interacting with the Bufferoo API
@@ -35,10 +36,6 @@ interface AuthorizedApiService {
     @POST("api/user/refresh")
     suspend fun updateUserInfo(@Body body: ReqUserInfo): RespFormatter<RespUserInfo>
 
-    @POST("api/user/setpassword")
-    @FormUrlEncoded
-    suspend fun setPassword(@Field("phone_number") phone_number: String): Response<Any>
-
     @POST("api/refer/get")
     @FormUrlEncoded
     suspend fun getMyReferralLink(
@@ -54,6 +51,10 @@ interface AuthorizedApiService {
         @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
         @Field("user_id") user_id: Int = AppPrefs.userId
     ): RespAcceptTerms
+
+
+    @POST("api/card/new")
+    suspend fun addNewCard(@Body body : ReqCard): RespFormatter<Any>
 
     @POST("api/ordercard/two")
     @Multipart
@@ -147,18 +148,6 @@ interface AuthorizedApiService {
 
     @GET("api/other/branches")
     suspend fun getAllBankBranches(): List<BankBranchDTO>
-
-
-    @POST("api/card/new")
-    @FormUrlEncoded
-    suspend fun addCard(
-        @Field("title") title: String,
-        @Field("expiry") expiry: Int,
-        @Field("pan") pan: Long,
-        @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
-        @Field("user_id") user_id: Int = AppPrefs.userId
-    ): RespAcceptTerms
-
 
     @GET("api/partners")
     suspend fun getPartners(): Response<List<Partner>>
