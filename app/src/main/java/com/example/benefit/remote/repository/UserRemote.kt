@@ -3,6 +3,7 @@ package com.example.benefit.remote.repository
 import android.graphics.Bitmap
 import com.example.benefit.remote.models.*
 import com.example.benefit.util.ResultWrapper
+import java.math.BigInteger
 
 interface UserRemote {
 
@@ -50,8 +51,14 @@ interface UserRemote {
     suspend fun updateUserInfo(
         name: String,
         lastName: String,
-        gender: Int,
-        dobMillis: Long
+        gender: String,
+        dobMillis: BigInteger
     ): ResultWrapper<RespUserInfo>
+
+    suspend fun addNewCard(
+        title: String,
+        cardNumber: String,
+        expiry: Int
+    ): ResultWrapper<Any>
 
 }

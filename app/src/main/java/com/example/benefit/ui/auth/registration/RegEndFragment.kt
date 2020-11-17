@@ -21,7 +21,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class RegEndFragment @Inject constructor() : Fragment(R.layout.fragment_reg_end) {
 
-
     private val viewModel: RegistrationViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -17,7 +17,7 @@ import com.example.benefit.util.Constants.MONTHS
 import com.example.benefit.util.loadBitmap
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_reg_profile_setup.*
-import org.joda.time.DateTime
+import java.util.*
 import javax.inject.Inject
 
 
@@ -70,10 +70,8 @@ class RegProfileSetupFragment @Inject constructor() :
     }
 
     private fun setupViews() {
-
         cardPhoto.setBackgroundResource(R.drawable.shape_round_window_bg_color)
         cardPhotoIcon.setBackgroundResource(R.drawable.shape_round_window_bg_color)
-
     }
 
     private fun attachListeners() {
@@ -94,8 +92,8 @@ class RegProfileSetupFragment @Inject constructor() :
             viewModel.uploadProfileInfo(
                 edtName.text.toString(),
                 edtLastName.text.toString(),
-                if (rbMale.isChecked) 0 else 1,
-                dob!!.millis
+                if (rbMale.isChecked) EGender.MALE.name else EGender.FEMALE.name,
+                dob!!.timeInMillis.toBigInteger()
             )
 
         }
@@ -124,10 +122,12 @@ class RegProfileSetupFragment @Inject constructor() :
 
     private fun validateFields() {
 
-        btnReady.isEnabled = viewModel.uploadAvatarResp.value != null &&
-                dob != null &&
-                !edtName.text.isNullOrBlank() &&
-                !edtLastName.text.isNullOrBlank()
+        btnReady.myEnabled(
+            viewModel.uploadAvatarResp.value != null &&
+                    dob != null &&
+                    !edtName.text.isNullOrBlank() &&
+                    !edtLastName.text.isNullOrBlank()
+        )
 
     }
 
@@ -141,10 +141,10 @@ class RegProfileSetupFragment @Inject constructor() :
         Glide.with(this).load(imageUri).into(ivImage)
     }
 
-    var dob: DateTime? = null
+    var dob: Calendar? = null
 
     override fun onDOBSelected(day: Int, month: Int, year: Int) {
-        dob = DateTime(year, month, day, 0, 0)
+        dob = GregorianCalendar(year, month, day)
         edtDay.text = day.toString()
         edtMonth.text = MONTHS[AppPrefs.language]!![month]
         edtYear.text = year.toString()
