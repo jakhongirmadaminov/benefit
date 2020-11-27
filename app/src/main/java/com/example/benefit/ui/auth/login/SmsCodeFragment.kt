@@ -62,7 +62,6 @@ class SmsCodeFragment @Inject constructor() : Fragment(R.layout.fragment_code) {
 
         viewModel.loginSmsResp.observe(viewLifecycleOwner, Observer {
             it ?: return@Observer
-
             findNavController().navigate(R.id.action_codeFragment_to_deviceCodeFragment)
         })
 

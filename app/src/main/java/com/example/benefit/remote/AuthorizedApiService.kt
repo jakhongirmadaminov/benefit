@@ -91,7 +91,6 @@ interface AuthorizedApiService {
         @Field("user_id") user_id: Int = AppPrefs.userId
     ): RespAcceptTerms
 
-
     @POST("api/ordercard/seven")
     @FormUrlEncoded
     suspend fun orderCardLimit(
