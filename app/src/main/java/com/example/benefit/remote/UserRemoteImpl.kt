@@ -73,7 +73,7 @@ class UserRemoteImpl @Inject constructor(
         getFormattedResponse { authorizedApiService.getNews(page, perPage) }
 
     override suspend fun termsAccept(type_id: Int) =
-        getParsedResponse { authorizedApiService.termsAccept(type_id) }
+        getFormattedResponse { authorizedApiService.termsAccept(type_id) }
 
     override suspend fun addPassportPhoto(
         order_card_id: Int,
@@ -83,7 +83,7 @@ class UserRemoteImpl @Inject constructor(
         image.compress(Bitmap.CompressFormat.JPEG, 90, stream)
         val file = stream.toByteArray().toRequestBody()
         val body = MultipartBody.Part.createFormData("image", "image.jpg", file)
-        return getParsedResponse { authorizedApiService.addPassportPhoto(order_card_id, body) }
+        return getFormattedResponse { authorizedApiService.addPassportPhoto(order_card_id, body) }
     }
 
     override suspend fun addPhotoWithPassport(
@@ -94,7 +94,7 @@ class UserRemoteImpl @Inject constructor(
         image.compress(Bitmap.CompressFormat.JPEG, 90, stream)
         val file = stream.toByteArray().toRequestBody()
         val body = MultipartBody.Part.createFormData("image", "image.jpg", file)
-        return getParsedResponse {
+        return getFormattedResponse {
             authorizedApiService.addPhotoWithPassport(
                 order_card_id,
                 body
@@ -118,7 +118,7 @@ class UserRemoteImpl @Inject constructor(
             val fileBody: RequestBody = bos.toByteArray().toRequestBody()
             map["image"] = fileBody
         }
-        return getParsedResponse { authorizedApiService.addWorkProof(map) }
+        return getFormattedResponse { authorizedApiService.addWorkProof(map) }
     }
 
     override suspend fun uploadAvatar(bitmap: Bitmap): ResultWrapper<RespUserInfo> {
@@ -152,14 +152,14 @@ class UserRemoteImpl @Inject constructor(
     ) = getFormattedResponse { authorizedApiService.addNewCard(ReqCard(cardNumber, title, expiry)) }
 
     override suspend fun addOrderCardAddress(order_card_id: Int, address: String) =
-        getParsedResponse { authorizedApiService.orderCardAddress(order_card_id, address) }
+        getFormattedResponse { authorizedApiService.orderCardAddress(order_card_id, address) }
 
     override suspend fun addLimitSum(order_card_id: Int, sum: String) =
-        getParsedResponse { authorizedApiService.orderCardLimit(order_card_id, sum) }
+        getFormattedResponse { authorizedApiService.orderCardLimit(order_card_id, sum) }
 
 
     override suspend fun completeAddCard(order_card_id: Int) =
-        getParsedResponse { authorizedApiService.completeOrderCard(order_card_id) }
+        getFormattedResponse { authorizedApiService.completeOrderCard(order_card_id) }
 
     override suspend fun getMyCards() = getFormattedResponse { authorizedApiService.getMyCards() }
 
