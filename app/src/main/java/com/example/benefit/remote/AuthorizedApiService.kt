@@ -7,7 +7,6 @@ import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 import splitties.experimental.ExperimentalSplittiesApi
-import java.math.BigInteger
 
 /**
  * Defines the abstract methods used for interacting with the Bufferoo API
@@ -17,24 +16,24 @@ interface AuthorizedApiService {
 
 
     @GET("api/paynet/categories")
-    suspend fun paymentCategories(): RespFormatter<List<PaynetCategory>>
+    suspend fun paymentCategories(): RespFormat<List<PaynetCategory>>
 
     @GET("api/background")
-    suspend fun getCardBackgrounds(): RespFormatter<List<CardBgDTO>>
+    suspend fun getCardBackgrounds(): RespFormat<List<CardBgDTO>>
 
     @GET("api/partners/category/{id}")
     suspend fun getPartnersByCategory(
         @Path(value = "id", encoded = true) id: Int
-    ): RespPartnerInCategory
+    ): RespFormat<RespPartnerInCategory>
 
     @GET("api/news")
     suspend fun getNews(
         @Query("page", encoded = true) page: Int,
         @Query("per-page", encoded = true) per_page: Int
-    ): RespFormatter<List<NewsDTO>>
+    ): RespFormat<List<NewsDTO>>
 
     @POST("api/user/refresh")
-    suspend fun updateUserInfo(@Body body: ReqUserInfo): RespFormatter<RespUserInfo>
+    suspend fun updateUserInfo(@Body body: ReqUserInfo): RespFormat<RespUserInfo>
 
     @POST("api/refer/get")
     @FormUrlEncoded
@@ -50,11 +49,11 @@ interface AuthorizedApiService {
         @Field("is_agree") is_agree: Boolean = true,
         @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
         @Field("user_id") user_id: Int = AppPrefs.userId
-    ): RespFormatter<RespAcceptTerms>
+    ): RespFormat<RespAcceptTerms>
 
 
     @POST("api/card/new")
-    suspend fun addNewCard(@Body body : ReqCard): RespFormatter<Any>
+    suspend fun addNewCard(@Body body: ReqCard): RespFormat<Any>
 
     @POST("api/ordercard/two")
     @Multipart
@@ -63,7 +62,7 @@ interface AuthorizedApiService {
         @Part image: MultipartBody.Part,
         @Part("user_id") user_id: Int = AppPrefs.userId,
         @Part("user_auth") user_auth: String = AppPrefs.userToken!!
-    ): RespFormatter<RespAcceptTerms>
+    ): RespFormat<RespAcceptTerms>
 
     @POST("api/ordercard/three")
     @Multipart
@@ -72,15 +71,15 @@ interface AuthorizedApiService {
         @Part image: MultipartBody.Part,
         @Part("user_id") user_id: Int = AppPrefs.userId,
         @Part("user_auth") user_auth: String = AppPrefs.userToken!!
-    ): RespFormatter<RespAcceptTerms>
+    ): RespFormat<RespAcceptTerms>
 
     @POST("api/ordercard/four")
     @Multipart
-    suspend fun addWorkProof(@PartMap body: MutableMap<String, @JvmSuppressWildcards RequestBody>): RespFormatter<RespAcceptTerms>
+    suspend fun addWorkProof(@PartMap body: MutableMap<String, @JvmSuppressWildcards RequestBody>): RespFormat<RespAcceptTerms>
 
     @POST("api/user/avatar")
     @Multipart
-    suspend fun uploadAvatar(@PartMap body: MutableMap<String, @JvmSuppressWildcards RequestBody>): RespFormatter<RespUserInfo>
+    suspend fun uploadAvatar(@PartMap body: MutableMap<String, @JvmSuppressWildcards RequestBody>): RespFormat<RespUserInfo>
 
     @POST("api/ordercard/five")
     @FormUrlEncoded
@@ -89,7 +88,7 @@ interface AuthorizedApiService {
         @Field("adress_text") adress_text: String,
         @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
         @Field("user_id") user_id: Int = AppPrefs.userId
-    ):RespFormatter< RespAcceptTerms>
+    ): RespFormat<RespAcceptTerms>
 
     @POST("api/ordercard/seven")
     @FormUrlEncoded
@@ -98,7 +97,7 @@ interface AuthorizedApiService {
         @Field("summa") summa: String,
         @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
         @Field("user_id") user_id: Int = AppPrefs.userId
-    ): RespFormatter<RespAcceptTerms>
+    ): RespFormat<RespAcceptTerms>
 
     @POST("api/ordercard/close")
     @FormUrlEncoded
@@ -107,7 +106,7 @@ interface AuthorizedApiService {
         @Field("status") status: Int = 1,
         @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
         @Field("user_id") user_id: Int = AppPrefs.userId
-    ):RespFormatter< RespAcceptTerms>
+    ): RespFormat<RespAcceptTerms>
 
 
     @POST("api/card/my")
@@ -115,7 +114,7 @@ interface AuthorizedApiService {
     suspend fun getMyCards(
         @Field("user_token") user_auth: String = AppPrefs.userToken!!,
         @Field("user_id") user_id: Int = AppPrefs.userId
-    ): RespFormatter<List<CardDTO>>
+    ): RespFormat<List<CardDTO>>
 
 
     @POST("api/card/title")
@@ -130,9 +129,9 @@ interface AuthorizedApiService {
     suspend fun changeCardDesign(
         @Field("background_id") background_id: Int,
         @Field("card_id") card_id: Int,
-        @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
+        @Field("user_token") user_auth: String = AppPrefs.userToken!!,
         @Field("user_id") user_id: Int = AppPrefs.userId
-    ): RespFormatter<RespChangeCardTitle>
+    ): RespFormat<RespChangeCardTitle>
 
     @POST("api/card/transhistory")
     @FormUrlEncoded
@@ -153,7 +152,7 @@ interface AuthorizedApiService {
 
 
     @GET("/api/category")
-    suspend fun getPartnersCategory(): Response<List<PartnerCategoryDTO>>
+    suspend fun getPartnersCategory(): RespFormat<List<PartnerCategoryDTO>>
 
 
     @GET("/api/category/children/{id}")
@@ -171,7 +170,7 @@ interface AuthorizedApiService {
 
     @POST("api/card/status")
     @FormUrlEncoded
-    suspend fun blockCard(@Field("card_id") card_id: Int): RespFormatter<RespActivateCard>
+    suspend fun blockCard(@Field("card_id") card_id: Int): RespFormat<RespActivateCard>
 
     @POST("api/card/remove")
     @FormUrlEncoded

@@ -1,6 +1,6 @@
 package com.example.benefit.util
 
-import com.example.benefit.remote.models.RespFormatter
+import com.example.benefit.remote.models.RespFormat
 import org.json.JSONObject
 import retrofit2.HttpException
 
@@ -31,7 +31,7 @@ suspend fun <T> getParsedResponse(action: suspend () -> T): ResultWrapper<T> {
     }
 }
 
-suspend fun <T> getFormattedResponse(action: suspend () -> RespFormatter<T>): ResultWrapper<T> {
+suspend fun <T> getFormattedResponse(action: suspend () -> RespFormat<T>): ResultWrapper<T> {
     return try {
         val resp = action()
         when {

@@ -34,18 +34,8 @@ class PartnersRemoteImpl @Inject constructor(
         }
     }
 
-    override suspend fun getPartnersCategory(): ResultWrapper<List<PartnerCategoryDTO>> {
-        return try {
-            val response = authorizedApiService.getPartnersCategory()
-            if (response.isSuccessful) ResultSuccess(response.body()!!)
-            else ResultError(
-                JSONObject(response.errorBody()!!.string())["message"].toString(),
-                response.code()
-            )
-        } catch (e: Exception) {
-            ResultError(message = e.localizedMessage)
-        }
-    }
+    override suspend fun getPartnersCategory() =
+        getFormattedResponse { authorizedApiService.getPartnersCategory() }
 
     override suspend fun getPartnersForCategory(id: Int): ResultWrapper<List<PartnerCategoryDTO>> {
         return try {
@@ -64,7 +54,7 @@ class PartnersRemoteImpl @Inject constructor(
         getParsedResponse { authorizedApiService.getAllBankBranches() }
 
     override suspend fun getPartnersByCategoryId(id: Int): ResultWrapper<List<Partner>> {
-        val resp = getParsedResponse { authorizedApiService.getPartnersByCategory(id) }
+        val resp = getFormattedResponse { authorizedApiService.getPartnersByCategory(id) }
         return when (resp) {
             is ResultError -> resp
             is ResultSuccess -> ResultSuccess(resp.value.partners!!)

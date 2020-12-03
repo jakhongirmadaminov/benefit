@@ -16,7 +16,7 @@ interface ApiService {
 
     @POST("api/user/loginnumber")
     @FormUrlEncoded
-    suspend fun login(@Field("phone_number") phone_number: String): RespFormatter<RespLogin>
+    suspend fun login(@Field("phone_number") phone_number: String): RespFormat<RespLogin>
 
     @POST("api/user/signup")
     @FormUrlEncoded
@@ -25,7 +25,7 @@ interface ApiService {
         @Field("referal_code") referal_code: String?,
         @Field("created") created: String = "1601573398",
         @Field("ip") ip: String = "127.0.0.1"
-    ): RespFormatter<RegPhoneResp>
+    ): RespFormat<RegPhoneResp>
 
 
     @POST("api/user/setpassword")
@@ -35,13 +35,13 @@ interface ApiService {
         @Field("password") password: String,
         @Field("user_token") user_token: String,
         @Field("user_id") user_id: Int
-    ): RespFormatter<RespUserInfo>
+    ): RespFormat<RespUserInfo>
 
     @POST("api/user/loginsms")
-    suspend fun loginsms(@Body body: ReqLoginSms): RespFormatter<RespLoginSms>
+    suspend fun loginsms(@Body body: ReqLoginSms): RespFormat<RespLoginSms>
 
     @POST("api/user/logincode")
-    suspend fun logincode(@Body body: ReqLoginCode): RespFormatter<RespLoginCode>
+    suspend fun logincode(@Body body: ReqLoginCode): RespFormat<RespLoginCode>
 
     @POST("api/ordercard/one")
     @FormUrlEncoded
@@ -58,7 +58,7 @@ interface ApiService {
         @Field("user_id") user_id: Int,
         @Field("phone_number") phone_number: String,
         @Field("sms_code") sms_code: String
-    ): RespFormatter<RespUserInfo>
+    ): RespFormat<RespUserInfo>
 
     @POST("api/user/sendcode")
     @FormUrlEncoded
