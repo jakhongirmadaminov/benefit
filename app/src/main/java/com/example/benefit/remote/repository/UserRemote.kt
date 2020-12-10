@@ -45,7 +45,7 @@ interface UserRemote {
 
     suspend fun addLimitSum(order_card_id: Int, sum: String): ResultWrapper<RespAcceptTerms>
     suspend fun completeAddCard(order_card_id: Int): ResultWrapper<RespAcceptTerms>
-    suspend fun getMyCards(): ResultWrapper<List<CardDTO>>
+    suspend fun getMyCards(): ResultWrapper<MyCardsResp>
     suspend fun getMyReferralLink(): ResultWrapper<String>
     suspend fun uploadAvatar(bitmap: Bitmap): ResultWrapper<RespUserInfo>
     suspend fun updateUserInfo(

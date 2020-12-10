@@ -92,7 +92,7 @@ class RegProfileSetupFragment @Inject constructor() :
             viewModel.uploadProfileInfo(
                 edtName.text.toString(),
                 edtLastName.text.toString(),
-                if (rbMale.isChecked) EGender.MALE.name else EGender.FEMALE.name,
+                if (rbMale.isChecked) EGender.MALE.name.toLowerCase() else EGender.FEMALE.name.toLowerCase(),
                 dob!!.timeInMillis.toBigInteger()
             )
 

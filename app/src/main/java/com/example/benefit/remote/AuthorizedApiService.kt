@@ -114,7 +114,7 @@ interface AuthorizedApiService {
     suspend fun getMyCards(
         @Field("user_token") user_auth: String = AppPrefs.userToken!!,
         @Field("user_id") user_id: Int = AppPrefs.userId
-    ): RespFormat<List<CardDTO>>
+    ): RespFormat<MyCardsResp>
 
 
     @POST("api/card/title")
@@ -145,7 +145,7 @@ interface AuthorizedApiService {
 
 
     @GET("api/other/branches")
-    suspend fun getAllBankBranches(): List<BankBranchDTO>
+    suspend fun getAllBankBranches(): RespFormat<List<BankBranchDTO>>
 
     @GET("api/partners")
     suspend fun getPartners(): Response<List<Partner>>

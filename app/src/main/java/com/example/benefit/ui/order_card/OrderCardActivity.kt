@@ -13,6 +13,7 @@ import androidx.core.widget.doOnTextChanged
 import com.asksira.bsimagepicker.BSImagePicker
 import com.bumptech.glide.Glide
 import com.example.benefit.R
+import com.example.benefit.remote.models.BankBranchDTO
 import com.example.benefit.ui.select_card_type.ECardType
 import com.example.benefit.util.SizeUtils
 import com.example.benefit.util.loadBitmap
@@ -22,7 +23,7 @@ import kotlinx.android.synthetic.main.activity_order_card.*
 
 @AndroidEntryPoint
 class OrderCardActivity : AppCompatActivity(), BSImagePicker.OnSingleImageSelectedListener,
-    BSImagePicker.ImageLoaderDelegate {
+    BSImagePicker.ImageLoaderDelegate, IOnBranchSelected {
 
 
     companion object {
@@ -52,6 +53,10 @@ class OrderCardActivity : AppCompatActivity(), BSImagePicker.OnSingleImageSelect
     }
 
     private fun attachListeners() {
+
+        edtSelectBranch.setOnClickListener {
+            BSDSelectBankBranch().show(supportFragmentManager, "")
+        }
 
         edtLimit.doOnTextChanged { text, _, _, _ ->
             btnNextLimit.isEnabled = !text.isNullOrBlank() && text.toString().toInt() > 0
@@ -384,4 +389,13 @@ class OrderCardActivity : AppCompatActivity(), BSImagePicker.OnSingleImageSelect
         if (!cardType.isZoom()) limitContent.visibility = View.GONE
         sendReqContent.visibility = View.GONE
     }
+
+    override fun onBranchSelected(bankBranchDTO: BankBranchDTO) {
+        edtSelectBranch.text = bankBranchDTO.title_ru
+    }
+}
+
+
+interface IOnBranchSelected {
+    fun onBranchSelected(bankBranchDTO: BankBranchDTO)
 }

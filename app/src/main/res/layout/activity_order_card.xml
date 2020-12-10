@@ -686,132 +686,132 @@
             <!--           SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
 
 
-<!--            <TextView-->
-<!--                android:id="@+id/tvNum6"-->
-<!--                android:layout_width="28dp"-->
-<!--                android:layout_height="28dp"-->
-<!--                android:background="@drawable/shape_oval_white"-->
-<!--                android:gravity="center"-->
-<!--                android:text="6"-->
-<!--                android:textColor="@color/black"-->
-<!--                app:layout_constraintBottom_toBottomOf="@id/titleINN"-->
-<!--                app:layout_constraintEnd_toEndOf="@id/icOvalUserTerms"-->
-<!--                app:layout_constraintStart_toStartOf="@id/icOvalUserTerms"-->
-<!--                app:layout_constraintTop_toTopOf="@id/titleINN" />-->
+            <!--            <TextView-->
+            <!--                android:id="@+id/tvNum6"-->
+            <!--                android:layout_width="28dp"-->
+            <!--                android:layout_height="28dp"-->
+            <!--                android:background="@drawable/shape_oval_white"-->
+            <!--                android:gravity="center"-->
+            <!--                android:text="6"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@id/titleINN"-->
+            <!--                app:layout_constraintEnd_toEndOf="@id/icOvalUserTerms"-->
+            <!--                app:layout_constraintStart_toStartOf="@id/icOvalUserTerms"-->
+            <!--                app:layout_constraintTop_toTopOf="@id/titleINN" />-->
 
-<!--            <ImageView-->
-<!--                android:id="@+id/ivINNChecked"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/shape_oval_orange"-->
-<!--                android:padding="5dp"-->
-<!--                android:src="@drawable/ic_check"-->
-<!--                android:visibility="invisible"-->
-<!--                app:layout_constraintBottom_toBottomOf="@id/tvNum6"-->
-<!--                app:layout_constraintEnd_toEndOf="@id/tvNum6"-->
-<!--                app:layout_constraintStart_toStartOf="@id/tvNum6"-->
-<!--                app:layout_constraintTop_toTopOf="@id/tvNum6" />-->
-
-
-<!--            <ImageView-->
-<!--                android:id="@+id/icOvalINN"-->
-<!--                android:layout_width="60dp"-->
-<!--                android:layout_height="60dp"-->
-<!--                android:src="@drawable/ic_oval_address"-->
-<!--                app:layout_constraintBottom_toBottomOf="@id/tvNum6"-->
-<!--                app:layout_constraintEnd_toEndOf="@id/tvNum6"-->
-<!--                app:layout_constraintStart_toStartOf="@id/tvNum6"-->
-<!--                app:layout_constraintTop_toTopOf="@id/tvNum6" />-->
+            <!--            <ImageView-->
+            <!--                android:id="@+id/ivINNChecked"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:background="@drawable/shape_oval_orange"-->
+            <!--                android:padding="5dp"-->
+            <!--                android:src="@drawable/ic_check"-->
+            <!--                android:visibility="invisible"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@id/tvNum6"-->
+            <!--                app:layout_constraintEnd_toEndOf="@id/tvNum6"-->
+            <!--                app:layout_constraintStart_toStartOf="@id/tvNum6"-->
+            <!--                app:layout_constraintTop_toTopOf="@id/tvNum6" />-->
 
 
-<!--            <TextView-->
-<!--                android:id="@+id/titleINN"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="?android:actionBarSize"-->
-<!--                android:fontFamily="sans-serif-medium"-->
-<!--                android:text="@string/inn"-->
-<!--                android:textColor="#ffffff"-->
-<!--                android:textSize="18sp"-->
-<!--                android:textStyle="normal"-->
-<!--                app:layout_constraintStart_toStartOf="@id/titleUserTerms"-->
-<!--                app:layout_constraintTop_toBottomOf="@id/addressContent" />-->
+            <!--            <ImageView-->
+            <!--                android:id="@+id/icOvalINN"-->
+            <!--                android:layout_width="60dp"-->
+            <!--                android:layout_height="60dp"-->
+            <!--                android:src="@drawable/ic_oval_address"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@id/tvNum6"-->
+            <!--                app:layout_constraintEnd_toEndOf="@id/tvNum6"-->
+            <!--                app:layout_constraintStart_toStartOf="@id/tvNum6"-->
+            <!--                app:layout_constraintTop_toTopOf="@id/tvNum6" />-->
 
 
-<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                android:id="@+id/iNNContent"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:animateLayoutChanges="true"-->
-<!--                android:clipChildren="false"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="@id/titleINN"-->
-<!--                app:layout_constraintTop_toBottomOf="@id/titleINN">-->
+            <!--            <TextView-->
+            <!--                android:id="@+id/titleINN"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="?android:actionBarSize"-->
+            <!--                android:fontFamily="sans-serif-medium"-->
+            <!--                android:text="@string/inn"-->
+            <!--                android:textColor="#ffffff"-->
+            <!--                android:textSize="18sp"-->
+            <!--                android:textStyle="normal"-->
+            <!--                app:layout_constraintStart_toStartOf="@id/titleUserTerms"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/addressContent" />-->
 
 
-<!--                <TextView-->
-<!--                    android:id="@+id/subTitleINN"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="20dp"-->
-<!--                    android:fontFamily="sans-serif"-->
-<!--                    android:text="@string/with_passport_photo_subtitle"-->
-<!--                    android:textColor="#e6ffffff"-->
-<!--                    android:textSize="14sp"-->
-<!--                    android:textStyle="normal"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+            <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+            <!--                android:id="@+id/iNNContent"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:animateLayoutChanges="true"-->
+            <!--                android:clipChildren="false"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="@id/titleINN"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/titleINN">-->
 
 
-<!--                <androidx.cardview.widget.CardView-->
-<!--                    android:id="@+id/cardINN"-->
-<!--                    android:layout_width="200dp"-->
-<!--                    android:layout_height="200dp"-->
-<!--                    android:layout_marginTop="20dp"-->
-<!--                    app:cardCornerRadius="10dp"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/subTitleINN" >-->
+            <!--                <TextView-->
+            <!--                    android:id="@+id/subTitleINN"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginTop="20dp"-->
+            <!--                    android:fontFamily="sans-serif"-->
+            <!--                    android:text="@string/with_passport_photo_subtitle"-->
+            <!--                    android:textColor="#e6ffffff"-->
+            <!--                    android:textSize="14sp"-->
+            <!--                    android:textStyle="normal"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/ivINN"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:clickable="true"-->
-<!--                    android:focusable="true"-->
-<!--                    android:scaleType="centerCrop"-->
-<!--                    android:foreground="?android:selectableItemBackground"-->
-<!--                    android:src="@drawable/ic_photo_with_passport_eg"/>-->
+            <!--                <androidx.cardview.widget.CardView-->
+            <!--                    android:id="@+id/cardINN"-->
+            <!--                    android:layout_width="200dp"-->
+            <!--                    android:layout_height="200dp"-->
+            <!--                    android:layout_marginTop="20dp"-->
+            <!--                    app:cardCornerRadius="10dp"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@id/subTitleINN" >-->
 
-<!--                </androidx.cardview.widget.CardView>-->
-<!--                <Button-->
-<!--                    android:id="@+id/btnBackINN"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="40dp"-->
-<!--                    android:layout_marginTop="20dp"-->
-<!--                    android:layout_marginRight="5dp"-->
-<!--                    android:background="@drawable/selector_left_more_rounded"-->
-<!--                    android:text="@string/back"-->
-<!--                    android:textAllCaps="false"-->
-<!--                    app:layout_constraintEnd_toStartOf="@id/btnNextINN"-->
-<!--                    app:layout_constraintHorizontal_weight="1"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/cardINN" />-->
 
-<!--                <Button-->
-<!--                    android:id="@+id/btnNextINN"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="40dp"-->
-<!--                    android:layout_marginLeft="5dp"-->
-<!--                    android:background="@drawable/selector_right_more_rounded"-->
-<!--                    android:enabled="false"-->
-<!--                    android:textAllCaps="false"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintHorizontal_weight="1"-->
-<!--                    app:layout_constraintStart_toEndOf="@id/btnBackINN"-->
-<!--                    app:layout_constraintTop_toTopOf="@id/btnBackINN" />-->
+            <!--                <ImageView-->
+            <!--                    android:id="@+id/ivINN"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="match_parent"-->
+            <!--                    android:clickable="true"-->
+            <!--                    android:focusable="true"-->
+            <!--                    android:scaleType="centerCrop"-->
+            <!--                    android:foreground="?android:selectableItemBackground"-->
+            <!--                    android:src="@drawable/ic_photo_with_passport_eg"/>-->
 
-<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+            <!--                </androidx.cardview.widget.CardView>-->
+            <!--                <Button-->
+            <!--                    android:id="@+id/btnBackINN"-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="40dp"-->
+            <!--                    android:layout_marginTop="20dp"-->
+            <!--                    android:layout_marginRight="5dp"-->
+            <!--                    android:background="@drawable/selector_left_more_rounded"-->
+            <!--                    android:text="@string/back"-->
+            <!--                    android:textAllCaps="false"-->
+            <!--                    app:layout_constraintEnd_toStartOf="@id/btnNextINN"-->
+            <!--                    app:layout_constraintHorizontal_weight="1"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@id/cardINN" />-->
+
+            <!--                <Button-->
+            <!--                    android:id="@+id/btnNextINN"-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="40dp"-->
+            <!--                    android:layout_marginLeft="5dp"-->
+            <!--                    android:background="@drawable/selector_right_more_rounded"-->
+            <!--                    android:enabled="false"-->
+            <!--                    android:textAllCaps="false"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    app:layout_constraintHorizontal_weight="1"-->
+            <!--                    app:layout_constraintStart_toEndOf="@id/btnBackINN"-->
+            <!--                    app:layout_constraintTop_toTopOf="@id/btnBackINN" />-->
+
+            <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
             <!--            ssssssssssssssssssssssssssssssssssssss-->
@@ -895,18 +895,22 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <EditText
+                <TextView
                     android:id="@+id/edtSelectBranch"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/selector_white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="start|center_vertical"
                     android:hint="@string/select_from_list"
                     android:imeOptions="actionDone"
                     android:inputType="text"
                     android:maxLines="1"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
+                    android:textSize="16dp"
                     app:layout_constraintTop_toBottomOf="@id/subTitleSelectBranch" />
 
                 <Button
@@ -918,6 +922,7 @@
                     android:text="@string/select_on_map"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
+                    android:visibility="gone"
                     app:layout_constraintTop_toBottomOf="@id/edtSelectBranch" />
 
                 <Button
@@ -959,8 +964,8 @@
                 android:background="@drawable/shape_oval_white"
                 android:gravity="center"
                 android:text="8"
-                android:visibility="gone"
                 android:textColor="@color/black"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/titleLimit"
                 app:layout_constraintEnd_toEndOf="@id/icOvalUserTerms"
                 app:layout_constraintStart_toStartOf="@id/icOvalUserTerms"
@@ -984,8 +989,8 @@
                 android:id="@+id/icOvalLimit"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:visibility="gone"
                 android:src="@drawable/ic_oval_select_branch"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/tvNum8"
                 app:layout_constraintEnd_toEndOf="@id/tvNum8"
                 app:layout_constraintStart_toStartOf="@id/tvNum8"
@@ -995,7 +1000,6 @@
             <TextView
                 android:id="@+id/titleLimit"
                 android:layout_width="wrap_content"
-                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="?android:actionBarSize"
                 android:fontFamily="sans-serif-medium"
@@ -1003,6 +1007,7 @@
                 android:textColor="#ffffff"
                 android:textSize="18sp"
                 android:textStyle="normal"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@id/titleUserTerms"
                 app:layout_constraintTop_toBottomOf="@id/selectBranchContent" />
 

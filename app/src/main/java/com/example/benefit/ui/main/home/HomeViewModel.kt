@@ -52,8 +52,6 @@ class HomeViewModel @ViewModelInject constructor(private val userRemote: UserRem
     }
 
 
-
-
     val cardsResp = SingleLiveEvent<List<CardDTO>>()
     val isLoadingCards = SingleLiveEvent<Boolean>()
     fun getMyCards() {
@@ -64,12 +62,11 @@ class HomeViewModel @ViewModelInject constructor(private val userRemote: UserRem
                 isLoadingCards.value = false
                 when (response) {
                     is ResultError -> errorMessage.value = response.message
-                    is ResultSuccess -> cardsResp.value = response.value
+                    is ResultSuccess -> cardsResp.value = response.value.bank
                 }.exhaustive
             }
         }
     }
-
 
 
 }
