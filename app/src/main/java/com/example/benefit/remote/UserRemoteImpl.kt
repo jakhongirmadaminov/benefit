@@ -149,7 +149,15 @@ class UserRemoteImpl @Inject constructor(
         title: String,
         cardNumber: String,
         expiry: Int
-    ) = getFormattedResponse { authorizedApiService.addNewCard(ReqCard(cardNumber, title, expiry)) }
+    ) = getFormattedResponse {
+        authorizedApiService.addNewCard(
+            ReqCard(
+                cardNumber,
+                title,
+                (expiry.toString().substring(2) + expiry.toString().substring(0, 2)).toInt()
+            )
+        )
+    }
 
     override suspend fun addOrderCardAddress(order_card_id: Int, address: String) =
         getFormattedResponse { authorizedApiService.orderCardAddress(order_card_id, address) }
