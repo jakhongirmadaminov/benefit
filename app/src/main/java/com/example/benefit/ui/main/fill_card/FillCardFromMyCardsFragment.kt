@@ -16,8 +16,9 @@ import javax.inject.Inject
 /**
  * Created by jahon on 03-Sep-20
  */
-@AndroidEntryPoint
-class FillCardFromMyCardsFragment @Inject constructor() : Fragment(R.layout.fragment_fill_from_my_cards) {
+import com.example.benefit.ui.base.BaseFragment
+
+class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_cards) {
 
 
     private val viewModel: CardOptionsViewModel by viewModels()

@@ -15,8 +15,9 @@ import javax.inject.Inject
 /**
  * Created by jahon on 03-Sep-20
  */
-@AndroidEntryPoint
-class CardNotificationsFragment @Inject constructor() : Fragment(R.layout.fragment_card_notifications) {
+import com.example.benefit.ui.base.BaseFragment
+
+class CardNotificationsFragment : BaseFragment(R.layout.fragment_card_notifications) {
 
 
     private val viewModel: CardOptionsViewModel by activityViewModels()

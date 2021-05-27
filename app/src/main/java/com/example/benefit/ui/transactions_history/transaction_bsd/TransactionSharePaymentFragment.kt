@@ -20,7 +20,7 @@ import javax.inject.Inject
 /**
  * Created by jahon on 03-Sep-20
  */
-@AndroidEntryPoint
+
 class TransactionSharePaymentFragment @Inject constructor() :
     Fragment(R.layout.fragment_transaction_share_payment) {
 

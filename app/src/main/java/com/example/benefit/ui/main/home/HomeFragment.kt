@@ -1,15 +1,16 @@
 package com.example.benefit.ui.main.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.viewpager.widget.PagerAdapter
 import com.example.benefit.R
 import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.remote.models.EPaymentType
 import com.example.benefit.remote.models.PaynetCategory
+import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.branches_atms.BranchesAtmsActivity
 import com.example.benefit.ui.expenses_by_categories.ExpensesByCategoriesActivity
 import com.example.benefit.ui.loans.LoanActivity
@@ -27,14 +28,13 @@ import com.example.benefit.util.loadImageUrl
 import com.rd.utils.DensityUtils.dpToPx
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.item_card.view.*
 import splitties.fragments.start
 import java.text.DecimalFormat
 
-@AndroidEntryPoint
-class HomeFragment : Fragment(R.layout.fragment_home) {
+
+class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private val paynetCatgAdapter = GroupAdapter<GroupieViewHolder>()
     private val newsAdapter = GroupAdapter<GroupieViewHolder>()
@@ -141,13 +141,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
         page_two.setOnClickListener {
-            start<LoanActivity> {}
+            startActivity(Intent(requireActivity(), LoanActivity::class.java))
         }
         cardBranches.setOnClickListener {
-            start<BranchesAtmsActivity> {}
+            startActivity(Intent(requireActivity(), BranchesAtmsActivity::class.java))
         }
         cardExpenses.setOnClickListener {
-            start<ExpensesByCategoriesActivity> {}
+            startActivity(Intent(requireActivity(), ExpensesByCategoriesActivity::class.java))
         }
 
     }

@@ -1,6 +1,6 @@
 package com.example.benefit.ui.expenses_by_categories
 
-import androidx.hilt.lifecycle.ViewModelInject
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.benefit.remote.PartnersRemoteImpl
@@ -10,8 +10,11 @@ import com.example.benefit.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
+import dagger.hilt.android.lifecycle.HiltViewModel
 
-class ExpensesByCategoriesViewModel @ViewModelInject constructor(val partnersRemoteImpl: PartnersRemoteImpl): ViewModel() {
+@HiltViewModel
+class ExpensesByCategoriesViewModel @Inject constructor(val partnersRemoteImpl: PartnersRemoteImpl): ViewModel() {
 
 
     val partnerCategoriesResp = SingleLiveEvent<ResultWrapper<List<PartnerCategoryDTO>>>()

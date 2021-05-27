@@ -17,13 +17,13 @@ import javax.inject.Inject
 @ExperimentalSplittiesApi
 class PartnersRemoteImpl @Inject constructor(
     private val apiService: ApiService,
-    private val authorizedApiService: AuthorizedApiService
+    private val authApiService: AuthApiService
 ) :
     PartnersRemote {
 
     override suspend fun getPartners(): ResultWrapper<List<Partner>> {
         return try {
-            val response = authorizedApiService.getPartners()
+            val response = authApiService.getPartners()
             if (response.isSuccessful) ResultSuccess(response.body()!!)
             else ResultError(
                 JSONObject(response.errorBody()!!.string())["message"].toString(),
@@ -35,11 +35,11 @@ class PartnersRemoteImpl @Inject constructor(
     }
 
     override suspend fun getPartnersCategory() =
-        getFormattedResponse { authorizedApiService.getPartnersCategory() }
+        getFormattedResponse { authApiService.getPartnersCategory() }
 
     override suspend fun getPartnersForCategory(id: Int): ResultWrapper<List<PartnerCategoryDTO>> {
         return try {
-            val response = authorizedApiService.getCategoryChildren(id)
+            val response = authApiService.getCategoryChildren(id)
             if (response.isSuccessful) ResultSuccess(response.body()!!)
             else ResultError(
                 JSONObject(response.errorBody()!!.string())["message"].toString(),
@@ -51,10 +51,10 @@ class PartnersRemoteImpl @Inject constructor(
     }
 
     override suspend fun getAllBankBranches() =
-        getFormattedResponse { authorizedApiService.getAllBankBranches() }
+        getFormattedResponse { authApiService.getAllBankBranches() }
 
     override suspend fun getPartnersByCategoryId(id: Int): ResultWrapper<List<Partner>> {
-        val resp = getFormattedResponse { authorizedApiService.getPartnersByCategory(id) }
+        val resp = getFormattedResponse { authApiService.getPartnersByCategory(id) }
         return when (resp) {
             is ResultError -> resp
             is ResultSuccess -> ResultSuccess(resp.value.partners!!)

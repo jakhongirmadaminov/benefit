@@ -11,7 +11,7 @@ import com.example.benefit.util.MyBSDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 
-@AndroidEntryPoint
+
 class AddCardBSD : MyBSDialog() {
 
     private val viewModel: RegistrationViewModel by activityViewModels()

@@ -16,7 +16,7 @@ import com.example.benefit.util.MyBSDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 
-@AndroidEntryPoint
+
 class FillCardBSD : MyBSDialog() {
 
     private val viewModel: FillCardViewModel by viewModels()

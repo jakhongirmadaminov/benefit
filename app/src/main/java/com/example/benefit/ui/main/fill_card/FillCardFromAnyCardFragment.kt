@@ -21,7 +21,7 @@ import javax.inject.Inject
 /**
  * Created by jahon on 03-Sep-20
  */
-@AndroidEntryPoint
+
 class FillCardFromAnyCardFragment @Inject constructor() :
     Fragment(R.layout.fragment_fill_from_any_card) {
 

@@ -15,7 +15,7 @@ import com.example.benefit.util.MyBSDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 
-@AndroidEntryPoint
+
 class CardOptionsBSD : MyBSDialog() {
 
     lateinit var cardBeingFilled: CardDTO

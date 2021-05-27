@@ -15,7 +15,7 @@ import javax.inject.Inject
 @ExperimentalSplittiesApi
 class CardsRemoteImpl @Inject constructor(
     private val api: ApiService,
-    private val authApi: AuthorizedApiService
+    private val authApi: AuthApiService
 ) : CardsRemote {
 
     override suspend fun getCardBackgrounds() =

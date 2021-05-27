@@ -31,7 +31,7 @@ import kotlin.random.Random
 /**
  * Created by jahon on 03-Sep-20
  */
-@AndroidEntryPoint
+
 class TransactionMoreInfoFragment @Inject constructor() :
     Fragment(R.layout.fragment_transaction_more_info) {
 

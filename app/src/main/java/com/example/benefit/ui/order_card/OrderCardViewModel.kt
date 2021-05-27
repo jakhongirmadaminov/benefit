@@ -1,7 +1,7 @@
 package com.example.benefit.ui.order_card
 
 import android.graphics.Bitmap
-import androidx.hilt.lifecycle.ViewModelInject
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,8 +18,11 @@ import kotlinx.coroutines.withContext
 
 /**
  * Created by jahon on 06-Sep-20
- */
-class OrderCardViewModel @ViewModelInject constructor(private val userRemote: UserRemote) :
+ */import javax.inject.Inject
+import dagger.hilt.android.lifecycle.HiltViewModel
+
+@HiltViewModel
+class OrderCardViewModel @Inject constructor(private val userRemote: UserRemote) :
     ViewModel() {
 
     var passportBitmap: Bitmap? = null

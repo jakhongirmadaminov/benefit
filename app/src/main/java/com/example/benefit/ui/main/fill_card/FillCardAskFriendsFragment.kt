@@ -49,7 +49,7 @@ private const val CONTACT_KEY_INDEX: Int = 1
 private val TO_IDS: IntArray = intArrayOf(android.R.id.text1)
 
 
-@AndroidEntryPoint
+
 class FillCardAskFriendsFragment @Inject constructor() :
     Fragment(R.layout.fragment_fill_card_ask_friends),
     LoaderManager.LoaderCallbacks<Cursor> {

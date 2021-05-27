@@ -1,11 +1,14 @@
 package com.example.benefit.ui.main.profile
 
-import androidx.hilt.lifecycle.ViewModelInject
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import javax.inject.Inject
+import dagger.hilt.android.lifecycle.HiltViewModel
 
-class ProfileViewModel @ViewModelInject constructor(): ViewModel() {
+@HiltViewModel
+class ProfileViewModel @Inject constructor(): ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is notifications Fragment"

@@ -17,7 +17,7 @@ import javax.inject.Inject
 /**
  * Created by jahon on 03-Sep-20
  */
-@AndroidEntryPoint
+
 class SettingsNewCodeFragment @Inject constructor() :
     Fragment(R.layout.fragment_settings_new_code) {
 

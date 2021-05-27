@@ -5,27 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.benefit.R
 import com.example.benefit.ui.auth.login.LoginBSD
 import com.example.benefit.ui.auth.registration.RegistrationBSD
+import com.example.benefit.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_auth.*
 
-@AndroidEntryPoint
-class AuthActivity : AppCompatActivity() {
 
-//    @Inject
-//    lateinit var viewModelFactory: AuthFragmentFactory
-
-//    @Inject
-//    @Named("AuthFragmentFactory")
-//    lateinit var fragmentFactory: FragmentFactory
-
-//    private val viewModel: AuthViewModel by viewModels {
-//        viewModelFactory
-//    }
-
-
-//    @Inject
-//    @Named("LoginFragmentFactory")
-//    lateinit var fragmentFactory: FragmentFactory
+class AuthActivity : BaseActivity() {
 
 
 

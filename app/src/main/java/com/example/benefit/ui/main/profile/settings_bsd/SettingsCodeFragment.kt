@@ -22,8 +22,9 @@ import javax.inject.Inject
 /**
  * Created by jahon on 03-Sep-20
  */
-@AndroidEntryPoint
-class SettingsCodeFragment @Inject constructor() : Fragment(R.layout.fragment_settings_code) {
+import com.example.benefit.ui.base.BaseFragment
+
+class SettingsCodeFragment : BaseFragment(R.layout.fragment_settings_code) {
 
 
     private val viewModel: LoginViewModel by viewModels()

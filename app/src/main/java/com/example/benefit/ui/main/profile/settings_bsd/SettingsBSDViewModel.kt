@@ -1,6 +1,6 @@
 package com.example.benefit.ui.main.profile.settings_bsd
 
-import androidx.hilt.lifecycle.ViewModelInject
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.benefit.remote.UserRemoteImpl
@@ -14,8 +14,11 @@ import kotlinx.coroutines.withContext
 
 /**
  * Created by jahon on 03-Sep-20
- */
-class SettingsBSDViewModel @ViewModelInject constructor(private val userRemoteImpl: UserRemoteImpl) :
+ */import javax.inject.Inject
+import dagger.hilt.android.lifecycle.HiltViewModel
+
+@HiltViewModel
+class SettingsBSDViewModel @Inject constructor(private val userRemoteImpl: UserRemoteImpl) :
     ViewModel() {
 
     val loginResp = SingleLiveEvent<ResultWrapper<RespLogin>>()

@@ -1,5 +1,6 @@
 package com.example.benefit.ui.main.payments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_payments.*
 import splitties.fragments.start
 
-@AndroidEntryPoint
+
 class PaymentsFragment : Fragment(R.layout.fragment_payments) {
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
@@ -74,7 +75,7 @@ class PaymentsFragment : Fragment(R.layout.fragment_payments) {
             TransferToCardBSD().show(childFragmentManager, "")
         }
         clGap.setOnClickListener {
-            start<GapActivity> {}
+            startActivity(Intent(requireActivity(), GapActivity::class.java))
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.example.benefit.ui.main.home
 
-import androidx.hilt.lifecycle.ViewModelInject
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.benefit.remote.models.CardDTO
@@ -14,8 +14,11 @@ import com.example.benefit.util.exhaustive
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
+import dagger.hilt.android.lifecycle.HiltViewModel
 
-class HomeViewModel @ViewModelInject constructor(private val userRemote: UserRemote) : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor(private val userRemote: UserRemote) : ViewModel() {
 
     val paynetCatgResp = SingleLiveEvent<List<PaynetCategory>>()
     val errorMessage = SingleLiveEvent<String>()

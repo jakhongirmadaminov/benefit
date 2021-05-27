@@ -15,7 +15,7 @@ import javax.inject.Inject
 /**
  * Created by jahon on 03-Sep-20
  */
-@AndroidEntryPoint
+
 class SettingsChangeCodeFragment @Inject constructor() :
     Fragment(R.layout.fragment_settings_change_code) {
 

@@ -12,7 +12,7 @@ import splitties.activities.start
 import kotlin.random.Random
 import kotlin.random.nextUInt
 
-@AndroidEntryPoint
+
 class LoansChartActivity : BaseActionbarActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_loans_chart)

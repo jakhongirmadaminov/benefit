@@ -1,6 +1,6 @@
 package com.example.benefit.ui.auth.login
 
-import androidx.hilt.lifecycle.ViewModelInject
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.benefit.remote.models.RespLogin
@@ -15,8 +15,11 @@ import splitties.preferences.edit
 
 /**
  * Created by jahon on 03-Sep-20
- */
-class LoginViewModel @ViewModelInject constructor(private val userRemote: UserRemote) :
+ */import javax.inject.Inject
+import dagger.hilt.android.lifecycle.HiltViewModel
+
+@HiltViewModel
+class LoginViewModel @Inject constructor(private val userRemote: UserRemote) :
     ViewModel() {
 
     val loginResp = SingleLiveEvent<RespLogin>()

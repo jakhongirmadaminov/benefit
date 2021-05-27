@@ -18,8 +18,9 @@ import javax.inject.Inject
 /**
  * Created by jahon on 03-Sep-20
  */
-@AndroidEntryPoint
-class RegCodeFragment @Inject constructor() : Fragment(R.layout.fragment_reg_code) {
+import com.example.benefit.ui.base.BaseFragment
+
+class RegCodeFragment : BaseFragment(R.layout.fragment_reg_code) {
 
 
     private val viewModel: RegistrationViewModel by activityViewModels()

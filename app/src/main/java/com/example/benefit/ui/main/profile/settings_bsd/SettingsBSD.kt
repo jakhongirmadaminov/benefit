@@ -10,7 +10,7 @@ import com.example.benefit.util.MyBSDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 
-@AndroidEntryPoint
+
 class SettingsBSD : MyBSDialog() {
 
     private val viewModel: SettingsBSDViewModel by viewModels()

@@ -1,5 +1,6 @@
 package com.example.benefit.ui.selected_partners_category
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -10,16 +11,16 @@ import com.example.benefit.R
 import com.example.benefit.remote.models.Partner
 import com.example.benefit.remote.models.PartnerCategoryDTO
 import com.example.benefit.ui.base.BaseActivity
+import com.example.benefit.ui.partner_home.PartnerHomeActivity
 import com.example.benefit.ui.viewgroups.ItemPartnerCashback
 import com.example.benefit.util.ResultError
 import com.example.benefit.util.ResultSuccess
 import com.example.benefit.util.exhaustive
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_selected_partners_category.*
 
-@AndroidEntryPoint
+
 class SelectedPartnersCategoryActivity : BaseActivity() {
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
@@ -70,7 +71,11 @@ class SelectedPartnersCategoryActivity : BaseActivity() {
 
         adapter.clear()
         value.forEach {
-            adapter.add(ItemPartnerCashback(it))
+            adapter.add(ItemPartnerCashback(it) {
+                startActivity(Intent(this, PartnerHomeActivity::class.java).apply {
+                    putExtra(PartnerHomeActivity.EXTRA_PARTNER, it)
+                })
+            })
         }
 
         adapter.notifyDataSetChanged()

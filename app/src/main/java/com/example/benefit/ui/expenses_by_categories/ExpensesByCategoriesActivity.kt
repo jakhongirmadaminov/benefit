@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_expenses_by_categories.*
 import kotlinx.android.synthetic.main.item_bar_chart.view.*
 import kotlin.random.Random
 
-@AndroidEntryPoint
+
 class ExpensesByCategoriesActivity : BaseActionbarActivity() {
 
     private val viewModel: ExpensesByCategoriesViewModel by viewModels()

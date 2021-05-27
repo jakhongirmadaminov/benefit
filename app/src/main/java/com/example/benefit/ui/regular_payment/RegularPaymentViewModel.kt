@@ -1,13 +1,16 @@
 package com.example.benefit.ui.regular_payment
 
-import androidx.hilt.lifecycle.ViewModelInject
+
 import androidx.lifecycle.ViewModel
 import com.example.benefit.remote.UserRemoteImpl
 
 /**
  * Created by jahon on 03-Sep-20
- */
-class RegularPaymentViewModel @ViewModelInject constructor(private val userRemoteImpl: UserRemoteImpl) :
+ */import javax.inject.Inject
+import dagger.hilt.android.lifecycle.HiltViewModel
+
+@HiltViewModel
+class RegularPaymentViewModel @Inject constructor(private val userRemoteImpl: UserRemoteImpl) :
     ViewModel() {
 
 //    val loginResp = SingleLiveEvent<ResultWrapper<String>>()

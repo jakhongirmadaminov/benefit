@@ -31,8 +31,9 @@ import kotlin.random.Random
 /**
  * Created by jahon on 03-Sep-20
  */
-@AndroidEntryPoint
-class TransactionFragment @Inject constructor() : Fragment(R.layout.fragment_transaction) {
+import com.example.benefit.ui.base.BaseFragment
+
+class TransactionFragment : BaseFragment(R.layout.fragment_transaction) {
 
 //    val args by navArgs<TransactionFragmentArgs>()
 //    val productId = args.productId

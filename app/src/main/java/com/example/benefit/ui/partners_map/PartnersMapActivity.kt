@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.benefit.R
 import com.example.benefit.remote.models.Partner
 import com.example.benefit.remote.models.PartnerCategoryDTO
+import com.example.benefit.ui.base.BaseActivity
 import com.example.benefit.ui.viewgroups.ItemCategorySquare
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -26,7 +27,7 @@ import kotlinx.android.synthetic.main.activity_partners_map.*
 import java.util.*
 
 
-class PartnersMapActivity : AppCompatActivity(), OnMapReadyCallback {
+class PartnersMapActivity : BaseActivity(), OnMapReadyCallback {
 
     private val markerList = ArrayList<Marker>()
     private lateinit var gMap: GoogleMap

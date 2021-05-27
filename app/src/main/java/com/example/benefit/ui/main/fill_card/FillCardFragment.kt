@@ -1,6 +1,7 @@
 package com.example.benefit.ui.main.fill_card
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -20,8 +21,9 @@ import javax.inject.Inject
 /**
  * Created by jahon on 03-Sep-20
  */
-@AndroidEntryPoint
-class FillCardFragment @Inject constructor() : Fragment(R.layout.fragment_fill_card) {
+import com.example.benefit.ui.base.BaseFragment
+
+class FillCardFragment : BaseFragment(R.layout.fragment_fill_card) {
 
     companion object {
         const val ARG_CARD = "CARD"
@@ -89,7 +91,7 @@ class FillCardFragment @Inject constructor() : Fragment(R.layout.fragment_fill_c
             findNavController().navigate(R.id.action_fillCardFragment_to_cardDepositAskFriendsFragment)
         }
         llWithCash.setOnClickListener {
-            start<BranchesAtmsActivity> {}
+            startActivity(Intent(requireActivity(), BranchesAtmsActivity::class.java))
         }
         llFromAnyCard.setOnClickListener {
             findNavController().navigate(R.id.action_fillCardFragment_to_cardMakeDepositFromAnyCardFragment)

@@ -1,7 +1,7 @@
 //package com.example.benefit.ui.select_card_type
 //
 //import android.graphics.Bitmap
-//import androidx.hilt.lifecycle.ViewModelInject
+//
 //import androidx.lifecycle.LiveData
 //import androidx.lifecycle.MutableLiveData
 //import androidx.lifecycle.ViewModel

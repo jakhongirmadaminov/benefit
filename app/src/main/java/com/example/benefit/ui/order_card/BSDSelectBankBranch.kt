@@ -11,7 +11,7 @@ import com.example.benefit.util.MyBSDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.bsd_select_bank_branch.*
 
-@AndroidEntryPoint
+
 class BSDSelectBankBranch : MyBSDialog() {
 
 

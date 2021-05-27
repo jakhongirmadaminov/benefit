@@ -2,25 +2,18 @@ package com.example.benefit.ui.select_card_type
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.example.benefit.R
+import com.example.benefit.enums.ECardType
+import com.example.benefit.ui.base.BaseActivity
 import com.example.benefit.ui.main.home.HomeFragment
 import com.example.benefit.ui.order_card.OrderCardActivity
 import com.example.benefit.ui.order_card.OrderCardActivity.Companion.EXTRA_CARD_TYPE
 import com.example.benefit.ui.order_card.OrderCardActivity.Companion.REQ_ORDER_CARD
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_select_card_type.*
 
 
-@AndroidEntryPoint
-class SelectCardTypeActivity : AppCompatActivity() {
-
-
-    companion object {
-    }
-
+class SelectCardTypeActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,13 +84,5 @@ class SelectCardTypeActivity : AppCompatActivity() {
                 finish()
             }
         }
-    }
-}
-
-enum class ECardType {
-    ZOOM, SUPREME;
-
-    fun isZoom(): Boolean {
-        return this == ZOOM
     }
 }

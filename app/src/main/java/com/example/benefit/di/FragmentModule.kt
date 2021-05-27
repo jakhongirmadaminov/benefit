@@ -1,40 +1,46 @@
 package com.example.benefit.di
-//import com.example.benefit.ui.auth.LoginFragmentFactory
-import com.example.benefit.remote.CardsRemoteImpl
-import com.example.benefit.remote.PartnersRemoteImpl
-import com.example.benefit.remote.UserRemoteImpl
+
+import com.example.benefit.remote.*
 import com.example.benefit.remote.repository.CardsRemote
 import com.example.benefit.remote.repository.PartnersRemote
 import com.example.benefit.remote.repository.UserRemote
-import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.components.ViewModelComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import splitties.experimental.ExperimentalSplittiesApi
 
 @ExperimentalSplittiesApi
 @ExperimentalCoroutinesApi
 @Module
-@InstallIn(ApplicationComponent::class)
-abstract class FragmentModule {
+@InstallIn(ViewModelComponent::class)
+object FragmentModule {
 
-//    @JvmStatic
-//    @Singleton
-//    @Provides
-//    @Named("LoginFragmentFactory")
-//    fun provideLoginFragmentFactory(): FragmentFactory {
-//        return LoginFragmentFactory()
-//    }
 
-    @Binds
-    abstract fun provideUserRepository(userRemoteImpl: UserRemoteImpl): UserRemote
+    @Provides
+    fun provideUserRepository(
+        apiService: ApiService,
+        authApiService: AuthApiService
+    ): UserRemote {
+        return UserRemoteImpl(apiService, authApiService)
+    }
 
-    @Binds
-    abstract fun provideCardsRepository(cardsRemoteImpl: CardsRemoteImpl): CardsRemote
+    @Provides
+    fun provideCardsRepository(
+        apiService: ApiService,
+        authApiService: AuthApiService
+    ): CardsRemote {
+        return CardsRemoteImpl(apiService, authApiService)
+    }
 
-    @Binds
-    abstract fun providePartnersRepository(partnersRemoteImpl: PartnersRemoteImpl): PartnersRemote
+    @Provides
+    fun providePartnersRepository(
+        apiService: ApiService,
+        authApiService: AuthApiService
+    ): PartnersRemote {
+        return PartnersRemoteImpl(apiService, authApiService)
+    }
 
 
 }

@@ -1,6 +1,6 @@
 package com.example.benefit.ui.order_card
 
-import androidx.hilt.lifecycle.ViewModelInject
+
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,8 +12,11 @@ import com.example.benefit.util.exhaustive
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
+import dagger.hilt.android.lifecycle.HiltViewModel
 
-class BSDSelectBranchViewModel @ViewModelInject constructor(private val partnersRemote: PartnersRemote) :
+@HiltViewModel
+class BSDSelectBranchViewModel @Inject constructor(private val partnersRemote: PartnersRemote) :
     ViewModel() {
 
     val branches = MutableLiveData<List<BankBranchDTO>>()

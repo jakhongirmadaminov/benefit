@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.benefit.R
 import com.example.benefit.remote.models.Partner
+import com.example.benefit.ui.base.BaseActivity
 import com.example.benefit.ui.partner_story.StoryActivity
 import com.example.benefit.util.loadImageUrl
 import com.xwray.groupie.GroupAdapter
@@ -14,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_partner_home.*
 import splitties.activities.start
 
 
-class PartnerHomeActivity : AppCompatActivity() {
+class PartnerHomeActivity : BaseActivity() {
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
     lateinit var partner: Partner

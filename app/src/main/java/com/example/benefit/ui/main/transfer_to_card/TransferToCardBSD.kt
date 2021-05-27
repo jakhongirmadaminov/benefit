@@ -11,7 +11,7 @@ import com.example.benefit.util.MyBSDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 
-@AndroidEntryPoint
+
 class TransferToCardBSD : MyBSDialog() {
 
     private val viewModel: TransferToCardViewModel by viewModels()

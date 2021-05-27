@@ -1,20 +1,22 @@
 package com.example.benefit.ui.selected_partners_category
 
-import androidx.hilt.lifecycle.ViewModelInject
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.benefit.remote.PartnersRemoteImpl
 import com.example.benefit.remote.models.Partner
 import com.example.benefit.remote.repository.PartnersRemote
 import com.example.benefit.util.ResultWrapper
 import com.example.benefit.util.SingleLiveEvent
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import splitties.experimental.ExperimentalSplittiesApi
+import javax.inject.Inject
 
 @ExperimentalSplittiesApi
-class SelectedPartnersCategoryViewModel @ViewModelInject constructor(private val partnersRepository: PartnersRemote) :
+@HiltViewModel
+class SelectedPartnersCategoryViewModel @Inject constructor(private val partnersRepository: PartnersRemote) :
     ViewModel() {
 
 

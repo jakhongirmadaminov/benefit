@@ -16,15 +16,13 @@ import com.example.benefit.ui.order_card.OrderCardActivity
 import com.example.benefit.ui.select_card_type.SelectCardTypeActivity
 import com.redmadrobot.inputmask.MaskedTextChangedListener
 import com.redmadrobot.inputmask.MaskedTextChangedListener.Companion.installOn
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_reg_card_activation.*
-import splitties.fragments.start
 import javax.inject.Inject
 
 /**
  * Created by jahon on 03-Sep-20
  */
-@AndroidEntryPoint
+
 class RegCardActivationFragment @Inject constructor() :
     Fragment(R.layout.fragment_reg_card_activation) {
 
@@ -135,7 +133,7 @@ class RegCardActivationFragment @Inject constructor() :
         tvNext.setOnClickListener {
             if ((parentFragment is RegistrationBSD)) {
                 (parentFragment as RegistrationBSD).dismiss()
-                start<MainActivity> {}
+                startActivity(Intent(requireActivity(), MainActivity::class.java))
             } else if ((parentFragment is AddCardBSD)) (parentFragment as AddCardBSD).dismiss()
         }
 
@@ -171,7 +169,7 @@ class RegCardActivationFragment @Inject constructor() :
             if (requestCode == OrderCardActivity.REQ_ORDER_CARD) {
                 if (((parentFragment as NavHostFragment).parentFragment is RegistrationBSD)) {
                     ((parentFragment as NavHostFragment).parentFragment as RegistrationBSD).dismiss()
-                    start<MainActivity> {}
+                    startActivity(Intent(requireActivity(), MainActivity::class.java))
                 } else if (((parentFragment as NavHostFragment).parentFragment is AddCardBSD)) ((parentFragment as NavHostFragment).parentFragment as AddCardBSD).dismiss()
             }
         }

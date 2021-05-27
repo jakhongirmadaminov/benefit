@@ -1,5 +1,6 @@
 package com.example.benefit.ui.main.partners_category
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -9,15 +10,12 @@ import com.example.benefit.R
 import com.example.benefit.remote.models.PartnerCategoryDTO
 import com.example.benefit.ui.partners_map.PartnersMapActivity
 import com.example.benefit.ui.viewgroups.ItemPartnerCategory
-import com.example.benefit.ui.viewgroups.ItemProgress
 import com.example.benefit.util.*
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_partners_category.*
-import splitties.fragments.start
 
-@AndroidEntryPoint
+
 class PartnersCategoryFragment : Fragment(R.layout.fragment_partners_category) {
 
     val viewModel: PartnersCategoryViewModel by viewModels()
@@ -35,12 +33,13 @@ class PartnersCategoryFragment : Fragment(R.layout.fragment_partners_category) {
 
     private fun attachListeners() {
         ivMap.setOnClickListener {
-            start<PartnersMapActivity> {
+
+            startActivity(Intent(requireActivity(), PartnersMapActivity::class.java).apply {
                 putParcelableArrayListExtra(
                     PartnersMapActivity.EXTRA_CATEGORIES,
                     ArrayList((viewModel.partnersResp.value!! as ResultSuccess).value)
                 )
-            }
+            })
         }
     }
 

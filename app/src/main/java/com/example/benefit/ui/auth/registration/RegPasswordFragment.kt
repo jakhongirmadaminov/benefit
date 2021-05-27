@@ -14,8 +14,9 @@ import javax.inject.Inject
 /**
  * Created by jahon on 03-Sep-20
  */
-@AndroidEntryPoint
-class RegPasswordFragment @Inject constructor() : Fragment(R.layout.fragment_reg_password) {
+import com.example.benefit.ui.base.BaseFragment
+
+class RegPasswordFragment : BaseFragment(R.layout.fragment_reg_password) {
 
 
     private val viewModel: RegistrationViewModel by activityViewModels()

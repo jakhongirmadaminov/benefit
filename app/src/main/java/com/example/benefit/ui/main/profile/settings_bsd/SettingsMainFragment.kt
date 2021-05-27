@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.ui.auth.login.LoginViewModel
+import com.example.benefit.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_settings_main.*
 import javax.inject.Inject
@@ -14,8 +15,7 @@ import javax.inject.Inject
 /**
  * Created by jahon on 03-Sep-20
  */
-@AndroidEntryPoint
-class SettingsMainFragment @Inject constructor() : Fragment(R.layout.fragment_settings_main) {
+class SettingsMainFragment : BaseFragment(R.layout.fragment_settings_main) {
 
 
     private val viewModel: LoginViewModel by viewModels()

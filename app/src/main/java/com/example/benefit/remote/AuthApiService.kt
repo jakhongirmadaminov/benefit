@@ -12,7 +12,7 @@ import splitties.experimental.ExperimentalSplittiesApi
  * Defines the abstract methods used for interacting with the Bufferoo API
  */
 @ExperimentalSplittiesApi
-interface AuthorizedApiService {
+interface AuthApiService {
 
 
     @GET("api/paynet/categories")

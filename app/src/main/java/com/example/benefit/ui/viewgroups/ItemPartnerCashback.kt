@@ -2,14 +2,12 @@ package com.example.benefit.ui.viewgroups
 
 import com.example.benefit.R
 import com.example.benefit.remote.models.Partner
-import com.example.benefit.ui.partner_home.PartnerHomeActivity
 import com.example.benefit.util.loadImageUrl
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_partner_cashback.view.*
-import splitties.activities.start
 
-class ItemPartnerCashback(val partner: Partner) : Item() {
+class ItemPartnerCashback(val partner: Partner, val onClick: (partner: Partner) -> Unit) : Item() {
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
 
@@ -17,9 +15,9 @@ class ItemPartnerCashback(val partner: Partner) : Item() {
         viewHolder.itemView.tvBrand.text = partner.title
 
         viewHolder.itemView.clParent.setOnClickListener {
-            viewHolder.itemView.context.start<PartnerHomeActivity> {
-                putExtra(PartnerHomeActivity.EXTRA_PARTNER, partner)
-            }
+            onClick(partner)
+
+
         }
 
     }

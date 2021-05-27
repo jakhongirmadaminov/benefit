@@ -29,7 +29,7 @@ import javax.inject.Inject
 /**
  * Created by jahon on 03-Sep-20
  */
-@AndroidEntryPoint
+
 class CardChangeDesignFragment @Inject constructor() :
     Fragment(R.layout.fragment_card_change_design) {
 

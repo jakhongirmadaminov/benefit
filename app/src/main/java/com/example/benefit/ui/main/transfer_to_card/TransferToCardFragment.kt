@@ -17,8 +17,9 @@ import javax.inject.Inject
 /**
  * Created by jahon on 03-Sep-20
  */
-@AndroidEntryPoint
-class TransferToCardFragment @Inject constructor() : Fragment(R.layout.fragment_transfer_to_card) {
+import com.example.benefit.ui.base.BaseFragment
+
+class TransferToCardFragment : BaseFragment(R.layout.fragment_transfer_to_card) {
 
 
     private val viewModel: TransferToCardViewModel by viewModels()
@@ -78,7 +79,7 @@ class TransferToCardFragment @Inject constructor() : Fragment(R.layout.fragment_
             findNavController().navigate(R.id.action_transferToCardFragment_to_transferToCardTransactionFragment)
         }
 //        llWithCash.setOnClickListener {
-//            start<BranchesAtmsActivity> {}
+//            startActivity(Intent(requireActivity(), BranchesAtmsActivity::class.java))
 //        }
 //        llFromAnyCard.setOnClickListener {
 //            findNavController().navigate(R.id.action_fillCardFragment_to_cardMakeDepositFromAnyCardFragment)

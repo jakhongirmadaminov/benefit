@@ -1,6 +1,6 @@
 package com.example.benefit.ui.partners_map
 
-import androidx.hilt.lifecycle.ViewModelInject
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.benefit.remote.models.Partner
@@ -12,8 +12,11 @@ import com.example.benefit.util.exhaustive
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
+import dagger.hilt.android.lifecycle.HiltViewModel
 
-class PartnersMapViewModel @ViewModelInject constructor(private val partnersRepository: PartnersRemote) :
+@HiltViewModel
+class PartnersMapViewModel @Inject constructor(private val partnersRepository: PartnersRemote) :
     ViewModel() {
 
     var errorMessage = SingleLiveEvent<String?>()

@@ -31,7 +31,7 @@ import kotlin.random.Random
 /**
  * Created by jahon on 03-Sep-20
  */
-@AndroidEntryPoint
+
 class TransactionSelectCategoryFragment @Inject constructor() :
     Fragment(R.layout.fragment_transaction_select_category) {
 

@@ -22,7 +22,7 @@ import javax.inject.Inject
 /**
  * Created by jahon on 03-Sep-20
  */
-@AndroidEntryPoint
+
 class FillCardAskFriendsTransferFragment @Inject constructor() :
     Fragment(R.layout.fragment_fill_card_ask_friends_transfer) {
 

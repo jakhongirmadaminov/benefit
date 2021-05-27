@@ -17,7 +17,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 
-@AndroidEntryPoint
+
 class LoginBSD : MyBSDialog() {
 
     private val viewModel: LoginViewModel by viewModels()

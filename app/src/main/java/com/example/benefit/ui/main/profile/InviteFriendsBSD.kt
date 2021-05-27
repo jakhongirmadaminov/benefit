@@ -11,7 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.bsd_invite_friend.*
 
 
-@AndroidEntryPoint
+
 class InviteFriendsBSD : MyBSDialog() {
 
 

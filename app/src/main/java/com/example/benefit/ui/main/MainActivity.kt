@@ -6,6 +6,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.benefit.R
 import com.example.benefit.ui.auth.AuthActivity
+import com.example.benefit.ui.base.BaseActivity
 import com.example.benefit.util.AppPrefs
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -13,8 +14,7 @@ import splitties.activities.start
 import splitties.experimental.ExperimentalSplittiesApi
 
 @ExperimentalSplittiesApi
-@AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     companion object{
         const val IS_GOING_DEPOSIT = "IS_GOING_DEPOSIT"

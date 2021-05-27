@@ -1,6 +1,6 @@
 package com.example.benefit.ui.main.home.card_options
 
-import androidx.hilt.lifecycle.ViewModelInject
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.benefit.remote.models.CardBgDTO
@@ -15,8 +15,11 @@ import kotlinx.coroutines.withContext
 
 /**
  * Created by jahon on 03-Sep-20
- */
-class CardOptionsViewModel @ViewModelInject constructor(private val cardsRemote: CardsRemote) :
+ */import javax.inject.Inject
+import dagger.hilt.android.lifecycle.HiltViewModel
+
+@HiltViewModel
+class CardOptionsViewModel @Inject constructor(private val cardsRemote: CardsRemote) :
     ViewModel() {
 
     val isLoading = SingleLiveEvent<Boolean>()

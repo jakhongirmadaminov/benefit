@@ -20,8 +20,9 @@ import javax.inject.Inject
 /**
  * Created by jahon on 03-Sep-20
  */
-@AndroidEntryPoint
-class SettingsPhoneFragment @Inject constructor() : Fragment(R.layout.fragment_settings_phone) {
+import com.example.benefit.ui.base.BaseFragment
+
+class SettingsPhoneFragment : BaseFragment(R.layout.fragment_settings_phone) {
 
 
     private val viewModel: LoginViewModel by viewModels()

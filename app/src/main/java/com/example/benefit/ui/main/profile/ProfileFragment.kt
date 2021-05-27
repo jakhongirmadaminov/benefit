@@ -1,5 +1,6 @@
 package com.example.benefit.ui.main.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -14,7 +15,7 @@ import kotlinx.android.synthetic.main.item_news_and_promos.*
 import splitties.fragments.start
 import splitties.preferences.edit
 
-@AndroidEntryPoint
+
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     val viewModel: ProfileViewModel by viewModels()
@@ -37,7 +38,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 token = null
                 userToken = null
             }
-            start<AuthActivity> {}
+            startActivity(Intent(requireActivity(), AuthActivity::class.java))
             requireActivity().finish()
         }
 

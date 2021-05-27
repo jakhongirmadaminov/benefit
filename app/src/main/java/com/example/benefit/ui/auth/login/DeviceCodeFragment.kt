@@ -1,18 +1,21 @@
 package com.example.benefit.ui.auth.login
 
+/**
+ * Created by jahon on 03-Sep-20
+ */
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import com.example.benefit.R
 import com.example.benefit.ui.auth.registration.ResponseState
+import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.MainActivity
 import com.example.benefit.util.AppPrefs
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_code.*
 import kotlinx.android.synthetic.main.fragment_device_code.*
 import kotlinx.android.synthetic.main.fragment_device_code.btnConfirm
@@ -20,15 +23,9 @@ import kotlinx.android.synthetic.main.fragment_device_code.edtCode
 import kotlinx.android.synthetic.main.fragment_device_code.progress
 import kotlinx.android.synthetic.main.fragment_device_code.tvError
 import splitties.experimental.ExperimentalSplittiesApi
-import splitties.fragments.start
 import splitties.preferences.edit
-import javax.inject.Inject
 
-/**
- * Created by jahon on 03-Sep-20
- */
-@AndroidEntryPoint
-class DeviceCodeFragment @Inject constructor() : Fragment(R.layout.fragment_device_code) {
+class DeviceCodeFragment : BaseFragment(R.layout.fragment_device_code) {
 
 
     private val viewModel: LoginViewModel by activityViewModels()
@@ -67,7 +64,8 @@ class DeviceCodeFragment @Inject constructor() : Fragment(R.layout.fragment_devi
             AppPrefs.edit {
                 token = it.access_token
             }
-            start<MainActivity> {}
+
+            startActivity(Intent(requireActivity(), MainActivity::class.java))
             ((parentFragment as NavHostFragment).parentFragment as LoginBSD).dismiss()
         })
 

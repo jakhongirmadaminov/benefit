@@ -17,7 +17,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 
-@AndroidEntryPoint
+
 class RegistrationBSD : MyBSDialog() {
 
     private val viewModel: RegistrationViewModel by viewModels()

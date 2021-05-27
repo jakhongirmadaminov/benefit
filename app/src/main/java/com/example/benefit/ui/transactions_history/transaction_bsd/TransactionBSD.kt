@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.bsd_transaction.*
 import kotlinx.android.synthetic.main.bsd_transaction.view.*
 
 
-@AndroidEntryPoint
+
 class TransactionBSD : MyNestedScrollBSDialog() {
 
     companion object {

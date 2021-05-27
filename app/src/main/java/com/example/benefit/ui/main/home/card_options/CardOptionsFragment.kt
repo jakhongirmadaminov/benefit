@@ -24,8 +24,9 @@ import javax.inject.Inject
 /**
  * Created by jahon on 03-Sep-20
  */
-@AndroidEntryPoint
-class CardOptionsFragment @Inject constructor() : Fragment(R.layout.fragment_card_options),
+import com.example.benefit.ui.base.BaseFragment
+
+class CardOptionsFragment : BaseFragment(R.layout.fragment_card_options),
     IOnCardAction {
 
     lateinit var card: CardDTO

@@ -10,7 +10,7 @@ import com.example.benefit.util.MyNestedScrollBSDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 
-@AndroidEntryPoint
+
 class CreateRegularPaymentBSD : MyNestedScrollBSDialog() {
 
 

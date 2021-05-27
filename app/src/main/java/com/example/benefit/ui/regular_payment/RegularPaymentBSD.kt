@@ -14,7 +14,7 @@ import com.example.benefit.util.MyBSDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 
-@AndroidEntryPoint
+
 class RegularPaymentBSD : MyBSDialog() {
 
 

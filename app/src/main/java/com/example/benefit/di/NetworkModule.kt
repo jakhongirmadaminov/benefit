@@ -3,16 +3,15 @@ package com.example.benefit.di
 import com.example.benefit.BuildConfig
 import com.example.benefit.remote.ApiService
 import com.example.benefit.remote.ApiServiceFactory
-import com.example.benefit.remote.AuthorizedApiService
+import com.example.benefit.remote.AuthApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
-import retrofit2.Retrofit
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 object NetworkModule {
 
     @Singleton
@@ -21,10 +20,9 @@ object NetworkModule {
         return ApiServiceFactory.makeApiService(BuildConfig.DEBUG)
     }
 
-
     @Singleton
     @Provides
-    fun provideAuthorizedApiService(): AuthorizedApiService {
+    fun provideAuthorizedApiService(): AuthApiService {
         return ApiServiceFactory.makeAuthorizedApiService(BuildConfig.DEBUG)
     }
 

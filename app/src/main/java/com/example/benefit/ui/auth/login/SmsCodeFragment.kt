@@ -23,8 +23,9 @@ import javax.inject.Inject
 /**
  * Created by jahon on 03-Sep-20
  */
-@AndroidEntryPoint
-class SmsCodeFragment @Inject constructor() : Fragment(R.layout.fragment_code) {
+import com.example.benefit.ui.base.BaseFragment
+
+class SmsCodeFragment : BaseFragment(R.layout.fragment_code) {
 
 
     private val viewModel: LoginViewModel by activityViewModels()

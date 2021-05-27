@@ -12,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.bsd_fill_card.*
 
 
-@AndroidEntryPoint
+
 class GameRulesBSD : MyBSDialog() {
 
 

@@ -2,10 +2,10 @@ package com.example.benefit.ui.transactions_history
 
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.benefit.R
 import com.example.benefit.remote.models.TransactionDTO
+import com.example.benefit.ui.base.BaseActivity
 import com.example.benefit.ui.main.home.HomeFragment
 import com.example.benefit.ui.transactions_history.transaction_bsd.TransactionType
 import com.example.benefit.ui.viewgroups.CardTagItem
@@ -24,8 +24,8 @@ import kotlinx.android.synthetic.main.activity_transactions_history.*
 import kotlinx.android.synthetic.main.item_line_chart.view.*
 import kotlin.random.Random
 
-@AndroidEntryPoint
-class TransactionsHistoryActivity : AppCompatActivity() {
+
+class TransactionsHistoryActivity : BaseActivity() {
 
     companion object {
         const val EXTRA_CARD = "CARD"

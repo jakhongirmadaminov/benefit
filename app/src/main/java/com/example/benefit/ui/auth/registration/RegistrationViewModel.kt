@@ -1,7 +1,7 @@
 package com.example.benefit.ui.auth.registration
 
 import android.graphics.Bitmap
-import androidx.hilt.lifecycle.ViewModelInject
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.benefit.remote.models.RegPhoneResp
@@ -16,8 +16,11 @@ import java.math.BigInteger
 
 /**
  * Created by jahon on 03-Sep-20
- */
-class RegistrationViewModel @ViewModelInject constructor(private val userRemote: UserRemote) :
+ */import javax.inject.Inject
+import dagger.hilt.android.lifecycle.HiltViewModel
+
+@HiltViewModel
+class RegistrationViewModel @Inject constructor(private val userRemote: UserRemote) :
     ViewModel() {
 
 

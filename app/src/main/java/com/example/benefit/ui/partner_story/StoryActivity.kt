@@ -1,18 +1,15 @@
 package com.example.benefit.ui.partner_story
 
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.example.benefit.R
 import com.example.benefit.remote.models.Partner
+import com.example.benefit.ui.base.BaseActivity
 import com.example.benefit.util.loadImageUrl
-import jp.shts.android.storiesprogressview.StoriesProgressView
 import jp.shts.android.storiesprogressview.StoriesProgressView.StoriesListener
 import kotlinx.android.synthetic.main.activity_story.*
 
 
-class StoryActivity : AppCompatActivity(), StoriesListener {
+class StoryActivity : BaseActivity(), StoriesListener {
 
     companion object {
 

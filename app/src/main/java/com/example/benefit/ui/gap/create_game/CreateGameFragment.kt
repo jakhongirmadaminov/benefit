@@ -19,8 +19,9 @@ import javax.inject.Inject
 /**
  * Created by jahon on 03-Sep-20
  */
-@AndroidEntryPoint
-class CreateGameFragment @Inject constructor() : Fragment(R.layout.fragment_create_game) {
+import com.example.benefit.ui.base.BaseFragment
+
+class CreateGameFragment : BaseFragment(R.layout.fragment_create_game) {
 
 
     private val viewModel: CreateGameViewModel by viewModels()

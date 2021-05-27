@@ -7,22 +7,21 @@ import android.provider.MediaStore
 import android.view.View
 import android.widget.ImageView
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.widget.doOnTextChanged
 import com.asksira.bsimagepicker.BSImagePicker
 import com.bumptech.glide.Glide
 import com.example.benefit.R
+import com.example.benefit.enums.ECardType
+import com.example.benefit.enums.ECardType.Companion.isZoom
 import com.example.benefit.remote.models.BankBranchDTO
-import com.example.benefit.ui.select_card_type.ECardType
+import com.example.benefit.ui.base.BaseActivity
 import com.example.benefit.util.SizeUtils
 import com.example.benefit.util.loadBitmap
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_order_card.*
 
 
-@AndroidEntryPoint
-class OrderCardActivity : AppCompatActivity(), BSImagePicker.OnSingleImageSelectedListener,
+class OrderCardActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListener,
     BSImagePicker.ImageLoaderDelegate, IOnBranchSelected {
 
 

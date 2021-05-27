@@ -9,8 +9,9 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/main_bg" />
+        android:background="@color/blood_red"
+        android:scaleType="centerCrop" />
+    <!--    android:src="@drawable/main_bg"-->
 
 
     <LinearLayout
@@ -29,7 +30,8 @@
             app:layout_constraintBottom_toTopOf="@id/btnLogin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
 
 
         <Button
@@ -39,10 +41,10 @@
             android:layout_marginStart="?android:actionBarSize"
             android:layout_marginEnd="?android:actionBarSize"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/selector_orange"
+            android:background="@drawable/selector_white"
             android:text="@string/login"
             android:textAllCaps="false"
-            android:textColor="@color/white" />
+            android:textColor="@color/grey_text" />
 
 
         <Button
@@ -52,10 +54,10 @@
             android:layout_marginStart="?android:actionBarSize"
             android:layout_marginEnd="?android:actionBarSize"
             android:layout_marginBottom="28dp"
-            android:background="@drawable/selector_white"
+            android:background="@drawable/selector_dark"
             android:text="@string/registration"
             android:textAllCaps="false"
-            android:textColor="@color/grey_text" />
+            android:textColor="@color/white" />
 
 
         <ImageView

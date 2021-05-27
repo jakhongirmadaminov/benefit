@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.bsd_fill_card.*
 
 
-@AndroidEntryPoint
+
 class CreateGameBSD : MyNestedScrollBSDialog() {
 
 

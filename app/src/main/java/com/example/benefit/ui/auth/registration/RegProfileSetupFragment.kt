@@ -24,7 +24,7 @@ import javax.inject.Inject
 /**
  * Created by jahon on 03-Sep-20
  */
-@AndroidEntryPoint
+
 class RegProfileSetupFragment @Inject constructor() :
     Fragment(R.layout.fragment_reg_profile_setup), BSImagePicker.OnSingleImageSelectedListener,
     BSImagePicker.ImageLoaderDelegate, IOnMonthSelected {

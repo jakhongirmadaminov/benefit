@@ -19,7 +19,7 @@ import javax.inject.Inject
 /**
  * Created by jahon on 03-Sep-20
  */
-@AndroidEntryPoint
+
 class FindFriendsFragment @Inject constructor() :
     Fragment(R.layout.fragment_find_friends) {
 
