@@ -41,10 +41,73 @@ interface AuthApiService {
 
     @POST("api/card/idtopan")
     @FormUrlEncoded
-    suspend fun transferFromCardIdToPan(
+    suspend fun p2pIdToPan(
         @Field("amount") amount: Int,
         @Field("card_id") card_id: Int,
         @Field("pan") pan: String
+    ): RespFormat<PlainResp>
+
+    @POST("api/card/pidtoid")
+    @FormUrlEncoded
+    suspend fun p2pIdToId(
+        @Field("amount") amount: Int,
+        @Field("card_id") card_id: Int,
+        @Field("recipient_id") recipient_id: String
+    ): RespFormat<PlainResp>
+
+    @POST("api/card/pantoid")
+    @FormUrlEncoded
+    suspend fun p2pPanToId(
+        @Field("amount") amount: Int,
+        @Field("card_id") card_id: Int,
+        @Field("pan") pan: String,
+        @Field("expiry") expiry: String
+    ): RespFormat<PlainResp>
+
+    @POST("api/card/balanceplus")
+    @FormUrlEncoded
+    suspend fun topUpBalance(
+        @Field("amount") amount: Int,
+        @Field("card_id") card_id: Int,
+        @Field("pan") pan: String,
+        @Field("expiry") expiry: String
+    ): RespFormat<PlainResp>
+
+    @POST("api/card/balancecheck")
+    @FormUrlEncoded
+    suspend fun topUpBalanceCode(
+        @Field("topup_id") topup_id: Int,
+        @Field("code") code: String
+    ): RespFormat<PlainResp>
+
+    @POST("api/card/transhistory")
+    @FormUrlEncoded
+    suspend fun transHistory(
+        @Field("card_id") card_id: Int,
+        @Field("startDate") startDate: Long,
+        @Field("endDate") endDate: Long,
+        @Field("pageNumber") pageNumber: Int = 0,
+        @Field("pageSize") pageSize: Int = 100
+    ): RespFormat<PlainResp>
+
+    @POST("api/card/analytics")
+    @FormUrlEncoded
+    suspend fun transHistoryAnalytics(
+        @Field("card_id") card_id: Int,
+        @Field("startDate") startDate: Long,
+        @Field("endDate") endDate: Long,
+        @Field("pageNumber") pageNumber: Int = 0,
+        @Field("pageSize") pageSize: Int = 100
+    ): RespFormat<PlainResp>
+
+    @POST("api/card/report")
+    @FormUrlEncoded
+    suspend fun cardReport(
+        @Field("card_id") card_id: Int,
+        @Field("startDate") startDate: Long,
+        @Field("endDate") endDate: Long,
+        @Field("pageNumber") pageNumber: Int = 0,
+        @Field("pageSize") pageSize: Int = 100
     ): RespFormat<PlainResp>
 
 
@@ -164,6 +227,26 @@ interface AuthApiService {
         @Field("pageSize") pageSize: Int
     ): RespChangeCardTitle
 
+    @POST("api/user/sendcode")
+    @FormUrlEncoded
+    suspend fun changePasswordGetSmsCode(
+        @Field("phone_number") phone_number: String
+    ): RespFormat<PlainResp>
+
+    @POST("api/user/devicecode")
+    @FormUrlEncoded
+    suspend fun changePasswordSendNewCode(
+        @Field("phone_number") phone_number: String,
+        @Field("device_code") device_code: String
+    ): RespFormat<PlainResp>
+
+    @POST("api/user/changepassword")
+    @FormUrlEncoded
+    suspend fun changePassword(
+        @Field("phone_number") phone_number: String,
+        @Field("password") password: String,
+        @Field("user_id") user_id: Int
+    ): RespFormat<PlainResp>
 
     @GET("api/other/branches")
     suspend fun getAllBankBranches(): RespFormat<List<BankBranchDTO>>
@@ -183,7 +266,6 @@ interface AuthApiService {
             encoded = true
         ) id: Int
     ): Response<List<PartnerCategoryDTO>>
-
 
     @POST("api/card/statusactive")
     @FormUrlEncoded

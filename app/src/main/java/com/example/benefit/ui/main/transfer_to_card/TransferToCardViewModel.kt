@@ -60,7 +60,7 @@ class TransferToCardViewModel @Inject constructor(
     fun transferToCard(selectedCardId: Int, cardP2pTarget: CardP2PDTO, amount: Int) {
         viewModelScope.launch(IO) {
             transactionResp.postValue(getFormattedResponse(panInfoLoading) {
-                authApi.transferFromCardIdToPan(
+                authApi.p2pIdToPan(
                     amount,
                     selectedCardId,
                     cardP2pTarget.pan!!
