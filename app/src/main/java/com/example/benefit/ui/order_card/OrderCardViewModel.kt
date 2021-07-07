@@ -1,7 +1,9 @@
 package com.example.benefit.ui.order_card
 
+/**
+ * Created by jahon on 06-Sep-20
+ */
 import android.graphics.Bitmap
-
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,14 +14,11 @@ import com.example.benefit.util.ResultError
 import com.example.benefit.util.ResultSuccess
 import com.example.benefit.util.SingleLiveEvent
 import com.example.benefit.util.exhaustive
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-
-/**
- * Created by jahon on 06-Sep-20
- */import javax.inject.Inject
-import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 @HiltViewModel
 class OrderCardViewModel @Inject constructor(private val userRemote: UserRemote) :
@@ -46,11 +45,13 @@ class OrderCardViewModel @Inject constructor(private val userRemote: UserRemote)
 
 
     val acceptTermsResp = SingleLiveEvent<RespAcceptTerms>()
+    val currentSuccessPos = MutableLiveData<Int>()
+
     val errorMessage = SingleLiveEvent<String>()
-    val isLoading = SingleLiveEvent<Boolean>()
+    val isLoading = MutableLiveData<Boolean>()
     val isCompleted = SingleLiveEvent<Boolean>()
 
-    fun acceptTerms(type_id:Int) {
+    fun acceptTerms(type_id: Int) {
         isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
             val response = userRemote.termsAccept(type_id)
@@ -62,6 +63,7 @@ class OrderCardViewModel @Inject constructor(private val userRemote: UserRemote)
                     }
                     is ResultSuccess -> {
                         acceptTermsResp.value = response.value
+                        currentSuccessPos.value = currentStep.value!! - 1
                     }
                 }.exhaustive
             }
@@ -81,6 +83,7 @@ class OrderCardViewModel @Inject constructor(private val userRemote: UserRemote)
                     }
                     is ResultSuccess -> {
                         acceptTermsResp.value = response.value
+                        currentSuccessPos.value = currentStep.value!! - 1
                     }
                 }.exhaustive
             }
@@ -101,6 +104,7 @@ class OrderCardViewModel @Inject constructor(private val userRemote: UserRemote)
                     }
                     is ResultSuccess -> {
                         acceptTermsResp.value = response.value
+                        currentSuccessPos.value = currentStep.value!! - 1
                     }
                 }.exhaustive
             }
@@ -121,6 +125,7 @@ class OrderCardViewModel @Inject constructor(private val userRemote: UserRemote)
                     }
                     is ResultSuccess -> {
                         acceptTermsResp.value = response.value
+                        currentSuccessPos.value = currentStep.value!! - 1
                     }
                 }.exhaustive
             }
@@ -140,6 +145,7 @@ class OrderCardViewModel @Inject constructor(private val userRemote: UserRemote)
                     }
                     is ResultSuccess -> {
                         acceptTermsResp.value = response.value
+                        currentSuccessPos.value = currentStep.value!! - 1
                     }
                 }.exhaustive
             }
@@ -160,6 +166,7 @@ class OrderCardViewModel @Inject constructor(private val userRemote: UserRemote)
                     }
                     is ResultSuccess -> {
                         acceptTermsResp.value = response.value
+                        currentSuccessPos.value = currentStep.value!! - 1
                     }
                 }.exhaustive
             }

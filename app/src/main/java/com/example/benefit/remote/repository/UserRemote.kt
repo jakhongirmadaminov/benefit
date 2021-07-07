@@ -55,10 +55,8 @@ interface UserRemote {
         dobMillis: BigInteger
     ): ResultWrapper<RespUserInfo>
 
-    suspend fun addNewCard(
-        title: String,
-        cardNumber: String,
-        expiry: Int
-    ): ResultWrapper<Any>
+    suspend fun addNewCard(title: String, cardNumber: String, expiry: String): ResultWrapper<RespAddCard>
+
+    suspend fun confirmNewCard(card_id: Int, sms_code: String): ResultWrapper<Any>
 
 }

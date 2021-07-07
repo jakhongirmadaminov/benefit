@@ -1,29 +1,29 @@
 package com.example.benefit.ui.main.transfer_to_card
 
-import android.os.Bundle
-import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.example.benefit.R
-import com.example.benefit.ui.branches_atms.BranchesAtmsActivity
-import com.example.benefit.ui.main.home.HomeFragment
-import com.example.benefit.ui.main.home.card_options.CardOptionsBSD
-import com.example.benefit.util.SizeUtils
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.*
-import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.ivBack
-import splitties.fragments.start
-import javax.inject.Inject
-
 
 /**
  * Created by jahon on 03-Sep-20
  */
+import android.os.Bundle
+import android.view.View
+import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.example.benefit.R
+import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.ui.base.BaseFragment
+import com.example.benefit.ui.main.home.HomeFragment
+import com.example.benefit.util.SizeUtils
+import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.*
+import kotlinx.android.synthetic.main.item_card_small.view.*
 
-class TransferToCardTransactionFragment : BaseFragment(R.layout.fragment_transfer_to_card_transaction) {
+class TransferToCardTransactionFragment :
+    BaseFragment(R.layout.fragment_transfer_to_card_transaction) {
 
+
+    val args: TransferToCardTransactionFragmentArgs by navArgs()
 
     private val viewModel: TransferToCardViewModel by viewModels()
 
@@ -31,6 +31,7 @@ class TransferToCardTransactionFragment : BaseFragment(R.layout.fragment_transfe
         super.onViewCreated(view, savedInstanceState)
 
 
+        viewModel.getMyCards()
         setupViews()
 
         attachListeners()
@@ -39,17 +40,43 @@ class TransferToCardTransactionFragment : BaseFragment(R.layout.fragment_transfe
 
     private fun setupViews() {
 
-        val cardView = layoutInflater.inflate(R.layout.item_card_small, null)
-        val cardView2 = layoutInflater.inflate(R.layout.item_card_small, null)
+        tvCardOwner.text = args.cardP2pTarget.fullName
+        tvCardNumber.text = args.cardP2pTarget.pan
+    }
 
-        cardView.setOnClickListener {
-            CardOptionsBSD().show(childFragmentManager, "")
+
+    private fun subscribeObservers() {
+
+        viewModel.isLoadingCards.observe(viewLifecycleOwner) {
+            progressCards.isVisible = it
         }
 
-        cardsPagerSmall.addView(cardView)
-        cardsPagerSmall.addView(cardView2)
+        viewModel.errorMessage.observe(viewLifecycleOwner, {
+//            lblYoullReceiveCode.text = it ?: return@observe
+//            lblYoullReceiveCode.setTextColor(Color.RED)
+        })
 
-        cardsPagerSmall.adapter = HomeFragment.WizardPagerAdapter(listOf(cardView, cardView2))
+
+        viewModel.cardsResp.observe(viewLifecycleOwner, {
+            setupCardsPager(it)
+        })
+
+
+    }
+
+
+    private fun setupCardsPager(cardsDTO: List<CardDTO>) {
+
+        val cards = cardsDTO.map {
+            val cardView = layoutInflater.inflate(R.layout.item_card_small, null)
+            cardView.cardName.text = it.card_title
+            cardView.tvAmount.text = it.balance
+            cardView.tvCardEndNum.text = "*" + it.pan!!.substring(it.pan!!.length - 4)
+            cardsPagerSmall.addView(cardView)
+            cardView
+        }
+
+        cardsPagerSmall.adapter = HomeFragment.WizardPagerAdapter(cards)
         cardsPagerSmall.offscreenPageLimit = 2
         cardsPagerSmall.clipToPadding = false
         cardsPagerSmall.setPadding(
@@ -63,15 +90,24 @@ class TransferToCardTransactionFragment : BaseFragment(R.layout.fragment_transfe
     }
 
 
-    private fun subscribeObservers() {
-
-
-    }
-
     private fun attachListeners() {
 
         ivBack.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        tvFill.setOnClickListener {
+            viewModel.transferToCard(
+                viewModel.cardsResp.value!![cardsPagerSmall.currentItem].id!!,
+                args.cardP2pTarget,
+                edtSum.text.toString().toInt()
+            )
+        }
+
+        edtSum.doOnTextChanged { text, start, before, count ->
+            tvFill.isEnabled =
+                viewModel.cardsResp.value!![cardsPagerSmall.currentItem].balance!!.toInt() > text.toString()
+                    .toInt()
         }
 
 //        llAskFriends.setOnClickListener {

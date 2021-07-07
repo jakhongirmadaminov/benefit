@@ -13,7 +13,6 @@ import cards.pay.paycardsrecognizer.sdk.ScanCardIntent
 import com.example.benefit.R
 import com.example.benefit.ui.main.home.card_options.CardOptionsViewModel
 import com.redmadrobot.inputmask.MaskedTextChangedListener
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_fill_from_any_card.*
 import javax.inject.Inject
 
@@ -21,6 +20,9 @@ import javax.inject.Inject
 /**
  * Created by jahon on 03-Sep-20
  */
+
+const val REQUEST_CODE_SCAN_CARD = 13
+
 
 class FillCardFromAnyCardFragment @Inject constructor() :
     Fragment(R.layout.fragment_fill_from_any_card) {
@@ -71,7 +73,6 @@ class FillCardFromAnyCardFragment @Inject constructor() :
 
     }
 
-    val REQUEST_CODE_SCAN_CARD = 1
     private fun attachListeners() {
         ivClearCardNumber.setOnClickListener {
             edtCardNumber.setText("")

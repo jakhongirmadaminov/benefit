@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/clParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/shape_top_rounded"
     android:clipChildren="true"
-    android:clipToPadding="true"
-    android:background="@drawable/shape_top_rounded">
+    android:clipToPadding="true">
 
 
     <ImageView
@@ -36,6 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="?android:actionBarSize"
         android:clickable="true"
+        android:enabled="false"
         android:focusable="true"
         android:fontFamily="sans-serif-medium"
         android:foreground="?android:selectableItemBackground"
@@ -48,6 +50,17 @@
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ProgressBar
+        android:id="@+id/progressCards"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/cardsPagerSmall"
+        app:layout_constraintEnd_toEndOf="@id/cardsPagerSmall"
+        app:layout_constraintStart_toStartOf="@id/cardsPagerSmall"
+        app:layout_constraintTop_toTopOf="@id/cardsPagerSmall" />
 
 
     <androidx.viewpager.widget.ViewPager
@@ -120,24 +133,24 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:fontFamily="sans-serif"
-            android:text="KIM VLADIMIR SERGEEVICH"
             android:textColor="#cc000000"
             android:textSize="14sp"
             android:textStyle="normal"
             app:layout_constraintStart_toEndOf="@id/ivTargetBankBg"
-            app:layout_constraintTop_toTopOf="@id/ivTargetBankBg" />
+            app:layout_constraintTop_toTopOf="@id/ivTargetBankBg"
+            tools:text="KIM VLADIMIR SERGEEVICH" />
 
         <TextView
             android:id="@+id/tvCardNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
-            android:text="8600 03** **** 7102"
             android:textColor="#cc5c5c5c"
             android:textSize="14sp"
             android:textStyle="normal"
             app:layout_constraintStart_toStartOf="@id/tvCardOwner"
-            app:layout_constraintTop_toBottomOf="@id/tvCardOwner" />
+            app:layout_constraintTop_toBottomOf="@id/tvCardOwner"
+            tools:text="8600 03** **** 7102" />
 
         <TextView
             android:id="@+id/tvWriteTagOrComment"
@@ -162,11 +175,11 @@
         android:layout_marginLeft="26dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="26dp"
-        android:hint="0"
-        android:text="500"
+        android:hint="500"
         android:textColor="@color/black"
         android:textSize="30sp"
-        app:layout_constraintTop_toBottomOf="@id/llTargetCard" />
+        app:layout_constraintTop_toBottomOf="@id/llTargetCard"
+        tools:text="500" />
 
     <TextView
         android:id="@+id/tvMinAmount"
@@ -184,10 +197,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clLoading"
         android:layout_width="match_parent"
-        android:visibility="invisible"
         android:layout_height="match_parent"
         android:layout_marginTop="?android:actionBarSize"
-        android:background="@color/window_background">
+        android:background="@color/window_background"
+        android:visibility="invisible">
 
 
         <TextView
@@ -220,10 +233,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clLoadingEnd"
         android:layout_width="match_parent"
-        android:visibility="invisible"
         android:layout_height="match_parent"
         android:layout_marginTop="?android:actionBarSize"
-        android:background="@color/window_background">
+        android:background="@color/window_background"
+        android:visibility="invisible">
 
 
         <TextView
@@ -260,12 +273,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:fontFamily="sans-serif"
-            android:text="KIM VLADIMIR SERGEEVICH"
             android:textColor="#cc000000"
             android:textSize="14sp"
             android:textStyle="normal"
             app:layout_constraintStart_toEndOf="@id/ivBankLogo"
-            app:layout_constraintTop_toTopOf="@id/ivBankLogo" />
+            app:layout_constraintTop_toTopOf="@id/ivBankLogo"
+            tools:text="KIM VLADIMIR SERGEEVICH" />
 
 
         <TextView

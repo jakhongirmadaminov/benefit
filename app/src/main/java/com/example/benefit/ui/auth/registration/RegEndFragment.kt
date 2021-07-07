@@ -13,8 +13,8 @@ import com.example.benefit.R
 import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.MainActivity
 import com.example.benefit.ui.main.MainActivity.Companion.IS_GOING_DEPOSIT
+import com.example.benefit.ui.main.home.bsd_add_card.AddCardBSD
 import kotlinx.android.synthetic.main.fragment_reg_end.*
-import splitties.fragments.start
 
 class RegEndFragment : BaseFragment(R.layout.fragment_reg_end) {
 
@@ -35,7 +35,8 @@ class RegEndFragment : BaseFragment(R.layout.fragment_reg_end) {
             startActivity(Intent(requireActivity(), MainActivity::class.java).apply {
                 this.putExtra(IS_GOING_DEPOSIT, true)
             })
-            (parentFragment as RegistrationBSD).dismiss()
+            (parentFragment as? RegistrationBSD)?.dismiss()
+            (parentFragment as? AddCardBSD)?.dismiss()
         }
         ivBack.setOnClickListener {
             findNavController().popBackStack()

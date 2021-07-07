@@ -1,23 +1,19 @@
 package com.example.benefit.ui.auth.login
 
+/**
+ * Created by jahon on 03-Sep-20
+ */
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_phone.*
-import javax.inject.Inject
-
-/**
- * Created by jahon on 03-Sep-20
- */
 import com.example.benefit.ui.base.BaseFragment
+import kotlinx.android.synthetic.main.fragment_phone.*
 
 class PhoneFragment : BaseFragment(R.layout.fragment_phone) {
 
@@ -52,7 +48,11 @@ class PhoneFragment : BaseFragment(R.layout.fragment_phone) {
 
         viewModel.loginResp.observe(viewLifecycleOwner, Observer {
             it ?: return@Observer
-            findNavController().navigate(R.id.action_phoneFragment_to_codeFragment)
+
+            val action = PhoneFragmentDirections.actionPhoneFragmentToCodeFragment(
+                edtPhone.text.toString()
+            )
+            findNavController().navigate(action)
         })
 
 

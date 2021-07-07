@@ -9,21 +9,41 @@
         android:id="@+id/phoneFragment"
         android:name="com.example.benefit.ui.auth.login.PhoneFragment"
         android:label=""
-        tools:layout="@layout/fragment_phone" >
+        tools:layout="@layout/fragment_phone">
         <action
             android:id="@+id/action_phoneFragment_to_codeFragment"
             app:destination="@id/codeFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right">
+
+            <argument
+                android:name="phone"
+                app:argType="string"
+                app:nullable="true" />
+
+        </action>
     </fragment>
 
     <fragment
         android:id="@+id/codeFragment"
         android:name="com.example.benefit.ui.auth.login.SmsCodeFragment"
         android:label=""
-        tools:layout="@layout/fragment_code" >
+        tools:layout="@layout/fragment_code">
+
+        <argument
+            android:name="phone"
+            app:argType="string"
+            app:nullable="true" />
+
+
+        <argument
+            android:name="cardId"
+            android:defaultValue="0"
+            app:argType="integer" />
+
+
         <action
             android:id="@+id/action_codeFragment_to_deviceCodeFragment"
             app:destination="@id/deviceCodeFragment"
@@ -31,6 +51,7 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+
     </fragment>
 
 

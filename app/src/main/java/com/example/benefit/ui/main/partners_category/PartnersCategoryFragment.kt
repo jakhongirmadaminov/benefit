@@ -8,15 +8,17 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.benefit.R
 import com.example.benefit.remote.models.PartnerCategoryDTO
+import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.partners_map.PartnersMapActivity
 import com.example.benefit.ui.viewgroups.ItemPartnerCategory
 import com.example.benefit.util.*
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_partners_category.*
 
 
-class PartnersCategoryFragment : Fragment(R.layout.fragment_partners_category) {
+class PartnersCategoryFragment : BaseFragment(R.layout.fragment_partners_category) {
 
     val viewModel: PartnersCategoryViewModel by viewModels()
 

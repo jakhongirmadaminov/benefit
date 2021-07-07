@@ -42,7 +42,12 @@ class RegCardActivationFragment @Inject constructor() :
 
         viewModel.addNewCardResp.observe(viewLifecycleOwner, {
             val result = it ?: return@observe
-            findNavController().navigate(R.id.action_regCardActivationFragment_to_regEndFragment)
+            val action =
+                RegCardActivationFragmentDirections.actionRegCardActivationFragmentToCardConfirm(
+                    result.cardId,
+                    null
+                )
+            findNavController().navigate(action)
         })
 
 
@@ -145,10 +150,13 @@ class RegCardActivationFragment @Inject constructor() :
         }
 
         btnActivate.setOnClickListener {
+
+            val expString = edtExpiryDate.text.toString().replace("/", "")
+
             viewModel.addNewCard(
                 edtCardName.text.toString(),
                 edtCardNumber.text.toString().replace(" ", ""),
-                edtExpiryDate.text.toString().replace("/", "").toInt()
+                expString.substring(2) + expString.substring(0, 2)
             )
         }
     }

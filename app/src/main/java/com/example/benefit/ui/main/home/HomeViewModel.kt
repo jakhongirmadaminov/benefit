@@ -1,28 +1,29 @@
 package com.example.benefit.ui.main.home
 
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.benefit.remote.models.CardBankDTO
 import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.remote.models.NewsDTO
 import com.example.benefit.remote.models.PaynetCategory
 import com.example.benefit.remote.repository.UserRemote
 import com.example.benefit.util.ResultError
 import com.example.benefit.util.ResultSuccess
-import com.example.benefit.util.SingleLiveEvent
 import com.example.benefit.util.exhaustive
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-import dagger.hilt.android.lifecycle.HiltViewModel
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val userRemote: UserRemote) : ViewModel() {
 
-    val paynetCatgResp = SingleLiveEvent<List<PaynetCategory>>()
-    val errorMessage = SingleLiveEvent<String>()
-    val isLoadingPaynetCategories = SingleLiveEvent<Boolean>()
+    val paynetCatgResp = MutableLiveData<List<PaynetCategory>>()
+    val errorMessage = MutableLiveData<String>()
+    val isLoadingPaynetCategories = MutableLiveData<Boolean>()
 
     fun getPaynetCategories() {
         isLoadingPaynetCategories.value = true
@@ -38,8 +39,8 @@ class HomeViewModel @Inject constructor(private val userRemote: UserRemote) : Vi
         }
     }
 
-    val newsResp = SingleLiveEvent<List<NewsDTO>>()
-    val isLoadingNews = SingleLiveEvent<Boolean>()
+    val newsResp = MutableLiveData<List<NewsDTO>>()
+    val isLoadingNews = MutableLiveData<Boolean>()
     fun getNews(page: Int) {
         isLoadingNews.value = true
         viewModelScope.launch(Dispatchers.IO) {
@@ -55,8 +56,8 @@ class HomeViewModel @Inject constructor(private val userRemote: UserRemote) : Vi
     }
 
 
-    val cardsResp = SingleLiveEvent<List<CardDTO>>()
-    val isLoadingCards = SingleLiveEvent<Boolean>()
+    val cardsResp = MutableLiveData<List<CardDTO>>()
+    val isLoadingCards = MutableLiveData<Boolean>()
     fun getMyCards() {
         isLoadingCards.value = true
         viewModelScope.launch(Dispatchers.IO) {
@@ -65,7 +66,16 @@ class HomeViewModel @Inject constructor(private val userRemote: UserRemote) : Vi
                 isLoadingCards.value = false
                 when (response) {
                     is ResultError -> errorMessage.value = response.message
-                    is ResultSuccess -> cardsResp.value = response.value.bank
+                    is ResultSuccess -> {
+//                        val bankCards =
+//                            response.value.bank.flatten().associateBy { it.idString }
+//
+//                        response.value.benefit.forEachIndexed { index, cardDTO ->
+//                            cardDTO.balance = bankCards[cardDTO.own_id!!]!!.balance
+//                        }
+
+                        cardsResp.value = response.value.getProperly()
+                    }
                 }.exhaustive
             }
         }

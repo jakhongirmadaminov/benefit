@@ -1,32 +1,32 @@
 package com.example.benefit.ui.main.transfer_to_card
 
-import android.os.Bundle
-import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import com.example.benefit.R
-import com.example.benefit.ui.main.home.card_options.CardOptionsBSD
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_transfer_to_card.*
-import kotlinx.android.synthetic.main.fragment_transfer_to_card.ivBack
-import javax.inject.Inject
-
 
 /**
  * Created by jahon on 03-Sep-20
  */
+import android.os.Bundle
+import android.view.View
+import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import cards.pay.paycardsrecognizer.sdk.ScanCardIntent
+import com.example.benefit.R
+import com.example.benefit.remote.models.CardP2PDTO
 import com.example.benefit.ui.base.BaseFragment
+import com.example.benefit.ui.main.fill_card.REQUEST_CODE_SCAN_CARD
+import com.example.benefit.util.ResultError
+import com.example.benefit.util.ResultSuccess
+import kotlinx.android.synthetic.main.fragment_transfer_to_card.*
 
 class TransferToCardFragment : BaseFragment(R.layout.fragment_transfer_to_card) {
-
 
     private val viewModel: TransferToCardViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         setupViews()
 
@@ -37,57 +37,67 @@ class TransferToCardFragment : BaseFragment(R.layout.fragment_transfer_to_card) 
     private fun setupViews() {
 
 
-//        val cardView = layoutInflater.inflate(R.layout.item_card_small, null)
-//
-//        cardView.setOnClickListener {
-//            CardOptionsBSD().show(childFragmentManager, "")
-//        }
-//
-//        cardsPager.addView(cardView)
-//        val cardView2 = layoutInflater.inflate(R.layout.item_card_small, null)
-//        cardsPager.addView(cardView2)
-//
-//
-//        cardsPager.adapter = HomeFragment.WizardPagerAdapter(listOf(cardView, cardView2))
-//        cardsPager.offscreenPageLimit = 2
-//        cardsPager.clipToPadding = false
-//        cardsPager.setPadding(
-//            SizeUtils.dpToPx(requireContext(), 26).toInt(),
-//            0,
-//            SizeUtils.dpToPx(requireContext(), 26).toInt(),
-//            0
-//        )
-//        cardsPager.pageMargin = SizeUtils.dpToPx(requireContext(), 15).toInt()
-
-
     }
 
     private fun subscribeObservers() {
+        viewModel.isLoadingCards.observe(viewLifecycleOwner) {
+            edtCardNumber.setCompoundDrawables(null, null, null, null)
+            cardInfoProgress.isVisible = it
+            lblEnterPan.isVisible = !it
+        }
 
+        viewModel.panResp.observe(viewLifecycleOwner) {
+            when (it) {
+                is ResultError -> {
+                    edtCardNumber.setCompoundDrawables(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.ic_round_error_outline_24
+                        ),
+                        null,
+                        null,
+                        null
+                    )
 
+                }
+                is ResultSuccess -> {
+                    tvNext.isEnabled = true
+                }
+            }
+        }
     }
 
     private fun attachListeners() {
+
+        edtCardNumber.doOnTextChanged { text, start, before, count ->
+            text?.let {
+                tvNext.isEnabled = false
+                val pan = it.replace("\\s".toRegex(), "")
+                if (pan.length == 16) {
+                    viewModel.getCardP2PInfo(pan)
+                }
+            }
+        }
 
         ivBack.setOnClickListener {
             ((parentFragment as NavHostFragment).parentFragment as TransferToCardBSD).dismiss()
         }
 
-
+        llTakeCardPhoto.setOnClickListener {
+            val intent = ScanCardIntent.Builder(requireContext()).build()
+            startActivityForResult(intent, REQUEST_CODE_SCAN_CARD)
+        }
 
         tvNext.setOnClickListener {
-            findNavController().navigate(R.id.action_transferToCardFragment_to_transferToCardTransactionFragment)
+            (viewModel.panResp.value as? ResultSuccess<CardP2PDTO>)?.let {
+                val dir =
+                    TransferToCardFragmentDirections.actionTransferToCardFragmentToTransferToCardTransactionFragment(
+                        it.value
+                    )
+                findNavController().navigate(dir)
+            }
         }
-//        llWithCash.setOnClickListener {
-//            startActivity(Intent(requireActivity(), BranchesAtmsActivity::class.java))
-//        }
-//        llFromAnyCard.setOnClickListener {
-//            findNavController().navigate(R.id.action_fillCardFragment_to_cardMakeDepositFromAnyCardFragment)
-//        }
-//        llFromOwnCards.setOnClickListener {
-//            findNavController().navigate(R.id.action_fillCardFragment_to_cardMakeDepositFromMyCardFragment)
-//
-//        }
+
 
     }
 

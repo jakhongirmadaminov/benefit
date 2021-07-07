@@ -1,5 +1,6 @@
 package com.example.benefit.util
 
+import androidx.lifecycle.MutableLiveData
 import com.example.benefit.remote.models.RespFormat
 import org.json.JSONObject
 import retrofit2.HttpException
@@ -45,6 +46,31 @@ suspend fun <T> getFormattedResponse(action: suspend () -> RespFormat<T>): Resul
             e.code()
         )
     } catch (e: Exception) {
+        ResultError(message = e.localizedMessage)
+    }
+}
+
+
+suspend fun <T> getFormattedResponse(
+    isLoading: MutableLiveData<Boolean>,
+    action: suspend () -> RespFormat<T>
+): ResultWrapper<T> {
+    return try {
+        isLoading.postValue(true)
+        val resp = action()
+        when {
+            resp.result?.data != null -> ResultSuccess(resp.result.data)
+            resp.result?.error != null -> ResultError(resp.result.error.message)
+            else -> ResultError(resp.result?.message)
+        }
+    } catch (e: HttpException) {
+        isLoading.postValue(false)
+        ResultError(
+            JSONObject(e.response()!!.errorBody()!!.string())["message"].toString(),
+            e.code()
+        )
+    } catch (e: Exception) {
+        isLoading.postValue(false)
         ResultError(message = e.localizedMessage)
     }
 }

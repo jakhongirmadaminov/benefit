@@ -26,7 +26,7 @@
     <string name="set_password">Установите код-пароль:</string>
     <string name="confirm">Подтвердить</string>
     <string name="app_entrance">Вход\nв приложение</string>
-    <string name="card_activation">Активация\nкарты</string>
+    <string name="card_activation">Активация карты</string>
     <string name="next">Далее</string>
     <string name="enter_card_number_and_exp">Введите номер и срок действия карты</string>
     <string name="warning_card_activation">Внимание!\nАктивация и возможности сервиса доступны держателям банковских карт Orient Finans Bank и Benefit</string>

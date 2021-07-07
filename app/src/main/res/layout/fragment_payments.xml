@@ -149,69 +149,69 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clTransferToFriend"
-            android:layout_width="match_parent"
+        <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+        <!--            android:id="@+id/clTransferToFriend"-->
+        <!--            android:layout_width="match_parent"-->
 
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="26dp"
-            android:layout_marginTop="26dp"
-            android:layout_marginRight="26dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:selectableItemBackground">
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginLeft="26dp"-->
+        <!--            android:layout_marginTop="26dp"-->
+        <!--            android:layout_marginRight="26dp"-->
+        <!--            android:clickable="true"-->
+        <!--            android:focusable="true"-->
+        <!--            android:foreground="?android:selectableItemBackground">-->
 
-            <ImageView
-                android:id="@+id/icPhone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/fxemoji_phone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <!--            <ImageView-->
+        <!--                android:id="@+id/icPhone"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:src="@drawable/fxemoji_phone"-->
+        <!--                app:layout_constraintStart_toStartOf="parent"-->
+        <!--                app:layout_constraintTop_toTopOf="parent" />-->
 
-            <TextView
-                android:id="@+id/tvTitleTransferToFriend"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/transfer_to_friend"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="@id/icPhone"
-                app:layout_constraintStart_toEndOf="@id/icPhone"
-                app:layout_constraintTop_toTopOf="@id/icPhone"
+        <!--            <TextView-->
+        <!--                android:id="@+id/tvTitleTransferToFriend"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginLeft="20dp"-->
+        <!--                android:fontFamily="sans-serif-medium"-->
+        <!--                android:text="@string/transfer_to_friend"-->
+        <!--                android:textColor="#000000"-->
+        <!--                android:textSize="16sp"-->
+        <!--                android:textStyle="normal"-->
+        <!--                app:layout_constraintBottom_toBottomOf="@id/icPhone"-->
+        <!--                app:layout_constraintStart_toEndOf="@id/icPhone"-->
+        <!--                app:layout_constraintTop_toTopOf="@id/icPhone"-->
 
-                />
+        <!--                />-->
 
-            <TextView
-                android:id="@+id/tvSubTitleTransferToFriend"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif"
-                android:text="@string/transfer_fund_or_cashback_to_friends_from_contacts"
-                android:textColor="#5c5c5c"
-                android:textSize="14sp"
-                android:textStyle="normal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toStartOf="@id/tvTitleTransferToFriend"
-                app:layout_constraintTop_toBottomOf="@id/tvTitleTransferToFriend" />
+        <!--            <TextView-->
+        <!--                android:id="@+id/tvSubTitleTransferToFriend"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginTop="10dp"-->
+        <!--                android:fontFamily="sans-serif"-->
+        <!--                android:text="@string/transfer_fund_or_cashback_to_friends_from_contacts"-->
+        <!--                android:textColor="#5c5c5c"-->
+        <!--                android:textSize="14sp"-->
+        <!--                android:textStyle="normal"-->
+        <!--                app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                app:layout_constraintHorizontal_weight="1"-->
+        <!--                app:layout_constraintStart_toStartOf="@id/tvTitleTransferToFriend"-->
+        <!--                app:layout_constraintTop_toBottomOf="@id/tvTitleTransferToFriend" />-->
 
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/bg_grey"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toStartOf="@id/tvTitleTransferToFriend"
-                app:layout_constraintTop_toBottomOf="@id/tvSubTitleTransferToFriend" />
+        <!--            <View-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="1dp"-->
+        <!--                android:layout_marginTop="15dp"-->
+        <!--                android:background="@color/bg_grey"-->
+        <!--                app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                app:layout_constraintHorizontal_weight="1"-->
+        <!--                app:layout_constraintStart_toStartOf="@id/tvTitleTransferToFriend"-->
+        <!--                app:layout_constraintTop_toBottomOf="@id/tvSubTitleTransferToFriend" />-->
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -327,7 +327,7 @@
                 android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                 app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="@id/tvTitleGap"
                 app:layout_constraintTop_toBottomOf="@id/tvTitleGap" />
 
@@ -350,15 +350,14 @@
             android:id="@+id/rvRegularPayments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:paddingBottom="26dp"
-            android:paddingRight="6dp"
-            android:paddingTop="6dp"
             android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingTop="6dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="26dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="4"
             tools:listitem="@layout/item_payment_square" />
-
 
 
     </LinearLayout>

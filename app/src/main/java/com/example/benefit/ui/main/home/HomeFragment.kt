@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.viewpager.widget.PagerAdapter
 import com.example.benefit.R
+import com.example.benefit.remote.models.CardBankDTO
 import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.remote.models.EPaymentType
 import com.example.benefit.remote.models.PaynetCategory
@@ -96,17 +97,17 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                     TransferToCardBSD().show(childFragmentManager, "")
                 }
             )
-            paynetCatgAdapter.add(
-                ItemPaynetCatg(
-                    PaynetCategory(
-                        paymentTypeEnum = EPaymentType.FRIEND_TRANSFER,
-                        imageResource = R.drawable.ic_payment_friend,
-                        titleRu = getString(R.string.transfer_to_friend)
-                    )
-                ) {
-
-                }
-            )
+//            paynetCatgAdapter.add(
+//                ItemPaynetCatg(
+//                    PaynetCategory(
+//                        paymentTypeEnum = EPaymentType.FRIEND_TRANSFER,
+//                        imageResource = R.drawable.ic_payment_friend,
+//                        titleRu = getString(R.string.transfer_to_friend)
+//                    )
+//                ) {
+//
+//                }
+//            )
             it.forEach { paynetCategory ->
                 paynetCatgAdapter.add(ItemPaynetCatg(paynetCategory) {})
             }

@@ -11,14 +11,51 @@
         android:name="com.example.benefit.ui.auth.registration.RegCardActivationFragment"
         android:label=""
         tools:layout="@layout/fragment_reg_card_activation">
+
+
         <action
-            android:id="@+id/action_regCardActivationFragment_to_regEndFragment"
+            android:id="@+id/action_regCardActivationFragment_to_cardConfirm"
+            app:destination="@id/cardConfirm"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+
+            <argument
+                android:name="cardId"
+                android:defaultValue="0"
+                app:argType="integer" />
+
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/cardConfirm"
+        android:name="com.example.benefit.ui.auth.login.SmsCodeFragment"
+        android:label=""
+        tools:layout="@layout/fragment_code">
+
+        <argument
+            android:name="cardId"
+            android:defaultValue="0"
+            app:argType="integer" />
+
+
+        <argument
+            android:name="phone"
+            app:argType="string"
+            app:nullable="true" />
+
+        <action
+            android:id="@+id/action_cardConfirm_to_regEndFragment"
             app:destination="@id/regEndFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+
 
     <fragment
         android:id="@+id/regEndFragment"

@@ -35,6 +35,23 @@ interface AuthApiService {
     @POST("api/user/refresh")
     suspend fun updateUserInfo(@Body body: ReqUserInfo): RespFormat<RespUserInfo>
 
+    @POST("api/card/info")
+    @FormUrlEncoded
+    suspend fun getMyCardInfo(@Field("card_id") card_id: Int): RespFormat<CardsDTO>
+
+    @POST("api/card/idtopan")
+    @FormUrlEncoded
+    suspend fun transferFromCardIdToPan(
+        @Field("amount") amount: Int,
+        @Field("card_id") card_id: Int,
+        @Field("pan") pan: String
+    ): RespFormat<PlainResp>
+
+
+    @POST("api/card/pinfo")
+    @FormUrlEncoded
+    suspend fun getP2PCardInfo(@Field("hpan") hpan: String): RespFormat<CardP2PDTO>
+
     @POST("api/refer/get")
     @FormUrlEncoded
     suspend fun getMyReferralLink(
@@ -53,7 +70,11 @@ interface AuthApiService {
 
 
     @POST("api/card/new")
-    suspend fun addNewCard(@Body body: ReqCard): RespFormat<Any>
+    suspend fun addNewCard(@Body body: ReqCard): RespFormat<RespAddCard>
+
+
+    @POST("api/card/confirm")
+    suspend fun confirmNewCard(@Body body: CardConfirmBody): RespFormat<Any>
 
     @POST("api/ordercard/two")
     @Multipart

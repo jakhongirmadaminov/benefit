@@ -148,16 +148,21 @@ class UserRemoteImpl @Inject constructor(
     override suspend fun addNewCard(
         title: String,
         cardNumber: String,
-        expiry: Int
+        expiry: String
     ) = getFormattedResponse {
         authApiService.addNewCard(
             ReqCard(
                 cardNumber,
                 title,
-                (expiry.toString().substring(2) + expiry.toString().substring(0, 2)).toInt()
+                expiry
+//                (expiry.toString().substring(2) + expiry.toString().substring(0, 2)).toInt()
             )
         )
     }
+
+    override suspend fun confirmNewCard(card_id: Int, sms_code: String): ResultWrapper<Any> =
+        getFormattedResponse { authApiService.confirmNewCard(CardConfirmBody(card_id, sms_code)) }
+
 
     override suspend fun addOrderCardAddress(order_card_id: Int, address: String) =
         getFormattedResponse { authApiService.orderCardAddress(order_card_id, address) }

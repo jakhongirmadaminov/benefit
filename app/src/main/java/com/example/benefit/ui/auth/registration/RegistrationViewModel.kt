@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.benefit.remote.models.RegPhoneResp
+import com.example.benefit.remote.models.RespAddCard
 import com.example.benefit.remote.models.RespUserInfo
 import com.example.benefit.remote.repository.UserRemote
 import com.example.benefit.util.*
@@ -30,7 +31,7 @@ class RegistrationViewModel @Inject constructor(private val userRemote: UserRemo
     var setPasswordResp = SingleLiveEvent<RespUserInfo>()
     var uploadAvatarResp = SingleLiveEvent<RespUserInfo>()
     var uploadUserInfoResp = SingleLiveEvent<RespUserInfo>()
-    var addNewCardResp = SingleLiveEvent<Any>()
+    var addNewCardResp = SingleLiveEvent<RespAddCard>()
     val isLoading = SingleLiveEvent<Boolean>()
     val errorMessage = SingleLiveEvent<String>()
     val resendCodeResp = SingleLiveEvent<String>()
@@ -175,7 +176,7 @@ class RegistrationViewModel @Inject constructor(private val userRemote: UserRemo
         }
     }
 
-    fun addNewCard( title: String,cardNumber: String, expiry: Int) {
+    fun addNewCard( title: String,cardNumber: String, expiry: String) {
         isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
             val response = userRemote.addNewCard(title, cardNumber, expiry)

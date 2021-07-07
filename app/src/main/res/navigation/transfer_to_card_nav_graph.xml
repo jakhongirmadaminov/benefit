@@ -18,7 +18,10 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right">
+
+
+        </action>
 
     </fragment>
 
@@ -28,6 +31,10 @@
         android:label=""
         tools:layout="@layout/fragment_transfer_to_card_transaction">
 
+        <argument
+            android:name="card_p2p_target"
+            app:argType="com.example.benefit.remote.models.CardP2PDTO"
+            app:nullable="false" />
 
     </fragment>
 

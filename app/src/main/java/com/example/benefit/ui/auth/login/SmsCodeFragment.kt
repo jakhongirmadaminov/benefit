@@ -1,34 +1,33 @@
 package com.example.benefit.ui.auth.login
 
+/**
+ * Created by jahon on 03-Sep-20
+ */
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Html
 import android.view.View
 import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.benefit.R
 import com.example.benefit.ui.auth.registration.ResponseState
-import com.example.benefit.util.AppPrefs
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.benefit.ui.base.BaseFragment
+import com.example.benefit.util.ResultError
+import com.example.benefit.util.ResultSuccess
 import kotlinx.android.synthetic.main.fragment_code.*
 import splitties.experimental.ExperimentalSplittiesApi
-import splitties.preferences.edit
 import java.sql.Time
-import javax.inject.Inject
-
-/**
- * Created by jahon on 03-Sep-20
- */
-import com.example.benefit.ui.base.BaseFragment
 
 class SmsCodeFragment : BaseFragment(R.layout.fragment_code) {
 
 
-    private val viewModel: LoginViewModel by activityViewModels()
+    //    private val viewModel: LoginViewModel by activityViewModels()
+    private val viewModel: SmsConfirmViewModel by activityViewModels()
+    val args: SmsCodeFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,7 +36,6 @@ class SmsCodeFragment : BaseFragment(R.layout.fragment_code) {
         attachListeners()
         subscribeObservers()
 
-        edtCode.setText(viewModel.code.toString())
     }
 
 
@@ -66,6 +64,16 @@ class SmsCodeFragment : BaseFragment(R.layout.fragment_code) {
             findNavController().navigate(R.id.action_codeFragment_to_deviceCodeFragment)
         })
 
+        viewModel.confirmNewCardResp.observe(viewLifecycleOwner, Observer {
+            when (it ?: return@Observer) {
+                is ResultError -> {
+                }
+                is ResultSuccess -> {
+                    findNavController().navigate(R.id.action_cardConfirm_to_regEndFragment)
+                }
+            }
+        })
+
 
     }
 
@@ -81,7 +89,11 @@ class SmsCodeFragment : BaseFragment(R.layout.fragment_code) {
         }
 
         btnConfirm.setOnClickListener {
-            viewModel.loginsms(edtCode.text.toString())
+            if (args.phone != null) {
+                viewModel.loginsms(args.phone!!, edtCode.text.toString())
+            } else {
+                viewModel.confirmNewCard(args.cardId, edtCode.text.toString())
+            }
         }
     }
 

@@ -431,130 +431,130 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <TextView
-                android:id="@+id/tvNum4"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:background="@drawable/shape_oval_white"
-                android:gravity="center"
-                android:text="4"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@id/titleWorkProve"
-                app:layout_constraintEnd_toEndOf="@id/icOvalUserTerms"
-                app:layout_constraintStart_toStartOf="@id/icOvalUserTerms"
-                app:layout_constraintTop_toTopOf="@id/titleWorkProve" />
+<!--            <TextView-->
+<!--                android:id="@+id/tvNum4"-->
+<!--                android:layout_width="28dp"-->
+<!--                android:layout_height="28dp"-->
+<!--                android:background="@drawable/shape_oval_white"-->
+<!--                android:gravity="center"-->
+<!--                android:text="4"-->
+<!--                android:textColor="@color/black"-->
+<!--                app:layout_constraintBottom_toBottomOf="@id/titleWorkProve"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/icOvalUserTerms"-->
+<!--                app:layout_constraintStart_toStartOf="@id/icOvalUserTerms"-->
+<!--                app:layout_constraintTop_toTopOf="@id/titleWorkProve" />-->
 
-            <ImageView
-                android:id="@+id/ivWorkProveChecked"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_oval_orange"
-                android:padding="5dp"
-                android:src="@drawable/ic_check"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@id/tvNum4"
-                app:layout_constraintEnd_toEndOf="@id/tvNum4"
-                app:layout_constraintStart_toStartOf="@id/tvNum4"
-                app:layout_constraintTop_toTopOf="@id/tvNum4" />
+<!--            <ImageView-->
+<!--                android:id="@+id/ivWorkProveChecked"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/shape_oval_orange"-->
+<!--                android:padding="5dp"-->
+<!--                android:src="@drawable/ic_check"-->
+<!--                android:visibility="invisible"-->
+<!--                app:layout_constraintBottom_toBottomOf="@id/tvNum4"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/tvNum4"-->
+<!--                app:layout_constraintStart_toStartOf="@id/tvNum4"-->
+<!--                app:layout_constraintTop_toTopOf="@id/tvNum4" />-->
 
-            <ImageView
-                android:id="@+id/icOvalWorkProve"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/ic_oval_work_prove"
-                app:layout_constraintBottom_toBottomOf="@id/tvNum4"
-                app:layout_constraintEnd_toEndOf="@id/tvNum4"
-                app:layout_constraintStart_toStartOf="@id/tvNum4"
-                app:layout_constraintTop_toTopOf="@id/tvNum4" />
+<!--            <ImageView-->
+<!--                android:id="@+id/icOvalWorkProve"-->
+<!--                android:layout_width="60dp"-->
+<!--                android:layout_height="60dp"-->
+<!--                android:src="@drawable/ic_oval_work_prove"-->
+<!--                app:layout_constraintBottom_toBottomOf="@id/tvNum4"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/tvNum4"-->
+<!--                app:layout_constraintStart_toStartOf="@id/tvNum4"-->
+<!--                app:layout_constraintTop_toTopOf="@id/tvNum4" />-->
 
-            <TextView
-                android:id="@+id/titleWorkProve"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="?android:actionBarSize"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/work_prove"
-                android:textColor="#ffffff"
-                android:textSize="18sp"
-                android:textStyle="normal"
-                app:layout_constraintStart_toStartOf="@id/titleUserTerms"
-                app:layout_constraintTop_toBottomOf="@id/photoWithPassportContent" />
+<!--            <TextView-->
+<!--                android:id="@+id/titleWorkProve"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="?android:actionBarSize"-->
+<!--                android:fontFamily="sans-serif-medium"-->
+<!--                android:text="@string/work_prove"-->
+<!--                android:textColor="#ffffff"-->
+<!--                android:textSize="18sp"-->
+<!--                android:textStyle="normal"-->
+<!--                app:layout_constraintStart_toStartOf="@id/titleUserTerms"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/photoWithPassportContent" />-->
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/workProveContent"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:animateLayoutChanges="true"
-                android:clipChildren="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/titleWorkProve"
-                app:layout_constraintTop_toBottomOf="@id/titleWorkProve">
-
-
-                <TextView
-                    android:id="@+id/subTitleWorkProve"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="sans-serif"
-                    android:text="@string/work_prove_subtitle"
-                    android:textColor="#e6ffffff"
-                    android:textSize="14sp"
-                    android:textStyle="normal"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:id="@+id/workProveContent"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:animateLayoutChanges="true"-->
+<!--                android:clipChildren="false"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="@id/titleWorkProve"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/titleWorkProve">-->
 
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardWorkProve"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="20dp"
-                    app:cardCornerRadius="10dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/subTitleWorkProve">
+<!--                <TextView-->
+<!--                    android:id="@+id/subTitleWorkProve"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    android:fontFamily="sans-serif"-->
+<!--                    android:text="@string/work_prove_subtitle"-->
+<!--                    android:textColor="#e6ffffff"-->
+<!--                    android:textSize="14sp"-->
+<!--                    android:textStyle="normal"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
 
-                    <ImageView
-                        android:id="@+id/ivWorkProve"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:selectableItemBackground"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_work_prove_eg" />
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:id="@+id/cardWorkProve"-->
+<!--                    android:layout_width="200dp"-->
+<!--                    android:layout_height="200dp"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    app:cardCornerRadius="10dp"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/subTitleWorkProve">-->
 
-                </androidx.cardview.widget.CardView>
 
-                <Button
-                    android:id="@+id/btnBackWorkProve"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="5dp"
-                    android:background="@drawable/selector_left_more_rounded"
-                    android:text="@string/back"
-                    android:textAllCaps="false"
-                    app:layout_constraintEnd_toStartOf="@id/btnNextWorkProve"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cardWorkProve" />
+<!--                    <ImageView-->
+<!--                        android:id="@+id/ivWorkProve"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:clickable="true"-->
+<!--                        android:focusable="true"-->
+<!--                        android:foreground="?android:selectableItemBackground"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        android:src="@drawable/ic_work_prove_eg" />-->
 
-                <Button
-                    android:id="@+id/btnNextWorkProve"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="5dp"
-                    android:background="@drawable/selector_right_more_rounded"
-                    android:enabled="false"
-                    android:textAllCaps="false"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintStart_toEndOf="@id/btnBackWorkProve"
-                    app:layout_constraintTop_toTopOf="@id/btnBackWorkProve" />
+<!--                </androidx.cardview.widget.CardView>-->
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                <Button-->
+<!--                    android:id="@+id/btnBackWorkProve"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    android:layout_marginRight="5dp"-->
+<!--                    android:background="@drawable/selector_left_more_rounded"-->
+<!--                    android:text="@string/back"-->
+<!--                    android:textAllCaps="false"-->
+<!--                    app:layout_constraintEnd_toStartOf="@id/btnNextWorkProve"-->
+<!--                    app:layout_constraintHorizontal_weight="1"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/cardWorkProve" />-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/btnNextWorkProve"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:layout_marginLeft="5dp"-->
+<!--                    android:background="@drawable/selector_right_more_rounded"-->
+<!--                    android:enabled="false"-->
+<!--                    android:textAllCaps="false"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintHorizontal_weight="1"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/btnBackWorkProve"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/btnBackWorkProve" />-->
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
 
             <!--            ssssssssssssssssssssssssssssssssssssss-->
             <!--           SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
@@ -572,7 +572,7 @@
                 android:layout_height="28dp"
                 android:background="@drawable/shape_oval_white"
                 android:gravity="center"
-                android:text="5"
+                android:text="4"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@id/titleAddress"
                 app:layout_constraintEnd_toEndOf="@id/icOvalUserTerms"
@@ -613,7 +613,7 @@
                 android:textSize="18sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="@id/titleUserTerms"
-                app:layout_constraintTop_toBottomOf="@id/workProveContent" />
+                app:layout_constraintTop_toBottomOf="@id/photoWithPassportContent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/addressContent"
@@ -675,6 +675,7 @@
                     android:layout_marginLeft="5dp"
                     android:background="@drawable/selector_right_more_rounded"
                     android:textAllCaps="false"
+                    android:enabled="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toEndOf="@id/btnBackAddress"
@@ -826,7 +827,7 @@
                 android:layout_height="28dp"
                 android:background="@drawable/shape_oval_white"
                 android:gravity="center"
-                android:text="7"
+                android:text="5"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@id/titleSelectBranch"
                 app:layout_constraintEnd_toEndOf="@id/icOvalUserTerms"
@@ -902,7 +903,7 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/selector_white"
                     android:clickable="true"
-                    android:focusable="true"
+                    android:focusable="false"
                     android:gravity="start|center_vertical"
                     android:hint="@string/select_from_list"
                     android:imeOptions="actionDone"
@@ -963,7 +964,7 @@
                 android:layout_height="28dp"
                 android:background="@drawable/shape_oval_white"
                 android:gravity="center"
-                android:text="8"
+                android:text="6"
                 android:textColor="@color/black"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/titleLimit"
@@ -1092,7 +1093,7 @@
                 android:layout_height="28dp"
                 android:background="@drawable/shape_oval_white"
                 android:gravity="center"
-                android:text="9"
+                android:text="7"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@id/titleSendReq"
                 app:layout_constraintEnd_toEndOf="@id/icOvalUserTerms"
