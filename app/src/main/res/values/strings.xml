@@ -208,5 +208,8 @@
     <string name="delete">Удалить</string>
     <string name="are_you_sure_to_delete_card">Внимание! Вы действительно хотите удалить эту карту?</string>
     <string name="referal">Referal code</string>
+    <string name="wrong_code">Неверный код:</string>
+    <string name="password_change">Смена кода...</string>
+    <string name="password_successfully_changed">Код входа успешно изменён</string>
 
 </resources>

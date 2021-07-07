@@ -1,33 +1,37 @@
 package com.example.benefit.ui.main.profile.settings_bsd
 
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.benefit.remote.UserRemoteImpl
-import com.example.benefit.remote.models.RespLogin
-
-import com.example.benefit.util.ResultWrapper
-import com.example.benefit.util.SingleLiveEvent
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-
 /**
  * Created by jahon on 03-Sep-20
- */import javax.inject.Inject
+ */
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.benefit.remote.AuthApiService
+import com.example.benefit.remote.models.PlainResp
+import com.example.benefit.util.AppPrefs
+import com.example.benefit.util.ResultWrapper
+import com.example.benefit.util.getFormattedResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
-class SettingsBSDViewModel @Inject constructor(private val userRemoteImpl: UserRemoteImpl) :
+class SettingsBSDViewModel @Inject constructor(private val authApiService: AuthApiService) :
     ViewModel() {
 
-    val loginResp = SingleLiveEvent<ResultWrapper<RespLogin>>()
-    fun login(phoneNumber: String) {
+    val newPasswordResp = MutableLiveData<ResultWrapper<PlainResp>>()
+    val newPasswordLoading = MutableLiveData<Boolean>()
+    fun setNewCode(newPassword: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val response = userRemoteImpl.login(phoneNumber)
-            withContext(Dispatchers.Main) {
-                loginResp.value = response
-            }
+            newPasswordResp.postValue(getFormattedResponse(newPasswordLoading) {
+                authApiService.changePassword(
+                    AppPrefs.phoneNumber!!,
+                    newPassword,
+                    AppPrefs.userId
+                )
+            })
         }
     }
 

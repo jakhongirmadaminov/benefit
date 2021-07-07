@@ -63,6 +63,7 @@ class DeviceCodeFragment : BaseFragment(R.layout.fragment_device_code) {
             it ?: return@Observer
             AppPrefs.edit {
                 token = it.access_token
+                pin = edtCode.text.toString()
             }
 
             startActivity(Intent(requireActivity(), MainActivity::class.java))

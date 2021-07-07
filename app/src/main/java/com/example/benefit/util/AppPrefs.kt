@@ -15,6 +15,9 @@ object AppPrefs : Preferences("myPrefs") {
     var token by stringOrNullPref(null)
 
     @ExperimentalSplittiesApi
+    var pin by stringOrNullPref(null)
+
+    @ExperimentalSplittiesApi
     var userToken by stringOrNullPref(null)
 
     @ExperimentalSplittiesApi

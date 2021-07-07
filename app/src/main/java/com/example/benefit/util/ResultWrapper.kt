@@ -58,6 +58,7 @@ suspend fun <T> getFormattedResponse(
     return try {
         isLoading.postValue(true)
         val resp = action()
+        isLoading.postValue(false)
         when {
             resp.result?.data != null -> ResultSuccess(resp.result.data)
             resp.result?.error != null -> ResultError(resp.result.error.message)
