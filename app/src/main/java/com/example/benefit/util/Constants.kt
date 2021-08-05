@@ -5,69 +5,97 @@ package com.example.benefit.util
  */
 object Constants {
 
-    const val BASE_URL = "http://benefitbank.uz/"
+//    const val BASE_URL = "http://benefitbank.uz/"
+    const val BASE_URL = "http://sys.benefitbank.uz/"
+
 //    const val FILE_PROVIDER = "com.example.benefit.fileprovider"
 
     val MONTHS = hashMapOf(
-        Pair("ru", listOf("Января",
-            "Февраля",
-            "Марта",
-            "Апреля",
-            "Мая",
-            "Июня",
-            "Июля",
-            "Августа",
-            "Сентября",
-            "Октября",
-            "Ноября",
-            "Декабря")),
-        Pair("en", listOf("January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "Ноября",
-            "Декабря")),
-        Pair("uz", listOf("Yanvar",
-            "Fevral",
-            "Mart",
-            "Aprel",
-            "May",
-            "Iyun",
-            "Iyul",
-            "Avgust",
-            "Sentabr",
-            "Oktabr",
-            "Noyabr",
-            "Dekabr")))
+        Pair(
+            "ru", listOf(
+                "Января",
+                "Февраля",
+                "Марта",
+                "Апреля",
+                "Мая",
+                "Июня",
+                "Июля",
+                "Августа",
+                "Сентября",
+                "Октября",
+                "Ноября",
+                "Декабря"
+            )
+        ),
+        Pair(
+            "en", listOf(
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "Ноября",
+                "Декабря"
+            )
+        ),
+        Pair(
+            "uz", listOf(
+                "Yanvar",
+                "Fevral",
+                "Mart",
+                "Aprel",
+                "May",
+                "Iyun",
+                "Iyul",
+                "Avgust",
+                "Sentabr",
+                "Oktabr",
+                "Noyabr",
+                "Dekabr"
+            )
+        )
+    )
 
     val WEEKDAYS = hashMapOf(
-        Pair("ru", listOf("Понедельник",
-            "Вторник",
-            "Среда",
-            "Четверг",
-            "Пятница",
-            "Суббота",
-            "Воскресенье")),
-        Pair("uz", listOf("Dushanba",
-            "Seshanba",
-            "Chorshanba",
-            "Payshanba",
-            "Juma",
-            "Shanba",
-            "Yakshanba")),
-        Pair("en", listOf("Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday")))
+        Pair(
+            "ru", listOf(
+                "Понедельник",
+                "Вторник",
+                "Среда",
+                "Четверг",
+                "Пятница",
+                "Суббота",
+                "Воскресенье"
+            )
+        ),
+        Pair(
+            "uz", listOf(
+                "Dushanba",
+                "Seshanba",
+                "Chorshanba",
+                "Payshanba",
+                "Juma",
+                "Shanba",
+                "Yakshanba"
+            )
+        ),
+        Pair(
+            "en", listOf(
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday"
+            )
+        )
+    )
 
 
     const val APP_DATABASE_NAME = "com.sablab.domvetdoctor.cache.db"
