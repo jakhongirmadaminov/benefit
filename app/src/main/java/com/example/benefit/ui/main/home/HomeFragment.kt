@@ -4,10 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.viewpager.widget.PagerAdapter
 import com.example.benefit.R
-import com.example.benefit.remote.models.CardBankDTO
 import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.remote.models.EPaymentType
 import com.example.benefit.remote.models.PaynetCategory
@@ -147,9 +147,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         cardBranches.setOnClickListener {
             startActivity(Intent(requireActivity(), BranchesAtmsActivity::class.java))
         }
-        cardExpenses.setOnClickListener {
-            startActivity(Intent(requireActivity(), ExpensesByCategoriesActivity::class.java))
-        }
+
 
     }
 
@@ -171,6 +169,20 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     }
 
     private fun setupCardsPager(cardsDTO: List<CardDTO>) {
+
+        categoryExpensesPanel.isVisible = cardsDTO.isNotEmpty()
+
+        if (cardsDTO.isNotEmpty()) {
+            cardExpenses.setOnClickListener {
+                startActivity(
+                    Intent(
+                        requireActivity(),
+                        ExpensesByCategoriesActivity::class.java
+                    ).apply {
+                        putParcelableArrayListExtra(ARG_CARDS, ArrayList(cardsDTO))
+                    })
+            }
+        }
 
         val cardViews = arrayListOf<View>()
         cardsDTO.forEach {

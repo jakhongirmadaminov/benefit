@@ -11,7 +11,11 @@ import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_category_small.view.*
 
 
-class ItemCategorySmall(val obj: PartnerCategoryDTO) : Item() {
+class ItemCategorySmall(
+    val obj: PartnerCategoryDTO,
+    var expense: Long? = null,
+    var percentage: Float? = null
+) : Item() {
 
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
@@ -28,7 +32,19 @@ class ItemCategorySmall(val obj: PartnerCategoryDTO) : Item() {
             Color.WHITE,
             android.graphics.PorterDuff.Mode.SRC_IN
         )
+        percentage?.let {
+            val shortPercentage =
+                if (it.toString().length > 4) it.toString().substring(0, 4) else it.toString()
+            viewHolder.itemView.tvPercentage.text = "$shortPercentage %"
+        } ?: run {
+            viewHolder.itemView.tvPercentage.text = "0 %"
+        }
+        expense?.let {
 
+            viewHolder.itemView.tvCategoryTotalExpense.text = expense.toString() + " UZS"
+        } ?: run {
+            viewHolder.itemView.tvCategoryTotalExpense.text = "0 UZS"
+        }
     }
 
     override fun getLayout() = R.layout.item_category_small

@@ -3,16 +3,17 @@ package com.example.benefit.ui.viewgroups
 import android.graphics.Color
 import androidx.core.content.ContextCompat
 import com.example.benefit.R
+import com.example.benefit.remote.models.CardDTO
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_card_tag.view.*
 
-class CardTagItem(val cardTitle: String, val onClick: (item: CardTagItem) -> Unit) : Item() {
+class CardTagItem(val cardDTO: CardDTO, val onClick: (item: CardTagItem, cardDto:CardDTO) -> Unit) : Item() {
 
     var selected = false
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        viewHolder.itemView.tvCardTitle.text = cardTitle
+        viewHolder.itemView.tvCardTitle.text = cardDTO.card_title
 
         if (selected) {
             viewHolder.itemView.tvCardTitle.setBackgroundResource(R.drawable.selector_orange)
@@ -28,7 +29,7 @@ class CardTagItem(val cardTitle: String, val onClick: (item: CardTagItem) -> Uni
         }
 
         viewHolder.itemView.tvCardTitle.setOnClickListener {
-            onClick(this)
+            onClick(this,cardDTO)
         }
 
     }

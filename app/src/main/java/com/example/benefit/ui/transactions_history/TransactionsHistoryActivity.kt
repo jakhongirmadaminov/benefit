@@ -148,20 +148,20 @@ class TransactionsHistoryActivity : BaseActivity() {
         }
         transactionsAdapter.notifyDataSetChanged()
 
-        val tempVals = arrayListOf("Benefit", "Zoom", "Cashback", "Детям", "Общее", "...")
+//        val tempVals = arrayListOf("Benefit", "Zoom", "Cashback", "Детям", "Общее", "...")
+//
+//        tempVals.forEach {
+//            cardsAdapter.add(CardTagItem(it) { cardItem ->
+//                for (i in 0 until cardsAdapter.itemCount) {
+//                    (cardsAdapter.getItem(i) as CardTagItem).selected = false
+//                }
+//                cardItem.selected = true
+//                cardsAdapter.notifyDataSetChanged()
+//            })
+//        }
 
-        tempVals.forEach {
-            cardsAdapter.add(CardTagItem(it) { cardItem ->
-                for (i in 0 until cardsAdapter.itemCount) {
-                    (cardsAdapter.getItem(i) as CardTagItem).selected = false
-                }
-                cardItem.selected = true
-                cardsAdapter.notifyDataSetChanged()
-            })
-        }
 
-
-        cardsAdapter.notifyDataSetChanged()
+//        cardsAdapter.notifyDataSetChanged()
     }
 
     private fun makeChart(chart: LineChart) {

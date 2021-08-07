@@ -211,5 +211,8 @@
     <string name="wrong_code">Неверный код:</string>
     <string name="password_change">Смена кода...</string>
     <string name="password_successfully_changed">Код входа успешно изменён</string>
+    <string name="sums">%1$s сум</string>
+    <string name="expense_for_month">"Потрачено за "</string>
+    <string name="error">Ошибка!</string>
 
 </resources>

@@ -9,20 +9,20 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
-        app:elevation="0dp"
-        android:elevation="0dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:animateLayoutChanges="true">
+        android:animateLayoutChanges="true"
+        android:elevation="0dp"
+        app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tool_bar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:elevation="0dp"
             android:theme="@style/ToolBarStyle"
             app:contentInsetLeft="0dp"
             app:elevation="0dp"
-            android:elevation="0dp"
             app:layout_scrollFlags="scroll|enterAlways">
 
             <LinearLayout
@@ -60,31 +60,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="26dp"
-                android:fontFamily="sans-serif"
-                android:text="750 000 UZS"
-                android:textColor="#000000"
-                android:textSize="22dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="26dp"
-                android:fontFamily="sans-serif"
-                android:text="Потрачено за март"
-                android:textColor="#cc5c5c5c"
-                android:textSize="14dp"
-                android:textStyle="normal" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvCardTags"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="26dp"
+                android:layout_height="wrap_content"
                 android:clipChildren="false"
                 android:clipToPadding="false"
                 android:orientation="horizontal"
@@ -93,11 +73,34 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_card_tag" />
 
+            <TextView
+                android:id="@+id/tvExpenses"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="26dp"
+                android:layout_marginTop="13dp"
+                android:fontFamily="sans-serif"
+                android:textColor="#000000"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                tools:text="750 000 UZS" />
+
+            <TextView
+                android:id="@+id/tvSpentExpensesForMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="26dp"
+                android:fontFamily="sans-serif"
+                android:textColor="#cc5c5c5c"
+                android:textSize="14dp"
+                android:textStyle="normal"
+                tools:text="Потрачено за март" />
+
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/chartPager"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:layout_marginTop="26dp" />
+                android:layout_marginTop="13dp" />
 
             <com.rd.PageIndicatorView
                 android:id="@+id/pageIndicatorView"
@@ -130,9 +133,9 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvCategories"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
-                android:layout_height="wrap_content"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_category_small" />
 

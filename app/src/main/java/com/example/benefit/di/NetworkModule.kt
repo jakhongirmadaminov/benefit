@@ -4,6 +4,7 @@ import com.example.benefit.BuildConfig
 import com.example.benefit.remote.ApiService
 import com.example.benefit.remote.ApiServiceFactory
 import com.example.benefit.remote.AuthApiService
+import com.example.benefit.util.SystemDateTimeManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,6 +26,10 @@ object NetworkModule {
     fun provideAuthorizedApiService(): AuthApiService {
         return ApiServiceFactory.makeAuthorizedApiService(BuildConfig.DEBUG)
     }
+
+    @Singleton
+    @Provides
+    fun provideSystemDateTimeManager() = SystemDateTimeManager()
 
 
 }

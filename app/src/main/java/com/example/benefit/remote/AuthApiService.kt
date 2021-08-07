@@ -15,6 +15,32 @@ import splitties.experimental.ExperimentalSplittiesApi
 interface AuthApiService {
 
 
+//    @POST("api/card/phistory")
+//    @FormUrlEncoded
+//    suspend fun transactionHistory(
+//        @Field("per-page") per_page: Int = 15,
+//        @Field("user_id") user_id: Int = AppPrefs.userId,
+//    ):  RespFormat<TransactionHistory>
+
+    @POST("api/card/report")
+    @FormUrlEncoded
+    suspend fun transactionsInOut(
+        @Field("card_id") user_id: Int,
+        @Field("startDate") startDate: Int,
+        @Field("endDate") endDate: Int,
+        @Field("pageSize") pageSize: Int = 100,
+    ): RespFormat<TransactionInOutDTO>
+
+    @POST("api/card/analytics")
+    @FormUrlEncoded
+    suspend fun transactionsAnalytics(
+        @Field("card_id") user_id: Int,
+        @Field("startDate") startDate: Int,
+        @Field("endDate") endDate: Int,
+        @Field("pageSize") pageSize: Int = 100,
+    ): RespFormat<List<TransactionAnalyticsContainerDTO>>
+
+
     @GET("api/paynet/categories")
     suspend fun paymentCategories(): RespFormat<List<PaynetCategory>>
 
