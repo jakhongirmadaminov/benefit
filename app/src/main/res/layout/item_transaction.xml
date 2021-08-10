@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:selectableItemBackground"
@@ -15,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="26dp"
-        android:src="@drawable/ic_asia_alliance_logo"
+        tools:src="@drawable/ic_asia_alliance_logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:fontFamily="sans-serif-light"
-        android:text="@string/transfer_from_card"
+        tools:text="@string/transfer_from_card"
         android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="normal"
@@ -39,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:fontFamily="sans-serif"
-        android:text="Asia Alliance Bank"
+        tools:text="Asia Alliance Bank"
         android:textColor="#ab5c5c5c"
         android:textSize="14sp"
         android:textStyle="normal"
@@ -49,12 +50,27 @@
 
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvMinus"
+        tools:visibility="visible"
+        android:visibility="gone"
+        android:text="-"
+        android:textStyle="normal"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@id/tvAmount"
+        android:textColor="#ba000000"
+        app:layout_constraintTop_toTopOf="@id/tvAmount"
+        app:layout_constraintBottom_toBottomOf="@id/tvAmount"
+        />
+
+    <TextView
         android:id="@+id/tvAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="26dp"
         android:fontFamily="sans-serif-light"
-        android:text="250 000 UZS"
+        tools:text="250 000 UZS"
         android:textColor="#ba000000"
         android:textSize="15sp"
         android:textStyle="normal"

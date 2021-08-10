@@ -11,6 +11,7 @@ import com.example.benefit.R
 import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.remote.models.EPaymentType
 import com.example.benefit.remote.models.PaynetCategory
+import com.example.benefit.ui.auth.AuthActivity
 import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.branches_atms.BranchesAtmsActivity
 import com.example.benefit.ui.expenses_by_categories.ExpensesByCategoriesActivity
@@ -25,6 +26,7 @@ import com.example.benefit.ui.transactions_history.TransactionsHistoryActivity
 import com.example.benefit.ui.viewgroups.ItemLoading
 import com.example.benefit.ui.viewgroups.ItemNews
 import com.example.benefit.ui.viewgroups.ItemPaynetCatg
+import com.example.benefit.util.AppPrefs
 import com.example.benefit.util.loadImageUrl
 import com.rd.utils.DensityUtils.dpToPx
 import com.xwray.groupie.GroupAdapter
@@ -32,6 +34,7 @@ import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.item_card.view.*
 import splitties.fragments.start
+import splitties.preferences.edit
 import java.text.DecimalFormat
 
 
@@ -58,6 +61,19 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             when (it ?: return@observe) {
                 true -> paynetCatgAdapter.add(ItemLoading())
                 else -> paynetCatgAdapter.clear()
+            }
+        })
+        viewModel.signInRequired.observe(viewLifecycleOwner, {
+            when (it ?: return@observe) {
+                true -> {
+                    AppPrefs.edit {
+                        token = null
+                    }
+                    start<AuthActivity>()
+                    requireActivity().finish()
+                }
+                else -> {
+                }
             }
         })
         viewModel.isLoadingNews.observe(viewLifecycleOwner, {
@@ -135,11 +151,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
         }
 
-        cardPayments.setOnClickListener {
-            start<TransactionsHistoryActivity> {
-
-            }
-        }
 
         page_two.setOnClickListener {
             startActivity(Intent(requireActivity(), LoanActivity::class.java))
@@ -170,6 +181,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private fun setupCardsPager(cardsDTO: List<CardDTO>) {
 
+        transactionHistoryPanel.isVisible = cardsDTO.isNotEmpty()
         categoryExpensesPanel.isVisible = cardsDTO.isNotEmpty()
 
         if (cardsDTO.isNotEmpty()) {
@@ -178,6 +190,16 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                     Intent(
                         requireActivity(),
                         ExpensesByCategoriesActivity::class.java
+                    ).apply {
+                        putParcelableArrayListExtra(ARG_CARDS, ArrayList(cardsDTO))
+                    })
+            }
+
+            cardPayments.setOnClickListener {
+                startActivity(
+                    Intent(
+                        requireActivity(),
+                        TransactionsHistoryActivity::class.java
                     ).apply {
                         putParcelableArrayListExtra(ARG_CARDS, ArrayList(cardsDTO))
                     })

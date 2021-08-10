@@ -38,7 +38,8 @@ suspend fun <T> getFormattedResponse(action: suspend () -> RespFormat<T>): Resul
         when {
             resp.result?.data != null -> ResultSuccess(resp.result.data)
             resp.result?.error != null -> ResultError(resp.result.error.message)
-            else -> ResultError(resp.result?.message)
+            resp.error != null -> ResultError("", resp.error.status)
+            else -> ResultError(resp.result?.message, resp.result?.error?.status)
         }
     } catch (e: HttpException) {
         ResultError(

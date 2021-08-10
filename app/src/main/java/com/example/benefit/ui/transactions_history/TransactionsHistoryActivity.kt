@@ -2,14 +2,22 @@ package com.example.benefit.ui.transactions_history
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.core.view.children
 import com.example.benefit.R
-import com.example.benefit.remote.models.TransactionDTO
+import com.example.benefit.remote.models.CardDTO
+import com.example.benefit.remote.models.TransactionAnalyticsDTO
+import com.example.benefit.remote.models.TransactionInOutDTO
 import com.example.benefit.ui.base.BaseActivity
+import com.example.benefit.ui.expenses_by_categories.ARG_CARDS
 import com.example.benefit.ui.main.home.HomeFragment
-import com.example.benefit.ui.transactions_history.transaction_bsd.TransactionType
 import com.example.benefit.ui.viewgroups.CardTagItem
 import com.example.benefit.ui.viewgroups.ItemTransaction
+import com.example.benefit.util.ResultError
+import com.example.benefit.util.ResultSuccess
 import com.example.benefit.util.SizeUtils
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
@@ -17,24 +25,37 @@ import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_expenses_by_categories.*
 import kotlinx.android.synthetic.main.activity_transactions_history.*
+import kotlinx.android.synthetic.main.activity_transactions_history.chartPager
+import kotlinx.android.synthetic.main.activity_transactions_history.rvCardTags
 import kotlinx.android.synthetic.main.item_line_chart.view.*
+import kotlinx.android.synthetic.main.item_line_chart.view.chart
+import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
 import kotlin.random.Random
 
 
-class TransactionsHistoryActivity : BaseActivity() {
+class TransactionsHistoryActivity : BaseActivity() , OnChartValueSelectedListener {
 
     companion object {
         const val EXTRA_CARD = "CARD"
         const val EXTRA_CARDS = "CARDS"
     }
 
+    lateinit var myCards: List<CardDTO>
+
+    private val viewModel: TransactionsHistoryViewModel by viewModels()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_transactions_history)
+        myCards = intent.getParcelableArrayListExtra(ARG_CARDS)
 
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -45,10 +66,41 @@ class TransactionsHistoryActivity : BaseActivity() {
         attachListeners()
         subscribeObservers()
 
+        viewModel.getTransactionsHistory(myCards[0].id!!)
     }
 
     private fun subscribeObservers() {
 
+
+        viewModel.transactionsAnalyticsResp.observe(this) {
+            when (it) {
+                is ResultError -> {
+                    Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show()
+                }
+                is ResultSuccess -> {
+//                    loadGraph(it.value)
+                }
+            }
+        }
+
+        viewModel.transactionsReportResp.observe(this) {
+            when (it) {
+                is ResultError -> {
+//                    tvExpenses.text = ""
+                }
+                is ResultSuccess -> {
+                    setupChartPager(it.value)
+                }
+            }
+        }
+
+        viewModel.analyticsReportLoading.observe(this) {
+
+        }
+
+        viewModel.totalExpenseReportLoading.observe(this) {
+
+        }
 
     }
 
@@ -65,23 +117,31 @@ class TransactionsHistoryActivity : BaseActivity() {
     }
 
     private fun setupViews() {
-        rvCardTags.adapter = cardsAdapter
+        rvCardTags.adapter = tagsAdapter
+        rvTransactions.adapter = transactionsAdapter
         cbMonthSpent.performClick()
         setupCardTags()
-        setupChartPager()
     }
 
-    private fun setupChartPager() {
+
+    private fun setupChartPager(value: List<TransactionInOutDTO>) {
 
         val chartView = layoutInflater.inflate(R.layout.item_line_chart, null)
         val chartView2 = layoutInflater.inflate(R.layout.item_line_chart, null)
 
-        chartView.rbMonth1.isChecked = true
+        chartView2.rbMonth6.isChecked = true
+        chartView.llMonths.children.forEachIndexed { index, view ->
+            (view as? TextView)?.text =
+                DateTimeFormat.forPattern("MMM").print(DateTime.now().minusMonths(11 - index))
+        }
 
+        chartView2.llMonths.children.forEachIndexed { index, view ->
+            (view as? TextView)?.text =
+                DateTimeFormat.forPattern("MMM").print(DateTime.now().minusMonths(5 - index))
+        }
 
-
-        makeChart(chartView.chart)
-        makeChart(chartView2.chart)
+        makeChart(chartView.chart, value.drop(6))
+        makeChart(chartView2.chart, value.dropLast(6))
 
         chartPager.addView(chartView)
         chartPager.addView(chartView2)
@@ -97,79 +157,70 @@ class TransactionsHistoryActivity : BaseActivity() {
             0
         )
         chartPager.pageMargin = SizeUtils.dpToPx(this, 26).toInt()
-
+        chartPager.currentItem = 1
     }
 
+    override fun onValueSelected(e: Entry?, h: Highlight?) {
+        e?.let {
+            showExpenses(it.x.toInt())
+        }
+    }
 
-    val cardsAdapter = GroupAdapter<GroupieViewHolder>()
-    val transactionsAdapter = GroupAdapter<GroupieViewHolder>()
-    private fun setupCardTags() {
+    override fun onNothingSelected() {
 
-        rvTransactions.adapter = transactionsAdapter
+    }
+// if isCredit false znachit eto expense
+// if isCredit true znachit eto popolnenie
 
-        val data = arrayListOf(
-            TransactionDTO(
-                "Amphora",
-                "#заинтернет",
-                100000,
-                "",
-                1593863236,
-                TransactionType.COMMERCIAL_PAYMENT
-            ),
-            TransactionDTO(
-                "ЧП “Nuraliev”",
-                "Категория не выбрана",
-                250000,
-                "",
-                1593863236,
-                TransactionType.NONE
-            ),
-            TransactionDTO(
-                "Перевод на карту",
-                "Kapital Bank",
-                300000,
-                "",
-                1593863236,
-                TransactionType.TRANSFER_TO_CARD
-            ),
-            TransactionDTO(
-                "Infinity Roses",
-                "Магазины Цветов",
-                120000,
-                "",
-                1593863236,
-                TransactionType.COMMERCIAL_PAYMENT
+
+    private fun showExpenses(barIndex: Int) {
+        if (chartPager.currentItem == 0) {
+            loadTransactions(
+                (viewModel.transactionsAnalyticsResp.value as ResultSuccess).value[11 - barIndex],
+                11 - barIndex
             )
-        )
-        transactionsAdapter.clear()
+        } else {
+            loadTransactions(
+                (viewModel.transactionsAnalyticsResp.value as ResultSuccess).value[5 - barIndex],
+                5 - barIndex
+            )
+        }
+    }
 
-        data.forEach {
+    val transactionsAdapter = GroupAdapter<GroupieViewHolder>()
+    private fun loadTransactions(value: List<TransactionAnalyticsDTO>, barIndex: Int) {
+        transactionsAdapter.clear()
+        value.forEach {
             transactionsAdapter.add(ItemTransaction(it))
         }
         transactionsAdapter.notifyDataSetChanged()
-
-//        val tempVals = arrayListOf("Benefit", "Zoom", "Cashback", "Детям", "Общее", "...")
-//
-//        tempVals.forEach {
-//            cardsAdapter.add(CardTagItem(it) { cardItem ->
-//                for (i in 0 until cardsAdapter.itemCount) {
-//                    (cardsAdapter.getItem(i) as CardTagItem).selected = false
-//                }
-//                cardItem.selected = true
-//                cardsAdapter.notifyDataSetChanged()
-//            })
-//        }
-
-
-//        cardsAdapter.notifyDataSetChanged()
     }
 
-    private fun makeChart(chart: LineChart) {
-        val entries = ArrayList<Entry>()
-        for (i in 0..20) {
-            // turn your data into Entry objects
-            entries.add(Entry(i.toFloat(), Random.nextInt(0, 50).toFloat()))
+    val tagsAdapter = GroupAdapter<GroupieViewHolder>()
+    private fun setupCardTags() {
+
+        myCards.forEachIndexed { index, cardDTO ->
+            val cardItem = CardTagItem(cardDTO) { cardItem, card ->
+                for (i in 0 until tagsAdapter.itemCount) {
+                    (tagsAdapter.getItem(i) as CardTagItem).selected = false
+                }
+                cardItem.selected = true
+                tagsAdapter.notifyDataSetChanged()
+                viewModel.getTransactionsHistory(card.id!!)
+            }
+            cardItem.selected = index == 0
+            tagsAdapter.add(cardItem)
         }
+
+    }
+
+    private fun makeChart(chart: LineChart, value: List<TransactionInOutDTO>) {
+        val entries = ArrayList<Entry>()
+        value.reversed().forEachIndexed { index, item ->
+            // turn your data into Entry objects
+            entries.add(Entry(index.toFloat(), item.outcome_total.toFloat()))
+        }
+
 
         val dataSet = LineDataSet(entries, "") // add entries to dataset
 //        dataSet.color = ContextCompat.getColor(this, R.color.colorAccent)
@@ -197,6 +248,7 @@ class TransactionsHistoryActivity : BaseActivity() {
 
 
         chart.data = lineData
+        chart.setOnChartValueSelectedListener(this)
 
         val xAxis = chart.xAxis
         xAxis.disableGridDashedLine()

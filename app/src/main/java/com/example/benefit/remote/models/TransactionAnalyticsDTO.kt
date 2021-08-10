@@ -1,14 +1,18 @@
 package com.example.benefit.remote.models
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
+data class TransactionAnalyticsContainerDTO(@SerializedName("content") val content: List<TransactionAnalyticsDTO>) :
+    Parcelable
 
-data class TransactionAnalyticsContainerDTO(@SerializedName("content") val content: List<TransactionAnalyticsDTO>)
-
+@Parcelize
 data class TransactionAnalyticsDTO(
     @SerializedName("acctbal") val acctbal: Int?,
     @SerializedName("actamt") val actamt: Int?,
-    @SerializedName("bankDate") val bankDate: Any?,
+    @SerializedName("bankDate") val bankDate: String?,
     @SerializedName("city") val city: String?,
     @SerializedName("conamt") val conamt: Int?,
     @SerializedName("credit") val credit: Boolean?,
@@ -29,10 +33,11 @@ data class TransactionAnalyticsDTO(
     @SerializedName("udate") val udate: Int?,
     @SerializedName("utime") val utime: Int?,
     @SerializedName("utrnno") val utrnno: Long?
-)
+) : Parcelable
 
+@Parcelize
 data class CategoryName(
     @SerializedName("title_en") val titleEn: String?,
     @SerializedName("title_ru") val titleRu: String?,
     @SerializedName("title_uz") val titleUz: String?
-)
+) : Parcelable

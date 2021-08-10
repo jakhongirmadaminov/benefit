@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
+import com.example.benefit.remote.models.TransactionAnalyticsDTO
 import com.example.benefit.remote.models.TransactionDTO
 import com.example.benefit.util.MyBSDialog
 import com.example.benefit.util.MyNestedScrollBSDialog
@@ -25,7 +26,7 @@ class TransactionBSD : MyNestedScrollBSDialog() {
         const val ARG_TRANSACTION_DTO = "TRANSACTION_DTO"
     }
 
-    lateinit var transactionDTO: TransactionDTO
+    lateinit var transactionDTO: TransactionAnalyticsDTO
     private val viewModel: TransactionViewModel by viewModels()
 
     override fun onAttach(context: Context) {

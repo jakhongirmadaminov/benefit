@@ -4,7 +4,6 @@ package com.example.benefit.ui.main.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.benefit.remote.models.CardBankDTO
 import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.remote.models.NewsDTO
 import com.example.benefit.remote.models.PaynetCategory
@@ -58,6 +57,7 @@ class HomeViewModel @Inject constructor(private val userRemote: UserRemote) : Vi
 
     val cardsResp = MutableLiveData<List<CardDTO>>()
     val isLoadingCards = MutableLiveData<Boolean>()
+    val signInRequired = MutableLiveData<Boolean>()
     fun getMyCards() {
         isLoadingCards.value = true
         viewModelScope.launch(Dispatchers.IO) {
@@ -65,7 +65,10 @@ class HomeViewModel @Inject constructor(private val userRemote: UserRemote) : Vi
             withContext(Dispatchers.Main) {
                 isLoadingCards.value = false
                 when (response) {
-                    is ResultError -> errorMessage.value = response.message
+                    is ResultError -> {
+                        if (response.code == 403) signInRequired.value = true
+                        errorMessage.value = response.message
+                    }
                     is ResultSuccess -> {
 //                        val bankCards =
 //                            response.value.bank.flatten().associateBy { it.idString }

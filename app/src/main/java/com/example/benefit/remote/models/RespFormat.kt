@@ -2,11 +2,15 @@ package com.example.benefit.remote.models
 
 import com.google.gson.annotations.SerializedName
 
-data class RespFormat<T>(@SerializedName("result") val result: ResultBody<T>? = null)
+data class RespFormat<T>(
+    @SerializedName("result") val result: ResultBody<T>? = null,
+    @SerializedName("error") val error: ErrorBody? = null
+)
 
 
 data class ErrorBody(
     @SerializedName("errorCode") val errorCode: Int? = null,
+    @SerializedName("status") val status: Int? = null,
     @SerializedName("message") val message: String? = null
 )
 

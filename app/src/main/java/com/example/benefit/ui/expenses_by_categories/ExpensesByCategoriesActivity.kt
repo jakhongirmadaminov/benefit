@@ -64,6 +64,7 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity(), OnChartValueSelect
 
     private fun setupViews() {
         rvCategories.adapter = categoriesAdapter
+        rvCardTags.adapter = tagsAdapter
 
         setupCardTags()
 
@@ -95,14 +96,6 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity(), OnChartValueSelect
                     tvExpenses.text = ""
                 }
                 is ResultSuccess -> {
-//                    tvExpenses.text = getString(
-//                        R.string.sums,
-//                        DecimalFormat("#,###").format(it.value[0].outcome_total)
-//                    )
-//                    tvSpentExpensesForMonth.text =
-//                        getString(R.string.expense_for_month) + " " + Constants.MONTHS[AppPrefs.language]!![DateTime.now().monthOfYear - 1]
-
-//                    loadGraph(it.value)
                     setupChartPager(it.value)
                 }
             }
@@ -131,6 +124,7 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity(), OnChartValueSelect
 
     }
 
+    val categoriesAdapter = GroupAdapter<GroupieViewHolder>()
     private fun loadData(value: List<PartnerCategoryDTO>) {
         categoriesAdapter.clear()
         value.forEach {
@@ -140,9 +134,7 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity(), OnChartValueSelect
     }
 
     val tagsAdapter = GroupAdapter<GroupieViewHolder>()
-    val categoriesAdapter = GroupAdapter<GroupieViewHolder>()
     private fun setupCardTags() {
-        rvCardTags.adapter = tagsAdapter
 
         myCards.forEachIndexed { index, cardDTO ->
             val cardItem = CardTagItem(cardDTO) { cardItem, card ->
