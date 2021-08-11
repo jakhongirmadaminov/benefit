@@ -283,25 +283,25 @@ class OrderCardActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedLis
 
 
     override fun onSingleImageSelected(uri: Uri, tag: String?) {
-        val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
-
-        when (tag) {
-            PASSPORT -> {
-                viewModel.passportBitmap = bitmap
-                ivPassportPhoto.loadBitmap(bitmap)
-                btnNextPhotoPassport.isEnabled = true
+        try {
+            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
+            when (tag) {
+                PASSPORT -> {
+                    viewModel.passportBitmap = bitmap
+                    ivPassportPhoto.loadBitmap(bitmap)
+                    btnNextPhotoPassport.isEnabled = true
+                }
+                PASSPORT_WITH_PHOTO -> {
+                    viewModel.withPassportBitmap = bitmap
+                    ivPhotoWithPassport.loadBitmap(bitmap)
+                    btnNextPhotoWithPassport.isEnabled = true
+                }
+                WORK_PROOF -> {
+                    viewModel.workProofBitmap = bitmap
+                }
             }
-            PASSPORT_WITH_PHOTO -> {
-                viewModel.withPassportBitmap = bitmap
-                ivPhotoWithPassport.loadBitmap(bitmap)
-                btnNextPhotoWithPassport.isEnabled = true
-            }
-            WORK_PROOF -> {
-                viewModel.workProofBitmap = bitmap
-//                ivWorkProve.loadBitmap(bitmap)
-            }
+        } catch (e: Exception) {
         }
-
     }
 
     override fun loadImage(imageUri: Uri, ivImage: ImageView) {
