@@ -25,6 +25,7 @@ class TransactionsHistoryViewModel @Inject constructor(val apiService: AuthApiSe
 
     val totalExpenseReportLoading = MutableLiveData<Boolean>()
     val analyticsReportLoading = MutableLiveData<Boolean>()
+    val isLoading = MutableLiveData<Boolean>()
     val transactionsReportResp = MutableLiveData<ResultWrapper<List<TransactionInOutDTO>>>()
     val transactionsAnalyticsResp =
         MutableLiveData<ResultWrapper<List<List<TransactionAnalyticsDTO>>>>()
@@ -32,6 +33,7 @@ class TransactionsHistoryViewModel @Inject constructor(val apiService: AuthApiSe
 
     fun getTransactionsHistory(cardId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
+            isLoading.postValue(true)
             val thisMonthsStartDateTime = DateTime.now().dayOfMonth().withMinimumValue()
 
             val monthlyAnalyticsReportMap =
@@ -54,20 +56,6 @@ class TransactionsHistoryViewModel @Inject constructor(val apiService: AuthApiSe
                 })
             }
 
-
-            val monthlyTransactionsReport = monthlyAnalyticsReportMap.awaitAll()
-
-            monthlyTransactionsReport.forEach {
-                if (it !is ResultSuccess) {
-                    transactionsReportResp.postValue(ResultError())
-                    return@launch
-                }
-            }
-
-            transactionsReportResp.postValue(ResultSuccess(monthlyTransactionsReport.map {
-                (it as ResultSuccess).value
-            }))
-
             val monthlyAnalyticsMap =
                 arrayListOf<Deferred<ResultWrapper<List<TransactionAnalyticsContainerDTO>>>>()
 
@@ -88,6 +76,7 @@ class TransactionsHistoryViewModel @Inject constructor(val apiService: AuthApiSe
                 })
             }
 
+            val monthlyTransactionsReport = monthlyAnalyticsReportMap.awaitAll()
             val monthlyTransactions = monthlyAnalyticsMap.awaitAll()
 
             monthlyTransactions.forEach {
@@ -96,10 +85,21 @@ class TransactionsHistoryViewModel @Inject constructor(val apiService: AuthApiSe
                     return@launch
                 }
             }
+            monthlyTransactionsReport.forEach {
+                if (it !is ResultSuccess) {
+                    transactionsReportResp.postValue(ResultError())
+                    return@launch
+                }
+            }
 
             transactionsAnalyticsResp.postValue(ResultSuccess(monthlyTransactions.map {
                 (it as ResultSuccess).value.last().content
             }))
+            transactionsReportResp.postValue(ResultSuccess(monthlyTransactionsReport.map {
+                (it as ResultSuccess).value
+            }))
+            isLoading.postValue(false)
+
         }
     }
 

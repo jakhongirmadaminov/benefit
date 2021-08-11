@@ -3,33 +3,32 @@ package com.example.benefit.ui.main.payments
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.benefit.R
 import com.example.benefit.remote.models.RegularPaymentDTO
 import com.example.benefit.ui.gap.GapActivity
-import com.example.benefit.ui.regular_payment.CreateRegularPaymentBSD
 import com.example.benefit.ui.main.fill_card.FillCardBSD
 import com.example.benefit.ui.main.transfer_to_card.TransferToCardBSD
+import com.example.benefit.ui.regular_payment.CreateRegularPaymentBSD
 import com.example.benefit.ui.regular_payment.RegularPaymentBSD
 import com.example.benefit.ui.viewgroups.ItemRegularPayment
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_payments.*
-import splitties.fragments.start
 
 
 class PaymentsFragment : Fragment(R.layout.fragment_payments) {
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
-    private lateinit var paymentsViewModel: PaymentsViewModel
+    val viewModel: PaymentsViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setupViews()
         attachListeners()
+
     }
 
 
@@ -68,7 +67,7 @@ class PaymentsFragment : Fragment(R.layout.fragment_payments) {
     private fun attachListeners() {
 
         clMakeDepo.setOnClickListener {
-         FillCardBSD() .show(childFragmentManager, "")
+            FillCardBSD().show(childFragmentManager, "")
         }
 
         clTransferToCard.setOnClickListener {

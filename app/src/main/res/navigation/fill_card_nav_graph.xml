@@ -54,7 +54,11 @@
         android:id="@+id/cardMakeDepositFromMyCardFragment"
         android:name="com.example.benefit.ui.main.fill_card.FillCardFromMyCardsFragment"
         android:label=""
-        tools:layout="@layout/fragment_fill_from_my_cards"></fragment>
+        tools:layout="@layout/fragment_fill_from_my_cards">
+
+        <argument android:name="cards" app:nullable="true" app:argType="com.example.benefit.remote.models.CardsDTO"/>
+        <argument android:name="card" app:nullable="true" app:argType="com.example.benefit.remote.models.CardDTO"/>
+    </fragment>
 
 
     <fragment

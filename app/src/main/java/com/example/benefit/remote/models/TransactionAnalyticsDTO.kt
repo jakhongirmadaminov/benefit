@@ -33,7 +33,12 @@ data class TransactionAnalyticsDTO(
     @SerializedName("udate") val udate: Int?,
     @SerializedName("utime") val utime: Int?,
     @SerializedName("utrnno") val utrnno: Long?
-) : Parcelable
+) : Parcelable {
+
+    val amountWithoutTiyin: Long?
+        get() = reqamt?.toString()?.dropLast(2)?.toLong()
+
+}
 
 @Parcelize
 data class CategoryName(

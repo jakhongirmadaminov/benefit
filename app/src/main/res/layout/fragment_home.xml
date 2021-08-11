@@ -16,17 +16,17 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:clipToPadding="false"
+            android:layout_height="wrap_content"
             android:clipChildren="false"
-            android:layout_height="wrap_content">
+            android:clipToPadding="false">
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/cardsPager"
                 android:layout_width="match_parent"
-                android:clipToPadding="false"
-                android:clipChildren="false"
                 android:layout_height="190dp"
-                android:layout_marginTop="46dp" />
+                android:layout_marginTop="46dp"
+                android:clipChildren="false"
+                android:clipToPadding="false" />
 
             <ProgressBar
                 android:id="@+id/cardsProgress"
@@ -45,6 +45,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
             app:piv_animationType="scale"
+            app:piv_count="1"
             app:piv_dynamicCount="true"
             app:piv_interactiveAnimation="true"
             app:piv_selectedColor="@color/colorAccent"
@@ -361,10 +362,10 @@
             android:textStyle="bold" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/transactionHistoryPanel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="26dp"
-            android:id="@+id/transactionHistoryPanel"
             android:layout_marginTop="20dp"
             android:layout_marginRight="26dp">
 
@@ -416,14 +417,14 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/categoryExpensesPanel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="26dp"
             android:layout_marginTop="20dp"
-            android:id="@+id/categoryExpensesPanel"
+            android:layout_marginRight="26dp"
             android:visibility="gone"
-            tools:visibility="visible"
-            android:layout_marginRight="26dp">
+            tools:visibility="visible">
 
 
             <androidx.cardview.widget.CardView

@@ -3,20 +3,25 @@ package com.example.benefit.ui.branches_atms
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
+import androidx.activity.viewModels
 import com.example.benefit.R
-import com.example.benefit.ui.base.BaseActionbarActivity
+import com.example.benefit.remote.models.BankBranchDTO
 import com.example.benefit.ui.base.BaseActivity
+import com.example.benefit.util.ResultError
+import com.example.benefit.util.ResultSuccess
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
+import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_branches_atms.*
 
 
 class BranchesAtmsActivity : BaseActivity(), OnMapReadyCallback {
+    private val viewModel: BranchesAtmsViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_branches_atms)
@@ -26,7 +31,44 @@ class BranchesAtmsActivity : BaseActivity(), OnMapReadyCallback {
 
         setupViews()
         attachListeners()
+        subscribeObservers()
+        viewModel.getBranches()
+    }
 
+    private fun subscribeObservers() {
+        viewModel.isLoading.observe(this) {
+
+        }
+
+        viewModel.errorMessage.observe(this) {
+
+        }
+
+        viewModel.branches.observe(this) {
+            val resp = it ?: return@observe
+            when (resp) {
+                is ResultError -> {
+
+                }
+                is ResultSuccess -> {
+                    showPointsOnMap(resp.value)
+                }
+            }
+        }
+
+    }
+
+    private fun showPointsOnMap(value: List<BankBranchDTO>) {
+        value.forEach {
+            map?.addMarker(
+                MarkerOptions().position(
+                    LatLng(
+                        it.lat!!.toDouble(),
+                        it.lan!!.toDouble()
+                    )
+                ).title(it.title_ru)
+            )
+        }
     }
 
     private fun setupViews() {
@@ -95,7 +137,10 @@ class BranchesAtmsActivity : BaseActivity(), OnMapReadyCallback {
         ivNowWorking.alpha = 0.4f
     }
 
+
+    var map: GoogleMap? = null
     override fun onMapReady(googleMap: GoogleMap) {
+        map = googleMap
         try {
             // Customise the styling of the base map using a JSON object defined
             // in a raw resource file.
@@ -111,13 +156,16 @@ class BranchesAtmsActivity : BaseActivity(), OnMapReadyCallback {
             Log.e("TAAAG", "Can't find style. Error: ", e)
         }
 
-
         googleMap.animateCamera(
             CameraUpdateFactory.newLatLngZoom(
                 LatLng(41.311104, 69.279996),
                 17F
             )
         )
+
+        if (viewModel.branches.value != null && viewModel.branches.value is ResultSuccess) {
+            showPointsOnMap((viewModel.branches.value as ResultSuccess).value)
+        }
 
     }
 

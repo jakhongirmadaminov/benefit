@@ -1,216 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/swipeRefresh"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:orientation="vertical"
-        android:paddingBottom="26dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="26dp"
-            android:fontFamily="sans-serif"
-            android:text="@string/payments_list"
-            android:textColor="#000000"
-            android:textSize="26sp"
-            android:textStyle="bold" />
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCardTags"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="26dp"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            android:paddingLeft="26dp"
-            android:paddingRight="26dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_card_tag" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginTop="26dp">
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingBottom="26dp">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardMonthSpent"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="26dp"
-                android:layout_marginRight="8dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:selectableItemBackground"
-                app:cardCornerRadius="10dp">
+                android:fontFamily="sans-serif"
+                android:text="@string/payments_list"
+                android:textColor="#000000"
+                android:textSize="26sp"
+                android:textStyle="bold" />
 
 
-                <CheckBox
-                    android:id="@+id/cbMonthSpent"
-                    android:layout_width="match_parent"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCardTags"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="26dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingLeft="26dp"
+                android:paddingRight="26dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_card_tag" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="26dp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardMonthSpent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:background="@drawable/selector_stroke_accent"
-                    android:button="@null"
-                    android:checked="false"
-                    android:clickable="false" />
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:selectableItemBackground"
+                    app:cardCornerRadius="10dp">
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                    <CheckBox
+                        android:id="@+id/cbMonthSpent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/selector_stroke_accent"
+                        android:button="@null"
+                        android:checked="false"
+                        android:clickable="false" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:id="@+id/lblSpentOnMonth"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:textColor="#5c5c5c"
+                            android:textSize="14sp"
+                            android:textStyle="normal"
+                            tools:text="Потрачено за март" />
+
+                        <TextView
+                            android:id="@+id/tvSpentOnMonthAmount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:textColor="#000000"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            tools:text="520 000 UZS" />
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardMonthIncome"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="26dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:selectableItemBackground"
+                    app:cardCornerRadius="10dp">
+
+                    <CheckBox
+                        android:id="@+id/cbMonthIncome"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/selector_stroke_accent"
+                        android:button="@null"
+                        android:checked="false"
+                        android:clickable="false" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
 
-                    <TextView
-                        android:id="@+id/lblSpentOnMonth"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif"
-                        tools:text="Потрачено за март"
-                        android:textColor="#5c5c5c"
-                        android:textSize="14sp"
-                        android:textStyle="normal" />
+                        <TextView
+                            android:id="@+id/lblIncomeOnMonth"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:textColor="#5c5c5c"
+                            android:textSize="14sp"
+                            android:textStyle="normal"
+                            tools:text="Пополнено за март" />
 
-                    <TextView
-                        android:id="@+id/tvSpentOnMonthAmount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif"
-                        tools:text="520 000 UZS"
-                        android:textColor="#000000"
-                        android:textSize="22sp"
-                        android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/tvIncomeOnMonthAmount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:textColor="#000000"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            tools:text="300 000 UZS" />
 
-                </LinearLayout>
-
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardMonthIncome"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="26dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:selectableItemBackground"
-                app:cardCornerRadius="10dp">
-
-                <CheckBox
-                    android:id="@+id/cbMonthIncome"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/selector_stroke_accent"
-                    android:button="@null"
-                    android:checked="false"
-                    android:clickable="false" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    </LinearLayout>
 
 
-                    <TextView
-                        android:id="@+id/lblIncomeOnMonth"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif"
-                        tools:text="Пополнено за март"
-                        android:textColor="#5c5c5c"
-                        android:textSize="14sp"
-                        android:textStyle="normal" />
+                </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:id="@+id/tvIncomeOnMonthAmount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif"
-                        tools:text="300 000 UZS"
-                        android:textColor="#000000"
-                        android:textSize="22sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
+            </LinearLayout>
 
 
-            </androidx.cardview.widget.CardView>
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/chartPager"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="26dp" />
+
+            <com.rd.PageIndicatorView
+                android:id="@+id/pageIndicatorView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardsPager"
+                app:piv_count="1"
+                app:piv_animationType="scale"
+                app:piv_dynamicCount="true"
+                app:piv_interactiveAnimation="true"
+                app:piv_selectedColor="@color/colorAccent"
+                app:piv_unselectedColor="@color/bg_grey"
+                app:piv_viewPager="@id/chartPager" />
+
+            <!--        <EditText-->
+            <!--            android:id="@+id/searchView"-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="40dp"-->
+            <!--            android:layout_margin="26dp"-->
+            <!--            android:background="@drawable/selector_grey"-->
+            <!--            android:drawableLeft="@drawable/ic_baseline_search_24"-->
+            <!--            android:drawablePadding="10dp"-->
+            <!--            android:fontFamily="sans-serif"-->
+            <!--            android:hint="@string/search_by_name_or_num"-->
+            <!--            android:paddingLeft="10dp"-->
+            <!--            android:textColor="#805c5c5c"-->
+            <!--            android:textSize="14sp"-->
+            <!--            android:textStyle="normal"-->
+            <!--            app:layout_constraintTop_toBottomOf="@id/title" />-->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTransactions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_transaction" />
 
         </LinearLayout>
-
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/chartPager"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="26dp" />
-
-        <com.rd.PageIndicatorView
-            android:id="@+id/pageIndicatorView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardsPager"
-            app:piv_animationType="scale"
-            app:piv_dynamicCount="true"
-            app:piv_interactiveAnimation="true"
-            app:piv_selectedColor="@color/colorAccent"
-            app:piv_unselectedColor="@color/bg_grey"
-            app:piv_viewPager="@id/chartPager" />
-
-
-        <EditText
-            android:id="@+id/searchView"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="26dp"
-            android:background="@drawable/selector_grey"
-            android:drawableLeft="@drawable/ic_baseline_search_24"
-            android:drawablePadding="10dp"
-            android:fontFamily="sans-serif"
-            android:hint="@string/search_by_name_or_num"
-            android:paddingLeft="10dp"
-            android:textColor="#805c5c5c"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            app:layout_constraintTop_toBottomOf="@id/title" />
-
-        <TextView
-            android:id="@+id/tvDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="26dp"
-            android:layout_marginBottom="16dp"
-            android:fontFamily="sans-serif"
-            android:text="4 марта 2019"
-            android:textColor="#ab5c5c5c"
-            android:textSize="14sp"
-            android:textStyle="normal" />
-
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvTransactions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_transaction" />
-
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

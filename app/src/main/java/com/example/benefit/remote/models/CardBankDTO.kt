@@ -21,5 +21,10 @@ data class CardBankDTO(
     @SerializedName("pan") val pan: String? = null,
     @SerializedName("phone") val phone: String? = null,
     @SerializedName("status") val status: Int? = null
-) : Parcelable
+) : Parcelable /*{
+
+    val balanceWithoutTiyin: String?
+        get() = balance?.dropLast(2)
+
+}*/
 

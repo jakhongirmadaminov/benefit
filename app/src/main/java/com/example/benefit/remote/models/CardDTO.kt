@@ -21,8 +21,15 @@ data class CardDTO(
     @SerializedName("pan") val pan: String? = null,
     @SerializedName("phone") val phone: String? = null,
     @SerializedName("status") val status: Int? = null
-) : Parcelable
+) : Parcelable /*{
 
+    val balanceWithoutTiyin: String?
+        get() {
+            val balanceTemp = balance
+            return balanceTemp?.dropLast(2)
+        }
+
+}*/
 
 @Parcelize
-class CardsDTO : ArrayList<CardDTO>(), Parcelable
+class CardsDTO(val cards: List<CardDTO>? = null) : ArrayList<CardDTO>(cards ?: listOf()), Parcelable

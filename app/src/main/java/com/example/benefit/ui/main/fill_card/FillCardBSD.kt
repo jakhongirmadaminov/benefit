@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -14,45 +15,57 @@ import com.example.benefit.ui.main.fill_card.FillCardFragment.Companion.ARG_CARD
 import com.example.benefit.ui.main.fill_card.FillCardFragment.Companion.ARG_CARDS
 import com.example.benefit.util.MyBSDialog
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.bsd_fill_card.*
 
 
-
+@AndroidEntryPoint
 class FillCardBSD : MyBSDialog() {
 
     private val viewModel: FillCardViewModel by viewModels()
-    lateinit var cardBeingFilled: CardDTO
-    lateinit var selectableCards: List<CardDTO>
+    var cardBeingFilled: CardDTO? = null
+    var selectableCards: List<CardDTO>? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        cardBeingFilled = requireArguments().getParcelable(ARG_CARD)!!
-        selectableCards = requireArguments().getParcelableArrayList(ARG_CARDS)!!
+        cardBeingFilled = arguments?.getParcelable(ARG_CARD)
+        selectableCards = arguments?.getParcelableArrayList(ARG_CARDS)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.bsd_fill_card, null)
-
-        return view
-    }
-
-
-//    fun navigateToCardTransfer() {
-//        nav_host_fragment.findNavController()
-//            .navigate(R.id.action_fillCardFragment_to_cardMakeDepositFromAnyCardFragment)
-//    }
+    ) = inflater.inflate(R.layout.bsd_fill_card, container)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (childFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).findNavController()
-            .setGraph(R.navigation.fill_card_nav_graph, Bundle().apply {
-                putParcelable(ARG_CARD, cardBeingFilled)
-                putParcelableArrayList(ARG_CARDS, ArrayList(selectableCards))
-            })
+        if (cardBeingFilled == null || selectableCards == null) {
+            subscribeObservers()
+            viewModel.getMyCards()
+        } else {
+            (childFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).findNavController()
+                .setGraph(R.navigation.fill_card_nav_graph, Bundle().apply {
+                    putParcelable(ARG_CARD, cardBeingFilled)
+                    putParcelableArrayList(ARG_CARDS, ArrayList(selectableCards!!))
+                })
+        }
 
+
+    }
+
+    private fun subscribeObservers() {
+
+        viewModel.isLoadingCards.observe(viewLifecycleOwner) {
+            progress.isVisible = it
+        }
+
+        viewModel.cardsResp.observe(viewLifecycleOwner) {
+            (childFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).findNavController()
+                .setGraph(R.navigation.fill_card_nav_graph, Bundle().apply {
+                    putParcelable(ARG_CARD, it[0])
+                    putParcelableArrayList(ARG_CARDS, ArrayList(it))
+                })
+        }
     }
 }

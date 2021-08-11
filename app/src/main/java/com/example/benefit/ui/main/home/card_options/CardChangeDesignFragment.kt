@@ -173,7 +173,7 @@ class CardChangeDesignFragment @Inject constructor() :
         view.tvCardNumber.text = cardDTO.pan
         view.tvCardName.text = cardDTO.card_title
         if (cardDTO.background_link != null) view.cardBg.loadImageUrl(cardDTO.background_link)
-        view.tvBalance.text = "${DecimalFormat("#,###").format(cardDTO.balance!!.toInt())} UZS"
+        view.tvBalance.text = "${DecimalFormat("#,###").format(cardDTO.balance!!.dropLast(2).toInt())} UZS"
         return view
     }
 

@@ -232,7 +232,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         view.tvCardNumber.text = cardDTO.pan
         view.tvCardName.text = cardDTO.card_title
         if (cardDTO.background_link != null) view.cardBg.loadImageUrl(cardDTO.background_link)
-        view.tvBalance.text = "${DecimalFormat("#,###").format(cardDTO.balance!!.toInt())} UZS"
+        view.tvBalance.text = "${DecimalFormat("#,###").format(cardDTO.balance!!.dropLast(2).toInt())} UZS"
         view.icPlus.setOnClickListener {
             val dialog = FillCardBSD()
             dialog.arguments = Bundle().apply {
@@ -253,7 +253,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     }
 
     private fun setupServicesPager() {
-
         servicesPager.adapter = WizardPagerAdapter(listOf(page_one, page_two, page_three))
         servicesPager.offscreenPageLimit = 2
         servicesPager.clipToPadding = false
@@ -266,7 +265,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     class WizardPagerAdapter(val views: List<View>) : PagerAdapter() {
         override fun instantiateItem(collection: ViewGroup, position: Int): Any {
             return views[position]
-//            return servicesPager.findViewById(resId)
         }
 
         override fun getCount(): Int {
@@ -278,7 +276,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         }
 
         override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-            // No super
         }
     }
 

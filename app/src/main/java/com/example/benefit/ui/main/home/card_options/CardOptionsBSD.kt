@@ -5,15 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.ui.main.fill_card.FillCardFragment
 import com.example.benefit.util.MyBSDialog
-import dagger.hilt.android.AndroidEntryPoint
-
 
 
 class CardOptionsBSD : MyBSDialog() {
@@ -28,12 +25,10 @@ class CardOptionsBSD : MyBSDialog() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.bsd_card_options, container)
-
-        return view
-    }
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ) = inflater.inflate(R.layout.bsd_card_options, container)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

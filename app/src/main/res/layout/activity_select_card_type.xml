@@ -92,6 +92,7 @@
         app:layout_constraintTop_toBottomOf="@id/cardTypesPager"
         app:piv_animationType="scale"
         app:piv_dynamicCount="true"
+        app:piv_count="1"
         app:piv_interactiveAnimation="true"
         app:piv_selectedColor="@color/colorAccent"
         app:piv_unselectedColor="@color/bg_grey"

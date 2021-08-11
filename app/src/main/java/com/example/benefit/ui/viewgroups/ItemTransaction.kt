@@ -6,15 +6,18 @@ import androidx.core.view.isVisible
 import com.example.benefit.R
 import com.example.benefit.remote.models.TransactionAnalyticsDTO
 import com.example.benefit.ui.transactions_history.transaction_bsd.TransactionBSD
+import com.example.benefit.util.TransTypeTranslator
 import com.example.benefit.util.loadImageUrl
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_transaction.view.*
+import java.text.DecimalFormat
 
 class ItemTransaction(val obj: TransactionAnalyticsDTO) : Item() {
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        viewHolder.itemView.tvAmount.text = obj.reqamt.toString() + " UZS"
+        viewHolder.itemView.tvAmount.text =
+            DecimalFormat("#,###").format(obj.amountWithoutTiyin) + " UZS"
         viewHolder.itemView.tvBankName.text = obj.merchantName
 
         viewHolder.itemView.tvMinus.isVisible = obj.isCredit == false
@@ -22,7 +25,7 @@ class ItemTransaction(val obj: TransactionAnalyticsDTO) : Item() {
         obj.partner?.image?.let {
             viewHolder.itemView.icBankLogo.loadImageUrl(it)
         }
-        viewHolder.itemView.tvTransactionType.text = obj.transType
+        viewHolder.itemView.tvTransactionType.text = TransTypeTranslator.translate(obj.transType)
         viewHolder.itemView.clParent.setOnClickListener {
             val dialog = TransactionBSD()
             dialog.arguments = Bundle().apply {

@@ -1,27 +1,25 @@
 package com.example.benefit.ui.main.fill_card
 
+/**
+ * Created by jahon on 03-Sep-20
+ */
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.remote.models.CardDTO
+import com.example.benefit.remote.models.CardsDTO
+import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.branches_atms.BranchesAtmsActivity
 import com.example.benefit.ui.main.home.HomeFragment
-import com.example.benefit.ui.main.home.card_options.CardOptionsBSD
 import com.example.benefit.util.SizeUtils
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_fill_card.*
-import splitties.fragments.start
-import javax.inject.Inject
-
-/**
- * Created by jahon on 03-Sep-20
- */
-import com.example.benefit.ui.base.BaseFragment
+import kotlinx.android.synthetic.main.item_card_small.view.*
+import java.text.DecimalFormat
 
 class FillCardFragment : BaseFragment(R.layout.fragment_fill_card) {
 
@@ -29,7 +27,6 @@ class FillCardFragment : BaseFragment(R.layout.fragment_fill_card) {
         const val ARG_CARD = "CARD"
         const val ARG_CARDS = "CARDS"
     }
-
 
     private val viewModel: FillCardViewModel by viewModels()
     lateinit var cardBeingFilled: CardDTO
@@ -45,7 +42,6 @@ class FillCardFragment : BaseFragment(R.layout.fragment_fill_card) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         setupViews()
 
         attachListeners()
@@ -54,19 +50,21 @@ class FillCardFragment : BaseFragment(R.layout.fragment_fill_card) {
 
     private fun setupViews() {
 
+        llFromOwnCards.isVisible = selectableCards.size > 1
 
-        val cardView = layoutInflater.inflate(R.layout.item_card_small, null)
-
-        cardView.setOnClickListener {
-            CardOptionsBSD().show(childFragmentManager, "")
+        cardsPager.adapter = null
+        val cardViews = selectableCards.map {
+            val cardView = layoutInflater.inflate(R.layout.item_card_small, null)
+            cardView.cardName.text = it.card_title
+            cardView.tvAmount.text =
+                DecimalFormat("#,###").format(it.balance?.dropLast(2)?.toInt()) + " UZS"
+            cardView.tvCardEndNum.text = "*" + it.pan!!.substring(it.pan!!.length - 4)
+            cardsPager.addView(cardView)
+            cardView
         }
 
-        cardsPager.addView(cardView)
-        val cardView2 = layoutInflater.inflate(R.layout.item_card_small, null)
-        cardsPager.addView(cardView2)
+        cardsPager.adapter = HomeFragment.WizardPagerAdapter(cardViews)
 
-
-        cardsPager.adapter = HomeFragment.WizardPagerAdapter(listOf(cardView, cardView2))
         cardsPager.offscreenPageLimit = 2
         cardsPager.clipToPadding = false
         cardsPager.setPadding(
@@ -97,7 +95,12 @@ class FillCardFragment : BaseFragment(R.layout.fragment_fill_card) {
             findNavController().navigate(R.id.action_fillCardFragment_to_cardMakeDepositFromAnyCardFragment)
         }
         llFromOwnCards.setOnClickListener {
-            findNavController().navigate(R.id.action_fillCardFragment_to_cardMakeDepositFromMyCardFragment)
+            val dir =
+                FillCardFragmentDirections.actionFillCardFragmentToCardMakeDepositFromMyCardFragment(
+                    CardsDTO(selectableCards),
+                    cardBeingFilled,
+                )
+            findNavController().navigate(dir)
 
         }
 

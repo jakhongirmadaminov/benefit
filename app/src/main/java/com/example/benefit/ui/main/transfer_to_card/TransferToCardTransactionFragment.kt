@@ -106,7 +106,7 @@ class TransferToCardTransactionFragment :
 
         edtSum.doOnTextChanged { text, start, before, count ->
             tvFill.isEnabled =
-                viewModel.cardsResp.value!![cardsPagerSmall.currentItem].balance!!.toInt() > text.toString()
+                viewModel.cardsResp.value!![cardsPagerSmall.currentItem].balance?.dropLast(2)!!.toInt() > text.toString()
                     .toInt()
         }
 

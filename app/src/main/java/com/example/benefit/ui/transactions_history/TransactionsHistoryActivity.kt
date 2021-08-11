@@ -2,11 +2,13 @@ package com.example.benefit.ui.transactions_history
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
+import androidx.core.view.get
 import com.example.benefit.R
 import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.remote.models.TransactionAnalyticsDTO
@@ -16,9 +18,8 @@ import com.example.benefit.ui.expenses_by_categories.ARG_CARDS
 import com.example.benefit.ui.main.home.HomeFragment
 import com.example.benefit.ui.viewgroups.CardTagItem
 import com.example.benefit.ui.viewgroups.ItemTransaction
-import com.example.benefit.util.ResultError
-import com.example.benefit.util.ResultSuccess
-import com.example.benefit.util.SizeUtils
+import com.example.benefit.ui.viewgroups.ItemTransactionDate
+import com.example.benefit.util.*
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -29,34 +30,32 @@ import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import kotlinx.android.synthetic.main.activity_expenses_by_categories.*
 import kotlinx.android.synthetic.main.activity_transactions_history.*
-import kotlinx.android.synthetic.main.activity_transactions_history.chartPager
-import kotlinx.android.synthetic.main.activity_transactions_history.rvCardTags
 import kotlinx.android.synthetic.main.item_line_chart.view.*
-import kotlinx.android.synthetic.main.item_line_chart.view.chart
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
-import kotlin.random.Random
+import java.text.DecimalFormat
 
 
-class TransactionsHistoryActivity : BaseActivity() , OnChartValueSelectedListener {
+class TransactionsHistoryActivity : BaseActivity(), OnChartValueSelectedListener {
 
     companion object {
         const val EXTRA_CARD = "CARD"
         const val EXTRA_CARDS = "CARDS"
     }
 
+    var selectedCardId: Int = 0
     lateinit var myCards: List<CardDTO>
 
     private val viewModel: TransactionsHistoryViewModel by viewModels()
 
+    var selectedMonthOffset = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_transactions_history)
         myCards = intent.getParcelableArrayListExtra(ARG_CARDS)
-
+        selectedCardId = myCards[0].id!!
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.elevation = 0F
@@ -66,7 +65,7 @@ class TransactionsHistoryActivity : BaseActivity() , OnChartValueSelectedListene
         attachListeners()
         subscribeObservers()
 
-        viewModel.getTransactionsHistory(myCards[0].id!!)
+        viewModel.getTransactionsHistory(selectedCardId)
     }
 
     private fun subscribeObservers() {
@@ -90,6 +89,7 @@ class TransactionsHistoryActivity : BaseActivity() , OnChartValueSelectedListene
                 }
                 is ResultSuccess -> {
                     setupChartPager(it.value)
+
                 }
             }
         }
@@ -101,18 +101,31 @@ class TransactionsHistoryActivity : BaseActivity() , OnChartValueSelectedListene
         viewModel.totalExpenseReportLoading.observe(this) {
 
         }
+        viewModel.isLoading.observe(this) {
+            swipeRefresh.isRefreshing = it
+        }
 
     }
 
     private fun attachListeners() {
 
+        swipeRefresh.setOnRefreshListener {
+            viewModel.getTransactionsHistory(selectedCardId)
+        }
+
         cardMonthIncome.setOnClickListener {
             cbMonthIncome.isChecked = true
             cbMonthSpent.isChecked = false
+            if (viewModel.transactionsAnalyticsResp.value != null && viewModel.transactionsReportResp.value!! is ResultSuccess) {
+                setupChartPager((viewModel.transactionsReportResp.value!! as ResultSuccess).value)
+            }
         }
         cardMonthSpent.setOnClickListener {
             cbMonthSpent.isChecked = true
             cbMonthIncome.isChecked = false
+            if (viewModel.transactionsAnalyticsResp.value != null && viewModel.transactionsReportResp.value!! is ResultSuccess) {
+                setupChartPager((viewModel.transactionsReportResp.value!! as ResultSuccess).value)
+            }
         }
     }
 
@@ -125,7 +138,8 @@ class TransactionsHistoryActivity : BaseActivity() , OnChartValueSelectedListene
 
 
     private fun setupChartPager(value: List<TransactionInOutDTO>) {
-
+        chartPager.adapter = null
+        chartPager.removeAllViews()
         val chartView = layoutInflater.inflate(R.layout.item_line_chart, null)
         val chartView2 = layoutInflater.inflate(R.layout.item_line_chart, null)
 
@@ -139,6 +153,29 @@ class TransactionsHistoryActivity : BaseActivity() , OnChartValueSelectedListene
             (view as? TextView)?.text =
                 DateTimeFormat.forPattern("MMM").print(DateTime.now().minusMonths(5 - index))
         }
+
+        chartView.radioGroup.children.forEachIndexed { index, view ->
+            (view as RadioButton).setOnCheckedChangeListener { compoundButton, b ->
+                if (b) {
+                    selectedMonthOffset = 11 - index
+                    loadTransactions(
+                        (viewModel.transactionsAnalyticsResp.value as ResultSuccess).value[selectedMonthOffset]
+                    )
+                }
+            }
+        }
+        chartView2.radioGroup.children.forEachIndexed { index, view ->
+            (view as RadioButton).setOnCheckedChangeListener { compoundButton, b ->
+                if (b) {
+                    selectedMonthOffset = 5 - index
+                    loadTransactions(
+                        (viewModel.transactionsAnalyticsResp.value as ResultSuccess).value[selectedMonthOffset]
+                    )
+                }
+            }
+        }
+
+
 
         makeChart(chartView.chart, value.drop(6))
         makeChart(chartView2.chart, value.dropLast(6))
@@ -158,6 +195,7 @@ class TransactionsHistoryActivity : BaseActivity() , OnChartValueSelectedListene
         )
         chartPager.pageMargin = SizeUtils.dpToPx(this, 26).toInt()
         chartPager.currentItem = 1
+        loadTransactions((viewModel.transactionsAnalyticsResp.value as ResultSuccess).value[0])
     }
 
     override fun onValueSelected(e: Entry?, h: Highlight?) {
@@ -172,31 +210,62 @@ class TransactionsHistoryActivity : BaseActivity() , OnChartValueSelectedListene
 // if isCredit false znachit eto expense
 // if isCredit true znachit eto popolnenie
 
-
     private fun showExpenses(barIndex: Int) {
         if (chartPager.currentItem == 0) {
-            loadTransactions(
-                (viewModel.transactionsAnalyticsResp.value as ResultSuccess).value[11 - barIndex],
-                11 - barIndex
-            )
+            chartPager[0].radioGroup.children.forEachIndexed { index, view ->
+                (view as RadioButton).isChecked = index == barIndex
+            }
+            selectedMonthOffset = 11 - barIndex
         } else {
-            loadTransactions(
-                (viewModel.transactionsAnalyticsResp.value as ResultSuccess).value[5 - barIndex],
-                5 - barIndex
-            )
+            chartPager[1].radioGroup.children.forEachIndexed { index, view ->
+                (view as RadioButton).isChecked = index == barIndex
+            }
+            selectedMonthOffset = 5 - barIndex
         }
+        loadTransactions((viewModel.transactionsAnalyticsResp.value as ResultSuccess).value[selectedMonthOffset])
     }
 
     val transactionsAdapter = GroupAdapter<GroupieViewHolder>()
-    private fun loadTransactions(value: List<TransactionAnalyticsDTO>, barIndex: Int) {
+    private fun loadTransactions(value: List<TransactionAnalyticsDTO>) {
         transactionsAdapter.clear()
+        var dateString: Int? = null
         value.forEach {
-            transactionsAdapter.add(ItemTransaction(it))
+            if (cbMonthSpent.isChecked && !it.isCredit!! || cbMonthIncome.isChecked && it.isCredit!!) {
+                if (it.udate != dateString) {
+                    transactionsAdapter.add(ItemTransactionDate(it.udate!!))
+                    dateString = it.udate
+                }
+                transactionsAdapter.add(ItemTransaction(it))
+            }
         }
         transactionsAdapter.notifyDataSetChanged()
+
+        var totalExpense = 0L
+        var totalIncome = 0L
+        value.forEach {
+            if (!it.isCredit!!) {
+                totalExpense += it.amountWithoutTiyin!!
+            } else if (it.isCredit) {
+                totalIncome += it.amountWithoutTiyin!!
+            }
+        }
+        tvIncomeOnMonthAmount.text =
+            getString(R.string.sums, DecimalFormat("#,###").format(totalIncome))
+        lblIncomeOnMonth.text =
+            getString(R.string.income_for_month) + " " + if (DateTime.now().monthOfYear - selectedMonthOffset - 1 >= 0) Constants.MONTHS[AppPrefs.language]!![DateTime.now().monthOfYear - selectedMonthOffset - 1]
+            else Constants.MONTHS[AppPrefs.language]!![DateTime.now().monthOfYear - selectedMonthOffset - 1 + 12]
+
+        tvSpentOnMonthAmount.text =
+            getString(R.string.sums, DecimalFormat("#,###").format(totalExpense))
+        lblSpentOnMonth.text =
+            getString(R.string.expense_for_month) + " " + if (DateTime.now().monthOfYear - selectedMonthOffset - 1 >= 0) Constants.MONTHS[AppPrefs.language]!![DateTime.now().monthOfYear - selectedMonthOffset - 1]
+            else Constants.MONTHS[AppPrefs.language]!![DateTime.now().monthOfYear - selectedMonthOffset - 1 + 12]
+
+
     }
 
     val tagsAdapter = GroupAdapter<GroupieViewHolder>()
+
     private fun setupCardTags() {
 
         myCards.forEachIndexed { index, cardDTO ->
@@ -205,8 +274,9 @@ class TransactionsHistoryActivity : BaseActivity() , OnChartValueSelectedListene
                     (tagsAdapter.getItem(i) as CardTagItem).selected = false
                 }
                 cardItem.selected = true
+                selectedCardId = card.id!!
                 tagsAdapter.notifyDataSetChanged()
-                viewModel.getTransactionsHistory(card.id!!)
+                viewModel.getTransactionsHistory(selectedCardId)
             }
             cardItem.selected = index == 0
             tagsAdapter.add(cardItem)
@@ -218,7 +288,12 @@ class TransactionsHistoryActivity : BaseActivity() , OnChartValueSelectedListene
         val entries = ArrayList<Entry>()
         value.reversed().forEachIndexed { index, item ->
             // turn your data into Entry objects
-            entries.add(Entry(index.toFloat(), item.outcome_total.toFloat()))
+            entries.add(
+                Entry(
+                    index.toFloat(),
+                    if (cbMonthSpent.isChecked) item.outcome_total.toFloat() else item.income_total.toFloat()
+                )
+            )
         }
 
 

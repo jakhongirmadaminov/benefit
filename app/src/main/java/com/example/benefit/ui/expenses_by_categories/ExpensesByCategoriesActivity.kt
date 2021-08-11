@@ -290,9 +290,11 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity(), OnChartValueSelect
 
         list.forEach { transaction ->
             transaction.partner?.let { partner ->
-                expensesByCategoryMap[partner.category_id!!]?.plus(transaction.reqamt!!) ?: run {
-                    expensesByCategoryMap[partner.category_id] = transaction.reqamt!!.toLong()
-                }
+                expensesByCategoryMap[partner.category_id!!]?.plus(transaction.amountWithoutTiyin!!)
+                    ?: run {
+                        expensesByCategoryMap[partner.category_id] =
+                            transaction.amountWithoutTiyin!!.toLong()
+                    }
             }
         }
 
@@ -303,7 +305,8 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity(), OnChartValueSelect
 
         tvExpenses.text = getString(R.string.sums, DecimalFormat("#,###").format(totalExpense))
         tvSpentExpensesForMonth.text =
-            getString(R.string.expense_for_month) + " " + Constants.MONTHS[AppPrefs.language]!![DateTime.now().monthOfYear - monthIndex - 1]
+            getString(R.string.expense_for_month) + " " + if (DateTime.now().monthOfYear - monthIndex - 1 >= 0) Constants.MONTHS[AppPrefs.language]!![DateTime.now().monthOfYear - monthIndex - 1]
+            else Constants.MONTHS[AppPrefs.language]!![DateTime.now().monthOfYear - monthIndex - 1 + 12]
 
 
         for (i in 0 until categoriesAdapter.itemCount) {
