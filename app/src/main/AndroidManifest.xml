@@ -43,7 +43,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
-            android:name=".ui.partner_story.StoryActivity"
+            android:name=".stories.screen.StoryActivity"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity

@@ -1,18 +1,23 @@
 package com.example.benefit.ui.transactions_history.transaction_bsd
 
+
+/**
+ * Created by jahon on 03-Sep-20
+ */
 import android.content.Context
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
+import com.example.benefit.remote.models.TransactionAnalyticsDTO
 import com.example.benefit.remote.models.TransactionDTO
+import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.home.HomeFragment
 import com.example.benefit.ui.viewgroups.ItemTransactionTxtOnly
 import com.example.benefit.util.SizeUtils
+import com.example.benefit.util.loadImageUrl
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -21,17 +26,10 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_transaction.*
 import kotlinx.android.synthetic.main.item_line_chart.view.*
-import javax.inject.Inject
+import java.text.DecimalFormat
 import kotlin.random.Random
-
-
-/**
- * Created by jahon on 03-Sep-20
- */
-import com.example.benefit.ui.base.BaseFragment
 
 class TransactionFragment : BaseFragment(R.layout.fragment_transaction) {
 
@@ -45,7 +43,7 @@ class TransactionFragment : BaseFragment(R.layout.fragment_transaction) {
     }
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
-    lateinit var transactionDTO: TransactionDTO
+    lateinit var transactionDTO: TransactionAnalyticsDTO
     private val viewModel: TransactionViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,6 +58,7 @@ class TransactionFragment : BaseFragment(R.layout.fragment_transaction) {
 
     private fun setupViews() {
 
+        setupTransactionInfo()
         rvAllTransactions.adapter = adapter
 
         val data = arrayListOf(
@@ -102,6 +101,21 @@ class TransactionFragment : BaseFragment(R.layout.fragment_transaction) {
         }
 
         setupChartPager()
+        clParent.scrollTo(0, 0)
+    }
+
+    private fun setupTransactionInfo() {
+
+        transactionDTO.partner?.image?.let {
+            ivBrandLogo.loadImageUrl(it)
+        }
+
+        tvCardNumber.text = transactionDTO.hpan
+        tvDate.text = transactionDTO.dateFormatted + " " + transactionDTO.timeFormatted
+        tvSum.text =
+            (if (transactionDTO.isCredit != true) "- " else "") + DecimalFormat("#,###").format(
+                transactionDTO.amountWithoutTiyin
+            ) + " UZS"
 
     }
 
@@ -190,17 +204,19 @@ class TransactionFragment : BaseFragment(R.layout.fragment_transaction) {
 
 
         val gradientColor =
-            when (transactionDTO.transactionType) {
-                TransactionType.TRANSFER_TO_CARD -> {
-                    R.drawable.gradient_line_chart_orange
-                }
-                TransactionType.COMMERCIAL_PAYMENT -> {
-                    R.drawable.gradient_line_chart_pink
-                }
-                else -> {
-                    R.drawable.gradient_line_chart_pink
-                }
-            }
+//            when (transactionDTO.transType) {
+//                TransactionType.TRANSFER_TO_CARD -> {
+            R.drawable.gradient_line_chart_orange
+//                }
+//                TransactionType.COMMERCIAL_PAYMENT -> {
+//                    R.drawable.gradient_line_chart_pink
+//                }
+//                else -> {
+//                    R.drawable.gradient_line_chart_pink
+//                }
+//            }
+//
+
 
         dataSet.fillDrawable =
             ContextCompat.getDrawable(requireContext(), gradientColor)

@@ -11,6 +11,9 @@ import com.example.benefit.R
 import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.remote.models.EPaymentType
 import com.example.benefit.remote.models.PaynetCategory
+import com.example.benefit.stories.data.StoryUser
+import com.example.benefit.stories.screen.EXTRA_STORIES
+import com.example.benefit.stories.screen.StoryActivity
 import com.example.benefit.ui.auth.AuthActivity
 import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.branches_atms.BranchesAtmsActivity
@@ -24,9 +27,11 @@ import com.example.benefit.ui.main.home.card_options.CardOptionsBSD
 import com.example.benefit.ui.main.transfer_to_card.TransferToCardBSD
 import com.example.benefit.ui.transactions_history.TransactionsHistoryActivity
 import com.example.benefit.ui.viewgroups.ItemLoading
-import com.example.benefit.ui.viewgroups.ItemNews
 import com.example.benefit.ui.viewgroups.ItemPaynetCatg
+import com.example.benefit.ui.viewgroups.ItemStory
 import com.example.benefit.util.AppPrefs
+import com.example.benefit.util.ResultError
+import com.example.benefit.util.ResultSuccess
 import com.example.benefit.util.loadImageUrl
 import com.rd.utils.DensityUtils.dpToPx
 import com.xwray.groupie.GroupAdapter
@@ -51,7 +56,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         attachListeners()
         subscribeObservers()
         viewModel.getPaynetCategories()
-        viewModel.getNews(1)
+        viewModel.getStories()
         viewModel.getMyCards()
     }
 
@@ -76,7 +81,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 }
             }
         })
-        viewModel.isLoadingNews.observe(viewLifecycleOwner, {
+        viewModel.isLoadingStories.observe(viewLifecycleOwner, {
             when (it ?: return@observe) {
                 true -> newsAdapter.add(ItemLoading())
                 else -> newsAdapter.clear()
@@ -130,11 +135,37 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
         })
 
-        viewModel.newsResp.observe(viewLifecycleOwner, {
-            it ?: return@observe
-            it.forEach { news ->
-                newsAdapter.add(ItemNews(news))
+        viewModel.storiesResp.observe(viewLifecycleOwner, {
+            val resp = it ?: return@observe
+
+            when (resp) {
+                is ResultError -> {
+                }
+                is ResultSuccess -> {
+                    val storyUsers =
+                        ArrayList(resp.value.groupBy { it.partnerId }.values.map { stories ->
+                            StoryUser(
+                                stories[0].partnerTitle!!,
+                                stories[0].partnerIconImage!!,
+                                ArrayList(stories)
+                            )
+                        })
+                    storyUsers.forEachIndexed { index, storyUser ->
+                        val storiesToShow = arrayListOf<StoryUser>()
+                        for (i in index until storyUsers.size) {
+                            storiesToShow.add(storyUsers[i])
+                        }
+                        newsAdapter.add(
+                            ItemStory(storyUser) {
+                                startActivity(
+                                    Intent(requireActivity(), StoryActivity::class.java).apply {
+                                        putParcelableArrayListExtra(EXTRA_STORIES, storiesToShow)
+                                    })
+                            })
+                    }
+                }
             }
+
         })
         viewModel.cardsResp.observe(viewLifecycleOwner, {
             it ?: return@observe
@@ -160,12 +191,50 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         }
 
 
+        cardExpenses.setOnClickListener {
+            viewModel.cardsResp.value?.let { cards ->
+                startActivity(
+                    Intent(
+                        requireActivity(),
+                        ExpensesByCategoriesActivity::class.java
+                    ).apply {
+                        putParcelableArrayListExtra(ARG_CARDS, ArrayList(cards))
+                    })
+            } ?: run {
+
+            }
+
+
+        }
+
+        cardPayments.setOnClickListener {
+            viewModel.cardsResp.value?.let { cards ->
+                startActivity(
+                    Intent(
+                        requireActivity(),
+                        TransactionsHistoryActivity::class.java
+                    ).apply {
+                        putParcelableArrayListExtra(ARG_CARDS, ArrayList(cards))
+                    })
+            } ?: run {
+                val dialog = DialogPleaseAddCard()
+                childFragmentManager.setFragmentResultListener(
+                    KEY_ADD_CARD,
+                    viewLifecycleOwner,
+                    { requestKey, result ->
+                        AddCardBSD().show(childFragmentManager, "")
+                    })
+                dialog.show(childFragmentManager, "")
+            }
+        }
+
+
     }
 
     private fun setupViews() {
 
         rvPayments.adapter = paynetCatgAdapter
-        rvNewsAndPromos.adapter = newsAdapter
+        rvStories.adapter = newsAdapter
         cardOval.setBackgroundResource(R.drawable.shape_oval)
         cardOvalExpenses.setBackgroundResource(R.drawable.shape_oval)
         cardOvalBranches.setBackgroundResource(R.drawable.shape_oval)
@@ -181,30 +250,9 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private fun setupCardsPager(cardsDTO: List<CardDTO>) {
 
-        transactionHistoryPanel.isVisible = cardsDTO.isNotEmpty()
-        categoryExpensesPanel.isVisible = cardsDTO.isNotEmpty()
+//        transactionHistoryPanel.isVisible = cardsDTO.isNotEmpty()
+//        categoryExpensesPanel.isVisible = cardsDTO.isNotEmpty()
 
-        if (cardsDTO.isNotEmpty()) {
-            cardExpenses.setOnClickListener {
-                startActivity(
-                    Intent(
-                        requireActivity(),
-                        ExpensesByCategoriesActivity::class.java
-                    ).apply {
-                        putParcelableArrayListExtra(ARG_CARDS, ArrayList(cardsDTO))
-                    })
-            }
-
-            cardPayments.setOnClickListener {
-                startActivity(
-                    Intent(
-                        requireActivity(),
-                        TransactionsHistoryActivity::class.java
-                    ).apply {
-                        putParcelableArrayListExtra(ARG_CARDS, ArrayList(cardsDTO))
-                    })
-            }
-        }
 
         val cardViews = arrayListOf<View>()
         cardsDTO.forEach {
@@ -232,7 +280,8 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         view.tvCardNumber.text = cardDTO.pan
         view.tvCardName.text = cardDTO.card_title
         if (cardDTO.background_link != null) view.cardBg.loadImageUrl(cardDTO.background_link)
-        view.tvBalance.text = "${DecimalFormat("#,###").format(cardDTO.balance!!.dropLast(2).toInt())} UZS"
+        view.tvBalance.text =
+            "${DecimalFormat("#,###").format(cardDTO.balance!!.dropLast(2).toInt())} UZS"
         view.icPlus.setOnClickListener {
             val dialog = FillCardBSD()
             dialog.arguments = Bundle().apply {

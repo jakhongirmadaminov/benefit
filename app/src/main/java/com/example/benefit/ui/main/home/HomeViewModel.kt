@@ -4,13 +4,12 @@ package com.example.benefit.ui.main.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.benefit.remote.AuthApiService
 import com.example.benefit.remote.models.CardDTO
-import com.example.benefit.remote.models.NewsDTO
 import com.example.benefit.remote.models.PaynetCategory
 import com.example.benefit.remote.repository.UserRemote
-import com.example.benefit.util.ResultError
-import com.example.benefit.util.ResultSuccess
-import com.example.benefit.util.exhaustive
+import com.example.benefit.stories.data.Story
+import com.example.benefit.util.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,7 +17,10 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val userRemote: UserRemote) : ViewModel() {
+class HomeViewModel @Inject constructor(
+    private val userRemote: UserRemote,
+    private val apiAuth: AuthApiService
+) : ViewModel() {
 
     val paynetCatgResp = MutableLiveData<List<PaynetCategory>>()
     val errorMessage = MutableLiveData<String>()
@@ -38,22 +40,14 @@ class HomeViewModel @Inject constructor(private val userRemote: UserRemote) : Vi
         }
     }
 
-    val newsResp = MutableLiveData<List<NewsDTO>>()
-    val isLoadingNews = MutableLiveData<Boolean>()
-    fun getNews(page: Int) {
-        isLoadingNews.value = true
+    val storiesResp = MutableLiveData<ResultWrapper<List<Story>>>()
+    val isLoadingStories = MutableLiveData<Boolean>()
+    fun getStories() {
+        isLoadingStories.value = true
         viewModelScope.launch(Dispatchers.IO) {
-            val response = userRemote.getNews(page)
-            withContext(Dispatchers.Main) {
-                isLoadingNews.value = false
-                when (response) {
-                    is ResultError -> errorMessage.value = response.message
-                    is ResultSuccess -> newsResp.value = response.value
-                }.exhaustive
-            }
+            storiesResp.postValue(getFormattedResponse(isLoadingStories) { apiAuth.getStories( ) })
         }
     }
-
 
     val cardsResp = MutableLiveData<List<CardDTO>>()
     val isLoadingCards = MutableLiveData<Boolean>()

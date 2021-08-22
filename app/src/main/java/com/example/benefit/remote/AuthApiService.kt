@@ -1,9 +1,11 @@
 package com.example.benefit.remote
 
 import com.example.benefit.remote.models.*
+import com.example.benefit.stories.data.Story
 import com.example.benefit.util.AppPrefs
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
 import splitties.experimental.ExperimentalSplittiesApi
@@ -305,6 +307,13 @@ interface AuthApiService {
     @FormUrlEncoded
     suspend fun deleteCard(@Field("card_id") card_id: Int): RespActivateCard
 
+    @GET("api/partners/allstory/0000000000/{currentMillis}")
+    suspend fun getStories(
+        @Path(
+            value = "currentMillis",
+            encoded = true
+        ) currentMillis: Long = System.currentTimeMillis()
+    ): RespFormat<List<Story>>
 
 }
 

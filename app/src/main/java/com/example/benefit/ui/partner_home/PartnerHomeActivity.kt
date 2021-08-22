@@ -3,11 +3,11 @@ package com.example.benefit.ui.partner_home
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.example.benefit.R
 import com.example.benefit.remote.models.Partner
+import com.example.benefit.stories.screen.EXTRA_STORIES
+import com.example.benefit.stories.screen.StoryActivity
 import com.example.benefit.ui.base.BaseActivity
-import com.example.benefit.ui.partner_story.StoryActivity
 import com.example.benefit.util.loadImageUrl
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
@@ -49,7 +49,7 @@ class PartnerHomeActivity : BaseActivity() {
     private fun attachListeners() {
         ivBrandLogo.setOnClickListener {
             start<StoryActivity> {
-                putExtra(StoryActivity.EXTRA_PARTNER, partner)
+                putExtra(EXTRA_STORIES, partner)
             }
         }
 

@@ -3,6 +3,7 @@ package com.example.benefit.remote.models
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
+import org.joda.time.format.DateTimeFormat
 
 @Parcelize
 data class TransactionAnalyticsContainerDTO(@SerializedName("content") val content: List<TransactionAnalyticsDTO>) :
@@ -38,6 +39,13 @@ data class TransactionAnalyticsDTO(
     val amountWithoutTiyin: Long?
         get() = reqamt?.toString()?.dropLast(2)?.toLong()
 
+
+    val dateFormatted: String?
+        get() = DateTimeFormat.forPattern("dd MMM yyyy")
+            .print(DateTimeFormat.forPattern("yyyyMMdd").parseDateTime(udate.toString()))
+    val timeFormatted: String?
+        get() = DateTimeFormat.forPattern("HH:mm:ss")
+            .print(DateTimeFormat.forPattern("HHmmss").parseDateTime(utime.toString()))
 }
 
 @Parcelize

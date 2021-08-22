@@ -215,5 +215,7 @@
     <string name="expense_for_month">Потрачено за </string>
     <string name="error">Ошибка!</string>
     <string name="income_for_month">"Пополнено за "</string>
+    <string name="all_transactions">Все переводы</string>
+    <string name="please_add_at_lease_one_card">Please add at least one card!</string>
 
 </resources>
