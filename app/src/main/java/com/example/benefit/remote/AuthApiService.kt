@@ -79,7 +79,7 @@ interface AuthApiService {
     @FormUrlEncoded
     suspend fun p2pIdToId(
         @Field("amount") amount: Int,
-        @Field("card_id") card_id: Int,
+        @Field("card_id") card_id: String,
         @Field("recipient_id") recipient_id: String
     ): RespFormat<PlainResp>
 

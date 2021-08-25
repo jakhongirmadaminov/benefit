@@ -7,11 +7,11 @@ package com.example.benefit.ui.main.fill_card
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.benefit.remote.AuthApiService
 import com.example.benefit.remote.models.CardDTO
+import com.example.benefit.remote.models.PlainResp
 import com.example.benefit.remote.repository.UserRemote
-import com.example.benefit.util.ResultError
-import com.example.benefit.util.ResultSuccess
-import com.example.benefit.util.exhaustive
+import com.example.benefit.util.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,7 +19,10 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class FillCardViewModel @Inject constructor(private val userRemote: UserRemote) :
+class FillCardViewModel @Inject constructor(
+    private val userRemote: UserRemote,
+    private val authApiService: AuthApiService
+) :
     ViewModel() {
 
     val cardsResp = MutableLiveData<List<CardDTO>>()
@@ -42,6 +45,16 @@ class FillCardViewModel @Inject constructor(private val userRemote: UserRemote) 
                     }
                 }.exhaustive
             }
+        }
+    }
+
+    val p2pLoading = MutableLiveData<Boolean>()
+    val p2pResp = MutableLiveData<ResultWrapper<PlainResp>>()
+
+    fun p2pId2Id(amount: Int, fromId: String, toId: String) {
+        viewModelScope.launch {
+            p2pResp.postValue(
+                getFormattedResponse(p2pLoading) { authApiService.p2pIdToId(amount, fromId, toId) })
         }
     }
 

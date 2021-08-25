@@ -5,6 +5,8 @@ package com.example.benefit.ui.main.fill_card
  */
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -13,16 +15,21 @@ import androidx.viewpager.widget.ViewPager
 import com.example.benefit.R
 import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.home.HomeFragment
-import com.example.benefit.ui.main.home.card_options.CardOptionsViewModel
+import com.example.benefit.util.ResultError
+import com.example.benefit.util.ResultSuccess
 import com.example.benefit.util.SizeUtils
+import com.google.android.material.snackbar.Snackbar
+import com.notkamui.keval.Keval
 import kotlinx.android.synthetic.main.fragment_fill_from_my_cards.*
 import kotlinx.android.synthetic.main.item_card_small.view.*
+import kotlinx.android.synthetic.main.layout_calculator.*
+import kotlinx.android.synthetic.main.layout_calculator.view.*
 import java.text.DecimalFormat
 
 class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_cards) {
 
 
-    private val viewModel: CardOptionsViewModel by viewModels()
+    private val viewModel: FillCardViewModel by viewModels()
 
     val navArgs: FillCardFromMyCardsFragmentArgs by navArgs()
 
@@ -38,7 +45,7 @@ class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_
     }
 
     private fun setupViews() {
-
+        setupCalculatorView()
         val cardViews = navArgs.cards?.map {
             val cardView = layoutInflater.inflate(R.layout.item_card_small, null)
             cardView.cardName.text = it.card_title
@@ -50,7 +57,7 @@ class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_
         }
 
         cardsToPagerSmall.adapter = HomeFragment.WizardPagerAdapter(cardViews!!)
-        cardsToPagerSmall.offscreenPageLimit = 2
+        cardsToPagerSmall.offscreenPageLimit = 10
         cardsToPagerSmall.clipToPadding = false
         cardsToPagerSmall.setPadding(
             SizeUtils.dpToPx(requireContext(), 26).toInt(),
@@ -143,17 +150,77 @@ class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_
 
     }
 
+    private fun setupCalculatorView() {
+        tvOne.setOnClickListener { edtSum.append("1") }
+        tvTwo.setOnClickListener { edtSum.append("2") }
+        tvThree.setOnClickListener { edtSum.append("3") }
+        tvFour.setOnClickListener { edtSum.append("4") }
+        tvFive.setOnClickListener { edtSum.append("5") }
+        tvSix.setOnClickListener { edtSum.append("6") }
+        tvSeven.setOnClickListener { edtSum.append("7") }
+        tvEight.setOnClickListener { edtSum.append("8") }
+        tvNine.setOnClickListener { edtSum.append("9") }
+        tvZero.setOnClickListener { edtSum.append("0") }
+        tvMinus.setOnClickListener { edtSum.append(" - ") }
+        tvPlus.setOnClickListener { edtSum.append(" + ") }
+        tvMultiply.setOnClickListener { edtSum.append(" * ") }
+        tvDivide.setOnClickListener { edtSum.append(" / ") }
+        tvEquals.setOnClickListener {
+            if (edtSum.text.isNotBlank()) {
+                try {
+                    edtSum.setText(Keval.eval(edtSum.text.toString()).toInt().toString())
+                } catch (e: Exception) {
+
+                }
+            }
+        }
+
+        backspace.setOnClickListener {
+            if (edtSum.text.isNotBlank()) {
+                edtSum.setText(edtSum.text.dropLast(1))
+            }
+        }
+    }
+
     private fun subscribeObservers() {
 
-
+        viewModel.p2pLoading.observe(viewLifecycleOwner) {
+            clTopUpLoading.isVisible = it
+        }
+        viewModel.p2pResp.observe(viewLifecycleOwner) {
+            val resp = it ?: return@observe
+            when (resp) {
+                is ResultError -> {
+                    Snackbar.make(clParent, resp.message ?: "ERROR", Snackbar.LENGTH_SHORT).show()
+                }
+                is ResultSuccess -> {
+                    clTopUpSuccess.isVisible = true
+                }
+            }
+        }
     }
 
     private fun attachListeners() {
+        tvFill.setOnClickListener {
+            viewModel.p2pId2Id(
+                edtSum.text.toString().toInt(),
+                navArgs.cards!![cardFromIndex].own_id!!,
+                navArgs.cards!![cardToIndex].own_id!!
+            )
+        }
+
         ivBack.setOnClickListener {
             (parentFragment as NavHostFragment).requireParentFragment()!!.findNavController()
                 .popBackStack()
         }
 
+        btnClose.setOnClickListener {
+            ((parentFragment as NavHostFragment).requireParentFragment() as FillCardBSD).dismiss()
+        }
+
+        edtSum.doOnTextChanged { text, start, before, count ->
+            tvFill.isEnabled = text != null && text.isNotBlank() && !text.contains(" ")
+        }
     }
 
 }
