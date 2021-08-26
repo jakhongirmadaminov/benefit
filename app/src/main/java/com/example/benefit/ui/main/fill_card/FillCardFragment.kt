@@ -10,6 +10,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager.widget.ViewPager
 import com.example.benefit.R
 import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.remote.models.CardsDTO
@@ -65,7 +66,24 @@ class FillCardFragment : BaseFragment(R.layout.fragment_fill_card) {
 
         cardsPager.adapter = HomeFragment.WizardPagerAdapter(cardViews)
 
-        cardsPager.offscreenPageLimit = 2
+        cardsPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+
+            }
+
+            override fun onPageSelected(position: Int) {
+                cardBeingFilled = selectableCards[position]
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+            }
+        })
+
+        cardsPager.offscreenPageLimit = 10
         cardsPager.clipToPadding = false
         cardsPager.setPadding(
             SizeUtils.dpToPx(requireContext(), 26).toInt(),
@@ -75,6 +93,11 @@ class FillCardFragment : BaseFragment(R.layout.fragment_fill_card) {
         )
         cardsPager.pageMargin = SizeUtils.dpToPx(requireContext(), 15).toInt()
 
+        for (i in selectableCards.indices) {
+            if (selectableCards[i].own_id!! == cardBeingFilled.own_id!!) {
+                cardsPager.currentItem = i
+            }
+        }
 
     }
 

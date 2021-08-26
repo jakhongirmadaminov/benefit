@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
+import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.home.HomeFragment
 import com.example.benefit.ui.main.home.card_options.CardOptionsBSD
 import com.example.benefit.util.SizeUtils
@@ -22,7 +23,7 @@ import javax.inject.Inject
  */
 
 class CreateRegularPaymentEnd @Inject constructor() :
-    Fragment(R.layout.fragment_create_regular_payment_end) {
+    BaseFragment(R.layout.fragment_create_regular_payment_end) {
 
 //    val args by navArgs<TransactionFragmentArgs>()
 //    val productId = args.productId
@@ -76,7 +77,7 @@ class CreateRegularPaymentEnd @Inject constructor() :
 
 
         cardsPager.adapter = HomeFragment.WizardPagerAdapter(listOf(cardView, cardView2))
-        cardsPager.offscreenPageLimit = 2
+        cardsPager.offscreenPageLimit = 10
         cardsPager.clipToPadding = false
         cardsPager.setPadding(
             SizeUtils.dpToPx(requireContext(), 26).toInt(),

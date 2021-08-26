@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import androidx.cardview.widget.CardView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -12,6 +11,7 @@ import androidx.viewpager.widget.ViewPager
 import com.example.benefit.R
 import com.example.benefit.remote.models.CardBgDTO
 import com.example.benefit.remote.models.CardDTO
+import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.home.HomeFragment
 import com.example.benefit.ui.viewgroups.ItemCardDesign
 import com.example.benefit.util.loadImageUrl
@@ -19,7 +19,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.rd.utils.DensityUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_card_change_design.*
 import kotlinx.android.synthetic.main.item_card.view.*
 import java.text.DecimalFormat
@@ -31,7 +30,7 @@ import javax.inject.Inject
  */
 
 class CardChangeDesignFragment @Inject constructor() :
-    Fragment(R.layout.fragment_card_change_design) {
+    BaseFragment(R.layout.fragment_card_change_design) {
 
 
     var cardViews = ArrayList<View>()
@@ -173,7 +172,8 @@ class CardChangeDesignFragment @Inject constructor() :
         view.tvCardNumber.text = cardDTO.pan
         view.tvCardName.text = cardDTO.card_title
         if (cardDTO.background_link != null) view.cardBg.loadImageUrl(cardDTO.background_link)
-        view.tvBalance.text = "${DecimalFormat("#,###").format(cardDTO.balance!!.dropLast(2).toInt())} UZS"
+        view.tvBalance.text =
+            "${DecimalFormat("#,###").format(cardDTO.balance!!.dropLast(2).toInt())} UZS"
         return view
     }
 

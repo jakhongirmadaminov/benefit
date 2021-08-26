@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.benefit.R
+import com.example.benefit.ui.base.BaseFragment
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_transaction_more_info.*
@@ -18,7 +19,7 @@ import javax.inject.Inject
  */
 
 class TransactionMoreInfoFragment @Inject constructor() :
-    Fragment(R.layout.fragment_transaction_more_info) {
+    BaseFragment(R.layout.fragment_transaction_more_info) {
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
     val args: TransactionMoreInfoFragmentArgs by navArgs()

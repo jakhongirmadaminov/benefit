@@ -303,7 +303,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private fun setupServicesPager() {
         servicesPager.adapter = WizardPagerAdapter(listOf(page_one, page_two, page_three))
-        servicesPager.offscreenPageLimit = 2
+        servicesPager.offscreenPageLimit = 10
         servicesPager.clipToPadding = false
         servicesPager.setPadding(dpToPx(26), 0, dpToPx(26), 0)
         servicesPager.pageMargin = dpToPx(15)

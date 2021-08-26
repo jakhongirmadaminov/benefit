@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.benefit.R
 import com.example.benefit.ui.auth.AuthActivity
+import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.profile.settings_bsd.SettingsBSD
 import com.example.benefit.util.AppPrefs
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,7 +17,7 @@ import splitties.fragments.start
 import splitties.preferences.edit
 
 
-class ProfileFragment : Fragment(R.layout.fragment_profile) {
+class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     val viewModel: ProfileViewModel by viewModels()
 

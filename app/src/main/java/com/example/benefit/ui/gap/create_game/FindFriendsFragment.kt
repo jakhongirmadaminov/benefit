@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.remote.models.FriendDTO
 import com.example.benefit.remote.models.FriendsDTOs
+import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.viewgroups.FriendItem
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
@@ -21,7 +22,7 @@ import javax.inject.Inject
  */
 
 class FindFriendsFragment @Inject constructor() :
-    Fragment(R.layout.fragment_find_friends) {
+    BaseFragment(R.layout.fragment_find_friends) {
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
 

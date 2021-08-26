@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.benefit.R
 import com.example.benefit.remote.models.RegularPaymentDTO
+import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.gap.GapActivity
 import com.example.benefit.ui.main.fill_card.FillCardBSD
 import com.example.benefit.ui.main.transfer_to_card.TransferToCardBSD
@@ -18,7 +19,7 @@ import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_payments.*
 
 
-class PaymentsFragment : Fragment(R.layout.fragment_payments) {
+class PaymentsFragment : BaseFragment(R.layout.fragment_payments) {
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
     val viewModel: PaymentsViewModel by viewModels()

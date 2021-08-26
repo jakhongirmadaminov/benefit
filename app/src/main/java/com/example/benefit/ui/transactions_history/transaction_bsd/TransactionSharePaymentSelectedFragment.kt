@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.benefit.R
 import com.example.benefit.remote.models.FriendsDTOs
+import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.viewgroups.FriendItem
 import com.example.benefit.ui.viewgroups.FriendItemImgName
 import com.google.android.material.snackbar.Snackbar
@@ -23,7 +24,7 @@ import javax.inject.Inject
  */
 
 class TransactionSharePaymentSelectedFragment @Inject constructor() :
-    Fragment(R.layout.fragment_transaction_share_payment_selected) {
+    BaseFragment(R.layout.fragment_transaction_share_payment_selected) {
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
     private val horizontalAdapter = GroupAdapter<GroupieViewHolder>()

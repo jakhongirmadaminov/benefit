@@ -6,16 +6,15 @@ import android.provider.MediaStore
 import android.view.View
 import android.widget.ImageView
 import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.asksira.bsimagepicker.BSImagePicker
 import com.bumptech.glide.Glide
 import com.example.benefit.R
+import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.util.AppPrefs
 import com.example.benefit.util.Constants.MONTHS
 import com.example.benefit.util.loadBitmap
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_reg_profile_setup.*
 import java.util.*
 import javax.inject.Inject
@@ -26,7 +25,7 @@ import javax.inject.Inject
  */
 
 class RegProfileSetupFragment @Inject constructor() :
-    Fragment(R.layout.fragment_reg_profile_setup), BSImagePicker.OnSingleImageSelectedListener,
+    BaseFragment(R.layout.fragment_reg_profile_setup), BSImagePicker.OnSingleImageSelectedListener,
     BSImagePicker.ImageLoaderDelegate, IOnMonthSelected {
 
     private val viewModel: RegistrationViewModel by activityViewModels()

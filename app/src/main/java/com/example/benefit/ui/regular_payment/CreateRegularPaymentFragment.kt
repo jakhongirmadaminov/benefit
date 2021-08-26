@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.remote.models.RegularPaymentDTO
+import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.viewgroups.ItemPayment
 import com.example.benefit.util.SizeUtils
 import com.xwray.groupie.GroupAdapter
@@ -22,7 +23,7 @@ import javax.inject.Inject
  */
 
 class CreateRegularPaymentFragment @Inject constructor() :
-    Fragment(R.layout.fragment_create_regular_payment) {
+    BaseFragment(R.layout.fragment_create_regular_payment) {
 
 //    val args by navArgs<TransactionFragmentArgs>()
 //    val productId = args.productId

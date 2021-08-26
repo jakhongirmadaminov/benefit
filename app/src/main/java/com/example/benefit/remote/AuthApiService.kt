@@ -81,7 +81,7 @@ interface AuthApiService {
         @Field("amount") amount: Int,
         @Field("card_id") card_id: String,
         @Field("recipient_id") recipient_id: String
-    ): RespFormat<PlainResp>
+    ): RespFormat<RespPid2Pid>
 
     @POST("api/card/pantoid")
     @FormUrlEncoded

@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
+import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.MainActivity
 import com.example.benefit.ui.main.home.bsd_add_card.AddCardBSD
 import com.example.benefit.ui.order_card.OrderCardActivity
@@ -24,7 +25,7 @@ import javax.inject.Inject
  */
 
 class RegCardActivationFragment @Inject constructor() :
-    Fragment(R.layout.fragment_reg_card_activation) {
+    BaseFragment(R.layout.fragment_reg_card_activation) {
 
 
     private val viewModel: RegistrationViewModel by activityViewModels()

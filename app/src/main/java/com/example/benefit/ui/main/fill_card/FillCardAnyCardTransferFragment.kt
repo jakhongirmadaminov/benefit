@@ -90,7 +90,7 @@ class FillCardAnyCardTransferFragment @Inject constructor() :
         cardsPagerSmall.addView(cardView2)
 
         cardsPagerSmall.adapter = HomeFragment.WizardPagerAdapter(listOf(cardView, cardView2))
-        cardsPagerSmall.offscreenPageLimit = 2
+        cardsPagerSmall.offscreenPageLimit = 10
         cardsPagerSmall.clipToPadding = false
         cardsPagerSmall.setPadding(
             SizeUtils.dpToPx(requireContext(), 26).toInt(),

@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.item_card_small.view.*
 import kotlinx.android.synthetic.main.layout_calculator.*
 import kotlinx.android.synthetic.main.layout_calculator.view.*
 import java.text.DecimalFormat
+import java.util.*
 
 class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_cards) {
 
@@ -80,14 +81,10 @@ class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_
 
             override fun onPageSelected(position: Int) {
                 if (cardFromIndex == position) {
-                    navArgs.cards!!.forEachIndexed { index, cardDTO ->
-                        if (position != index) {
-                            cardFromIndex = index
-                            return@forEachIndexed
-                        }
-                    }
+                    cardFromIndex = if (position + 1 == navArgs.cards!!.size) 0 else position + 1
                     cardsFromPagerSmall.currentItem = cardFromIndex
                 }
+                cardToIndex = position
             }
 
             override fun onPageScrollStateChanged(state: Int) {
@@ -105,7 +102,7 @@ class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_
         }
 
         cardsFromPagerSmall.adapter = HomeFragment.WizardPagerAdapter(cardViews2!!)
-        cardsFromPagerSmall.offscreenPageLimit = 2
+        cardsFromPagerSmall.offscreenPageLimit = 10
         cardsFromPagerSmall.clipToPadding = false
         cardsFromPagerSmall.setPadding(
             SizeUtils.dpToPx(requireContext(), 26).toInt(),
@@ -115,12 +112,14 @@ class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_
         )
         cardsFromPagerSmall.pageMargin = SizeUtils.dpToPx(requireContext(), 15).toInt()
 
-        navArgs.cards!!.forEachIndexed { index, cardDTO ->
-            if (cardDTO != navArgs.card) {
-                cardFromIndex = index
-                return@forEachIndexed
+
+        for (i in 0 until navArgs.cards!!.size) {
+            if (cardToIndex != i) {
+                cardFromIndex = i
+                break
             }
         }
+
         cardsFromPagerSmall.currentItem = cardFromIndex
 
         cardsFromPagerSmall.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -134,14 +133,10 @@ class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_
 
             override fun onPageSelected(position: Int) {
                 if (cardToIndex == position) {
-                    navArgs.cards!!.forEachIndexed { index, cardDTO ->
-                        if (position != index) {
-                            cardToIndex = index
-                            return@forEachIndexed
-                        }
-                    }
+                    cardToIndex = if (position + 1 == navArgs.cards!!.size) 0 else position + 1
                     cardsToPagerSmall.currentItem = cardToIndex
                 }
+                cardFromIndex = position
             }
 
             override fun onPageScrollStateChanged(state: Int) {
@@ -195,6 +190,17 @@ class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_
                 }
                 is ResultSuccess -> {
                     clTopUpSuccess.isVisible = true
+
+                    tvTransferAmount.text =
+                        getString(
+                            R.string.transfer_amount,
+                            edtSum.text.toString()
+                        )
+                    tvCommissions.text =
+                        getString(
+                            R.string.commissions_amount,
+                            (resp.value.amountWithoutTiyin!! - edtSum.text.toString().toInt()).toString()
+                        )
                 }
             }
         }
@@ -209,9 +215,14 @@ class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_
             )
         }
 
+//        RUSTAM
+//        C3C65508B1B7A7E9E053D30811ACA238
+
+//        ASKAR
+//        C58FF006FB320BF3E053D30811ACD142
+
         ivBack.setOnClickListener {
-            (parentFragment as NavHostFragment).requireParentFragment()!!.findNavController()
-                .popBackStack()
+            findNavController().popBackStack()
         }
 
         btnClose.setOnClickListener {

@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.benefit.remote.AuthApiService
 import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.remote.models.PlainResp
+import com.example.benefit.remote.models.RespPid2Pid
 import com.example.benefit.remote.repository.UserRemote
 import com.example.benefit.util.*
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -49,7 +50,7 @@ class FillCardViewModel @Inject constructor(
     }
 
     val p2pLoading = MutableLiveData<Boolean>()
-    val p2pResp = MutableLiveData<ResultWrapper<PlainResp>>()
+    val p2pResp = MutableLiveData<ResultWrapper<RespPid2Pid>>()
 
     fun p2pId2Id(amount: Int, fromId: String, toId: String) {
         viewModelScope.launch {

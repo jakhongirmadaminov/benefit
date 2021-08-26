@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
+import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.util.AppPrefs
 import kotlinx.android.synthetic.main.fragment_settings_change_code.*
 import javax.inject.Inject
@@ -18,7 +19,7 @@ import javax.inject.Inject
  */
 
 class SettingsChangeCodeFragment @Inject constructor() :
-    Fragment(R.layout.fragment_settings_change_code) {
+    BaseFragment(R.layout.fragment_settings_change_code) {
 
 
     private val viewModel: SettingsBSDViewModel by activityViewModels()

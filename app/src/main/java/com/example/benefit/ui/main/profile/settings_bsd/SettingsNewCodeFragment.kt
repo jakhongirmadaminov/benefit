@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
+import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.util.AppPrefs
 import com.example.benefit.util.ResultError
 import com.example.benefit.util.ResultSuccess
@@ -21,7 +22,7 @@ import javax.inject.Inject
  */
 
 class SettingsNewCodeFragment @Inject constructor() :
-    Fragment(R.layout.fragment_settings_new_code) {
+    BaseFragment(R.layout.fragment_settings_new_code) {
 
 
     private val viewModel: SettingsBSDViewModel by activityViewModels()

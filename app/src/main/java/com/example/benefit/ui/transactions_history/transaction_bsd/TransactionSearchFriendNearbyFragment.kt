@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.remote.models.FriendDTO
 import com.example.benefit.remote.models.FriendsDTOs
+import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.viewgroups.FriendItem
 import com.example.benefit.ui.viewgroups.FriendItemImgName
 import com.example.benefit.util.SizeUtils
@@ -27,7 +28,7 @@ import javax.inject.Inject
  */
 
 class TransactionSearchFriendNearbyFragment @Inject constructor() :
-    Fragment(R.layout.fragment_transaction_search_friends_nearby) {
+    BaseFragment(R.layout.fragment_transaction_search_friends_nearby) {
     private val adapter = GroupAdapter<GroupieViewHolder>()
     private val horizontalAdapter = GroupAdapter<GroupieViewHolder>()
 

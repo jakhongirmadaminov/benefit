@@ -219,7 +219,7 @@
     <string name="please_add_at_lease_one_card">Please add at least one card!</string>
     <string name="top_up_card_pending">Идёт пополнение \nсредств</string>
     <string name="top_up_card_success">Карта успешно \nпополнена</string>
-    <string name="tranfer_amount">"Сумма перевода: "</string>
-    <string name="commissions_amount">"Комиссия: "</string>
+    <string name="transfer_amount">Сумма перевода: %1$s сум</string>
+    <string name="commissions_amount">Комиссия: %1$s сум</string>
 
 </resources>

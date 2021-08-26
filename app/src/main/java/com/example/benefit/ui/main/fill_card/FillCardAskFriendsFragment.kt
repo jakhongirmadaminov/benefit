@@ -16,6 +16,7 @@ import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
+import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.home.card_options.CardOptionsViewModel
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
@@ -51,7 +52,7 @@ private val TO_IDS: IntArray = intArrayOf(android.R.id.text1)
 
 
 class FillCardAskFriendsFragment @Inject constructor() :
-    Fragment(R.layout.fragment_fill_card_ask_friends),
+    BaseFragment(R.layout.fragment_fill_card_ask_friends),
     LoaderManager.LoaderCallbacks<Cursor> {
 
     // Define variables for the contact the user selects

@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.benefit.R
 import com.example.benefit.remote.models.FriendDTO
 import com.example.benefit.remote.models.TransactionDTO
+import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.home.HomeFragment
 import com.example.benefit.ui.viewgroups.FriendItem
 import com.example.benefit.ui.viewgroups.FriendItemImgName
@@ -41,7 +42,7 @@ import kotlin.random.Random
  */
 
 class TransactionSharePaymentEndFragment @Inject constructor() :
-    Fragment(R.layout.fragment_transaction_share_payment_end) {
+    BaseFragment(R.layout.fragment_transaction_share_payment_end) {
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
     val args: TransactionSharePaymentEndFragmentArgs by navArgs()

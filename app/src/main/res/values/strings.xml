@@ -207,9 +207,9 @@
     <string name="delete_card">Удалить карту</string>
     <string name="delete">Удалить</string>
     <string name="are_you_sure_to_delete_card">Внимание! Вы действительно хотите удалить эту карту?</string>
-    <string name="referal">Referal code</string>
+    <string name="referal">Referral code</string>
     <string name="wrong_code">Неверный код:</string>
-    <string name="password_change">Смена кода...</string>
+    <string name="password_change">Смена кода…</string>
     <string name="password_successfully_changed">Код входа успешно изменён</string>
     <string name="sums">%1$s сум</string>
     <string name="expense_for_month">Потрачено за </string>
@@ -219,7 +219,7 @@
     <string name="please_add_at_lease_one_card">Please add at least one card!</string>
     <string name="top_up_card_pending">Идёт пополнение \nсредств</string>
     <string name="top_up_card_success">Карта успешно \nпополнена</string>
-    <string name="tranfer_amount">"Сумма перевода: "</string>
-    <string name="commissions_amount">"Комиссия: "</string>
+    <string name="transfer_amount">Сумма перевода: %1$s сум</string>
+    <string name="commissions_amount">Комиссия: %1$s сум</string>
 
 </resources>

@@ -77,7 +77,7 @@ class TransferToCardTransactionFragment :
         }
 
         cardsPagerSmall.adapter = HomeFragment.WizardPagerAdapter(cards)
-        cardsPagerSmall.offscreenPageLimit = 2
+        cardsPagerSmall.offscreenPageLimit = 10
         cardsPagerSmall.clipToPadding = false
         cardsPagerSmall.setPadding(
             SizeUtils.dpToPx(requireContext(), 26).toInt(),

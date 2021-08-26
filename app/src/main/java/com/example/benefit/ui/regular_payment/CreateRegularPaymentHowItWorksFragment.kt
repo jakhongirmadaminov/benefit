@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
+import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.util.SizeUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
@@ -20,7 +21,7 @@ import javax.inject.Inject
  */
 
 class CreateRegularPaymentHowItWorksFragment @Inject constructor() :
-    Fragment(R.layout.fragment_create_regular_payment_how_it_works) {
+    BaseFragment(R.layout.fragment_create_regular_payment_how_it_works) {
 
 //    val args by navArgs<TransactionFragmentArgs>()
 //    val productId = args.productId

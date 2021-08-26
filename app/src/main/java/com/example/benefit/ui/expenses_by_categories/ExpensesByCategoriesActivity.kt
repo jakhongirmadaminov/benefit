@@ -177,7 +177,7 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity(), OnChartValueSelect
 
 
         chartPager.adapter = HomeFragment.WizardPagerAdapter(listOf(chartView, chartView2))
-        chartPager.offscreenPageLimit = 2
+        chartPager.offscreenPageLimit = 10
         chartPager.clipToPadding = false
         chartPager.setPadding(
             SizeUtils.dpToPx(this, 26).toInt(),

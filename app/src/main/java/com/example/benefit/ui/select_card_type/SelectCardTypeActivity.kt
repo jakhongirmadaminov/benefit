@@ -34,7 +34,7 @@ class SelectCardTypeActivity : BaseActivity() {
 
         cardTypesPager.adapter =
             HomeFragment.WizardPagerAdapter(listOf(page_one, page_two))
-        cardTypesPager.offscreenPageLimit = 2
+        cardTypesPager.offscreenPageLimit = 10
     }
 
     var cardType = ECardType.ZOOM
