@@ -58,6 +58,9 @@
             android:name="card"
             app:argType="com.example.benefit.remote.models.CardDTO"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_cardMakeDepositFromAnyCardFragment_to_fillCardFragment"
+            app:destination="@id/fillCardFragment" />
 
     </fragment>
 

@@ -13,7 +13,6 @@ import cards.pay.paycardsrecognizer.sdk.Card
 import cards.pay.paycardsrecognizer.sdk.ScanCardIntent
 import com.example.benefit.R
 import com.example.benefit.ui.base.BaseFragment
-import com.example.benefit.ui.main.home.card_options.CardOptionsViewModel
 import com.redmadrobot.inputmask.MaskedTextChangedListener
 import kotlinx.android.synthetic.main.fragment_fill_from_any_card.*
 import javax.inject.Inject
@@ -28,7 +27,7 @@ const val REQUEST_CODE_SCAN_CARD = 13
 class FillCardFromAnyCardFragment @Inject constructor() :
     BaseFragment(R.layout.fragment_fill_from_any_card) {
 
-    private val viewModel: CardOptionsViewModel by viewModels()
+    private val viewModel: FillCardViewModel by viewModels()
 
     val navArgs: FillCardFromAnyCardFragmentArgs by navArgs()
 

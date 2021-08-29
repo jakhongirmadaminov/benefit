@@ -44,7 +44,7 @@ class TransferToCardTransactionFragment :
     }
 
     private fun setupViews() {
-
+        layoutCalculator.edtSum = edtSum
         tvCardOwner.text = args.cardP2pTarget.fullName
         tvCardNumber.text = args.cardP2pTarget.pan
     }
@@ -142,20 +142,6 @@ class TransferToCardTransactionFragment :
                     .toInt() > text.toString()
                     .toInt()
         }
-
-//        llAskFriends.setOnClickListener {
-//            findNavController().navigate(R.id.action_fillCardFragment_to_cardDepositAskFriendsFragment)
-//        }
-//        llWithCash.setOnClickListener {
-//            startActivity(Intent(requireActivity(), BranchesAtmsActivity::class.java))
-//        }
-//        llFromAnyCard.setOnClickListener {
-//            findNavController().navigate(R.id.action_fillCardFragment_to_cardMakeDepositFromAnyCardFragment)
-//        }
-//        llFromOwnCards.setOnClickListener {
-//            findNavController().navigate(R.id.action_fillCardFragment_to_cardMakeDepositFromMyCardFragment)
-//
-//        }
 
     }
 
