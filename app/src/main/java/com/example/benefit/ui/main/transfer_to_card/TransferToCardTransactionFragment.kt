@@ -15,9 +15,14 @@ import com.example.benefit.R
 import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.home.HomeFragment
+import com.example.benefit.util.ResultError
+import com.example.benefit.util.ResultSuccess
 import com.example.benefit.util.SizeUtils
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.*
 import kotlinx.android.synthetic.main.item_card_small.view.*
+import kotlinx.android.synthetic.main.transaction_loading.*
+import kotlinx.android.synthetic.main.transaction_success.*
 
 class TransferToCardTransactionFragment :
     BaseFragment(R.layout.fragment_transfer_to_card_transaction) {
@@ -49,6 +54,33 @@ class TransferToCardTransactionFragment :
 
         viewModel.isLoadingCards.observe(viewLifecycleOwner) {
             progressCards.isVisible = it
+        }
+
+        viewModel.transactionLoading.observe(viewLifecycleOwner) {
+            clTopUpLoading.isVisible = it
+        }
+        viewModel.transactionResp.observe(viewLifecycleOwner) {
+            val resp = it ?: return@observe
+            when (resp) {
+                is ResultError -> {
+                    Snackbar.make(clParent, resp.message ?: "ERROR", Snackbar.LENGTH_SHORT).show()
+                }
+                is ResultSuccess -> {
+                    clTopUpSuccess.isVisible = true
+
+                    tvTransferAmount.text =
+                        getString(
+                            R.string.transfer_amount,
+                            edtSum.text.toString()
+                        )
+                    tvCommissions.text =
+                        getString(
+                            R.string.commissions_amount,
+                            (resp.value.amountWithoutTiyin!! - edtSum.text.toString()
+                                .toInt()).toString()
+                        )
+                }
+            }
         }
 
         viewModel.errorMessage.observe(viewLifecycleOwner, {
@@ -106,7 +138,8 @@ class TransferToCardTransactionFragment :
 
         edtSum.doOnTextChanged { text, start, before, count ->
             tvFill.isEnabled =
-                viewModel.cardsResp.value!![cardsPagerSmall.currentItem].balance?.dropLast(2)!!.toInt() > text.toString()
+                viewModel.cardsResp.value!![cardsPagerSmall.currentItem].balance?.dropLast(2)!!
+                    .toInt() > text.toString()
                     .toInt()
         }
 

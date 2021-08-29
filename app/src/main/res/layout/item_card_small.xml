@@ -12,8 +12,15 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/gradient_blue">
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivCardBg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_blue"
+            android:scaleType="fitXY"
+            tools:foreground="@drawable/card_bg_zoom" />
 
 
         <ImageView
@@ -33,28 +40,28 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:fontFamily="sans-serif"
-            tools:text="@string/bonused"
             android:textColor="#ffffff"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/logo"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/bonused" />
 
 
         <TextView
             android:id="@+id/tvCardEndNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            tools:text="*5027"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/cardName"
             android:layout_marginLeft="5dp"
-            app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="sans-serif"
             android:textColor="#b8ffffff"
             android:textSize="16sp"
-            android:textStyle="normal" />
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cardName"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="*5027" />
 
         <TextView
             android:id="@+id/tvAmount"
@@ -62,13 +69,13 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="26dp"
             android:fontFamily="sans-serif"
-            tools:text="750 000 UZS"
             android:textColor="#ffffff"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="750 000 UZS" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,6 +1,12 @@
 package com.example.benefit.remote.models
 
+import android.os.Build
 import android.os.Parcelable
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.content.ContextCompat
+import com.example.benefit.R
+import com.example.benefit.util.loadImageUrl
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
@@ -21,15 +27,73 @@ data class CardDTO(
     @SerializedName("pan") val pan: String? = null,
     @SerializedName("phone") val phone: String? = null,
     @SerializedName("status") val status: Int? = null
-) : Parcelable /*{
+) : Parcelable {
+//
+//    val balanceWithoutTiyin: String?
+//        get() {
+//            val balanceTemp = balance
+//            return balanceTemp?.dropLast(2)
+//        }
 
-    val balanceWithoutTiyin: String?
-        get() {
-            val balanceTemp = balance
-            return balanceTemp?.dropLast(2)
+    fun setBackgroundInto(imageView: ImageView, tvLabel: TextView? = null) {
+        if (background_link.isNullOrBlank() || background_link.contains("No background for this card")) {
+            if (pan!!.contains("8600577")) {
+                tvLabel?.text = "Supreme"
+                imageView.setImageResource(R.drawable.card_bg_supreme)
+            } else if (pan.contains("860057")) {
+                tvLabel?.text = "Zoom"
+                imageView.setImageResource(R.drawable.card_bg_zoom)
+            } else {
+                tvLabel?.text = ""
+                imageView.setImageResource(R.drawable.card_bg_generic)
+            }
+        } else {
+            imageView.loadImageUrl(background_link)
         }
+    }
 
-}*/
+    fun setMiniBackgroundInto(imageView: ImageView, tvLabel: TextView? = null) {
+        if (background_link.isNullOrBlank() || background_link.contains("No background for this card")) {
+            if (pan!!.contains("8600577")) {
+                tvLabel?.text = "Supreme"
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    imageView.foreground =
+                        ContextCompat.getDrawable(
+                            imageView.context,
+                            R.drawable.card_bg_mini_supreme
+                        )
+                } else {
+                    imageView.setImageResource(R.drawable.card_bg_mini_supreme)
+                }
+            } else if (pan.contains("860057")) {
+                tvLabel?.text = "Zoom"
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    imageView.foreground =
+                        ContextCompat.getDrawable(
+                            imageView.context,
+                            R.drawable.card_bg_mini_zoom
+                        )
+                } else {
+                    imageView.setImageResource(R.drawable.card_bg_mini_zoom)
+                }
+
+            } else {
+                tvLabel?.text = ""
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    imageView.foreground =
+                        ContextCompat.getDrawable(
+                            imageView.context,
+                            R.drawable.card_bg_mini_generic
+                        )
+                } else {
+                    imageView.setImageResource(R.drawable.card_bg_mini_generic)
+                }
+            }
+        } else {
+            imageView.loadImageUrl(background_link)
+        }
+    }
+}
 
 @Parcelize
 class CardsDTO(val cards: List<CardDTO>? = null) : ArrayList<CardDTO>(cards ?: listOf()), Parcelable

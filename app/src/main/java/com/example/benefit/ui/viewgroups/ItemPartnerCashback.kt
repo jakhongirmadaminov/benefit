@@ -11,13 +11,11 @@ class ItemPartnerCashback(val partner: Partner, val onClick: (partner: Partner) 
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
 
-        viewHolder.itemView.ivIcon.loadImageUrl(partner.image!!)
+        viewHolder.itemView.ivIcon.loadImageUrl(partner.icon_image!!)
         viewHolder.itemView.tvBrand.text = partner.title
 
         viewHolder.itemView.clParent.setOnClickListener {
             onClick(partner)
-
-
         }
 
     }

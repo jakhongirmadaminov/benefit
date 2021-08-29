@@ -5,18 +5,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import androidx.fragment.app.Fragment
+import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import androidx.viewpager.widget.ViewPager
 import com.example.benefit.R
+import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.home.HomeFragment
-import com.example.benefit.ui.main.home.card_options.CardOptionsBSD
-import com.example.benefit.ui.main.home.card_options.CardOptionsViewModel
-import com.example.benefit.util.KeyboardUtil
+import com.example.benefit.util.ResultError
+import com.example.benefit.util.ResultSuccess
 import com.example.benefit.util.SizeUtils
-import dagger.hilt.android.AndroidEntryPoint
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_fill_from_any_card_transfer.*
+import kotlinx.android.synthetic.main.item_card_small.view.*
+import kotlinx.android.synthetic.main.transaction_loading.*
+import kotlinx.android.synthetic.main.transaction_success.*
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 
@@ -25,11 +32,11 @@ import javax.inject.Inject
  */
 
 class FillCardAnyCardTransferFragment @Inject constructor() :
-    Fragment(R.layout.fragment_fill_from_any_card_transfer) {
+    BaseFragment(R.layout.fragment_fill_from_any_card_transfer) {
 
-
-    private val viewModel: CardOptionsViewModel by viewModels()
-
+    private var cardToIndex: Int = 0
+    private val viewModel: FillCardViewModel by viewModels()
+    val navArgs: FillCardAnyCardTransferFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,12 +44,35 @@ class FillCardAnyCardTransferFragment @Inject constructor() :
         setupViews()
         attachListeners()
         subscribeObservers()
-
     }
 
     private fun subscribeObservers() {
+        viewModel.p2pPan2IdLoading.observe(viewLifecycleOwner) {
+            clTopUpLoading.isVisible = it
+        }
+        viewModel.p2pPan2IdResp.observe(viewLifecycleOwner) {
+            val resp = it ?: return@observe
+            when (resp) {
+                is ResultError -> {
+                    Snackbar.make(clParent, resp.message ?: "ERROR", Snackbar.LENGTH_SHORT).show()
+                }
+                is ResultSuccess -> {
+                    clTopUpSuccess.isVisible = true
 
-
+                    tvTransferAmount.text =
+                        getString(
+                            R.string.transfer_amount,
+                            edtSum.text.toString()
+                        )
+                    tvCommissions.text =
+                        getString(
+                            R.string.commissions_amount,
+                            (resp.value.amountWithoutTiyin!! - edtSum.text.toString()
+                                .toInt()).toString()
+                        )
+                }
+            }
+        }
     }
 
     override fun onCreateView(
@@ -54,14 +84,7 @@ class FillCardAnyCardTransferFragment @Inject constructor() :
             WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
         )
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-//        KeyboardUtil(requireActivity(), llCalculator)
         return super.onCreateView(inflater, container, savedInstanceState)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
     }
 
     private fun attachListeners() {
@@ -72,24 +95,39 @@ class FillCardAnyCardTransferFragment @Inject constructor() :
 
         }
 
+        tvFill.setOnClickListener {
+            viewModel.p2pPan2Id(
+                edtSum.text.toString().toInt(),
+                navArgs.cards!![cardToIndex].id!!,
+                navArgs.targetPan,
+                navArgs.targetExpiry
+            )
+        }
+
+        btnClose.setOnClickListener {
+            ((parentFragment as NavHostFragment).requireParentFragment() as FillCardBSD).dismiss()
+        }
+
+        edtSum.doOnTextChanged { text, start, before, count ->
+            tvFill.isEnabled = text != null && text.isNotBlank() && !text.contains(" ")
+        }
+
     }
 
 
     private fun setupViews() {
-//        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
-
-
-        val cardView = layoutInflater.inflate(R.layout.item_card_small, null)
-        val cardView2 = layoutInflater.inflate(R.layout.item_card_small, null)
-
-        cardView.setOnClickListener {
-            CardOptionsBSD().show(childFragmentManager, "")
+        layoutCalculator.edtSum = edtSum
+        val cardViews = navArgs.cards?.map {
+            val cardView = layoutInflater.inflate(R.layout.item_card_small, null)
+            cardView.cardName.text = it.card_title
+            cardView.tvAmount.text =
+                DecimalFormat("#,###").format(it.balance?.dropLast(2)?.toInt()) + " UZS"
+            cardView.tvCardEndNum.text = "*" + it.pan!!.substring(it.pan!!.length - 4)
+            cardsPagerSmall.addView(cardView)
+            cardView
         }
 
-        cardsPagerSmall.addView(cardView)
-        cardsPagerSmall.addView(cardView2)
-
-        cardsPagerSmall.adapter = HomeFragment.WizardPagerAdapter(listOf(cardView, cardView2))
+        cardsPagerSmall.adapter = HomeFragment.WizardPagerAdapter(cardViews!!)
         cardsPagerSmall.offscreenPageLimit = 10
         cardsPagerSmall.clipToPadding = false
         cardsPagerSmall.setPadding(
@@ -99,7 +137,25 @@ class FillCardAnyCardTransferFragment @Inject constructor() :
             0
         )
         cardsPagerSmall.pageMargin = SizeUtils.dpToPx(requireContext(), 15).toInt()
+        cardToIndex = navArgs.cards!!.indexOf(navArgs.card!!)
+        cardsPagerSmall.currentItem = cardToIndex
 
+        cardsPagerSmall.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+
+            }
+
+            override fun onPageSelected(position: Int) {
+                cardToIndex = position
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+            }
+        })
 
     }
 

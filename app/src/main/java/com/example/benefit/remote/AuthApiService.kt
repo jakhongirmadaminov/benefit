@@ -5,7 +5,6 @@ import com.example.benefit.stories.data.Story
 import com.example.benefit.util.AppPrefs
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
 import splitties.experimental.ExperimentalSplittiesApi
@@ -73,7 +72,7 @@ interface AuthApiService {
         @Field("amount") amount: Int,
         @Field("card_id") card_id: Int,
         @Field("pan") pan: String
-    ): RespFormat<PlainResp>
+    ): RespFormat<RespPid2Pid>
 
     @POST("api/card/pidtoid")
     @FormUrlEncoded
@@ -90,7 +89,7 @@ interface AuthApiService {
         @Field("card_id") card_id: Int,
         @Field("pan") pan: String,
         @Field("expiry") expiry: String
-    ): RespFormat<PlainResp>
+    ): RespFormat<RespPid2Pid>
 
     @POST("api/card/balanceplus")
     @FormUrlEncoded

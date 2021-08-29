@@ -179,7 +179,7 @@
         android:textColor="@color/black"
         android:textSize="30sp"
         app:layout_constraintTop_toBottomOf="@id/llTargetCard"
-        tools:text="500" />
+        tools:text="" />
 
     <TextView
         android:id="@+id/tvMinAmount"
@@ -193,152 +193,20 @@
         app:layout_constraintStart_toStartOf="@id/edtSum"
         app:layout_constraintTop_toBottomOf="@id/edtSum" />
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clLoading"
+    <com.example.benefit.util.CalculatorLayout
+        android:id="@+id/layoutCalculator"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?android:actionBarSize"
-        android:background="@color/window_background"
-        android:visibility="invisible">
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 
-        <TextView
-            android:id="@+id/tvOngoingTransaction"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="26dp"
-            android:layout_marginRight="40dp"
-            android:fontFamily="sans-serif"
-            android:text="@string/ongoing_money_transaction"
-            android:textColor="#000000"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <include
+        layout="@layout/transaction_loading"
+        tools:visibility="gone" />
 
-        <ProgressBar
-            android:id="@+id/progress"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clLoadingEnd"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?android:actionBarSize"
-        android:background="@color/window_background"
-        android:visibility="invisible">
-
-
-        <TextView
-            android:id="@+id/tvTransactionSuccess"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="26dp"
-            android:layout_marginRight="40dp"
-            android:fontFamily="sans-serif"
-            android:text="@string/transaction_completed_successfully"
-            android:textColor="#000000"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <ImageView
-            android:id="@+id/ivBankLogo"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="26dp"
-            android:layout_marginTop="26dp"
-            android:background="@drawable/shape_white_rounded_grey_stroke"
-            android:padding="10dp"
-            android:src="@drawable/b_logo"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTransactionSuccess" />
-
-
-        <TextView
-            android:id="@+id/tvCardOwnerSuccess"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:fontFamily="sans-serif"
-            android:textColor="#cc000000"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            app:layout_constraintStart_toEndOf="@id/ivBankLogo"
-            app:layout_constraintTop_toTopOf="@id/ivBankLogo"
-            tools:text="KIM VLADIMIR SERGEEVICH" />
-
-
-        <TextView
-            android:id="@+id/tvCardNumberSuccess"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:text="8600 03** **** 7102"
-            android:textColor="#cc5c5c5c"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            app:layout_constraintStart_toStartOf="@id/tvCardOwnerSuccess"
-            app:layout_constraintTop_toBottomOf="@id/tvCardOwnerSuccess" />
-
-
-        <ImageView
-            android:id="@+id/ivOval"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:src="@drawable/success_tick"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <TextView
-            android:id="@+id/tvSummaryTotalAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:fontFamily="sans-serif-light"
-            android:text="Сумма перевода: 275 000 UZS"
-            android:textColor="#000000"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            app:layout_constraintBottom_toTopOf="@id/tvCommissions"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivOval"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <TextView
-            android:id="@+id/tvCommissions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:fontFamily="sans-serif-light"
-            android:text="Комиссия: 1 375 UZS"
-            android:textColor="#000000"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvSummaryTotalAmount"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+        layout="@layout/transaction_success"
+        tools:visibility="gone" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

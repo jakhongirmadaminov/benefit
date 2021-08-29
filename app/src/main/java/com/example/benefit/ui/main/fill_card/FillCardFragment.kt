@@ -60,6 +60,7 @@ class FillCardFragment : BaseFragment(R.layout.fragment_fill_card) {
             cardView.tvAmount.text =
                 DecimalFormat("#,###").format(it.balance?.dropLast(2)?.toInt()) + " UZS"
             cardView.tvCardEndNum.text = "*" + it.pan!!.substring(it.pan!!.length - 4)
+            it.setMiniBackgroundInto(cardView.ivCardBg)
             cardsPager.addView(cardView)
             cardView
         }
@@ -115,7 +116,12 @@ class FillCardFragment : BaseFragment(R.layout.fragment_fill_card) {
             startActivity(Intent(requireActivity(), BranchesAtmsActivity::class.java))
         }
         llFromAnyCard.setOnClickListener {
-            findNavController().navigate(R.id.action_fillCardFragment_to_cardMakeDepositFromAnyCardFragment)
+            val dir =
+                FillCardFragmentDirections.actionFillCardFragmentToCardMakeDepositFromAnyCardFragment(
+                    CardsDTO(selectableCards),
+                    cardBeingFilled
+                )
+            findNavController().navigate(dir)
         }
         llFromOwnCards.setOnClickListener {
             val dir =

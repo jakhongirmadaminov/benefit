@@ -11,7 +11,7 @@ import com.example.benefit.remote.AuthApiService
 import com.example.benefit.remote.UserRemoteImpl
 import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.remote.models.CardP2PDTO
-import com.example.benefit.remote.models.PlainResp
+import com.example.benefit.remote.models.RespPid2Pid
 import com.example.benefit.util.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -55,11 +55,11 @@ class TransferToCardViewModel @Inject constructor(
     }
 
     val transactionLoading = MutableLiveData<Boolean>()
-    val transactionResp = MutableLiveData<ResultWrapper<PlainResp>>()
+    val transactionResp = MutableLiveData<ResultWrapper<RespPid2Pid>>()
 
     fun transferToCard(selectedCardId: Int, cardP2pTarget: CardP2PDTO, amount: Int) {
         viewModelScope.launch(IO) {
-            transactionResp.postValue(getFormattedResponse(panInfoLoading) {
+            transactionResp.postValue(getFormattedResponse(transactionLoading) {
                 authApi.p2pIdToPan(
                     amount,
                     selectedCardId,

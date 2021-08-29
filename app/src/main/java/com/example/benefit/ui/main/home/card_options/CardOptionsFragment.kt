@@ -51,6 +51,7 @@ class CardOptionsFragment : BaseFragment(R.layout.fragment_card_options),
         tvExpiryDate.text = card.expiry.toString()
         tvCardName.text = card.card_title
 
+        card.setBackgroundInto(ivCardBg, tvCardTitle)
 
     }
 

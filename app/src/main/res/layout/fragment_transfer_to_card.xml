@@ -16,7 +16,6 @@
         android:layout_height="190dp"
         android:background="@drawable/selector_rounded_top_corners_grey">
 
-
         <ImageView
             android:id="@+id/ivBack"
             android:layout_width="wrap_content"
@@ -149,13 +148,15 @@
         android:text="@string/latest_deposits"
         android:textColor="#ab5c5c5c"
         android:textSize="16sp"
-        android:textStyle="normal" />
+        android:textStyle="normal"
+        android:visibility="gone" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="26dp">
+        android:layout_marginTop="26dp"
+        android:visibility="gone">
 
         <!--        <include layout="@layout/item_transaction" />-->
     </LinearLayout>

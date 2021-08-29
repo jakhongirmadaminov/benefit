@@ -19,11 +19,12 @@ import com.example.benefit.util.ResultError
 import com.example.benefit.util.ResultSuccess
 import com.example.benefit.util.SizeUtils
 import com.google.android.material.snackbar.Snackbar
-import com.notkamui.keval.Keval
 import kotlinx.android.synthetic.main.fragment_fill_from_my_cards.*
 import kotlinx.android.synthetic.main.item_card_small.view.*
 import kotlinx.android.synthetic.main.layout_calculator.*
 import kotlinx.android.synthetic.main.layout_calculator.view.*
+import kotlinx.android.synthetic.main.transaction_loading.*
+import kotlinx.android.synthetic.main.transaction_success.*
 import java.text.DecimalFormat
 import java.util.*
 
@@ -46,7 +47,9 @@ class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_
     }
 
     private fun setupViews() {
-        setupCalculatorView()
+//        setupCalculatorView()
+        layoutCalculator.edtSum = edtSum
+
         val cardViews = navArgs.cards?.map {
             val cardView = layoutInflater.inflate(R.layout.item_card_small, null)
             cardView.cardName.text = it.card_title
@@ -144,45 +147,45 @@ class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_
         })
 
     }
-
-    private fun setupCalculatorView() {
-        tvOne.setOnClickListener { edtSum.append("1") }
-        tvTwo.setOnClickListener { edtSum.append("2") }
-        tvThree.setOnClickListener { edtSum.append("3") }
-        tvFour.setOnClickListener { edtSum.append("4") }
-        tvFive.setOnClickListener { edtSum.append("5") }
-        tvSix.setOnClickListener { edtSum.append("6") }
-        tvSeven.setOnClickListener { edtSum.append("7") }
-        tvEight.setOnClickListener { edtSum.append("8") }
-        tvNine.setOnClickListener { edtSum.append("9") }
-        tvZero.setOnClickListener { edtSum.append("0") }
-        tvMinus.setOnClickListener { edtSum.append(" - ") }
-        tvPlus.setOnClickListener { edtSum.append(" + ") }
-        tvMultiply.setOnClickListener { edtSum.append(" * ") }
-        tvDivide.setOnClickListener { edtSum.append(" / ") }
-        tvEquals.setOnClickListener {
-            if (edtSum.text.isNotBlank()) {
-                try {
-                    edtSum.setText(Keval.eval(edtSum.text.toString()).toInt().toString())
-                } catch (e: Exception) {
-
-                }
-            }
-        }
-
-        backspace.setOnClickListener {
-            if (edtSum.text.isNotBlank()) {
-                edtSum.setText(edtSum.text.dropLast(1))
-            }
-        }
-    }
+//
+//    private fun setupCalculatorView() {
+//        tvOne.setOnClickListener { edtSum.append("1") }
+//        tvTwo.setOnClickListener { edtSum.append("2") }
+//        tvThree.setOnClickListener { edtSum.append("3") }
+//        tvFour.setOnClickListener { edtSum.append("4") }
+//        tvFive.setOnClickListener { edtSum.append("5") }
+//        tvSix.setOnClickListener { edtSum.append("6") }
+//        tvSeven.setOnClickListener { edtSum.append("7") }
+//        tvEight.setOnClickListener { edtSum.append("8") }
+//        tvNine.setOnClickListener { edtSum.append("9") }
+//        tvZero.setOnClickListener { edtSum.append("0") }
+//        tvMinus.setOnClickListener { edtSum.append(" - ") }
+//        tvPlus.setOnClickListener { edtSum.append(" + ") }
+//        tvMultiply.setOnClickListener { edtSum.append(" * ") }
+//        tvDivide.setOnClickListener { edtSum.append(" / ") }
+//        tvEquals.setOnClickListener {
+//            if (edtSum.text.isNotBlank()) {
+//                try {
+//                    edtSum.setText(Keval.eval(edtSum.text.toString()).toInt().toString())
+//                } catch (e: Exception) {
+//
+//                }
+//            }
+//        }
+//
+//        backspace.setOnClickListener {
+//            if (edtSum.text.isNotBlank()) {
+//                edtSum.setText(edtSum.text.dropLast(1))
+//            }
+//        }
+//    }
 
     private fun subscribeObservers() {
 
-        viewModel.p2pLoading.observe(viewLifecycleOwner) {
+        viewModel.p2pId2IdLoading.observe(viewLifecycleOwner) {
             clTopUpLoading.isVisible = it
         }
-        viewModel.p2pResp.observe(viewLifecycleOwner) {
+        viewModel.p2pId2IdResp.observe(viewLifecycleOwner) {
             val resp = it ?: return@observe
             when (resp) {
                 is ResultError -> {
@@ -199,7 +202,8 @@ class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_
                     tvCommissions.text =
                         getString(
                             R.string.commissions_amount,
-                            (resp.value.amountWithoutTiyin!! - edtSum.text.toString().toInt()).toString()
+                            (resp.value.amountWithoutTiyin!! - edtSum.text.toString()
+                                .toInt()).toString()
                         )
                 }
             }

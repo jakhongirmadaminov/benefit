@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager.widget.ViewPager
@@ -32,7 +33,6 @@ import javax.inject.Inject
 class CardChangeDesignFragment @Inject constructor() :
     BaseFragment(R.layout.fragment_card_change_design) {
 
-
     var cardViews = ArrayList<View>()
     private val adapter = GroupAdapter<GroupieViewHolder>()
     private val viewModel: CardOptionsViewModel by viewModels()
@@ -42,15 +42,6 @@ class CardChangeDesignFragment @Inject constructor() :
             tvDone.isEnabled = value > 0
             field = value
         }
-
-//    lateinit var card: CardDTO
-
-//    override fun onAttach(context: Context) {
-//        super.onAttach(context)
-//        card = requireArguments().getParcelable(FillCardFragment.ARG_CARD)!!
-//        cards = requireArguments().getParcelableArrayList(FillCardFragment.ARG_CARDS)!!
-//    }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -66,7 +57,6 @@ class CardChangeDesignFragment @Inject constructor() :
         rvDesigns.adapter = adapter
         setupCardsPager()
 
-
     }
 
 
@@ -75,6 +65,11 @@ class CardChangeDesignFragment @Inject constructor() :
         viewModel.cardBgs.observe(viewLifecycleOwner, {
             val resp = it ?: return@observe
             loadData(resp)
+        })
+
+        viewModel.setCardDesignResp.observe(viewLifecycleOwner, {
+            val resp = it ?: return@observe
+            ((parentFragment as NavHostFragment).parentFragment as CardOptionsBSD).dismiss()
         })
 
         viewModel.isLoading.observe(viewLifecycleOwner, {
@@ -139,9 +134,7 @@ class CardChangeDesignFragment @Inject constructor() :
 
     private fun resetCardBgs() {
         args.cards!!.forEachIndexed { index, cardDTO ->
-            ((cardViews[index] as CardView).getChildAt(0) as ImageView).loadImageUrl(
-                cardDTO.background_link!!
-            )
+            cardDTO.setBackgroundInto((cardViews[index] as CardView).getChildAt(0) as ImageView)
         }
         selectedDesign = 0
     }
@@ -171,7 +164,7 @@ class CardChangeDesignFragment @Inject constructor() :
         view.tvCardOwner.text = cardDTO.fullName
         view.tvCardNumber.text = cardDTO.pan
         view.tvCardName.text = cardDTO.card_title
-        if (cardDTO.background_link != null) view.cardBg.loadImageUrl(cardDTO.background_link)
+        cardDTO.setBackgroundInto(view.cardBg, view.tvCardType)
         view.tvBalance.text =
             "${DecimalFormat("#,###").format(cardDTO.balance!!.dropLast(2).toInt())} UZS"
         return view

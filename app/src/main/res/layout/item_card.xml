@@ -10,14 +10,14 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:selectableItemBackground"
-    app:cardBackgroundColor="@color/turquoise"
     app:cardCornerRadius="15dp">
 
     <ImageView
         android:id="@+id/cardBg"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:scaleType="fitXY"
-        android:layout_height="match_parent" />
+        tools:src="@drawable/card_bg_generic" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -35,18 +35,18 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvCardTitle"
+            android:id="@+id/tvCardType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:fontFamily="sans-serif"
-            tools:text="Zoom"
             android:textColor="#ffffff"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/icB"
             app:layout_constraintStart_toEndOf="@id/icB"
-            app:layout_constraintTop_toTopOf="@id/icB" />
+            app:layout_constraintTop_toTopOf="@id/icB"
+            tools:text="Zoom" />
 
         <TextView
             android:id="@+id/tvMultiplySum"
@@ -54,13 +54,13 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:fontFamily="sans-serif"
-            tools:text="*5027"
             android:textColor="#b8ffffff"
             android:textSize="18sp"
             android:textStyle="normal"
-            app:layout_constraintBottom_toBottomOf="@id/tvCardTitle"
-            app:layout_constraintStart_toEndOf="@id/tvCardTitle"
-            app:layout_constraintTop_toTopOf="@id/tvCardTitle" />
+            app:layout_constraintBottom_toBottomOf="@id/tvCardType"
+            app:layout_constraintStart_toEndOf="@id/tvCardType"
+            app:layout_constraintTop_toTopOf="@id/tvCardType"
+            tools:text="*5027" />
 
         <TextView
             android:id="@+id/tvCardName"
@@ -124,13 +124,13 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="26dp"
             android:fontFamily="sans-serif"
-            tools:text="750 000 UZS"
             android:textColor="#ffffff"
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/icPlus"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/icPlus" />
+            app:layout_constraintTop_toTopOf="@id/icPlus"
+            tools:text="750 000 UZS" />
 
         <TextView
             android:id="@+id/tvCardNumber"
@@ -152,12 +152,12 @@
             android:layout_marginLeft="26dp"
             android:layout_marginBottom="20dp"
             android:fontFamily="sans-serif-medium"
-            tools:text="STANISLAV KUCHKAROV"
             android:textColor="#ffffff"
             android:textSize="14dp"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="STANISLAV KUCHKAROV" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

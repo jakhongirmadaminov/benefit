@@ -48,6 +48,17 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+
+
+        <argument
+            android:name="cards"
+            app:argType="com.example.benefit.remote.models.CardsDTO"
+            app:nullable="true" />
+        <argument
+            android:name="card"
+            app:argType="com.example.benefit.remote.models.CardDTO"
+            app:nullable="true" />
+
     </fragment>
 
     <fragment
@@ -56,8 +67,14 @@
         android:label=""
         tools:layout="@layout/fragment_fill_from_my_cards">
 
-        <argument android:name="cards" app:nullable="true" app:argType="com.example.benefit.remote.models.CardsDTO"/>
-        <argument android:name="card" app:nullable="true" app:argType="com.example.benefit.remote.models.CardDTO"/>
+        <argument
+            android:name="cards"
+            app:argType="com.example.benefit.remote.models.CardsDTO"
+            app:nullable="true" />
+        <argument
+            android:name="card"
+            app:argType="com.example.benefit.remote.models.CardDTO"
+            app:nullable="true" />
     </fragment>
 
 
@@ -66,6 +83,24 @@
         android:name="com.example.benefit.ui.main.fill_card.FillCardAnyCardTransferFragment"
         android:label=""
         tools:layout="@layout/fragment_fill_from_any_card_transfer">
+
+        <argument
+            android:name="cards"
+            app:argType="com.example.benefit.remote.models.CardsDTO"
+            app:nullable="true" />
+        <argument
+            android:name="card"
+            app:argType="com.example.benefit.remote.models.CardDTO"
+            app:nullable="true" />
+
+        <argument
+            android:name="targetPan"
+            app:argType="string"
+            app:nullable="false" />
+        <argument
+            android:name="targetExpiry"
+            app:argType="string"
+            app:nullable="false" />
 
     </fragment>
 
@@ -98,7 +133,10 @@
         android:label=""
         tools:layout="@layout/fragment_fill_card_ask_friends_transfer">
 
-        <argument android:name="argSelection" app:nullable="true" app:argType="com.example.benefit.remote.models.FriendsDTOs"/>
+        <argument
+            android:name="argSelection"
+            app:argType="com.example.benefit.remote.models.FriendsDTOs"
+            app:nullable="true" />
 
     </fragment>
 

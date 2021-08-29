@@ -19,6 +19,7 @@ import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.fill_card.REQUEST_CODE_SCAN_CARD
 import com.example.benefit.util.ResultError
 import com.example.benefit.util.ResultSuccess
+import com.redmadrobot.inputmask.MaskedTextChangedListener
 import kotlinx.android.synthetic.main.fragment_transfer_to_card.*
 
 class TransferToCardFragment : BaseFragment(R.layout.fragment_transfer_to_card) {
@@ -36,6 +37,25 @@ class TransferToCardFragment : BaseFragment(R.layout.fragment_transfer_to_card) 
 
     private fun setupViews() {
 
+        MaskedTextChangedListener.installOn(edtCardNumber, "[0000] [0000] [0000] [0000]")
+        val listener = MaskedTextChangedListener("[0000] [0000] [0000] [0000]",
+            edtCardNumber,
+            object : MaskedTextChangedListener.ValueListener {
+                override fun onTextChanged(
+                    maskFilled: Boolean,
+                    extractedValue: String,
+                    formattedValue: String
+                ) {
+
+                    ivClearCardNumber.visibility =
+                        if (extractedValue.isNotBlank()) View.VISIBLE else View.GONE
+                }
+
+            }
+        )
+        edtCardNumber.hint = getString(R.string.card_number)
+        edtCardNumber.onFocusChangeListener = listener
+        edtCardNumber.addTextChangedListener(listener)
 
     }
 

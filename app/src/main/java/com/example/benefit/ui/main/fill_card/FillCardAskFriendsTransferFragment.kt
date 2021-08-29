@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.remote.models.FriendDTO
+import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.home.HomeFragment
 import com.example.benefit.ui.main.home.card_options.CardOptionsBSD
 import com.example.benefit.ui.main.home.card_options.CardOptionsViewModel
@@ -24,7 +25,7 @@ import javax.inject.Inject
  */
 
 class FillCardAskFriendsTransferFragment @Inject constructor() :
-    Fragment(R.layout.fragment_fill_card_ask_friends_transfer) {
+    BaseFragment(R.layout.fragment_fill_card_ask_friends_transfer) {
 
     companion object {
         const val ARG_SELECTION = "SELECTION"

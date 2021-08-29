@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.viewpager.widget.PagerAdapter
 import com.example.benefit.R
@@ -32,7 +31,6 @@ import com.example.benefit.ui.viewgroups.ItemStory
 import com.example.benefit.util.AppPrefs
 import com.example.benefit.util.ResultError
 import com.example.benefit.util.ResultSuccess
-import com.example.benefit.util.loadImageUrl
 import com.rd.utils.DensityUtils.dpToPx
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
@@ -279,7 +277,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         view.tvCardOwner.text = cardDTO.fullName
         view.tvCardNumber.text = cardDTO.pan
         view.tvCardName.text = cardDTO.card_title
-        if (cardDTO.background_link != null) view.cardBg.loadImageUrl(cardDTO.background_link)
+        cardDTO.setBackgroundInto(view.cardBg, view.tvCardType)
         view.tvBalance.text =
             "${DecimalFormat("#,###").format(cardDTO.balance!!.dropLast(2).toInt())} UZS"
         view.icPlus.setOnClickListener {

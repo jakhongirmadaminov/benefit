@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="26dp"
-            android:layout_marginTop="?android:actionBarSize"
+            android:layout_marginTop="26dp"
             android:layout_marginRight="40dp"
             android:fontFamily="sans-serif"
             android:text="@string/fill"

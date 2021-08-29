@@ -5,9 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.fragment.app.Fragment
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import cards.pay.paycardsrecognizer.sdk.Card
 import cards.pay.paycardsrecognizer.sdk.ScanCardIntent
 import com.example.benefit.R
@@ -24,12 +25,13 @@ import javax.inject.Inject
 
 const val REQUEST_CODE_SCAN_CARD = 13
 
-
 class FillCardFromAnyCardFragment @Inject constructor() :
     BaseFragment(R.layout.fragment_fill_from_any_card) {
 
-
     private val viewModel: CardOptionsViewModel by viewModels()
+
+    val navArgs: FillCardFromAnyCardFragmentArgs by navArgs()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,8 +58,6 @@ class FillCardFromAnyCardFragment @Inject constructor() :
                 }
 
             }
-
-
         )
         edtCardNumber.hint = getString(R.string.card_number)
         edtCardNumber.onFocusChangeListener = listener
@@ -75,6 +75,16 @@ class FillCardFromAnyCardFragment @Inject constructor() :
     }
 
     private fun attachListeners() {
+
+        edtCardNumber.doOnTextChanged { text, start, before, count ->
+            tvNext.isEnabled =
+                !text.isNullOrBlank() && text.length == 19 && !edtCardExpiry.text.isNullOrBlank() && edtCardExpiry.text.length == 5
+        }
+        edtCardExpiry.doOnTextChanged { text, start, before, count ->
+            tvNext.isEnabled =
+                !edtCardNumber.text.isNullOrBlank() && edtCardNumber.text.length == 19 && !text.isNullOrBlank() && text.length == 5
+        }
+
         ivClearCardNumber.setOnClickListener {
             edtCardNumber.setText("")
         }
@@ -83,7 +93,14 @@ class FillCardFromAnyCardFragment @Inject constructor() :
             findNavController().popBackStack()
         }
         tvNext.setOnClickListener {
-            findNavController().navigate(R.id.action_cardMakeDepositFromAnyCardFragment_to_cardDepositAnyCardTransferFragment)
+            val dir =
+                FillCardFromAnyCardFragmentDirections.actionCardMakeDepositFromAnyCardFragmentToCardDepositAnyCardTransferFragment(
+                    navArgs.cards,
+                    navArgs.card,
+                    edtCardNumber.text.toString().replace(" ", ""),
+                    edtCardExpiry.text.toString()
+                )
+            findNavController().navigate(dir)
         }
         llTakeCardPhoto.setOnClickListener {
             val intent = ScanCardIntent.Builder(requireContext()).build()
