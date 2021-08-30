@@ -14,10 +14,19 @@ import androidx.viewpager.widget.ViewPager
 import com.example.benefit.R
 import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.remote.models.CardsDTO
+import com.example.benefit.remote.models.TransactionAnalyticsDTO
 import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.branches_atms.BranchesAtmsActivity
 import com.example.benefit.ui.main.home.HomeFragment
+import com.example.benefit.ui.transactions_history.transaction_bsd.TransactionBSD
+import com.example.benefit.ui.viewgroups.ItemLoading
+import com.example.benefit.ui.viewgroups.ItemTransaction
+import com.example.benefit.ui.viewgroups.ItemTransactionDate
+import com.example.benefit.util.ResultError
+import com.example.benefit.util.ResultSuccess
 import com.example.benefit.util.SizeUtils
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_fill_card.*
 import kotlinx.android.synthetic.main.item_card_small.view.*
 import java.text.DecimalFormat
@@ -29,6 +38,7 @@ class FillCardFragment : BaseFragment(R.layout.fragment_fill_card) {
         const val ARG_CARDS = "CARDS"
     }
 
+    private val latestDepositsAdapter = GroupAdapter<GroupieViewHolder>()
     private val viewModel: FillCardViewModel by viewModels()
     lateinit var cardBeingFilled: CardDTO
     lateinit var selectableCards: List<CardDTO>
@@ -47,9 +57,12 @@ class FillCardFragment : BaseFragment(R.layout.fragment_fill_card) {
 
         attachListeners()
         subscribeObservers()
+
+        viewModel.getLatestDeposits(selectableCards[0].id!!)
     }
 
     private fun setupViews() {
+        rvLatestDeposits.adapter = latestDepositsAdapter
 
         llFromOwnCards.isVisible = selectableCards.size > 1
 
@@ -78,6 +91,7 @@ class FillCardFragment : BaseFragment(R.layout.fragment_fill_card) {
 
             override fun onPageSelected(position: Int) {
                 cardBeingFilled = selectableCards[position]
+                viewModel.getLatestDeposits(cardBeingFilled.id!!)
             }
 
             override fun onPageScrollStateChanged(state: Int) {
@@ -103,8 +117,50 @@ class FillCardFragment : BaseFragment(R.layout.fragment_fill_card) {
     }
 
     private fun subscribeObservers() {
+        viewModel.analyticsReportLoading.observe(viewLifecycleOwner) { isLoading ->
+            when (isLoading) {
+                true -> {
+                    latestDepositsAdapter.clear()
+                    latestDepositsAdapter.add(ItemLoading())
+                }
+                false -> {
+                    latestDepositsAdapter.clear()
+                }
+            }
+        }
 
 
+        viewModel.latestDepositsResp.observe(viewLifecycleOwner) {
+            val resp = it ?: return@observe
+            when (resp) {
+                is ResultError -> {
+
+                }
+                is ResultSuccess -> {
+                    loadLatestDeposits(resp.value)
+                }
+            }
+        }
+
+    }
+
+    private fun loadLatestDeposits(value: List<TransactionAnalyticsDTO>) {
+        latestDepositsAdapter.clear()
+
+        var dateString: Int? = null
+        value.forEach {
+            if (it.udate != dateString) {
+                latestDepositsAdapter.add(ItemTransactionDate(it.udate!!))
+                dateString = it.udate
+            }
+            latestDepositsAdapter.add(ItemTransaction(it) {
+                val dialog = TransactionBSD()
+                dialog.arguments = Bundle().apply {
+                    putParcelable(TransactionBSD.ARG_TRANSACTION_DTO, it)
+                }
+                dialog.show(childFragmentManager, "")
+            })
+        }
     }
 
     private fun attachListeners() {

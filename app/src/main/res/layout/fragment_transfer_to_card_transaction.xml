@@ -116,7 +116,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
-            android:text="SQB"
             android:textColor="#ffffff"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -124,7 +123,8 @@
             app:layout_constraintEnd_toEndOf="@id/ivTargetBankBg"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toEndOf="@id/ivTargetBankLogo"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="SQB" />
 
         <TextView
             android:id="@+id/tvCardOwner"
@@ -161,6 +161,7 @@
             android:textColor="#805c5c5c"
             android:textSize="14sp"
             android:textStyle="normal"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/ivTargetBankBg"
             app:layout_constraintStart_toStartOf="@id/tvCardOwner" />
 
@@ -176,7 +177,7 @@
         android:layout_marginRight="26dp"
         android:clickable="false"
         android:focusable="false"
-        android:hint="500"
+        android:hint="0"
         android:textColor="@color/black"
         android:textSize="30sp"
         app:layout_constraintTop_toBottomOf="@id/llTargetCard"

@@ -16,6 +16,7 @@ import com.example.benefit.remote.models.TransactionInOutDTO
 import com.example.benefit.ui.base.BaseActivity
 import com.example.benefit.ui.expenses_by_categories.ARG_CARDS
 import com.example.benefit.ui.main.home.HomeFragment
+import com.example.benefit.ui.transactions_history.transaction_bsd.TransactionBSD
 import com.example.benefit.ui.viewgroups.CardTagItem
 import com.example.benefit.ui.viewgroups.ItemTransaction
 import com.example.benefit.ui.viewgroups.ItemTransactionDate
@@ -235,10 +236,15 @@ class TransactionsHistoryActivity : BaseActivity(), OnChartValueSelectedListener
                     transactionsAdapter.add(ItemTransactionDate(it.udate!!))
                     dateString = it.udate
                 }
-                transactionsAdapter.add(ItemTransaction(it))
+                transactionsAdapter.add(ItemTransaction(it) {
+                    val dialog = TransactionBSD()
+                    dialog.arguments = Bundle().apply {
+                        putParcelable(TransactionBSD.ARG_TRANSACTION_DTO, it)
+                    }
+                    dialog.show(supportFragmentManager, "")
+                })
             }
         }
-        transactionsAdapter.notifyDataSetChanged()
 
         var totalExpense = 0L
         var totalIncome = 0L

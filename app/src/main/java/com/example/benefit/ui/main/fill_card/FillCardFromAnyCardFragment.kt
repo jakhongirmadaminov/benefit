@@ -13,6 +13,8 @@ import cards.pay.paycardsrecognizer.sdk.Card
 import cards.pay.paycardsrecognizer.sdk.ScanCardIntent
 import com.example.benefit.R
 import com.example.benefit.ui.base.BaseFragment
+import com.example.benefit.util.ResultError
+import com.example.benefit.util.ResultSuccess
 import com.redmadrobot.inputmask.MaskedTextChangedListener
 import kotlinx.android.synthetic.main.fragment_fill_from_any_card.*
 import javax.inject.Inject
@@ -62,27 +64,44 @@ class FillCardFromAnyCardFragment @Inject constructor() :
         edtCardNumber.onFocusChangeListener = listener
         edtCardNumber.addTextChangedListener(listener)
 
-        val listener2 = MaskedTextChangedListener("[00]/[00]", edtCardExpiry)
-        edtCardExpiry.hint = getString(R.string.mm_slash_yy)
-        edtCardExpiry.onFocusChangeListener = listener2
-        edtCardExpiry.addTextChangedListener(listener2)
+//        val listener2 = MaskedTextChangedListener("[00]/[00]", edtCardExpiry)
+//        edtCardExpiry.hint = getString(R.string.mm_slash_yy)
+//        edtCardExpiry.onFocusChangeListener = listener2
+//        edtCardExpiry.addTextChangedListener(listener2)
     }
 
     private fun subscribeObservers() {
 
+        viewModel.panInfoResp.observe(viewLifecycleOwner) {
+            when (it) {
+                is ResultError -> {
+
+
+                }
+                is ResultSuccess -> {
+
+                    tvNext.isEnabled = true
+                }
+            }
+        }
+
+        viewModel.panInfoLoading.observe(viewLifecycleOwner) {
+            if (it) tvNext.isEnabled = false
+        }
 
     }
 
     private fun attachListeners() {
 
         edtCardNumber.doOnTextChanged { text, start, before, count ->
-            tvNext.isEnabled =
-                !text.isNullOrBlank() && text.length == 19 && !edtCardExpiry.text.isNullOrBlank() && edtCardExpiry.text.length == 5
+//            tvNext.isEnabled =
+//                !text.isNullOrBlank() && text.length == 19 && !edtCardExpiry.text.isNullOrBlank() && edtCardExpiry.text.length == 5
+            if (text?.length == 19) viewModel.getCardP2PInfo(text.toString().replace(" ", ""))
         }
-        edtCardExpiry.doOnTextChanged { text, start, before, count ->
-            tvNext.isEnabled =
-                !edtCardNumber.text.isNullOrBlank() && edtCardNumber.text.length == 19 && !text.isNullOrBlank() && text.length == 5
-        }
+//        edtCardExpiry.doOnTextChanged { text, start, before, count ->
+//            tvNext.isEnabled =
+//                !edtCardNumber.text.isNullOrBlank() && edtCardNumber.text.length == 19 && !text.isNullOrBlank() && text.length == 5
+//        }
 
         ivClearCardNumber.setOnClickListener {
             edtCardNumber.setText("")
@@ -92,12 +111,16 @@ class FillCardFromAnyCardFragment @Inject constructor() :
             findNavController().popBackStack()
         }
         tvNext.setOnClickListener {
+
+//            val expString = edtCardExpiry.text.toString().replace("/", "")
+
             val dir =
                 FillCardFromAnyCardFragmentDirections.actionCardMakeDepositFromAnyCardFragmentToCardDepositAnyCardTransferFragment(
                     navArgs.cards,
                     navArgs.card,
-                    edtCardNumber.text.toString().replace(" ", ""),
-                    edtCardExpiry.text.toString()
+                    (viewModel.panInfoResp.value as ResultSuccess).value
+//                    edtCardNumber.text.toString().replace(" ", ""),
+//                    expString.substring(2) + expString.substring(0, 2)
                 )
             findNavController().navigate(dir)
         }
@@ -119,7 +142,7 @@ class FillCardFromAnyCardFragment @Inject constructor() :
                 """.trimIndent()
 
                 edtCardNumber.setText(card.cardNumber)
-                edtCardExpiry.setText(card.expirationDate)
+//                edtCardExpiry.setText(card.expirationDate)
 
                 Log.i("TAAAAG", "Card info: $cardData")
 

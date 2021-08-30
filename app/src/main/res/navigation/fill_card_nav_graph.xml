@@ -95,15 +95,19 @@
             android:name="card"
             app:argType="com.example.benefit.remote.models.CardDTO"
             app:nullable="true" />
+        <argument
+            android:name="targetCard"
+            app:argType="com.example.benefit.remote.models.CardP2PDTO"
+            app:nullable="true" />
 
-        <argument
-            android:name="targetPan"
-            app:argType="string"
-            app:nullable="false" />
-        <argument
-            android:name="targetExpiry"
-            app:argType="string"
-            app:nullable="false" />
+<!--        <argument-->
+<!--            android:name="targetPan"-->
+<!--            app:argType="string"-->
+<!--            app:nullable="false" />-->
+<!--        <argument-->
+<!--            android:name="targetExpiry"-->
+<!--            app:argType="string"-->
+<!--            app:nullable="false" />-->
 
     </fragment>
 

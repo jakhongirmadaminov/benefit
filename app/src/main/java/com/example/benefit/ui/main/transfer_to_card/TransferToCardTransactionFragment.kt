@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.*
 import kotlinx.android.synthetic.main.item_card_small.view.*
 import kotlinx.android.synthetic.main.transaction_loading.*
 import kotlinx.android.synthetic.main.transaction_success.*
+import java.text.DecimalFormat
 
 class TransferToCardTransactionFragment :
     BaseFragment(R.layout.fragment_transfer_to_card_transaction) {
@@ -102,8 +103,9 @@ class TransferToCardTransactionFragment :
         val cards = cardsDTO.map {
             val cardView = layoutInflater.inflate(R.layout.item_card_small, null)
             cardView.cardName.text = it.card_title
-            cardView.tvAmount.text = it.balance
+            cardView.tvAmount.text =   DecimalFormat("#,###").format(it.balance?.dropLast(2)?.toInt()) + " UZS"
             cardView.tvCardEndNum.text = "*" + it.pan!!.substring(it.pan!!.length - 4)
+            it.setMiniBackgroundInto(cardView.ivCardBg)
             cardsPagerSmall.addView(cardView)
             cardView
         }

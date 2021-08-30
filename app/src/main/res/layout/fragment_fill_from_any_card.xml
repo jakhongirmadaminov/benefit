@@ -89,25 +89,25 @@
             app:layout_constraintTop_toTopOf="@id/edtCardNumber" />
 
 
-        <EditText
-            android:id="@+id/edtCardExpiry"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="26dp"
-            android:layout_marginRight="26dp"
-            android:background="@drawable/shape_white_rounded_grey_stroke"
-            android:digits="0123456789/"
-            android:gravity="center"
-            android:hint="@string/mm_slash_yy"
-            android:imeOptions="actionDone"
-            android:inputType="date"
-            android:maxLines="1"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:textSize="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edtCardNumber" />
+<!--        <EditText-->
+<!--            android:id="@+id/edtCardExpiry"-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_marginLeft="26dp"-->
+<!--            android:layout_marginRight="26dp"-->
+<!--            android:background="@drawable/shape_white_rounded_grey_stroke"-->
+<!--            android:digits="0123456789/"-->
+<!--            android:gravity="center"-->
+<!--            android:hint="@string/mm_slash_yy"-->
+<!--            android:imeOptions="actionDone"-->
+<!--            android:inputType="date"-->
+<!--            android:maxLines="1"-->
+<!--            android:paddingLeft="15dp"-->
+<!--            android:paddingRight="15dp"-->
+<!--            android:textSize="16dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/edtCardNumber" />-->
 
         <TextView
             android:layout_width="wrap_content"

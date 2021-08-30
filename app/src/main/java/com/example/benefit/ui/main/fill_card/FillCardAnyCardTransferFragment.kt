@@ -44,6 +44,8 @@ class FillCardAnyCardTransferFragment @Inject constructor() :
         setupViews()
         attachListeners()
         subscribeObservers()
+
+//        viewModel.getCardP2PInfo(navArgs.targetPan)
     }
 
     private fun subscribeObservers() {
@@ -73,6 +75,7 @@ class FillCardAnyCardTransferFragment @Inject constructor() :
                 }
             }
         }
+
     }
 
     override fun onCreateView(
@@ -99,8 +102,8 @@ class FillCardAnyCardTransferFragment @Inject constructor() :
             viewModel.p2pPan2Id(
                 edtSum.text.toString().toInt(),
                 navArgs.cards!![cardToIndex].id!!,
-                navArgs.targetPan,
-                navArgs.targetExpiry
+                navArgs.targetCard!!.pan!!,
+                navArgs.targetCard!!.expiry!!.substring(2)
             )
         }
 
@@ -116,6 +119,10 @@ class FillCardAnyCardTransferFragment @Inject constructor() :
 
 
     private fun setupViews() {
+        tvCardEndNum.text =
+            "*" + navArgs.targetCard!!.pan!!.substring(navArgs.targetCard!!.pan!!.length - 4)
+        tvBankName.text = navArgs.targetCard!!.fullName
+
         layoutCalculator.edtSum = edtSum
         val cardViews = navArgs.cards?.map {
             val cardView = layoutInflater.inflate(R.layout.item_card_small, null)
@@ -123,6 +130,7 @@ class FillCardAnyCardTransferFragment @Inject constructor() :
             cardView.tvAmount.text =
                 DecimalFormat("#,###").format(it.balance?.dropLast(2)?.toInt()) + " UZS"
             cardView.tvCardEndNum.text = "*" + it.pan!!.substring(it.pan!!.length - 4)
+            it.setMiniBackgroundInto(cardView.ivCardBg)
             cardsPagerSmall.addView(cardView)
             cardView
         }

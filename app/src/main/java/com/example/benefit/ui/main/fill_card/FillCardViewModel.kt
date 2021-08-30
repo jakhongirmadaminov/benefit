@@ -9,13 +9,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.benefit.remote.AuthApiService
 import com.example.benefit.remote.models.CardDTO
+import com.example.benefit.remote.models.CardP2PDTO
 import com.example.benefit.remote.models.RespPid2Pid
+import com.example.benefit.remote.models.TransactionAnalyticsDTO
 import com.example.benefit.remote.repository.UserRemote
 import com.example.benefit.util.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
 import javax.inject.Inject
 
 @HiltViewModel
@@ -79,6 +83,55 @@ class FillCardViewModel @Inject constructor(
                         expiry
                     )
                 })
+        }
+    }
+
+
+    val panInfoLoading = MutableLiveData<Boolean>()
+    val panInfoResp = MutableLiveData<ResultWrapper<CardP2PDTO>>()
+
+    fun getCardP2PInfo(pan: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            panInfoResp.postValue(getFormattedResponse(panInfoLoading) {
+                authApiService.getP2PCardInfo(
+                    pan
+                )
+            })
+        }
+    }
+
+    val analyticsReportLoading = MutableLiveData<Boolean>()
+    val latestDepositsResp =
+        MutableLiveData<ResultWrapper<List<TransactionAnalyticsDTO>>>()
+
+
+    fun getLatestDeposits(cardId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            analyticsReportLoading.postValue(true)
+
+
+            val resp = getFormattedResponse(analyticsReportLoading) {
+                authApiService.transactionsAnalytics(
+                    cardId,
+                    DateTimeFormat.forPattern("yyyyMMdd")
+                        .print(DateTime.now().minusMonths(1)).toInt(),
+                    DateTimeFormat.forPattern("yyyyMMdd")
+                        .print(DateTime.now().dayOfMonth().withMaximumValue()).toInt()
+                )
+            }
+            analyticsReportLoading.postValue(false)
+
+            when (resp) {
+                is ResultError -> {
+                    latestDepositsResp.postValue(resp)
+
+                }
+                is ResultSuccess -> {
+                    latestDepositsResp.postValue(ResultSuccess(resp.value.last().content.filter { it.isCredit!! }))
+                }
+            }
+
+
         }
     }
 

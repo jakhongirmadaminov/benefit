@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/clParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -32,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="26dp"
-                android:layout_marginTop="26dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="40dp"
                 android:fontFamily="sans-serif"
                 android:text="@string/fill"
@@ -44,8 +45,8 @@
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/cardsPager"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="26dp" />
+                android:layout_height="70dp"
+                android:layout_marginTop="15dp" />
 
             <com.rd.PageIndicatorView
                 android:id="@+id/pageIndicatorView"
@@ -53,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="26dp"
+                android:layout_marginBottom="15dp"
                 app:piv_animationType="scale"
                 app:piv_count="1"
                 app:piv_dynamicCount="true"
@@ -179,7 +180,8 @@
                 android:layout_height="?android:actionBarSize"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="?android:selectableItemBackground">
+                android:foreground="?android:selectableItemBackground"
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="?android:actionBarSize"
@@ -214,16 +216,12 @@
                 android:textSize="16sp"
                 android:textStyle="normal" />
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvLatestDeposits"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
-
-                <include layout="@layout/item_transaction" />
-
-                <include layout="@layout/item_transaction" />
-            </LinearLayout>
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_transaction" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
