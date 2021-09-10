@@ -45,10 +45,11 @@ class HomeViewModel @Inject constructor(
     fun getStories() {
         isLoadingStories.value = true
         viewModelScope.launch(Dispatchers.IO) {
-            storiesResp.postValue(getFormattedResponse(isLoadingStories) { apiAuth.getStories( ) })
+            storiesResp.postValue(getFormattedResponse(isLoadingStories) { apiAuth.getStories() })
         }
     }
 
+    var supremeCard: CardDTO? = null
     val cardsResp = MutableLiveData<List<CardDTO>>()
     val isLoadingCards = MutableLiveData<Boolean>()
     val signInRequired = MutableLiveData<Boolean>()
@@ -64,14 +65,8 @@ class HomeViewModel @Inject constructor(
                         errorMessage.value = response.message
                     }
                     is ResultSuccess -> {
-//                        val bankCards =
-//                            response.value.bank.flatten().associateBy { it.idString }
-//
-//                        response.value.benefit.forEachIndexed { index, cardDTO ->
-//                            cardDTO.balance = bankCards[cardDTO.own_id!!]!!.balance
-//                        }
-
                         cardsResp.value = response.value.getProperly()
+                        supremeCard = cardsResp.value?.find { it.isSupreme() }
                     }
                 }.exhaustive
             }

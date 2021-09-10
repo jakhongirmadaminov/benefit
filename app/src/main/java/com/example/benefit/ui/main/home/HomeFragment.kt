@@ -25,6 +25,7 @@ import com.example.benefit.ui.main.home.bsd_add_card.AddCardBSD
 import com.example.benefit.ui.main.home.card_options.CardOptionsBSD
 import com.example.benefit.ui.main.transfer_to_card.TransferToCardBSD
 import com.example.benefit.ui.transactions_history.TransactionsHistoryActivity
+import com.example.benefit.ui.transactions_history.TransactionsHistoryActivity.Companion.EXTRA_CARD
 import com.example.benefit.ui.viewgroups.ItemLoading
 import com.example.benefit.ui.viewgroups.ItemPaynetCatg
 import com.example.benefit.ui.viewgroups.ItemStory
@@ -227,6 +228,26 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         }
 
 
+        cardLimits.setOnClickListener {
+
+            viewModel.supremeCard?.let { supremeCard ->
+                startActivity(
+                    Intent(requireActivity(), LoanActivity::class.java).apply {
+                        putExtra(EXTRA_CARD, supremeCard)
+                    })
+            } ?: run {
+                val dialog = DialogYouHaveNoSupremeCard()
+//                childFragmentManager.setFragmentResultListener(
+//                    KEY_ADD_CARD,
+//                    viewLifecycleOwner,
+//                    { requestKey, result ->
+//                        AddCardBSD().show(childFragmentManager, "")
+//                    })
+                dialog.show(childFragmentManager, "")
+            }
+        }
+
+
     }
 
     private fun setupViews() {
@@ -275,7 +296,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     private fun makeCardView(cardDTO: CardDTO): View {
         val view = layoutInflater.inflate(R.layout.item_card, cardsPager, false)
         view.tvCardOwner.text = cardDTO.fullName
-        view.tvCardNumber.text = cardDTO.pan
+        view.tvCardNumber.text = cardDTO.panHidden
         view.tvCardName.text = cardDTO.card_title
         cardDTO.setBackgroundInto(view.cardBg, view.tvCardType)
         view.tvBalance.text =

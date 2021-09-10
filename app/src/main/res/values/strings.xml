@@ -221,5 +221,8 @@
     <string name="top_up_card_success">Карта успешно \nпополнена</string>
     <string name="transfer_amount">Сумма перевода: %1$s сум</string>
     <string name="commissions_amount">Комиссия: %1$s сум</string>
+    <string name="you_have_no_supreme_card">У вас нет карты Supreme!</string>
+    <string name="available_amount">Available amount</string>
+    <string name="yearly">годовых</string>
 
 </resources>

@@ -55,7 +55,7 @@ class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_
             cardView.cardName.text = it.card_title
             cardView.tvAmount.text =
                 DecimalFormat("#,###").format(it.balance?.dropLast(2)?.toInt()) + " UZS"
-            cardView.tvCardEndNum.text = "*" + it.pan!!.substring(it.pan!!.length - 4)
+            cardView.tvCardEndNum.text = "*" + it.panHidden!!.substring(it.panHidden!!.length - 4)
             cardsToPagerSmall.addView(cardView)
             cardView
         }
@@ -99,7 +99,7 @@ class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_
             cardView.cardName.text = it.card_title
             cardView.tvAmount.text =
                 DecimalFormat("#,###").format(it.balance?.dropLast(2)?.toInt()) + " UZS"
-            cardView.tvCardEndNum.text = "*" + it.pan!!.substring(it.pan!!.length - 4)
+            cardView.tvCardEndNum.text = "*" + it.panHidden!!.substring(it.panHidden!!.length - 4)
             cardsFromPagerSmall.addView(cardView)
             cardView
         }

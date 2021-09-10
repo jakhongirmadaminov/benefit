@@ -162,7 +162,7 @@ class CardChangeDesignFragment @Inject constructor() :
     private fun makeCardView(cardDTO: CardDTO): View {
         val view = layoutInflater.inflate(R.layout.item_card, cardsPager, false)
         view.tvCardOwner.text = cardDTO.fullName
-        view.tvCardNumber.text = cardDTO.pan
+        view.tvCardNumber.text = cardDTO.panHidden
         view.tvCardName.text = cardDTO.card_title
         cardDTO.setBackgroundInto(view.cardBg, view.tvCardType)
         view.tvBalance.text =

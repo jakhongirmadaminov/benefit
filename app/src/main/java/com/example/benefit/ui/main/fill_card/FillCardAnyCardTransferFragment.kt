@@ -129,7 +129,7 @@ class FillCardAnyCardTransferFragment @Inject constructor() :
             cardView.cardName.text = it.card_title
             cardView.tvAmount.text =
                 DecimalFormat("#,###").format(it.balance?.dropLast(2)?.toInt()) + " UZS"
-            cardView.tvCardEndNum.text = "*" + it.pan!!.substring(it.pan!!.length - 4)
+            cardView.tvCardEndNum.text = "*" + it.panHidden!!.substring(it.panHidden!!.length - 4)
             it.setMiniBackgroundInto(cardView.ivCardBg)
             cardsPagerSmall.addView(cardView)
             cardView

@@ -17,7 +17,6 @@ import com.example.benefit.util.MyBSDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.bsd_fill_card.*
 
-
 @AndroidEntryPoint
 class FillCardBSD : MyBSDialog() {
 
@@ -39,7 +38,6 @@ class FillCardBSD : MyBSDialog() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         if (cardBeingFilled == null || selectableCards == null) {
             subscribeObservers()
             viewModel.getMyCards()
@@ -50,8 +48,6 @@ class FillCardBSD : MyBSDialog() {
                     putParcelableArrayList(ARG_CARDS, ArrayList(selectableCards!!))
                 })
         }
-
-
     }
 
     private fun subscribeObservers() {
@@ -63,9 +59,10 @@ class FillCardBSD : MyBSDialog() {
         viewModel.cardsResp.observe(viewLifecycleOwner) {
             (childFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).findNavController()
                 .setGraph(R.navigation.fill_card_nav_graph, Bundle().apply {
-                    putParcelable(ARG_CARD, it[0])
+                    putParcelable(ARG_CARD, cardBeingFilled ?: it[0])
                     putParcelableArrayList(ARG_CARDS, ArrayList(it))
                 })
         }
     }
+
 }

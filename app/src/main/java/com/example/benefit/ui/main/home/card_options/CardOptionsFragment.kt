@@ -46,7 +46,7 @@ class CardOptionsFragment : BaseFragment(R.layout.fragment_card_options),
     private fun setupViews() {
         cardParent.setBackgroundResource(R.drawable.shape_top_rounded)
         tvBalance.text = "${DecimalFormat("#,###").format(card.balance!!.dropLast(2).toInt())} UZS"
-        tvCardNumber.text = card.pan
+        tvCardNumber.text = card.panHidden
         tvCardOwner.text = card.fullName
         tvExpiryDate.text = card.expiry.toString()
         tvCardName.text = card.card_title

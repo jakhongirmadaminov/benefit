@@ -24,7 +24,8 @@ data class CardDTO(
     @SerializedName("fullName") val fullName: String? = null,
     @SerializedName("id") val id: Int? = null,
     @SerializedName("own_id") val own_id: String? = null,
-    @SerializedName("pan") val pan: String? = null,
+    @SerializedName("pan") val panHidden: String? = null,
+    @SerializedName("card_pan") val panOpen: String? = null,
     @SerializedName("phone") val phone: String? = null,
     @SerializedName("status") val status: Int? = null
 ) : Parcelable {
@@ -35,12 +36,16 @@ data class CardDTO(
 //            return balanceTemp?.dropLast(2)
 //        }
 
+    fun isSupreme(): Boolean {
+        return panOpen!!.contains("8600577")
+    }
+
     fun setBackgroundInto(imageView: ImageView, tvLabel: TextView? = null) {
         if (background_link.isNullOrBlank() || background_link.contains("No background for this card")) {
-            if (pan!!.contains("8600577")) {
+            if (panOpen!!.contains("8600577")) {
                 tvLabel?.text = "Supreme"
                 imageView.setImageResource(R.drawable.card_bg_supreme)
-            } else if (pan.contains("860057")) {
+            } else if (panOpen.contains("860057")) {
                 tvLabel?.text = "Zoom"
                 imageView.setImageResource(R.drawable.card_bg_zoom)
             } else {
@@ -54,7 +59,7 @@ data class CardDTO(
 
     fun setMiniBackgroundInto(imageView: ImageView, tvLabel: TextView? = null) {
         if (background_link.isNullOrBlank() || background_link.contains("No background for this card")) {
-            if (pan!!.contains("8600577")) {
+            if (panOpen!!.contains("8600577")) {
                 tvLabel?.text = "Supreme"
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     imageView.foreground =
@@ -65,7 +70,7 @@ data class CardDTO(
                 } else {
                     imageView.setImageResource(R.drawable.card_bg_mini_supreme)
                 }
-            } else if (pan.contains("860057")) {
+            } else if (panOpen.contains("860057")) {
                 tvLabel?.text = "Zoom"
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     imageView.foreground =

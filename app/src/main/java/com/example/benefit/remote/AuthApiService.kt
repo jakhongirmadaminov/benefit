@@ -314,5 +314,13 @@ interface AuthApiService {
         ) currentMillis: Long = System.currentTimeMillis()
     ): RespFormat<List<Story>>
 
+    @POST("api/loan/loanid")
+    @FormUrlEncoded
+    suspend fun getLoanIdByPan(@Field("pan") pan: String): RespFormat<RespLoanId>
+
+    @POST("api/loan/getloan")
+    @FormUrlEncoded
+    suspend fun getLoanInfo(@Field("id") id: Long): RespFormat<RespLoanInfo>
+
 }
 
