@@ -2,15 +2,13 @@ package com.example.benefit.ui.main.profile.settings_bsd
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.ui.auth.login.LoginViewModel
 import com.example.benefit.ui.base.BaseFragment
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.benefit.util.AppPrefs
 import kotlinx.android.synthetic.main.fragment_settings_main.*
-import javax.inject.Inject
 
 /**
  * Created by jahon on 03-Sep-20
@@ -29,7 +27,9 @@ class SettingsMainFragment : BaseFragment(R.layout.fragment_settings_main) {
     }
 
     private fun setupViews() {
-
+        edtSurname.setText(AppPrefs.lastName)
+        edtName.setText(AppPrefs.firstName)
+        lblPhoneNum.setText(AppPrefs.phoneNumber)
         cardPhoto.setBackgroundResource(R.drawable.shape_oval)
         cardPhotoIcon.setBackgroundResource(R.drawable.shape_oval)
     }

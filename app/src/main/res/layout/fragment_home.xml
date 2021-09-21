@@ -52,43 +52,43 @@
             app:piv_unselectedColor="@color/bg_grey"
             app:piv_viewPager="@id/cardsPager" />
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginLeft="26dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="26dp"
-            app:cardCornerRadius="10dp">
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="100dp"-->
+<!--            android:layout_marginLeft="26dp"-->
+<!--            android:layout_marginTop="15dp"-->
+<!--            android:layout_marginRight="26dp"-->
+<!--            app:cardCornerRadius="10dp">-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/gradient_black">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:background="@drawable/gradient_black">-->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_bell_ringing" />
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    android:layout_marginTop="15dp"-->
+<!--                    android:layout_marginRight="10dp"-->
+<!--                    android:src="@drawable/ic_bell_ringing" />-->
 
-                <TextView
-                    android:id="@+id/tvNotification"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="10dp"
-                    android:fontFamily="sans-serif"
-                    android:maxLines="4"
-                    android:text="Станислав! Новая карта Benefit Zoom готова! Свяжитесь со службой технической поддержки и согласуйте с оператором место и время доставки"
-                    android:textColor="#ffffff"
-                    android:textSize="14sp"
-                    android:textStyle="normal" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tvNotification"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="15dp"-->
+<!--                    android:layout_marginRight="10dp"-->
+<!--                    android:fontFamily="sans-serif"-->
+<!--                    android:maxLines="4"-->
+<!--                    android:text="Станислав! Новая карта Benefit Zoom готова! Свяжитесь со службой технической поддержки и согласуйте с оператором место и время доставки"-->
+<!--                    android:textColor="#ffffff"-->
+<!--                    android:textSize="14sp"-->
+<!--                    android:textStyle="normal" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-        </androidx.cardview.widget.CardView>
+<!--        </androidx.cardview.widget.CardView>-->
 
 
         <androidx.viewpager.widget.ViewPager

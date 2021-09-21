@@ -207,15 +207,18 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         }
 
         cardPayments.setOnClickListener {
-            viewModel.cardsResp.value?.let { cards ->
+            if (!viewModel.cardsResp.value.isNullOrEmpty()) {
                 startActivity(
                     Intent(
                         requireActivity(),
                         TransactionsHistoryActivity::class.java
                     ).apply {
-                        putParcelableArrayListExtra(ARG_CARDS, ArrayList(cards))
+                        putParcelableArrayListExtra(
+                            ARG_CARDS,
+                            ArrayList(viewModel.cardsResp.value!!)
+                        )
                     })
-            } ?: run {
+            } else {
                 val dialog = DialogPleaseAddCard()
                 childFragmentManager.setFragmentResultListener(
                     KEY_ADD_CARD,

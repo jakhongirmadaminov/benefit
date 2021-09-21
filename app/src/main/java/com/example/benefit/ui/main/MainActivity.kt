@@ -8,6 +8,7 @@ import com.example.benefit.R
 import com.example.benefit.ui.auth.AuthActivity
 import com.example.benefit.ui.base.BaseActivity
 import com.example.benefit.util.AppPrefs
+import com.example.benefit.util.ContextUtils.setLocale
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import splitties.activities.start
@@ -23,6 +24,7 @@ class MainActivity : BaseActivity() {
     var isGoingDeposit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setLocale(AppPrefs.language, this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 

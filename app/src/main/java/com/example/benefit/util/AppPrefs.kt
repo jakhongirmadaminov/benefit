@@ -5,6 +5,7 @@ package com.example.benefit.util
  */
 
 
+import com.example.benefit.ui.auth.registration.EGender
 import splitties.experimental.ExperimentalSplittiesApi
 import splitties.preferences.Preferences
 
@@ -33,16 +34,16 @@ object AppPrefs : Preferences("myPrefs") {
     var avatar by stringOrNullPref(null)
 
     @ExperimentalSplittiesApi
-    var birth_date by stringPref("")
+    var dobMillis by longPref(0)
 
     @ExperimentalSplittiesApi
     var firstName by stringPref("")
 
     @ExperimentalSplittiesApi
-    var middleName by stringPref("")
+    var lastName by stringPref("")
 
     @ExperimentalSplittiesApi
-    var lastName by stringPref("")
+    var gender by stringPref(EGender.MALE.name)
 
     @ExperimentalSplittiesApi
     var email by stringOrNullPref(null)

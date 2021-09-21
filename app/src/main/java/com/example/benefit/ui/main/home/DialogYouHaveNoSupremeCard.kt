@@ -21,9 +21,9 @@ class DialogYouHaveNoSupremeCard : DialogFragment(R.layout.dialog_you_have_no_su
             dismiss()
         }
 
-        btnCancel.setOnClickListener {
-            dismiss()
-        }
+//        btnCancel.setOnClickListener {
+//            dismiss()
+//        }
     }
 
 

@@ -1,22 +1,18 @@
 package com.example.benefit.ui.auth.registration
 
+/**
+ * Created by jahon on 03-Sep-20
+ */
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_reg_phone.*
-import javax.inject.Inject
-
-/**
- * Created by jahon on 03-Sep-20
- */
 import com.example.benefit.ui.base.BaseFragment
+import kotlinx.android.synthetic.main.fragment_reg_phone.*
 
 class RegPhoneFragment : BaseFragment(R.layout.fragment_reg_phone) {
 
@@ -102,7 +98,7 @@ class RegPhoneFragment : BaseFragment(R.layout.fragment_reg_phone) {
         btnGetCode.setOnClickListener {
             viewModel.signup(
                 edtPhone.text.toString(),
-                if (edtReferal.text.isNullOrBlank()) null else edtReferal.text.toString()
+                null/*if (edtReferal.text.isNullOrBlank()) null else edtReferal.text.toString()*/
             )
         }
     }

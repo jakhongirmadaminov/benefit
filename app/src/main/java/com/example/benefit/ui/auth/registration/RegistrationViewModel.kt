@@ -1,7 +1,9 @@
 package com.example.benefit.ui.auth.registration
 
+/**
+ * Created by jahon on 03-Sep-20
+ */
 import android.graphics.Bitmap
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.benefit.remote.models.RegPhoneResp
@@ -9,16 +11,13 @@ import com.example.benefit.remote.models.RespAddCard
 import com.example.benefit.remote.models.RespUserInfo
 import com.example.benefit.remote.repository.UserRemote
 import com.example.benefit.util.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import splitties.preferences.edit
 import java.math.BigInteger
-
-/**
- * Created by jahon on 03-Sep-20
- */import javax.inject.Inject
-import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 @HiltViewModel
 class RegistrationViewModel @Inject constructor(private val userRemote: UserRemote) :
@@ -168,6 +167,12 @@ class RegistrationViewModel @Inject constructor(private val userRemote: UserRemo
                         isLoading.value = false
                     }
                     is ResultSuccess -> {
+                        AppPrefs.edit {
+                            firstName = name
+                            this.lastName = lastName
+                            this.gender = gender
+                            this.dobMillis = dobMillis.toLong()
+                        }
                         uploadUserInfoResp.value = response.value
                         isLoading.value = false
                     }
@@ -176,7 +181,7 @@ class RegistrationViewModel @Inject constructor(private val userRemote: UserRemo
         }
     }
 
-    fun addNewCard( title: String,cardNumber: String, expiry: String) {
+    fun addNewCard(title: String, cardNumber: String, expiry: String) {
         isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
             val response = userRemote.addNewCard(title, cardNumber, expiry)

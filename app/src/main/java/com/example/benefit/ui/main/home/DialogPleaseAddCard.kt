@@ -20,10 +20,10 @@ class DialogPleaseAddCard : DialogFragment(R.layout.dialog_please_add_card) {
             childFragmentManager.setFragmentResult(KEY_ADD_CARD, Bundle())
             dismiss()
         }
-
-        btnCancel.setOnClickListener {
-            dismiss()
-        }
+//
+//        btnCancel.setOnClickListener {
+//            dismiss()
+//        }
     }
 
 

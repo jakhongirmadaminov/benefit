@@ -21,13 +21,14 @@
                 android:id="@+id/tvAddCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
                 android:gravity="center"
                 android:text="@string/please_add_at_lease_one_card"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
+          <!--  <Button
                 android:id="@+id/btnCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,7 +38,7 @@
                 android:text="@string/cancel"
                 android:textAllCaps="false"
                 app:layout_constraintEnd_toStartOf="@id/btnOk"
-                app:layout_constraintTop_toTopOf="@id/btnOk" />
+                app:layout_constraintTop_toTopOf="@id/btnOk" />-->
 
             <Button
                 android:id="@+id/btnOk"
@@ -46,7 +47,7 @@
                 android:layout_marginTop="25dp"
                 android:paddingStart="7dp"
                 android:paddingEnd="7dp"
-                android:text="@string/cancel"
+                android:text="@string/ok"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -214,9 +214,9 @@
     <string name="sums">%1$s сум</string>
     <string name="expense_for_month">Потрачено за </string>
     <string name="error">Ошибка!</string>
-    <string name="income_for_month">"Пополнено за "</string>
+    <string name="income_for_month">Пополнено за </string>
     <string name="all_transactions">Все переводы</string>
-    <string name="please_add_at_lease_one_card">Please add at least one card!</string>
+    <string name="please_add_at_lease_one_card">Добавьте карту Benefit!</string>
     <string name="top_up_card_pending">Идёт пополнение \nсредств</string>
     <string name="top_up_card_success">Карта успешно \nпополнена</string>
     <string name="transfer_amount">Сумма перевода: %1$s сум</string>
@@ -224,5 +224,6 @@
     <string name="you_have_no_supreme_card">У вас нет карты Supreme!</string>
     <string name="available_amount">Доступный лимит</string>
     <string name="yearly">годовых</string>
+    <string name="ok">Ok</string>
 
 </resources>
