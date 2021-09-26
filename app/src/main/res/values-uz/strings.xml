@@ -225,5 +225,6 @@
     <string name="available_amount">Available amount</string>
     <string name="yearly">годовых</string>
     <string name="ok">Ok</string>
+    <string name="new_game">Новая игра</string>
 
 </resources>
