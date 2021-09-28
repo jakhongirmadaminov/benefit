@@ -1,227 +1,229 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:orientation="vertical">-->
+
+<!--<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:id="@+id/clParent"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:orientation="vertical"-->
+<!--    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">-->
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/clParent"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/shape_top_rounded"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/rectangle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="40dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/fill"
+            android:textColor="#000000"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/cardsPager"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="15dp" />
+
+        <com.rd.PageIndicatorView
+            android:id="@+id/pageIndicatorView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            app:piv_animationType="scale"
+            app:piv_count="1"
+            app:piv_dynamicCount="true"
+            app:piv_interactiveAnimation="true"
+            app:piv_selectedColor="@color/colorAccent"
+            app:piv_unselectedColor="@color/bg_grey"
+            app:piv_viewPager="@id/cardsPager" />
+
+
+        <LinearLayout
+            android:id="@+id/llFromOwnCards"
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackground">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/rectangle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_width="?android:actionBarSize"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:padding="16dp"
+                android:src="@drawable/ic_identity" />
+
 
             <TextView
-                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="26dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
                 android:fontFamily="sans-serif"
-                android:text="@string/fill"
+                android:text="@string/from_own_cards"
                 android:textColor="#000000"
-                android:textSize="26sp"
-                android:textStyle="bold" />
-
-
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/cardsPager"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginTop="15dp" />
-
-            <com.rd.PageIndicatorView
-                android:id="@+id/pageIndicatorView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                app:piv_animationType="scale"
-                app:piv_count="1"
-                app:piv_dynamicCount="true"
-                app:piv_interactiveAnimation="true"
-                app:piv_selectedColor="@color/colorAccent"
-                app:piv_unselectedColor="@color/bg_grey"
-                app:piv_viewPager="@id/cardsPager" />
-
-
-            <LinearLayout
-                android:id="@+id/llFromOwnCards"
-                android:layout_width="match_parent"
-                android:layout_height="?android:actionBarSize"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:selectableItemBackground">
-
-                <ImageView
-                    android:layout_width="?android:actionBarSize"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:padding="16dp"
-                    android:src="@drawable/ic_identity" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:fontFamily="sans-serif"
-                    android:text="@string/from_own_cards"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="normal" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="75dp"
-                android:background="@color/bg_grey" />
-
-
-            <LinearLayout
-                android:id="@+id/llFromAnyCard"
-                android:layout_width="match_parent"
-                android:layout_height="?android:actionBarSize"
-
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:selectableItemBackground">
-
-                <ImageView
-                    android:layout_width="?android:actionBarSize"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:padding="16dp"
-                    android:src="@drawable/ic_cards" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:fontFamily="sans-serif"
-                    android:text="@string/from_any_bank_card"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="normal" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="75dp"
-                android:background="@color/bg_grey" />
-
-
-            <LinearLayout
-                android:id="@+id/llWithCash"
-                android:layout_width="match_parent"
-                android:layout_height="?android:actionBarSize"
-
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:selectableItemBackground">
-
-                <ImageView
-                    android:layout_width="?android:actionBarSize"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:padding="16dp"
-                    android:src="@drawable/ic_wallet" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:fontFamily="sans-serif"
-                    android:text="@string/by_cash"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="normal" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="75dp"
-                android:background="@color/bg_grey" />
-
-
-            <LinearLayout
-                android:id="@+id/llAskFriends"
-                android:layout_width="match_parent"
-                android:layout_height="?android:actionBarSize"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:selectableItemBackground"
-                android:visibility="gone">
-
-                <ImageView
-                    android:layout_width="?android:actionBarSize"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:padding="16dp"
-                    android:src="@drawable/ic_handshake" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:fontFamily="sans-serif"
-                    android:text="@string/request_friends"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="normal" />
-
-            </LinearLayout>
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="26dp"
-                android:layout_marginTop="26dp"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/latest_deposits"
-                android:textColor="#ab5c5c5c"
                 android:textSize="16sp"
                 android:textStyle="normal" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvLatestDeposits"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_transaction" />
         </LinearLayout>
-    </ScrollView>
-</RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="75dp"
+            android:background="@color/bg_grey" />
+
+
+        <LinearLayout
+            android:id="@+id/llFromAnyCard"
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackground">
+
+            <ImageView
+                android:layout_width="?android:actionBarSize"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:padding="16dp"
+                android:src="@drawable/ic_cards" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/from_any_bank_card"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="75dp"
+            android:background="@color/bg_grey" />
+
+
+        <LinearLayout
+            android:id="@+id/llWithCash"
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackground">
+
+            <ImageView
+                android:layout_width="?android:actionBarSize"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:padding="16dp"
+                android:src="@drawable/ic_wallet" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/by_cash"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="75dp"
+            android:background="@color/bg_grey" />
+
+
+        <LinearLayout
+            android:id="@+id/llAskFriends"
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="?android:actionBarSize"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:padding="16dp"
+                android:src="@drawable/ic_handshake" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/request_friends"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:layout_marginTop="26dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/latest_deposits"
+            android:textColor="#ab5c5c5c"
+            android:textSize="16sp"
+            android:textStyle="normal" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvLatestDeposits"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_transaction" />
+    </LinearLayout>
+<!--</androidx.core.widget.NestedScrollView>&lt;!&ndash;</RelativeLayout>&ndash;&gt;-->

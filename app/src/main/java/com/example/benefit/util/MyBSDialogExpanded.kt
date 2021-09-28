@@ -1,15 +1,16 @@
 package com.example.benefit.util
 
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.View
 import android.view.WindowManager
 import android.widget.FrameLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.example.benefit.R
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import android.util.DisplayMetrics
-import com.example.benefit.R
 
 
 open class MyBSDialogExpanded : BottomSheetDialogFragment() {
@@ -27,7 +28,6 @@ open class MyBSDialogExpanded : BottomSheetDialogFragment() {
             val bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             bottomSheetBehavior.peekHeight = DisplayMetrics().heightPixels
-            bottomSheetBehavior.peekHeight = SizeUtils.getScreenHeight(requireActivity())
             bottomSheetBehavior.isFitToContents = true
 //            bottomSheetBehavior.peekHeight = 0
             coordinatorLayout.parent.requestLayout()

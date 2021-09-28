@@ -164,8 +164,7 @@ class GapChartView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
         drawCentreCircle(canvas)
         drawPlayerAvatarsBg(canvas)
 
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.rectangle_photo_four)
-
+        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_avatar_sample)
 
         drawAvatarsBitmaps(canvas, listOf(bitmap, bitmap, bitmap, bitmap, bitmap, bitmap))
     }
@@ -180,10 +179,10 @@ class GapChartView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
                 bitmaps[i],
                 null,
                 RectF(
-                    baseRect.centerX() + new_x - (progressArcRadius - radiusBgArc - pieMargin*2),
-                    baseRect.centerY() + new_y - (progressArcRadius - radiusBgArc - pieMargin*2),
-                    baseRect.centerX() + new_x + (progressArcRadius - radiusBgArc - pieMargin*2),
-                    baseRect.centerY() + new_y + (progressArcRadius - radiusBgArc - pieMargin*2),
+                    baseRect.centerX() + new_x - (progressArcRadius - radiusBgArc - pieMargin * 2),
+                    baseRect.centerY() + new_y - (progressArcRadius - radiusBgArc - pieMargin * 2),
+                    baseRect.centerX() + new_x + (progressArcRadius - radiusBgArc - pieMargin * 2),
+                    baseRect.centerY() + new_y + (progressArcRadius - radiusBgArc - pieMargin * 2),
                 ),
                 Paint().apply {
                     isAntiAlias = true
@@ -200,7 +199,7 @@ class GapChartView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
             val new_x = radiusBgArc * cos(startAngle * Math.PI / 180).toFloat()
             val new_y = radiusBgArc * sin(startAngle * Math.PI / 180).toFloat()
             canvas.drawCircle(
-                baseRect.centerX() + new_x,
+                baseRect.centerX() + new_x - pieMargin/2,
                 baseRect.centerY() + new_y,
                 progressArcRadius - radiusBgArc,
                 Paint().apply {
@@ -276,36 +275,36 @@ class GapChartView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
 
         for (i in 0 until playerCount) {
 
-//            if (i == 0 || i == 1) {
+            if (i == 0 || i == 1) {
 
-            val startAngle = 360 / playerCount * i.toFloat() - 90
-            val endAngle = 360 / playerCount * (i + 1).toFloat() - 90
+                val startAngle = 360 / playerCount * i.toFloat() - 90
+                val endAngle = 360 / playerCount * (i + 1).toFloat() - 90
 
-            val gradient =
-                SweepGradient(
+                val gradient =
+                    SweepGradient(
+                        progressArcRects[i].centerX(),
+                        progressArcRects[i].centerY(),
+                        Color.parseColor("#602b8f"),
+                        Color.parseColor("#FAB3E3")
+                    )
+
+                val matrix = Matrix()
+                matrix.postRotate(
+                    endAngle,
                     progressArcRects[i].centerX(),
-                    progressArcRects[i].centerY(),
-                    Color.parseColor("#602b8f"),
-                    Color.parseColor("#FAB3E3")
+                    progressArcRects[i].centerY()
                 )
-
-            val matrix = Matrix()
-            matrix.postRotate(
-                endAngle,
-                progressArcRects[i].centerX(),
-                progressArcRects[i].centerY()
-            )
-            gradient.setLocalMatrix(matrix)
-            progressGradientPaint.shader = gradient
-            canvas.drawArc(
-                progressArcRects[i],
-                startAngle,
-                360 / playerCount.toFloat(),
-                true,
-                progressGradientPaint
-            )
+                gradient.setLocalMatrix(matrix)
+                progressGradientPaint.shader = gradient
+                canvas.drawArc(
+                    progressArcRects[i],
+                    startAngle,
+                    360 / playerCount.toFloat(),
+                    true,
+                    progressGradientPaint
+                )
+            }
         }
-//        }
     }
 
 //    private fun drawBg(canvas: Canvas) {
