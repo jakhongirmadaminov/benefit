@@ -7,13 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.example.benefit.R
-import com.example.benefit.util.MyBSDialog
+import com.example.benefit.ui.main.BenefitBSD
+
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.bsd_fill_card.*
 
 
 
-class GameRulesBSD : MyBSDialog() {
+class GameRulesBSD : BenefitBSD() {
 
 
     override fun onCreateView(

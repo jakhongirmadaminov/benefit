@@ -6,13 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.benefit.R
-import com.example.benefit.util.MyBSDialog
+import com.example.benefit.ui.main.BenefitBSD
+
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.bsd_invite_friend.*
 
 
 
-class InviteFriendsBSD : MyBSDialog() {
+class InviteFriendsBSD : BenefitBSD() {
 
 
     override fun onCreateView(

@@ -7,13 +7,14 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import com.example.benefit.R
-import com.example.benefit.util.MyBSDialog
+import com.example.benefit.ui.main.BenefitBSD
+
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.bsd_select_bank_branch.*
 
 
 @AndroidEntryPoint
-class BSDSelectBankBranch : MyBSDialog() {
+class BSDSelectBankBranch : BenefitBSD() {
 
 
     private val viewModel: BSDSelectBranchViewModel by viewModels()

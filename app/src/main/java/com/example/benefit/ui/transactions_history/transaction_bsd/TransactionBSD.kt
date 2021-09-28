@@ -12,15 +12,15 @@ import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.remote.models.TransactionAnalyticsDTO
 import com.example.benefit.remote.models.TransactionDTO
-import com.example.benefit.util.MyBSDialog
-import com.example.benefit.util.MyNestedScrollBSDialog
+import com.example.benefit.ui.main.BenefitBSD
+
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.bsd_transaction.*
 import kotlinx.android.synthetic.main.bsd_transaction.view.*
 
 
 
-class TransactionBSD : MyNestedScrollBSDialog() {
+class TransactionBSD : BenefitBSD() {
 
     companion object {
         const val ARG_TRANSACTION_DTO = "TRANSACTION_DTO"

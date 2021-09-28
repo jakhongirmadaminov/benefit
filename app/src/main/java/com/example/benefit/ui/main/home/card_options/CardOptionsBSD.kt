@@ -9,11 +9,12 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.remote.models.CardDTO
+import com.example.benefit.ui.main.BenefitBSD
 import com.example.benefit.ui.main.fill_card.FillCardFragment
-import com.example.benefit.util.MyBSDialog
 
 
-class CardOptionsBSD : MyBSDialog() {
+
+class CardOptionsBSD : BenefitBSD() {
 
     lateinit var cardBeingFilled: CardDTO
     lateinit var selectableCards: List<CardDTO>

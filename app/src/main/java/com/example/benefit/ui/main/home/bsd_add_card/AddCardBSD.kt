@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.example.benefit.R
 import com.example.benefit.ui.auth.registration.RegistrationViewModel
-import com.example.benefit.util.MyBSDialog
+import com.example.benefit.ui.main.BenefitBSD
+
 import dagger.hilt.android.AndroidEntryPoint
 
 
 
-class AddCardBSD : MyBSDialog() {
+class AddCardBSD : BenefitBSD() {
 
     private val viewModel: RegistrationViewModel by activityViewModels()
 

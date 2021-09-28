@@ -10,12 +10,13 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.remote.models.RegularPaymentDTO
-import com.example.benefit.util.MyBSDialog
+import com.example.benefit.ui.main.BenefitBSD
+
 import dagger.hilt.android.AndroidEntryPoint
 
 
 
-class RegularPaymentBSD : MyBSDialog() {
+class RegularPaymentBSD : BenefitBSD() {
 
 
     companion object {

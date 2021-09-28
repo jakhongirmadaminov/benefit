@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.benefit.R
-import com.example.benefit.util.MyBSDialog
+import com.example.benefit.ui.main.BenefitBSD
+
 import dagger.hilt.android.AndroidEntryPoint
 
 
 
-class SettingsBSD : MyBSDialog() {
+class SettingsBSD : BenefitBSD() {
 
     private val viewModel: SettingsBSDViewModel by viewModels()
 

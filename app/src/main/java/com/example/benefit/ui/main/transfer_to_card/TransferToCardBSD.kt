@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.example.benefit.R
-import com.example.benefit.util.MyBSDialog
+import com.example.benefit.ui.main.BenefitBSD
+
 import dagger.hilt.android.AndroidEntryPoint
 
 
 
-class TransferToCardBSD : MyBSDialog() {
+class TransferToCardBSD : BenefitBSD() {
 
     private val viewModel: TransferToCardViewModel by viewModels()
 

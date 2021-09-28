@@ -9,7 +9,8 @@ import android.widget.FrameLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.viewModels
 import com.example.benefit.R
-import com.example.benefit.util.MyBSDialog
+import com.example.benefit.ui.main.BenefitBSD
+
 import com.example.benefit.util.SizeUtils
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -18,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 
-class LoginBSD : MyBSDialog() {
+class LoginBSD : BenefitBSD() {
 
     private val viewModel: LoginViewModel by viewModels()
 
