@@ -16,6 +16,10 @@
             android:name="transactionDTO"
             app:argType="com.example.benefit.remote.models.TransactionAnalyticsDTO" />
 
+        <argument
+            android:name="transactionsReport"
+            app:argType="com.example.benefit.remote.models.TransactionInOutDTOList" />
+
         <action
             android:id="@+id/action_transactionFragment_to_transactionMoreInfoFragment"
             app:destination="@id/transactionMoreInfoFragment"

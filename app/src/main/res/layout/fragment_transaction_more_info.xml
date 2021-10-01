@@ -57,19 +57,19 @@
 
         <TextView
             android:id="@+id/tvBrandName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:layout_marginEnd="10dp"
             android:fontFamily="sans-serif"
-            android:text="Amphora"
             android:textColor="#000000"
-            android:textSize="26sp"
+            android:textSize="26dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/cardBrand"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/cardBrand"
             app:layout_constraintTop_toTopOf="@id/cardBrand"
-
-            />
+            tools:text="Amphora" />
 
 
         <ImageView
@@ -86,312 +86,273 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/cardBrand"
             android:paddingLeft="26dp"
             android:paddingRight="26dp"
             android:paddingBottom="26dp"
-            android:layout_marginTop="15dp"
-            android:layout_height="wrap_content">
+            app:layout_constraintTop_toBottomOf="@id/cardBrand">
 
 
             <TextView
+                android:id="@+id/lblDenomination"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:fontFamily="sans-serif"
                 android:layout_marginTop="15dp"
-                android:textStyle="normal"
+                android:fontFamily="sans-serif"
+                android:text="@string/denomination"
                 android:textColor="#000000"
-                android:text="Наименование"
-                />
+                android:textSize="18sp"
+                android:textStyle="normal" />
 
             <TextView
+                android:id="@+id/tvDenomination"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
                 android:fontFamily="sans-serif-light"
-                android:textStyle="normal"
-                android:textColor="#cc5c5c5c"
                 android:text="ЧП “Amstel Wing”"
-                />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:fontFamily="sans-serif"
-                android:layout_marginTop="15dp"
-                android:textStyle="normal"
-                android:textColor="#000000"
-                android:text="Наименование"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:fontFamily="sans-serif-light"
-                android:textStyle="normal"
                 android:textColor="#cc5c5c5c"
-                android:text="ЧП “Amstel Wing”"
-                />
-
+                android:textSize="18sp"
+                android:textStyle="normal" />
 
             <TextView
+                android:id="@+id/lblReceiptNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:fontFamily="sans-serif"
                 android:layout_marginTop="15dp"
-                android:textStyle="normal"
-                android:textColor="#000000"
-                android:text="Номер квитанции"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:fontFamily="sans-serif-light"
-                android:textStyle="normal"
-                android:textColor="#cc5c5c5c"
-                android:text="№156384"
-                />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
                 android:fontFamily="sans-serif"
-                android:layout_marginTop="15dp"
-                android:textStyle="normal"
+                android:text="@string/receipt_number"
                 android:textColor="#000000"
-                android:text="Категория"
-                />
+                android:textSize="18sp"
+                android:textStyle="normal" />
 
             <TextView
+                android:id="@+id/tvReceiptNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
                 android:fontFamily="sans-serif-light"
-                android:textStyle="normal"
                 android:textColor="#cc5c5c5c"
-                android:text="Интернет - провайдер"
-                />
-
+                android:textSize="18sp"
+                android:textStyle="normal"
+                tools:text="№156384" />
 
             <TextView
+                android:id="@+id/lblCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:layout_marginTop="15dp"
                 android:fontFamily="sans-serif"
-                android:layout_marginTop="15dp"
-                android:textStyle="normal"
+                android:text="@string/category"
                 android:textColor="#000000"
-                android:text="Статус"
-                />
+                android:textSize="18sp"
+                android:textStyle="normal" />
 
             <TextView
+                android:id="@+id/tvCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
                 android:fontFamily="sans-serif-light"
-                android:textStyle="normal"
                 android:textColor="#cc5c5c5c"
-                android:text="Списано"
-                />
-
+                android:textSize="18sp"
+                android:textStyle="normal"
+                tools:text="Интернет - провайдер" />
 
             <TextView
+                android:id="@+id/lblStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:layout_marginTop="15dp"
                 android:fontFamily="sans-serif"
-                android:layout_marginTop="15dp"
-                android:textStyle="normal"
+                android:text="@string/status"
                 android:textColor="#000000"
-                android:text="Сумма"
-                />
+                android:textSize="18sp"
+                android:textStyle="normal" />
 
             <TextView
+                android:id="@+id/tvStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
                 android:fontFamily="sans-serif-light"
-                android:textStyle="normal"
                 android:textColor="#cc5c5c5c"
-                android:text="110 000 сум"
-                />
+                android:textSize="18sp"
+                android:textStyle="normal"
+                tools:text="Списано" />
 
 
             <TextView
+                android:id="@+id/tvSumm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:layout_marginTop="15dp"
                 android:fontFamily="sans-serif"
-                android:layout_marginTop="15dp"
-                android:textStyle="normal"
+                android:text="@string/sum"
                 android:textColor="#000000"
-                android:text="Дата и время операции"
-                />
+                android:textSize="18sp"
+                android:textStyle="normal" />
 
             <TextView
+                android:id="@+id/tvSum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
                 android:fontFamily="sans-serif-light"
-                android:textStyle="normal"
                 android:textColor="#cc5c5c5c"
-                android:text="03.03.2019, 09:39"
-                />
+                android:textSize="18sp"
+                android:textStyle="normal"
+                tools:text="110 000 сум" />
 
 
             <TextView
+                android:id="@+id/lblOperationDateAndTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:layout_marginTop="15dp"
                 android:fontFamily="sans-serif"
-                android:layout_marginTop="15dp"
-                android:textStyle="normal"
+                android:text="@string/operation_date_and_time"
                 android:textColor="#000000"
-                android:text="Номер счёта"
-                />
+                android:textSize="18sp"
+                android:textStyle="normal" />
 
             <TextView
+                android:id="@+id/tvOperationDateAndTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
                 android:fontFamily="sans-serif-light"
-                android:textStyle="normal"
                 android:textColor="#cc5c5c5c"
-                android:text="3365987"
-                />
+                android:textSize="18sp"
+                android:textStyle="normal"
+                tools:text="03.03.2019, 09:39" />
 
 
             <TextView
+                android:id="@+id/lblAccountNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:layout_marginTop="15dp"
                 android:fontFamily="sans-serif"
-                android:layout_marginTop="15dp"
-                android:textStyle="normal"
+                android:text="@string/account_number"
                 android:textColor="#000000"
-                android:text="С карты"
-                />
+                android:textSize="18sp"
+                android:textStyle="normal" />
 
             <TextView
+                android:id="@+id/tvAccountNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
                 android:fontFamily="sans-serif-light"
-                android:textStyle="normal"
                 android:textColor="#cc5c5c5c"
-                android:text="8600 16** **** 5027"
-                />
+                android:textSize="18sp"
+                android:textStyle="normal"
+                tools:text="3365987" />
 
 
             <TextView
+                android:id="@+id/lblFromCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:layout_marginTop="15dp"
                 android:fontFamily="sans-serif"
-                android:layout_marginTop="15dp"
-                android:textStyle="normal"
+                android:text="@string/from_card"
                 android:textColor="#000000"
-                android:text="Пункт обслуживания"
-                />
+                android:textSize="18sp"
+                android:textStyle="normal" />
 
             <TextView
+                android:id="@+id/tvFromCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
                 android:fontFamily="sans-serif-light"
-                android:textStyle="normal"
                 android:textColor="#cc5c5c5c"
-                android:text="10712185"
-                />
-
+                android:textSize="18sp"
+                android:textStyle="normal"
+                tools:text="8600 16** **** 5027" />
 
             <TextView
+                android:id="@+id/lblServicePoint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:layout_marginTop="15dp"
                 android:fontFamily="sans-serif"
-                android:layout_marginTop="15dp"
-                android:textStyle="normal"
+                android:text="@string/service_point"
                 android:textColor="#000000"
-                android:text="Терминал"
-                />
+                android:textSize="18sp"
+                android:textStyle="normal" />
 
             <TextView
+                android:id="@+id/tvServicePoint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
                 android:fontFamily="sans-serif-light"
-                android:textStyle="normal"
                 android:textColor="#cc5c5c5c"
-                android:text="92800083"
-                />
-
+                android:textSize="18sp"
+                android:textStyle="normal"
+                tools:text="10712185" />
 
             <TextView
+                android:id="@+id/lblTerminal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:layout_marginTop="15dp"
                 android:fontFamily="sans-serif"
-                android:layout_marginTop="15dp"
-                android:textStyle="normal"
+                android:text="@string/terminal"
                 android:textColor="#000000"
-                android:text="Код активации"
-                />
+                android:textSize="18sp"
+                android:textStyle="normal" />
 
             <TextView
+                android:id="@+id/tvTerminal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
                 android:fontFamily="sans-serif-light"
-                android:textStyle="normal"
                 android:textColor="#cc5c5c5c"
-                android:text="0"
-                />
+                android:textSize="18sp"
+                android:textStyle="normal"
+                tools:text="92800083" />
+
 
             <TextView
+                android:id="@+id/lblReceiptCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:layout_marginTop="15dp"
                 android:fontFamily="sans-serif"
-                android:layout_marginTop="15dp"
-                android:textStyle="normal"
+                android:text="@string/receipt_code"
                 android:textColor="#000000"
-                android:text="AID"
-                />
+                android:textSize="18sp"
+                android:textStyle="normal" />
 
             <TextView
+                android:id="@+id/tvReceiptCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
                 android:fontFamily="sans-serif-light"
-                android:textStyle="normal"
                 android:textColor="#cc5c5c5c"
-                android:text="45632587"
-                />
+                android:textSize="18sp"
+                android:textStyle="normal"
+                tools:text="0" />
 
+            <TextView
+                android:id="@+id/lblAID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/aid"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/tvAID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:textColor="#cc5c5c5c"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                tools:text="45632587" />
 
         </LinearLayout>
-
-
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/rvDetails"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="15dp"-->
-<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/cardBrand"-->
-<!--            tools:listitem="@layout/item_transaction_txt_only" />-->
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

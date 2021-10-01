@@ -8,14 +8,13 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.remote.models.TransactionAnalyticsDTO
-import com.example.benefit.remote.models.TransactionDTO
 import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.home.HomeFragment
-import com.example.benefit.ui.viewgroups.ItemTransactionTxtOnly
 import com.example.benefit.util.SizeUtils
 import com.example.benefit.util.loadImageUrl
 import com.github.mikephil.charting.charts.LineChart
@@ -33,22 +32,20 @@ import kotlin.random.Random
 
 class TransactionFragment : BaseFragment(R.layout.fragment_transaction) {
 
-//    val args by navArgs<TransactionFragmentArgs>()
-//    val productId = args.productId
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
-
         transactionDTO = requireArguments().getParcelable(TransactionBSD.ARG_TRANSACTION_DTO)!!
+        transactionsReport =
+            requireArguments().getParcelableArrayList(TransactionBSD.ARG_TRANSACTIONS_REPORT)
     }
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
     lateinit var transactionDTO: TransactionAnalyticsDTO
+    var transactionsReport: ArrayList<TransactionAnalyticsDTO>? = null
     private val viewModel: TransactionViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         setupViews()
 
@@ -61,53 +58,15 @@ class TransactionFragment : BaseFragment(R.layout.fragment_transaction) {
         setupTransactionInfo()
         rvAllTransactions.adapter = adapter
 
-        val data = arrayListOf(
-            TransactionDTO(
-                "Amphora",
-                "#заинтернет",
-                100000,
-                "",
-                1593863236,
-                TransactionType.COMMERCIAL_PAYMENT
-            ),
-            TransactionDTO(
-                "ЧП “Nuraliev”",
-                "Категория не выбрана",
-                250000,
-                "",
-                1593863236,
-                TransactionType.NONE
-            ),
-            TransactionDTO(
-                "Перевод на карту",
-                "Kapital Bank",
-                300000,
-                "",
-                1593863236,
-                TransactionType.TRANSFER_TO_CARD
-            ),
-            TransactionDTO(
-                "Infinity Roses",
-                "Магазины Цветов",
-                120000,
-                "",
-                1593863236,
-                TransactionType.COMMERCIAL_PAYMENT
-            )
-        )
-
-        data.forEach {
-            adapter.add(ItemTransactionTxtOnly(it))
-        }
-
         setupChartPager()
-        clParent.scrollTo(0, 0)
     }
 
     private fun setupTransactionInfo() {
-
-        transactionDTO.partner?.image?.let {
-            ivBrandLogo.loadImageUrl(it)
+        if (transactionDTO.partner?.image.isNullOrBlank()) {
+            ivBrandLogo.isVisible = false
+        } else {
+            ivBrandLogo.isVisible = true
+            ivBrandLogo.loadImageUrl(transactionDTO.partner!!.image!!)
         }
 
         tvCardNumber.text = transactionDTO.hpan

@@ -153,13 +153,13 @@ class FillCardFragment : BaseFragment(R.layout.fragment_fill_card) {
                 latestDepositsAdapter.add(ItemTransactionDate(it.udate!!))
                 dateString = it.udate
             }
-            latestDepositsAdapter.add(ItemTransaction(it) {
+            latestDepositsAdapter.add(ItemTransaction(it) /*{
                 val dialog = TransactionBSD()
                 dialog.arguments = Bundle().apply {
                     putParcelable(TransactionBSD.ARG_TRANSACTION_DTO, it)
                 }
                 dialog.show(childFragmentManager, "")
-            })
+            }*/)
         }
     }
 

@@ -15,7 +15,8 @@ open class BenefitBSD : BottomSheetDialogFragment() {
         dialog?.setOnShowListener {
             val d = dialog as BottomSheetDialog
             val bottomSheet = d.findViewById<View>(R.id.design_bottom_sheet) as FrameLayout
-            bottomSheet.setBackgroundResource(android.R.color.transparent)
+
+            bottomSheet.setBackgroundResource(R.drawable.shape_top_rounded)
             val vHeight =
                 SizeUtils.getScreenHeight(requireActivity()) - SizeUtils.getActionBarHeight(
                     requireActivity()

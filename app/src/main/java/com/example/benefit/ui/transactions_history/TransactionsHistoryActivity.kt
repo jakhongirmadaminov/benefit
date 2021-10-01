@@ -17,6 +17,7 @@ import com.example.benefit.ui.base.BaseActivity
 import com.example.benefit.ui.expenses_by_categories.ARG_CARDS
 import com.example.benefit.ui.main.home.HomeFragment
 import com.example.benefit.ui.transactions_history.transaction_bsd.TransactionBSD
+import com.example.benefit.ui.transactions_history.transaction_bsd.TransactionBSD.Companion.ARG_TRANSACTIONS_REPORT
 import com.example.benefit.ui.viewgroups.CardTagItem
 import com.example.benefit.ui.viewgroups.ItemTransaction
 import com.example.benefit.ui.viewgroups.ItemTransactionDate
@@ -240,6 +241,7 @@ class TransactionsHistoryActivity : BaseActivity(), OnChartValueSelectedListener
                     val dialog = TransactionBSD()
                     dialog.arguments = Bundle().apply {
                         putParcelable(TransactionBSD.ARG_TRANSACTION_DTO, it)
+                        putParcelableArrayList (ARG_TRANSACTIONS_REPORT, ArrayList((viewModel.transactionsReportResp.value as ResultSuccess).value))
                     }
                     dialog.show(supportFragmentManager, "")
                 })

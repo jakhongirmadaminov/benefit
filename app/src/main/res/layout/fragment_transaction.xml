@@ -1,268 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/clParent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/shape_top_rounded"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardBrand"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardBrand"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="26dp"
-            android:layout_marginTop="26dp"
-            app:cardCornerRadius="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/ivBrandLogo"
-                android:layout_width="?android:actionBarSize"
-                android:layout_height="?android:actionBarSize"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:selectableItemBackground" />
-        </androidx.cardview.widget.CardView>
-
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="26dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/rectangle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvSum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="26dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="40dp"
-            android:fontFamily="sans-serif"
-            android:textColor="#000000"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardBrand"
-            tools:text="- 100 000 UZS" />
-
-
-        <TextView
-            android:id="@+id/tvTransactionType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="sans-serif-medium"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            app:layout_constraintStart_toStartOf="@id/tvSum"
-            app:layout_constraintTop_toBottomOf="@id/tvSum"
-            tools:text="На карту Kapital Bank" />
-
-        <TextView
-            android:id="@+id/tvCardNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:textColor="#ab5c5c5c"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            app:layout_constraintStart_toStartOf="@id/tvTransactionType"
-            app:layout_constraintTop_toBottomOf="@id/tvTransactionType"
-            tools:text="8600 33** **** 4312" />
-
-        <TextView
-            android:id="@+id/tvDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="sans-serif"
-            android:textColor="#ab5c5c5c"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            app:layout_constraintStart_toStartOf="@id/tvCardNumber"
-            app:layout_constraintTop_toBottomOf="@id/tvCardNumber"
-            tools:text="5 марта 2019, 09:30" />
-
-
-        <!--        <EditText-->
-        <!--            android:id="@+id/edtTag"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="40dp"-->
-        <!--            android:layout_marginLeft="26dp"-->
-        <!--            android:layout_marginTop="10dp"-->
-        <!--            android:layout_marginRight="80dp"-->
-        <!--            android:background="@drawable/selector_grey_rounded"-->
-        <!--            android:hint="Напишите #тег или комментарий"-->
-        <!--            android:paddingLeft="10dp"-->
-        <!--            android:paddingRight="10dp"-->
-        <!--            android:textSize="14dp"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/tvDate" />-->
-
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/chartPager"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="15dp"
-            app:layout_constraintTop_toBottomOf="@id/tvDate" />
-
-        <com.rd.PageIndicatorView
-            android:id="@+id/pageIndicatorView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chartPager"
-            app:piv_animationType="scale"
-            app:piv_count="1"
-            app:piv_dynamicCount="true"
-            app:piv_interactiveAnimation="true"
-            app:piv_selectedColor="@color/colorAccent"
-            app:piv_unselectedColor="@color/bg_grey"
-            app:piv_viewPager="@id/chartPager" />
-
-        <ImageView
-            android:id="@+id/ivFolderHeart"
+            android:id="@+id/ivBrandLogo"
             android:layout_width="?android:actionBarSize"
             android:layout_height="?android:actionBarSize"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="16dp"
             android:clickable="true"
             android:focusable="true"
-            android:foreground="?android:selectableItemBackground"
-            android:padding="15dp"
-            android:src="@drawable/ic_folder_heart"
-            app:layout_constraintBottom_toTopOf="@id/ivPeople"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:foreground="?android:selectableItemBackground" />
+    </androidx.cardview.widget.CardView>
 
 
-        <ImageView
-            android:id="@+id/ivPeople"
-            android:layout_width="?android:actionBarSize"
-            android:layout_height="?android:actionBarSize"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:selectableItemBackground"
-            android:padding="15dp"
-            android:src="@drawable/ic_people"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/ivMore"
-            app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/rectangle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-            app:layout_constraintTop_toBottomOf="@id/ivFolderHeart" />
-
-
-        <ImageView
-            android:id="@+id/ivMore"
-            android:layout_width="?android:actionBarSize"
-            android:layout_height="?android:actionBarSize"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:selectableItemBackground"
-            android:padding="15dp"
-            android:src="@drawable/ic_three_dots"
-            app:layout_constraintBottom_toTopOf="@id/ivRefresh"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivPeople" />
+    <TextView
+        android:id="@+id/tvSum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:fontFamily="sans-serif"
+        android:textColor="#000000"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardBrand"
+        tools:text="- 100 000 UZS" />
 
 
-        <ImageView
-            android:id="@+id/ivRefresh"
-            android:layout_width="?android:actionBarSize"
-            android:layout_height="?android:actionBarSize"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:selectableItemBackground"
-            android:padding="15dp"
-            android:src="@drawable/ic_refresh"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/ivSelectCategories"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivMore" />
+    <TextView
+        android:id="@+id/tvTransactionType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@id/tvSum"
+        app:layout_constraintTop_toBottomOf="@id/tvSum"
+        tools:text="На карту Kapital Bank" />
 
-        <ImageView
-            android:id="@+id/ivSelectCategories"
-            android:layout_width="?android:actionBarSize"
-            android:layout_height="?android:actionBarSize"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:selectableItemBackground"
-            android:padding="15dp"
-            android:src="@drawable/ic_folder_plus"
-            app:layout_constraintBottom_toTopOf="@id/ivRefresh"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivRefresh" />
+    <TextView
+        android:id="@+id/tvCardNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:textColor="#ab5c5c5c"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@id/tvTransactionType"
+        app:layout_constraintTop_toBottomOf="@id/tvTransactionType"
+        tools:text="8600 33** **** 4312" />
 
-
-        <TextView
-            android:id="@+id/lblAllTransactions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="26dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="@string/all_transactions"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pageIndicatorView" />
-
-        <TextView
-            android:id="@+id/tvAllTransactionsSum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="26dp"
-            android:fontFamily="sans-serif-medium"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/lblAllTransactions"
-            tools:text="- 560 000 UZS" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="26dp"
-            android:layout_marginRight="26dp"
-            android:background="@color/bg_grey"
-            app:layout_constraintTop_toTopOf="@id/rvAllTransactions" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvAllTransactions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/lblAllTransactions"
-            tools:listitem="@layout/item_transaction_txt_only" />
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif"
+        android:textColor="#ab5c5c5c"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@id/tvCardNumber"
+        app:layout_constraintTop_toBottomOf="@id/tvCardNumber"
+        tools:text="5 марта 2019, 09:30" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+    <!--        <EditText-->
+    <!--            android:id="@+id/edtTag"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="40dp"-->
+    <!--            android:layout_marginLeft="26dp"-->
+    <!--            android:layout_marginTop="10dp"-->
+    <!--            android:layout_marginRight="80dp"-->
+    <!--            android:background="@drawable/selector_grey_rounded"-->
+    <!--            android:hint="Напишите #тег или комментарий"-->
+    <!--            android:paddingLeft="10dp"-->
+    <!--            android:paddingRight="10dp"-->
+    <!--            android:textSize="14dp"-->
+    <!--            app:layout_constraintTop_toBottomOf="@id/tvDate" />-->
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/chartPager"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@id/tvDate" />
+
+    <com.rd.PageIndicatorView
+        android:id="@+id/pageIndicatorView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chartPager"
+        app:piv_animationType="scale"
+        app:piv_count="1"
+        app:piv_dynamicCount="true"
+        app:piv_interactiveAnimation="true"
+        app:piv_selectedColor="@color/colorAccent"
+        app:piv_unselectedColor="@color/bg_grey"
+        app:piv_viewPager="@id/chartPager" />
+
+    <ImageView
+        android:id="@+id/ivFolderHeart"
+        android:layout_width="?android:actionBarSize"
+        android:layout_height="?android:actionBarSize"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:selectableItemBackground"
+        android:padding="15dp"
+        android:src="@drawable/ic_folder_heart"
+        app:layout_constraintBottom_toTopOf="@id/ivPeople"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/ivPeople"
+        android:layout_width="?android:actionBarSize"
+        android:layout_height="?android:actionBarSize"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:selectableItemBackground"
+        android:padding="15dp"
+        android:src="@drawable/ic_people"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/ivMore"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@id/ivFolderHeart" />
+
+
+    <ImageView
+        android:id="@+id/ivMore"
+        android:layout_width="?android:actionBarSize"
+        android:layout_height="?android:actionBarSize"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:selectableItemBackground"
+        android:padding="15dp"
+        android:src="@drawable/ic_three_dots"
+        app:layout_constraintBottom_toTopOf="@id/ivRefresh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivPeople" />
+
+
+    <ImageView
+        android:id="@+id/ivRefresh"
+        android:layout_width="?android:actionBarSize"
+        android:layout_height="?android:actionBarSize"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:selectableItemBackground"
+        android:padding="15dp"
+        android:src="@drawable/ic_refresh"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/ivSelectCategories"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivMore" />
+
+    <ImageView
+        android:id="@+id/ivSelectCategories"
+        android:layout_width="?android:actionBarSize"
+        android:layout_height="?android:actionBarSize"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:selectableItemBackground"
+        android:padding="15dp"
+        android:src="@drawable/ic_folder_plus"
+        app:layout_constraintBottom_toTopOf="@id/ivRefresh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivRefresh" />
+
+
+    <TextView
+        android:id="@+id/lblAllTransactions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/all_transactions"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pageIndicatorView" />
+
+    <TextView
+        android:id="@+id/tvAllTransactionsSum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="26dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/lblAllTransactions"
+        tools:text="- 560 000 UZS" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:background="@color/bg_grey"
+        app:layout_constraintTop_toTopOf="@id/rvAllTransactions" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAllTransactions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/lblAllTransactions"
+        tools:listitem="@layout/item_transaction_txt_only" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

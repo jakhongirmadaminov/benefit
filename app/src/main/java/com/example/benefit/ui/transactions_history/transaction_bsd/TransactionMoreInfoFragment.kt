@@ -2,12 +2,13 @@ package com.example.benefit.ui.transactions_history.transaction_bsd
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.benefit.R
 import com.example.benefit.ui.base.BaseFragment
+import com.example.benefit.util.loadImageUrl
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_transaction_more_info.*
@@ -37,6 +38,14 @@ class TransactionMoreInfoFragment @Inject constructor() :
 
     private fun setupViews() {
         tvBrandName.text = args.transactionDTO.merchantName
+        if (args.transactionDTO.partner?.image.isNullOrBlank()) {
+            ivBrandLogo.isVisible = false
+        } else {
+            ivBrandLogo.isVisible = true
+            ivBrandLogo.loadImageUrl(args.transactionDTO.partner!!.image!!)
+        }
+
+        tvDenomination.text = args.transactionDTO.merchant
 
     }
 
