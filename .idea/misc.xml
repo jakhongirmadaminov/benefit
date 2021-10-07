@@ -37,6 +37,8 @@
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.3614583333333333" />
         <entry key="app/src/main/res/layout/fragment_reg_card_activation.xml" value="0.3148148148148148" />
         <entry key="app/src/main/res/layout/fragment_reg_code.xml" value="0.3614583333333333" />
+        <entry key="app/src/main/res/layout/fragment_reg_end.xml" value="0.23854166666666668" />
+        <entry key="app/src/main/res/layout/fragment_reg_password.xml" value="0.23854166666666668" />
         <entry key="app/src/main/res/layout/fragment_reg_phone.xml" value="0.3614583333333333" />
         <entry key="app/src/main/res/layout/fragment_regular_payment.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_settings_lang.xml" value="0.21822916666666667" />

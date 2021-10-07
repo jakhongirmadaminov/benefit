@@ -12,6 +12,7 @@ import com.example.benefit.util.ResultSuccess
 import com.example.benefit.util.ResultWrapper
 import com.example.benefit.util.getFormattedResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -48,7 +49,7 @@ class LoansViewModel @Inject constructor(private val apiService: AuthApiService)
     }
 
     fun getLoanInfoById(id: Long) {
-        viewModelScope.launch {
+        viewModelScope.launch(IO) {
             respLoanInfo.postValue(getFormattedResponse(isLoading) { apiService.getLoanInfo(id) })
         }
     }
