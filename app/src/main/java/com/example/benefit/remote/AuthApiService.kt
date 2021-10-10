@@ -39,7 +39,7 @@ interface AuthApiService {
         @Field("startDate") startDate: Int,
         @Field("endDate") endDate: Int,
         @Field("pageSize") pageSize: Int = 100,
-    ): RespFormat<List<TransactionAnalyticsContainerDTO>>
+    ): RespFormat<ArrayList<TransactionAnalyticsContainerDTO>>
 
 
     @GET("api/paynet/categories")

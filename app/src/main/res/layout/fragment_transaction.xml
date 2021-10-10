@@ -238,13 +238,6 @@
         app:layout_constraintTop_toTopOf="@id/lblAllTransactions"
         tools:text="- 560 000 UZS" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="26dp"
-        android:layout_marginRight="26dp"
-        android:background="@color/bg_grey"
-        app:layout_constraintTop_toTopOf="@id/rvAllTransactions" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvAllTransactions"

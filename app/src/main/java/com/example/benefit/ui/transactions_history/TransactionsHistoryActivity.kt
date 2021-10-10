@@ -241,7 +241,6 @@ class TransactionsHistoryActivity : BaseActivity(), OnChartValueSelectedListener
                     val dialog = TransactionBSD()
                     dialog.arguments = Bundle().apply {
                         putParcelable(TransactionBSD.ARG_TRANSACTION_DTO, it)
-                        putParcelableArrayList (ARG_TRANSACTIONS_REPORT, ArrayList((viewModel.transactionsReportResp.value as ResultSuccess).value))
                     }
                     dialog.show(supportFragmentManager, "")
                 })
@@ -252,9 +251,9 @@ class TransactionsHistoryActivity : BaseActivity(), OnChartValueSelectedListener
         var totalIncome = 0L
         value.forEach {
             if (!it.isCredit!!) {
-                totalExpense += it.amountWithoutTiyin!!
+                totalExpense += it.amountWithoutTiyin ?: 0
             } else if (it.isCredit) {
-                totalIncome += it.amountWithoutTiyin!!
+                totalIncome += it.amountWithoutTiyin ?: 0
             }
         }
         tvIncomeOnMonthAmount.text =

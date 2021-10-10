@@ -1,12 +1,13 @@
 package com.example.benefit.remote.models
 
 import android.os.Parcelable
+import com.example.benefit.util.Constants
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import org.joda.time.format.DateTimeFormat
 
 @Parcelize
-data class TransactionAnalyticsContainerDTO(@SerializedName("content") val content: List<TransactionAnalyticsDTO>) :
+data class TransactionAnalyticsContainerDTO(@SerializedName("content") val content: ArrayList<TransactionAnalyticsDTO>) :
     Parcelable
 
 @Parcelize
@@ -33,11 +34,13 @@ data class TransactionAnalyticsDTO(
     @SerializedName("transType") val transType: String?,
     @SerializedName("udate") val udate: Int?,
     @SerializedName("utime") val utime: Int?,
-    @SerializedName("utrnno") val utrnno: Long?
+    @SerializedName("utrnno") val utrnno: Long?,
+    @SerializedName("category_name") val categoryName: CategoryName?,
 ) : Parcelable {
+//    "category_name":{"title_ru":"","title_en":"","title_uz":""}
 
-    val amountWithoutTiyin: Long?
-        get() = reqamt?.toString()?.dropLast(2)?.toLong()
+    val amountWithoutTiyin: Long
+        get() = if (reqamt != null && reqamt > 10) reqamt?.toString()?.dropLast(2)?.toLong() else 0
 
 
     val dateFormatted: String?
@@ -45,12 +48,26 @@ data class TransactionAnalyticsDTO(
             .print(DateTimeFormat.forPattern("yyyyMMdd").parseDateTime(udate.toString()))
     val timeFormatted: String?
         get() = DateTimeFormat.forPattern("HH:mm:ss")
-            .print(DateTimeFormat.forPattern("HHmmss").parseDateTime(utime.toString()))
+            .print(
+                DateTimeFormat.forPattern("HHmmss")
+                    .parseDateTime(if (utime.toString().length == 5) "0" + utime.toString() else utime.toString())
+            )
 }
 
 @Parcelize
 data class CategoryName(
-    @SerializedName("title_en") val titleEn: String?,
-    @SerializedName("title_ru") val titleRu: String?,
-    @SerializedName("title_uz") val titleUz: String?
-) : Parcelable
+    @SerializedName("title_en") val titleEn: String? = null,
+    @SerializedName("title_ru") val titleRu: String? = null,
+    @SerializedName("title_uz") val titleUz: String? = null
+) : Parcelable {
+
+    fun getLocalized(locale: String): String? {
+        return if (locale == Constants.EN) {
+            titleEn
+        } else if (locale == Constants.UZ) {
+            titleUz
+        } else {
+            titleRu
+        }
+    }
+}

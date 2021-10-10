@@ -28,7 +28,7 @@ class TransactionsHistoryViewModel @Inject constructor(val apiService: AuthApiSe
     val isLoading = MutableLiveData<Boolean>()
     val transactionsReportResp = MutableLiveData<ResultWrapper<List<TransactionInOutDTO>>>()
     val transactionsAnalyticsResp =
-        MutableLiveData<ResultWrapper<List<List<TransactionAnalyticsDTO>>>>()
+        MutableLiveData<ResultWrapper<ArrayList<ArrayList<TransactionAnalyticsDTO>>>>()
 
 
     fun getTransactionsHistory(cardId: Int) {
@@ -57,7 +57,7 @@ class TransactionsHistoryViewModel @Inject constructor(val apiService: AuthApiSe
             }
 
             val monthlyAnalyticsMap =
-                arrayListOf<Deferred<ResultWrapper<List<TransactionAnalyticsContainerDTO>>>>()
+                arrayListOf<Deferred<ResultWrapper<ArrayList<TransactionAnalyticsContainerDTO>>>>()
 
             for (i in 0..11) {
                 monthlyAnalyticsMap.add(async {
@@ -92,9 +92,9 @@ class TransactionsHistoryViewModel @Inject constructor(val apiService: AuthApiSe
                 }
             }
 
-            transactionsAnalyticsResp.postValue(ResultSuccess(monthlyTransactions.map {
+            transactionsAnalyticsResp.postValue(ResultSuccess(ArrayList( monthlyTransactions.map {
                 (it as ResultSuccess).value.last().content
-            }))
+            })  ))
             transactionsReportResp.postValue(ResultSuccess(monthlyTransactionsReport.map {
                 (it as ResultSuccess).value
             }))

@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.benefit.R
 import com.example.benefit.ui.base.BaseFragment
+import com.example.benefit.util.AppPrefs
 import com.example.benefit.util.loadImageUrl
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
@@ -39,13 +40,25 @@ class TransactionMoreInfoFragment @Inject constructor() :
     private fun setupViews() {
         tvBrandName.text = args.transactionDTO.merchantName
         if (args.transactionDTO.partner?.image.isNullOrBlank()) {
-            ivBrandLogo.isVisible = false
+//            ivBrandLogo.isVisible = false
         } else {
             ivBrandLogo.isVisible = true
             ivBrandLogo.loadImageUrl(args.transactionDTO.partner!!.image!!)
         }
 
-        tvDenomination.text = args.transactionDTO.merchant
+        tvDenomination.text = args.transactionDTO.merchantName
+        tvReceiptNumber.text = args.transactionDTO.actamt.toString()
+        tvCategory.text = args.transactionDTO.categoryName?.getLocalized(AppPrefs.language)
+//        tvStatus.text = args.transactionDTO.stat
+        tvSum.text = args.transactionDTO.amountWithoutTiyin.toString()
+        tvOperationDateAndTime.text =
+            args.transactionDTO.dateFormatted + ", " + args.transactionDTO.timeFormatted
+//        tvAccountNumber.text = args.transactionDTO.acctbal
+//        tvAID.text = args.transactionDTO.a
+        tvFromCard.text = args.transactionDTO.hpan
+        tvTerminal.text = args.transactionDTO.terminal
+        tvReceiptCode.text = args.transactionDTO.terminal
+//        tvServicePoint.text = args.transactionDTO.serv
 
     }
 

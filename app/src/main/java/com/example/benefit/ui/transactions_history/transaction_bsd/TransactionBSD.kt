@@ -10,6 +10,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.remote.models.TransactionAnalyticsDTO
+import com.example.benefit.remote.models.TransactionInOutDTO
 import com.example.benefit.ui.main.BenefitBSD
 
 
@@ -18,10 +19,11 @@ class TransactionBSD : BenefitBSD() {
     companion object {
         const val ARG_TRANSACTION_DTO = "TRANSACTION_DTO"
         const val ARG_TRANSACTIONS_REPORT = "transactionsReport"
+        const val ARG_TRANSACTIONS_ANALYTICS = "transactionsAnalytics"
     }
 
     lateinit var transactionDTO: TransactionAnalyticsDTO
-    var transactionsReport: ArrayList<TransactionAnalyticsDTO>? = null
+    var transactionsReport: ArrayList<TransactionInOutDTO>? = null
     private val viewModel: TransactionViewModel by viewModels()
 
     override fun onAttach(context: Context) {
