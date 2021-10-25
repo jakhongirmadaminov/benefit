@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -18,14 +17,12 @@ import com.example.benefit.ui.select_card_type.SelectCardTypeActivity
 import com.redmadrobot.inputmask.MaskedTextChangedListener
 import com.redmadrobot.inputmask.MaskedTextChangedListener.Companion.installOn
 import kotlinx.android.synthetic.main.fragment_reg_card_activation.*
-import javax.inject.Inject
 
 /**
  * Created by jahon on 03-Sep-20
  */
 
-class RegCardActivationFragment @Inject constructor() :
-    BaseFragment(R.layout.fragment_reg_card_activation) {
+class RegCardActivationFragment : BaseFragment(R.layout.fragment_reg_card_activation) {
 
 
     private val viewModel: RegistrationViewModel by activityViewModels()

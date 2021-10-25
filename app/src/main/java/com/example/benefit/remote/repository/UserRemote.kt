@@ -51,8 +51,8 @@ interface UserRemote {
     suspend fun updateUserInfo(
         name: String,
         lastName: String,
-        gender: String,
-        dobMillis: BigInteger
+        gender: String?,
+        dobMillis: BigInteger?
     ): ResultWrapper<RespUserInfo>
 
     suspend fun addNewCard(title: String, cardNumber: String, expiry: String): ResultWrapper<RespAddCard>

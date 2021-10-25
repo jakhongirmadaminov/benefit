@@ -2,12 +2,14 @@ package com.example.benefit.ui.main.profile.settings_bsd
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
-import com.example.benefit.ui.auth.login.LoginViewModel
 import com.example.benefit.ui.base.BaseFragment
+import com.example.benefit.ui.main.profile.ProfileViewModel
 import com.example.benefit.util.AppPrefs
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_settings_main.*
 
 /**
@@ -16,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_settings_main.*
 class SettingsMainFragment : BaseFragment(R.layout.fragment_settings_main) {
 
 
-    private val viewModel: LoginViewModel by viewModels()
+    private val viewModel: ProfileViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,6 +37,16 @@ class SettingsMainFragment : BaseFragment(R.layout.fragment_settings_main) {
     }
 
     private fun subscribeObservers() {
+        viewModel.isLoading.observe(viewLifecycleOwner, {
+            progress.isVisible = it
+        })
+
+        viewModel.uploadUserInfoResp.observe(viewLifecycleOwner, {
+            findNavController().popBackStack()
+        })
+        viewModel.errorMessage.observe(viewLifecycleOwner, {
+            Snackbar.make(clParent, it, Snackbar.LENGTH_SHORT).show()
+        })
     }
 
     private fun attachListeners() {
@@ -47,6 +59,10 @@ class SettingsMainFragment : BaseFragment(R.layout.fragment_settings_main) {
         }
         tvChangeLang.setOnClickListener {
             findNavController().navigate(R.id.action_profileSettingsMainFragment_to_profileSettingsLangFragment)
+        }
+
+        tvReady.setOnClickListener {
+            viewModel.updateUserInfo(edtSurname.text.toString(), edtName.text.toString())
         }
 
     }

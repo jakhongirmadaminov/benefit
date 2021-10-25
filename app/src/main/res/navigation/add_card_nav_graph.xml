@@ -12,7 +12,6 @@
         android:label=""
         tools:layout="@layout/fragment_reg_card_activation">
 
-
         <action
             android:id="@+id/action_regCardActivationFragment_to_cardConfirm"
             app:destination="@id/cardConfirm"

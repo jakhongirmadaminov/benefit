@@ -16,6 +16,7 @@ import com.example.benefit.enums.ECardType
 import com.example.benefit.enums.ECardType.Companion.isZoom
 import com.example.benefit.remote.models.BankBranchDTO
 import com.example.benefit.ui.base.BaseActivity
+import com.example.benefit.util.PDFHelper
 import com.example.benefit.util.SizeUtils
 import com.example.benefit.util.loadBitmap
 import kotlinx.android.synthetic.main.activity_order_card.*
@@ -70,6 +71,9 @@ class OrderCardActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedLis
         btnClose.setOnClickListener {
             setResult(RESULT_OK)
             finish()
+        }
+        btnTerms.setOnClickListener {
+            startActivity(PDFHelper.makeIntentFromPdfAsset(this, "agreement.pdf"))
         }
 
         ivPassportPhoto.setOnClickListener {

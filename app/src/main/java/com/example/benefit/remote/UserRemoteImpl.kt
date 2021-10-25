@@ -139,8 +139,8 @@ class UserRemoteImpl @Inject constructor(
     override suspend fun updateUserInfo(
         name: String,
         lastName: String,
-        gender: String,
-        dobMillis: BigInteger
+        gender: String?,
+        dobMillis: BigInteger?
     ) = getFormattedResponse {
         authApiService.updateUserInfo(ReqUserInfo(name, lastName, gender, dobMillis))
     }
