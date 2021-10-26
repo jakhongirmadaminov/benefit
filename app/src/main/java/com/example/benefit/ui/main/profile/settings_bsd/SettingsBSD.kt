@@ -6,13 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.benefit.R
-import com.example.benefit.ui.main.BenefitBSD
-
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.benefit.ui.main.BenefitFixedHeightBSD
 
 
-
-class SettingsBSD : BenefitBSD() {
+class SettingsBSD : BenefitFixedHeightBSD() {
 
     private val viewModel: SettingsBSDViewModel by viewModels()
 
@@ -21,7 +18,7 @@ class SettingsBSD : BenefitBSD() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.bsd_profile, null)
+        val view = inflater.inflate(R.layout.bsd_settings, container)
 
         return view
     }

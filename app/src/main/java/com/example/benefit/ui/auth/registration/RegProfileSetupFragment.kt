@@ -45,7 +45,7 @@ class RegProfileSetupFragment @Inject constructor() :
         })
 
         viewModel.uploadAvatarResp.observe(viewLifecycleOwner, {
-
+            validateFields()
         })
 
         viewModel.isLoading.observe(viewLifecycleOwner, {

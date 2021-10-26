@@ -57,7 +57,7 @@ class SettingsChangeCodeFragment @Inject constructor() :
         btnConfirm.setOnClickListener {
 
             if (edtCode.text.toString() == AppPrefs.pin) {
-                findNavController().navigate(R.id.action_profileSettingsChangeCodeFragment_to_profileSettingsNewCodeFragment)
+                findNavController().navigate(R.id.action_settingsChangeCodeFragment_to_settingsNewCodeFragment)
             } else {
                 lblEnterCode.setTextColor(
                     ContextCompat.getColor(requireContext(), R.color.error_red)

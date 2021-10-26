@@ -1,10 +1,7 @@
 package com.example.benefit.ui.main
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
-import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.FrameLayout
 import com.example.benefit.R
 import com.example.benefit.util.SizeUtils

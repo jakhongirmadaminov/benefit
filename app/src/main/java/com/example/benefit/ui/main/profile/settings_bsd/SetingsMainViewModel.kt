@@ -1,16 +1,14 @@
-package com.example.benefit.ui.main.profile
+package com.example.benefit.ui.main.profile.settings_bsd
 
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.benefit.remote.AuthApiService
+import com.example.benefit.remote.models.ReqUserInfo
 import com.example.benefit.remote.models.RespUserInfo
 import com.example.benefit.remote.repository.UserRemote
-import com.example.benefit.util.AppPrefs
-import com.example.benefit.util.ResultError
-import com.example.benefit.util.ResultSuccess
-import com.example.benefit.util.exhaustive
+import com.example.benefit.util.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
@@ -21,21 +19,27 @@ import java.math.BigInteger
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileViewModel @Inject constructor(
+class SetingsMainViewModel @Inject constructor(
     private val userRemote: UserRemote,
     private val apiAuth: AuthApiService
 ) : ViewModel() {
 
-
     val isLoading = MutableLiveData<Boolean>()
     val errorMessage = MutableLiveData<String>()
     var uploadUserInfoResp = MutableLiveData<RespUserInfo>()
+    var userInfoResp = MutableLiveData<ResultWrapper<ReqUserInfo>>()
+
+    init {
+        viewModelScope.launch(IO) {
+            userInfoResp.postValue(getFormattedResponse(isLoading) { apiAuth.getUserInfo(AppPrefs.userId) })
+        }
+    }
 
     fun updateUserInfo(
         name: String,
         lastName: String,
-        gender: String,
-        dob: BigInteger
+        gender: String = "male",
+        dob: BigInteger = BigInteger.valueOf(AppPrefs.dobMillis)
     ) {
         isLoading.value = true
         viewModelScope.launch(IO) {

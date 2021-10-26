@@ -1,31 +1,24 @@
 package com.example.benefit.ui.main.profile.settings_bsd
 
-import android.os.Bundle
-import android.view.View
-import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.example.benefit.R
-import com.example.benefit.ui.auth.login.LoginBSD
-import com.example.benefit.ui.auth.login.LoginViewModel
-import com.example.benefit.ui.main.MainActivity
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_reg_code.*
-import kotlinx.android.synthetic.main.fragment_settings_phone.*
-import kotlinx.android.synthetic.main.fragment_settings_phone.ivBack
-import splitties.fragments.start
-import javax.inject.Inject
-
 /**
  * Created by jahon on 03-Sep-20
  */
+import android.os.Bundle
+import android.view.View
+import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import com.example.benefit.R
 import com.example.benefit.ui.base.BaseFragment
+import com.example.benefit.ui.main.profile.ProfileViewModel
+import kotlinx.android.synthetic.main.fragment_settings_phone.*
+import kotlinx.android.synthetic.main.layout_success.*
 
 class SettingsPhoneFragment : BaseFragment(R.layout.fragment_settings_phone) {
 
 
-    private val viewModel: LoginViewModel by viewModels()
+    private val viewModel: ProfileViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,6 +28,8 @@ class SettingsPhoneFragment : BaseFragment(R.layout.fragment_settings_phone) {
     }
 
     private fun subscribeObservers() {
+
+
     }
 
     private fun attachListeners() {
@@ -52,7 +47,14 @@ class SettingsPhoneFragment : BaseFragment(R.layout.fragment_settings_phone) {
         }
 
         ivBack.setOnClickListener {
-                findNavController().popBackStack()
+            findNavController().popBackStack()
+        }
+
+        btnGetCode.setOnClickListener {
+        }
+
+        btnClose.setOnClickListener {
+            ((parentFragment as NavHostFragment).requireParentFragment() as SettingsBSD).dismiss()
         }
 
     }

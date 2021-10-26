@@ -24,7 +24,8 @@ interface ApiService {
         @Field("phone") phone: String,
         @Field("referal_code") referal_code: String?,
         @Field("created") created: String = "1601573398",
-        @Field("ip") ip: String = "127.0.0.1"
+        @Field("ip") ip: String = "127.0.0.1",
+        @Field("referal_code") referal: String = "-",
     ): RespFormat<RegPhoneResp>
 
 

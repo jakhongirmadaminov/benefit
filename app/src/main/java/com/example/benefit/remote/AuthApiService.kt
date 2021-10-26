@@ -62,6 +62,10 @@ interface AuthApiService {
     @POST("api/user/refresh")
     suspend fun updateUserInfo(@Body body: ReqUserInfo): RespFormat<RespUserInfo>
 
+    @POST("api/user/profile")
+    @FormUrlEncoded
+    suspend fun getUserInfo(@Field("id") id: Int): RespFormat<ReqUserInfo>
+
     @POST("api/card/info")
     @FormUrlEncoded
     suspend fun getMyCardInfo(@Field("card_id") card_id: Int): RespFormat<CardsDTO>

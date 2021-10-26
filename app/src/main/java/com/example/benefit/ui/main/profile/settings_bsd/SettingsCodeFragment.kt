@@ -78,7 +78,7 @@ class SettingsCodeFragment : BaseFragment(R.layout.fragment_settings_code) {
 
 
         btnConfirm.setOnClickListener {
-            findNavController().navigate(R.id.action_profileSettingsCodeFragment_to_profileSettingsPhoneFragment)
+            findNavController().navigate(R.id.action_settingsCodeFragment_to_settingsPhoneFragment)
         }
 
         ivBack.setOnClickListener {

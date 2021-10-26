@@ -25,6 +25,7 @@
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:visibility="gone"
+        android:indeterminate="true"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/tvReady" />
 
