@@ -3,13 +3,16 @@ package com.example.benefit.ui.main.payments
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.benefit.R
 import com.example.benefit.remote.models.RegularPaymentDTO
 import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.gap.GapActivity
 import com.example.benefit.ui.main.fill_card.FillCardBSD
+import com.example.benefit.ui.main.fill_card.FillCardFragment
+import com.example.benefit.ui.main.home.DialogPleaseAddCard
+import com.example.benefit.ui.main.home.KEY_ADD_CARD
+import com.example.benefit.ui.main.home.bsd_add_card.AddCardBSD
 import com.example.benefit.ui.main.transfer_to_card.TransferToCardBSD
 import com.example.benefit.ui.regular_payment.CreateRegularPaymentBSD
 import com.example.benefit.ui.regular_payment.RegularPaymentBSD
@@ -29,9 +32,12 @@ class PaymentsFragment : BaseFragment(R.layout.fragment_payments) {
 
         setupViews()
         attachListeners()
-
+        subscribeObservers()
     }
 
+    private fun subscribeObservers() {
+
+    }
 
     private fun setupViews() {
         rvRegularPayments.adapter = adapter
@@ -68,7 +74,27 @@ class PaymentsFragment : BaseFragment(R.layout.fragment_payments) {
     private fun attachListeners() {
 
         clMakeDepo.setOnClickListener {
-            FillCardBSD().show(childFragmentManager, "")
+            if (viewModel.cardsResp.value.isNullOrEmpty()) {
+                val dialog = DialogPleaseAddCard()
+                childFragmentManager.setFragmentResultListener(
+                    KEY_ADD_CARD,
+                    viewLifecycleOwner,
+                    { requestKey, result ->
+                        AddCardBSD().show(childFragmentManager, "")
+                    })
+                dialog.show(childFragmentManager, "")
+            } else {
+                val dialog = FillCardBSD()
+                dialog.arguments = Bundle().apply {
+                    putParcelable(FillCardFragment.ARG_CARD, viewModel.cardsResp.value!![0])
+                    putParcelableArrayList(
+                        FillCardFragment.ARG_CARDS,
+                        ArrayList(viewModel.cardsResp.value!!)
+                    )
+                }
+                dialog.show(requireActivity().supportFragmentManager, "")
+            }
+
         }
 
         clTransferToCard.setOnClickListener {

@@ -18,6 +18,8 @@ import com.example.benefit.ui.main.home.HomeFragment
 import com.example.benefit.util.ResultError
 import com.example.benefit.util.ResultSuccess
 import com.example.benefit.util.SizeUtils
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_fill_from_my_cards.*
 import kotlinx.android.synthetic.main.item_card_small.view.*
@@ -41,9 +43,20 @@ class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val vHeight =
+            SizeUtils.getScreenHeight(requireActivity()) - SizeUtils.getActionBarHeight(
+                requireActivity()
+            )
+
         setupViews()
         attachListeners()
         subscribeObservers()
+        clParent.layoutParams = clParent.layoutParams.apply { height = vHeight }
+//        (((parentFragment as NavHostFragment).parentFragment as FillCardBSD).dialog!! as BottomSheetDialog).behavior.isHideable =
+//            false
+//        (((parentFragment as NavHostFragment).parentFragment as FillCardBSD).dialog!! as BottomSheetDialog).behavior.isDraggable =
+//            false
+
     }
 
     private fun setupViews() {

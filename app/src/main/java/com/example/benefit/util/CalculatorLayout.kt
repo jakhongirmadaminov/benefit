@@ -2,6 +2,7 @@ package com.example.benefit.util
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.Gravity
 import android.widget.EditText
 import android.widget.LinearLayout
 import com.example.benefit.R
