@@ -62,21 +62,21 @@ suspend fun <T> makeRequest(
     action: suspend () -> RespFormat<T>
 ) {
     try {
-        resultState.value = RequestState.Loading
+        resultState.postValue(RequestState.Loading)
         val resp = action()
-        resultState.value = when {
+        resultState.postValue( when {
             resp.result?.data != null -> RequestState.Success(resp.result.data)
             resp.result?.error != null -> RequestState.Error(resp.result.error.message)
             resp.error != null -> RequestState.Error("", resp.error.status)
             else -> RequestState.Error(resp.result?.message, resp.result?.error?.status)
-        }
+        })
     } catch (e: HttpException) {
-        resultState.value = RequestState.Error(
+        resultState.postValue(RequestState.Error(
             JSONObject(e.response()!!.errorBody()!!.string())["message"].toString(),
             e.code()
-        )
+        ))
     } catch (e: Exception) {
-        resultState.value = RequestState.Error(message = e.localizedMessage)
+        resultState.postValue( RequestState.Error(message = e.localizedMessage))
     }
 }
 

@@ -17,13 +17,13 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(private val apiAuth: AuthApiService) : ViewModel() {
 
+    var currencyResp = MutableLiveData<RequestState<List<CurrencyDTO>>>()
+    var newsResp = MutableLiveData<RequestState<List<NewsDTO>>>()
     init {
         getCurrencies()
         getNews()
     }
 
-    var currencyResp = MutableLiveData<RequestState<List<CurrencyDTO>>>()
-    var newsResp = MutableLiveData<RequestState<List<NewsDTO>>>()
 
     fun getCurrencies() {
         viewModelScope.launch(IO) {

@@ -18,6 +18,7 @@ import com.example.benefit.util.RequestState
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.item_currency.view.*
 import kotlinx.android.synthetic.main.item_news_and_promos.*
 import splitties.preferences.edit
 
@@ -45,7 +46,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
                 }
                 RequestState.Loading -> {
                     currencyGrid.removeAllViews()
-                    currencyGrid.addView(layoutInflater.inflate(ItemLoading().layout, currencyGrid))
+                    currencyGrid.addView(layoutInflater.inflate(ItemLoading().layout, null))
                 }
                 is RequestState.Success -> {
                     populateCurrencies(resp.value)
@@ -73,7 +74,10 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     private fun populateCurrencies(value: List<CurrencyDTO>) {
         currencyGrid.removeAllViews()
         value.forEach {
-            currencyGrid.addView(layoutInflater.inflate(R.layout.item_currency, currencyGrid))
+            val view = layoutInflater.inflate(R.layout.item_currency, null)
+            view.tvCurrency.text = it.code
+            view.tvRate.text = it.cb_price.toString()
+            currencyGrid.addView(view)
         }
 
     }
