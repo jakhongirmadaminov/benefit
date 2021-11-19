@@ -14,6 +14,12 @@ sealed class ResultWrapper<out V> {
     }
 }
 
+sealed class RequestState<out V> {
+    object Loading : RequestState<Nothing>()
+    data class Success<out V>(val value: V) : RequestState<V>()
+    data class Error(val message: String? = null, val code: Int? = null) : RequestState<Nothing>()
+}
+
 data class ResultError(val message: String? = null, val code: Int? = null) :
     ResultWrapper<Nothing>()
 
@@ -48,6 +54,29 @@ suspend fun <T> getFormattedResponse(action: suspend () -> RespFormat<T>): Resul
         )
     } catch (e: Exception) {
         ResultError(message = e.localizedMessage)
+    }
+}
+
+suspend fun <T> makeRequest(
+    resultState: MutableLiveData<RequestState<T>>,
+    action: suspend () -> RespFormat<T>
+) {
+    try {
+        resultState.value = RequestState.Loading
+        val resp = action()
+        resultState.value = when {
+            resp.result?.data != null -> RequestState.Success(resp.result.data)
+            resp.result?.error != null -> RequestState.Error(resp.result.error.message)
+            resp.error != null -> RequestState.Error("", resp.error.status)
+            else -> RequestState.Error(resp.result?.message, resp.result?.error?.status)
+        }
+    } catch (e: HttpException) {
+        resultState.value = RequestState.Error(
+            JSONObject(e.response()!!.errorBody()!!.string())["message"].toString(),
+            e.code()
+        )
+    } catch (e: Exception) {
+        resultState.value = RequestState.Error(message = e.localizedMessage)
     }
 }
 

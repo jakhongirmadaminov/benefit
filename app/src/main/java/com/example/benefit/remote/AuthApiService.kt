@@ -326,5 +326,9 @@ interface AuthApiService {
     @FormUrlEncoded
     suspend fun getLoanInfo(@Field("id") id: Long): RespFormat<RespLoanInfo>
 
+    @GET("api/other/currency2")
+    suspend fun getCurrencies(): RespFormat<List<CurrencyDTO>>
+
+
 }
 
