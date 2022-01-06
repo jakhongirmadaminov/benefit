@@ -23,3 +23,4 @@ class ItemNewsAndPromos(val newsItem: NewsDTO, val onClick: (String) -> Unit) : 
     override fun getLayout() = R.layout.item_news_and_promos
 
 }
+
