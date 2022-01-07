@@ -10,8 +10,7 @@ import com.example.benefit.ui.viewgroups.ItemPayment
 import com.example.benefit.util.SizeUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import kotlinx.android.synthetic.main.fragment_create_regular_payment.*
-import kotlinx.android.synthetic.main.fragment_create_regular_payment.clParent
+import kotlinx.android.synthetic.main.fragment_payments.*
 import javax.inject.Inject
 
 
@@ -19,8 +18,7 @@ import javax.inject.Inject
  * Created by jahon on 03-Sep-20
  */
 
-class PaymentsFragment @Inject constructor() :
-    BaseFragment(R.layout.fragment_payments) {
+class PaymentsFragment @Inject constructor() : BaseFragment(R.layout.fragment_payments) {
 
 //    val args by navArgs<TransactionFragmentArgs>()
 //    val productId = args.productId
@@ -42,9 +40,7 @@ class PaymentsFragment @Inject constructor() :
 
 
     private fun attachListeners() {
-        ivMore.setOnClickListener {
-            findNavController().navigate(R.id.action_createRegularPaymentFragment_to_createRegPaymentHowItWorksFragment)
-        }
+
 
     }
 
