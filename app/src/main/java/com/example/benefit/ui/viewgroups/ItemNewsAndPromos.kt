@@ -12,9 +12,11 @@ class ItemNewsAndPromos(val newsItem: NewsDTO, val onClick: (String) -> Unit) : 
 
         viewHolder.itemView.apply {
             lblTitle.text = newsItem.title
+            tvDate.text = newsItem.created
             lblSubtitle.text = newsItem.content
-            icPeople.loadImageUrl(newsItem.image)
+            imgNews.loadImageUrl(newsItem.image)
             clCard.setOnClickListener {
+                lblSubtitle.maxLines = if (lblSubtitle.maxLines == 3) 50 else 3
                 onClick(newsItem.url_link)
             }
         }

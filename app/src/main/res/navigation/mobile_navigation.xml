@@ -19,9 +19,9 @@
 
     <fragment
         android:id="@+id/nav_payments"
-        android:name="com.example.benefit.ui.main.payments.PaymentsFragment"
+        android:name="com.example.benefit.ui.main.payments_and_transfers.PaymentsAndTransfersFragment"
         android:label="@string/payments_and_transfers"
-        tools:layout="@layout/fragment_payments" />
+        tools:layout="@layout/fragment_payments_and_transfers" />
 
     <fragment
         android:id="@+id/nav_profile"

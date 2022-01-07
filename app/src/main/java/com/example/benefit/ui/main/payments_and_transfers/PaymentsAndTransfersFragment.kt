@@ -1,4 +1,4 @@
-package com.example.benefit.ui.main.payments
+package com.example.benefit.ui.main.payments_and_transfers
 
 import android.content.Intent
 import android.os.Bundle
@@ -19,13 +19,13 @@ import com.example.benefit.ui.regular_payment.RegularPaymentBSD
 import com.example.benefit.ui.viewgroups.ItemRegularPayment
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import kotlinx.android.synthetic.main.fragment_payments.*
+import kotlinx.android.synthetic.main.fragment_payments_and_transfers.*
 
 
-class PaymentsFragment : BaseFragment(R.layout.fragment_payments) {
+class PaymentsAndTransfersFragment : BaseFragment(R.layout.fragment_payments_and_transfers) {
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
-    val viewModel: PaymentsViewModel by viewModels()
+    val viewModel: PaymentsAndTransfersViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -2,364 +2,68 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clParent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_top_rounded"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/rectangle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="26dp"
-            android:layout_marginRight="26dp"
+            android:layout_marginTop="?android:actionBarSize"
+            android:layout_marginRight="40dp"
             android:fontFamily="sans-serif"
-            android:text="@string/payments_brline_and_transfers"
+            android:text="@string/payments"
             android:textColor="#000000"
             android:textSize="26sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clMakeDepo"
+        <EditText
+            android:id="@+id/edtSearch"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="26dp"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="26dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:selectableItemBackground">
-
-            <ImageView
-                android:id="@+id/icInbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/fxemoji_inbox"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvTitleMakeDepo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/top_up"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="@id/icInbox"
-                app:layout_constraintStart_toEndOf="@id/icInbox"
-                app:layout_constraintTop_toTopOf="@id/icInbox"
-
-                />
-
-            <TextView
-                android:id="@+id/tvSubTitleMakeDepo"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif"
-                android:text="@string/make_depo_to_cards_of_benefit"
-                android:textColor="#5c5c5c"
-                android:textSize="14sp"
-                android:textStyle="normal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toStartOf="@id/tvTitleMakeDepo"
-                app:layout_constraintTop_toBottomOf="@id/tvTitleMakeDepo" />
-
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/bg_grey"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toStartOf="@id/tvTitleMakeDepo"
-                app:layout_constraintTop_toBottomOf="@id/tvSubTitleMakeDepo" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clTransferToCard"
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="26dp"
-            android:layout_marginTop="26dp"
-            android:layout_marginRight="26dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:selectableItemBackground">
-
-            <ImageView
-                android:id="@+id/icCard"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/fxemoji_card"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvTitleCardTransfer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/transfer_to_card"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="@id/icCard"
-                app:layout_constraintStart_toEndOf="@id/icCard"
-                app:layout_constraintTop_toTopOf="@id/icCard" />
-
-            <TextView
-                android:id="@+id/tvSubTitleCardTransfer"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif"
-                android:text="@string/transfer_to_bank_cards"
-                android:textColor="#5c5c5c"
-                android:textSize="14sp"
-                android:textStyle="normal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toStartOf="@id/tvTitleCardTransfer"
-                app:layout_constraintTop_toBottomOf="@id/tvTitleCardTransfer" />
-
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/bg_grey"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toStartOf="@id/tvTitleCardTransfer"
-                app:layout_constraintTop_toBottomOf="@id/tvSubTitleCardTransfer" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-        <!--            android:id="@+id/clTransferToFriend"-->
-        <!--            android:layout_width="match_parent"-->
-
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginLeft="26dp"-->
-        <!--            android:layout_marginTop="26dp"-->
-        <!--            android:layout_marginRight="26dp"-->
-        <!--            android:clickable="true"-->
-        <!--            android:focusable="true"-->
-        <!--            android:foreground="?android:selectableItemBackground">-->
-
-        <!--            <ImageView-->
-        <!--                android:id="@+id/icPhone"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:src="@drawable/fxemoji_phone"-->
-        <!--                app:layout_constraintStart_toStartOf="parent"-->
-        <!--                app:layout_constraintTop_toTopOf="parent" />-->
-
-        <!--            <TextView-->
-        <!--                android:id="@+id/tvTitleTransferToFriend"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_marginLeft="20dp"-->
-        <!--                android:fontFamily="sans-serif-medium"-->
-        <!--                android:text="@string/transfer_to_friend"-->
-        <!--                android:textColor="#000000"-->
-        <!--                android:textSize="16sp"-->
-        <!--                android:textStyle="normal"-->
-        <!--                app:layout_constraintBottom_toBottomOf="@id/icPhone"-->
-        <!--                app:layout_constraintStart_toEndOf="@id/icPhone"-->
-        <!--                app:layout_constraintTop_toTopOf="@id/icPhone"-->
-
-        <!--                />-->
-
-        <!--            <TextView-->
-        <!--                android:id="@+id/tvSubTitleTransferToFriend"-->
-        <!--                android:layout_width="0dp"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_marginTop="10dp"-->
-        <!--                android:fontFamily="sans-serif"-->
-        <!--                android:text="@string/transfer_fund_or_cashback_to_friends_from_contacts"-->
-        <!--                android:textColor="#5c5c5c"-->
-        <!--                android:textSize="14sp"-->
-        <!--                android:textStyle="normal"-->
-        <!--                app:layout_constraintEnd_toEndOf="parent"-->
-        <!--                app:layout_constraintHorizontal_weight="1"-->
-        <!--                app:layout_constraintStart_toStartOf="@id/tvTitleTransferToFriend"-->
-        <!--                app:layout_constraintTop_toBottomOf="@id/tvTitleTransferToFriend" />-->
-
-
-        <!--            <View-->
-        <!--                android:layout_width="0dp"-->
-        <!--                android:layout_height="1dp"-->
-        <!--                android:layout_marginTop="15dp"-->
-        <!--                android:background="@color/bg_grey"-->
-        <!--                app:layout_constraintEnd_toEndOf="parent"-->
-        <!--                app:layout_constraintHorizontal_weight="1"-->
-        <!--                app:layout_constraintStart_toStartOf="@id/tvTitleTransferToFriend"-->
-        <!--                app:layout_constraintTop_toBottomOf="@id/tvSubTitleTransferToFriend" />-->
-
-        <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clPay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_marginLeft="26dp"
-            android:layout_marginTop="26dp"
-            android:layout_marginRight="26dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:selectableItemBackground">
-
-            <ImageView
-                android:id="@+id/icTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/fxemoji_tv"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvTitlePay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/pay"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="@id/icTv"
-                app:layout_constraintStart_toEndOf="@id/icTv"
-                app:layout_constraintTop_toTopOf="@id/icTv"
-
-                />
-
-            <TextView
-                android:id="@+id/tvSubTitlePay"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif"
-                android:text="@string/pay_services_mobile_operators_internet_providers"
-                android:textColor="#5c5c5c"
-                android:textSize="14sp"
-                android:textStyle="normal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toStartOf="@id/tvTitlePay"
-                app:layout_constraintTop_toBottomOf="@id/tvTitlePay" />
-
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/bg_grey"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toStartOf="@id/tvTitlePay"
-                app:layout_constraintTop_toBottomOf="@id/tvSubTitlePay" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clGap"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="26dp"
-            android:layout_marginTop="26dp"
-            android:layout_marginRight="26dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:selectableItemBackground">
-
-            <ImageView
-                android:id="@+id/icGap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/fxemoji_threespeech"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvTitleGap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/game_gap"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="@id/icGap"
-                app:layout_constraintStart_toEndOf="@id/icGap"
-                app:layout_constraintTop_toTopOf="@id/icGap"
-
-                />
-
-            <TextView
-                android:id="@+id/tvSubTitleGap"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="15dp"
-                android:fontFamily="sans-serif"
-                android:text="@string/ptwop_game_share_fund_between_friends"
-                android:textColor="#5c5c5c"
-                android:textSize="14sp"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toStartOf="@id/tvTitleGap"
-                app:layout_constraintTop_toBottomOf="@id/tvTitleGap" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="26dp"
-            android:layout_marginTop="26dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="@string/regular_payments"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="normal" />
-
+            android:background="@drawable/selector_grey"
+            android:drawableLeft="@drawable/places_ic_search"
+            android:drawablePadding="10dp"
+            android:hint="@string/search"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:layout_constraintTop_toBottomOf="@id/title" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvRegularPayments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="16dp"
-            android:paddingTop="6dp"
-            android:paddingRight="6dp"
-            android:paddingBottom="26dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="4"
-            tools:listitem="@layout/item_payment_square" />
+            android:layout_margin="26dp"
+            android:id="@+id/rvPayments"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_payment"
+            app:layout_constraintTop_toBottomOf="@id/edtSearch" />
 
 
-    </LinearLayout>
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

@@ -1,4 +1,4 @@
-package com.example.benefit.ui.main.payments
+package com.example.benefit.ui.main.payments_and_transfers
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,7 +15,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class PaymentsViewModel @Inject constructor(private val userRemote: UserRemote) : ViewModel() {
+class PaymentsAndTransfersViewModel @Inject constructor(private val userRemote: UserRemote) : ViewModel() {
 
     val cardsResp = MutableLiveData<List<CardDTO>>()
     val isLoadingCards = MutableLiveData<Boolean>()

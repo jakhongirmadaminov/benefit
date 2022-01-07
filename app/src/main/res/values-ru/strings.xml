@@ -237,5 +237,6 @@
     <string name="service_point">Пункт обслуживания</string>
     <string name="from_card">С карты</string>
     <string name="account_number">Номер счёта</string>
+    <string name="payments">Платежи</string>
 
 </resources>

@@ -3,19 +3,16 @@ package com.example.benefit.util
 import android.content.ContentResolver
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.PorterDuff
 import android.net.Uri
 import android.provider.OpenableColumns
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
-import android.widget.TextView
+import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.benefit.R
 import java.io.ByteArrayOutputStream
 
 
@@ -85,6 +82,10 @@ fun ImageView.loadCircleImageUrl(url: String?) {
 
 fun ImageView.loadCircleBitmap(bitmap: Bitmap) {
     Glide.with(this.context).load(bitmap).apply(RequestOptions().circleCrop()).into(this)
+}
+
+fun ImageView.loadDrawableCircleCrop(@DrawableRes drawable: Int) {
+    Glide.with(this.context).load(drawable).apply(RequestOptions().circleCrop()).into(this)
 }
 
 fun ImageView.loadBitmap(bitmap: Bitmap) {
