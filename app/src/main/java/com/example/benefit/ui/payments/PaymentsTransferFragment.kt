@@ -10,7 +10,7 @@ import com.example.benefit.ui.viewgroups.ItemPayment
 import com.example.benefit.util.SizeUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import kotlinx.android.synthetic.main.fragment_payments_transfer.*
+import kotlinx.android.synthetic.main.fragment_payment_transfer.*
 import javax.inject.Inject
 
 
@@ -19,7 +19,7 @@ import javax.inject.Inject
  */
 
 class PaymentsTransferFragment @Inject constructor() :
-    BaseFragment(R.layout.fragment_payments_transfer) {
+    BaseFragment(R.layout.fragment_payment_transfer) {
 
 //    val args by navArgs<TransactionFragmentArgs>()
 //    val productId = args.productId
@@ -53,7 +53,7 @@ class PaymentsTransferFragment @Inject constructor() :
 
         }
 
-        rvPayments.adapter = adapter
+//        rvPayments.adapter = adapter
 
         val data = listOf(
             RegularPaymentDTO("Телефон"),
@@ -70,11 +70,11 @@ class PaymentsTransferFragment @Inject constructor() :
 
         data.forEach {
             adapter.add(ItemPayment(it) {
-                findNavController().navigate(
+//                findNavController().navigate(
 //                    CreateRegularPaymentFragmentDirections.actionCreateRegularPaymentFragmentToCreateRegPaymentEndFragment(
 //                        it
 //                    )
-                )
+//                )
             })
         }
 

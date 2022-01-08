@@ -2,11 +2,13 @@ package com.example.benefit.ui.payments
 
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.fragment.findNavController
+import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.viewModels
 import com.example.benefit.R
-import com.example.benefit.remote.models.RegularPaymentDTO
+import com.example.benefit.remote.models.PaynetCategory
 import com.example.benefit.ui.base.BaseFragment
-import com.example.benefit.ui.viewgroups.ItemPayment
+import com.example.benefit.ui.viewgroups.ItemLoading
+import com.example.benefit.ui.viewgroups.ItemPaynet
 import com.example.benefit.util.SizeUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
@@ -26,7 +28,7 @@ class PaymentsFragment @Inject constructor() : BaseFragment(R.layout.fragment_pa
     private val adapter = GroupAdapter<GroupieViewHolder>()
 
     //    lateinit var transactionDTO: TransactionDTO
-//    private val viewModel: PaymentsAndTransfersViewModel by viewModels()
+    private val viewModel: PaymentsViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,7 +43,23 @@ class PaymentsFragment @Inject constructor() : BaseFragment(R.layout.fragment_pa
 
     private fun attachListeners() {
 
-
+        edtSearch.doOnTextChanged { text, _, _, _ ->
+            viewModel.paynetCatgResp.value?.let { paynetCategories ->
+                if (text!!.isBlank()) {
+                    adapter.clear()
+                    loadData(paynetCategories)
+                } else {
+                    val filtered = paynetCategories.filter {
+                        it.titleRu?.contains(text) == true
+                                || it.titleUz?.contains(text) == true
+                    }
+                    if (filtered.isNotEmpty()) {
+                        adapter.clear()
+                        loadData(filtered)
+                    }
+                }
+            }
+        }
     }
 
     private fun setupViews() {
@@ -54,26 +72,19 @@ class PaymentsFragment @Inject constructor() : BaseFragment(R.layout.fragment_pa
 
         rvPayments.adapter = adapter
 
-        val data = listOf(
-            RegularPaymentDTO("Телефон"),
-            RegularPaymentDTO("Интернет"),
-            RegularPaymentDTO("Электр.."),
-            RegularPaymentDTO("Электр..")
-        )
-        loadData(data)
 
     }
 
-    private fun loadData(data: List<RegularPaymentDTO>) {
+    private fun loadData(data: List<PaynetCategory>) {
         adapter.clear()
 
         data.forEach {
-            adapter.add(ItemPayment(it) {
-                findNavController().navigate(
+            adapter.add(ItemPaynet(it) {
+//                findNavController().navigate(
 //                    CreateRegularPaymentFragmentDirections.actionCreateRegularPaymentFragmentToCreateRegPaymentEndFragment(
 //                        it
 //                    )
-                )
+//                )
             })
         }
 
@@ -82,7 +93,18 @@ class PaymentsFragment @Inject constructor() : BaseFragment(R.layout.fragment_pa
 
     private fun subscribeObservers() {
 
+        viewModel.paynetCatgResp.observe(viewLifecycleOwner) {
+            loadData(it)
+        }
 
+        viewModel.isLoadingPaynetCategories.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) addLoadingSpinner()
+        }
+    }
+
+    private fun addLoadingSpinner() {
+        adapter.clear()
+        adapter.add(ItemLoading())
     }
 
 

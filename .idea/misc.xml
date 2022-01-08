@@ -3,16 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/fragment_fill_from_any_card.xml" value="0.18414387031408308" />
-        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/fragment_fill_from_any_card_transfer.xml" value="0.18414387031408308" />
-        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/fragment_fill_from_my_cards.xml" value="0.18414387031408308" />
-        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/fragment_fill_merchant_fields.xml" value="0.18414387031408308" />
-        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/fragment_payment_merchants.xml" value="0.18414387031408308" />
-        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/fragment_payments.xml" value="0.18414387031408308" />
-        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/fragment_payments_transfer.xml" value="0.18414387031408308" />
-        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/fragment_profile.xml" value="0.18414387031408308" />
-        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/fragment_transfer_to_card.xml" value="0.18414387031408308" />
-        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/item_news_and_promos.xml" value="0.18414387031408308" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_selected_partners_category.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_create_regular_payment.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_payments_and_transfers.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_create_regular_payment.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_payments.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_payments_and_transfers.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_payments_transfer.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_payments_transfers.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_profile.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_regular_payment.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_currency.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_news_and_promos.xml" value="0.11911231884057971" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_payment.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_paynet.xml" value="0.37864583333333335" />
         <entry key="app/src/main/res/drawable/selector_rounded_top_corners.xml" value="0.22962962962962963" />
         <entry key="app/src/main/res/drawable/shape_top_rounded.xml" value="0.24259259259259258" />
         <entry key="app/src/main/res/drawable/shape_white_rounded_calculator_bg.xml" value="0.35555555555555557" />
@@ -90,7 +94,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -22,13 +22,13 @@ class PaymentsViewModel @Inject constructor(
     private val apiAuth: AuthApiService
 ) : ViewModel() {
 
-    init {
-        getPaynetCategories()
-    }
-
     val paynetCatgResp = MutableLiveData<List<PaynetCategory>>()
     val errorMessage = MutableLiveData<String>()
     val isLoadingPaynetCategories = MutableLiveData<Boolean>()
+
+    init {
+        getPaynetCategories()
+    }
 
     fun getPaynetCategories() {
         isLoadingPaynetCategories.value = true

@@ -23,7 +23,7 @@ class PaymentsBSD : BenefitBSD() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.bsd_payments_and_transfers, null)
+        val view = inflater.inflate(R.layout.bsd_payments, null)
 
         return view
     }
@@ -33,7 +33,7 @@ class PaymentsBSD : BenefitBSD() {
         super.onViewCreated(view, savedInstanceState)
         (childFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).findNavController()
             .setGraph(R.navigation.payments_nav_graph, Bundle().apply {
-               if () putParcelable(ARG_TRANSACTION_DTO, transactionDTO)
+//               if () putParcelable(ARG_TRANSACTION_DTO, transactionDTO)
             })
 
     }

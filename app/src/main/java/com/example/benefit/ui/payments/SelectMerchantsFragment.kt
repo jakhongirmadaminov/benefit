@@ -70,11 +70,11 @@ class SelectMerchantsFragment @Inject constructor() :
 
         data.forEach {
             adapter.add(ItemPayment(it) {
-                findNavController().navigate(
+//                findNavController().navigate(
 //                    CreateRegularPaymentFragmentDirections.actionCreateRegularPaymentFragmentToCreateRegPaymentEndFragment(
 //                        it
 //                    )
-                )
+//                )
             })
         }
 

@@ -14,6 +14,7 @@ import com.example.benefit.ui.main.home.DialogPleaseAddCard
 import com.example.benefit.ui.main.home.KEY_ADD_CARD
 import com.example.benefit.ui.main.home.bsd_add_card.AddCardBSD
 import com.example.benefit.ui.main.transfer_to_card.TransferToCardBSD
+import com.example.benefit.ui.payments.PaymentsBSD
 import com.example.benefit.ui.regular_payment.CreateRegularPaymentBSD
 import com.example.benefit.ui.regular_payment.RegularPaymentBSD
 import com.example.benefit.ui.viewgroups.ItemRegularPayment
@@ -40,6 +41,7 @@ class PaymentsAndTransfersFragment : BaseFragment(R.layout.fragment_payments_and
     }
 
     private fun setupViews() {
+
         rvRegularPayments.adapter = adapter
         adapter.clear()
 
@@ -72,6 +74,10 @@ class PaymentsAndTransfersFragment : BaseFragment(R.layout.fragment_payments_and
     }
 
     private fun attachListeners() {
+        clPay.setOnClickListener {
+            PaymentsBSD().show(childFragmentManager, "")
+
+        }
 
         clMakeDepo.setOnClickListener {
             if (viewModel.cardsResp.value.isNullOrEmpty()) {

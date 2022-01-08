@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/create_regular_payment_nav_graph.xml"
-    app:startDestination="@id/paymentsTransfersFragment">
+    app:startDestination="@id/paymentsFragment">
 
 
     <fragment
-        android:id="@+id/paymentsTransfersFragment"
-        android:name="com.example.benefit.ui.regular_payment.CreateRegularPaymentFragment"
+        android:id="@+id/paymentsFragment"
+        android:name="com.example.benefit.ui.payments.PaymentsFragment"
         android:label=""
-        tools:layout="@layout/fragment_create_regular_payment">
+        tools:layout="@layout/fragment_payments">
 
         <!--                <action-->
         <!--                    android:id="@+id/action_fillCardFragment_to_cardMakeDepositFromAnyCardFragment"-->
@@ -19,39 +19,39 @@
         <!--                    app:exitAnim="@anim/slide_out_left"-->
         <!--                    app:popEnterAnim="@anim/slide_in_left"-->
         <!--                    app:popExitAnim="@anim/slide_out_right" />-->
-        <action
-            android:id="@+id/action_createRegularPaymentFragment_to_createRegPaymentHowItWorksFragment"
-            app:destination="@id/createRegPaymentHowItWorksFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_createRegularPaymentFragment_to_createRegPaymentEndFragment"
-            app:destination="@id/createRegPaymentEndFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+<!--        <action-->
+<!--            android:id="@+id/action_createRegularPaymentFragment_to_createRegPaymentHowItWorksFragment"-->
+<!--            app:destination="@id/createRegPaymentHowItWorksFragment"-->
+<!--            app:enterAnim="@anim/slide_in_right"-->
+<!--            app:exitAnim="@anim/slide_out_left"-->
+<!--            app:popEnterAnim="@anim/slide_in_left"-->
+<!--            app:popExitAnim="@anim/slide_out_right" />-->
+<!--        <action-->
+<!--            android:id="@+id/action_createRegularPaymentFragment_to_createRegPaymentEndFragment"-->
+<!--            app:destination="@id/createRegPaymentEndFragment"-->
+<!--            app:enterAnim="@anim/slide_in_right"-->
+<!--            app:exitAnim="@anim/slide_out_left"-->
+<!--            app:popEnterAnim="@anim/slide_in_left"-->
+<!--            app:popExitAnim="@anim/slide_out_right" />-->
     </fragment>
 
-<!--    <fragment-->
-<!--        android:id="@+id/createRegPaymentHowItWorksFragment"-->
-<!--        android:name="com.example.benefit.ui.regular_payment.CreateRegularPaymentHowItWorksFragment"-->
-<!--        android:label=""-->
-<!--        tools:layout="@layout/fragment_create_regular_payment_how_it_works" />-->
+    <!--    <fragment-->
+    <!--        android:id="@+id/createRegPaymentHowItWorksFragment"-->
+    <!--        android:name="com.example.benefit.ui.regular_payment.CreateRegularPaymentHowItWorksFragment"-->
+    <!--        android:label=""-->
+    <!--        tools:layout="@layout/fragment_create_regular_payment_how_it_works" />-->
 
-<!--    <fragment-->
-<!--        android:id="@+id/createRegPaymentEndFragment"-->
-<!--        android:name="com.example.benefit.ui.regular_payment.CreateRegularPaymentEnd"-->
-<!--        android:label=""-->
-<!--        tools:layout="@layout/fragment_create_regular_payment_end" >-->
+    <!--    <fragment-->
+    <!--        android:id="@+id/createRegPaymentEndFragment"-->
+    <!--        android:name="com.example.benefit.ui.regular_payment.CreateRegularPaymentEnd"-->
+    <!--        android:label=""-->
+    <!--        tools:layout="@layout/fragment_create_regular_payment_end" >-->
 
-<!--        <argument-->
-<!--            android:name="paymentDTO"-->
-<!--            app:argType="com.example.benefit.remote.models.RegularPaymentDTO" />-->
+    <!--        <argument-->
+    <!--            android:name="paymentDTO"-->
+    <!--            app:argType="com.example.benefit.remote.models.RegularPaymentDTO" />-->
 
-<!--    </fragment>-->
+    <!--    </fragment>-->
 
 
 </navigation>
