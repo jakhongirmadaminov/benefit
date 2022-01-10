@@ -61,7 +61,7 @@
             android:layout_margin="26dp"
             android:id="@+id/rvPayments"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_payment"
+            tools:listitem="@layout/item_merchants"
             app:layout_constraintTop_toBottomOf="@id/edtSearch" />
 
 

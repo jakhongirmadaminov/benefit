@@ -1,0 +1,57 @@
+package com.example.benefit.ui.payments
+
+
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.benefit.remote.AuthApiService
+import com.example.benefit.remote.models.PaynetService
+import com.example.benefit.util.RequestState
+import com.example.benefit.util.makeRequest
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class FillMerchantFieldsViewModel @Inject constructor(
+    private val apiAuth: AuthApiService
+) : ViewModel() {
+
+    //    var supremeCard: CardDTO? = null
+    val paynetServices = MutableLiveData<RequestState<List<PaynetService>>>()
+    val isLoadingCards = MutableLiveData<Boolean>()
+    fun getPaynetServicesForProviderId(id: Long) {
+        isLoadingCards.value = true
+        viewModelScope.launch(Dispatchers.IO) {
+            makeRequest(paynetServices) { apiAuth.getPaynetServices(id) }
+        }
+    }
+
+
+//    var supremeCard: CardDTO? = null
+//    val cardsResp = MutableLiveData<List<CardDTO>>()
+//    val isLoadingCards = MutableLiveData<Boolean>()
+//    val signInRequired = MutableLiveData<Boolean>()
+//    fun getMyCards() {
+//        isLoadingCards.value = true
+//        viewModelScope.launch(Dispatchers.IO) {
+//            val response = userRemote.getMyCards()
+//            withContext(Dispatchers.Main) {
+//                isLoadingCards.value = false
+//                when (response) {
+//                    is ResultError -> {
+//                        if (response.code == 403) signInRequired.value = true
+//                        errorMessage.value = response.message
+//                    }
+//                    is ResultSuccess -> {
+//                        cardsResp.value = response.value.getProperly()
+//                        supremeCard = cardsResp.value?.find { it.isSupreme() }
+//                    }
+//                }.exhaustive
+//            }
+//        }
+//    }
+
+
+}

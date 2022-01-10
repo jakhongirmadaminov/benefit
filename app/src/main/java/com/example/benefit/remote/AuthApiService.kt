@@ -45,6 +45,16 @@ interface AuthApiService {
     @GET("api/paynet/categories")
     suspend fun paymentCategories(): RespFormat<List<PaynetCategory>>
 
+    @GET("api/paynet/providers")
+    suspend fun getPaynetProviders(
+        @Query("id", encoded = true) id: Long
+    ): RespFormat<List<PaynetMerchant>>
+
+    @GET("api/paynet/services")
+    suspend fun getPaynetServices(
+        @Query("id", encoded = true) id: Long
+    ): RespFormat<List<PaynetService>>
+
     @GET("api/background")
     suspend fun getCardBackgrounds(): RespFormat<List<CardBgDTO>>
 

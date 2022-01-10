@@ -19,20 +19,20 @@
         <!--                    app:exitAnim="@anim/slide_out_left"-->
         <!--                    app:popEnterAnim="@anim/slide_in_left"-->
         <!--                    app:popExitAnim="@anim/slide_out_right" />-->
-<!--        <action-->
-<!--            android:id="@+id/action_createRegularPaymentFragment_to_createRegPaymentHowItWorksFragment"-->
-<!--            app:destination="@id/createRegPaymentHowItWorksFragment"-->
-<!--            app:enterAnim="@anim/slide_in_right"-->
-<!--            app:exitAnim="@anim/slide_out_left"-->
-<!--            app:popEnterAnim="@anim/slide_in_left"-->
-<!--            app:popExitAnim="@anim/slide_out_right" />-->
-<!--        <action-->
-<!--            android:id="@+id/action_createRegularPaymentFragment_to_createRegPaymentEndFragment"-->
-<!--            app:destination="@id/createRegPaymentEndFragment"-->
-<!--            app:enterAnim="@anim/slide_in_right"-->
-<!--            app:exitAnim="@anim/slide_out_left"-->
-<!--            app:popEnterAnim="@anim/slide_in_left"-->
-<!--            app:popExitAnim="@anim/slide_out_right" />-->
+        <action
+            android:id="@+id/action_paymentsFragment_to_selectMerchantFragment"
+            app:destination="@id/selectMerchantFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <!--        <action-->
+        <!--            android:id="@+id/action_createRegularPaymentFragment_to_createRegPaymentEndFragment"-->
+        <!--            app:destination="@id/createRegPaymentEndFragment"-->
+        <!--            app:enterAnim="@anim/slide_in_right"-->
+        <!--            app:exitAnim="@anim/slide_out_left"-->
+        <!--            app:popEnterAnim="@anim/slide_in_left"-->
+        <!--            app:popExitAnim="@anim/slide_out_right" />-->
     </fragment>
 
     <!--    <fragment-->
@@ -41,17 +41,32 @@
     <!--        android:label=""-->
     <!--        tools:layout="@layout/fragment_create_regular_payment_how_it_works" />-->
 
-    <!--    <fragment-->
-    <!--        android:id="@+id/createRegPaymentEndFragment"-->
-    <!--        android:name="com.example.benefit.ui.regular_payment.CreateRegularPaymentEnd"-->
-    <!--        android:label=""-->
-    <!--        tools:layout="@layout/fragment_create_regular_payment_end" >-->
+    <fragment
+        android:id="@+id/selectMerchantFragment"
+        android:name="com.example.benefit.ui.payments.SelectMerchantsFragment"
+        android:label=""
+        tools:layout="@layout/fragment_payment_merchants">
 
-    <!--        <argument-->
-    <!--            android:name="paymentDTO"-->
-    <!--            app:argType="com.example.benefit.remote.models.RegularPaymentDTO" />-->
+        <argument
+            android:name="paynetCategory"
+            app:argType="com.example.benefit.remote.models.PaynetCategory" />
+        <action
+            android:id="@+id/action_selectMerchantFragment_to_fillMerchantFields"
+            app:destination="@id/fillMerchantFields" />
 
-    <!--    </fragment>-->
+    </fragment>
+
+    <fragment
+        android:id="@+id/fillMerchantFields"
+        android:name="com.example.benefit.ui.payments.FillMerchantsFieldsFragment"
+        android:label=""
+        tools:layout="@layout/fragment_fill_merchant_fields">
+
+        <argument
+            android:name="paynetMerchant"
+            app:argType="com.example.benefit.remote.models.PaynetMerchant" />
+
+    </fragment>
 
 
 </navigation>

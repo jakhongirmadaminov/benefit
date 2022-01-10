@@ -44,30 +44,4 @@ class PaymentsViewModel @Inject constructor(
         }
     }
 
-
-//    var supremeCard: CardDTO? = null
-//    val cardsResp = MutableLiveData<List<CardDTO>>()
-//    val isLoadingCards = MutableLiveData<Boolean>()
-//    val signInRequired = MutableLiveData<Boolean>()
-//    fun getMyCards() {
-//        isLoadingCards.value = true
-//        viewModelScope.launch(Dispatchers.IO) {
-//            val response = userRemote.getMyCards()
-//            withContext(Dispatchers.Main) {
-//                isLoadingCards.value = false
-//                when (response) {
-//                    is ResultError -> {
-//                        if (response.code == 403) signInRequired.value = true
-//                        errorMessage.value = response.message
-//                    }
-//                    is ResultSuccess -> {
-//                        cardsResp.value = response.value.getProperly()
-//                        supremeCard = cardsResp.value?.find { it.isSupreme() }
-//                    }
-//                }.exhaustive
-//            }
-//        }
-//    }
-
-
 }

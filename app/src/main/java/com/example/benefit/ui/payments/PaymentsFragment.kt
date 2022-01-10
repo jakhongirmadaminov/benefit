@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.remote.models.PaynetCategory
 import com.example.benefit.ui.base.BaseFragment
@@ -78,13 +79,11 @@ class PaymentsFragment @Inject constructor() : BaseFragment(R.layout.fragment_pa
     private fun loadData(data: List<PaynetCategory>) {
         adapter.clear()
 
-        data.forEach {
-            adapter.add(ItemPaynet(it) {
-//                findNavController().navigate(
-//                    CreateRegularPaymentFragmentDirections.actionCreateRegularPaymentFragmentToCreateRegPaymentEndFragment(
-//                        it
-//                    )
-//                )
+        data.forEach { paynetCategory ->
+            adapter.add(ItemPaynet(paynetCategory) {
+                findNavController().navigate(
+                    PaymentsFragmentDirections.actionPaymentsFragmentToSelectMerchantFragment(it)
+                )
             })
         }
 
