@@ -10,7 +10,11 @@
         android:name="com.example.benefit.ui.gap.create_game.CreateGameFragment"
         tools:layout="@layout/fragment_create_game">
 
-
+        <argument
+            android:name="selectedFriends"
+            android:defaultValue="@null"
+            app:argType="com.example.benefit.remote.models.BenefitFriends"
+            app:nullable="true" />
         <action
             android:id="@+id/action_createGameFragment_to_findFriendsFragment"
             app:destination="@id/findFriendsFragment" />
@@ -23,6 +27,14 @@
         android:name="com.example.benefit.ui.gap.create_game.FindFriendsFragment"
         tools:layout="@layout/fragment_find_friends">
 
+        <argument
+            android:name="selectedFriends"
+            app:argType="com.example.benefit.remote.models.BenefitFriends"
+            app:nullable="true" />
+
+        <action
+            android:id="@+id/action_findFriendsFragment_to_createGameFragment"
+            app:destination="@id/createGameFragment" />
 
     </fragment>
 

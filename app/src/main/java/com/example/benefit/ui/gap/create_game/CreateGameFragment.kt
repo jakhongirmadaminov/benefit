@@ -1,30 +1,27 @@
 package com.example.benefit.ui.gap.create_game
 
-import android.os.Bundle
-import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.example.benefit.R
-import com.example.benefit.ui.branches_atms.BranchesAtmsActivity
-import com.example.benefit.ui.gap.gap_chart.GapChartActivity
-import com.example.benefit.ui.main.home.HomeFragment
-import com.example.benefit.ui.main.home.card_options.CardOptionsBSD
-import com.example.benefit.util.SizeUtils
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_create_game.*
-import splitties.fragments.start
-import javax.inject.Inject
-
 /**
  * Created by jahon on 03-Sep-20
  */
+import android.os.Bundle
+import android.view.View
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.example.benefit.R
 import com.example.benefit.ui.base.BaseFragment
+import com.example.benefit.ui.gap.gap_chart.GapChartActivity
+import com.example.benefit.ui.viewgroups.ItemContactSquare
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
+import kotlinx.android.synthetic.main.fragment_create_game.*
+import splitties.fragments.start
 
 class CreateGameFragment : BaseFragment(R.layout.fragment_create_game) {
 
-
+    val args: CreateGameFragmentArgs by navArgs()
     private val viewModel: CreateGameViewModel by viewModels()
+    val adapter = GroupAdapter<GroupieViewHolder>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,6 +34,20 @@ class CreateGameFragment : BaseFragment(R.layout.fragment_create_game) {
     }
 
     private fun setupViews() {
+        rvContacts.adapter = adapter
+        adapter.clear()
+
+        args.selectedFriends?.forEach {
+            adapter.add(ItemContactSquare(it))
+        }
+
+        adapter.add(ItemContactSquare {
+            findNavController().navigate(
+                CreateGameFragmentDirections.actionCreateGameFragmentToFindFriendsFragment(
+                    args.selectedFriends
+                )
+            )
+        })
 
 
     }
@@ -47,12 +58,12 @@ class CreateGameFragment : BaseFragment(R.layout.fragment_create_game) {
     }
 
     private fun attachListeners() {
-        llAdd.setOnClickListener {
-            findNavController().navigate(CreateGameFragmentDirections.actionCreateGameFragmentToFindFriendsFragment())
-        }
+//        llAdd.setOnClickListener {
+//            findNavController().navigate(CreateGameFragmentDirections.actionCreateGameFragmentToFindFriendsFragment())
+//        }
 
         tvCreate.setOnClickListener {
-           start<GapChartActivity>{}
+            start<GapChartActivity> {}
         }
 
     }

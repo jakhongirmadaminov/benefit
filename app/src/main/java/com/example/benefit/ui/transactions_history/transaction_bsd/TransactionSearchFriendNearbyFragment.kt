@@ -3,12 +3,11 @@ package com.example.benefit.ui.transactions_history.transaction_bsd
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.remote.models.FriendDTO
-import com.example.benefit.remote.models.FriendsDTOs
+import com.example.benefit.remote.models.Friends
 import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.viewgroups.FriendItem
 import com.example.benefit.ui.viewgroups.FriendItemImgName
@@ -16,7 +15,6 @@ import com.example.benefit.util.SizeUtils
 import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_transaction_search_friends_nearby.*
 import kotlinx.android.synthetic.main.fragment_transaction_search_friends_nearby.clParent
 import kotlinx.android.synthetic.main.fragment_transaction_search_friends_nearby.ivBack
@@ -123,7 +121,7 @@ class TransactionSearchFriendNearbyFragment @Inject constructor() :
                     Snackbar.LENGTH_SHORT
                 ).show()
             } else {
-                val contacts = FriendsDTOs()
+                val contacts = Friends()
                 for (i in 0 until horizontalAdapter.itemCount) {
                     contacts.add((horizontalAdapter.getItem(i) as FriendItemImgName).friend)
                 }

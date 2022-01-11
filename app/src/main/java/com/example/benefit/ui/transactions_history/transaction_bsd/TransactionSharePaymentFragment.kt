@@ -8,11 +8,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.benefit.R
 import com.example.benefit.remote.models.FriendDTO
-import com.example.benefit.remote.models.FriendsDTOs
+import com.example.benefit.remote.models.Friends
 import com.example.benefit.ui.viewgroups.FriendItem
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_transaction_share_payment.*
 import javax.inject.Inject
 
@@ -81,7 +80,7 @@ class TransactionSharePaymentFragment @Inject constructor() :
         }
 
         tvSelect.setOnClickListener {
-            val contacts = FriendsDTOs()
+            val contacts = Friends()
 
             for (i in 0 until adapter.itemCount) {
                 contacts.add((adapter.getItem(i) as FriendItem).friend)

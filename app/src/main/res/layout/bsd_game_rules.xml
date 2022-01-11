@@ -6,31 +6,17 @@
     android:layout_height="wrap_content">
 
 
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
         android:id="@+id/clParent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/shape_top_rounded">
-
-
-<!--        <ImageView-->
-<!--            android:id="@+id/ivBack"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:clickable="true"-->
-<!--            android:focusable="true"-->
-<!--            android:padding="15dp"-->
-<!--            android:src="@drawable/ic_baseline_keyboard_backspace_24"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_top_rounded"
+        android:orientation="vertical">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:src="@drawable/rectangle"
             app:layout_constraintEnd_toEndOf="parent"
@@ -39,10 +25,10 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="26dp"
-            android:layout_marginTop="?android:actionBarSize"
+            android:layout_marginTop="26dp"
             android:layout_marginRight="40dp"
             android:fontFamily="sans-serif"
             android:text="@string/game_rules"
@@ -53,7 +39,6 @@
             app:layout_constraintHorizontal_bias="0.277"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <TextView
             android:layout_width="match_parent"
@@ -69,6 +54,6 @@
             app:layout_constraintTop_toBottomOf="@id/title" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

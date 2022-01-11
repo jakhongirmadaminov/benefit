@@ -339,6 +339,11 @@ interface AuthApiService {
     @GET("api/other/currency2")
     suspend fun getCurrencies(): RespFormat<List<CurrencyDTO>>
 
-
+    @POST("api/other/friends")
+    @FormUrlEncoded
+    suspend fun getBenefitFriends(
+        @Field("phone_array") phone_array: String,
+        @Field("user_id") user_id: Int = AppPrefs.userId
+    ): RespFormat<List<BenefitContactDTO>>
 }
 

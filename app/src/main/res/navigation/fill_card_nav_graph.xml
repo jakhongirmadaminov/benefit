@@ -142,7 +142,7 @@
 
         <argument
             android:name="argSelection"
-            app:argType="com.example.benefit.remote.models.FriendsDTOs"
+            app:argType="com.example.benefit.remote.models.Friends"
             app:nullable="true" />
 
     </fragment>
