@@ -37,19 +37,26 @@ class CreateGameFragment : BaseFragment(R.layout.fragment_create_game) {
         rvContacts.adapter = adapter
         adapter.clear()
 
-        args.selectedFriends?.forEach {
-            adapter.add(ItemContactSquare(it))
+
+        args.selectedFriends?.forEach { friend ->
+            adapter.add(ItemContactSquare(friend,
+                onClick = null,
+                onRemove = { viewItem ->
+                    args.selectedFriends?.remove(friend)
+                    adapter.remove(viewItem)
+                }
+            ))
         }
 
-        adapter.add(ItemContactSquare {
-            findNavController().navigate(
-                CreateGameFragmentDirections.actionCreateGameFragmentToFindFriendsFragment(
-                    args.selectedFriends
+        if (args.selectedFriends == null || args.selectedFriends!!.size < 10) {
+            adapter.add(ItemContactSquare(onClick = {
+                findNavController().navigate(
+                    CreateGameFragmentDirections.actionCreateGameFragmentToFindFriendsFragment(
+                        args.selectedFriends
+                    )
                 )
-            )
-        })
-
-
+            }, onRemove = null))
+        }
     }
 
     private fun subscribeObservers() {

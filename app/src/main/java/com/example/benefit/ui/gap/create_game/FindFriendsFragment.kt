@@ -16,7 +16,6 @@ import androidx.navigation.fragment.navArgs
 import com.example.benefit.R
 import com.example.benefit.remote.models.BenefitContactDTO
 import com.example.benefit.remote.models.BenefitFriends
-import com.example.benefit.remote.models.Friends
 import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.fill_card.REQ_CODE_READ_CONTACTS
 import com.example.benefit.ui.viewgroups.BenefitFriendItem
@@ -99,13 +98,11 @@ class FindFriendsFragment @Inject constructor() :
     private fun loadData(value: List<BenefitContactDTO>) {
         adapter.clear()
         value.forEach {
-            adapter.add(BenefitFriendItem(it) {
-                if (it.isChecked) {
-
-                } else {
-
-                }
-            })
+            it.isChecked = args.selectedFriends?.contains(it) == true
+            adapter.add(BenefitFriendItem(it, onCheckChanged = { isChecked ->
+                if (isChecked) args.selectedFriends?.add(it)
+                else args.selectedFriends?.remove(it)
+            }))
         }
     }
 
