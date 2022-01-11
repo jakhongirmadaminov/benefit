@@ -13,7 +13,6 @@ import com.example.benefit.util.exhaustive
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,13 +33,11 @@ class PaymentsViewModel @Inject constructor(
         isLoadingPaynetCategories.value = true
         viewModelScope.launch(Dispatchers.IO) {
             val response = userRemote.paymentCategories()
-            withContext(Dispatchers.Main) {
-                isLoadingPaynetCategories.value = false
-                when (response) {
-                    is ResultError -> errorMessage.value = response.message
-                    is ResultSuccess -> paynetCatgResp.value = response.value
-                }.exhaustive
-            }
+            isLoadingPaynetCategories.postValue(false)
+            when (response) {
+                is ResultError -> errorMessage.postValue(response.message)
+                is ResultSuccess -> paynetCatgResp.postValue(response.value)
+            }.exhaustive
         }
     }
 

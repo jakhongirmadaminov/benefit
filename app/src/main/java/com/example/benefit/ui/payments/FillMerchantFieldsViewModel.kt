@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.benefit.remote.AuthApiService
 import com.example.benefit.remote.models.PaynetService
+import com.example.benefit.remote.models.ServiceField
 import com.example.benefit.util.RequestState
 import com.example.benefit.util.makeRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,6 +28,21 @@ class FillMerchantFieldsViewModel @Inject constructor(
             makeRequest(paynetServices) { apiAuth.getPaynetServices(id) }
         }
     }
+
+    fun pay() {
+
+    }
+
+    fun areAllFieldsSelected(service: PaynetService): Boolean {
+        fields.forEachIndexed { index, fieldValue ->
+            if (service.service_fields!![index].required == 1 && fieldValue.userSelection.isNullOrBlank()) {
+                return false
+            }
+        }
+        return true
+    }
+
+    val fields = arrayListOf<ServiceField>()
 
 
 //    var supremeCard: CardDTO? = null

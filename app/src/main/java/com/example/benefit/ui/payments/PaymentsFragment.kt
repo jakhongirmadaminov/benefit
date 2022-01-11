@@ -97,7 +97,7 @@ class PaymentsFragment @Inject constructor() : BaseFragment(R.layout.fragment_pa
         }
 
         viewModel.isLoadingPaynetCategories.observe(viewLifecycleOwner) { isLoading ->
-            if (isLoading) addLoadingSpinner()
+            if (isLoading) addLoadingSpinner() else adapter.clear()
         }
     }
 

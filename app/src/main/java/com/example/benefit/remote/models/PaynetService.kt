@@ -3,6 +3,7 @@ package com.example.benefit.remote.models
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 
 @Parcelize
 data class PaynetService(
@@ -28,11 +29,21 @@ data class ProviderName(
 data class ServiceField(
     @SerializedName("fieldControl") val fieldControl: String? = null,
     @SerializedName("fieldType") val fieldType: FieldType? = null,
-    @SerializedName("fieldValues") val fieldValues: String? = null,
+    @SerializedName("fieldValues") val fieldValues: @RawValue Any? = null,
     @SerializedName("name") val name: String? = null,
     @SerializedName("own_id") val own_id: Long? = null,
     @SerializedName("own_order") val own_order: Long? = null,
     @SerializedName("required") val required: Int? = null,
+    @SerializedName("titleRu") val titleRu: String? = null,
+    @SerializedName("titleUz") val titleUz: String? = null,
+    var userSelection: String? = null
+) : Parcelable
+
+//{"field_id":6789,"own_id":122,"titleRu":"АНДИЖОН ВИЛОЯТИ - Андижон шахри","titleUz":"АНДИЖОН ВИЛОЯТИ - Андижон шахри"}
+@Parcelize
+data class FieldValue(
+    @SerializedName("field_id") val field_id: Double? = null,
+    @SerializedName("own_id") val own_id: Double? = null,
     @SerializedName("titleRu") val titleRu: String? = null,
     @SerializedName("titleUz") val titleUz: String? = null
 ) : Parcelable

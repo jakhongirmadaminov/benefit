@@ -2,7 +2,8 @@ package com.example.benefit.ui.payments
 
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
@@ -12,10 +13,13 @@ import com.example.benefit.R
 import com.example.benefit.remote.models.FieldType
 import com.example.benefit.remote.models.PaynetService
 import com.example.benefit.ui.base.BaseFragment
-import com.example.benefit.util.*
+import com.example.benefit.util.AppPrefs
+import com.example.benefit.util.Constants.UZ
+import com.example.benefit.util.RequestState
+import com.example.benefit.util.SizeUtils
+import com.example.benefit.util.loadImageUrl
 import kotlinx.android.synthetic.main.fragment_fill_merchant_fields.*
-import kotlinx.android.synthetic.main.fragment_payments.clParent
-import kotlinx.android.synthetic.main.fragment_payments.title
+import kotlinx.android.synthetic.main.item_paynet_service_field_spinner.view.*
 import kotlinx.android.synthetic.main.item_paynet_service_field_string.view.*
 import javax.inject.Inject
 
@@ -40,6 +44,9 @@ class FillMerchantsFieldsFragment @Inject constructor() :
 
     private fun attachListeners() {
 
+        btnPay.setOnClickListener {
+            viewModel.pay()
+        }
 
     }
 
@@ -53,21 +60,26 @@ class FillMerchantsFieldsFragment @Inject constructor() :
         }
     }
 
-    val fields = arrayListOf<EditText>()
 
     private fun populateFields(service: PaynetService) {
         paymentServiceFields.removeAllViews()
 
-        service.service_fields?.forEach { serviceField ->
-
+        service.service_fields?.forEachIndexed { index, serviceField ->
+            viewModel.fields.add(serviceField)
+            serviceField.fieldValues is List<*>
             when (serviceField.fieldType) {
                 FieldType.STRING -> {
                     val view =
                         layoutInflater.inflate(R.layout.item_paynet_service_field_string, null)
                             .apply {
                                 lblTitle.text =
-                                    if (AppPrefs.language == Constants.UZ) serviceField.titleUz else serviceField.titleRu
-                                fields.add(edtInput)
+                                    if (AppPrefs.language == UZ) serviceField.titleUz else serviceField.titleRu
+//                                viewModel.fields.add(edtInput)
+                                edtInput.doOnTextChanged { text, start, before, count ->
+                                    text?.let {
+                                        setFieldValue(service, index, it.toString())
+                                    }
+                                }
                             }
                     paymentServiceFields.addView(view)
                 }
@@ -76,38 +88,76 @@ class FillMerchantsFieldsFragment @Inject constructor() :
                         layoutInflater.inflate(R.layout.item_paynet_service_field_money, null)
                             .apply {
                                 lblTitle.text =
-                                    if (AppPrefs.language == Constants.UZ) serviceField.titleUz else serviceField.titleRu
-                                fields.add(edtInput)
+                                    if (AppPrefs.language == UZ) serviceField.titleUz else serviceField.titleRu
+//                                viewModel.fields.add(edtInput)
+                                edtInput.doOnTextChanged { text, start, before, count ->
+                                    text?.let {
+                                        setFieldValue(service, index, it.toString())
+                                    }
+                                }
                             }
                     paymentServiceFields.addView(view)
                 }
                 null -> {
+                    if (serviceField.fieldValues is List<*>) {
+                        val view =
+                            layoutInflater.inflate(
+                                R.layout.item_paynet_service_field_spinner,
+                                paymentServiceFields,
+                                false
+                            ).apply {
+                                val selections: List<Map<String, Any>> =
+                                    serviceField.fieldValues.filterIsInstance<Map<String, Any>>()
+                                selectionsSpinner.adapter = ArrayAdapter(
+                                    requireContext(),
+                                    android.R.layout.simple_spinner_item,
+                                    selections.map { if (AppPrefs.language == UZ) it["titleUz"] as String else it["titleRu"] as String }
+                                )
+                                selectionsSpinner.onItemSelectedListener = object :
+                                    AdapterView.OnItemSelectedListener {
+                                    override fun onItemSelected(
+                                        p0: AdapterView<*>?,
+                                        p1: View?,
+                                        p2: Int,
+                                        p3: Long
+                                    ) {
+                                        setFieldValue(
+                                            service,
+                                            index,
+                                            selections[p2]["field_id"]!!.toString()
+                                        )
 
+                                    }
+
+                                    override fun onNothingSelected(p0: AdapterView<*>?) {
+                                    }
+
+                                }
+                                tvTitle.text =
+                                    if (AppPrefs.language == UZ) serviceField.titleUz else serviceField.titleRu
+                            }
+                        paymentServiceFields.addView(view)
+                    }
                 }
+
+
             }
 
 
         }
 
-        putFieldCheckCallbacks(service)
+//        putFieldCheckCallbacks(service)
 
     }
 
-    private fun putFieldCheckCallbacks(service: PaynetService) {
-        fields.forEach {
-            it.doOnTextChanged { text, start, before, count ->
-                checkFields(service)
-            }
-        }
+    private fun setFieldValue(service: PaynetService, index: Int, text: String) {
+        viewModel.fields[index].userSelection = text
+        checkFields(service)
+
     }
 
     private fun checkFields(service: PaynetService) {
-        fields.forEachIndexed { index, editText ->
-            if (service.service_fields!![index].required == 1 && editText.text?.isBlank() == true) {
-                btnPay.myEnabled(false)
-            }
-        }
-        btnPay.myEnabled(true)
+        btnPay.myEnabled(viewModel.areAllFieldsSelected(service))
     }
 
     private fun subscribeObservers() {
@@ -122,15 +172,17 @@ class FillMerchantsFieldsFragment @Inject constructor() :
                 is RequestState.Success -> {
                     progress.isVisible = false
                     populateFields(it.value[0])
+
                 }
             }
         }
+
 
     }
 
 
     override fun onDestroyView() {
         super.onDestroyView()
-        fields.clear()
+        viewModel.fields.clear()
     }
 }
