@@ -34,25 +34,6 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|end">
 
-                    <!--                <TextView-->
-                    <!--                    android:layout_width="0dp"-->
-                    <!--                    android:layout_height="wrap_content"-->
-                    <!--                    android:layout_weight="1"-->
-                    <!--                    android:fontFamily="sans-serif"-->
-                    <!--                    android:gravity="center"-->
-                    <!--                    android:text="@string/limits"-->
-                    <!--                    android:textColor="#000000"-->
-                    <!--                    android:textSize="20sp"-->
-                    <!--                    android:textStyle="bold" />-->
-
-
-                    <!--                <ImageView-->
-                    <!--                    android:id="@+id/icMore"-->
-                    <!--                    android:layout_width="?android:actionBarSize"-->
-                    <!--                    android:layout_height="match_parent"-->
-                    <!--                    android:padding="15dp"-->
-                    <!--                    android:src="@drawable/ic_three_dots" />-->
-
                     <TextView
                         android:id="@+id/tvSelect"
                         android:layout_width="wrap_content"
@@ -76,16 +57,31 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="13dp"
+                android:fontFamily="sans-serif"
+                android:gravity="center_horizontal"
+                android:textColor="#cc000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <com.example.benefit.ui.gap.gap_chart.GapChartView
                 android:id="@+id/chart"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:layout_margin="26dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginEnd="26dp"
+                android:layout_marginBottom="26dp"
+                android:layout_marginTop="13dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/gap_chart"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -94,7 +90,7 @@
                 android:id="@+id/tvSum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"
                 android:fontFamily="sans-serif"
                 android:gravity="center_horizontal"
                 android:textColor="#cc000000"
@@ -102,23 +98,23 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/chart"
-                android:text="100 000 UZS" />
+                app:layout_constraintTop_toBottomOf="@id/chart" />
 
 
             <TextView
                 android:id="@+id/tvReceiver"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:fontFamily="sans-serif-light"
                 android:gravity="center_horizontal"
-                android:text="Получатель: Стас"
                 android:textColor="#cc5c5c5c"
                 android:textSize="14sp"
                 android:textStyle="normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvSum" />
+                app:layout_constraintTop_toBottomOf="@id/tvSum"
+                tools:text="Получатель: Стас" />
 
             <View
                 android:id="@+id/line1"
@@ -128,48 +124,49 @@
                 android:background="@color/bg_grey"
                 app:layout_constraintTop_toBottomOf="@id/tvReceiver" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="26dp"
-                android:fontFamily="sans-serif"
-                android:text="Сотрудники"
-                android:textColor="#5c5c5c"
-                android:textSize="14sp"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toTopOf="@id/line2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/line1" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="26dp"
-                android:fontFamily="sans-serif"
-                android:gravity="end"
-                android:text="4 игрока"
-                android:textColor="#5c5c5c"
-                android:textSize="14sp"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toTopOf="@id/line2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/line1" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="26dp"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif"
+                    android:text="Сотрудники"
+                    android:textColor="#5c5c5c"
+                    android:textSize="14sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="26dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="end"
+                    android:text="4 игрока"
+                    android:textColor="#5c5c5c"
+                    android:textSize="14sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
 
             <View
                 android:id="@+id/line2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="50dp"
                 android:background="@color/bg_grey"
                 app:layout_constraintTop_toBottomOf="@id/line1" />
 
-            <!--        <androidx.recyclerview.widget.RecyclerView-->
-            <!--            android:layout_width="match_parent"-->
-            <!--            android:id="@+id/rvPlayers"-->
-            <!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-            <!--            tools:listitem="@layout/item_gap_player"-->
-            <!--            android:layout_height="wrap_content"-->
-            <!--            app:layout_constraintTop_toBottomOf="@id/line2" />-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPlayers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/line2"
+                tools:listitem="@layout/item_gap_player" />
 
 
             <LinearLayout
@@ -458,7 +455,7 @@
 
             </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
 
     </LinearLayout>

@@ -52,7 +52,8 @@ class SelectMerchantsFragment @Inject constructor() :
                             loadData(paynetMerchants)
                         } else {
                             val filtered = paynetMerchants.filter {
-                                it.titleShort?.contains(text) == true
+                                it.titleShort?.lowercase()
+                                    ?.contains(text.toString().lowercase()) == true
                                        /* || it.titleShort?.contains(text) == true*/
                             }
                             if (filtered.isNotEmpty()) {

@@ -51,8 +51,9 @@ class PaymentsFragment @Inject constructor() : BaseFragment(R.layout.fragment_pa
                     loadData(paynetCategories)
                 } else {
                     val filtered = paynetCategories.filter {
-                        it.titleRu?.contains(text) == true
-                                || it.titleUz?.contains(text) == true
+                        it.titleRu?.lowercase()?.contains(text.toString().lowercase()) == true ||
+                                it.titleUz?.lowercase()
+                                    ?.contains(text.toString().lowercase()) == true
                     }
                     if (filtered.isNotEmpty()) {
                         adapter.clear()

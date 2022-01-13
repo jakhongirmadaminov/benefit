@@ -7,12 +7,12 @@ import android.os.Bundle
 import android.provider.ContactsContract
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
+import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.activityViewModels
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.benefit.R
 import com.example.benefit.remote.models.BenefitContactDTO
 import com.example.benefit.remote.models.BenefitFriends
@@ -36,8 +36,7 @@ class FindFriendsFragment @Inject constructor() :
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
 
-    val args: FindFriendsFragmentArgs by navArgs()
-    private val viewModel: CreateGameViewModel by viewModels()
+    private val viewModel: CreateGameViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -98,23 +97,46 @@ class FindFriendsFragment @Inject constructor() :
     private fun loadData(value: List<BenefitContactDTO>) {
         adapter.clear()
         value.forEach {
-            it.isChecked = args.selectedFriends?.contains(it) == true
+            it.isChecked = viewModel.selectedFriends.contains(it) == true
             adapter.add(BenefitFriendItem(it, onCheckChanged = { isChecked ->
-                if (isChecked) args.selectedFriends?.add(it)
-                else args.selectedFriends?.remove(it)
+                if (isChecked) viewModel.selectedFriends.add(it)
+                else viewModel.selectedFriends.remove(it)
             }))
         }
     }
 
     private fun attachListeners() {
+
+        edtSearch.doOnTextChanged { text, start, before, count ->
+            when (val result = viewModel.availableContacts.value) {
+                is RequestState.Success -> {
+                    result.value.let { benefitContacts ->
+                        if (text!!.isBlank()) {
+                            adapter.clear()
+                            loadData(benefitContacts)
+                        } else {
+                            val filtered = benefitContacts.filter {
+                                it.fullname?.lowercase()
+                                    ?.contains(text.toString().lowercase()) == true
+                                /* || it.titleShort?.contains(text) == true*/
+                            }
+                            if (filtered.isNotEmpty()) {
+                                adapter.clear()
+                                loadData(filtered)
+                            }
+                        }
+                    }
+                }
+                else -> {
+
+                }
+            }
+        }
+
         ivBack.setOnClickListener {
             findNavController().popBackStack()
         }
-        ivLocation.setOnClickListener {
-//            findNavController().navigate(
-//                TransactionSharePaymentFragmentDirections.actionTransactionSharePaymentFragmentToTransactionSearchFriendNearbyFragment()
-//            )
-        }
+        ivLocation.setOnClickListener { }
 
         tvSelect.setOnClickListener {
             val contacts = BenefitFriends()
@@ -122,10 +144,8 @@ class FindFriendsFragment @Inject constructor() :
                 val friend = (adapter.getItem(i) as BenefitFriendItem).friend
                 if (friend.isChecked) contacts.add(friend)
             }
-
-            findNavController().navigate(
-                FindFriendsFragmentDirections.actionFindFriendsFragmentToCreateGameFragment(contacts)
-            )
+            viewModel.selectedFriends = contacts
+            findNavController().popBackStack()
         }
     }
 
