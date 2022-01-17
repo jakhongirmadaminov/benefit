@@ -29,8 +29,27 @@ class FillMerchantFieldsViewModel @Inject constructor(
         }
     }
 
-    fun pay() {
+    val payState = MutableLiveData<RequestState<Any>>()
+    fun pay(serviceId: Long, providerId: Long) {
+        (paynetServices.value as? RequestState.Success)?.value?.let { services ->
 
+            viewModelScope.launch(Dispatchers.IO) {
+                val fields = StringBuilder()
+                services[0].service_fields?.forEach {
+                    fields.append("\"${it.name}\":")
+                    fields.append("\"${it.userSelection}\",")
+                }
+
+                makeRequest(payState) {
+                    apiAuth.paynetPay(
+                        serviceId,
+                        providerId,
+                        fields.removeSuffix(",").toString()
+                    )
+                }
+
+            }
+        }
     }
 
     fun areAllFieldsSelected(service: PaynetService): Boolean {

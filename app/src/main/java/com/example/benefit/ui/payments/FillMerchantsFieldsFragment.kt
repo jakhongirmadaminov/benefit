@@ -19,6 +19,7 @@ import com.example.benefit.util.RequestState
 import com.example.benefit.util.SizeUtils
 import com.example.benefit.util.loadImageUrl
 import kotlinx.android.synthetic.main.fragment_fill_merchant_fields.*
+import kotlinx.android.synthetic.main.item_paynet_service_field_phone.view.*
 import kotlinx.android.synthetic.main.item_paynet_service_field_spinner.view.*
 import kotlinx.android.synthetic.main.item_paynet_service_field_string.view.*
 import javax.inject.Inject
@@ -45,7 +46,7 @@ class FillMerchantsFieldsFragment @Inject constructor() :
     private fun attachListeners() {
 
         btnPay.setOnClickListener {
-            viewModel.pay()
+            viewModel.pay(args.paynetMerchant.category_id!!, providerId = args.paynetMerchant.own_id!!)
         }
 
     }
@@ -93,6 +94,21 @@ class FillMerchantsFieldsFragment @Inject constructor() :
                                 edtInput.doOnTextChanged { text, start, before, count ->
                                     text?.let {
                                         setFieldValue(service, index, it.toString())
+                                    }
+                                }
+                            }
+                    paymentServiceFields.addView(view)
+                }
+                FieldType.PHONE -> {
+                    val view =
+                        layoutInflater.inflate(R.layout.item_paynet_service_field_phone, null)
+                            .apply {
+                                lblEnterPhone.text =
+                                    if (AppPrefs.language == UZ) serviceField.titleUz else serviceField.titleRu
+//                                viewModel.fields.add(edtInput)
+                                edtPhone.doOnTextChanged { text, start, before, count ->
+                                    text?.let {
+                                        setFieldValue(service, index, "998$it")
                                     }
                                 }
                             }

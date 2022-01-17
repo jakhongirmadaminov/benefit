@@ -45,6 +45,14 @@ interface AuthApiService {
     @GET("api/paynet/categories")
     suspend fun paymentCategories(): RespFormat<List<PaynetCategory>>
 
+    @POST("api/paynet/paycheck")
+    @FormUrlEncoded
+    suspend fun paynetPay(
+        @Field("service_id") service_id: Long,
+        @Field("provider_id") provider_id: Long,
+        @Field("fields") fields: String,
+    ): RespFormat<Any>
+
     @GET("api/paynet/providers")
     suspend fun getPaynetProviders(
         @Query("id", encoded = true) id: Long
