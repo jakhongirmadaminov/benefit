@@ -9,13 +9,13 @@ import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_payment.view.*
 
-class ItemPaynet(val obj: PaynetCategory, val onClick: () -> Unit) : Item() {
+class ItemPaynet(val obj: PaynetCategory, val onClick: (PaynetCategory) -> Unit) : Item() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
 
         viewHolder.itemView.tvPaymentName.text =
             if (AppPrefs.language == UZ) obj.titleUz else obj.titleRu
         viewHolder.itemView.clParent.setOnClickListener {
-            onClick()
+            onClick(obj)
         }
         obj.image?.let {
             viewHolder.itemView.ivLogo.loadImageUrl(it)

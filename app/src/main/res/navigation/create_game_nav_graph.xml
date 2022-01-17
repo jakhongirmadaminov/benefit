@@ -10,7 +10,6 @@
         android:name="com.example.benefit.ui.gap.create_game.CreateGameFragment"
         tools:layout="@layout/fragment_create_game">
 
-
         <action
             android:id="@+id/action_createGameFragment_to_findFriendsFragment"
             app:destination="@id/findFriendsFragment" />
@@ -22,7 +21,6 @@
         android:id="@+id/findFriendsFragment"
         android:name="com.example.benefit.ui.gap.create_game.FindFriendsFragment"
         tools:layout="@layout/fragment_find_friends">
-
 
     </fragment>
 

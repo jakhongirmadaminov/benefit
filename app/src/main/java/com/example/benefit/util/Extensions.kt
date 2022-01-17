@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
 import java.io.ByteArrayOutputStream
 
 
@@ -72,6 +73,17 @@ fun ImageView.loadImageUrl(url: String) {
     circularProgressDrawable.start()
 
     Glide.with(this.context).load(url)/*.placeholder(circularProgressDrawable)*/
+        .apply(RequestOptions().centerInside()).into(this)
+}
+
+fun ImageView.loadImageUrlAndShrink(url: String) {
+    val circularProgressDrawable = CircularProgressDrawable(this.context)
+    circularProgressDrawable.strokeWidth = 5f
+    circularProgressDrawable.centerRadius = 30f
+    circularProgressDrawable.start()
+
+    Glide.with(this.context).load(url)/*.placeholder(circularProgressDrawable)*/
+        .override(300, SIZE_ORIGINAL)
         .apply(RequestOptions().centerInside()).into(this)
 }
 

@@ -15,4 +15,4 @@ data class FriendDTO(
 
 
 @Parcelize
-class FriendsDTOs : ArrayList<FriendDTO>(), Parcelable
+class Friends : ArrayList<FriendDTO>(), Parcelable

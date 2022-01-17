@@ -45,6 +45,16 @@ interface AuthApiService {
     @GET("api/paynet/categories")
     suspend fun paymentCategories(): RespFormat<List<PaynetCategory>>
 
+    @GET("api/paynet/providers")
+    suspend fun getPaynetProviders(
+        @Query("id", encoded = true) id: Long
+    ): RespFormat<List<PaynetMerchant>>
+
+    @GET("api/paynet/services")
+    suspend fun getPaynetServices(
+        @Query("id", encoded = true) id: Long
+    ): RespFormat<List<PaynetService>>
+
     @GET("api/background")
     suspend fun getCardBackgrounds(): RespFormat<List<CardBgDTO>>
 
@@ -329,6 +339,26 @@ interface AuthApiService {
     @GET("api/other/currency2")
     suspend fun getCurrencies(): RespFormat<List<CurrencyDTO>>
 
+    @GET("api/gap/index")
+    suspend fun getGapGames(): RespFormat<List<GapGameDTO>>
 
+    @POST("api/other/friends")
+    @FormUrlEncoded
+    suspend fun getBenefitFriends(
+        @Field("phone_array") phone_array: String,
+        @Field("user_id") user_id: Int = AppPrefs.userId
+    ): RespFormat<List<BenefitContactDTO>>
+
+    @POST("api/gap/start")
+    @FormUrlEncoded
+    suspend fun createGapGame(
+        @Field("title") title: String,
+        @Field("summa") summa: String,
+        @Field("is_random") is_random: String,
+        @Field("is_notif") is_notif: String,
+        @Field("is_period") is_period: String,
+        @Field("members") members: String,
+        @Field("user_id") user_id: Int = AppPrefs.userId
+    ): RespFormat<GapGameDTO>
 }
 

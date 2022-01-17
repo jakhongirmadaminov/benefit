@@ -56,13 +56,14 @@
             app:layout_constraintTop_toBottomOf="@id/title" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="26dp"
             android:id="@+id/rvPayments"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="26dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_payment"
-            app:layout_constraintTop_toBottomOf="@id/edtSearch" />
+            app:layout_constraintTop_toBottomOf="@id/edtSearch"
+            app:layout_constraintVertical_weight="1"
+            tools:listitem="@layout/item_payment" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

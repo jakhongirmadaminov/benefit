@@ -50,6 +50,7 @@ private const val CONTACT_KEY_INDEX: Int = 1
 private val TO_IDS: IntArray = intArrayOf(android.R.id.text1)
 
 
+val REQ_CODE_READ_CONTACTS = 12
 
 class FillCardAskFriendsFragment @Inject constructor() :
     BaseFragment(R.layout.fragment_fill_card_ask_friends),
@@ -68,7 +69,6 @@ class FillCardAskFriendsFragment @Inject constructor() :
     // An adapter that binds the result Cursor to the ListView
     private var cursorAdapter = FriendsCursorAdapter()
 
-    private val REQ_CODE_READ_CONTACTS = 12
     private val adapter = GroupAdapter<GroupieViewHolder>()
     private val viewModel: CardOptionsViewModel by viewModels()
 
