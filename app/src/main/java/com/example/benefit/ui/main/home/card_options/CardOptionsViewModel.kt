@@ -29,7 +29,7 @@ class CardOptionsViewModel @Inject constructor(private val cardsRemote: CardsRem
     val setCardDesignResp = SingleLiveEvent<String>()
     val blockCardResp = SingleLiveEvent<Boolean>()
 
-    fun deleteCard(cardId: Int) {
+    fun deleteCard(cardId: Long) {
         isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
             val response = cardsRemote.deleteCard(cardId)
@@ -47,7 +47,7 @@ class CardOptionsViewModel @Inject constructor(private val cardsRemote: CardsRem
         }
     }
 
-    fun blockCard(cardId: Int) {
+    fun blockCard(cardId: Long) {
         isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
             val response = cardsRemote.blockCard(cardId)
@@ -85,7 +85,7 @@ class CardOptionsViewModel @Inject constructor(private val cardsRemote: CardsRem
     }
 
 
-    fun setCardDesign(bgId: Int, cardId: Int) {
+    fun setCardDesign(bgId: Int, cardId: Long) {
         isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
             val response = cardsRemote.changeCardDesign(bgId, cardId)

@@ -41,7 +41,7 @@ data class GapGameDTO(
 @Parcelize
 data class Member(
     @SerializedName("card_id")
-    val cardId: Int?,
+    val cardId: Long?,
     @SerializedName("card_info")
     val cardInfo: Int?,
     @SerializedName("created")

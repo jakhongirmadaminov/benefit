@@ -65,6 +65,25 @@
         <argument
             android:name="paynetMerchant"
             app:argType="com.example.benefit.remote.models.PaynetMerchant" />
+        <action
+            android:id="@+id/action_fillMerchantFields_to_paynetTransaction"
+            app:destination="@id/paynetTransaction" />
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/paynetTransaction"
+        android:name="com.example.benefit.ui.payments.PaynetTransactionFragment"
+        android:label=""
+        tools:layout="@layout/fragment_payment_transfer">
+        <argument
+            android:name="paynetMerchant"
+            app:argType="com.example.benefit.remote.models.PaynetMerchant" />
+
+        <argument
+            android:name="serviceFields"
+            app:argType="com.example.benefit.remote.models.ServiceFields" />
 
     </fragment>
 

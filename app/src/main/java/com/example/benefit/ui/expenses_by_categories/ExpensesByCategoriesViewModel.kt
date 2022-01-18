@@ -44,7 +44,7 @@ class ExpensesByCategoriesViewModel @Inject constructor(
         MutableLiveData<ResultWrapper<List<List<TransactionAnalyticsDTO>>>>()
 
 
-    fun getExpensesAndAnalytics(cardId: Int) {
+    fun getExpensesAndAnalytics(cardId: Long) {
         viewModelScope.launch(IO) {
             val thisMonthsStartDateTime = DateTime.now().dayOfMonth().withMinimumValue()
 

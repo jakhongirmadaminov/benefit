@@ -1,6 +1,8 @@
 package com.example.benefit.remote.models
 
 import android.os.Parcelable
+import com.example.benefit.util.AppPrefs
+import com.example.benefit.util.Constants.UZ
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
@@ -27,13 +29,17 @@ data class PaynetMerchant(
     @SerializedName("updated_at") val updated_at: String? = null,
     @SerializedName("image") val image: String? = null,
     @SerializedName("image2") val image2: String? = null,
-) : Parcelable
+) : Parcelable {
+    fun getLocalizedCatgName(): String {
+        return if (AppPrefs.language == UZ) category_name!!.uz!! else category_name!!.ru!!
+    }
+}
 
 @Parcelize
 data class LocalizedName(
     @SerializedName("ru") val ru: String? = null,
     @SerializedName("uz") val uz: String? = null,
-): Parcelable
+) : Parcelable
 
 enum class EPaymentType {
     CARD_TRANSFER, FRIEND_TRANSFER

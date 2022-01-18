@@ -47,7 +47,7 @@ class SmsConfirmViewModel @Inject constructor(private val userRemote: UserRemote
         }
     }
 
-    fun confirmNewCard(cardId: Int, code: String) {
+    fun confirmNewCard(cardId: Long, code: String) {
         isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
             val response = userRemote.confirmNewCard(cardId, code)

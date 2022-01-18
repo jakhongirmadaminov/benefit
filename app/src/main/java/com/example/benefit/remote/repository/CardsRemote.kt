@@ -9,9 +9,9 @@ import com.example.benefit.util.ResultWrapper
 interface CardsRemote {
 
     suspend fun getCardBackgrounds(): ResultWrapper<List<CardBgDTO>>
-    suspend fun deleteCard(cardId: Int): ResultWrapper<RespActivateCard>
-    suspend fun blockCard(cardId: Int): ResultWrapper<RespActivateCard>
-    suspend fun activateCard(cardId: Int): ResultWrapper<RespActivateCard>
+    suspend fun deleteCard(cardId: Long): ResultWrapper<RespActivateCard>
+    suspend fun blockCard(cardId: Long): ResultWrapper<RespActivateCard>
+    suspend fun activateCard(cardId: Long): ResultWrapper<RespActivateCard>
     suspend fun cardTransactionHistory(
         ownId: Int,
         endDate: Long,
@@ -20,8 +20,8 @@ interface CardsRemote {
         pageSize: Int
     ): ResultWrapper<RespChangeCardTitle>
 
-    suspend fun changeCardTitle(title: String, card_id: Int): ResultWrapper<RespChangeCardTitle>
-    suspend fun changeCardDesign(bgId: Int, card_id: Int): ResultWrapper<RespChangeCardTitle>
+    suspend fun changeCardTitle(title: String, card_id: Long): ResultWrapper<RespChangeCardTitle>
+    suspend fun changeCardDesign(bgId: Int, card_id: Long): ResultWrapper<RespChangeCardTitle>
 
 
 }

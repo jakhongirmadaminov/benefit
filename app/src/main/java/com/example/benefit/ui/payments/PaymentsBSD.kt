@@ -9,10 +9,11 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.ui.main.BenefitBSD
+import com.example.benefit.ui.main.BenefitFixedHeightBSD
 import com.example.benefit.ui.transactions_history.transaction_bsd.TransactionBSD.Companion.ARG_TRANSACTION_DTO
 
 
-class PaymentsBSD : BenefitBSD() {
+class PaymentsBSD : BenefitFixedHeightBSD() {
 
 
     private val viewModel: PaymentsViewModel by viewModels()

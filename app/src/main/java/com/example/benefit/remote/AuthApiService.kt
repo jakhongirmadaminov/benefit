@@ -26,7 +26,7 @@ interface AuthApiService {
     @POST("api/card/report")
     @FormUrlEncoded
     suspend fun transactionsInOut(
-        @Field("card_id") user_id: Int,
+        @Field("card_id") card_id: Long,
         @Field("startDate") startDate: Int,
         @Field("endDate") endDate: Int,
         @Field("pageSize") pageSize: Int = 100,
@@ -35,7 +35,7 @@ interface AuthApiService {
     @POST("api/card/analytics")
     @FormUrlEncoded
     suspend fun transactionsAnalytics(
-        @Field("card_id") user_id: Int,
+        @Field("card_id") card_id: Long,
         @Field("startDate") startDate: Int,
         @Field("endDate") endDate: Int,
         @Field("pageSize") pageSize: Int = 100,
@@ -47,10 +47,22 @@ interface AuthApiService {
 
     @POST("api/paynet/paycheck")
     @FormUrlEncoded
-    suspend fun paynetPay(
+    suspend fun paynetPayCheck(
         @Field("service_id") service_id: Long,
         @Field("provider_id") provider_id: Long,
         @Field("fields") fields: String,
+    ): RespFormat<Any>
+
+    @POST("api/paynet/paycard")
+    @FormUrlEncoded
+    suspend fun paynetPayCard(
+        @Field("service_id") service_id: Long,
+        @Field("provider_id") provider_id: Long,
+        @Field("fields") fields: String,
+        @Field("summa") summa: Int,
+        @Field("card_id") card_id: Long,
+        @Field("user_token") user_token: String,
+        @Field("user_id") user_id: Int = AppPrefs.userId
     ): RespFormat<Any>
 
     @GET("api/paynet/providers")
@@ -86,13 +98,13 @@ interface AuthApiService {
 
     @POST("api/card/info")
     @FormUrlEncoded
-    suspend fun getMyCardInfo(@Field("card_id") card_id: Int): RespFormat<CardsDTO>
+    suspend fun getMyCardInfo(@Field("card_id") card_id: Long): RespFormat<CardsDTO>
 
     @POST("api/card/idtopan")
     @FormUrlEncoded
     suspend fun p2pIdToPan(
         @Field("amount") amount: Int,
-        @Field("card_id") card_id: Int,
+        @Field("card_id") card_id: Long,
         @Field("pan") pan: String
     ): RespFormat<RespPid2Pid>
 
@@ -108,7 +120,7 @@ interface AuthApiService {
     @FormUrlEncoded
     suspend fun p2pPanToId(
         @Field("amount") amount: Int,
-        @Field("card_id") card_id: Int,
+        @Field("card_id") card_id: Long,
         @Field("pan") pan: String,
         @Field("expiry") expiry: String
     ): RespFormat<RespPid2Pid>
@@ -117,7 +129,7 @@ interface AuthApiService {
     @FormUrlEncoded
     suspend fun topUpBalance(
         @Field("amount") amount: Int,
-        @Field("card_id") card_id: Int,
+        @Field("card_id") card_id: Long,
         @Field("pan") pan: String,
         @Field("expiry") expiry: String
     ): RespFormat<PlainResp>
@@ -132,7 +144,7 @@ interface AuthApiService {
     @POST("api/card/transhistory")
     @FormUrlEncoded
     suspend fun transHistory(
-        @Field("card_id") card_id: Int,
+        @Field("card_id") card_id: Long,
         @Field("startDate") startDate: Long,
         @Field("endDate") endDate: Long,
         @Field("pageNumber") pageNumber: Int = 0,
@@ -142,7 +154,7 @@ interface AuthApiService {
     @POST("api/card/analytics")
     @FormUrlEncoded
     suspend fun transHistoryAnalytics(
-        @Field("card_id") card_id: Int,
+        @Field("card_id") card_id: Long,
         @Field("startDate") startDate: Long,
         @Field("endDate") endDate: Long,
         @Field("pageNumber") pageNumber: Int = 0,
@@ -152,7 +164,7 @@ interface AuthApiService {
     @POST("api/card/report")
     @FormUrlEncoded
     suspend fun cardReport(
-        @Field("card_id") card_id: Int,
+        @Field("card_id") card_id: Long,
         @Field("startDate") startDate: Long,
         @Field("endDate") endDate: Long,
         @Field("pageNumber") pageNumber: Int = 0,
@@ -191,7 +203,7 @@ interface AuthApiService {
     @POST("api/ordercard/two")
     @Multipart
     suspend fun addPassportPhoto(
-        @Part("order_card_id") order_card_id: Int,
+        @Part("order_card_id") order_card_id: Long,
         @Part image: MultipartBody.Part,
         @Part("user_id") user_id: Int = AppPrefs.userId,
         @Part("user_auth") user_auth: String = AppPrefs.userToken!!
@@ -200,7 +212,7 @@ interface AuthApiService {
     @POST("api/ordercard/three")
     @Multipart
     suspend fun addPhotoWithPassport(
-        @Part("order_card_id") order_card_id: Int,
+        @Part("order_card_id") order_card_id: Long,
         @Part image: MultipartBody.Part,
         @Part("user_id") user_id: Int = AppPrefs.userId,
         @Part("user_auth") user_auth: String = AppPrefs.userToken!!
@@ -217,7 +229,7 @@ interface AuthApiService {
     @POST("api/ordercard/five")
     @FormUrlEncoded
     suspend fun orderCardAddress(
-        @Field("order_card_id") order_card_id: Int,
+        @Field("order_card_id") order_card_id: Long,
         @Field("adress_text") adress_text: String,
         @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
         @Field("user_id") user_id: Int = AppPrefs.userId
@@ -226,7 +238,7 @@ interface AuthApiService {
     @POST("api/ordercard/seven")
     @FormUrlEncoded
     suspend fun orderCardLimit(
-        @Field("order_card_id") order_card_id: Int,
+        @Field("order_card_id") order_card_id: Long,
         @Field("summa") summa: String,
         @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
         @Field("user_id") user_id: Int = AppPrefs.userId
@@ -235,7 +247,7 @@ interface AuthApiService {
     @POST("api/ordercard/close")
     @FormUrlEncoded
     suspend fun completeOrderCard(
-        @Field("order_card_id") order_card_id: Int,
+        @Field("order_card_id") order_card_id: Long,
         @Field("status") status: Int = 1,
         @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
         @Field("user_id") user_id: Int = AppPrefs.userId
@@ -254,14 +266,14 @@ interface AuthApiService {
     @FormUrlEncoded
     suspend fun changeCardTitle(
         @Field("title") title: String,
-        @Field("card_id") card_id: Int
+        @Field("card_id") card_id: Long
     ): RespChangeCardTitle
 
     @POST("api/card/design")
     @FormUrlEncoded
     suspend fun changeCardDesign(
         @Field("background_id") background_id: Int,
-        @Field("card_id") card_id: Int,
+        @Field("card_id") card_id: Long,
         @Field("user_token") user_auth: String = AppPrefs.userToken!!,
         @Field("user_id") user_id: Int = AppPrefs.userId
     ): RespFormat<RespChangeCardTitle>
@@ -318,15 +330,15 @@ interface AuthApiService {
 
     @POST("api/card/statusactive")
     @FormUrlEncoded
-    suspend fun activateCard(@Field("card_id") card_id: Int): RespActivateCard
+    suspend fun activateCard(@Field("card_id") card_id: Long): RespActivateCard
 
     @POST("api/card/status")
     @FormUrlEncoded
-    suspend fun blockCard(@Field("card_id") card_id: Int): RespFormat<RespActivateCard>
+    suspend fun blockCard(@Field("card_id") card_id: Long): RespFormat<RespActivateCard>
 
     @POST("api/card/remove")
     @FormUrlEncoded
-    suspend fun deleteCard(@Field("card_id") card_id: Int): RespActivateCard
+    suspend fun deleteCard(@Field("card_id") card_id: Long): RespActivateCard
 
     @GET("api/partners/allstory/0000000000/{currentMillis}")
     suspend fun getStories(

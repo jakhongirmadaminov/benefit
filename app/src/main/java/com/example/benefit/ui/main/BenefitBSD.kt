@@ -10,6 +10,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 open class BenefitBSD : BottomSheetDialogFragment() {
 
+    var peekHeight: Int = 0
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dialog?.setOnShowListener {
@@ -17,11 +19,11 @@ open class BenefitBSD : BottomSheetDialogFragment() {
             val bottomSheet = d.findViewById<View>(R.id.design_bottom_sheet) as FrameLayout
 
             bottomSheet.setBackgroundResource(R.drawable.shape_top_rounded)
-            val vHeight =
+            peekHeight =
                 SizeUtils.getScreenHeight(requireActivity()) - SizeUtils.getActionBarHeight(
                     requireActivity()
                 )
-            d.behavior.peekHeight = vHeight
+            d.behavior.peekHeight = peekHeight
         }
     }
 

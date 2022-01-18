@@ -46,7 +46,7 @@ class TransactionsHistoryActivity : BaseActivity(), OnChartValueSelectedListener
         const val EXTRA_CARDS = "CARDS"
     }
 
-    var selectedCardId: Int = 0
+    var selectedCardId: Long = 0
     lateinit var myCards: List<CardDTO>
 
     private val viewModel: TransactionsHistoryViewModel by viewModels()

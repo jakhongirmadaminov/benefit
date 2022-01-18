@@ -2,7 +2,6 @@ package com.example.benefit.util
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.Gravity
 import android.widget.EditText
 import android.widget.LinearLayout
 import com.example.benefit.R
@@ -39,9 +38,9 @@ class CalculatorLayout constructor(context: Context, attrs: AttributeSet) :
         tvDivide.setOnClickListener { edtSum?.append(" / ") }
         tvEquals.setOnClickListener {
             edtSum?.let {
-                if (it?.text.isNotBlank()) {
+                if (it.text.isNotBlank()) {
                     try {
-                        it?.setText(Keval.eval(it?.text.toString()).toInt().toString())
+                        it.setText(Keval.eval(it.text.toString()).toInt().toString())
                     } catch (e: Exception) {
 
                     }

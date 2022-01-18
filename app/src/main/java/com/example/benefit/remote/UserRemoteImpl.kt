@@ -76,7 +76,7 @@ class UserRemoteImpl @Inject constructor(
         getFormattedResponse { authApiService.termsAccept(type_id) }
 
     override suspend fun addPassportPhoto(
-        order_card_id: Int,
+        order_card_id: Long,
         image: Bitmap
     ): ResultWrapper<RespAcceptTerms> {
         val stream = ByteArrayOutputStream()
@@ -87,7 +87,7 @@ class UserRemoteImpl @Inject constructor(
     }
 
     override suspend fun addPhotoWithPassport(
-        order_card_id: Int,
+        order_card_id: Long,
         image: Bitmap
     ): ResultWrapper<RespAcceptTerms> {
         val stream = ByteArrayOutputStream()
@@ -103,7 +103,7 @@ class UserRemoteImpl @Inject constructor(
     }
 
     override suspend fun addWorkProof(
-        order_card_id: Int,
+        order_card_id: Long,
         image: Bitmap
     ): ResultWrapper<RespAcceptTerms> {
         val map: MutableMap<String, RequestBody> = HashMap()
@@ -160,18 +160,18 @@ class UserRemoteImpl @Inject constructor(
         )
     }
 
-    override suspend fun confirmNewCard(card_id: Int, sms_code: String): ResultWrapper<Any> =
+    override suspend fun confirmNewCard(card_id: Long, sms_code: String): ResultWrapper<Any> =
         getFormattedResponse { authApiService.confirmNewCard(CardConfirmBody(card_id, sms_code)) }
 
 
-    override suspend fun addOrderCardAddress(order_card_id: Int, address: String) =
+    override suspend fun addOrderCardAddress(order_card_id: Long, address: String) =
         getFormattedResponse { authApiService.orderCardAddress(order_card_id, address) }
 
-    override suspend fun addLimitSum(order_card_id: Int, sum: String) =
+    override suspend fun addLimitSum(order_card_id: Long, sum: String) =
         getFormattedResponse { authApiService.orderCardLimit(order_card_id, sum) }
 
 
-    override suspend fun completeAddCard(order_card_id: Int) =
+    override suspend fun completeAddCard(order_card_id: Long) =
         getFormattedResponse { authApiService.completeOrderCard(order_card_id) }
 
     override suspend fun getMyCards() = getFormattedResponse { authApiService.getMyCards() }

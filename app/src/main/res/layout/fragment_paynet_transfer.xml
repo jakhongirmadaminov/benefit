@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clParent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_top_rounded"
+    android:clipChildren="true"
+    android:clipToPadding="true">
+
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:selectableItemBackground"
+        android:padding="15dp"
+        android:src="@drawable/ic_baseline_keyboard_backspace_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/rectangle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.example.benefit.util.TextButtonMain
+        android:id="@+id/tvFill"
+        android:layout_width="wrap_content"
+        android:layout_height="?android:actionBarSize"
+        android:clickable="true"
+        android:enabled="false"
+        android:focusable="true"
+        android:fontFamily="sans-serif-medium"
+        android:foreground="?android:selectableItemBackground"
+        android:gravity="center"
+        android:paddingLeft="28dp"
+        android:paddingRight="28dp"
+        android:text="@string/transfer"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ProgressBar
+        android:id="@+id/progressCards"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/cardsPagerSmall"
+        app:layout_constraintEnd_toEndOf="@id/cardsPagerSmall"
+        app:layout_constraintStart_toStartOf="@id/cardsPagerSmall"
+        app:layout_constraintTop_toTopOf="@id/cardsPagerSmall" />
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/cardsPagerSmall"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        app:layout_constraintTop_toBottomOf="@id/tvFill" />
+
+
+    <ImageView
+        android:id="@+id/ivArrowDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/ic_arrow_down"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardsPagerSmall" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/llTargetCard"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@id/ivArrowDown">
+
+
+        <ImageView
+            android:id="@+id/ivTargetService"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/ivTargetBankLogo"-->
+        <!--            android:layout_width="70dp"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintHorizontal_chainStyle="packed"-->
+        <!--            app:layout_constraintStart_toStartOf="@id/ivTargetService"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            tools:src="@drawable/b_logo" />-->
+
+        <TextView
+            android:id="@+id/tvServiceName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:fontFamily="sans-serif"
+            android:textColor="#cc000000"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toEndOf="@id/ivTargetService"
+            app:layout_constraintTop_toTopOf="@id/ivTargetService"
+            tools:text="Sarkor Telecom" />
+
+        <TextView
+            android:id="@+id/tvServiceFullName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:textColor="#cc5c5c5c"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="@id/tvServiceName"
+            app:layout_constraintTop_toBottomOf="@id/tvServiceName"
+            tools:text="OOO Sarkor Telecom" />
+
+        <TextView
+            android:id="@+id/tvCategoryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:textColor="#cc5c5c5c"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="@id/ivTargetService"
+            app:layout_constraintStart_toStartOf="@id/tvServiceName"
+            tools:text="Internet" />
+
+        <TextView
+            android:id="@+id/tvWriteTagOrComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/write_tag_or_comment"
+            android:textColor="#805c5c5c"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/ivTargetService"
+            app:layout_constraintStart_toStartOf="@id/tvServiceName" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <EditText
+        android:id="@+id/edtSum"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="26dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:hint="0"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@id/llTargetCard" />
+
+    <TextView
+        android:id="@+id/tvMinAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/minimum_sum_is"
+        android:textColor="#e94040"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@id/edtSum"
+        app:layout_constraintTop_toBottomOf="@id/edtSum" />
+
+    <com.example.benefit.util.CalculatorLayout
+        android:id="@+id/layoutCalculator"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent=".4" />
+
+    <include
+        layout="@layout/transaction_loading"
+        tools:visibility="gone" />
+
+    <include
+        layout="@layout/transaction_success"
+        tools:visibility="gone" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

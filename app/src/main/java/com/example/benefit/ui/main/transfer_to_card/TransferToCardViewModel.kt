@@ -57,12 +57,12 @@ class TransferToCardViewModel @Inject constructor(
     val transactionLoading = MutableLiveData<Boolean>()
     val transactionResp = MutableLiveData<ResultWrapper<RespPid2Pid>>()
 
-    fun transferToCard(selectedCardId: Int, cardP2pTarget: CardP2PDTO, amount: Int) {
+    fun transferToCard(selectedcardId: Long, cardP2pTarget: CardP2PDTO, amount: Int) {
         viewModelScope.launch(IO) {
             transactionResp.postValue(getFormattedResponse(transactionLoading) {
                 authApi.p2pIdToPan(
                     amount,
-                    selectedCardId,
+                    selectedcardId,
                     cardP2pTarget.pan!!
                 )
             })

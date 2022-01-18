@@ -5,11 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.benefit.remote.AuthApiService
-import com.example.benefit.remote.models.PaynetCategory
 import com.example.benefit.remote.models.PaynetMerchant
-import com.example.benefit.remote.repository.UserRemote
 import com.example.benefit.util.*
-import com.example.benefit.util.getParsedResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

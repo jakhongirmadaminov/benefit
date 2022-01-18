@@ -21,13 +21,13 @@ class CardsRemoteImpl @Inject constructor(
     override suspend fun getCardBackgrounds() =
         getFormattedResponse { authApi.getCardBackgrounds() }
 
-    override suspend fun deleteCard(cardId: Int) =
+    override suspend fun deleteCard(cardId: Long) =
         getParsedResponse { authApi.deleteCard(cardId) }
 
-    override suspend fun blockCard(cardId: Int) =
+    override suspend fun blockCard(cardId: Long) =
         getFormattedResponse { authApi.blockCard(cardId) }
 
-    override suspend fun activateCard(cardId: Int) =
+    override suspend fun activateCard(cardId: Long) =
         getParsedResponse { authApi.activateCard(cardId) }
 
     override suspend fun cardTransactionHistory(
@@ -40,10 +40,10 @@ class CardsRemoteImpl @Inject constructor(
         authApi.cardTransactionHistory(ownId, endDate, startDate, pageNumber, pageSize)
     }
 
-    override suspend fun changeCardTitle(title: String, card_id: Int) =
+    override suspend fun changeCardTitle(title: String, card_id: Long) =
         getParsedResponse { authApi.changeCardTitle(title, card_id) }
 
-    override suspend fun changeCardDesign(bgId: Int, card_id: Int) =
+    override suspend fun changeCardDesign(bgId: Int, card_id: Long) =
         getFormattedResponse { authApi.changeCardDesign(bgId, card_id) }
 
 }

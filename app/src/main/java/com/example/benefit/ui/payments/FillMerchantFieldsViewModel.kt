@@ -30,7 +30,7 @@ class FillMerchantFieldsViewModel @Inject constructor(
     }
 
     val payState = MutableLiveData<RequestState<Any>>()
-    fun pay(serviceId: Long, providerId: Long) {
+    fun payCheck(serviceId: Long, providerId: Long) {
         (paynetServices.value as? RequestState.Success)?.value?.let { services ->
 
             viewModelScope.launch(Dispatchers.IO) {
@@ -41,7 +41,7 @@ class FillMerchantFieldsViewModel @Inject constructor(
                 }
 
                 makeRequest(payState) {
-                    apiAuth.paynetPay(
+                    apiAuth.paynetPayCheck(
                         serviceId,
                         providerId,
                         fields.removeSuffix(",").toString()

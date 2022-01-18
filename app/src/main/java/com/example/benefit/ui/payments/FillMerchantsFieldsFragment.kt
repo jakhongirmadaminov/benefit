@@ -8,10 +8,12 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.benefit.R
 import com.example.benefit.remote.models.FieldType
 import com.example.benefit.remote.models.PaynetService
+import com.example.benefit.remote.models.ServiceFields
 import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.util.AppPrefs
 import com.example.benefit.util.Constants.UZ
@@ -28,6 +30,8 @@ import javax.inject.Inject
 /**
  * Created by jahon on 03-Sep-20
  */
+
+const val SUMMA_SERVICE_FIELD = "summa"
 
 class FillMerchantsFieldsFragment @Inject constructor() :
     BaseFragment(R.layout.fragment_fill_merchant_fields) {
@@ -46,7 +50,16 @@ class FillMerchantsFieldsFragment @Inject constructor() :
     private fun attachListeners() {
 
         btnPay.setOnClickListener {
-            viewModel.pay(args.paynetMerchant.category_id!!, providerId = args.paynetMerchant.own_id!!)
+//            viewModel.payCheck(
+//                args.paynetMerchant.category_id!!,
+//                providerId = args.paynetMerchant.own_id!!
+//            )
+            findNavController().navigate(
+                FillMerchantsFieldsFragmentDirections.actionFillMerchantFieldsToPaynetTransaction(
+                    args.paynetMerchant,
+                    ServiceFields(viewModel.fields)
+                )
+            )
         }
 
     }
@@ -64,8 +77,10 @@ class FillMerchantsFieldsFragment @Inject constructor() :
 
     private fun populateFields(service: PaynetService) {
         paymentServiceFields.removeAllViews()
+        viewModel.fields.clear()
 
         service.service_fields?.forEachIndexed { index, serviceField ->
+            if (serviceField.name == SUMMA_SERVICE_FIELD) return
             viewModel.fields.add(serviceField)
             serviceField.fieldValues is List<*>
             when (serviceField.fieldType) {

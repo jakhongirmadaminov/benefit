@@ -22,7 +22,7 @@ data class CardDTO(
     @SerializedName("created") val created: Int? = null,
     @SerializedName("expiry") val expiry: Int? = null,
     @SerializedName("fullName") val fullName: String? = null,
-    @SerializedName("id") val id: Int? = null,
+    @SerializedName("id") val id: Long? = null,
     @SerializedName("own_id") val own_id: String? = null,
     @SerializedName("pan") val panHidden: String? = null,
     @SerializedName("card_pan") val panOpen: String? = null,

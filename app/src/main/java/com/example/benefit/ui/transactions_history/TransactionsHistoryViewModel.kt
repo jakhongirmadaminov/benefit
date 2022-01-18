@@ -31,7 +31,7 @@ class TransactionsHistoryViewModel @Inject constructor(val apiService: AuthApiSe
         MutableLiveData<ResultWrapper<ArrayList<ArrayList<TransactionAnalyticsDTO>>>>()
 
 
-    fun getTransactionsHistory(cardId: Int) {
+    fun getTransactionsHistory(cardId: Long) {
         viewModelScope.launch(Dispatchers.IO) {
             isLoading.postValue(true)
             val thisMonthsStartDateTime = DateTime.now().dayOfMonth().withMinimumValue()

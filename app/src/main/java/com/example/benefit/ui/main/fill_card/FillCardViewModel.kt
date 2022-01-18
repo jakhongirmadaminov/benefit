@@ -72,7 +72,7 @@ class FillCardViewModel @Inject constructor(
     val p2pPan2IdLoading = MutableLiveData<Boolean>()
     val p2pPan2IdResp = MutableLiveData<ResultWrapper<RespPid2Pid>>()
 
-    fun p2pPan2Id(amount: Int, cardId: Int, pan: String, expiry: String) {
+    fun p2pPan2Id(amount: Int, cardId: Long, pan: String, expiry: String) {
         viewModelScope.launch {
             p2pPan2IdResp.postValue(
                 getFormattedResponse(p2pPan2IdLoading) {
@@ -105,7 +105,7 @@ class FillCardViewModel @Inject constructor(
         MutableLiveData<ResultWrapper<List<TransactionAnalyticsDTO>>>()
 
 
-    fun getLatestDeposits(cardId: Int) {
+    fun getLatestDeposits(cardId: Long) {
         viewModelScope.launch(Dispatchers.IO) {
             analyticsReportLoading.postValue(true)
 

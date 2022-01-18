@@ -39,6 +39,11 @@ data class ServiceField(
     var userSelection: String? = null
 ) : Parcelable
 
+@Parcelize
+data class ServiceFields(
+    val data: List<ServiceField>
+) : ArrayList<ServiceField>(data), Parcelable
+
 //{"field_id":6789,"own_id":122,"titleRu":"АНДИЖОН ВИЛОЯТИ - Андижон шахри","titleUz":"АНДИЖОН ВИЛОЯТИ - Андижон шахри"}
 @Parcelize
 data class FieldValue(
