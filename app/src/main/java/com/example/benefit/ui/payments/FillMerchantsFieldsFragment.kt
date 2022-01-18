@@ -123,7 +123,7 @@ class FillMerchantsFieldsFragment @Inject constructor() :
 //                                viewModel.fields.add(edtInput)
                                 edtPhone.doOnTextChanged { text, start, before, count ->
                                     text?.let {
-                                        setFieldValue(service, index, "998$it")
+                                        setFieldValue(service, index, it.toString())
                                     }
                                 }
                             }

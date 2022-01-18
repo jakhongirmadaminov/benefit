@@ -158,6 +158,13 @@ val <T> T.exhaustive: T
 fun String.numericOnly(): String {
     return Regex("[^0-9]").replace(this, "")
 }
+
+
+ fun String.isNumeric(): Boolean {
+    return this.matches("-?\\d+(\\.\\d+)?".toRegex())
+}
+
+
 ///**
 // * Extension function to simplify setting an afterTextChanged action to EditText components.
 // */

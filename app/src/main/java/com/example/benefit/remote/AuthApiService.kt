@@ -61,7 +61,7 @@ interface AuthApiService {
         @Field("fields") fields: String,
         @Field("summa") summa: Int,
         @Field("card_id") card_id: Long,
-        @Field("user_token") user_token: String,
+        @Field("user_token") user_token: String= AppPrefs.userToken!!,
         @Field("user_id") user_id: Int = AppPrefs.userId
     ): RespFormat<Any>
 

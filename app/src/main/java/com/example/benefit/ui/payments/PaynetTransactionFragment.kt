@@ -17,9 +17,7 @@ import com.example.benefit.R
 import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.home.HomeFragment
-import com.example.benefit.util.RequestState
-import com.example.benefit.util.SizeUtils
-import com.example.benefit.util.loadImageUrl
+import com.example.benefit.util.*
 import kotlinx.android.synthetic.main.fragment_paynet_transfer.*
 import kotlinx.android.synthetic.main.item_card_small.view.*
 import kotlinx.android.synthetic.main.transaction_loading.*
@@ -142,27 +140,26 @@ class PaynetTransactionFragment : BaseFragment(R.layout.fragment_paynet_transfer
                 fields.append("\"${it.name}\":")
                 fields.append("\"${it.userSelection}\",")
             }
-
+            fields.append("\"$SUMMA_SERVICE_FIELD\":")
+            fields.append("\"${edtSum.text.toString().toInt()}\"")
             viewModel.pay(
                 serviceId = args.paynetMerchant.category_id!!,
                 providerId = args.paynetMerchant.own_id!!,
-                fields = fields.removeSuffix(",").toString(),
+                fields = fields.toString(),
                 edtSum.text.toString().toInt(),
-                (viewModel.myCards.value as RequestState.Success).value.getProperly()[cardsPagerSmall.currentItem].id!!,
-                "token"
+                (viewModel.myCards.value as RequestState.Success).value.getProperly()[cardsPagerSmall.currentItem].id!!
             )
         }
 
         edtSum.doOnTextChanged { text, start, before, count ->
-            if (text.isNullOrBlank()) {
+            if (text.isNullOrBlank() || !text.toString().isNumeric()) {
                 tvFill.isEnabled = false
                 return@doOnTextChanged
             }
             tvFill.isEnabled =
                 (viewModel.myCards.value as RequestState.Success).value.getProperly()[cardsPagerSmall.currentItem].balance?.dropLast(
                     2
-                )!!.toInt() > text.toString()
-                    .toInt()
+                )!!.toInt() > text.toString().toInt()
         }
 
     }

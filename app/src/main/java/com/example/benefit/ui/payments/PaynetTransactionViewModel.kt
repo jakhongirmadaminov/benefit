@@ -31,7 +31,6 @@ class PaynetTransactionViewModel @Inject constructor(private val apiAuth: AuthAp
         fields: String,
         summa: Int,
         cardId: Long,
-        userToken: String
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             makeRequest(transactionState) {
@@ -41,7 +40,6 @@ class PaynetTransactionViewModel @Inject constructor(private val apiAuth: AuthAp
                     fields,
                     summa,
                     cardId,
-                    userToken
                 )
             }
         }
