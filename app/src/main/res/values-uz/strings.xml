@@ -240,5 +240,8 @@
     <string name="payments">Платежи</string>
     <string name="amount_per_person">Сумма с 1 человека</string>
     <string name="count">Количество</string>
+    <string name="payment">Оплата</string>
+    <string name="payment_succeeded">Оплата прошла успешно</string>
+    <string name="from_each_player_by_sum">.  С игрока по %1$s UZS</string>
 
 </resources>

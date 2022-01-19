@@ -65,7 +65,7 @@ class GapActivity : BaseActionbarActivity() {
     }
 
     private fun setupViews() {
-
+        rvGames.adapter = adapter
 
     }
 

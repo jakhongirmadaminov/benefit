@@ -10,6 +10,7 @@
     app:cardCornerRadius="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clParent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/gradient_purple">
@@ -21,12 +22,12 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="15dp"
             android:fontFamily="sans-serif"
-            android:text="Сотрудники"
             android:textColor="#ffffff"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Сотрудники" />
 
         <TextView
             android:id="@+id/lblOne"
@@ -35,12 +36,12 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="15dp"
             android:fontFamily="sans-serif"
-            android:text=".  С игрока по 100 000 UZS"
             android:textColor="#ffffff"
             android:textSize="14sp"
             android:textStyle="normal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lblCardTitle" />
+            app:layout_constraintTop_toBottomOf="@id/lblCardTitle"
+            tools:text=".  С игрока по 100 000 UZS" />
 
         <TextView
             android:id="@+id/lblTwo"
@@ -48,12 +49,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:fontFamily="sans-serif"
-            android:text=".  Старт с 13.01.2020"
             android:textColor="#ffffff"
             android:textSize="14sp"
             android:textStyle="normal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lblOne" />
+            app:layout_constraintTop_toBottomOf="@id/lblOne"
+            tools:text=".  Старт с 13.01.2020" />
 
         <TextView
             android:id="@+id/lblThree"
@@ -61,13 +62,29 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:fontFamily="sans-serif"
-            android:text=".  Окончание 13.04.2020"
             android:textColor="#ffffff"
             android:textSize="14sp"
             android:textStyle="normal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lblTwo" />
+            app:layout_constraintTop_toBottomOf="@id/lblTwo"
+            tools:text=".  Окончание 13.04.2020" />
 
+
+        <LinearLayout
+            android:id="@+id/llAvatars"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:gravity="end"
+            android:orientation="horizontal"
+            android:paddingStart="20dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvPlayerCount"
+            app:layout_constraintEnd_toStartOf="@id/tvPlayerCount"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvPlayerCount" />
 
         <TextView
             android:id="@+id/tvPlayerCount"

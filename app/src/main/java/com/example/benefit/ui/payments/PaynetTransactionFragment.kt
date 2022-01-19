@@ -11,10 +11,12 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.benefit.R
 import com.example.benefit.remote.models.CardDTO
+import com.example.benefit.ui.auth.registration.RegistrationBSD
 import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.home.HomeFragment
 import com.example.benefit.util.*
@@ -46,6 +48,7 @@ class PaynetTransactionFragment : BaseFragment(R.layout.fragment_paynet_transfer
         tvServiceFullName.text = args.paynetMerchant.title
         tvCategoryName.text = args.paynetMerchant.getLocalizedCatgName()
         ivTargetService.loadImageUrl(args.paynetMerchant.image!!)
+        lblSearching.text = getString(R.string.payment)
     }
 
 
@@ -83,17 +86,13 @@ class PaynetTransactionFragment : BaseFragment(R.layout.fragment_paynet_transfer
                 is RequestState.Success -> {
                     clTopUpLoading.isVisible = false
                     clTopUpSuccess.isVisible = true
-
+                    lblTopUpSuccess.text = getString(R.string.payment_succeeded)
                     tvTransferAmount.text =
                         getString(
                             R.string.transfer_amount,
-                            edtSum.text.toString()
+                            transactionState.value.response!!.filter { it.key == SUMMA_SERVICE_FIELD }[0].value
                         )
-                    tvCommissions.text =
-                        getString(
-                            R.string.commissions_amount,
-                            transactionState.value.toString()
-                        )
+                    tvCommissions.text = getString(R.string.commissions_amount, "0")
                 }
             }
         }
@@ -125,10 +124,31 @@ class PaynetTransactionFragment : BaseFragment(R.layout.fragment_paynet_transfer
         )
         cardsPagerSmall.pageMargin = SizeUtils.dpToPx(requireContext(), 15).toInt()
 
+//        cardsPagerSmall.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+//            override fun onPageScrolled(
+//                position: Int,
+//                positionOffset: Float,
+//                positionOffsetPixels: Int
+//            ) {
+//            }
+//
+//            override fun onPageSelected(position: Int) {
+//                (viewModel.myCards.value as RequestState.Success).value.getProperly()[position].is
+//            }
+//
+//            override fun onPageScrollStateChanged(state: Int) {
+//            }
+//
+//        })
+
     }
 
 
     private fun attachListeners() {
+
+        btnClose.setOnClickListener {
+            ((parentFragment as NavHostFragment).parentFragment as PaymentsBSD).dismiss()
+        }
 
         ivBack.setOnClickListener {
             findNavController().popBackStack()
@@ -143,8 +163,8 @@ class PaynetTransactionFragment : BaseFragment(R.layout.fragment_paynet_transfer
             fields.append("\"$SUMMA_SERVICE_FIELD\":")
             fields.append("\"${edtSum.text.toString().toInt()}\"")
             viewModel.pay(
-                serviceId = args.paynetMerchant.category_id!!,
-                providerId = args.paynetMerchant.own_id!!,
+                serviceId = args.paynetMerchant.own_id!!,
+                providerId = args.paynetMerchant.category_id!!,
                 fields = fields.toString(),
                 edtSum.text.toString().toInt(),
                 (viewModel.myCards.value as RequestState.Success).value.getProperly()[cardsPagerSmall.currentItem].id!!

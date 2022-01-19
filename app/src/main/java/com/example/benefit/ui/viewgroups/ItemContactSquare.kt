@@ -23,7 +23,7 @@ data class ItemContactSquare(
             contact?.let { friendDTO ->
                 ivImage.isVisible = true
                 friendDTO.avatar_link?.let {
-                    ivImage.loadImageUrlAndShrink(BASE_URL + it.removePrefix("/"))
+                    ivImage.loadImageUrlAndShrink(BASE_URL + it.removeSuffix("/"))
                 } ?: run {
                     photo.setColorFilter(Color.BLACK)
                     ivImage.setImageResource(R.drawable.ic_baseline_person_24)

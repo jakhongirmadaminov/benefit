@@ -63,7 +63,7 @@ interface AuthApiService {
         @Field("card_id") card_id: Long,
         @Field("user_token") user_token: String= AppPrefs.userToken!!,
         @Field("user_id") user_id: Int = AppPrefs.userId
-    ): RespFormat<Any>
+    ): RespFormat<PaynetPaymentResponse>
 
     @GET("api/paynet/providers")
     suspend fun getPaynetProviders(

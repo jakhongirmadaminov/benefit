@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.benefit.remote.AuthApiService
 import com.example.benefit.remote.models.MyCardsResp
+import com.example.benefit.remote.models.PaynetPaymentResponse
 import com.example.benefit.util.RequestState
 import com.example.benefit.util.makeRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,7 +25,7 @@ class PaynetTransactionViewModel @Inject constructor(private val apiAuth: AuthAp
         }
     }
 
-    val transactionState = MutableLiveData<RequestState<Any>>()
+    val transactionState = MutableLiveData<RequestState<PaynetPaymentResponse>>()
     fun pay(
         serviceId: Long,
         providerId: Long,

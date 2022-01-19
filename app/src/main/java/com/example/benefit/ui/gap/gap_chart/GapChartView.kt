@@ -6,8 +6,17 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 import com.example.benefit.R
+import com.example.benefit.remote.models.GapGameDTO
+import com.example.benefit.util.Constants
 import com.example.benefit.util.SizeUtils
+import com.example.benefit.util.createBitmapWithBorder
 import kotlin.math.cos
 import kotlin.math.min
 import kotlin.math.sin
@@ -16,18 +25,89 @@ import kotlin.math.sin
 class GapChartView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
 
 
-    var playerCount = 6
+//    private var playerBitmaps: List<Bitmap> = listOf()
+//        set(value) {
+//            requestLayout()
+//            field = value
+//        }
+
+    private var chartCanvas: Canvas? = null
+    private var playerCount = 6
+//        set(value) {
+//            requestLayout()
+//            field = value
+//        }
+
+    var game: GapGameDTO? = null
         set(value) {
-            requestLayout()
+            chartCanvas?.let { canvas ->
+                value?.let { game ->
+                    setupGame(canvas, game)
+                }
+            }
             field = value
         }
 
+    private fun setupGame(canvas: Canvas, game: GapGameDTO) {
 
-    var pricePerPerson = 100_000
-        set(value) {
-            requestLayout()
-            field = value
+        playerCount = this.game!!.members!!.size
+        pricePerPerson = game.summa!!.toInt()
+
+        game.members!!.forEachIndexed { index, member ->
+            getBitmap(Constants.BASE_URL + member.userInfo!!.avatarLink!!.removeSuffix("/")) {
+                it?.let {
+                    drawAvatarsBitmaps(index, canvas, it.createBitmapWithBorder(10f, Color.WHITE))
+                }
+            }
         }
+        requestLayout()
+    }
+
+
+    private inline fun getBitmap(imageURL: String, block: (Bitmap?) -> Unit) {
+        try {
+            block(
+                Glide.with(context)
+                    .asBitmap()
+                    .load(imageURL)
+                    .override(300, Target.SIZE_ORIGINAL)
+                    .listener(object : RequestListener<Bitmap> {
+                        override fun onLoadFailed(
+                            e: GlideException?,
+                            model: Any?,
+                            target: Target<Bitmap>?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            return false
+                        }
+
+                        override fun onResourceReady(
+                            resource: Bitmap?,
+                            model: Any?,
+                            target: Target<Bitmap>?,
+                            dataSource: DataSource?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            return false
+                        }
+                    })
+                    .apply(RequestOptions().circleCrop())
+                    .placeholder(R.drawable.ic_avatar_sample)
+                    .error(R.drawable.ic_avatar_sample)
+                    .submit()
+                    .get()
+            )
+        } catch (ex: Exception) {
+            block(BitmapFactory.decodeResource(resources, R.drawable.ic_avatar_sample))
+//            return fromResource(DEFAULT_IMAGE)
+        }
+    }
+
+    private var pricePerPerson = 100_000
+//        set(value) {
+//            requestLayout()
+//            field = value
+//        }
 
     var progressGradientPaint = Paint().apply {
         isAntiAlias = true
@@ -114,7 +194,7 @@ class GapChartView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
         //Ensures arc is within the rectangle
         progressArcRadius =
             (min(width, height) * .5 - SizeUtils.dpToPx(context, pieMargin)).toFloat() //
-        radiusBgArc = (min(width, height) * .4).toFloat() //
+        radiusBgArc = (min(width, height) * .37).toFloat() //
         radiusBase = (min(width, height) * .5).toFloat() //
 
         //I do radius - thickness so that the arc is within the rectangle
@@ -162,53 +242,57 @@ class GapChartView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
         drawProgressArcs(canvas)
         drawCentreCircleStroke(canvas)
         drawCentreCircle(canvas)
-        drawPlayerAvatarsBg(canvas)
+//        drawPlayerAvatarsBg(canvas)
 
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_avatar_sample)
+        chartCanvas = canvas
+//        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_avatar_sample)
 
-        drawAvatarsBitmaps(canvas, listOf(bitmap, bitmap, bitmap, bitmap, bitmap, bitmap))
-    }
-
-    private fun drawAvatarsBitmaps(canvas: Canvas, bitmaps: List<Bitmap>) {
-        for (i in 0 until playerCount) {
-            val startAngle = 360 / playerCount * i.toFloat() - 90
-            val new_x = radiusBgArc * cos(startAngle * Math.PI / 180).toFloat()
-            val new_y = radiusBgArc * sin(startAngle * Math.PI / 180).toFloat()
-
-            canvas.drawBitmap(
-                bitmaps[i],
-                null,
-                RectF(
-                    baseRect.centerX() + new_x - (progressArcRadius - radiusBgArc - pieMargin * 2),
-                    baseRect.centerY() + new_y - (progressArcRadius - radiusBgArc - pieMargin * 2),
-                    baseRect.centerX() + new_x + (progressArcRadius - radiusBgArc - pieMargin * 2),
-                    baseRect.centerY() + new_y + (progressArcRadius - radiusBgArc - pieMargin * 2),
-                ),
-                Paint().apply {
-                    isAntiAlias = true
-                    color = Color.WHITE
-                }
-            )
-        }
-
-    }
-
-    private fun drawPlayerAvatarsBg(canvas: Canvas) {
-        for (i in 0 until playerCount) {
-            val startAngle = 360 / playerCount * i.toFloat() - 90
-            val new_x = radiusBgArc * cos(startAngle * Math.PI / 180).toFloat()
-            val new_y = radiusBgArc * sin(startAngle * Math.PI / 180).toFloat()
-            canvas.drawCircle(
-                baseRect.centerX() + new_x - pieMargin/2,
-                baseRect.centerY() + new_y,
-                progressArcRadius - radiusBgArc,
-                Paint().apply {
-                    isAntiAlias = true
-                    color = Color.WHITE
-                }
-            )
+//        drawAvatarsBitmaps(canvas, listOf(bitmap, bitmap, bitmap, bitmap, bitmap, bitmap))
+        game?.let {
+            setupGame(canvas, it)
         }
     }
+
+    private fun drawAvatarsBitmaps(position: Int, canvas: Canvas, bitmap: Bitmap) {
+//        for (i in 0 until playerCount) {
+        val startAngle = 360 / playerCount * position.toFloat() - 90
+        val new_x = radiusBgArc * cos(startAngle * Math.PI / 180).toFloat()
+        val new_y = radiusBgArc * sin(startAngle * Math.PI / 180).toFloat()
+
+        canvas.drawBitmap(
+            bitmap,
+            null,
+            RectF(
+                baseRect.centerX() + new_x - (progressArcRadius - radiusBgArc - pieMargin * 2),
+                baseRect.centerY() + new_y - (progressArcRadius - radiusBgArc - pieMargin * 2),
+                baseRect.centerX() + new_x + (progressArcRadius - radiusBgArc - pieMargin * 2),
+                baseRect.centerY() + new_y + (progressArcRadius - radiusBgArc - pieMargin * 2),
+            ),
+            Paint().apply {
+                isAntiAlias = true
+                color = Color.WHITE
+            }
+        )
+//        }
+
+    }
+
+//    private fun drawPlayerAvatarsBg(canvas: Canvas) {
+//        for (i in 0 until playerCount) {
+//            val startAngle = 360 / playerCount * i.toFloat() - 90
+//            val new_x = radiusBgArc * cos(startAngle * Math.PI / 180).toFloat()
+//            val new_y = radiusBgArc * sin(startAngle * Math.PI / 180).toFloat()
+//            canvas.drawCircle(
+//                baseRect.centerX() + new_x - pieMargin / 2,
+//                baseRect.centerY() + new_y,
+//                progressArcRadius - radiusBgArc,
+//                Paint().apply {
+//                    isAntiAlias = true
+//                    color = Color.WHITE
+//                }
+//            )
+//        }
+//    }
 
     private fun drawCentreCircleStroke(canvas: Canvas) {
         val circleRadius = width * .15f
@@ -306,44 +390,4 @@ class GapChartView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
             }
         }
     }
-
-//    private fun drawBg(canvas: Canvas) {
-//
-//        //MAIN BG RING
-//        canvas.drawCircle(width / 2F,
-//            height / 2F,
-//            width / 2F - pThickness,
-//            Paint().apply {
-//                isAntiAlias = true
-//                strokeCap = Paint.Cap.BUTT
-//                strokeWidth = pThickness
-//                style = Paint.Style.STROKE
-//                color = bgColor
-//            })
-//
-//
-////INNER OVAL
-//        canvas.drawCircle(
-//            width / 2F,
-//            height / 2F,
-//            width / 2F - pThickness * 2.1F,
-//            Paint().apply {
-//                color = Color.parseColor("#e9e9e9")
-//                style = Paint.Style.FILL
-//
-//            }
-//        )
-//
-//        //INNER DARK RING
-//
-//        canvas.drawCircle(
-//            width / 2F,
-//            height / 2F,
-//            (width / 2F - pThickness * 2) + pThickness * 0.2F,
-//            innerStrokePaint
-//        )
-//
-//
-//    }
-
 }

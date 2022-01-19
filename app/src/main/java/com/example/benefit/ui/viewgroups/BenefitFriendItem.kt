@@ -17,7 +17,7 @@ class BenefitFriendItem(var friend: BenefitContactDTO, var onCheckChanged: (Bool
 
         viewHolder.itemView.apply {
             friend.avatar_link?.let {
-                photo.loadImageUrlAndShrink(Constants.BASE_URL + it.removePrefix("/"))
+                photo.loadImageUrlAndShrink(Constants.BASE_URL + it.removeSuffix("/"))
             } ?: run {
                 photo.setColorFilter(Color.BLACK)
                 photo.setImageResource(R.drawable.ic_baseline_person_24)

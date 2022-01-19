@@ -2,7 +2,7 @@ package com.example.benefit.util
 
 import android.content.ContentResolver
 import android.content.Context
-import android.graphics.Bitmap
+import android.graphics.*
 import android.net.Uri
 import android.provider.OpenableColumns
 import android.view.View
@@ -10,12 +10,13 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AlertDialog
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.BitmapImageViewTarget
 import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
 import java.io.ByteArrayOutputStream
-
 
 /**
  * Created by jahon on 22-May-20
@@ -160,7 +161,7 @@ fun String.numericOnly(): String {
 }
 
 
- fun String.isNumeric(): Boolean {
+fun String.isNumeric(): Boolean {
     return this.matches("-?\\d+(\\.\\d+)?".toRegex())
 }
 
@@ -179,4 +180,87 @@ fun String.numericOnly(): String {
 //        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
 //    })
 //}
+
+
+/**
+ * Load model into ImageView as a circle image with borderSize (optional) using Glide
+ *
+ * @param model - Any object supported by Glide (Uri, File, Bitmap, String, resource id as Int, ByteArray, and Drawable)
+ * @param borderSize - The border size in pixel
+ * @param borderColor - The border color
+ */
+fun <T> ImageView.loadCircularImage(
+    model: T,
+    borderSize: Float = 0F,
+    borderColor: Int = Color.WHITE
+) {
+    Glide.with(context)
+        .asBitmap()
+        .load(model)
+        .apply(RequestOptions.circleCropTransform())
+        .into(object : BitmapImageViewTarget(this) {
+            override fun setResource(resource: Bitmap?) {
+                setImageDrawable(
+                    resource?.run {
+                        RoundedBitmapDrawableFactory.create(
+                            resources,
+                            if (borderSize > 0) {
+                                createBitmapWithBorder(borderSize, borderColor)
+                            } else {
+                                this
+                            }
+                        ).apply {
+                            isCircular = true
+                        }
+                    }
+                )
+            }
+        })
+}
+
+/**
+ * Create a new bordered bitmap with the specified borderSize and borderColor
+ *
+ * @param borderSize - The border size in pixel
+ * @param borderColor - The border color
+ * @return A new bordered bitmap with the specified borderSize and borderColor
+ */
+ fun Bitmap.createBitmapWithBorder(borderSize: Float, borderColor: Int): Bitmap {
+    val borderOffset = (borderSize * 2).toInt()
+    val halfWidth = width / 2
+    val halfHeight = height / 2
+    val circleRadius = Math.min(halfWidth, halfHeight).toFloat()
+    val newBitmap = Bitmap.createBitmap(
+        width + borderOffset,
+        height + borderOffset,
+        Bitmap.Config.ARGB_8888
+    )
+
+    // Center coordinates of the image
+    val centerX = halfWidth + borderSize
+    val centerY = halfHeight + borderSize
+
+    val paint = Paint()
+    val canvas = Canvas(newBitmap).apply {
+        // Set transparent initial area
+        drawARGB(0, 0, 0, 0)
+    }
+
+    // Draw the transparent initial area
+    paint.isAntiAlias = true
+    paint.style = Paint.Style.FILL
+    canvas.drawCircle(centerX, centerY, circleRadius, paint)
+
+    // Draw the image
+    paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
+    canvas.drawBitmap(this, borderSize, borderSize, paint)
+
+    // Draw the createBitmapWithBorder
+    paint.xfermode = null
+    paint.style = Paint.Style.STROKE
+    paint.color = borderColor
+    paint.strokeWidth = borderSize
+    canvas.drawCircle(centerX, centerY, circleRadius, paint)
+    return newBitmap
+}
 
