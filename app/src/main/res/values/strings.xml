@@ -243,5 +243,6 @@
     <string name="payment">Оплата</string>
     <string name="payment_succeeded">Оплата прошла успешно</string>
     <string name="from_each_player_by_sum">.  С игрока по %1$s UZS</string>
+    <string name="cashback_points">Кэшбэк-баллы</string>
 
 </resources>

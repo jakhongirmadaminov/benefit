@@ -35,7 +35,6 @@ class GapChartActivity : BaseActionbarActivity() {
 
         game.members?.let {
             loadMembers(it)
-
         }
     }
 

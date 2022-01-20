@@ -4,16 +4,19 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/drawable/gradient_dark_blue_to_red.xml" value="0.3416666666666667" />
+        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/drawable/gradient_orange.xml" value="0.2453125" />
         <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/activity_gap.xml" value="0.18414387031408308" />
-        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/activity_gap_chart.xml" value="0.5" />
+        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/activity_gap_chart.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/bsd_payments.xml" value="0.18414387031408308" />
         <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/fragment_fill_from_any_card_transfer.xml" value="0.18055555555555555" />
         <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/fragment_fill_merchant_fields.xml" value="0.1038500506585613" />
         <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/fragment_find_friends.xml" value="0.18333333333333332" />
+        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/fragment_payments_and_transfers.xml" value="0.18414387031408308" />
         <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/fragment_paynet_transfer.xml" value="0.25" />
         <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/fragment_phone.xml" value="0.1824074074074074" />
         <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/fragment_transfer_to_card.xml" value="0.18414387031408308" />
         <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/fragment_transfer_to_card_transaction.xml" value="0.18414387031408308" />
+        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/item_card_small.xml" value="0.14175724637681159" />
         <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/item_gap_game.xml" value="0.33" />
         <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/item_gap_player.xml" value="0.25" />
         <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/item_paynet_service_field_money.xml" value="0.1824074074074074" />

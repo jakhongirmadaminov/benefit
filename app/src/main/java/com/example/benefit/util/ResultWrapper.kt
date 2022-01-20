@@ -64,19 +64,26 @@ suspend fun <T> makeRequest(
     try {
         resultState.postValue(RequestState.Loading)
         val resp = action()
-        resultState.postValue( when {
-            resp.result?.data != null -> RequestState.Success(resp.result.data)
-            resp.result?.error != null -> RequestState.Error(resp.result.error.message)
-            resp.error != null -> RequestState.Error("", resp.error.status)
-            else -> RequestState.Error(resp.result?.message, resp.result?.error?.status)
-        })
+        resultState.postValue(
+            when {
+                resp.result?.data != null -> RequestState.Success(resp.result.data)
+                resp.result?.error != null -> RequestState.Error(resp.result.error.message)
+                resp.error != null -> RequestState.Error(
+                    resp.error.data?.message,
+                    resp.error.status
+                )
+                else -> RequestState.Error(resp.result?.message, resp.result?.error?.status)
+            }
+        )
     } catch (e: HttpException) {
-        resultState.postValue(RequestState.Error(
-            JSONObject(e.response()!!.errorBody()!!.string())["message"].toString(),
-            e.code()
-        ))
+        resultState.postValue(
+            RequestState.Error(
+                JSONObject(e.response()!!.errorBody()!!.string())["message"].toString(),
+                e.code()
+            )
+        )
     } catch (e: Exception) {
-        resultState.postValue( RequestState.Error(message = e.localizedMessage))
+        resultState.postValue(RequestState.Error(message = e.localizedMessage))
     }
 }
 

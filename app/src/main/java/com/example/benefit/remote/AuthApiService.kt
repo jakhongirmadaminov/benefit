@@ -8,6 +8,7 @@ import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 import splitties.experimental.ExperimentalSplittiesApi
+import com.example.benefit.remote.Cacheable
 
 /**
  * Defines the abstract methods used for interacting with the Bufferoo API
@@ -61,7 +62,19 @@ interface AuthApiService {
         @Field("fields") fields: String,
         @Field("summa") summa: Int,
         @Field("card_id") card_id: Long,
-        @Field("user_token") user_token: String= AppPrefs.userToken!!,
+        @Field("user_token") user_token: String = AppPrefs.userToken!!,
+        @Field("user_id") user_id: Int = AppPrefs.userId
+    ): RespFormat<PaynetPaymentResponse>
+
+
+    @POST("api/paynet/pay")
+    @FormUrlEncoded
+    suspend fun payWithCashback(
+        @Field("service_id") service_id: Long,
+        @Field("provider_id") provider_id: Long,
+        @Field("fields") fields: String,
+        @Field("summa") summa: Int,
+        @Field("user_token") user_token: String = AppPrefs.userToken!!,
         @Field("user_id") user_id: Int = AppPrefs.userId
     ): RespFormat<PaynetPaymentResponse>
 
@@ -254,6 +267,7 @@ interface AuthApiService {
     ): RespFormat<RespAcceptTerms>
 
 
+    @Cacheable
     @POST("api/card/my")
     @FormUrlEncoded
     suspend fun getMyCards(
@@ -380,5 +394,10 @@ interface AuthApiService {
         @Field("members") members: String,
         @Field("user_id") user_id: Int = AppPrefs.userId
     ): RespFormat<GapGameDTO>
+
+    @POST("api/user/cashback")
+    @FormUrlEncoded
+    suspend fun getBftInfo(@Field("user_id") user_id: Int = AppPrefs.userId): RespFormat<BftInfoDTO>
+
 }
 

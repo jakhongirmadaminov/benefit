@@ -14,7 +14,7 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
+        INSTANCE = this
         val leastRecentlyUsedCacheEvictor = LeastRecentlyUsedCacheEvictor(90 * 1024 * 1024)
         val databaseProvider: DatabaseProvider = ExoDatabaseProvider(this)
 
@@ -25,5 +25,6 @@ class App : Application() {
 
     companion object {
         var simpleCache: SimpleCache? = null
+        var INSTANCE: App? = null
     }
 }

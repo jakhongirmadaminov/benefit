@@ -15,8 +15,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.benefit.R
+import com.example.benefit.remote.models.BalanceInfo
 import com.example.benefit.remote.models.CardDTO
-import com.example.benefit.ui.auth.registration.RegistrationBSD
 import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.home.HomeFragment
 import com.example.benefit.util.*
@@ -54,22 +54,22 @@ class PaynetTransactionFragment : BaseFragment(R.layout.fragment_paynet_transfer
 
     private fun subscribeObservers() {
 
-        viewModel.myCards.observe(viewLifecycleOwner) { requestState ->
+        viewModel.bftAndMyCardsPair.observe(viewLifecycleOwner) { requestState ->
 
-            when (requestState) {
-                is RequestState.Error -> {
-                    progressCards.isVisible = false
-                    Toast.makeText(context, requestState.message, Toast.LENGTH_SHORT).show()
-                }
-                RequestState.Loading -> {
-                    progressCards.isVisible = true
-                }
-                is RequestState.Success -> {
-                    progressCards.isVisible = false
-                    setupCardsPager(requestState.value.getProperly())
-
-                }
-            }
+//            when (requestState) {
+//                is RequestState.Error -> {
+//                    progressCards.isVisible = false
+//                    Toast.makeText(context, requestState.message, Toast.LENGTH_SHORT).show()
+//                }
+//                RequestState.Loading -> {
+//                    progressCards.isVisible = true
+//                }
+//                is RequestState.Success -> {
+            progressCards.isVisible = false
+            setupCardsPager(requestState.first, requestState.second.getProperly())
+//
+//                }
+//            }
 
         }
 
@@ -100,9 +100,19 @@ class PaynetTransactionFragment : BaseFragment(R.layout.fragment_paynet_transfer
     }
 
 
-    private fun setupCardsPager(cardsDTO: List<CardDTO>) {
+    private fun setupCardsPager(bftInfo: BalanceInfo, cardsDTO: List<CardDTO>) {
 
-        val cards = cardsDTO.map {
+        val cards = arrayListOf<View>().apply {
+            val cardView = layoutInflater.inflate(R.layout.item_card_small, null)
+            cardView.cardName.text = getString(R.string.cashback_points)
+            cardView.tvAmount.text = DecimalFormat("#,###").format(bftInfo.summa) + " BFT"
+            cardView.tvCardEndNum.text = ""
+            cardView.ivCardBg.setImageResource(R.drawable.gradient_orange)
+            cardsPagerSmall.addView(cardView)
+            add(cardView)
+        }
+
+        cardsDTO.forEach {
             val cardView = layoutInflater.inflate(R.layout.item_card_small, null)
             cardView.cardName.text = it.card_title
             cardView.tvAmount.text =
@@ -110,7 +120,7 @@ class PaynetTransactionFragment : BaseFragment(R.layout.fragment_paynet_transfer
             cardView.tvCardEndNum.text = "*" + it.panHidden!!.substring(it.panHidden!!.length - 4)
             it.setMiniBackgroundInto(cardView.ivCardBg)
             cardsPagerSmall.addView(cardView)
-            cardView
+            cards.add(cardView)
         }
 
         cardsPagerSmall.adapter = HomeFragment.WizardPagerAdapter(cards)
@@ -162,13 +172,23 @@ class PaynetTransactionFragment : BaseFragment(R.layout.fragment_paynet_transfer
             }
             fields.append("\"$SUMMA_SERVICE_FIELD\":")
             fields.append("\"${edtSum.text.toString().toInt()}\"")
-            viewModel.pay(
-                serviceId = args.paynetMerchant.own_id!!,
-                providerId = args.paynetMerchant.category_id!!,
-                fields = fields.toString(),
-                edtSum.text.toString().toInt(),
-                (viewModel.myCards.value as RequestState.Success).value.getProperly()[cardsPagerSmall.currentItem].id!!
-            )
+
+            if (cardsPagerSmall.currentItem == 0) {
+                viewModel.payWithCashback(
+                    serviceId = args.paynetMerchant.own_id!!,
+                    providerId = args.paynetMerchant.category_id!!,
+                    fields = fields.toString(),
+                    edtSum.text.toString().toInt(),
+                )
+            } else {
+                viewModel.pay(
+                    serviceId = args.paynetMerchant.own_id!!,
+                    providerId = args.paynetMerchant.category_id!!,
+                    fields = fields.toString(),
+                    edtSum.text.toString().toInt(),
+                    viewModel.bftAndMyCardsPair.value!!.second.getProperly()[cardsPagerSmall.currentItem].id!!
+                )
+            }
         }
 
         edtSum.doOnTextChanged { text, start, before, count ->
@@ -177,7 +197,7 @@ class PaynetTransactionFragment : BaseFragment(R.layout.fragment_paynet_transfer
                 return@doOnTextChanged
             }
             tvFill.isEnabled =
-                (viewModel.myCards.value as RequestState.Success).value.getProperly()[cardsPagerSmall.currentItem].balance?.dropLast(
+                viewModel.bftAndMyCardsPair.value!!.second.getProperly()[cardsPagerSmall.currentItem].balance?.dropLast(
                     2
                 )!!.toInt() > text.toString().toInt()
         }

@@ -11,7 +11,11 @@ data class RespFormat<T>(
 data class ErrorBody(
     @SerializedName("errorCode") val errorCode: Int? = null,
     @SerializedName("status") val status: Int? = null,
-    @SerializedName("message") val message: String? = null
+    @SerializedName("message") val message: String? = null,
+    @SerializedName("data") val data: ErrorBodyData? = null,
+)
+data class ErrorBodyData(
+    @SerializedName("message") val message: String? = null,
 )
 
 data class ResultBody<T>(

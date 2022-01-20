@@ -75,8 +75,18 @@ class PaymentsAndTransfersFragment : BaseFragment(R.layout.fragment_payments_and
 
     private fun attachListeners() {
         clPay.setOnClickListener {
-            PaymentsBSD().show(childFragmentManager, "")
-
+            if (viewModel.cardsResp.value.isNullOrEmpty()) {
+                val dialog = DialogPleaseAddCard()
+                childFragmentManager.setFragmentResultListener(
+                    KEY_ADD_CARD,
+                    viewLifecycleOwner,
+                    { requestKey, result ->
+                        AddCardBSD().show(childFragmentManager, "")
+                    })
+                dialog.show(childFragmentManager, "")
+            } else {
+                PaymentsBSD().show(childFragmentManager, "")
+            }
         }
 
         clMakeDepo.setOnClickListener {
@@ -100,12 +110,23 @@ class PaymentsAndTransfersFragment : BaseFragment(R.layout.fragment_payments_and
                 }
                 dialog.show(requireActivity().supportFragmentManager, "")
             }
-
         }
 
         clTransferToCard.setOnClickListener {
-            TransferToCardBSD().show(childFragmentManager, "")
+            if (viewModel.cardsResp.value.isNullOrEmpty()) {
+                val dialog = DialogPleaseAddCard()
+                childFragmentManager.setFragmentResultListener(
+                    KEY_ADD_CARD,
+                    viewLifecycleOwner,
+                    { requestKey, result ->
+                        AddCardBSD().show(childFragmentManager, "")
+                    })
+                dialog.show(childFragmentManager, "")
+            } else {
+                TransferToCardBSD().show(childFragmentManager, "")
+            }
         }
+
         clGap.setOnClickListener {
             startActivity(Intent(requireActivity(), GapActivity::class.java))
         }

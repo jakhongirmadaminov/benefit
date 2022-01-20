@@ -1,9 +1,11 @@
 package com.example.benefit.remote
 
+import com.example.benefit.App
+import com.example.benefit.util.Constants
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.example.benefit.util.Constants
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -34,6 +36,8 @@ object ApiServiceFactory {
 
     fun makeAuthorizedApiService(isDebug: Boolean): AuthApiService {
         val okHttpClient = OkHttpClient.Builder()
+            .cache(Cache(App.INSTANCE!!.cacheDir, 10 * 1024 * 1024L))
+            .addInterceptor(MainInterceptor())
             .addInterceptor(makeLoggingInterceptor(isDebug))
             .addInterceptor(AuthInterceptor())
             .connectTimeout(20, TimeUnit.SECONDS)

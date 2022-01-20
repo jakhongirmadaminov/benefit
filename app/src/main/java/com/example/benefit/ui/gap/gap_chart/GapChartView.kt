@@ -24,25 +24,18 @@ import kotlin.math.sin
 
 class GapChartView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
 
-
-//    private var playerBitmaps: List<Bitmap> = listOf()
-//        set(value) {
-//            requestLayout()
-//            field = value
-//        }
-
     private var chartCanvas: Canvas? = null
-    private var playerCount = 6
-//        set(value) {
-//            requestLayout()
-//            field = value
-//        }
+    private var playerCount = 0
 
     var game: GapGameDTO? = null
         set(value) {
             chartCanvas?.let { canvas ->
                 value?.let { game ->
                     setupGame(canvas, game)
+                    drawBgArcs(canvas)
+                    drawProgressArcs(canvas)
+                    drawCentreCircleStroke(canvas)
+                    drawCentreCircle(canvas)
                 }
             }
             field = value
@@ -53,14 +46,7 @@ class GapChartView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
         playerCount = this.game!!.members!!.size
         pricePerPerson = game.summa!!.toInt()
 
-        game.members!!.forEachIndexed { index, member ->
-            getBitmap(Constants.BASE_URL + member.userInfo!!.avatarLink!!.removeSuffix("/")) {
-                it?.let {
-                    drawAvatarsBitmaps(index, canvas, it.createBitmapWithBorder(10f, Color.WHITE))
-                }
-            }
-        }
-        requestLayout()
+
     }
 
 
@@ -103,11 +89,7 @@ class GapChartView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
         }
     }
 
-    private var pricePerPerson = 100_000
-//        set(value) {
-//            requestLayout()
-//            field = value
-//        }
+    private var pricePerPerson = 0
 
     var progressGradientPaint = Paint().apply {
         isAntiAlias = true
@@ -115,14 +97,6 @@ class GapChartView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
 //        strokeWidth = pThickness
 //        style = Paint.Style.STROKE
         color = Color.GREEN
-
-    }
-    var redPaint = Paint().apply {
-        isAntiAlias = true
-        strokeCap = Paint.Cap.ROUND
-//        strokeWidth = pThickness
-//        style = Paint.Style.STROKE
-        color = Color.RED
 
     }
     var progressArcRect = RectF(0F, 0F, 0F, 0F)
@@ -213,7 +187,7 @@ class GapChartView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
         bgArchRect[width / 2 - radiusBgArc, height / 2 - radiusBgArc, width / 2 + radiusBgArc] =
             height / 2 + radiusBgArc
 
-        for (i in 0..playerCount) {
+        for (i in game!!.members!!.indices) {
             bgArcRects.add(
                 RectF(
                     bgArchRect.left,
@@ -237,20 +211,22 @@ class GapChartView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
     @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-
+        chartCanvas = canvas
+        game?.let {
+            setupGame(canvas, it)
+        }
         drawBgArcs(canvas)
         drawProgressArcs(canvas)
         drawCentreCircleStroke(canvas)
         drawCentreCircle(canvas)
-//        drawPlayerAvatarsBg(canvas)
-
-        chartCanvas = canvas
-//        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_avatar_sample)
-
-//        drawAvatarsBitmaps(canvas, listOf(bitmap, bitmap, bitmap, bitmap, bitmap, bitmap))
-        game?.let {
-            setupGame(canvas, it)
+        game?.members!!.forEachIndexed { index, member ->
+            getBitmap(Constants.BASE_URL + member.userInfo!!.avatarLink!!.removeSuffix("/")) {
+                it?.let {
+                    drawAvatarsBitmaps(index, canvas, it.createBitmapWithBorder(10f, Color.WHITE))
+                }
+            }
         }
+        requestLayout()
     }
 
     private fun drawAvatarsBitmaps(position: Int, canvas: Canvas, bitmap: Bitmap) {
@@ -328,23 +304,27 @@ class GapChartView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
             })
     }
 
+    var hasOffsetSetup = false
     private fun drawBgArcs(canvas: Canvas) {
 
-        for (i in 0 until playerCount) {
-            val startAngle = 360 / playerCount * i.toFloat() - 90
-            val endAngle = 360 / playerCount * (i + 1).toFloat() - 90
-            val midAngle = startAngle + ((endAngle - startAngle) / 2)
+        if (!hasOffsetSetup) {
+            for (i in game!!.members!!.indices) {
+                val startAngle = 360 / playerCount * i.toFloat() - 90
+                val endAngle = 360 / playerCount * (i + 1).toFloat() - 90
+                val midAngle = startAngle + ((endAngle - startAngle) / 2)
+                val new_x =
+                    SizeUtils.dpToPx(context, pieMargin) * cos(midAngle * Math.PI / 180).toFloat()
+                val new_y =
+                    SizeUtils.dpToPx(context, pieMargin) * sin(midAngle * Math.PI / 180).toFloat()
+                bgArcRects[i].offset(new_x, new_y)
+            }
+            hasOffsetSetup = true
+        }
 
-            val new_x =
-                SizeUtils.dpToPx(context, pieMargin) * cos(midAngle * Math.PI / 180).toFloat()
-            val new_y =
-                SizeUtils.dpToPx(context, pieMargin) * sin(midAngle * Math.PI / 180).toFloat()
-
-            bgArcRects[i].offset(new_x, new_y)
-
+        for (i in game!!.members!!.indices) {
             canvas.drawArc(
                 bgArcRects[i],
-                startAngle,
+                360 / playerCount * i.toFloat() - 90,
                 360 / playerCount.toFloat(),
                 true,
                 Paint().apply {
