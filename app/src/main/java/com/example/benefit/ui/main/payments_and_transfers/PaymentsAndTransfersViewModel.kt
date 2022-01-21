@@ -22,10 +22,6 @@ class PaymentsAndTransfersViewModel @Inject constructor(private val userRemote: 
     val signInRequired = MutableLiveData<Boolean>()
     val errorMessage = MutableLiveData<String>()
 
-    init {
-        getMyCards()
-    }
-
     fun getMyCards() {
         isLoadingCards.value = true
         viewModelScope.launch(Dispatchers.IO) {

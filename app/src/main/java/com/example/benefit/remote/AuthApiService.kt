@@ -267,7 +267,7 @@ interface AuthApiService {
     ): RespFormat<RespAcceptTerms>
 
 
-    @Cacheable
+//    @Cacheable
     @POST("api/card/my")
     @FormUrlEncoded
     suspend fun getMyCards(

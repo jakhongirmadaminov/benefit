@@ -30,6 +30,7 @@ class PaymentsAndTransfersFragment : BaseFragment(R.layout.fragment_payments_and
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.getMyCards()
 
         setupViews()
         attachListeners()
