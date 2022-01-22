@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
-import com.example.benefit.ui.main.BenefitBSD
+import com.example.benefit.remote.models.PaynetCategory
 import com.example.benefit.ui.main.BenefitFixedHeightBSD
-import com.example.benefit.ui.transactions_history.transaction_bsd.TransactionBSD.Companion.ARG_TRANSACTION_DTO
 
+const val ARG_PAYNET_CATEGORY = "paynetCategory"
 
 class PaymentsBSD : BenefitFixedHeightBSD() {
 
@@ -32,10 +33,23 @@ class PaymentsBSD : BenefitFixedHeightBSD() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (childFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).findNavController()
-            .setGraph(R.navigation.payments_nav_graph, Bundle().apply {
-//               if () putParcelable(ARG_TRANSACTION_DTO, transactionDTO)
-            })
+
+        val navController =
+            (childFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).findNavController()
+
+        val paynetCatg = arguments?.getParcelable<PaynetCategory>(ARG_PAYNET_CATEGORY)
+
+        navController.setGraph(R.navigation.payments_nav_graph, Bundle())
+
+        paynetCatg?.let {
+            navController.navigate(
+                R.id.action_paymentsFragment_to_selectMerchantFragment,
+                Bundle().apply {
+                    putParcelable(ARG_PAYNET_CATEGORY, paynetCatg)
+                },
+                NavOptions.Builder().setPopUpTo(R.id.paymentsFragment, true).build()
+            );
+        }
 
     }
 

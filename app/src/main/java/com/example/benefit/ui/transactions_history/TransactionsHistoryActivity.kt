@@ -56,7 +56,7 @@ class TransactionsHistoryActivity : BaseActivity(), OnChartValueSelectedListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_transactions_history)
-        myCards = intent.getParcelableArrayListExtra(ARG_CARDS)
+        myCards = intent.getParcelableArrayListExtra(ARG_CARDS)!!
         selectedCardId = myCards[0].id!!
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

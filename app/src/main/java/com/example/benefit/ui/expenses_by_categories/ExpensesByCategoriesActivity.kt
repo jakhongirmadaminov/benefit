@@ -50,7 +50,7 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity(), OnChartValueSelect
         setContentView(R.layout.activity_expenses_by_categories)
         setSupportActionBar(tool_bar)
         super.onCreate(savedInstanceState)
-        myCards = intent.getParcelableArrayListExtra(ARG_CARDS)
+        myCards = intent.getParcelableArrayListExtra(ARG_CARDS)!!
 
         setupViews()
         attachListeners()

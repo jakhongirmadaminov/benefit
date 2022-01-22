@@ -16,7 +16,7 @@ class AuthInterceptor : Interceptor {
         val requestBuilder = chain.request().newBuilder()
         if (AppPrefs.token.isNullOrBlank()) throw Exception()
         requestBuilder.addHeader("Authorization", "Bearer ${AppPrefs.token}")
-        if (DEBUG) Log.d("TOKEEEEN", AppPrefs.token)
+        if (DEBUG) Log.d("TOKEEEEN", AppPrefs.token!!)
         return chain.proceed(requestBuilder.build())
     }
 }

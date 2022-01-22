@@ -24,6 +24,8 @@ import com.example.benefit.ui.main.fill_card.FillCardFragment.Companion.ARG_CARD
 import com.example.benefit.ui.main.home.bsd_add_card.AddCardBSD
 import com.example.benefit.ui.main.home.card_options.CardOptionsBSD
 import com.example.benefit.ui.main.transfer_to_card.TransferToCardBSD
+import com.example.benefit.ui.payments.ARG_PAYNET_CATEGORY
+import com.example.benefit.ui.payments.PaymentsBSD
 import com.example.benefit.ui.transactions_history.TransactionsHistoryActivity
 import com.example.benefit.ui.transactions_history.TransactionsHistoryActivity.Companion.EXTRA_CARD
 import com.example.benefit.ui.viewgroups.ItemLoading
@@ -35,11 +37,11 @@ import com.example.benefit.util.ResultSuccess
 import com.rd.utils.DensityUtils.dpToPx
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
+import java.text.DecimalFormat
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.item_card.view.*
 import splitties.fragments.start
 import splitties.preferences.edit
-import java.text.DecimalFormat
 
 
 class HomeFragment : BaseFragment(R.layout.fragment_home) {
@@ -114,24 +116,40 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                         titleRu = getString(R.string.transfer_to_card)
                     )
                 ) {
-                    TransferToCardBSD().show(childFragmentManager, "")
+                    if (!viewModel.cardsResp.value.isNullOrEmpty()) {
+                        TransferToCardBSD().show(childFragmentManager, "")
+                    } else {
+                        val dialog = DialogPleaseAddCard()
+                        childFragmentManager.setFragmentResultListener(
+                            KEY_ADD_CARD,
+                            viewLifecycleOwner,
+                            { requestKey, result ->
+                                AddCardBSD().show(childFragmentManager, "")
+                            })
+                        dialog.show(childFragmentManager, "")
+                    }
                 }
             )
-//            paynetCatgAdapter.add(
-//                ItemPaynetCatg(
-//                    PaynetCategory(
-//                        paymentTypeEnum = EPaymentType.FRIEND_TRANSFER,
-//                        imageResource = R.drawable.ic_payment_friend,
-//                        titleRu = getString(R.string.transfer_to_friend)
-//                    )
-//                ) {
-//
-//                }
-//            )
             it.forEach { paynetCategory ->
-                paynetCatgAdapter.add(ItemPaynetCatg(paynetCategory) {})
+                paynetCatgAdapter.add(ItemPaynetCatg(paynetCategory) { paynetCatg ->
+                    if (!viewModel.cardsResp.value.isNullOrEmpty()) {
+                        val paymentsDialog = PaymentsBSD()
+                        paymentsDialog.arguments = Bundle().apply {
+                            putParcelable(ARG_PAYNET_CATEGORY, paynetCatg)
+                        }
+                        paymentsDialog.show(childFragmentManager, "")
+                    } else {
+                        val dialog = DialogPleaseAddCard()
+                        childFragmentManager.setFragmentResultListener(
+                            KEY_ADD_CARD,
+                            viewLifecycleOwner,
+                            { requestKey, result ->
+                                AddCardBSD().show(childFragmentManager, "")
+                            })
+                        dialog.show(childFragmentManager, "")
+                    }
+                })
             }
-
         })
 
         viewModel.storiesResp.observe(viewLifecycleOwner, {

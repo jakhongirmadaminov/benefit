@@ -8,7 +8,11 @@ import com.example.benefit.ui.base.BaseActionbarActivity
 import com.example.benefit.ui.viewgroups.ItemGapPlayer
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import kotlinx.android.synthetic.main.activity_gap_chart.*
+import kotlinx.android.synthetic.main.activity_gap_chart.chart
+import kotlinx.android.synthetic.main.activity_gap_chart.rvPlayers
+import kotlinx.android.synthetic.main.activity_gap_chart.tool_bar
+import kotlinx.android.synthetic.main.activity_gap_chart.tvSum
+import kotlinx.android.synthetic.main.activity_gap_chart.tvTitle
 
 const val EXTRA_GAP_GAME = "GAME"
 
@@ -22,7 +26,7 @@ class GapChartActivity : BaseActionbarActivity() {
         setSupportActionBar(tool_bar)
         super.onCreate(savedInstanceState)
 
-        game = intent?.getParcelableExtra(EXTRA_GAP_GAME) as GapGameDTO
+        game = intent.getParcelableExtra(EXTRA_GAP_GAME)!!
 
         setupViews()
     }

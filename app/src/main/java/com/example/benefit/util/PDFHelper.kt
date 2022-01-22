@@ -33,7 +33,7 @@ object PDFHelper {
             out.flush()
             out.close()
         } catch (e: Exception) {
-            Log.e("tag", e.message)
+            Log.e("tag", e.message ?: "")
         }
         val pdfFileURI: Uri
         val intent = Intent(Intent.ACTION_VIEW)
