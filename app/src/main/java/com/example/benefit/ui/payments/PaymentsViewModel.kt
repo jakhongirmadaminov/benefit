@@ -17,9 +17,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PaymentsViewModel @Inject constructor(
-    private val userRemote: UserRemote,
-    private val apiAuth: AuthApiService
+        private val userRemote: UserRemote,
+        private val apiAuth: AuthApiService
 ) : ViewModel() {
+
+     var transferAmountKey: String? = null
 
     val paynetCatgResp = MutableLiveData<List<PaynetCategory>>()
     val errorMessage = MutableLiveData<String>()
@@ -40,5 +42,10 @@ class PaymentsViewModel @Inject constructor(
             }.exhaustive
         }
     }
+
+    fun setTransferringAmount(name: String) {
+        transferAmountKey = name
+    }
+
 
 }
