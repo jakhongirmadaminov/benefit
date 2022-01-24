@@ -6,29 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.benefit.R
-import com.example.benefit.ui.main.BenefitBSD
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.benefit.ui.main.BenefitFixedHeightBSD
 
 
-
-class CreateRegularPaymentBSD : BenefitBSD() {
+class CreateRegularPaymentBSD : BenefitFixedHeightBSD() {
 
 
     private val viewModel: CreateRegularPaymentViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.bsd_create_regular_payment, null)
 
         return view
     }
-
-
-
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -48,8 +48,8 @@
         tools:layout="@layout/fragment_create_regular_payment_end" >
 
         <argument
-            android:name="paymentDTO"
-            app:argType="com.example.benefit.remote.models.RegularPaymentDTO" />
+            android:name="paynetCategory"
+            app:argType="com.example.benefit.remote.models.PaynetCategory" />
 
     </fragment>
 

@@ -1,28 +1,60 @@
 package com.example.benefit.ui.regular_payment
 
 
-import androidx.lifecycle.ViewModel
-import com.example.benefit.remote.UserRemoteImpl
-
 /**
  * Created by jahon on 03-Sep-20
- */import javax.inject.Inject
+ */
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.benefit.remote.AuthApiService
+import com.example.benefit.remote.models.BalanceInfo
+import com.example.benefit.remote.models.BftInfoDTO
+import com.example.benefit.remote.models.MyCardsResp
+import com.example.benefit.util.ResultError
+import com.example.benefit.util.ResultSuccess
+import com.example.benefit.util.ResultWrapper
+import com.example.benefit.util.getFormattedResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
-class RegularPaymentViewModel @Inject constructor(private val userRemoteImpl: UserRemoteImpl) :
-    ViewModel() {
+class RegularPaymentViewModel @Inject constructor(private val apiAuth: AuthApiService) :
+        ViewModel() {
 
-//    val loginResp = SingleLiveEvent<ResultWrapper<String>>()
-//    fun login(phoneNumber: String) {
-//        loginResp.value = InProgress
-//        viewModelScope.launch(Dispatchers.IO) {
-//            val response = userRemoteImpl.login(phoneNumber)
-//            withContext(Dispatchers.Main) {
-//                loginResp.value = response
-//            }
-//        }
-//    }
+    val bftAndMyCardsPair = MutableLiveData<Pair<BalanceInfo, MyCardsResp>>()
+    val error = MutableLiveData<String>()
+    val isGettingsCards = MutableLiveData(false)
 
+    init {
+        getMyCards()
+    }
+
+    fun getMyCards() {
+        viewModelScope.launch(Dispatchers.IO) {
+            isGettingsCards.postValue(true)
+            val cardsResp = async { getFormattedResponse { apiAuth.getMyCards() } }
+            val bftResp = async { getFormattedResponse { apiAuth.getBftInfo() } }
+
+            processResponses(cardsResp.await(), bftResp.await())
+        }
+    }
+
+    private fun processResponses(
+            cardsResp: ResultWrapper<MyCardsResp>,
+            bftResp: ResultWrapper<BftInfoDTO>
+    ) {
+        isGettingsCards.postValue(false)
+        if (cardsResp is ResultSuccess && bftResp is ResultSuccess) {
+            bftAndMyCardsPair.postValue(Pair(bftResp.value.balanceInfo!!, cardsResp.value))
+        } else {
+            error.postValue(
+                    (cardsResp as? ResultError)?.message ?: (bftResp as? ResultError)?.message
+            )
+        }
+    }
 
 }

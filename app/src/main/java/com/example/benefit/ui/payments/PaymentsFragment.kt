@@ -11,6 +11,7 @@ import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.viewgroups.ItemLoading
 import com.example.benefit.ui.viewgroups.ItemPaynet
 import com.example.benefit.util.SizeUtils
+import com.example.benefit.util.setLoadingSpinner
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_payments.*
@@ -98,14 +99,11 @@ class PaymentsFragment @Inject constructor() : BaseFragment(R.layout.fragment_pa
         }
 
         viewModel.isLoadingPaynetCategories.observe(viewLifecycleOwner) { isLoading ->
-            if (isLoading) addLoadingSpinner() else adapter.clear()
+            if (isLoading) adapter.setLoadingSpinner() else adapter.clear()
         }
     }
 
-    private fun addLoadingSpinner() {
-        adapter.clear()
-        adapter.add(ItemLoading())
-    }
+
 
 
 }

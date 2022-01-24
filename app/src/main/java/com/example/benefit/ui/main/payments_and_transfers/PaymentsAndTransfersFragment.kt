@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.benefit.R
-import com.example.benefit.remote.models.RegularPaymentDTO
+import com.example.benefit.remote.models.AutoPaymentDTO
 import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.gap.GapActivity
 import com.example.benefit.ui.main.fill_card.FillCardBSD
@@ -18,6 +18,8 @@ import com.example.benefit.ui.payments.PaymentsBSD
 import com.example.benefit.ui.regular_payment.CreateRegularPaymentBSD
 import com.example.benefit.ui.regular_payment.RegularPaymentBSD
 import com.example.benefit.ui.viewgroups.ItemRegularPayment
+import com.example.benefit.util.RequestState
+import com.example.benefit.util.setLoadingSpinner
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_payments_and_transfers.*
@@ -31,6 +33,7 @@ class PaymentsAndTransfersFragment : BaseFragment(R.layout.fragment_payments_and
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getMyCards()
+        viewModel.getMyAutoPayments()
 
         setupViews()
         attachListeners()
@@ -38,27 +41,27 @@ class PaymentsAndTransfersFragment : BaseFragment(R.layout.fragment_payments_and
     }
 
     private fun subscribeObservers() {
+        viewModel.autoPaymentsReqState.observe(viewLifecycleOwner) { reqState ->
 
+            when (reqState) {
+                is RequestState.Error -> {
+                    adapter.clear()
+                }
+                RequestState.Loading -> adapter.setLoadingSpinner()
+                is RequestState.Success -> {
+                    loadData(reqState.value)
+                }
+            }
+        }
     }
 
     private fun setupViews() {
-
         rvRegularPayments.adapter = adapter
         adapter.clear()
-
-        val data = listOf(
-            RegularPaymentDTO("Телефон"),
-            RegularPaymentDTO("Интернет"),
-            RegularPaymentDTO("Электр.."),
-            RegularPaymentDTO("Электр..")
-        )
-        loadData(data)
-
-
     }
 
-    private fun loadData(data: List<RegularPaymentDTO>) {
-
+    private fun loadData(data: List<AutoPaymentDTO>) {
+        adapter.clear()
         data.forEach {
             adapter.add(ItemRegularPayment(it, {
                 val dialog = RegularPaymentBSD()
@@ -68,10 +71,11 @@ class PaymentsAndTransfersFragment : BaseFragment(R.layout.fragment_payments_and
                 dialog.show(childFragmentManager, "")
             }) { })
         }
-        adapter.add(ItemRegularPayment(null, {}) {
-            CreateRegularPaymentBSD().show(childFragmentManager, "")
-        })
-
+        if (adapter.itemCount < 8) {
+            adapter.add(ItemRegularPayment(null, {}) {
+                CreateRegularPaymentBSD().show(childFragmentManager, "")
+            })
+        }
     }
 
     private fun attachListeners() {
@@ -79,11 +83,11 @@ class PaymentsAndTransfersFragment : BaseFragment(R.layout.fragment_payments_and
             if (viewModel.cardsResp.value.isNullOrEmpty()) {
                 val dialog = DialogPleaseAddCard()
                 childFragmentManager.setFragmentResultListener(
-                    KEY_ADD_CARD,
-                    viewLifecycleOwner,
-                    { requestKey, result ->
-                        AddCardBSD().show(childFragmentManager, "")
-                    })
+                        KEY_ADD_CARD,
+                        viewLifecycleOwner,
+                        { requestKey, result ->
+                            AddCardBSD().show(childFragmentManager, "")
+                        })
                 dialog.show(childFragmentManager, "")
             } else {
                 PaymentsBSD().show(childFragmentManager, "")
@@ -94,19 +98,19 @@ class PaymentsAndTransfersFragment : BaseFragment(R.layout.fragment_payments_and
             if (viewModel.cardsResp.value.isNullOrEmpty()) {
                 val dialog = DialogPleaseAddCard()
                 childFragmentManager.setFragmentResultListener(
-                    KEY_ADD_CARD,
-                    viewLifecycleOwner,
-                    { requestKey, result ->
-                        AddCardBSD().show(childFragmentManager, "")
-                    })
+                        KEY_ADD_CARD,
+                        viewLifecycleOwner,
+                        { requestKey, result ->
+                            AddCardBSD().show(childFragmentManager, "")
+                        })
                 dialog.show(childFragmentManager, "")
             } else {
                 val dialog = FillCardBSD()
                 dialog.arguments = Bundle().apply {
                     putParcelable(FillCardFragment.ARG_CARD, viewModel.cardsResp.value!![0])
                     putParcelableArrayList(
-                        FillCardFragment.ARG_CARDS,
-                        ArrayList(viewModel.cardsResp.value!!)
+                            FillCardFragment.ARG_CARDS,
+                            ArrayList(viewModel.cardsResp.value!!)
                     )
                 }
                 dialog.show(requireActivity().supportFragmentManager, "")
@@ -117,11 +121,11 @@ class PaymentsAndTransfersFragment : BaseFragment(R.layout.fragment_payments_and
             if (viewModel.cardsResp.value.isNullOrEmpty()) {
                 val dialog = DialogPleaseAddCard()
                 childFragmentManager.setFragmentResultListener(
-                    KEY_ADD_CARD,
-                    viewLifecycleOwner,
-                    { requestKey, result ->
-                        AddCardBSD().show(childFragmentManager, "")
-                    })
+                        KEY_ADD_CARD,
+                        viewLifecycleOwner,
+                        { requestKey, result ->
+                            AddCardBSD().show(childFragmentManager, "")
+                        })
                 dialog.show(childFragmentManager, "")
             } else {
                 TransferToCardBSD().show(childFragmentManager, "")

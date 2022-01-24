@@ -202,7 +202,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="24dp"
                         android:fontFamily="sans-serif"
-                        android:text="106 000 UZS"
+                        tools:text="106 000 UZS"
                         android:textColor="#ffffff"
                         android:textSize="22sp"
                         android:textStyle="bold"

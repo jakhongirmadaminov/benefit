@@ -5,17 +5,15 @@
     android:id="@+id/create_regular_payment_nav_graph.xml"
     app:startDestination="@id/regularPaymentFragment">
 
-
     <fragment
         android:id="@+id/regularPaymentFragment"
         android:name="com.example.benefit.ui.regular_payment.RegularPaymentFragment"
         android:label=""
         tools:layout="@layout/fragment_regular_payment">
 
-
         <argument
-            android:name="paymentDTO"
-            app:argType="com.example.benefit.remote.models.RegularPaymentDTO" />
+            android:name="autoPaymentDTO"
+            app:argType="com.example.benefit.remote.models.AutoPaymentDTO" />
         <action
             android:id="@+id/action_regularPaymentFragment_to_createRegPaymentEndFragment"
             app:destination="@id/createRegPaymentEndFragment"
@@ -34,7 +32,7 @@
 
         <argument
             android:name="paymentDTO"
-            app:argType="com.example.benefit.remote.models.RegularPaymentDTO" />
+            app:argType="com.example.benefit.remote.models.AutoPaymentDTO" />
 
     </fragment>
 
