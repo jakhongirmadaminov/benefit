@@ -24,6 +24,7 @@ class ItemRegularPayment(
             }
         } else {
             viewHolder.itemView.ivImage.visibility = View.INVISIBLE
+            viewHolder.itemView.tvPaymentName.text = ""
             viewHolder.itemView.llAdd.setOnClickListener {
                 onClickAdd!!()
             }

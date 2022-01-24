@@ -48,8 +48,8 @@
                 android:layout_height="60dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:scaleType="centerCrop"
                 android:foreground="?android:selectableItemBackground"
+                android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -66,13 +66,13 @@
         android:layout_marginTop="10dp"
         android:fontFamily="sans-serif-light"
         android:gravity="center_horizontal"
-        android:text="Телефон"
         android:textColor="#ab5c5c5c"
         android:textSize="12dp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card" />
+        app:layout_constraintTop_toBottomOf="@id/card"
+        tools:text="Телефон" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
