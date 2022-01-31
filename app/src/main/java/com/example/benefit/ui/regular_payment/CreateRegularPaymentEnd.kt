@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.benefit.R
 import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.home.HomeFragment
@@ -25,12 +26,7 @@ import javax.inject.Inject
 class CreateRegularPaymentEnd @Inject constructor() :
     BaseFragment(R.layout.fragment_create_regular_payment_end) {
 
-//    val args by navArgs<TransactionFragmentArgs>()
-//    val productId = args.productId
-
-    private val adapter = GroupAdapter<GroupieViewHolder>()
-
-    //    lateinit var transactionDTO: TransactionDTO
+    val args by navArgs<CreateRegularPaymentEndArgs>()
     private val viewModel: CreateRegularPaymentViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,6 +53,8 @@ class CreateRegularPaymentEnd @Inject constructor() :
     }
 
     private fun setupViews() {
+
+//        tvBrandName.text = args.paynetCategory.
 
         clParent.layoutTransition.enableTransitionType(CHANGING)
         clParent.minimumHeight =
