@@ -17,9 +17,6 @@ const val ARG_PAYNET_CATEGORY = "paynetCategory"
 class PaymentsBSD : BenefitFixedHeightBSD() {
 
 
-    private val viewModel: PaymentsViewModel by viewModels()
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

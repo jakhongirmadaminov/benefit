@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/lblTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="sans-serif"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="normal" />
+
+
+    <EditText
+        android:id="@+id/edtInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/shape_input_bg"
+        android:fontFamily="sans-serif"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:maxLength="160"
+        android:maxLines="1"
+        android:paddingStart="15dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="5dp"
+        android:textColor="#cc5c5c5c"
+        android:textSize="24sp"
+        android:textStyle="normal" />
+
+
+</LinearLayout>

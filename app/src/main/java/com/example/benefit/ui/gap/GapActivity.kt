@@ -29,7 +29,6 @@ class GapActivity : BaseActionbarActivity() {
         setSupportActionBar(tool_bar)
         super.onCreate(savedInstanceState)
 
-
         setupViews()
         attachListeners()
         subscribeObservers()

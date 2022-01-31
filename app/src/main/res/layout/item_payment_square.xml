@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
@@ -48,11 +49,14 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:selectableItemBackground"
-                android:src="@drawable/ic_asia_alliance_logo"
+                android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_asia_alliance_logo" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.cardview.widget.CardView>
 
     <TextView
@@ -62,13 +66,13 @@
         android:layout_marginTop="10dp"
         android:fontFamily="sans-serif-light"
         android:gravity="center_horizontal"
-        android:text="Телефон"
         android:textColor="#ab5c5c5c"
         android:textSize="12dp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card" />
+        app:layout_constraintTop_toBottomOf="@id/card"
+        tools:text="Телефон" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

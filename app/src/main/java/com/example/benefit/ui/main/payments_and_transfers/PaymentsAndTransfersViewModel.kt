@@ -3,19 +3,20 @@ package com.example.benefit.ui.main.payments_and_transfers
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.benefit.remote.AuthApiService
+import com.example.benefit.remote.models.AutoPaymentDTO
 import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.remote.repository.UserRemote
-import com.example.benefit.util.ResultError
-import com.example.benefit.util.ResultSuccess
-import com.example.benefit.util.exhaustive
+import com.example.benefit.util.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class PaymentsAndTransfersViewModel @Inject constructor(private val userRemote: UserRemote) : ViewModel() {
+class PaymentsAndTransfersViewModel @Inject constructor(private val userRemote: UserRemote, private val authApi: AuthApiService) : ViewModel() {
 
     val cardsResp = MutableLiveData<List<CardDTO>>()
     val isLoadingCards = MutableLiveData<Boolean>()
@@ -38,6 +39,13 @@ class PaymentsAndTransfersViewModel @Inject constructor(private val userRemote: 
                     }
                 }.exhaustive
             }
+        }
+    }
+
+    val autoPaymentsReqState = MutableLiveData<RequestState<List<AutoPaymentDTO>>>()
+    fun getMyAutoPayments() {
+        viewModelScope.launch(IO) {
+            makeRequest(autoPaymentsReqState) { authApi.getMyAutoPayments() }
         }
     }
 }

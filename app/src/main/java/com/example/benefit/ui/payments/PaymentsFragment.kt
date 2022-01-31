@@ -3,7 +3,7 @@ package com.example.benefit.ui.payments
 import android.os.Bundle
 import android.view.View
 import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.remote.models.PaynetCategory
@@ -11,6 +11,7 @@ import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.viewgroups.ItemLoading
 import com.example.benefit.ui.viewgroups.ItemPaynet
 import com.example.benefit.util.SizeUtils
+import com.example.benefit.util.setLoadingSpinner
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_payments.*
@@ -29,7 +30,7 @@ class PaymentsFragment @Inject constructor() : BaseFragment(R.layout.fragment_pa
     private val adapter = GroupAdapter<GroupieViewHolder>()
 
     //    lateinit var transactionDTO: TransactionDTO
-    private val viewModel: PaymentsViewModel by viewModels()
+    private val viewModel: PaymentsViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,7 +54,7 @@ class PaymentsFragment @Inject constructor() : BaseFragment(R.layout.fragment_pa
                     val filtered = paynetCategories.filter {
                         it.titleRu?.lowercase()?.contains(text.toString().lowercase()) == true ||
                                 it.titleUz?.lowercase()
-                                    ?.contains(text.toString().lowercase()) == true
+                                        ?.contains(text.toString().lowercase()) == true
                     }
                     if (filtered.isNotEmpty()) {
                         adapter.clear()
@@ -67,7 +68,7 @@ class PaymentsFragment @Inject constructor() : BaseFragment(R.layout.fragment_pa
     private fun setupViews() {
         clParent.layoutParams = clParent.layoutParams.apply {
             height = SizeUtils.getScreenHeight(requireActivity()) - SizeUtils.getActionBarHeight(
-                requireActivity()
+                    requireActivity()
             )
 
         }
@@ -83,7 +84,7 @@ class PaymentsFragment @Inject constructor() : BaseFragment(R.layout.fragment_pa
         data.forEach { paynetCategory ->
             adapter.add(ItemPaynet(paynetCategory) {
                 findNavController().navigate(
-                    PaymentsFragmentDirections.actionPaymentsFragmentToSelectMerchantFragment(it)
+                        PaymentsFragmentDirections.actionPaymentsFragmentToSelectMerchantFragment(it)
                 )
             })
         }
@@ -98,14 +99,11 @@ class PaymentsFragment @Inject constructor() : BaseFragment(R.layout.fragment_pa
         }
 
         viewModel.isLoadingPaynetCategories.observe(viewLifecycleOwner) { isLoading ->
-            if (isLoading) addLoadingSpinner() else adapter.clear()
+            if (isLoading) adapter.setLoadingSpinner() else adapter.clear()
         }
     }
 
-    private fun addLoadingSpinner() {
-        adapter.clear()
-        adapter.add(ItemLoading())
-    }
+
 
 
 }

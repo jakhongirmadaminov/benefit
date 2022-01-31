@@ -37,11 +37,11 @@ import com.example.benefit.util.ResultSuccess
 import com.rd.utils.DensityUtils.dpToPx
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import java.text.DecimalFormat
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.item_card.view.*
 import splitties.fragments.start
 import splitties.preferences.edit
+import java.text.DecimalFormat
 
 
 class HomeFragment : BaseFragment(R.layout.fragment_home) {
@@ -109,26 +109,26 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         viewModel.paynetCatgResp.observe(viewLifecycleOwner, {
             it ?: return@observe
             paynetCatgAdapter.add(
-                ItemPaynetCatg(
-                    PaynetCategory(
-                        paymentTypeEnum = EPaymentType.CARD_TRANSFER,
-                        imageResource = R.drawable.ic_payment_card,
-                        titleRu = getString(R.string.transfer_to_card)
-                    )
-                ) {
-                    if (!viewModel.cardsResp.value.isNullOrEmpty()) {
-                        TransferToCardBSD().show(childFragmentManager, "")
-                    } else {
-                        val dialog = DialogPleaseAddCard()
-                        childFragmentManager.setFragmentResultListener(
-                            KEY_ADD_CARD,
-                            viewLifecycleOwner,
-                            { requestKey, result ->
-                                AddCardBSD().show(childFragmentManager, "")
-                            })
-                        dialog.show(childFragmentManager, "")
+                    ItemPaynetCatg(
+                            PaynetCategory(
+                                    paymentTypeEnum = EPaymentType.CARD_TRANSFER,
+                                    imageResource = R.drawable.ic_payment_card,
+                                    titleRu = getString(R.string.transfer_to_card)
+                            )
+                    ) {
+                        if (!viewModel.cardsResp.value.isNullOrEmpty()) {
+                            TransferToCardBSD().show(childFragmentManager, "")
+                        } else {
+                            val dialog = DialogPleaseAddCard()
+                            childFragmentManager.setFragmentResultListener(
+                                    KEY_ADD_CARD,
+                                    viewLifecycleOwner,
+                                    { requestKey, result ->
+                                        AddCardBSD().show(childFragmentManager, "")
+                                    })
+                            dialog.show(childFragmentManager, "")
+                        }
                     }
-                }
             )
             it.forEach { paynetCategory ->
                 paynetCatgAdapter.add(ItemPaynetCatg(paynetCategory) { paynetCatg ->
@@ -141,11 +141,11 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                     } else {
                         val dialog = DialogPleaseAddCard()
                         childFragmentManager.setFragmentResultListener(
-                            KEY_ADD_CARD,
-                            viewLifecycleOwner,
-                            { requestKey, result ->
-                                AddCardBSD().show(childFragmentManager, "")
-                            })
+                                KEY_ADD_CARD,
+                                viewLifecycleOwner,
+                                { requestKey, result ->
+                                    AddCardBSD().show(childFragmentManager, "")
+                                })
                         dialog.show(childFragmentManager, "")
                     }
                 })
@@ -160,25 +160,25 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 }
                 is ResultSuccess -> {
                     val storyUsers =
-                        ArrayList(resp.value.groupBy { it.partnerId }.values.map { stories ->
-                            StoryUser(
-                                stories[0].partnerTitle!!,
-                                stories[0].partnerIconImage!!,
-                                ArrayList(stories)
-                            )
-                        })
+                            ArrayList(resp.value.groupBy { it.partnerId }.values.map { stories ->
+                                StoryUser(
+                                        stories[0].partnerTitle!!,
+                                        stories[0].partnerIconImage!!,
+                                        ArrayList(stories)
+                                )
+                            })
                     storyUsers.forEachIndexed { index, storyUser ->
                         val storiesToShow = arrayListOf<StoryUser>()
                         for (i in index until storyUsers.size) {
                             storiesToShow.add(storyUsers[i])
                         }
                         newsAdapter.add(
-                            ItemStory(storyUser) {
-                                startActivity(
-                                    Intent(requireActivity(), StoryActivity::class.java).apply {
-                                        putParcelableArrayListExtra(EXTRA_STORIES, storiesToShow)
-                                    })
-                            })
+                                ItemStory(storyUser) {
+                                    startActivity(
+                                            Intent(requireActivity(), StoryActivity::class.java).apply {
+                                                putParcelableArrayListExtra(EXTRA_STORIES, storiesToShow)
+                                            })
+                                })
                     }
                 }
             }
@@ -199,9 +199,16 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
         }
 
-
         page_two.setOnClickListener {
-            startActivity(Intent(requireActivity(), LoanActivity::class.java))
+            viewModel.supremeCard?.let { supremeCard ->
+                startActivity(
+                        Intent(requireActivity(), LoanActivity::class.java).apply {
+                            putExtra(EXTRA_CARD, supremeCard)
+                        })
+            } ?: run {
+                val dialog = DialogYouHaveNoSupremeCard()
+                dialog.show(childFragmentManager, "")
+            }
         }
         cardBranches.setOnClickListener {
             startActivity(Intent(requireActivity(), BranchesAtmsActivity::class.java))
@@ -211,23 +218,23 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         cardExpenses.setOnClickListener {
             if (!viewModel.cardsResp.value.isNullOrEmpty()) {
                 startActivity(
-                    Intent(
-                        requireActivity(),
-                        ExpensesByCategoriesActivity::class.java
-                    ).apply {
-                        putParcelableArrayListExtra(
-                            ARG_CARDS,
-                            ArrayList(viewModel.cardsResp.value!!)
-                        )
-                    })
+                        Intent(
+                                requireActivity(),
+                                ExpensesByCategoriesActivity::class.java
+                        ).apply {
+                            putParcelableArrayListExtra(
+                                    ARG_CARDS,
+                                    ArrayList(viewModel.cardsResp.value!!)
+                            )
+                        })
             } else {
                 val dialog = DialogPleaseAddCard()
                 childFragmentManager.setFragmentResultListener(
-                    KEY_ADD_CARD,
-                    viewLifecycleOwner,
-                    { requestKey, result ->
-                        AddCardBSD().show(childFragmentManager, "")
-                    })
+                        KEY_ADD_CARD,
+                        viewLifecycleOwner,
+                        { requestKey, result ->
+                            AddCardBSD().show(childFragmentManager, "")
+                        })
                 dialog.show(childFragmentManager, "")
             }
         }
@@ -235,23 +242,23 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         cardPayments.setOnClickListener {
             if (!viewModel.cardsResp.value.isNullOrEmpty()) {
                 startActivity(
-                    Intent(
-                        requireActivity(),
-                        TransactionsHistoryActivity::class.java
-                    ).apply {
-                        putParcelableArrayListExtra(
-                            ARG_CARDS,
-                            ArrayList(viewModel.cardsResp.value!!)
-                        )
-                    })
+                        Intent(
+                                requireActivity(),
+                                TransactionsHistoryActivity::class.java
+                        ).apply {
+                            putParcelableArrayListExtra(
+                                    ARG_CARDS,
+                                    ArrayList(viewModel.cardsResp.value!!)
+                            )
+                        })
             } else {
                 val dialog = DialogPleaseAddCard()
                 childFragmentManager.setFragmentResultListener(
-                    KEY_ADD_CARD,
-                    viewLifecycleOwner,
-                    { requestKey, result ->
-                        AddCardBSD().show(childFragmentManager, "")
-                    })
+                        KEY_ADD_CARD,
+                        viewLifecycleOwner,
+                        { requestKey, result ->
+                            AddCardBSD().show(childFragmentManager, "")
+                        })
                 dialog.show(childFragmentManager, "")
             }
         }
@@ -261,9 +268,9 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
             viewModel.supremeCard?.let { supremeCard ->
                 startActivity(
-                    Intent(requireActivity(), LoanActivity::class.java).apply {
-                        putExtra(EXTRA_CARD, supremeCard)
-                    })
+                        Intent(requireActivity(), LoanActivity::class.java).apply {
+                            putExtra(EXTRA_CARD, supremeCard)
+                        })
             } ?: run {
                 val dialog = DialogYouHaveNoSupremeCard()
 //                childFragmentManager.setFragmentResultListener(
@@ -329,7 +336,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         view.tvCardName.text = cardDTO.card_title
         cardDTO.setBackgroundInto(view.cardBg, view.tvCardType)
         view.tvBalance.text =
-            "${DecimalFormat("#,###").format(cardDTO.balance!!.dropLast(2).toInt())} UZS"
+                "${DecimalFormat("#,###").format(cardDTO.balance!!.dropLast(2).toInt())} UZS"
         view.icPlus.setOnClickListener {
             val dialog = FillCardBSD()
             dialog.arguments = Bundle().apply {
