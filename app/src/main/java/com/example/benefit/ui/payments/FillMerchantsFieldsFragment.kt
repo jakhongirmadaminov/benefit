@@ -32,6 +32,7 @@ import javax.inject.Inject
  */
 
 const val SUMMA_SERVICE_FIELD = "summa"
+const val AMOUNT_SERVICE_FIELD = "amount"
 
 class FillMerchantsFieldsFragment @Inject constructor() :
     BaseFragment(R.layout.fragment_fill_merchant_fields) {
@@ -80,7 +81,7 @@ class FillMerchantsFieldsFragment @Inject constructor() :
         viewModel.fields.clear()
 
         service.service_fields?.forEachIndexed { index, serviceField ->
-            if (serviceField.name == SUMMA_SERVICE_FIELD) return
+            if (serviceField.name == SUMMA_SERVICE_FIELD || serviceField.name == AMOUNT_SERVICE_FIELD ) return
             viewModel.fields.add(serviceField)
             serviceField.fieldValues is List<*>
             when (serviceField.fieldType) {
