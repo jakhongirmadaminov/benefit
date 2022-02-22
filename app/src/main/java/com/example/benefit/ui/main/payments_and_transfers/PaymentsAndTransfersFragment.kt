@@ -73,7 +73,12 @@ class PaymentsAndTransfersFragment : BaseFragment(R.layout.fragment_payments_and
         }
         if (adapter.itemCount < 8) {
             adapter.add(ItemRegularPayment(null, {}) {
-                CreateRegularPaymentBSD().show(childFragmentManager, "")
+                val dialog = CreateRegularPaymentBSD()
+                    dialog.arguments = Bundle().apply {
+
+                    }
+                    dialog.show(childFragmentManager, "")
+
             })
         }
     }

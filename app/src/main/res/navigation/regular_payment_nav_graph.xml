@@ -32,7 +32,15 @@
 
         <argument
             android:name="paymentDTO"
-            app:argType="com.example.benefit.remote.models.AutoPaymentDTO" />
+            android:defaultValue="@null"
+            app:argType="com.example.benefit.remote.models.AutoPaymentDTO"
+            app:nullable="true" />
+
+        <argument
+            android:name="merchantDTO"
+            android:defaultValue="@null"
+            app:argType="com.example.benefit.remote.models.PaynetMerchant"
+            app:nullable="true" />
 
     </fragment>
 

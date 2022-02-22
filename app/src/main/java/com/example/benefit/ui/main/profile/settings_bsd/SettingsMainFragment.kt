@@ -7,7 +7,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.ui.base.BaseFragment
-import com.example.benefit.ui.main.profile.ProfileViewModel
 import com.example.benefit.util.AppPrefs
 import com.example.benefit.util.ResultError
 import com.example.benefit.util.ResultSuccess
@@ -35,21 +34,21 @@ class SettingsMainFragment : BaseFragment(R.layout.fragment_settings_main) {
     private fun setupViews() {
         edtSurname.setText(AppPrefs.lastName)
         edtName.setText(AppPrefs.firstName)
-        lblPhoneNum.setText(AppPrefs.phoneNumber)
+        lblPhoneNum.text = AppPrefs.phoneNumber
         cardPhoto.setBackgroundResource(R.drawable.shape_oval)
         cardPhotoIcon.setBackgroundResource(R.drawable.shape_oval)
     }
 
     @ExperimentalSplittiesApi
     private fun subscribeObservers() {
-        viewModel.isLoading.observe(viewLifecycleOwner, {
+        viewModel.isLoading.observe(viewLifecycleOwner) {
             progress.isVisible = it
-        })
+        }
 
-        viewModel.uploadUserInfoResp.observe(viewLifecycleOwner, {
-            findNavController().popBackStack()
-        })
-        viewModel.userInfoResp.observe(viewLifecycleOwner, {
+        viewModel.uploadUserInfoResp.observe(
+            viewLifecycleOwner
+        ) { findNavController().popBackStack() }
+        viewModel.userInfoResp.observe(viewLifecycleOwner) {
             val result = it ?: return@observe
             when (result) {
                 is ResultError -> {
@@ -72,10 +71,10 @@ class SettingsMainFragment : BaseFragment(R.layout.fragment_settings_main) {
                     edtSurname.setText(result.value.last_name)
                 }
             }
-        })
-        viewModel.errorMessage.observe(viewLifecycleOwner, {
+        }
+        viewModel.errorMessage.observe(viewLifecycleOwner) {
             Snackbar.make(clParent, it, Snackbar.LENGTH_SHORT).show()
-        })
+        }
     }
 
     private fun attachListeners() {

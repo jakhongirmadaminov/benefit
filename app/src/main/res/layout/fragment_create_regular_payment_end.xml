@@ -40,7 +40,7 @@
                 android:id="@+id/ivBrandLogo"
                 android:layout_width="?android:actionBarSize"
                 android:layout_height="?android:actionBarSize"
-                android:src="@drawable/ic_asia_alliance_logo" />
+                tools:src="@drawable/ic_asia_alliance_logo" />
         </androidx.cardview.widget.CardView>
 
 
@@ -60,19 +60,19 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:fontFamily="sans-serif"
-            android:text="Amphora"
             android:textColor="#000000"
             android:textSize="26sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/cardBrand"
             app:layout_constraintStart_toEndOf="@id/cardBrand"
             app:layout_constraintTop_toTopOf="@id/cardBrand"
+            tools:text="Amphora"
 
             />
 
 
         <TextView
-            android:id="@+id/tvSkip"
+            android:id="@+id/tvCreateRegPayment"
             android:layout_width="wrap_content"
             android:layout_height="?android:actionBarSize"
             android:clickable="true"
@@ -117,55 +117,66 @@
             android:textSize="22dp"
             app:layout_constraintTop_toBottomOf="@id/lblDesignation" />
 
-
-        <TextView
-            android:id="@+id/lblPhoneNum"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/paymentServiceFields"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="26dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="sans-serif-light"
-            android:text="@string/phone_number"
-            android:textColor="#ab5c5c5c"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="26dp"
+            android:layout_marginTop="15dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/edtDesignation" />
 
 
-        <TextView
-            android:id="@+id/tvPhoneStart"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="26dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="26dp"
-            android:background="@drawable/shape_white_rounded_grey_stroke"
-            android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="+998"
-            android:textSize="22dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lblPhoneNum" />
+        <!--        <TextView-->
+        <!--            android:id="@+id/lblPhoneNum"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginLeft="26dp"-->
+        <!--            android:layout_marginTop="16dp"-->
+        <!--            android:fontFamily="sans-serif-light"-->
+        <!--            android:text="@string/phone_number"-->
+        <!--            android:textColor="#ab5c5c5c"-->
+        <!--            android:textSize="14sp"-->
+        <!--            android:textStyle="normal"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/edtDesignation" />-->
 
 
-        <EditText
-            android:id="@+id/edtPhoneEnd"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="26dp"
-            android:background="@drawable/shape_white_rounded_grey_stroke"
-            android:gravity="center_vertical"
-            android:hint="@string/phone_number"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textSize="22dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tvPhoneStart"
-            app:layout_constraintTop_toBottomOf="@id/lblPhoneNum" />
+        <!--        <TextView-->
+        <!--            android:id="@+id/tvPhoneStart"-->
+        <!--            android:layout_width="80dp"-->
+        <!--            android:layout_height="40dp"-->
+        <!--            android:layout_marginLeft="26dp"-->
+        <!--            android:layout_marginTop="5dp"-->
+        <!--            android:layout_marginRight="26dp"-->
+        <!--            android:background="@drawable/shape_white_rounded_grey_stroke"-->
+        <!--            android:gravity="center"-->
+        <!--            android:paddingLeft="10dp"-->
+        <!--            android:paddingRight="10dp"-->
+        <!--            android:text="+998"-->
+        <!--            android:textSize="22dp"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/lblPhoneNum" />-->
+
+
+        <!--        <EditText-->
+        <!--            android:id="@+id/edtPhoneEnd"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="40dp"-->
+        <!--            android:layout_marginLeft="5dp"-->
+        <!--            android:layout_marginTop="5dp"-->
+        <!--            android:layout_marginRight="26dp"-->
+        <!--            android:background="@drawable/shape_white_rounded_grey_stroke"-->
+        <!--            android:gravity="center_vertical"-->
+        <!--            android:hint="@string/phone_number"-->
+        <!--            android:paddingLeft="10dp"-->
+        <!--            android:paddingRight="10dp"-->
+        <!--            android:textSize="22dp"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toEndOf="@id/tvPhoneStart"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/lblPhoneNum" />-->
 
 
         <TextView
@@ -199,15 +210,16 @@
             android:padding="15dp"
             android:src="@drawable/ic_re_check"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvPhoneStart" />
+            app:layout_constraintTop_toBottomOf="@id/paymentServiceFields" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clSetup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@id/ivReCheck">
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/ivReCheck"
+            tools:visibility="visible">
 
 
             <TextView
@@ -276,6 +288,16 @@
                 app:layout_constraintTop_toBottomOf="@id/tvDate" />
 
 
+            <ProgressBar
+                android:id="@+id/progressCards"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/cardsPager"
+                app:layout_constraintEnd_toEndOf="@id/cardsPager"
+                app:layout_constraintStart_toStartOf="@id/cardsPager"
+                app:layout_constraintTop_toTopOf="@id/cardsPager" />
+
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/cardsPager"
                 android:layout_width="match_parent"
@@ -297,14 +319,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardsPager" />
 
-            <TextView
-                android:id="@+id/tvSum"
+            <EditText
+                android:id="@+id/edtSum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="26dp"
                 android:layout_marginRight="26dp"
                 android:fontFamily="sans-serif-light"
-                android:text="80 000 UZS"
+                android:hint="@string/sum"
+                android:inputType="number"
                 android:textColor="#000000"
                 android:textSize="32sp"
                 android:textStyle="normal"
@@ -323,7 +346,7 @@
                 android:textSize="14sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvSum" />
+                app:layout_constraintTop_toBottomOf="@id/edtSum" />
 
             <TextView
                 android:id="@+id/tvTotalSum"
@@ -332,15 +355,15 @@
                 android:layout_marginLeft="26dp"
                 android:layout_marginRight="26dp"
                 android:fontFamily="sans-serif-light"
-                android:text="Итого: 80 000 UZS"
                 android:textColor="#ab5c5c5c"
                 android:textSize="14sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lblCommisions" />
+                app:layout_constraintTop_toBottomOf="@id/lblCommisions"
+                tools:text="Итого: 80 000 UZS" />
 
 
-            <LinearLayout
+            <RadioGroup
                 android:id="@+id/llExecutionRate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -348,25 +371,26 @@
                 android:orientation="vertical"
                 app:layout_constraintTop_toBottomOf="@id/tvTotalSum">
 
-                <CheckBox
+                <RadioButton
                     android:id="@+id/checkOnce"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:background="@android:color/transparent"
                     android:button="@null"
+                    android:checked="true"
                     android:drawableRight="@drawable/rb_orange"
                     android:gravity="left|center_vertical"
-                    android:background="@android:color/transparent"
                     android:paddingLeft="26dp"
                     android:paddingRight="26dp"
                     android:text="@string/one_time"
                     android:textStyle="bold" />
 
 
-                <CheckBox
+                <RadioButton
                     android:id="@+id/checkOnceAWeek"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:background="@android:color/transparent"
                     android:button="@null"
                     android:drawableRight="@drawable/rb_orange"
                     android:gravity="left|center_vertical"
@@ -376,11 +400,11 @@
                     android:textStyle="bold" />
 
 
-                <CheckBox
+                <RadioButton
                     android:id="@+id/checkOnceAMonth"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:background="@android:color/transparent"
                     android:button="@null"
                     android:drawableRight="@drawable/rb_orange"
                     android:gravity="left|center_vertical"
@@ -390,12 +414,12 @@
                     android:textStyle="bold" />
 
 
-                <CheckBox
+                <RadioButton
                     android:id="@+id/checkOnceAYear"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:button="@null"
                     android:background="@android:color/transparent"
+                    android:button="@null"
                     android:drawableRight="@drawable/rb_orange"
                     android:gravity="left|center_vertical"
                     android:paddingLeft="26dp"
@@ -403,7 +427,7 @@
                     android:text="@string/once_a_year"
                     android:textStyle="bold" />
 
-            </LinearLayout>
+            </RadioGroup>
 
 
             <ImageView
@@ -444,5 +468,14 @@
                 app:layout_constraintTop_toTopOf="@id/ivNotification" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <include
+            layout="@layout/transaction_loading"
+            tools:visibility="gone" />
+
+        <include
+            layout="@layout/transaction_success"
+            tools:visibility="gone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

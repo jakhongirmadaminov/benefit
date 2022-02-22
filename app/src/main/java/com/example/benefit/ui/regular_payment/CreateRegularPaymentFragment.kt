@@ -21,7 +21,7 @@ import javax.inject.Inject
  */
 
 class CreateRegularPaymentFragment @Inject constructor() :
-        BaseFragment(R.layout.fragment_create_regular_payment) {
+    BaseFragment(R.layout.fragment_create_regular_payment) {
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
     private val viewModel: CreateRegularPaymentViewModel by viewModels()
@@ -48,7 +48,7 @@ class CreateRegularPaymentFragment @Inject constructor() :
                     val filtered = paynetCategories.filter {
                         it.titleRu?.lowercase()?.contains(text.toString().lowercase()) == true ||
                                 it.titleUz?.lowercase()
-                                        ?.contains(text.toString().lowercase()) == true
+                                    ?.contains(text.toString().lowercase()) == true
                     }
                     if (filtered.isNotEmpty()) {
                         adapter.clear()
@@ -63,7 +63,7 @@ class CreateRegularPaymentFragment @Inject constructor() :
     private fun setupViews() {
         clParent.layoutParams = clParent.layoutParams.apply {
             height = SizeUtils.getScreenHeight(requireActivity()) - SizeUtils.getActionBarHeight(
-                    requireActivity()
+                requireActivity()
             )
         }
 
@@ -77,7 +77,9 @@ class CreateRegularPaymentFragment @Inject constructor() :
         data.forEach {
             adapter.add(ItemPaynet(it) {
                 findNavController().navigate(
-                        CreateRegularPaymentFragmentDirections.actionCreateRegularPaymentFragmentToCreateRegPaymentEndFragment(it)
+                    CreateRegularPaymentFragmentDirections.actionCreateRegularPaymentFragmentToSelectMerchantFragment2(
+                        it,
+                    )
                 )
             })
         }

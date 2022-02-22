@@ -33,8 +33,10 @@
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_login.xml" value="0.16" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_payments.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_payments_and_transfers.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/dialog_cashback.xml" value="0.2875905797101449" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_create_game.xml" value="0.25" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_create_regular_payment.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_create_regular_payment_end.xml" value="0.22010869565217392" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_fill_card_ask_friends.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_fill_merchant_fields.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_find_friends.xml" value="0.36666666666666664" />
@@ -50,6 +52,7 @@
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_profile.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_reg_card_activation.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_regular_payment.xml" value="0.22" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_story_display.xml" value="0.2875905797101449" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_transaction_share_payment.xml" value="0.1308876811594203" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_contact_square.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_contact_with_cb.xml" value="0.14010416666666667" />
@@ -68,6 +71,7 @@
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_paynet_service_field_spinner.xml" value="0.19895833333333332" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_paynet_service_field_string.xml" value="0.25" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/transaction_loading.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/transaction_success.xml" value="0.16574074074074074" />
         <entry key="app/src/main/res/drawable/selector_rounded_top_corners.xml" value="0.22962962962962963" />
         <entry key="app/src/main/res/drawable/shape_top_rounded.xml" value="0.24259259259259258" />
         <entry key="app/src/main/res/drawable/shape_white_rounded_calculator_bg.xml" value="0.35555555555555557" />

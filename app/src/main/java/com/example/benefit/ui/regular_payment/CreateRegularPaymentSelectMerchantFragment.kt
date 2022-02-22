@@ -1,4 +1,4 @@
-package com.example.benefit.ui.payments
+package com.example.benefit.ui.regular_payment
 
 import android.os.Bundle
 import android.view.View
@@ -10,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.benefit.R
 import com.example.benefit.remote.models.PaynetMerchant
 import com.example.benefit.ui.base.BaseFragment
+import com.example.benefit.ui.payments.SelectMerchantsViewModel
 import com.example.benefit.ui.viewgroups.ItemPaynetMerchant
 import com.example.benefit.util.AppPrefs
 import com.example.benefit.util.Constants.UZ
@@ -26,10 +27,10 @@ import javax.inject.Inject
  * Created by jahon on 03-Sep-20
  */
 
-class SelectMerchantsFragment @Inject constructor() :
+class CreateRegularPaymentSelectMerchantFragment @Inject constructor() :
     BaseFragment(R.layout.fragment_payment_merchants) {
 
-    val args by navArgs<SelectMerchantsFragmentArgs>()
+    val args by navArgs<CreateRegularPaymentSelectMerchantFragmentArgs>()
     private val adapter = GroupAdapter<GroupieViewHolder>()
     private val viewModel: SelectMerchantsViewModel by viewModels()
 
@@ -89,9 +90,9 @@ class SelectMerchantsFragment @Inject constructor() :
         data.forEach { paynetCategory ->
             adapter.add(ItemPaynetMerchant(paynetCategory) {
                 findNavController().navigate(
-                    SelectMerchantsFragmentDirections.actionSelectMerchantFragmentToFillMerchantFields(
-                        it
-                    )
+                    CreateRegularPaymentSelectMerchantFragmentDirections.actionSelectMerchantFragmentToCreateRegPaymentEndFragment(
+                        null, it,
+                        )
                 )
             })
         }

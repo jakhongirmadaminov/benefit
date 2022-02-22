@@ -17,7 +17,11 @@ data class PaynetCategory(
     @SerializedName("updated_at") val updated_at: String? = null,
     val imageResource: Int? = null,
     val paymentTypeEnum: EPaymentType? = null
-) : Parcelable
+) : Parcelable {
+    fun getLocalizedTitle(): String {
+        return if (AppPrefs.language == UZ) titleUz!! else titleRu!!
+    }
+}
 
 @Parcelize
 data class PaynetMerchant(

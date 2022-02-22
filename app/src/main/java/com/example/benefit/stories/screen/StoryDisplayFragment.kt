@@ -270,6 +270,10 @@ class StoryDisplayFragment : Fragment(),
 
         Glide.with(this).load(storyUser.profilePicUrl).circleCrop().into(storyDisplayProfilePicture)
         storyDisplayNick.text = storyUser.username
+
+        ivClose.setOnClickListener {
+            requireActivity().finish()
+        }
     }
 
     private fun showStoryOverlay() {

@@ -63,13 +63,13 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private fun subscribeObservers() {
 
-        viewModel.isLoadingPaynetCategories.observe(viewLifecycleOwner, {
+        viewModel.isLoadingPaynetCategories.observe(viewLifecycleOwner) {
             when (it ?: return@observe) {
                 true -> paynetCatgAdapter.add(ItemLoading())
                 else -> paynetCatgAdapter.clear()
             }
-        })
-        viewModel.signInRequired.observe(viewLifecycleOwner, {
+        }
+        viewModel.signInRequired.observe(viewLifecycleOwner) {
             when (it ?: return@observe) {
                 true -> {
                     AppPrefs.edit {
@@ -81,14 +81,14 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 else -> {
                 }
             }
-        })
-        viewModel.isLoadingStories.observe(viewLifecycleOwner, {
+        }
+        viewModel.isLoadingStories.observe(viewLifecycleOwner) {
             when (it ?: return@observe) {
                 true -> newsAdapter.add(ItemLoading())
                 else -> newsAdapter.clear()
             }
-        })
-        viewModel.isLoadingCards.observe(viewLifecycleOwner, {
+        }
+        viewModel.isLoadingCards.observe(viewLifecycleOwner) {
             when (it ?: return@observe) {
                 true -> {
                     cardsProgress.visibility = View.VISIBLE
@@ -99,36 +99,36 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                     cardsPager.visibility = View.VISIBLE
                 }
             }
-        })
+        }
 
-        viewModel.errorMessage.observe(viewLifecycleOwner, {
+        viewModel.errorMessage.observe(viewLifecycleOwner) {
 //            lblYoullReceiveCode.text = it ?: return@observe
 //            lblYoullReceiveCode.setTextColor(Color.RED)
-        })
+        }
 
-        viewModel.paynetCatgResp.observe(viewLifecycleOwner, {
+        viewModel.paynetCatgResp.observe(viewLifecycleOwner) {
             it ?: return@observe
             paynetCatgAdapter.add(
-                    ItemPaynetCatg(
-                            PaynetCategory(
-                                    paymentTypeEnum = EPaymentType.CARD_TRANSFER,
-                                    imageResource = R.drawable.ic_payment_card,
-                                    titleRu = getString(R.string.transfer_to_card)
-                            )
-                    ) {
-                        if (!viewModel.cardsResp.value.isNullOrEmpty()) {
-                            TransferToCardBSD().show(childFragmentManager, "")
-                        } else {
-                            val dialog = DialogPleaseAddCard()
-                            childFragmentManager.setFragmentResultListener(
-                                    KEY_ADD_CARD,
-                                    viewLifecycleOwner,
-                                    { requestKey, result ->
-                                        AddCardBSD().show(childFragmentManager, "")
-                                    })
-                            dialog.show(childFragmentManager, "")
+                ItemPaynetCatg(
+                    PaynetCategory(
+                        paymentTypeEnum = EPaymentType.CARD_TRANSFER,
+                        imageResource = R.drawable.ic_payment_card,
+                        titleRu = getString(R.string.transfer_to_card)
+                    )
+                ) {
+                    if (!viewModel.cardsResp.value.isNullOrEmpty()) {
+                        TransferToCardBSD().show(childFragmentManager, "")
+                    } else {
+                        val dialog = DialogPleaseAddCard()
+                        childFragmentManager.setFragmentResultListener(
+                            KEY_ADD_CARD,
+                            viewLifecycleOwner
+                        ) { requestKey, result ->
+                            AddCardBSD().show(childFragmentManager, "")
                         }
+                        dialog.show(childFragmentManager, "")
                     }
+                }
             )
             it.forEach { paynetCategory ->
                 paynetCatgAdapter.add(ItemPaynetCatg(paynetCategory) { paynetCatg ->
@@ -141,18 +141,18 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                     } else {
                         val dialog = DialogPleaseAddCard()
                         childFragmentManager.setFragmentResultListener(
-                                KEY_ADD_CARD,
-                                viewLifecycleOwner,
-                                { requestKey, result ->
-                                    AddCardBSD().show(childFragmentManager, "")
-                                })
+                            KEY_ADD_CARD,
+                            viewLifecycleOwner
+                        ) { requestKey, result ->
+                            AddCardBSD().show(childFragmentManager, "")
+                        }
                         dialog.show(childFragmentManager, "")
                     }
                 })
             }
-        })
+        }
 
-        viewModel.storiesResp.observe(viewLifecycleOwner, {
+        viewModel.storiesResp.observe(viewLifecycleOwner) {
             val resp = it ?: return@observe
 
             when (resp) {
@@ -160,51 +160,57 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 }
                 is ResultSuccess -> {
                     val storyUsers =
-                            ArrayList(resp.value.groupBy { it.partnerId }.values.map { stories ->
-                                StoryUser(
-                                        stories[0].partnerTitle!!,
-                                        stories[0].partnerIconImage!!,
-                                        ArrayList(stories)
-                                )
-                            })
+                        ArrayList(resp.value.groupBy { it.partnerId }.values.map { stories ->
+                            StoryUser(
+                                stories[0].partnerTitle!!,
+                                stories[0].partnerIconImage!!,
+                                ArrayList(stories)
+                            )
+                        })
                     storyUsers.forEachIndexed { index, storyUser ->
                         val storiesToShow = arrayListOf<StoryUser>()
                         for (i in index until storyUsers.size) {
                             storiesToShow.add(storyUsers[i])
                         }
                         newsAdapter.add(
-                                ItemStory(storyUser) {
-                                    startActivity(
-                                            Intent(requireActivity(), StoryActivity::class.java).apply {
-                                                putParcelableArrayListExtra(EXTRA_STORIES, storiesToShow)
-                                            })
-                                })
+                            ItemStory(storyUser) {
+                                startActivity(
+                                    Intent(requireActivity(), StoryActivity::class.java).apply {
+                                        putParcelableArrayListExtra(EXTRA_STORIES, storiesToShow)
+                                    })
+                            })
                     }
                 }
             }
 
-        })
-        viewModel.cardsResp.observe(viewLifecycleOwner, {
+        }
+        viewModel.cardsResp.observe(viewLifecycleOwner) {
             it ?: return@observe
             setupCardsPager(it)
-        })
+        }
 
     }
 
     private fun attachListeners() {
 
         page_one.setOnClickListener {
-            val dialog = DialogCashBack()
-            dialog.show(childFragmentManager, "")
 
+            val dialog = DialogCashBack()
+            childFragmentManager.setFragmentResultListener(
+                KEY_GO_TO_LIST,
+                viewLifecycleOwner
+            ) { requestKey, result ->
+                PaymentsBSD().show(childFragmentManager, "")
+            }
+            dialog.show(childFragmentManager, "")
         }
 
         page_two.setOnClickListener {
             viewModel.supremeCard?.let { supremeCard ->
                 startActivity(
-                        Intent(requireActivity(), LoanActivity::class.java).apply {
-                            putExtra(EXTRA_CARD, supremeCard)
-                        })
+                    Intent(requireActivity(), LoanActivity::class.java).apply {
+                        putExtra(EXTRA_CARD, supremeCard)
+                    })
             } ?: run {
                 val dialog = DialogYouHaveNoSupremeCard()
                 dialog.show(childFragmentManager, "")
@@ -218,23 +224,23 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         cardExpenses.setOnClickListener {
             if (!viewModel.cardsResp.value.isNullOrEmpty()) {
                 startActivity(
-                        Intent(
-                                requireActivity(),
-                                ExpensesByCategoriesActivity::class.java
-                        ).apply {
-                            putParcelableArrayListExtra(
-                                    ARG_CARDS,
-                                    ArrayList(viewModel.cardsResp.value!!)
-                            )
-                        })
+                    Intent(
+                        requireActivity(),
+                        ExpensesByCategoriesActivity::class.java
+                    ).apply {
+                        putParcelableArrayListExtra(
+                            ARG_CARDS,
+                            ArrayList(viewModel.cardsResp.value!!)
+                        )
+                    })
             } else {
                 val dialog = DialogPleaseAddCard()
                 childFragmentManager.setFragmentResultListener(
-                        KEY_ADD_CARD,
-                        viewLifecycleOwner,
-                        { requestKey, result ->
-                            AddCardBSD().show(childFragmentManager, "")
-                        })
+                    KEY_ADD_CARD,
+                    viewLifecycleOwner
+                ) { requestKey, result ->
+                    AddCardBSD().show(childFragmentManager, "")
+                }
                 dialog.show(childFragmentManager, "")
             }
         }
@@ -242,23 +248,23 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         cardPayments.setOnClickListener {
             if (!viewModel.cardsResp.value.isNullOrEmpty()) {
                 startActivity(
-                        Intent(
-                                requireActivity(),
-                                TransactionsHistoryActivity::class.java
-                        ).apply {
-                            putParcelableArrayListExtra(
-                                    ARG_CARDS,
-                                    ArrayList(viewModel.cardsResp.value!!)
-                            )
-                        })
+                    Intent(
+                        requireActivity(),
+                        TransactionsHistoryActivity::class.java
+                    ).apply {
+                        putParcelableArrayListExtra(
+                            ARG_CARDS,
+                            ArrayList(viewModel.cardsResp.value!!)
+                        )
+                    })
             } else {
                 val dialog = DialogPleaseAddCard()
                 childFragmentManager.setFragmentResultListener(
-                        KEY_ADD_CARD,
-                        viewLifecycleOwner,
-                        { requestKey, result ->
-                            AddCardBSD().show(childFragmentManager, "")
-                        })
+                    KEY_ADD_CARD,
+                    viewLifecycleOwner
+                ) { requestKey, result ->
+                    AddCardBSD().show(childFragmentManager, "")
+                }
                 dialog.show(childFragmentManager, "")
             }
         }
@@ -268,9 +274,9 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
             viewModel.supremeCard?.let { supremeCard ->
                 startActivity(
-                        Intent(requireActivity(), LoanActivity::class.java).apply {
-                            putExtra(EXTRA_CARD, supremeCard)
-                        })
+                    Intent(requireActivity(), LoanActivity::class.java).apply {
+                        putExtra(EXTRA_CARD, supremeCard)
+                    })
             } ?: run {
                 val dialog = DialogYouHaveNoSupremeCard()
 //                childFragmentManager.setFragmentResultListener(
@@ -336,7 +342,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         view.tvCardName.text = cardDTO.card_title
         cardDTO.setBackgroundInto(view.cardBg, view.tvCardType)
         view.tvBalance.text =
-                "${DecimalFormat("#,###").format(cardDTO.balance!!.dropLast(2).toInt())} UZS"
+            "${DecimalFormat("#,###").format(cardDTO.balance!!.dropLast(2).toInt())} UZS"
         view.icPlus.setOnClickListener {
             val dialog = FillCardBSD()
             dialog.arguments = Bundle().apply {

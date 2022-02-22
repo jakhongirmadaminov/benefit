@@ -3,8 +3,10 @@ package com.example.benefit.ui.regular_payment
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.benefit.R
@@ -13,10 +15,15 @@ import com.example.benefit.remote.models.BalanceInfo
 import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.home.HomeFragment
+import com.example.benefit.ui.payments.AMOUNT_SERVICE_FIELD
+import com.example.benefit.ui.payments.SUMMA_SERVICE_FIELD
+import com.example.benefit.util.RequestState
 import com.example.benefit.util.SizeUtils
 import com.example.benefit.util.loadImageUrl
 import kotlinx.android.synthetic.main.fragment_regular_payment.*
 import kotlinx.android.synthetic.main.item_card_small.view.*
+import kotlinx.android.synthetic.main.transaction_loading.*
+import kotlinx.android.synthetic.main.transaction_success.*
 import java.text.DecimalFormat
 import javax.inject.Inject
 
@@ -26,7 +33,7 @@ import javax.inject.Inject
  */
 
 class RegularPaymentFragment @Inject constructor() :
-        BaseFragment(R.layout.fragment_regular_payment) {
+    BaseFragment(R.layout.fragment_regular_payment) {
 
     val args: RegularPaymentFragmentArgs by navArgs()
     private val viewModel: RegularPaymentViewModel by viewModels()
@@ -34,7 +41,8 @@ class RegularPaymentFragment @Inject constructor() :
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        regularPaymentDTO = requireArguments().getParcelable(RegularPaymentBSD.ARG_REGULAR_PAYMENT_DTO)!!
+        regularPaymentDTO =
+            requireArguments().getParcelable(RegularPaymentBSD.ARG_REGULAR_PAYMENT_DTO)!!
 
     }
 
@@ -50,12 +58,20 @@ class RegularPaymentFragment @Inject constructor() :
     private fun attachListeners() {
         ivEdit.setOnClickListener {
             findNavController().navigate(
-                    RegularPaymentFragmentDirections.actionRegularPaymentFragmentToCreateRegPaymentEndFragment(
-                            regularPaymentDTO
-                    )
+                RegularPaymentFragmentDirections.actionRegularPaymentFragmentToCreateRegPaymentEndFragment(
+                    regularPaymentDTO
+                )
             )
         }
 
+        tvMakePayment.setOnClickListener {
+            viewModel.bftAndMyCardsPair.value?.second?.getProperly()?.let {
+                viewModel.makePayment(args.autoPaymentDTO, it[cardsPager.currentItem].id!!)
+            }
+        }
+        btnClose.setOnClickListener {
+            ((parentFragment as NavHostFragment).requireParentFragment() as RegularPaymentBSD).dismiss()
+        }
     }
 
     private fun setupViews() {
@@ -64,6 +80,9 @@ class RegularPaymentFragment @Inject constructor() :
         tvServiceFullName.text = args.autoPaymentDTO.providerInfo!!.title
         tvCategoryName.text = args.autoPaymentDTO.providerInfo!!.getLocalizedCatgName()
         ivTargetService.loadImageUrl(args.autoPaymentDTO.providerInfo!!.image!!)
+
+        edtSum.setText(args.autoPaymentDTO.amount.toString())
+
     }
 
     private fun subscribeObservers() {
@@ -75,6 +94,29 @@ class RegularPaymentFragment @Inject constructor() :
 
         viewModel.isGettingsCards.observe(viewLifecycleOwner) {
             progressCards.isVisible = it
+        }
+
+        viewModel.transactionState.observe(viewLifecycleOwner) { transactionState ->
+            when (transactionState) {
+                is RequestState.Error -> {
+                    clTopUpLoading.isVisible = false
+                    Toast.makeText(context, transactionState.message, Toast.LENGTH_SHORT).show()
+                }
+                RequestState.Loading -> {
+                    clTopUpLoading.isVisible = true
+                }
+                is RequestState.Success -> {
+                    clTopUpLoading.isVisible = false
+                    clTopUpSuccess.isVisible = true
+                    lblTopUpSuccess.text = getString(R.string.payment_succeeded)
+                    tvTransferAmount.text =
+                        getString(
+                            R.string.transfer_amount,
+                            transactionState.value.response!!.filter { it.key == SUMMA_SERVICE_FIELD || it.key == AMOUNT_SERVICE_FIELD }[0].value
+                        )
+                    tvCommissions.text = getString(R.string.commissions_amount, "0")
+                }
+            }
         }
 
     }
@@ -95,7 +137,7 @@ class RegularPaymentFragment @Inject constructor() :
             val cardView = layoutInflater.inflate(R.layout.item_card_small, null)
             cardView.cardName.text = it.card_title
             cardView.tvAmount.text =
-                    DecimalFormat("#,###").format(it.balance?.dropLast(2)?.toInt()) + " UZS"
+                DecimalFormat("#,###").format(it.balance?.dropLast(2)?.toInt()) + " UZS"
             cardView.tvCardEndNum.text = "*" + it.panHidden!!.substring(it.panHidden!!.length - 4)
             it.setMiniBackgroundInto(cardView.ivCardBg)
             cardsPager.addView(cardView)
@@ -106,10 +148,10 @@ class RegularPaymentFragment @Inject constructor() :
         cardsPager.offscreenPageLimit = 10
         cardsPager.clipToPadding = false
         cardsPager.setPadding(
-                SizeUtils.dpToPx(requireContext(), 26).toInt(),
-                0,
-                SizeUtils.dpToPx(requireContext(), 26).toInt(),
-                0
+            SizeUtils.dpToPx(requireContext(), 26).toInt(),
+            0,
+            SizeUtils.dpToPx(requireContext(), 26).toInt(),
+            0
         )
         cardsPager.pageMargin = SizeUtils.dpToPx(requireContext(), 15).toInt()
 

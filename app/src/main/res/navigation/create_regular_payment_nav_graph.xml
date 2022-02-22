@@ -27,12 +27,24 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_createRegularPaymentFragment_to_createRegPaymentEndFragment"
-            app:destination="@id/createRegPaymentEndFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            android:id="@+id/action_createRegularPaymentFragment_to_selectMerchantFragment2"
+            app:destination="@id/selectMerchantFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/selectMerchantFragment"
+        android:name="com.example.benefit.ui.regular_payment.CreateRegularPaymentSelectMerchantFragment"
+        android:label=""
+        tools:layout="@layout/fragment_payment_merchants">
+
+        <argument
+            android:name="paynetCategory"
+            app:argType="com.example.benefit.remote.models.PaynetCategory" />
+        <action
+            android:id="@+id/action_selectMerchantFragment_to_createRegPaymentEndFragment"
+            app:destination="@id/createRegPaymentEndFragment" />
+
+
     </fragment>
 
     <fragment
@@ -45,11 +57,20 @@
         android:id="@+id/createRegPaymentEndFragment"
         android:name="com.example.benefit.ui.regular_payment.CreateRegularPaymentEnd"
         android:label=""
-        tools:layout="@layout/fragment_create_regular_payment_end" >
+        tools:layout="@layout/fragment_create_regular_payment_end">
 
         <argument
-            android:name="paynetCategory"
-            app:argType="com.example.benefit.remote.models.PaynetCategory" />
+            android:name="paymentDTO"
+            android:defaultValue="@null"
+            app:argType="com.example.benefit.remote.models.AutoPaymentDTO"
+            app:nullable="true" />
+
+
+        <argument
+            android:name="merchantDTO"
+            android:defaultValue="@null"
+            app:argType="com.example.benefit.remote.models.PaynetMerchant"
+            app:nullable="true" />
 
     </fragment>
 

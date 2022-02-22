@@ -12,6 +12,9 @@ import kotlinx.android.synthetic.main.dialog_cashback.*
 /**
  * Created by jahon on 06-Sep-20
  */
+
+const val KEY_GO_TO_LIST = "GO_TO_LIST"
+
 class DialogCashBack : DialogFragment() {
 
 
@@ -37,7 +40,8 @@ class DialogCashBack : DialogFragment() {
             dismiss()
         }
         btnGoToList.setOnClickListener {
-
+            childFragmentManager.setFragmentResult(KEY_GO_TO_LIST, Bundle())
+            dismiss()
         }
     }
 }

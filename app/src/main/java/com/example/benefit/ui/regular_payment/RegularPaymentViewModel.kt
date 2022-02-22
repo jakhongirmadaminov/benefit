@@ -8,13 +8,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.benefit.remote.AuthApiService
-import com.example.benefit.remote.models.BalanceInfo
-import com.example.benefit.remote.models.BftInfoDTO
-import com.example.benefit.remote.models.MyCardsResp
-import com.example.benefit.util.ResultError
-import com.example.benefit.util.ResultSuccess
-import com.example.benefit.util.ResultWrapper
-import com.example.benefit.util.getFormattedResponse
+import com.example.benefit.remote.models.*
+import com.example.benefit.util.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -23,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegularPaymentViewModel @Inject constructor(private val apiAuth: AuthApiService) :
-        ViewModel() {
+    ViewModel() {
 
     val bftAndMyCardsPair = MutableLiveData<Pair<BalanceInfo, MyCardsResp>>()
     val error = MutableLiveData<String>()
@@ -44,17 +39,33 @@ class RegularPaymentViewModel @Inject constructor(private val apiAuth: AuthApiSe
     }
 
     private fun processResponses(
-            cardsResp: ResultWrapper<MyCardsResp>,
-            bftResp: ResultWrapper<BftInfoDTO>
+        cardsResp: ResultWrapper<MyCardsResp>,
+        bftResp: ResultWrapper<BftInfoDTO>
     ) {
         isGettingsCards.postValue(false)
         if (cardsResp is ResultSuccess && bftResp is ResultSuccess) {
             bftAndMyCardsPair.postValue(Pair(bftResp.value.balanceInfo!!, cardsResp.value))
         } else {
             error.postValue(
-                    (cardsResp as? ResultError)?.message ?: (bftResp as? ResultError)?.message
+                (cardsResp as? ResultError)?.message ?: (bftResp as? ResultError)?.message
             )
         }
     }
+
+    val transactionState = MutableLiveData<RequestState<PaynetPaymentResponse>>()
+    fun makePayment(autoPaymentDTO: AutoPaymentDTO, cardId: Long) {
+        viewModelScope.launch(Dispatchers.IO) {
+            makeRequest(transactionState) {
+                apiAuth.paynetPayCard(
+                    autoPaymentDTO.serviceInfo!!.ownId!!,
+                    autoPaymentDTO.providerInfo!!.own_id!!,
+                    autoPaymentDTO.fields!!,
+                    autoPaymentDTO.amount!!,
+                    cardId,
+                )
+            }
+        }
+    }
+
 
 }
