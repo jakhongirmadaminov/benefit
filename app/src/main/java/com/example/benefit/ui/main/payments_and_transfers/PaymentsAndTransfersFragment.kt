@@ -104,10 +104,10 @@ class PaymentsAndTransfersFragment : BaseFragment(R.layout.fragment_payments_and
                 val dialog = DialogPleaseAddCard()
                 childFragmentManager.setFragmentResultListener(
                         KEY_ADD_CARD,
-                        viewLifecycleOwner,
-                        { requestKey, result ->
-                            AddCardBSD().show(childFragmentManager, "")
-                        })
+                        viewLifecycleOwner
+                ) { requestKey, result ->
+                    AddCardBSD().show(childFragmentManager, "")
+                }
                 dialog.show(childFragmentManager, "")
             } else {
                 val dialog = FillCardBSD()

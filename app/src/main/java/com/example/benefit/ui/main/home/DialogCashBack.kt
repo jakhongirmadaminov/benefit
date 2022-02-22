@@ -40,7 +40,7 @@ class DialogCashBack : DialogFragment() {
             dismiss()
         }
         btnGoToList.setOnClickListener {
-            childFragmentManager.setFragmentResult(KEY_GO_TO_LIST, Bundle())
+            parentFragmentManager.setFragmentResult(KEY_GO_TO_LIST, Bundle())
             dismiss()
         }
     }

@@ -17,7 +17,7 @@ class DialogPleaseAddCard : DialogFragment(R.layout.dialog_please_add_card) {
         super.onViewCreated(view, savedInstanceState)
 
         btnOk.setOnClickListener {
-            childFragmentManager.setFragmentResult(KEY_ADD_CARD, Bundle())
+            parentFragmentManager.setFragmentResult(KEY_ADD_CARD, Bundle())
             dismiss()
         }
 //
