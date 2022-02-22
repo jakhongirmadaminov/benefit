@@ -15,7 +15,6 @@ import com.example.benefit.remote.models.BalanceInfo
 import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.home.HomeFragment
-import com.example.benefit.ui.payments.AMOUNT_SERVICE_FIELD
 import com.example.benefit.ui.payments.SUMMA_SERVICE_FIELD
 import com.example.benefit.util.RequestState
 import com.example.benefit.util.SizeUtils
@@ -112,7 +111,7 @@ class RegularPaymentFragment @Inject constructor() :
                     tvTransferAmount.text =
                         getString(
                             R.string.transfer_amount,
-                            transactionState.value.response!!.filter { it.key == SUMMA_SERVICE_FIELD || it.key == AMOUNT_SERVICE_FIELD }[0].value
+                            transactionState.value.response!!.filter { it.key == SUMMA_SERVICE_FIELD }[0].value
                         )
                     tvCommissions.text = getString(R.string.commissions_amount, "0")
                 }
