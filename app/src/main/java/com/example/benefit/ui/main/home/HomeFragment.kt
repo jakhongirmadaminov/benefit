@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.viewpager.widget.PagerAdapter
 import com.example.benefit.R
@@ -18,6 +19,9 @@ import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.branches_atms.BranchesAtmsActivity
 import com.example.benefit.ui.expenses_by_categories.ExpensesByCategoriesActivity
 import com.example.benefit.ui.loans.LoanActivity
+import com.example.benefit.ui.loans.LoansViewModel
+import com.example.benefit.ui.loans.loans_chart.EXTRA_LOAN_INFO
+import com.example.benefit.ui.loans.loans_chart.LoansChartActivity
 import com.example.benefit.ui.main.fill_card.FillCardBSD
 import com.example.benefit.ui.main.fill_card.FillCardFragment.Companion.ARG_CARD
 import com.example.benefit.ui.main.fill_card.FillCardFragment.Companion.ARG_CARDS
@@ -49,6 +53,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     private val paynetCatgAdapter = GroupAdapter<GroupieViewHolder>()
     private val newsAdapter = GroupAdapter<GroupieViewHolder>()
     val viewModel: HomeViewModel by viewModels()
+    val loansViewModel: LoansViewModel by viewModels()
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -59,9 +64,34 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         viewModel.getPaynetCategories()
         viewModel.getStories()
         viewModel.getMyCards()
+
+        viewModel.supremeCard?.let { supremeCard ->
+            loansViewModel.getLoanIdByPan(supremeCard.panOpen!!)
+        } ?: run {
+//            page_two.isVisible = false
+
+        }
+
     }
 
     private fun subscribeObservers() {
+
+        loansViewModel.respLoanInfo.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is ResultError -> {
+//                    page_two.isVisible = false
+                }
+                is ResultSuccess -> {
+//                    page_two.isVisible = true
+                    page_two.setOnClickListener {
+                        Intent(requireActivity(), LoansChartActivity::class.java).apply {
+                            putExtra(EXTRA_LOAN_INFO, response.value.responseBody)
+                            putExtra(EXTRA_CARD, viewModel.supremeCard)
+                        }
+                    }
+                }
+            }
+        }
 
         viewModel.isLoadingPaynetCategories.observe(viewLifecycleOwner) {
             when (it ?: return@observe) {
@@ -205,17 +235,18 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             dialog.show(childFragmentManager, "")
         }
 
-        page_two.setOnClickListener {
-            viewModel.supremeCard?.let { supremeCard ->
-                startActivity(
-                    Intent(requireActivity(), LoanActivity::class.java).apply {
-                        putExtra(EXTRA_CARD, supremeCard)
-                    })
-            } ?: run {
-                val dialog = DialogYouHaveNoSupremeCard()
-                dialog.show(childFragmentManager, "")
-            }
-        }
+//        page_two.setOnClickListener {
+//            viewModel.supremeCard?.let { supremeCard ->
+//                startActivity(
+//                    Intent(requireActivity(), LoansChartActivity::class.java).apply {
+//                        putExtra(EXTRA_LOAN_INFO, supremeCard)
+//                        putExtra(EXTRA_CARD, supremeCard)
+//                    })
+//            } ?: run {
+//                val dialog = DialogYouHaveNoSupremeCard()
+//                dialog.show(childFragmentManager, "")
+//            }
+//        }
         cardBranches.setOnClickListener {
             startActivity(Intent(requireActivity(), BranchesAtmsActivity::class.java))
         }

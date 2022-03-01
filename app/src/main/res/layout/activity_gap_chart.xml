@@ -164,6 +164,10 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvPlayers"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

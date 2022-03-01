@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.BitmapImageViewTarget
 import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
+import com.example.benefit.remote.models.ServiceField
 import com.example.benefit.ui.viewgroups.ItemLoading
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
@@ -24,6 +25,10 @@ import java.io.ByteArrayOutputStream
 /**
  * Created by jahon on 22-May-20
  */
+
+fun List<ServiceField>.allFilled(): Boolean {
+    return this.find { it.userSelection.isNullOrBlank() } == null
+}
 
 fun GroupAdapter<GroupieViewHolder>.setLoadingSpinner() {
     clear()
@@ -47,26 +52,26 @@ fun Any.getString(context: Context): String = when (this) {
 
 
 fun Context.showMessageDialog(
-        title: Any,
-        message: Any,
-        negativBtnText: Any? = "",
-        negativBtnAction: (() -> Unit)? = null,
-        positiveBtnText: Any? = "",
-        positiveBtnAction: (() -> Unit)? = null
+    title: Any,
+    message: Any,
+    negativBtnText: Any? = "",
+    negativBtnAction: (() -> Unit)? = null,
+    positiveBtnText: Any? = "",
+    positiveBtnAction: (() -> Unit)? = null
 ) {
     val builder = AlertDialog.Builder(this)
-            .setTitle(title.getString(this))
-            .setMessage(message.getString(this))
+        .setTitle(title.getString(this))
+        .setMessage(message.getString(this))
 
     if (negativBtnText != null)
         builder.setNegativeButton(
-                negativBtnText.getString(this)
+            negativBtnText.getString(this)
         ) { p0, p1 ->
             negativBtnAction?.invoke()
         }
     if (positiveBtnText != null)
         builder.setPositiveButton(
-                positiveBtnText.getString(this)
+            positiveBtnText.getString(this)
         ) { p0, p1 ->
             positiveBtnAction?.invoke()
         }
@@ -82,7 +87,7 @@ fun ImageView.loadImageUrl(url: String) {
     circularProgressDrawable.start()
 
     Glide.with(this.context).load(url)/*.placeholder(circularProgressDrawable)*/
-            .apply(RequestOptions().centerInside()).into(this)
+        .apply(RequestOptions().centerInside()).into(this)
 }
 
 fun ImageView.loadImageUrlAndShrink(url: String) {
@@ -92,8 +97,8 @@ fun ImageView.loadImageUrlAndShrink(url: String) {
     circularProgressDrawable.start()
 
     Glide.with(this.context).load(url)/*.placeholder(circularProgressDrawable)*/
-            .override(300, SIZE_ORIGINAL)
-            .apply(RequestOptions().centerInside()).into(this)
+        .override(300, SIZE_ORIGINAL)
+        .apply(RequestOptions().centerInside()).into(this)
 }
 
 fun ImageView.loadCircleImageUrl(url: String?) {
@@ -198,32 +203,32 @@ fun String.isNumeric(): Boolean {
  * @param borderColor - The border color
  */
 fun <T> ImageView.loadCircularImage(
-        model: T,
-        borderSize: Float = 0F,
-        borderColor: Int = Color.WHITE
+    model: T,
+    borderSize: Float = 0F,
+    borderColor: Int = Color.WHITE
 ) {
     Glide.with(context)
-            .asBitmap()
-            .load(model)
-            .apply(RequestOptions.circleCropTransform())
-            .into(object : BitmapImageViewTarget(this) {
-                override fun setResource(resource: Bitmap?) {
-                    setImageDrawable(
-                            resource?.run {
-                                RoundedBitmapDrawableFactory.create(
-                                        resources,
-                                        if (borderSize > 0) {
-                                            createBitmapWithBorder(borderSize, borderColor)
-                                        } else {
-                                            this
-                                        }
-                                ).apply {
-                                    isCircular = true
-                                }
+        .asBitmap()
+        .load(model)
+        .apply(RequestOptions.circleCropTransform())
+        .into(object : BitmapImageViewTarget(this) {
+            override fun setResource(resource: Bitmap?) {
+                setImageDrawable(
+                    resource?.run {
+                        RoundedBitmapDrawableFactory.create(
+                            resources,
+                            if (borderSize > 0) {
+                                createBitmapWithBorder(borderSize, borderColor)
+                            } else {
+                                this
                             }
-                    )
-                }
-            })
+                        ).apply {
+                            isCircular = true
+                        }
+                    }
+                )
+            }
+        })
 }
 
 /**
@@ -239,9 +244,9 @@ fun Bitmap.createBitmapWithBorder(borderSize: Float, borderColor: Int): Bitmap {
     val halfHeight = height / 2
     val circleRadius = Math.min(halfWidth, halfHeight).toFloat()
     val newBitmap = Bitmap.createBitmap(
-            width + borderOffset,
-            height + borderOffset,
-            Bitmap.Config.ARGB_8888
+        width + borderOffset,
+        height + borderOffset,
+        Bitmap.Config.ARGB_8888
     )
 
     // Center coordinates of the image

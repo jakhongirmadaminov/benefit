@@ -136,7 +136,7 @@ class FindFriendsFragment @Inject constructor() :
         ivBack.setOnClickListener {
             findNavController().popBackStack()
         }
-        ivLocation.setOnClickListener { }
+//        ivLocation.setOnClickListener { }
 
         tvSelect.setOnClickListener {
             val contacts = BenefitFriends()

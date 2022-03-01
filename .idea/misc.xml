@@ -19,7 +19,7 @@
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_order_card.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_partner_home.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_partners_map.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_partners_map.xml" value="0.25" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_select_card_type.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_selected_partners_category.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_story.xml" value="0.36666666666666664" />
@@ -34,13 +34,16 @@
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_payments.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_payments_and_transfers.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/dialog_cashback.xml" value="0.2875905797101449" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_code.xml" value="0.29483695652173914" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_create_game.xml" value="0.25" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_create_regular_payment.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_create_regular_payment_end.xml" value="0.22010869565217392" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_create_regular_payment_end.xml" value="0.1" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_device_code.xml" value="0.29483695652173914" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_fill_card_ask_friends.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_fill_merchant_fields.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_find_friends.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_find_friends.xml" value="0.25" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_home.xml" value="0.12681159420289856" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_partners_category.xml" value="0.2" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_payment_merchants.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_payment_transfer.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_payments.xml" value="0.36666666666666664" />
@@ -52,6 +55,7 @@
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_profile.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_reg_card_activation.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_regular_payment.xml" value="0.22" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_settings_code.xml" value="0.29483695652173914" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_story_display.xml" value="0.2875905797101449" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_transaction_share_payment.xml" value="0.1308876811594203" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_contact_square.xml" value="0.36666666666666664" />
@@ -59,7 +63,8 @@
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_currency.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_field_selection_value.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_gap_game.xml" value="0.25" />
-        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_gap_player.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_gap_player.xml" value="0.25" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_line_chart.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_merchants.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_news_and_promos.xml" value="0.11911231884057971" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_payment.xml" value="0.36666666666666664" />

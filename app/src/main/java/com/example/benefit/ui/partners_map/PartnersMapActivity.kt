@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.View
 import android.widget.RelativeLayout
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import com.example.benefit.R
 import com.example.benefit.remote.models.Partner
 import com.example.benefit.remote.models.PartnerCategoryDTO
@@ -24,7 +23,6 @@ import com.wunderlist.slidinglayer.SlidingLayer
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_partners_map.*
-import java.util.*
 
 
 class PartnersMapActivity : BaseActivity(), OnMapReadyCallback {
@@ -33,9 +31,11 @@ class PartnersMapActivity : BaseActivity(), OnMapReadyCallback {
     private lateinit var gMap: GoogleMap
     private val adapter = GroupAdapter<GroupieViewHolder>()
     lateinit var categories: ArrayList<PartnerCategoryDTO>
+    var selectedCategoryId: Int? = null
 
     companion object {
         const val EXTRA_CATEGORIES = "CATEGORIES"
+        const val EXTRA_CATEGORY_ID = "CATEGORY_ID"
     }
 
     val viewModel: PartnersMapViewModel by viewModels()
@@ -51,12 +51,12 @@ class PartnersMapActivity : BaseActivity(), OnMapReadyCallback {
         setupViews()
         attachListeners()
         subscribeObservers()
-        viewModel.getPartnersForCategory(categories[0].id)
+        viewModel.getPartnersForCategory(selectedCategoryId ?: categories[0].id)
     }
 
     private fun subscribeObservers() {
 
-        viewModel.isLoading.observe(this, {
+        viewModel.isLoading.observe(this) {
             val isLoading = it ?: return@observe
             if (isLoading) {
                 slidingLayer.closeLayer(true)
@@ -64,21 +64,21 @@ class PartnersMapActivity : BaseActivity(), OnMapReadyCallback {
             } else {
                 progress.visibility = View.GONE
             }
-        })
+        }
 
 
-        viewModel.partnersResp.observe(this, {
+        viewModel.partnersResp.observe(this) {
             val result = it ?: return@observe
             loadResult(result)
-        })
-        viewModel.errorMessage.observe(this, {
+        }
+        viewModel.errorMessage.observe(this) {
             if (it == null) {
                 tvMessage.visibility = View.GONE
             } else {
                 tvMessage.visibility = View.VISIBLE
                 tvMessage.text = it
             }
-        })
+        }
 
 
     }

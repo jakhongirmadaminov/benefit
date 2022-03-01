@@ -12,6 +12,7 @@ import com.example.benefit.remote.models.Partner
 import com.example.benefit.remote.models.PartnerCategoryDTO
 import com.example.benefit.ui.base.BaseActivity
 import com.example.benefit.ui.partner_home.PartnerHomeActivity
+import com.example.benefit.ui.partners_map.PartnersMapActivity
 import com.example.benefit.ui.viewgroups.ItemPartnerCashback
 import com.example.benefit.util.ResultError
 import com.example.benefit.util.ResultSuccess
@@ -60,6 +61,15 @@ class SelectedPartnersCategoryActivity : BaseActivity() {
                 }
                 is ResultSuccess -> {
                     loadData(response.value)
+                    icMap.setOnClickListener {
+                        startActivity(Intent(this, PartnersMapActivity::class.java).apply {
+                            putParcelableArrayListExtra(
+                                PartnersMapActivity.EXTRA_CATEGORIES,
+                                ArrayList(response.value)
+                            )
+                            putExtra(PartnersMapActivity.EXTRA_CATEGORY_ID, categoryDTO.id)
+                        })
+                    }
                 }
             }.exhaustive
 
@@ -110,19 +120,12 @@ class SelectedPartnersCategoryActivity : BaseActivity() {
         }
 
         rbCashBack.setOnCheckedChangeListener { buttonView, isChecked ->
-
             if (isChecked) {
 
             }
-
         }
 
 
-        icMap.setOnClickListener {
-//            start<PartnersMapActivity> {
-//                putParcelableArrayListExtra(                    PartnersMapActivity.EXTRA_CATEGORIES,                 )
-//                )
-        }
     }
 }
 

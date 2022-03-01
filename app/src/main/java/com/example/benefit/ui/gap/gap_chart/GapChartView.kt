@@ -230,10 +230,9 @@ class GapChartView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
     }
 
     private fun drawAvatarsBitmaps(position: Int, canvas: Canvas, bitmap: Bitmap) {
-//        for (i in 0 until playerCount) {
         val startAngle = 360 / playerCount * position.toFloat() - 90
-        val new_x = radiusBgArc * cos(startAngle * Math.PI / 180).toFloat()
-        val new_y = radiusBgArc * sin(startAngle * Math.PI / 180).toFloat()
+        val new_x = (radiusBgArc + 14) * cos(startAngle * Math.PI / 180).toFloat()
+        val new_y = (radiusBgArc + 14) * sin(startAngle * Math.PI / 180).toFloat()
 
         canvas.drawBitmap(
             bitmap,
@@ -249,26 +248,7 @@ class GapChartView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
                 color = Color.WHITE
             }
         )
-//        }
-
     }
-
-//    private fun drawPlayerAvatarsBg(canvas: Canvas) {
-//        for (i in 0 until playerCount) {
-//            val startAngle = 360 / playerCount * i.toFloat() - 90
-//            val new_x = radiusBgArc * cos(startAngle * Math.PI / 180).toFloat()
-//            val new_y = radiusBgArc * sin(startAngle * Math.PI / 180).toFloat()
-//            canvas.drawCircle(
-//                baseRect.centerX() + new_x - pieMargin / 2,
-//                baseRect.centerY() + new_y,
-//                progressArcRadius - radiusBgArc,
-//                Paint().apply {
-//                    isAntiAlias = true
-//                    color = Color.WHITE
-//                }
-//            )
-//        }
-//    }
 
     private fun drawCentreCircleStroke(canvas: Canvas) {
         val circleRadius = width * .15f

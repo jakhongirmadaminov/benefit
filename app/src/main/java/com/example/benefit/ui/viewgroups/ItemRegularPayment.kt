@@ -9,15 +9,17 @@ import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_payment_square.view.*
 
 class ItemRegularPayment(
-        val obj: AutoPaymentDTO? = null,
-        val onClick: ((obj: AutoPaymentDTO) -> Unit)? = null,
-        val onClickAdd: (() -> Unit)? = null
+    val obj: AutoPaymentDTO? = null,
+    val onClick: ((obj: AutoPaymentDTO) -> Unit)? = null,
+    val onClickAdd: (() -> Unit)? = null
 ) : Item() {
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         if (obj != null) {
             viewHolder.itemView.ivImage.visibility = View.VISIBLE
-            viewHolder.itemView.ivImage.loadImageUrl(obj.providerInfo!!.image!!)
+            obj.providerInfo?.image?.let {
+                viewHolder.itemView.ivImage.loadImageUrl(it)
+            }
             viewHolder.itemView.tvPaymentName.text = obj.title
             viewHolder.itemView.ivImage.setOnClickListener {
                 onClick!!(obj)
