@@ -49,6 +49,7 @@ class MainActivity : BaseActivity() {
             finish()
         } else if (shouldEnterPin()) {
             startActivity(Intent(this, PinActivity::class.java))
+            startTimerForPin()
         }
 
     }
@@ -57,6 +58,7 @@ class MainActivity : BaseActivity() {
         super.onRestart()
         if (shouldEnterPin()) {
             startActivity(Intent(this, PinActivity::class.java))
+            startTimerForPin()
         }
     }
 

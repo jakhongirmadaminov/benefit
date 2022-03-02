@@ -58,6 +58,7 @@
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.main.PinActivity"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity

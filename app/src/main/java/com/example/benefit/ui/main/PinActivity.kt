@@ -7,6 +7,7 @@ import androidx.core.widget.doOnTextChanged
 import com.example.benefit.R
 import com.example.benefit.ui.auth.AuthActivity
 import com.example.benefit.util.AppPrefs
+import com.example.benefit.util.loadImageUrl
 import kotlinx.android.synthetic.main.activity_pin.*
 
 class PinActivity : AppCompatActivity() {
@@ -16,8 +17,18 @@ class PinActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pin)
 
+        setupViews()
         attachListeners()
 
+    }
+
+    private fun setupViews() {
+        AppPrefs.avatar?.let {
+            ivProfile.loadImageUrl(it)
+        } ?: run {
+            ivProfile.setImageResource(R.drawable.ic_avatar_sample)
+        }
+        tvFullName.text = AppPrefs.firstName + " " + AppPrefs.lastName
     }
 
     private fun attachListeners() {
@@ -77,7 +88,7 @@ class PinActivity : AppCompatActivity() {
         }
 
         pinView.doOnTextChanged { text, start, before, count ->
-            text?.let { pinInput ->
+            pinView.getText()?.toString()?.let { pinInput ->
                 if (pinInput.length == 4) {
                     if (AppPrefs.pin == pinInput) {
                         finish()

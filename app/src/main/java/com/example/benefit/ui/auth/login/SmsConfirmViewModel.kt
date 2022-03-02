@@ -34,7 +34,7 @@ class SmsConfirmViewModel @Inject constructor(private val userRemote: UserRemote
                     is ResultSuccess -> {
                         AppPrefs.edit {
                             userToken = response.value.user_token
-                            avatar = response.value.avatar
+                            avatar =  response.value.avatar
                             firstName = response.value.first_name!!
                             lastName = response.value.last_name!!
                             userId = response.value.user_id!!
