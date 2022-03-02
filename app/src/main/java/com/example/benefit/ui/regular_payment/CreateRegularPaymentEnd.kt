@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
@@ -11,10 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.benefit.R
-import com.example.benefit.remote.models.BalanceInfo
-import com.example.benefit.remote.models.CardDTO
-import com.example.benefit.remote.models.FieldType
-import com.example.benefit.remote.models.PaynetService
+import com.example.benefit.remote.models.*
 import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.home.HomeFragment
 import com.example.benefit.util.*
@@ -115,12 +113,12 @@ class CreateRegularPaymentEnd @Inject constructor() :
 
             viewModel.saveAutoPayment(
                 type = if (checkOnce.isChecked) 1 else if (checkOnceAWeek.isChecked) 2 else if (checkOnceAMonth.isChecked) 3 else 4,
-                near_date = startDate!! + startTime!!,
+                near_date = (startDate!! + startTime!!) / 1000,
                 title = edtDesignation.text.toString(),
-                card_id = if (cardsPager.currentItem == 0) null else viewModel.bftAndMyCardsPair.value!!.second.getProperly()[cardsPager.currentItem - 1].id,
-                provider_id = args.paymentDTO?.providerInfo?.own_id
-                    ?: args.merchantDTO!!.category_id!!,
-                service_id = args.paymentDTO?.serviceInfo?.ownId ?: args.merchantDTO!!.own_id!!,
+                card_id = if (cardsPager.currentItem == 0) 0 else viewModel.bftAndMyCardsPair.value!!.second.getProperly()[cardsPager.currentItem - 1].id,
+                provider_id = args.paymentDTO?.providerInfo?.own_id ?: args.merchantDTO!!.own_id!!,
+                service_id = args.paymentDTO?.serviceInfo?.ownId
+                    ?: (viewModel.paynetServices.value as RequestState.Success).value.getPaymentService()!!.own_id!!,
                 from_cashback = cardsPager.currentItem == 0,
                 is_notify = switchNotification.isChecked,
                 amount = edtSum.text.toString().toInt(),
@@ -136,6 +134,14 @@ class CreateRegularPaymentEnd @Inject constructor() :
         args.paymentDTO?.let { autoPaymentDto ->
             autoPaymentDto.providerInfo?.image?.let { ivBrandLogo.loadImageUrl(it) }
             autoPaymentDto.providerInfo?.titleShort?.let { tvBrandName.text = it }
+            edtDesignation.setText(autoPaymentDto.title)
+
+            tvDate.text = autoPaymentDto.nearDate
+            startDate = DateTime.parse(
+                autoPaymentDto.nearDate,
+                DateTimeFormat.forPattern("dd.MM.yyyy")
+            ).millis
+            edtSum.setText(autoPaymentDto.amount.toString())
         }
 
         args.merchantDTO?.let { merchant ->
@@ -216,6 +222,7 @@ class CreateRegularPaymentEnd @Inject constructor() :
                                         setFieldValue(service, index, it.toString())
                                     }
                                 }
+                                findAndFillWithRegex(edtInput, serviceField)
                             }
                     paymentServiceFields.addView(view)
                 }
@@ -231,6 +238,7 @@ class CreateRegularPaymentEnd @Inject constructor() :
                                         setFieldValue(service, index, it.toString())
                                     }
                                 }
+                                findAndFillWithRegex(edtInput, serviceField)
                             }
                     paymentServiceFields.addView(view)
                 }
@@ -246,6 +254,7 @@ class CreateRegularPaymentEnd @Inject constructor() :
                                         setFieldValue(service, index, it.toString())
                                     }
                                 }
+                                findAndFillWithRegex(edtPhone, serviceField)
                             }
                     paymentServiceFields.addView(view)
                 }
@@ -301,6 +310,8 @@ class CreateRegularPaymentEnd @Inject constructor() :
                                         setFieldValue(service, index, it.toString())
                                     }
                                 }
+
+                                findAndFillWithRegex(edtInput, serviceField)
                             }
                     paymentServiceFields.addView(view)
                 }
@@ -310,8 +321,16 @@ class CreateRegularPaymentEnd @Inject constructor() :
 
         }
 
-//        putFieldCheckCallbacks(service)
+    }
 
+    private fun findAndFillWithRegex(edtInput: EditText, serviceField: ServiceField) {
+        args.paymentDTO?.let { autoPayment ->
+            Regex("(?<=\"${serviceField.name}\":\").+(?=\",)").find(
+                autoPayment.fields!!
+            )?.value?.let {
+                edtInput.setText(it)
+            }
+        }
     }
 
     private fun setFieldValue(service: PaynetService, index: Int, text: String) {
@@ -359,10 +378,7 @@ class CreateRegularPaymentEnd @Inject constructor() :
                 }
                 is RequestState.Success -> {
                     clTopUpLoading.isVisible = false
-                    populateFields(response.value.filter {
-                        it.titleRu!!.lowercase().contains("оплата")
-                    }[0])
-
+                    populateFields(response.value.getPaymentService()!!)
                 }
             }
         }
