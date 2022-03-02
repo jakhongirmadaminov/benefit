@@ -63,26 +63,26 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
 
-        <action
-            android:id="@+id/action_regCardActivationFragment_to_cardConfirm"
-            app:destination="@id/cardConfirm"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right">
+<!--        <action-->
+<!--            android:id="@+id/action_regCardActivationFragment_to_cardConfirm"-->
+<!--            app:destination="@id/cardConfirm"-->
+<!--            app:enterAnim="@anim/slide_in_right"-->
+<!--            app:exitAnim="@anim/slide_out_left"-->
+<!--            app:popEnterAnim="@anim/slide_in_left"-->
+<!--            app:popExitAnim="@anim/slide_out_right">-->
 
-            <argument
-                android:name="cardId"
-                android:defaultValue="0L"
-                app:argType="long" />
+<!--            <argument-->
+<!--                android:name="cardId"-->
+<!--                android:defaultValue="0L"-->
+<!--                app:argType="long" />-->
 
 
-            <argument
-                android:name="phone"
-                app:argType="string"
-                app:nullable="true" />
+<!--            <argument-->
+<!--                android:name="phone"-->
+<!--                app:argType="string"-->
+<!--                app:nullable="true" />-->
 
-        </action>
+<!--        </action>-->
 
 
     </fragment>

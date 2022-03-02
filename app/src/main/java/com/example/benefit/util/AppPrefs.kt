@@ -14,40 +14,40 @@ import splitties.preferences.edit
 object AppPrefs : Preferences("myPrefs") {
 
     @ExperimentalSplittiesApi
-    var token by stringOrNullPref(null)
+    var token by stringOrNullPref("token", null)
 
     @ExperimentalSplittiesApi
-    var pin by stringOrNullPref(null)
+    var pin by stringOrNullPref("pin", null)
 
     @ExperimentalSplittiesApi
-    var userToken by stringOrNullPref(null)
+    var userToken by stringOrNullPref("userToken", null)
 
     @ExperimentalSplittiesApi
-    var userId by intPref(0)
+    var userId by intPref("userId", 0)
 
     @ExperimentalSplittiesApi
-    var language by stringPref("uz")
+    var language by stringPref("language", "uz")
 
     @ExperimentalSplittiesApi
-    var phoneNumber by stringOrNullPref(null)
+    var phoneNumber by stringOrNullPref("phoneNumber", null)
 
     @ExperimentalSplittiesApi
-    var avatar by stringOrNullPref(null)
+    var avatar by stringOrNullPref("avatar", null)
 
     @ExperimentalSplittiesApi
-    var dobMillis by longPref(0)
+    var dobMillis by longPref("dobMillis", 0)
 
     @ExperimentalSplittiesApi
-    var firstName by stringPref("")
+    var firstName by stringPref("firstName", "")
 
     @ExperimentalSplittiesApi
-    var lastName by stringPref("")
+    var lastName by stringPref("lastName", "")
 
     @ExperimentalSplittiesApi
-    var gender by stringPref(EGender.MALE.name)
+    var gender by stringPref("gender", EGender.MALE.name)
 
     @ExperimentalSplittiesApi
-    var email by stringOrNullPref(null)
+    var email by stringOrNullPref("email", null)
 
 
     fun isLoggedIn(): Boolean {

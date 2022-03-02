@@ -22,8 +22,8 @@ class HomeViewModel @Inject constructor(
     private val apiAuth: AuthApiService
 ) : ViewModel() {
 
-    val paynetCatgResp = MutableLiveData<List<PaynetCategory>>()
-    val errorMessage = MutableLiveData<String>()
+    val paynetCatgResp = MutableLiveData<List<PaynetCategory>?>()
+    val errorMessage = MutableLiveData<String?>()
     val isLoadingPaynetCategories = MutableLiveData<Boolean>()
 
     fun getPaynetCategories() {

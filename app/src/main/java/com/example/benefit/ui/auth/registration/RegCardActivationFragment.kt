@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.MainActivity
@@ -38,18 +37,18 @@ class RegCardActivationFragment : BaseFragment(R.layout.fragment_reg_card_activa
 
     private fun subscribeObservers() {
 
-        viewModel.addNewCardResp.observe(viewLifecycleOwner, {
+        viewModel.addNewCardResp.observe(viewLifecycleOwner) {
             val result = it ?: return@observe
-            val action =
-                RegCardActivationFragmentDirections.actionRegCardActivationFragmentToCardConfirm(
-                    result.cardId,
-                    null
-                )
-            findNavController().navigate(action)
-        })
+//            val action =
+//                RegCardActivationFragmentDirections.actionRegCardActivationFragmentToCardConfirm(
+//                    result.cardId,
+//                    null
+//                )
+//            findNavController().navigate(action)
+        }
 
 
-        viewModel.isLoading.observe(viewLifecycleOwner, {
+        viewModel.isLoading.observe(viewLifecycleOwner) {
             when (it ?: return@observe) {
                 true -> {
                     tvInfo.visibility = View.GONE
@@ -61,13 +60,14 @@ class RegCardActivationFragment : BaseFragment(R.layout.fragment_reg_card_activa
                     progress.visibility = View.GONE
                 }
             }
-        })
+        }
 
-        viewModel.errorMessage.observe(viewLifecycleOwner,
-            {
-                tvInfo.visibility = View.VISIBLE
-                tvInfo.text = it ?: return@observe
-            })
+        viewModel.errorMessage.observe(
+            viewLifecycleOwner
+        ) {
+            tvInfo.visibility = View.VISIBLE
+            tvInfo.text = it ?: return@observe
+        }
 
 
     }

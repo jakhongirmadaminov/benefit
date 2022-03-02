@@ -26,15 +26,15 @@ class RegistrationViewModel @Inject constructor(private val userRemote: UserRemo
 
     var phone = ""
 
-    var signUpResp = SingleLiveEvent<RegPhoneResp>()
-    var setPasswordResp = SingleLiveEvent<RespUserInfo>()
-    var uploadAvatarResp = SingleLiveEvent<RespUserInfo>()
-    var uploadUserInfoResp = SingleLiveEvent<RespUserInfo>()
+    var signUpResp = SingleLiveEvent<RegPhoneResp?>()
+    var setPasswordResp = SingleLiveEvent<RespUserInfo?>()
+    var uploadAvatarResp = SingleLiveEvent<RespUserInfo?>()
+    var uploadUserInfoResp = SingleLiveEvent<RespUserInfo?>()
     var addNewCardResp = SingleLiveEvent<RespAddCard>()
     val isLoading = SingleLiveEvent<Boolean>()
-    val errorMessage = SingleLiveEvent<String>()
-    val resendCodeResp = SingleLiveEvent<String>()
-    val checkCodeResp = SingleLiveEvent<RespUserInfo>()
+    val errorMessage = SingleLiveEvent<String?>()
+    val resendCodeResp = SingleLiveEvent<String?>()
+    val checkCodeResp = SingleLiveEvent<RespUserInfo?>()
 
 
     fun signup(phoneNumber: String, referal: String? = null) {
