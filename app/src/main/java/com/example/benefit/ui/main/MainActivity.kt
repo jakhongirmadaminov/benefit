@@ -47,6 +47,8 @@ class MainActivity : BaseActivity() {
         if (AppPrefs.token.isNullOrBlank()) {
             start<AuthActivity>()
             finish()
+        } else if (shouldEnterPin()) {
+            startActivity(Intent(this, PinActivity::class.java))
         }
 
     }

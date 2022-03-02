@@ -76,7 +76,6 @@ class PinActivity : AppCompatActivity() {
             this.finish()
         }
 
-
         pinView.doOnTextChanged { text, start, before, count ->
             text?.let { pinInput ->
                 if (pinInput.length == 4) {

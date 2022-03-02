@@ -57,6 +57,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
+            android:name=".ui.main.PinActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar" />
+        <activity
             android:name=".stories.screen.StoryActivity"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
