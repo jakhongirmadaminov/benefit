@@ -8,6 +8,7 @@ package com.example.benefit.util
 import com.example.benefit.ui.auth.registration.EGender
 import splitties.experimental.ExperimentalSplittiesApi
 import splitties.preferences.Preferences
+import splitties.preferences.edit
 
 @ExperimentalSplittiesApi
 object AppPrefs : Preferences("myPrefs") {
@@ -48,4 +49,15 @@ object AppPrefs : Preferences("myPrefs") {
     @ExperimentalSplittiesApi
     var email by stringOrNullPref(null)
 
+
+    fun isLoggedIn(): Boolean {
+        return !userToken.isNullOrBlank()
+    }
+
+    fun logOut() {
+        edit {
+            userToken = null
+            token = null
+        }
+    }
 }

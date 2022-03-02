@@ -247,5 +247,6 @@
     <string name="payment_creating">Создаётся платёж...</string>
     <string name="payment_created">Платёж успешно создан</string>
     <string name="friends_list">Список друзей</string>
+    <string name="forgot_pin">Забыли код</string>
 
 </resources>

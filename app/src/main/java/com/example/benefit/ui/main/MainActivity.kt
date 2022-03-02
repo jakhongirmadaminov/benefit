@@ -1,7 +1,8 @@
 package com.example.benefit.ui.main
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.benefit.R
@@ -10,16 +11,20 @@ import com.example.benefit.ui.base.BaseActivity
 import com.example.benefit.util.AppPrefs
 import com.example.benefit.util.ContextUtils.setLocale
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import splitties.activities.start
 import splitties.experimental.ExperimentalSplittiesApi
 
 @ExperimentalSplittiesApi
 class MainActivity : BaseActivity() {
 
-    companion object{
+    companion object {
         const val IS_GOING_DEPOSIT = "IS_GOING_DEPOSIT"
     }
+
+    private var pinTimerJob: Job? = null
 
     var isGoingDeposit = false
 
@@ -46,5 +51,26 @@ class MainActivity : BaseActivity() {
 
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        if (shouldEnterPin()) {
+            startActivity(Intent(this, PinActivity::class.java))
+        }
+    }
 
+    private fun shouldEnterPin(): Boolean {
+        return AppPrefs.isLoggedIn() && pinTimerJob == null || pinTimerJob?.isCompleted == true
+    }
+
+    override fun onStop() {
+        super.onStop()
+        startTimerForPin()
+    }
+
+    private fun startTimerForPin() {
+        pinTimerJob?.cancel()
+        pinTimerJob = lifecycleScope.launch {
+            delay(20_000)
+        }
+    }
 }

@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/ivLogout"
+        android:layout_width="?android:actionBarSize"
+        android:layout_height="?android:actionBarSize"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:selectableItemBackground"
+        android:padding="15dp"
+        android:src="@drawable/ic_logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvFullName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="?android:actionBarSize"
+        android:gravity="center"
+        android:textColor="@color/primary_text"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/ivLogout"
+        tools:text="Jakhongir Madaminov" />
+
+    <ImageView
+        android:id="@+id/ivProfile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvFullName" />
+
+    <com.poovam.pinedittextfield.CirclePinField
+        android:id="@+id/pinView"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:inputType="text"
+        android:maxLength="4"
+        android:textSelectHandle="@drawable/text_handle"
+        android:textSize="16sp"
+        app:circleRadius="5dp"
+        app:distanceInBetween="10dp"
+        app:fieldBgColor="@color/bg_grey"
+        app:fillerColor="@color/colorAccent"
+        app:fillerRadius="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivProfile"
+        app:noOfFields="4"
+        tools:text="23" />
+
+    <GridLayout
+        android:id="@+id/keyPadGrid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="?android:actionBarSize"
+        android:columnCount="3"
+        android:rowCount="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pinView"
+        app:layout_constraintVertical_weight="1">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvOne"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/shape_oval_grey_darker"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/primary_text"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/ivLogout" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvTwo"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/shape_oval_grey_darker"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:gravity="center"
+                android:text="2"
+                android:textColor="@color/primary_text"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/ivLogout" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvThree"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/shape_oval_grey_darker"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:gravity="center"
+                android:text="3"
+                android:textColor="@color/primary_text"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/ivLogout" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvFour"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/shape_oval_grey_darker"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:gravity="center"
+                android:text="4"
+                android:textColor="@color/primary_text"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/ivLogout" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvFive"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/shape_oval_grey_darker"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:gravity="center"
+                android:text="5"
+                android:textColor="@color/primary_text"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/ivLogout" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvSix"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/shape_oval_grey_darker"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:gravity="center"
+                android:text="6"
+                android:textColor="@color/primary_text"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/ivLogout" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvSeven"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/shape_oval_grey_darker"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:gravity="center"
+                android:text="7"
+                android:textColor="@color/primary_text"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/ivLogout" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvEight"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/shape_oval_grey_darker"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:gravity="center"
+                android:text="8"
+                android:textColor="@color/primary_text"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/ivLogout" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvNine"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/shape_oval_grey_darker"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:gravity="center"
+                android:text="9"
+                android:textColor="@color/primary_text"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/ivLogout" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvForgotPin"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:gravity="center"
+                android:text="@string/forgot_pin"
+                android:textColor="@color/textlightGrey"
+                android:textSize="14dp"
+                app:layout_constraintTop_toBottomOf="@id/ivLogout" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvZero"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/shape_oval_grey_darker"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/primary_text"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/ivLogout" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/ivTouchId"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:clickable="true"
+                android:focusable="true"
+
+                android:foreground="?android:selectableItemBackground"
+                android:gravity="center"
+                android:padding="15dp"
+                android:src="@drawable/ic_touch_id"
+                android:text="1"
+                android:textColor="@color/primary_text"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/ivLogout" />
+
+        </LinearLayout>
+
+    </GridLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

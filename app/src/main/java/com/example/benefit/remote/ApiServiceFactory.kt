@@ -1,17 +1,18 @@
 package com.example.benefit.remote
 
+import android.util.Log
 import com.example.benefit.App
 import com.example.benefit.util.Constants
-import com.google.gson.FieldNamingPolicy
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import java.util.concurrent.TimeUnit
+import com.google.gson.*
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import timber.log.Timber
+import java.util.concurrent.TimeUnit
+
 
 /**
  * Provide "make" methods to create instances of [ApiService]
@@ -64,12 +65,29 @@ object ApiServiceFactory {
     }
 
     private fun makeLoggingInterceptor(isDebug: Boolean): Interceptor {
-        val logging = HttpLoggingInterceptor()
+        val logging = HttpLoggingInterceptor(CustomHttpLogging())
         logging.level = if (isDebug)
             HttpLoggingInterceptor.Level.BODY
         else
             HttpLoggingInterceptor.Level.NONE
         return logging
+    }
+
+    class CustomHttpLogging : HttpLoggingInterceptor.Logger {
+        override fun log(message: String) {
+            val logName = "OkHttp"
+            if (!message.startsWith("{")) {
+                Timber.tag(logName).d(message)
+                return
+            }
+            try {
+                val prettyPrintJson =
+                    GsonBuilder().setPrettyPrinting().create().toJson(JsonParser().parse(message))
+                Timber.tag(logName).d(prettyPrintJson)
+            } catch (m: JsonSyntaxException) {
+                Timber.tag(logName).d(message)
+            }
+        }
     }
 
 }

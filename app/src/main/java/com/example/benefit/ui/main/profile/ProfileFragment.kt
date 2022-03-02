@@ -22,8 +22,6 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.item_currency.view.*
-import kotlinx.android.synthetic.main.item_news_and_promos.*
-import splitties.preferences.edit
 
 
 class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
@@ -114,10 +112,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         }
 
         ivLogOut.setOnClickListener {
-            AppPrefs.edit {
-                token = null
-                userToken = null
-            }
+            AppPrefs.logOut()
             startActivity(Intent(requireActivity(), AuthActivity::class.java))
             requireActivity().finish()
         }
