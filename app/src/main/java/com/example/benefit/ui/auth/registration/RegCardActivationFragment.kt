@@ -136,7 +136,9 @@ class RegCardActivationFragment : BaseFragment(R.layout.fragment_reg_card_activa
         tvNext.setOnClickListener {
             if ((parentFragment is RegistrationBSD)) {
                 (parentFragment as RegistrationBSD).dismiss()
-                startActivity(Intent(requireActivity(), MainActivity::class.java))
+                startActivity(Intent(requireActivity(), MainActivity::class.java).apply {
+                    putExtra(MainActivity.JUST_LOGGED_IN, true)
+                })
             } else if ((parentFragment is AddCardBSD)) (parentFragment as AddCardBSD).dismiss()
         }
 
@@ -175,7 +177,9 @@ class RegCardActivationFragment : BaseFragment(R.layout.fragment_reg_card_activa
             if (requestCode == OrderCardActivity.REQ_ORDER_CARD) {
                 if (((parentFragment as NavHostFragment).parentFragment is RegistrationBSD)) {
                     ((parentFragment as NavHostFragment).parentFragment as RegistrationBSD).dismiss()
-                    startActivity(Intent(requireActivity(), MainActivity::class.java))
+                    startActivity(Intent(requireActivity(), MainActivity::class.java).apply {
+                        putExtra(MainActivity.JUST_LOGGED_IN, true)
+                    })
                 } else if (((parentFragment as NavHostFragment).parentFragment is AddCardBSD)) ((parentFragment as NavHostFragment).parentFragment as AddCardBSD).dismiss()
             }
         }

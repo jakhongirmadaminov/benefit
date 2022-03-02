@@ -22,11 +22,13 @@ class MainActivity : BaseActivity() {
 
     companion object {
         const val IS_GOING_DEPOSIT = "IS_GOING_DEPOSIT"
+        const val JUST_LOGGED_IN = "JUST_LOGGED_IN"
     }
 
     private var pinTimerJob: Job? = null
 
     var isGoingDeposit = false
+    var justLoggedIn = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setLocale(AppPrefs.language, this)
@@ -34,6 +36,7 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
 
         isGoingDeposit = intent.getBooleanExtra(IS_GOING_DEPOSIT, false)
+        justLoggedIn = intent.getBooleanExtra(JUST_LOGGED_IN, false)
 
         checkUserLogin()
 
@@ -63,7 +66,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun shouldEnterPin(): Boolean {
-        return AppPrefs.isLoggedIn() && pinTimerJob == null || pinTimerJob?.isCompleted == true
+        return !justLoggedIn && AppPrefs.isLoggedIn() && pinTimerJob == null || pinTimerJob?.isCompleted == true
     }
 
     override fun onStop() {
