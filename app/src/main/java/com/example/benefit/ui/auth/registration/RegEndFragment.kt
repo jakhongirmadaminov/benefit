@@ -28,7 +28,9 @@ class RegEndFragment : BaseFragment(R.layout.fragment_reg_end) {
 
     private fun attachListeners() {
         tvSkip.setOnClickListener {
-            startActivity(Intent(requireActivity(), MainActivity::class.java))
+            startActivity(Intent(requireActivity(), MainActivity::class.java).apply {
+                putExtra(MainActivity.IS_JUST_LOGGED_IN, true)
+            })
             ((parentFragment as NavHostFragment).parentFragment as RegistrationBSD).dismiss()
         }
         btnDepositCard.setOnClickListener {

@@ -8,6 +8,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.benefit.R
 import com.example.benefit.ui.auth.AuthActivity
 import com.example.benefit.ui.base.BaseActivity
+import com.example.benefit.ui.main.pin.PinActivity
 import com.example.benefit.util.AppPrefs
 import com.example.benefit.util.ContextUtils.setLocale
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -22,11 +23,13 @@ class MainActivity : BaseActivity() {
 
     companion object {
         const val IS_GOING_DEPOSIT = "IS_GOING_DEPOSIT"
+        const val IS_JUST_LOGGED_IN = "IS_JUST_LOGGED_IN"
     }
 
     private var pinTimerJob: Job? = null
 
     var isGoingDeposit = false
+    var isJustLoggedIn = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setLocale(AppPrefs.language, this)
@@ -34,6 +37,7 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
 
         isGoingDeposit = intent.getBooleanExtra(IS_GOING_DEPOSIT, false)
+        isJustLoggedIn = intent.getBooleanExtra(IS_JUST_LOGGED_IN, false)
 
         checkUserLogin()
 
@@ -63,7 +67,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun shouldEnterPin(): Boolean {
-        return AppPrefs.isLoggedIn() && pinTimerJob == null || pinTimerJob?.isCompleted == true
+        return !isJustLoggedIn && AppPrefs.isLoggedIn() && pinTimerJob == null || pinTimerJob?.isCompleted == true
     }
 
     override fun onStop() {

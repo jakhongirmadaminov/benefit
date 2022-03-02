@@ -15,6 +15,7 @@ import com.example.benefit.R
 import com.example.benefit.ui.auth.registration.ResponseState
 import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.MainActivity
+import com.example.benefit.ui.main.MainActivity.Companion.IS_JUST_LOGGED_IN
 import com.example.benefit.util.AppPrefs
 import kotlinx.android.synthetic.main.fragment_code.*
 import kotlinx.android.synthetic.main.fragment_device_code.*
@@ -66,7 +67,9 @@ class DeviceCodeFragment : BaseFragment(R.layout.fragment_device_code) {
                 pin = edtCode.text.toString()
             }
 
-            startActivity(Intent(requireActivity(), MainActivity::class.java))
+            startActivity(Intent(requireActivity(), MainActivity::class.java).apply {
+                putExtra(IS_JUST_LOGGED_IN, true)
+            })
             ((parentFragment as NavHostFragment).parentFragment as LoginBSD).dismiss()
         })
 

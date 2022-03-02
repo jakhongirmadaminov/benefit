@@ -1,6 +1,7 @@
 package com.example.benefit.ui.main.profile.settings_bsd
 
 
+import android.graphics.Bitmap
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -67,5 +68,28 @@ class SetingsMainViewModel @Inject constructor(
         }
     }
 
+    var uploadAvatarResp = SingleLiveEvent<RespUserInfo>()
+
+    fun uploadAvatar(bitmap: Bitmap) {
+        isLoading.value = true
+        viewModelScope.launch(IO) {
+            val response = userRemote.uploadAvatar(bitmap)
+            withContext(Dispatchers.Main) {
+                when (response) {
+                    is ResultError -> {
+                        errorMessage.value = response.message
+                        isLoading.value = false
+                    }
+                    is ResultSuccess -> {
+                        AppPrefs.edit {
+                            avatar = Constants.BASE_URL + "upload" + response.value.avatar
+                        }
+                        uploadAvatarResp.value = response.value
+                        isLoading.value = false
+                    }
+                }.exhaustive
+            }
+        }
+    }
 
 }

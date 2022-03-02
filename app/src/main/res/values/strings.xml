@@ -248,5 +248,6 @@
     <string name="payment_created">Платёж успешно создан</string>
     <string name="friends_list">Список друзей</string>
     <string name="forgot_pin">Забыли код</string>
+    <string name="your_data_updated">Ваши данные обновлены!</string>
 
 </resources>

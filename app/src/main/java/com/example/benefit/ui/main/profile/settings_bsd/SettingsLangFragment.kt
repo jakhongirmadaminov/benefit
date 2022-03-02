@@ -81,7 +81,9 @@ class SettingsLangFragment : BaseFragment(R.layout.fragment_settings_lang) {
     fun restart() {
         context?.startActivities(
             arrayOf(
-                Intent(context, MainActivity::class.java),
+                Intent(context, MainActivity::class.java).apply {
+                    putExtra(MainActivity.IS_JUST_LOGGED_IN, true)
+                },
             )
         )
         requireActivity().finish()

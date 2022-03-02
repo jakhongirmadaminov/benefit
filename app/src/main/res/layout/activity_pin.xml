@@ -336,7 +336,6 @@
                 android:layout_height="60dp"
                 android:clickable="true"
                 android:focusable="true"
-
                 android:foreground="@drawable/round_ripple"
                 android:gravity="center"
                 android:padding="15dp"

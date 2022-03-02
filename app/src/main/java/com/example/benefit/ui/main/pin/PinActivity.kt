@@ -1,8 +1,9 @@
-package com.example.benefit.ui.main
+package com.example.benefit.ui.main.pin
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import com.example.benefit.R
 import com.example.benefit.ui.auth.AuthActivity
@@ -13,13 +14,31 @@ import kotlinx.android.synthetic.main.activity_pin.*
 class PinActivity : AppCompatActivity() {
 
 
+    private var isBiometricSupported = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pin)
 
         setupViews()
         attachListeners()
+        isBiometricSupported = BiometricAuth(this).isBiometricSupported()
+        if (isBiometricSupported) {
+            showBioPrompt()
+        } else {
+            ivTouchId.isVisible = false
+        }
 
+    }
+
+    private fun showBioPrompt() {
+        BiometricPromptUtils.createBiometricPrompt(this, onSuccess = {
+            finish()
+        },
+            onUsePin = {
+
+            }
+        )
     }
 
     private fun setupViews() {
@@ -32,7 +51,9 @@ class PinActivity : AppCompatActivity() {
     }
 
     private fun attachListeners() {
-
+        ivTouchId.setOnClickListener {
+            showBioPrompt()
+        }
 
         tvZero.setOnClickListener {
             appendToPin("0")

@@ -40,15 +40,15 @@ class RegProfileSetupFragment @Inject constructor() :
 
     private fun subscribeObservers() {
 
-        viewModel.uploadUserInfoResp.observe(viewLifecycleOwner, {
+        viewModel.uploadUserInfoResp.observe(viewLifecycleOwner) {
             findNavController().navigate(R.id.action_regProfileSetupFragment_to_regCardActivationFragment)
-        })
+        }
 
-        viewModel.uploadAvatarResp.observe(viewLifecycleOwner, {
+        viewModel.uploadAvatarResp.observe(viewLifecycleOwner) {
             validateFields()
-        })
+        }
 
-        viewModel.isLoading.observe(viewLifecycleOwner, {
+        viewModel.isLoading.observe(viewLifecycleOwner) {
             when (it ?: return@observe) {
                 true -> {
                     tvError.visibility = View.GONE
@@ -58,7 +58,7 @@ class RegProfileSetupFragment @Inject constructor() :
                     progress.visibility = View.GONE
                 }
             }
-        })
+        }
 
         viewModel.errorMessage.observe(viewLifecycleOwner, {
             tvError.visibility = View.VISIBLE
