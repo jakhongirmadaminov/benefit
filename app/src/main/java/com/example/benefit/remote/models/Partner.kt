@@ -25,5 +25,15 @@ data class Partner(
     @SerializedName("type") val type: Int? = null,
     @SerializedName("type_name") val type_name: String? = null,
     @SerializedName("updated_at") val updated_at: Int? = null,
-    @SerializedName("user_id") val user_id: Int? = null
-):Parcelable
+    @SerializedName("user_id") val user_id: Int? = null,
+    @SerializedName("likes_count") val likes_count: Int? = null,
+    @SerializedName("photos_array") val photos_array: List<PartnerPhotoDTO>? = null,
+) : Parcelable
+
+@Parcelize
+data class PartnerPhotoDTO(
+    @SerializedName("image") val image: String? = null,
+    @SerializedName("title_ru") val title_ru: String? = null,
+    @SerializedName("title_en") val title_en: String? = null,
+    @SerializedName("title_uz") val title_uz: String? = null,
+) : Parcelable

@@ -35,7 +35,6 @@ class PartnersCategoryFragment : BaseFragment(R.layout.fragment_partners_categor
 
     private fun attachListeners() {
         ivMap.setOnClickListener {
-
             startActivity(Intent(requireActivity(), PartnersMapActivity::class.java).apply {
                 putParcelableArrayListExtra(
                     PartnersMapActivity.EXTRA_CATEGORIES,

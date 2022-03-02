@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.RelativeLayout
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import com.example.benefit.R
 import com.example.benefit.remote.models.Partner
 import com.example.benefit.remote.models.PartnerCategoryDTO
@@ -30,7 +31,7 @@ class PartnersMapActivity : BaseActivity(), OnMapReadyCallback {
     private val markerList = ArrayList<Marker>()
     private lateinit var gMap: GoogleMap
     private val adapter = GroupAdapter<GroupieViewHolder>()
-    lateinit var categories: ArrayList<PartnerCategoryDTO>
+    var categories: ArrayList<PartnerCategoryDTO>? = null
     var selectedCategoryId: Int? = null
 
     companion object {
@@ -47,11 +48,12 @@ class PartnersMapActivity : BaseActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        categories = intent.getParcelableArrayListExtra(EXTRA_CATEGORIES)!!
+        categories = intent.getParcelableArrayListExtra(EXTRA_CATEGORIES)
+        selectedCategoryId = intent.extras?.get(EXTRA_CATEGORY_ID) as Int?
         setupViews()
         attachListeners()
         subscribeObservers()
-        viewModel.getPartnersForCategory(selectedCategoryId ?: categories[0].id)
+        viewModel.getPartnersForCategory(selectedCategoryId ?: categories!![0].id)
     }
 
     private fun subscribeObservers() {
@@ -188,8 +190,9 @@ class PartnersMapActivity : BaseActivity(), OnMapReadyCallback {
         rlParent.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
         rvCategories.adapter = adapter
 
+        slidingLayer.isVisible = !categories.isNullOrEmpty()
         adapter.clear()
-        categories.forEach {
+        categories?.forEach {
             adapter.add(ItemCategorySquare(it))
         }
         adapter.notifyDataSetChanged()

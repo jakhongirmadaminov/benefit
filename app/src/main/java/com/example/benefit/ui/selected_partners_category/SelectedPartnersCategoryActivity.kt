@@ -63,10 +63,6 @@ class SelectedPartnersCategoryActivity : BaseActivity() {
                     loadData(response.value)
                     icMap.setOnClickListener {
                         startActivity(Intent(this, PartnersMapActivity::class.java).apply {
-                            putParcelableArrayListExtra(
-                                PartnersMapActivity.EXTRA_CATEGORIES,
-                                ArrayList(response.value)
-                            )
                             putExtra(PartnersMapActivity.EXTRA_CATEGORY_ID, categoryDTO.id)
                         })
                     }

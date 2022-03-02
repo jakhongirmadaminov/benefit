@@ -419,5 +419,13 @@ interface AuthApiService {
         @Field("user_id") user_id: Int = AppPrefs.userId
     ): RespFormat<List<AutoPaymentDTO>>
 
+    @POST("api/partners/useraction")
+    @FormUrlEncoded
+    suspend fun likePartner(
+        @Field("partner_id") partner_id: Long,
+        @Field("type") type: String = "like",
+        @Field("user_id") user_id: Int = AppPrefs.userId
+    ): RespFormat<PlainResp>
+
 }
 
