@@ -427,5 +427,13 @@ interface AuthApiService {
         @Field("user_id") user_id: Int = AppPrefs.userId
     ): RespFormat<PlainResp>
 
+    @POST("api/autopayments/trash")
+    @FormUrlEncoded
+    suspend fun deleteRegularPayment(
+        @Field("id") id: Int,
+        @Field("user_id") user_id: Int = AppPrefs.userId
+    ): RespFormat<PlainResp>
+
+
 }
 

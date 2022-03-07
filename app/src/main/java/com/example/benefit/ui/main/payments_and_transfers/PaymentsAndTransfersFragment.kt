@@ -17,6 +17,7 @@ import com.example.benefit.ui.main.transfer_to_card.TransferToCardBSD
 import com.example.benefit.ui.payments.PaymentsBSD
 import com.example.benefit.ui.regular_payment.CreateRegularPaymentBSD
 import com.example.benefit.ui.regular_payment.RegularPaymentBSD
+import com.example.benefit.ui.regular_payment.RegularPaymentBSD.Companion.RESULT_REGULAR_PAYMENT_DELETE
 import com.example.benefit.ui.viewgroups.ItemRegularPayment
 import com.example.benefit.util.RequestState
 import com.example.benefit.util.setLoadingSpinner
@@ -65,6 +66,13 @@ class PaymentsAndTransfersFragment : BaseFragment(R.layout.fragment_payments_and
         data.forEach {
             adapter.add(ItemRegularPayment(it, {
                 val dialog = RegularPaymentBSD()
+                childFragmentManager.setFragmentResultListener(
+                    RESULT_REGULAR_PAYMENT_DELETE,
+                    viewLifecycleOwner
+                ) { requestKey, result ->
+                    viewModel.getMyCards()
+                    viewModel.getMyAutoPayments()
+                }
                 dialog.arguments = Bundle().apply {
                     putParcelable(RegularPaymentBSD.ARG_REGULAR_PAYMENT_DTO, it)
                 }
@@ -74,10 +82,10 @@ class PaymentsAndTransfersFragment : BaseFragment(R.layout.fragment_payments_and
         if (adapter.itemCount < 8) {
             adapter.add(ItemRegularPayment(null, {}) {
                 val dialog = CreateRegularPaymentBSD()
-                    dialog.arguments = Bundle().apply {
+                dialog.arguments = Bundle().apply {
 
-                    }
-                    dialog.show(childFragmentManager, "")
+                }
+                dialog.show(childFragmentManager, "")
 
             })
         }
@@ -88,11 +96,11 @@ class PaymentsAndTransfersFragment : BaseFragment(R.layout.fragment_payments_and
             if (viewModel.cardsResp.value.isNullOrEmpty()) {
                 val dialog = DialogPleaseAddCard()
                 childFragmentManager.setFragmentResultListener(
-                        KEY_ADD_CARD,
-                        viewLifecycleOwner,
-                        { requestKey, result ->
-                            AddCardBSD().show(childFragmentManager, "")
-                        })
+                    KEY_ADD_CARD,
+                    viewLifecycleOwner
+                ) { requestKey, result ->
+                    AddCardBSD().show(childFragmentManager, "")
+                }
                 dialog.show(childFragmentManager, "")
             } else {
                 PaymentsBSD().show(childFragmentManager, "")
@@ -103,8 +111,8 @@ class PaymentsAndTransfersFragment : BaseFragment(R.layout.fragment_payments_and
             if (viewModel.cardsResp.value.isNullOrEmpty()) {
                 val dialog = DialogPleaseAddCard()
                 childFragmentManager.setFragmentResultListener(
-                        KEY_ADD_CARD,
-                        viewLifecycleOwner
+                    KEY_ADD_CARD,
+                    viewLifecycleOwner
                 ) { requestKey, result ->
                     AddCardBSD().show(childFragmentManager, "")
                 }
@@ -114,8 +122,8 @@ class PaymentsAndTransfersFragment : BaseFragment(R.layout.fragment_payments_and
                 dialog.arguments = Bundle().apply {
                     putParcelable(FillCardFragment.ARG_CARD, viewModel.cardsResp.value!![0])
                     putParcelableArrayList(
-                            FillCardFragment.ARG_CARDS,
-                            ArrayList(viewModel.cardsResp.value!!)
+                        FillCardFragment.ARG_CARDS,
+                        ArrayList(viewModel.cardsResp.value!!)
                     )
                 }
                 dialog.show(requireActivity().supportFragmentManager, "")
@@ -126,11 +134,11 @@ class PaymentsAndTransfersFragment : BaseFragment(R.layout.fragment_payments_and
             if (viewModel.cardsResp.value.isNullOrEmpty()) {
                 val dialog = DialogPleaseAddCard()
                 childFragmentManager.setFragmentResultListener(
-                        KEY_ADD_CARD,
-                        viewLifecycleOwner,
-                        { requestKey, result ->
-                            AddCardBSD().show(childFragmentManager, "")
-                        })
+                    KEY_ADD_CARD,
+                    viewLifecycleOwner
+                ) { requestKey, result ->
+                    AddCardBSD().show(childFragmentManager, "")
+                }
                 dialog.show(childFragmentManager, "")
             } else {
                 TransferToCardBSD().show(childFragmentManager, "")

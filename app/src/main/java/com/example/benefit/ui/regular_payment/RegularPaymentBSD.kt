@@ -18,6 +18,7 @@ class RegularPaymentBSD : BenefitFixedHeightBSD() {
 
     companion object {
         const val ARG_REGULAR_PAYMENT_DTO = "autoPaymentDTO"
+        const val RESULT_REGULAR_PAYMENT_DELETE = "RESULT_REGULAR_PAYMENT_DELETE"
     }
 
     private val viewModel: RegularPaymentViewModel by viewModels()

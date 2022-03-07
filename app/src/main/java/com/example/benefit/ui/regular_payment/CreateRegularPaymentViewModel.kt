@@ -12,7 +12,7 @@ import com.example.benefit.remote.models.*
 import com.example.benefit.remote.repository.UserRemote
 import com.example.benefit.util.*
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,6 +24,7 @@ class CreateRegularPaymentViewModel @Inject constructor(
 ) :
     ViewModel() {
 
+    val deleteRegPaymentResp = MutableLiveData<RequestState<PlainResp>>()
     val paynetCatgResp = MutableLiveData<List<PaynetCategory>>()
     val errorMessage = MutableLiveData<String>()
     val isLoading = MutableLiveData<Boolean>()
@@ -39,7 +40,7 @@ class CreateRegularPaymentViewModel @Inject constructor(
     val bftAndMyCardsPair = MutableLiveData<Pair<BalanceInfo, MyCardsResp>>()
 
     fun getMyCards() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(IO) {
             val cardsResp = async { getFormattedResponse { apiAuth.getMyCards() } }
             val bftResp = async { getFormattedResponse { apiAuth.getBftInfo() } }
 
@@ -63,14 +64,14 @@ class CreateRegularPaymentViewModel @Inject constructor(
 
     fun getPaynetServicesForProviderId(id: Long) {
         isLoading.value = true
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(IO) {
             makeRequest(paynetServices) { apiAuth.getPaynetServices(id) }
         }
     }
 
     fun getPaynetCategories() {
         isLoadingPaynetCategories.value = true
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(IO) {
             val response = userRemote.paymentCategories()
             isLoadingPaynetCategories.postValue(false)
             when (response) {
@@ -113,7 +114,7 @@ class CreateRegularPaymentViewModel @Inject constructor(
 
         viewModelScope.launch {
             isLoading.value = true
-            viewModelScope.launch(Dispatchers.IO) {
+            viewModelScope.launch(IO) {
                 makeRequest(savePaymentResp) {
                     apiAuth.saveAutoPayment(
                         title = title,
@@ -131,5 +132,13 @@ class CreateRegularPaymentViewModel @Inject constructor(
             }
         }
 
+    }
+
+    fun deleteRegularPayment(id: Int) {
+        viewModelScope.launch(IO) {
+            makeRequest(deleteRegPaymentResp) {
+                apiAuth.deleteRegularPayment(id)
+            }
+        }
     }
 }

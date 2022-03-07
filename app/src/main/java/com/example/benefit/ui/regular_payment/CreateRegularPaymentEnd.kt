@@ -9,12 +9,14 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.benefit.R
 import com.example.benefit.remote.models.*
 import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.home.HomeFragment
+import com.example.benefit.ui.regular_payment.RegularPaymentBSD.Companion.RESULT_REGULAR_PAYMENT_DELETE
 import com.example.benefit.util.*
 import com.example.benefit.util.Constants.MONTHS
 import kotlinx.android.synthetic.main.fragment_create_regular_payment_end.*
@@ -127,6 +129,7 @@ class CreateRegularPaymentEnd @Inject constructor() :
 
         }
 
+
     }
 
     private fun setupViews() {
@@ -142,6 +145,13 @@ class CreateRegularPaymentEnd @Inject constructor() :
                 DateTimeFormat.forPattern("dd.MM.yyyy")
             ).millis
             edtSum.setText(autoPaymentDto.amount.toString())
+            tvDelete.isVisible = true
+            tvDelete.setOnClickListener {
+                viewModel.deleteRegularPayment(autoPaymentDto.id!!)
+            }
+        } ?: run {
+            tvDelete.isVisible = false
+
         }
 
         args.merchantDTO?.let { merchant ->
@@ -344,6 +354,27 @@ class CreateRegularPaymentEnd @Inject constructor() :
     }
 
     private fun subscribeObservers() {
+
+        viewModel.deleteRegPaymentResp.observe(viewLifecycleOwner) {
+            when (it) {
+                is RequestState.Error -> {
+                    deleteProgress.isVisible = false
+                }
+                RequestState.Loading -> {
+                    deleteProgress.isVisible = true
+                }
+                is RequestState.Success -> {
+                    deleteProgress.isVisible = false
+
+                    ((parentFragment as NavHostFragment).parentFragment as RegularPaymentBSD).parentFragmentManager.setFragmentResult(
+                        RESULT_REGULAR_PAYMENT_DELETE,
+                        Bundle()
+                    )
+                    ((parentFragment as NavHostFragment).parentFragment as RegularPaymentBSD).dismiss()
+                }
+            }
+        }
+
         viewModel.savePaymentResp.observe(viewLifecycleOwner) {
             when (it) {
                 is RequestState.Error -> {
