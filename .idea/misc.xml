@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/drawable/shape_grey_rounded.xml" value="0.1845" />
+        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/drawable/shape_grey_rounded_15dp.xml" value="0.129" />
         <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/drawable/shape_top_rounded.xml" value="0.1" />
-        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/activity_partner_home.xml" value="0.1" />
+        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/activity_partner_home.xml" value="0.33" />
         <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/activity_pin.xml" value="0.1" />
         <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/activity_selected_partners_category.xml" value="0.1" />
         <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/fragment_create_regular_payment_end.xml" value="0.1" />

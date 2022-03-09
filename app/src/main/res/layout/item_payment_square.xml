@@ -24,7 +24,7 @@
                 android:id="@+id/llAdd"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:background="@drawable/shape_grey_rounded"
+                android:background="@drawable/shape_grey_rounded_10dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:selectableItemBackground"

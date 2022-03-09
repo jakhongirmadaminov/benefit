@@ -14,7 +14,7 @@
         android:id="@+id/ivIconBg"
         android:layout_width="?android:actionBarSize"
         android:layout_height="?android:actionBarSize"
-        android:background="@drawable/shape_grey_rounded"
+        android:background="@drawable/shape_grey_rounded_10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

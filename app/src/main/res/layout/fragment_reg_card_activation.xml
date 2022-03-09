@@ -79,7 +79,7 @@
                 android:layout_marginLeft="28dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="28dp"
-                android:background="@drawable/shape_grey_rounded"
+                android:background="@drawable/shape_grey_rounded_10dp"
                 android:orientation="vertical"
                 android:paddingLeft="15dp"
                 android:paddingTop="10dp"

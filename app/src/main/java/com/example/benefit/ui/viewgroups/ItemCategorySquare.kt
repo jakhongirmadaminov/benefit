@@ -18,7 +18,7 @@ class ItemCategorySquare(val obj: PartnerCategoryDTO) : Item() {
         viewHolder.itemView.tvCategoryTitle.text = obj.title_ru
         viewHolder.itemView.ivIcon.loadImageUrl(obj.icon_image)
         val unwrappedDrawable =
-            ContextCompat.getDrawable(viewHolder.itemView.context, R.drawable.shape_grey_rounded)
+            ContextCompat.getDrawable(viewHolder.itemView.context, R.drawable.shape_grey_rounded_10dp)
         val wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable!!)
         DrawableCompat.setTint(wrappedDrawable, Color.parseColor(obj.color))
 

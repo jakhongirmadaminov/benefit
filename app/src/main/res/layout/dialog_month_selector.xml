@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_margin="20dp"
-        android:background="@drawable/shape_grey_rounded">
+        android:background="@drawable/shape_grey_rounded_10dp">
 
 
         <DatePicker

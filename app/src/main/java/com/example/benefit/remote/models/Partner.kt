@@ -6,6 +6,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Partner(
+    @SerializedName("id") val id: Long,
     @SerializedName("category_id") val category_id: Int? = null,
     @SerializedName("coords") val coords: String? = null,
     @SerializedName("created_at") val created_at: Int? = null,

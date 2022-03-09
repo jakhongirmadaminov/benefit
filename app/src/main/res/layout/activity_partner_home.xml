@@ -159,7 +159,6 @@
             android:minHeight="1000dp"
             android:orientation="vertical">
 
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -207,24 +206,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
-                    tools:text="Кэшбэк 15%"
                     android:textColor="#abffffff"
                     android:textSize="14sp"
                     android:textStyle="normal"
                     app:layout_constraintStart_toStartOf="@id/tvBrandName"
-                    app:layout_constraintTop_toBottomOf="@id/tvBrandName" />
+                    app:layout_constraintTop_toBottomOf="@id/tvBrandName"
+                    tools:text="Кэшбэк 15%" />
 
                 <TextView
                     android:id="@+id/tvBrandSubtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
-                    tools:text="Товары и услуги в рассрочку"
                     android:textColor="#abffffff"
                     android:textSize="14sp"
                     android:textStyle="normal"
                     app:layout_constraintStart_toStartOf="@id/tvBrandName"
-                    app:layout_constraintTop_toBottomOf="@id/tvCashBackPercentage" />
+                    app:layout_constraintTop_toBottomOf="@id/tvCashBackPercentage"
+                    tools:text="Товары и услуги в рассрочку" />
 
                 <CheckBox
                     android:id="@+id/cbLike"
@@ -251,15 +250,43 @@
                 android:paddingRight="26dp"
                 android:paddingBottom="40dp">
 
-                <TextView
-                    android:id="@+id/tvContentTitle"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    tools:text="Рекомендовано"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="normal" />
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tvContentTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:textStyle="normal"
+                        tools:text="Рекомендовано" />
+
+
+                    <LinearLayout
+                        android:id="@+id/likedPplContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/shape_grey_rounded_10dp"
+                        android:paddingStart="10dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="10dp"
+                        android:paddingBottom="5dp"
+                        tools:text="+56" />
+
+
+                </LinearLayout>
+
 
                 <TextView
                     android:id="@+id/tvContentDesc"
@@ -267,10 +294,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:fontFamily="sans-serif"
-                    tools:text="Магазин эксклюзивной мебели «Commodum» более 20 лет представляет лучшие европейские модели интерьера. За продолжительное время работы магазин зарекомендовал себя среди широкого круга клиентов своим сервисом и качественными товарами."
                     android:textColor="#cc5c5c5c"
                     android:textSize="16sp"
-                    android:textStyle="normal" />
+                    android:textStyle="normal"
+                    tools:text="Магазин эксклюзивной мебели «Commodum» более 20 лет представляет лучшие европейские модели интерьера. За продолжительное время работы магазин зарекомендовал себя среди широкого круга клиентов своим сервисом и качественными товарами." />
 
             </LinearLayout>
 
