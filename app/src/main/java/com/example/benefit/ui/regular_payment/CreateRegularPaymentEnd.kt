@@ -129,10 +129,26 @@ class CreateRegularPaymentEnd @Inject constructor() :
 
         }
 
+        btnClose.setOnClickListener {
+            ((parentFragment as NavHostFragment).parentFragment as? RegularPaymentBSD)?.dismiss()
+            ((parentFragment as NavHostFragment).parentFragment as? CreateRegularPaymentBSD)?.dismiss()
+        }
 
     }
 
     private fun setupViews() {
+
+        clTopUpSuccess.layoutParams = clTopUpSuccess.layoutParams.apply {
+            height = SizeUtils.getScreenHeight(requireActivity()) - SizeUtils.getActionBarHeight(
+                requireActivity()
+            )
+        }
+
+        clTopUpLoading.layoutParams = clTopUpLoading.layoutParams.apply {
+            height = SizeUtils.getScreenHeight(requireActivity()) - SizeUtils.getActionBarHeight(
+                requireActivity()
+            )
+        }
 
         args.paymentDTO?.let { autoPaymentDto ->
             autoPaymentDto.providerInfo?.image?.let { ivBrandLogo.loadImageUrl(it) }
@@ -359,18 +375,15 @@ class CreateRegularPaymentEnd @Inject constructor() :
             when (it) {
                 is RequestState.Error -> {
                     deleteProgress.isVisible = false
+                    switchSetup.isChecked = true
                 }
                 RequestState.Loading -> {
                     deleteProgress.isVisible = true
+                    switchSetup.isChecked = false
                 }
                 is RequestState.Success -> {
                     deleteProgress.isVisible = false
-
-                    ((parentFragment as NavHostFragment).parentFragment as RegularPaymentBSD).parentFragmentManager.setFragmentResult(
-                        RESULT_REGULAR_PAYMENT_DELETE,
-                        Bundle()
-                    )
-                    ((parentFragment as NavHostFragment).parentFragment as RegularPaymentBSD).dismiss()
+                    completeWithSuccess()
                 }
             }
         }
@@ -380,12 +393,15 @@ class CreateRegularPaymentEnd @Inject constructor() :
                 is RequestState.Error -> {
                     clTopUpLoading.isVisible = false
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                    switchSetup.isChecked = true
                 }
                 RequestState.Loading -> {
+                    switchSetup.isChecked = false
                     lblSearching.text = getString(R.string.payment_creating)
                     clTopUpLoading.isVisible = true
                 }
                 is RequestState.Success -> {
+                    completeWithSuccess()
                     lblTopUpSuccess.text = getString(R.string.payment_created)
                     clTopUpLoading.isVisible = false
                     clTopUpSuccess.isVisible = true
@@ -401,18 +417,35 @@ class CreateRegularPaymentEnd @Inject constructor() :
         viewModel.paynetServices.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is RequestState.Error -> {
+                    switchSetup.isChecked = true
                     clTopUpLoading.isVisible = false
                     Toast.makeText(context, response.message, Toast.LENGTH_SHORT).show()
                 }
                 RequestState.Loading -> {
+                    switchSetup.isChecked = false
                     clTopUpLoading.isVisible = true
                 }
                 is RequestState.Success -> {
+                    switchSetup.isChecked = false
                     clTopUpLoading.isVisible = false
                     populateFields(response.value.getPaymentService()!!)
                 }
             }
         }
+    }
+
+    private fun completeWithSuccess() {
+        ((parentFragment as NavHostFragment).parentFragment as? RegularPaymentBSD)?.parentFragmentManager?.setFragmentResult(
+            RESULT_REGULAR_PAYMENT_DELETE,
+            Bundle()
+        )
+
+        ((parentFragment as NavHostFragment).parentFragment as? CreateRegularPaymentBSD)?.parentFragmentManager?.setFragmentResult(
+            RESULT_REGULAR_PAYMENT_DELETE,
+            Bundle()
+        )
+        ((parentFragment as NavHostFragment).parentFragment as? RegularPaymentBSD)?.dismiss()
+        ((parentFragment as NavHostFragment).parentFragment as? CreateRegularPaymentBSD)?.dismiss()
     }
 
 

@@ -342,6 +342,7 @@
                 android:layout_marginRight="26dp"
                 android:fontFamily="sans-serif-light"
                 android:hint="@string/sum"
+                android:imeOptions="actionDone"
                 android:inputType="number"
                 android:textColor="#000000"
                 android:textSize="32sp"
@@ -505,10 +506,14 @@
 
         <include
             layout="@layout/transaction_loading"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:visibility="gone" />
 
         <include
             layout="@layout/transaction_success"
-            tools:visibility="gone" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

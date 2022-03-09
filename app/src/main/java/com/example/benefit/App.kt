@@ -1,6 +1,7 @@
 package com.example.benefit
 
 import android.app.Application
+import com.example.benefit.util.SizeUtils
 import com.google.android.exoplayer2.database.DatabaseProvider
 import com.google.android.exoplayer2.database.ExoDatabaseProvider
 import com.google.android.exoplayer2.upstream.cache.LeastRecentlyUsedCacheEvictor

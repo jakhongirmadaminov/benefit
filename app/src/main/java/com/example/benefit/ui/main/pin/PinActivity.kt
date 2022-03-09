@@ -108,6 +108,12 @@ class PinActivity : AppCompatActivity() {
             this.finish()
         }
 
+        tvForgotPin.setOnClickListener {
+            AppPrefs.logOut()
+            startActivity(Intent(this, AuthActivity::class.java))
+            this.finish()
+        }
+
         pinView.doOnTextChanged { text, start, before, count ->
             pinView.getText()?.toString()?.let { pinInput ->
                 if (pinInput.length == 4) {

@@ -63,6 +63,10 @@ class PartnerHomeActivity : BaseActivity() {
             })
         }
 
+        cbLike.setOnClickListener {
+
+        }
+
     }
 
 

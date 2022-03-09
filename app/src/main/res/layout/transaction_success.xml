@@ -1,133 +1,141 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/clTopUpSuccess"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/shape_top_rounded"
     android:visibility="gone"
+    app:cardBackgroundColor="@color/window_background"
+    app:cardCornerRadius="15dp"
+    app:elevation="8dp"
     tools:visibility="visible">
 
-
-    <TextView
-        android:id="@+id/lblTopUpSuccess"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="26dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginRight="40dp"
-        android:fontFamily="sans-serif"
-        android:text="@string/top_up_card_success"
-        android:textColor="#000000"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.277"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/ivBankLogo"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="26dp"
-        android:layout_marginTop="26dp"
-        android:background="@drawable/shape_white_rounded_grey_stroke"
-        android:padding="10dp"
-        android:src="@drawable/b_logo"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lblTopUpSuccess" />
-
-
-    <TextView
-        android:id="@+id/tvCardOwnerSuccess"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:fontFamily="sans-serif"
-        android:textColor="#cc000000"
-        android:textSize="14sp"
-        android:textStyle="normal"
-        android:visibility="gone"
-        app:layout_constraintStart_toEndOf="@id/ivBankLogo"
-        app:layout_constraintTop_toTopOf="@id/ivBankLogo"
-        tools:text="KIM VLADIMIR SERGEEVICH" />
-
-
-    <TextView
-        android:id="@+id/tvCardNumberSuccess"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:text="8600 03** **** 7102"
-        android:textColor="#cc5c5c5c"
-        android:textSize="14sp"
-        android:textStyle="normal"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@id/tvCardOwnerSuccess"
-        app:layout_constraintTop_toBottomOf="@id/tvCardOwnerSuccess" />
-
-
-    <ImageView
-        android:id="@+id/imgTick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/success_tick"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:id="@+id/tvTransferAmount"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="sans-serif-light"
-        android:gravity="center_horizontal|bottom"
-        android:text="@string/transfer_amount"
-        android:textColor="#cc5c5c5c"
-        android:textSize="14sp"
-        android:textStyle="normal"
-        app:layout_constraintBottom_toTopOf="@id/tvCommissions"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgTick"
-        app:layout_constraintVertical_chainStyle="packed" />
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_top_rounded"
+        tools:visibility="visible">
 
-    <TextView
-        android:id="@+id/tvCommissions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="sans-serif-light"
-        android:gravity="center_horizontal|bottom"
-        android:text="@string/commissions_amount"
-        android:textColor="#cc5c5c5c"
-        android:textSize="14sp"
-        android:textStyle="normal"
-        app:layout_constraintBottom_toTopOf="@id/btnClose"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTransferAmount" />
+        <TextView
+            android:id="@+id/lblTopUpSuccess"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="40dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/top_up_card_success"
+            android:textColor="#000000"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.277"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <com.example.benefit.util.ButtonMain
-        android:id="@+id/btnClose"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="26dp"
-        android:layout_marginRight="26dp"
-        android:layout_marginBottom="22dp"
-        android:text="@string/close"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        <ImageView
+            android:id="@+id/ivBankLogo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="26dp"
+            android:layout_marginTop="26dp"
+            android:background="@drawable/shape_white_rounded_grey_stroke"
+            android:padding="10dp"
+            android:src="@drawable/b_logo"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lblTopUpSuccess" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tvCardOwnerSuccess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:fontFamily="sans-serif"
+            android:textColor="#cc000000"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@id/ivBankLogo"
+            app:layout_constraintTop_toTopOf="@id/ivBankLogo"
+            tools:text="KIM VLADIMIR SERGEEVICH" />
+
+
+        <TextView
+            android:id="@+id/tvCardNumberSuccess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="8600 03** **** 7102"
+            android:textColor="#cc5c5c5c"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@id/tvCardOwnerSuccess"
+            app:layout_constraintTop_toBottomOf="@id/tvCardOwnerSuccess" />
+
+
+        <ImageView
+            android:id="@+id/imgTick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/success_tick"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/tvTransferAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center_horizontal|bottom"
+            android:text="@string/transfer_amount"
+            android:textColor="#cc5c5c5c"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toTopOf="@id/tvCommissions"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgTick"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/tvCommissions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center_horizontal|bottom"
+            android:text="@string/commissions_amount"
+            android:textColor="#cc5c5c5c"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toTopOf="@id/btnClose"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTransferAmount" />
+
+        <com.example.benefit.util.ButtonMain
+            android:id="@+id/btnClose"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="26dp"
+            android:layout_marginRight="26dp"
+            android:layout_marginBottom="22dp"
+            android:text="@string/close"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

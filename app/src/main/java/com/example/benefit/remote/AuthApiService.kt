@@ -417,7 +417,7 @@ interface AuthApiService {
         @Field("from_cashback") from_cashback: Boolean,
         @Field("near_date") near_date: Long,
         @Field("user_id") user_id: Int = AppPrefs.userId
-    ): RespFormat<List<AutoPaymentDTO>>
+    ): RespFormat<PlainResp>
 
     @POST("api/partners/useraction")
     @FormUrlEncoded

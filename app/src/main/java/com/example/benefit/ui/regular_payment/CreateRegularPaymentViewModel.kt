@@ -97,7 +97,7 @@ class CreateRegularPaymentViewModel @Inject constructor(
         transferAmountKey = name
     }
 
-    val savePaymentResp = MutableLiveData<RequestState<List<AutoPaymentDTO>>>()
+    val savePaymentResp = MutableLiveData<RequestState<PlainResp>>()
 
     fun saveAutoPayment(
         type: Int,
