@@ -44,13 +44,8 @@ class TransactionsHistoryViewModel @Inject constructor(val apiService: AuthApiSe
                     getFormattedResponse(totalExpenseReportLoading) {
                         apiService.transactionsInOut(
                             cardId,
-                            DateTimeFormat.forPattern("yyyy0101")
-                                .print(thisMonthsStartDateTime.minusMonths(i)).toInt(),
-                            DateTimeFormat.forPattern("yyyy1231")
-                                .print(
-                                    thisMonthsStartDateTime.minusMonths(i).dayOfMonth()
-                                        .withMaximumValue()
-                                ).toInt()
+                            DateTimeFormat.forPattern("yyyy${1+i}01").print(DateTime.now()).toInt(),
+                            DateTimeFormat.forPattern("yyyy${1+i}31").print(DateTime.now()).toInt()
                         )
                     }
                 })
@@ -64,13 +59,8 @@ class TransactionsHistoryViewModel @Inject constructor(val apiService: AuthApiSe
                     getFormattedResponse(analyticsReportLoading) {
                         apiService.transactionsAnalytics(
                             cardId,
-                            DateTimeFormat.forPattern("yyyy0101")
-                                .print(thisMonthsStartDateTime.minusMonths(i)).toInt(),
-                            DateTimeFormat.forPattern("yyyy1231")
-                                .print(
-                                    thisMonthsStartDateTime.minusMonths(i).dayOfMonth()
-                                        .withMaximumValue()
-                                ).toInt()
+                            DateTimeFormat.forPattern("yyyy${1+i}01").print(DateTime.now()).toInt(),
+                            DateTimeFormat.forPattern("yyyy${1+i}31").print(DateTime.now()).toInt()
                         )
                     }
                 })
@@ -92,9 +82,9 @@ class TransactionsHistoryViewModel @Inject constructor(val apiService: AuthApiSe
                 }
             }
 
-            transactionsAnalyticsResp.postValue(ResultSuccess(ArrayList( monthlyTransactions.map {
+            transactionsAnalyticsResp.postValue(ResultSuccess(ArrayList(monthlyTransactions.map {
                 (it as ResultSuccess).value.last().content
-            })  ))
+            })))
             transactionsReportResp.postValue(ResultSuccess(monthlyTransactionsReport.map {
                 (it as ResultSuccess).value
             }))

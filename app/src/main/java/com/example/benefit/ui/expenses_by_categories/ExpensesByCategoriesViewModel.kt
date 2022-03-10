@@ -56,13 +56,8 @@ class ExpensesByCategoriesViewModel @Inject constructor(
                     getFormattedResponse(totalExpenseReportLoading) {
                         apiService.transactionsInOut(
                             cardId,
-                            DateTimeFormat.forPattern("yyyy0101")
-                                .print(thisMonthsStartDateTime.minusMonths(i)).toInt(),
-                            DateTimeFormat.forPattern("yyyy1231")
-                                .print(
-                                    thisMonthsStartDateTime.minusMonths(i).dayOfMonth()
-                                        .withMaximumValue()
-                                ).toInt()
+                            DateTimeFormat.forPattern("yyyy${1+i}01").print(DateTime.now()).toInt(),
+                            DateTimeFormat.forPattern("yyyy${1+i}31").print(DateTime.now()).toInt()
                         )
                     }
                 })
@@ -90,13 +85,8 @@ class ExpensesByCategoriesViewModel @Inject constructor(
                     getFormattedResponse(analyticsReportLoading) {
                         apiService.transactionsAnalytics(
                             cardId,
-                            DateTimeFormat.forPattern("yyyy0101")
-                                .print(thisMonthsStartDateTime.minusMonths(i)).toInt(),
-                            DateTimeFormat.forPattern("yyyy1231")
-                                .print(
-                                    thisMonthsStartDateTime.minusMonths(i).dayOfMonth()
-                                        .withMaximumValue()
-                                ).toInt()
+                            DateTimeFormat.forPattern("yyyy${1+i}01").print(DateTime.now()).toInt(),
+                            DateTimeFormat.forPattern("yyyy${2+i}31").print(DateTime.now()).toInt()
                         )
                     }
                 })
