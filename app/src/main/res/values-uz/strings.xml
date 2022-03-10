@@ -250,5 +250,6 @@
     <string name="forgot_pin">Забыли код</string>
     <string name="your_data_updated">Ваши данные обновлены!</string>
     <string name="delete_regular_payment">Удалить автоплатёж</string>
+    <string name="card_not_found">Card not found!</string>
 
 </resources>

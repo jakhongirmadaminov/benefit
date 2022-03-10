@@ -14,6 +14,7 @@ import com.example.benefit.R
 import com.example.benefit.stories.customview.StoryPagerAdapter
 import com.example.benefit.stories.data.StoryUser
 import com.example.benefit.stories.utils.CubeOutTransformer
+import com.example.benefit.ui.base.BaseActivity
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DataSpec
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
@@ -27,7 +28,7 @@ import kotlinx.coroutines.async
 
 const val EXTRA_STORIES = "STORIES"
 
-class StoryActivity : AppCompatActivity(),
+class StoryActivity : BaseActivity(),
     PageViewOperator {
 
     private lateinit var pagerAdapter: StoryPagerAdapter

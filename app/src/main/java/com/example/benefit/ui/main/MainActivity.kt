@@ -51,19 +51,18 @@ class MainActivity : BaseActivity() {
         if (AppPrefs.token.isNullOrBlank()) {
             start<AuthActivity>()
             finish()
-        } else if (shouldEnterPin()) {
+        }/* else if (shouldEnterPin()) {
             startActivity(Intent(this, PinActivity::class.java))
-            startTimerForPin()
-        }
+        }*/
 
     }
 
     override fun onRestart() {
         super.onRestart()
-        if (shouldEnterPin()) {
-            startActivity(Intent(this, PinActivity::class.java))
-            startTimerForPin()
-        }
+//        if (shouldEnterPin()) {
+//            startActivity(Intent(this, PinActivity::class.java))
+//            startTimerForPin()
+//        }
     }
 
     private fun shouldEnterPin(): Boolean {

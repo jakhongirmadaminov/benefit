@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -64,10 +66,6 @@ class FillCardFromAnyCardFragment @Inject constructor() :
         edtCardNumber.onFocusChangeListener = listener
         edtCardNumber.addTextChangedListener(listener)
 
-//        val listener2 = MaskedTextChangedListener("[00]/[00]", edtCardExpiry)
-//        edtCardExpiry.hint = getString(R.string.mm_slash_yy)
-//        edtCardExpiry.onFocusChangeListener = listener2
-//        edtCardExpiry.addTextChangedListener(listener2)
     }
 
     private fun subscribeObservers() {
@@ -75,11 +73,22 @@ class FillCardFromAnyCardFragment @Inject constructor() :
         viewModel.panInfoResp.observe(viewLifecycleOwner) {
             when (it) {
                 is ResultError -> {
-
-
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.card_not_found),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    edtCardNumber.setCompoundDrawables(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.ic_round_error_outline_24
+                        ),
+                        null,
+                        null,
+                        null
+                    )
                 }
                 is ResultSuccess -> {
-
                     tvNext.isEnabled = true
                 }
             }
@@ -94,14 +103,8 @@ class FillCardFromAnyCardFragment @Inject constructor() :
     private fun attachListeners() {
 
         edtCardNumber.doOnTextChanged { text, start, before, count ->
-//            tvNext.isEnabled =
-//                !text.isNullOrBlank() && text.length == 19 && !edtCardExpiry.text.isNullOrBlank() && edtCardExpiry.text.length == 5
             if (text?.length == 19) viewModel.getCardP2PInfo(text.toString().replace(" ", ""))
         }
-//        edtCardExpiry.doOnTextChanged { text, start, before, count ->
-//            tvNext.isEnabled =
-//                !edtCardNumber.text.isNullOrBlank() && edtCardNumber.text.length == 19 && !text.isNullOrBlank() && text.length == 5
-//        }
 
         ivClearCardNumber.setOnClickListener {
             edtCardNumber.setText("")
@@ -112,15 +115,11 @@ class FillCardFromAnyCardFragment @Inject constructor() :
         }
         tvNext.setOnClickListener {
 
-//            val expString = edtCardExpiry.text.toString().replace("/", "")
-
             val dir =
                 FillCardFromAnyCardFragmentDirections.actionCardMakeDepositFromAnyCardFragmentToCardDepositAnyCardTransferFragment(
                     navArgs.cards,
                     navArgs.card,
                     (viewModel.panInfoResp.value as ResultSuccess).value
-//                    edtCardNumber.text.toString().replace(" ", ""),
-//                    expString.substring(2) + expString.substring(0, 2)
                 )
             findNavController().navigate(dir)
         }
@@ -133,24 +132,24 @@ class FillCardFromAnyCardFragment @Inject constructor() :
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_SCAN_CARD) {
-            if (resultCode == Activity.RESULT_OK) {
-                val card: Card = data!!.getParcelableExtra(ScanCardIntent.RESULT_PAYCARDS_CARD)!!
-                val cardData = """
-                Card number: ${card.cardNumberRedacted}
-                Card holder: ${card.cardHolderName.toString()}
-                Card expiration date: ${card.expirationDate}
-                """.trimIndent()
+            when (resultCode) {
+                Activity.RESULT_OK -> {
+                    val card: Card = data!!.getParcelableExtra(ScanCardIntent.RESULT_PAYCARDS_CARD)!!
+                    val cardData = """
+                        Card number: ${card.cardNumberRedacted}
+                        Card holder: ${card.cardHolderName.toString()}
+                        Card expiration date: ${card.expirationDate}
+                        """.trimIndent()
 
-                edtCardNumber.setText(card.cardNumber)
-//                edtCardExpiry.setText(card.expirationDate)
-
-                Log.i("TAAAAG", "Card info: $cardData")
-
-
-            } else if (resultCode == Activity.RESULT_CANCELED) {
-                Log.i("TAAAAG", "Scan canceled")
-            } else {
-                Log.i("TAAAAG", "Scan failed")
+                    edtCardNumber.setText(card.cardNumber)
+                    Log.i("TAAAAG", "Card info: $cardData")
+                }
+                Activity.RESULT_CANCELED -> {
+                    Log.i("TAAAAG", "Scan canceled")
+                }
+                else -> {
+                    Log.i("TAAAAG", "Scan failed")
+                }
             }
         }
     }

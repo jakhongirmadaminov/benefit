@@ -52,8 +52,8 @@
         android:id="@+id/rvContacts"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/ivBack"
         tools:listitem="@layout/item_contact_square" />
 
@@ -85,6 +85,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="26dp"
         android:hint="0"
+        android:imeOptions="actionDone"
+        android:inputType="number"
         android:text="500"
         android:textColor="@color/black"
         android:textSize="30sp"
@@ -94,6 +96,7 @@
         android:id="@+id/tvMinAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:fontFamily="sans-serif-light"
         android:text="@string/minimum_sum_is"
         android:textColor="#e94040"
@@ -101,6 +104,12 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@id/edtSum"
         app:layout_constraintTop_toBottomOf="@id/edtSum" />
+
+    <com.example.benefit.util.CalculatorLayout
+        android:id="@+id/calcLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

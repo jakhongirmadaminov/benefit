@@ -19,7 +19,15 @@ import com.example.benefit.util.ResultError
 import com.example.benefit.util.ResultSuccess
 import com.example.benefit.util.SizeUtils
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_fill_from_any_card_transfer.*
 import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.*
+import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.cardsPagerSmall
+import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.clParent
+import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.edtSum
+import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.ivBack
+import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.layoutCalculator
+import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.tvFill
+import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.tvMinAmount
 import kotlinx.android.synthetic.main.item_card_small.view.*
 import kotlinx.android.synthetic.main.transaction_loading.*
 import kotlinx.android.synthetic.main.transaction_success.*
@@ -143,6 +151,7 @@ class TransferToCardTransactionFragment :
                 viewModel.cardsResp.value!![cardsPagerSmall.currentItem].balance?.dropLast(2)!!
                     .toInt() > text.toString()
                     .toInt()
+            tvMinAmount.isVisible = text?.toString()?.toInt() ?: 0 < 1000
         }
 
     }

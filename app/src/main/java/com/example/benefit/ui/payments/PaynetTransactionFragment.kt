@@ -19,7 +19,10 @@ import com.example.benefit.remote.models.BalanceInfo
 import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.home.HomeFragment
-import com.example.benefit.util.*
+import com.example.benefit.util.RequestState
+import com.example.benefit.util.SizeUtils
+import com.example.benefit.util.isNumeric
+import com.example.benefit.util.loadImageUrl
 import kotlinx.android.synthetic.main.fragment_paynet_transfer.*
 import kotlinx.android.synthetic.main.item_card_small.view.*
 import kotlinx.android.synthetic.main.transaction_loading.*
@@ -74,10 +77,10 @@ class PaynetTransactionFragment : BaseFragment(R.layout.fragment_paynet_transfer
                     clTopUpSuccess.isVisible = true
                     lblTopUpSuccess.text = getString(R.string.payment_succeeded)
                     tvTransferAmount.text =
-                            getString(
-                                    R.string.transfer_amount,
-                                    transactionState.value.response!!.filter { it.key == SUMMA_SERVICE_FIELD}[0].value
-                            )
+                        getString(
+                            R.string.transfer_amount,
+                            transactionState.value.response!!.filter { it.key == SUMMA_SERVICE_FIELD }[0].value
+                        )
                     tvCommissions.text = getString(R.string.commissions_amount, "0")
                 }
             }
@@ -102,7 +105,7 @@ class PaynetTransactionFragment : BaseFragment(R.layout.fragment_paynet_transfer
             val cardView = layoutInflater.inflate(R.layout.item_card_small, null)
             cardView.cardName.text = it.card_title
             cardView.tvAmount.text =
-                    DecimalFormat("#,###").format(it.balance?.dropLast(2)?.toInt()) + " UZS"
+                DecimalFormat("#,###").format(it.balance?.dropLast(2)?.toInt()) + " UZS"
             cardView.tvCardEndNum.text = "*" + it.panHidden!!.substring(it.panHidden!!.length - 4)
             it.setMiniBackgroundInto(cardView.ivCardBg)
             cardsPagerSmall.addView(cardView)
@@ -113,10 +116,10 @@ class PaynetTransactionFragment : BaseFragment(R.layout.fragment_paynet_transfer
         cardsPagerSmall.offscreenPageLimit = 10
         cardsPagerSmall.clipToPadding = false
         cardsPagerSmall.setPadding(
-                SizeUtils.dpToPx(requireContext(), 26).toInt(),
-                0,
-                SizeUtils.dpToPx(requireContext(), 26).toInt(),
-                0
+            SizeUtils.dpToPx(requireContext(), 26).toInt(),
+            0,
+            SizeUtils.dpToPx(requireContext(), 26).toInt(),
+            0
         )
         cardsPagerSmall.pageMargin = SizeUtils.dpToPx(requireContext(), 15).toInt()
 
@@ -144,18 +147,18 @@ class PaynetTransactionFragment : BaseFragment(R.layout.fragment_paynet_transfer
 
             if (cardsPagerSmall.currentItem == 0) {
                 viewModel.payWithCashback(
-                        serviceId = args.paynetMerchant.own_id!!,
-                        providerId = args.paynetMerchant.category_id!!,
-                        fields = fields.toString(),
-                        edtSum.text.toString().toInt(),
+                    serviceId = args.paynetMerchant.own_id!!,
+                    providerId = args.paynetMerchant.category_id!!,
+                    fields = fields.toString(),
+                    edtSum.text.toString().toInt(),
                 )
             } else {
                 viewModel.pay(
-                        serviceId = args.paynetMerchant.own_id!!,
-                        providerId = args.paynetMerchant.category_id!!,
-                        fields = fields.toString(),
-                        edtSum.text.toString().toInt(),
-                        viewModel.bftAndMyCardsPair.value!!.second.getProperly()[cardsPagerSmall.currentItem].id!!
+                    serviceId = args.paynetMerchant.own_id!!,
+                    providerId = args.paynetMerchant.category_id!!,
+                    fields = fields.toString(),
+                    edtSum.text.toString().toInt(),
+                    viewModel.bftAndMyCardsPair.value!!.second.getProperly()[cardsPagerSmall.currentItem].id!!
                 )
             }
         }
@@ -166,9 +169,10 @@ class PaynetTransactionFragment : BaseFragment(R.layout.fragment_paynet_transfer
                 return@doOnTextChanged
             }
             tvFill.isEnabled =
-                    viewModel.bftAndMyCardsPair.value!!.second.getProperly()[cardsPagerSmall.currentItem].balance?.dropLast(
-                            2
-                    )!!.toInt() > text.toString().toInt()
+                viewModel.bftAndMyCardsPair.value!!.second.getProperly()[cardsPagerSmall.currentItem].balance?.dropLast(
+                    2
+                )!!.toInt() > text.toString().toInt()
+            tvMinAmount.isVisible = text.toString().toInt() < 1000
         }
 
     }

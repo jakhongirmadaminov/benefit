@@ -6,6 +6,7 @@ package com.example.benefit.ui.main.transfer_to_card
  */
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
@@ -78,7 +79,11 @@ class TransferToCardFragment : BaseFragment(R.layout.fragment_transfer_to_card) 
                         null,
                         null
                     )
-
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.card_not_found),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 is ResultSuccess -> {
                     tvNext.isEnabled = true

@@ -21,7 +21,14 @@ import com.example.benefit.util.SizeUtils
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_fill_from_any_card_transfer.*
 import kotlinx.android.synthetic.main.fragment_fill_from_my_cards.*
+import kotlinx.android.synthetic.main.fragment_fill_from_my_cards.clParent
+import kotlinx.android.synthetic.main.fragment_fill_from_my_cards.edtSum
+import kotlinx.android.synthetic.main.fragment_fill_from_my_cards.ivBack
+import kotlinx.android.synthetic.main.fragment_fill_from_my_cards.layoutCalculator
+import kotlinx.android.synthetic.main.fragment_fill_from_my_cards.tvFill
+import kotlinx.android.synthetic.main.fragment_fill_from_my_cards.tvMinAmount
 import kotlinx.android.synthetic.main.item_card_small.view.*
 import kotlinx.android.synthetic.main.layout_calculator.*
 import kotlinx.android.synthetic.main.layout_calculator.view.*
@@ -248,6 +255,7 @@ class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_
 
         edtSum.doOnTextChanged { text, start, before, count ->
             tvFill.isEnabled = text != null && text.isNotBlank() && !text.contains(" ")
+            tvMinAmount.isVisible = text?.toString()?.toInt() ?: 0 < 1000
         }
     }
 

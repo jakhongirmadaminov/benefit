@@ -12,6 +12,8 @@ import com.example.benefit.stories.data.Story
 import com.example.benefit.util.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -71,6 +73,12 @@ class HomeViewModel @Inject constructor(
                 }.exhaustive
             }
         }
+    }
+
+    fun getBftBalance() = flow {
+        emit(apiAuth.getBftInfo().result?.data?.balanceInfo?.summa)
+    }.catch {
+        emit(null)
     }
 
 

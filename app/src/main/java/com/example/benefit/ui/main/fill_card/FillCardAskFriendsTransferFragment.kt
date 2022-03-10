@@ -3,7 +3,8 @@ package com.example.benefit.ui.main.fill_card
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
+import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
@@ -16,7 +17,6 @@ import com.example.benefit.ui.viewgroups.ContactItemSquare
 import com.example.benefit.util.SizeUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_fill_card_ask_friends_transfer.*
 import javax.inject.Inject
 
@@ -59,10 +59,14 @@ class FillCardAskFriendsTransferFragment @Inject constructor() :
             findNavController().popBackStack()
         }
 
+        edtSum.doOnTextChanged { text, start, before, count ->
+            tvMinAmount.isVisible = text?.toString()?.toInt() ?: 0 < 1000
+        }
     }
 
 
     private fun setupViews() {
+        calcLayout.edtSum = edtSum
 
         setupSelectedContacts()
         setupCardPager()

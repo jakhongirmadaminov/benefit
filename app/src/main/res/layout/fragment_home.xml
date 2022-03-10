@@ -130,11 +130,12 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        android:id="@+id/tvBFTAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="24dp"
                         android:fontFamily="sans-serif"
-                        android:text="193 000 BFT"
+                        tools:text="193 000 BFT"
                         android:textColor="#ffffff"
                         android:textSize="22sp"
                         android:textStyle="bold"

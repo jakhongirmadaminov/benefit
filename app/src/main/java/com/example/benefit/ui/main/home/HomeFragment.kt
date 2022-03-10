@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.PagerAdapter
 import com.example.benefit.R
 import com.example.benefit.remote.models.CardDTO
@@ -42,7 +42,10 @@ import com.rd.utils.DensityUtils.dpToPx
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.item_card.view.*
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import splitties.fragments.start
 import splitties.preferences.edit
 import java.text.DecimalFormat
@@ -337,15 +340,13 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
         setupServicesPager()
 
+        viewModel.getBftBalance().onEach { bftAmount ->
+            page_one.tvBFTAmount.text = (bftAmount?.toString() ?: "") + " BFT"
+        }.launchIn(lifecycleScope)
 
     }
 
     private fun setupCardsPager(cardsDTO: List<CardDTO>) {
-
-//        transactionHistoryPanel.isVisible = cardsDTO.isNotEmpty()
-//        categoryExpensesPanel.isVisible = cardsDTO.isNotEmpty()
-
-
         val cardViews = arrayListOf<View>()
         cardsDTO.forEach {
             val cardView = makeCardView(it)
@@ -363,7 +364,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         cardsPager.clipToPadding = false
         cardsPager.setPadding(dpToPx(26), 0, dpToPx(26), 0)
         cardsPager.pageMargin = dpToPx(15)
-
     }
 
     private fun makeCardView(cardDTO: CardDTO): View {

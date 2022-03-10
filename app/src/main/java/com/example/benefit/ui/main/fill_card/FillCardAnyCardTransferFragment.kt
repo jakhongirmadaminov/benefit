@@ -113,6 +113,7 @@ class FillCardAnyCardTransferFragment @Inject constructor() :
 
         edtSum.doOnTextChanged { text, start, before, count ->
             tvFill.isEnabled = text != null && text.isNotBlank() && !text.contains(" ")
+            tvMinAmount.isVisible = text?.toString()?.toInt() ?: 0 < 1000
         }
 
     }

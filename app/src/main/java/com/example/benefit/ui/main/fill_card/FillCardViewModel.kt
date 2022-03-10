@@ -93,9 +93,7 @@ class FillCardViewModel @Inject constructor(
     fun getCardP2PInfo(pan: String) {
         viewModelScope.launch(Dispatchers.IO) {
             panInfoResp.postValue(getFormattedResponse(panInfoLoading) {
-                authApiService.getP2PCardInfo(
-                    pan
-                )
+                authApiService.getP2PCardInfo(pan)
             })
         }
     }

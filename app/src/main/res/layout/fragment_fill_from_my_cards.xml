@@ -94,6 +94,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
+        android:visibility="gone"
         android:text="@string/minimum_sum_is"
         android:textColor="#e94040"
         android:textSize="14sp"
