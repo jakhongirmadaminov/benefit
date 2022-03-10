@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import org.joda.time.Period
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,5 +29,14 @@ class PartnerHomeViewModel @Inject constructor(val apiService: AuthApiService) :
             error.postValue(it.localizedMessage)
         }.launchIn(viewModelScope)
     }
+
+
+    fun partnerStoriesFlow(partnerId: Long) =
+        flow {
+            val fromMillis = System.currentTimeMillis() - Period(0, 1, 0, 0).millis
+            emit(
+                apiService.getPartnerStories(partnerId, fromMillis)
+            )
+        }
 
 }

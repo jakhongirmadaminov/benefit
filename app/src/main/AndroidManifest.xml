@@ -97,6 +97,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
+            android:name=".ui.partners_map.PartnerOnMapActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar" />
+        <activity
             android:name=".ui.branches_atms.BranchesAtmsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />

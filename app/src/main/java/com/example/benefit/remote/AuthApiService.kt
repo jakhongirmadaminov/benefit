@@ -3,7 +3,6 @@ package com.example.benefit.remote
 import com.example.benefit.remote.models.*
 import com.example.benefit.stories.data.Story
 import com.example.benefit.util.AppPrefs
-import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -438,10 +437,18 @@ interface AuthApiService {
 
     @POST("api/partners/useraction")
     @FormUrlEncoded
-  suspend  fun likeOrDislikePartner(
+    suspend fun likeOrDislikePartner(
         @Field("type") type: String,
         @Field("partner_id") partner_id: Long,
-        @Field("user_id") user_id: Int = AppPrefs.userId
+        @Field("user_id") user_id: Int = AppPrefs.userId,
+        @Field("user_token") user_token: String = AppPrefs.userToken ?: "",
+    ): PlainResp
+
+    @GET("api/partners/story/{partnerId}/{fromMillis}/{toMillis}")
+    suspend fun getPartnerStories(
+        @Path(value = "partnerId", encoded = true) partnerId: Long,
+        @Path(value = "fromMillis", encoded = true) fromMillis: Long,
+        @Path(value = "toMillis", encoded = true) currentMillis: Long = System.currentTimeMillis(),
     ): PlainResp
 
 
