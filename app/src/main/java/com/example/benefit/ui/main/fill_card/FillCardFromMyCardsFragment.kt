@@ -21,8 +21,10 @@ import com.example.benefit.util.SizeUtils
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_fill_card_ask_friends_transfer.*
 import kotlinx.android.synthetic.main.fragment_fill_from_any_card_transfer.*
 import kotlinx.android.synthetic.main.fragment_fill_from_my_cards.*
+import kotlinx.android.synthetic.main.fragment_fill_from_my_cards.cardsToPagerSmall
 import kotlinx.android.synthetic.main.fragment_fill_from_my_cards.clParent
 import kotlinx.android.synthetic.main.fragment_fill_from_my_cards.edtSum
 import kotlinx.android.synthetic.main.fragment_fill_from_my_cards.ivBack
@@ -255,7 +257,8 @@ class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_
 
         edtSum.doOnTextChanged { text, start, before, count ->
             tvFill.isEnabled = text != null && text.isNotBlank() && !text.contains(" ")
-            tvMinAmount.isVisible = text?.toString()?.toInt() ?: 0 < 1000
+            tvMinAmount.isVisible =
+                if (text.isNullOrBlank()) false else text.toString().toInt() < 1000
         }
     }
 

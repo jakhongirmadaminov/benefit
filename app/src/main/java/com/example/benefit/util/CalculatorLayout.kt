@@ -50,8 +50,9 @@ class CalculatorLayout constructor(context: Context, attrs: AttributeSet) :
 
         backspace.setOnClickListener {
             edtSum?.let {
-                if (it.text.isNotBlank()) {
-                    it.setText(it.text.dropLast(1))
+                if (!it.text.isNullOrBlank()) {
+                    val amount = it.text.dropLast(1)
+                    it.setText(amount)
                 }
             }
         }

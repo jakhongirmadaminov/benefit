@@ -23,7 +23,12 @@ import com.example.benefit.util.RequestState
 import com.example.benefit.util.SizeUtils
 import com.example.benefit.util.isNumeric
 import com.example.benefit.util.loadImageUrl
+import kotlinx.android.synthetic.main.fragment_fill_card_ask_friends_transfer.*
 import kotlinx.android.synthetic.main.fragment_paynet_transfer.*
+import kotlinx.android.synthetic.main.fragment_paynet_transfer.edtSum
+import kotlinx.android.synthetic.main.fragment_paynet_transfer.ivBack
+import kotlinx.android.synthetic.main.fragment_paynet_transfer.tvFill
+import kotlinx.android.synthetic.main.fragment_paynet_transfer.tvMinAmount
 import kotlinx.android.synthetic.main.item_card_small.view.*
 import kotlinx.android.synthetic.main.transaction_loading.*
 import kotlinx.android.synthetic.main.transaction_success.*
@@ -172,7 +177,8 @@ class PaynetTransactionFragment : BaseFragment(R.layout.fragment_paynet_transfer
                 viewModel.bftAndMyCardsPair.value!!.second.getProperly()[cardsPagerSmall.currentItem].balance?.dropLast(
                     2
                 )!!.toInt() > text.toString().toInt()
-            tvMinAmount.isVisible = text.toString().toInt() < 1000
+            tvMinAmount.isVisible =
+                if (text.isNullOrBlank()) false else text.toString().toInt() < 1000
         }
 
     }

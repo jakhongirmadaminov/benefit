@@ -22,7 +22,10 @@ import com.example.benefit.util.*
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
-import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.xwray.groupie.GroupAdapter
@@ -32,9 +35,7 @@ import kotlinx.android.synthetic.main.item_bar_chart.view.*
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import java.text.DecimalFormat
-import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 const val ARG_CARDS = "CARDS"
 
@@ -161,12 +162,14 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity(), OnChartValueSelect
 
         chartView.llMonths.children.forEachIndexed { index, view ->
             (view as? TextView)?.text =
-                DateTimeFormat.forPattern("MMM").print(DateTime.now().minusMonths(11 - index))
+                DateTimeFormat.forPattern("MMM")
+                    .print(DateTime(DateTime.now().year, index + 1, 1, 0, 0))
         }
 
         chartView2.llMonths.children.forEachIndexed { index, view ->
             (view as? TextView)?.text =
-                DateTimeFormat.forPattern("MMM").print(DateTime.now().minusMonths(5 - index))
+                DateTimeFormat.forPattern("MMM")
+                    .print(DateTime(DateTime.now().year, 6 + index, 1, 0, 0))
         }
 
         makeChart(chartView.chart, value.drop(6))
@@ -275,12 +278,12 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity(), OnChartValueSelect
         if (chartPager.currentItem == 0) {
             loadCategorizedExpenses(
                 (viewModel.transactionsAnalyticsResp.value as ResultSuccess).value[11 - barIndex],
-                11 - barIndex
+                barIndex
             )
         } else {
             loadCategorizedExpenses(
                 (viewModel.transactionsAnalyticsResp.value as ResultSuccess).value[5 - barIndex],
-                5 - barIndex
+                barIndex+5
             )
         }
     }

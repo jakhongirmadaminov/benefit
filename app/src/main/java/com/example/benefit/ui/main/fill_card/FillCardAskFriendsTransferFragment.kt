@@ -60,7 +60,8 @@ class FillCardAskFriendsTransferFragment @Inject constructor() :
         }
 
         edtSum.doOnTextChanged { text, start, before, count ->
-            tvMinAmount.isVisible = text?.toString()?.toInt() ?: 0 < 1000
+            tvMinAmount.isVisible =
+                if (text.isNullOrBlank()) false else text.toString().toInt() < 1000
         }
     }
 

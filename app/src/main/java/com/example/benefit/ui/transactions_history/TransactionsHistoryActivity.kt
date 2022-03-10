@@ -17,7 +17,6 @@ import com.example.benefit.ui.base.BaseActivity
 import com.example.benefit.ui.expenses_by_categories.ARG_CARDS
 import com.example.benefit.ui.main.home.HomeFragment
 import com.example.benefit.ui.transactions_history.transaction_bsd.TransactionBSD
-import com.example.benefit.ui.transactions_history.transaction_bsd.TransactionBSD.Companion.ARG_TRANSACTIONS_REPORT
 import com.example.benefit.ui.viewgroups.CardTagItem
 import com.example.benefit.ui.viewgroups.ItemTransaction
 import com.example.benefit.ui.viewgroups.ItemTransactionDate
@@ -148,18 +147,20 @@ class TransactionsHistoryActivity : BaseActivity(), OnChartValueSelectedListener
         chartView2.rbMonth6.isChecked = true
         chartView.llMonths.children.forEachIndexed { index, view ->
             (view as? TextView)?.text =
-                DateTimeFormat.forPattern("MMM").print(DateTime.now().minusMonths(11 - index))
+                DateTimeFormat.forPattern("MMM")
+                    .print(DateTime(DateTime.now().year, index + 1, 1, 0, 0))
         }
 
         chartView2.llMonths.children.forEachIndexed { index, view ->
             (view as? TextView)?.text =
-                DateTimeFormat.forPattern("MMM").print(DateTime.now().minusMonths(5 - index))
+                DateTimeFormat.forPattern("MMM")
+                    .print(DateTime(DateTime.now().year, 6 + index, 1, 0, 0))
         }
 
         chartView.radioGroup.children.forEachIndexed { index, view ->
             (view as RadioButton).setOnCheckedChangeListener { compoundButton, b ->
                 if (b) {
-                    selectedMonthOffset = 11 - index
+                    selectedMonthOffset = index
                     loadTransactions(
                         (viewModel.transactionsAnalyticsResp.value as ResultSuccess).value[selectedMonthOffset]
                     )
@@ -169,7 +170,7 @@ class TransactionsHistoryActivity : BaseActivity(), OnChartValueSelectedListener
         chartView2.radioGroup.children.forEachIndexed { index, view ->
             (view as RadioButton).setOnCheckedChangeListener { compoundButton, b ->
                 if (b) {
-                    selectedMonthOffset = 5 - index
+                    selectedMonthOffset = index + 5
                     loadTransactions(
                         (viewModel.transactionsAnalyticsResp.value as ResultSuccess).value[selectedMonthOffset]
                     )
@@ -217,12 +218,12 @@ class TransactionsHistoryActivity : BaseActivity(), OnChartValueSelectedListener
             chartPager[0].radioGroup.children.forEachIndexed { index, view ->
                 (view as RadioButton).isChecked = index == barIndex
             }
-            selectedMonthOffset = 11 - barIndex
+            selectedMonthOffset = barIndex
         } else {
             chartPager[1].radioGroup.children.forEachIndexed { index, view ->
                 (view as RadioButton).isChecked = index == barIndex
             }
-            selectedMonthOffset = 5 - barIndex
+            selectedMonthOffset = barIndex + 5
         }
         loadTransactions((viewModel.transactionsAnalyticsResp.value as ResultSuccess).value[selectedMonthOffset])
     }
@@ -251,9 +252,9 @@ class TransactionsHistoryActivity : BaseActivity(), OnChartValueSelectedListener
         var totalIncome = 0L
         value.forEach {
             if (!it.isCredit!!) {
-                totalExpense += it.amountWithoutTiyin ?: 0
+                totalExpense += it.amountWithoutTiyin
             } else if (it.isCredit) {
-                totalIncome += it.amountWithoutTiyin ?: 0
+                totalIncome += it.amountWithoutTiyin
             }
         }
         tvIncomeOnMonthAmount.text =

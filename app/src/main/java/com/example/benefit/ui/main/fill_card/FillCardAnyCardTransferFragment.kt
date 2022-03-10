@@ -19,7 +19,13 @@ import com.example.benefit.util.ResultError
 import com.example.benefit.util.ResultSuccess
 import com.example.benefit.util.SizeUtils
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_fill_card_ask_friends_transfer.*
 import kotlinx.android.synthetic.main.fragment_fill_from_any_card_transfer.*
+import kotlinx.android.synthetic.main.fragment_fill_from_any_card_transfer.clParent
+import kotlinx.android.synthetic.main.fragment_fill_from_any_card_transfer.edtSum
+import kotlinx.android.synthetic.main.fragment_fill_from_any_card_transfer.ivBack
+import kotlinx.android.synthetic.main.fragment_fill_from_any_card_transfer.tvFill
+import kotlinx.android.synthetic.main.fragment_fill_from_any_card_transfer.tvMinAmount
 import kotlinx.android.synthetic.main.item_card_small.view.*
 import kotlinx.android.synthetic.main.transaction_loading.*
 import kotlinx.android.synthetic.main.transaction_success.*
@@ -113,7 +119,8 @@ class FillCardAnyCardTransferFragment @Inject constructor() :
 
         edtSum.doOnTextChanged { text, start, before, count ->
             tvFill.isEnabled = text != null && text.isNotBlank() && !text.contains(" ")
-            tvMinAmount.isVisible = text?.toString()?.toInt() ?: 0 < 1000
+            tvMinAmount.isVisible =
+                if (text.isNullOrBlank()) false else text.toString().toInt() < 1000
         }
 
     }

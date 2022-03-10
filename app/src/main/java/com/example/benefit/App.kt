@@ -36,6 +36,7 @@ class App : Application() {
             startActivity(Intent(this, PinActivity::class.java).apply {
                 flags = FLAG_ACTIVITY_NEW_TASK
             })
+            startTimerForPin()
         }
     }
 

@@ -44,9 +44,9 @@ class TransactionsHistoryViewModel @Inject constructor(val apiService: AuthApiSe
                     getFormattedResponse(totalExpenseReportLoading) {
                         apiService.transactionsInOut(
                             cardId,
-                            DateTimeFormat.forPattern("yyyyMMdd")
+                            DateTimeFormat.forPattern("yyyy0101")
                                 .print(thisMonthsStartDateTime.minusMonths(i)).toInt(),
-                            DateTimeFormat.forPattern("yyyyMMdd")
+                            DateTimeFormat.forPattern("yyyy1231")
                                 .print(
                                     thisMonthsStartDateTime.minusMonths(i).dayOfMonth()
                                         .withMaximumValue()
@@ -64,9 +64,9 @@ class TransactionsHistoryViewModel @Inject constructor(val apiService: AuthApiSe
                     getFormattedResponse(analyticsReportLoading) {
                         apiService.transactionsAnalytics(
                             cardId,
-                            DateTimeFormat.forPattern("yyyyMMdd")
+                            DateTimeFormat.forPattern("yyyy0101")
                                 .print(thisMonthsStartDateTime.minusMonths(i)).toInt(),
-                            DateTimeFormat.forPattern("yyyyMMdd")
+                            DateTimeFormat.forPattern("yyyy1231")
                                 .print(
                                     thisMonthsStartDateTime.minusMonths(i).dayOfMonth()
                                         .withMaximumValue()

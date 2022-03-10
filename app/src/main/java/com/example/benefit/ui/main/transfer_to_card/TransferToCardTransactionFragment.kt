@@ -19,6 +19,7 @@ import com.example.benefit.util.ResultError
 import com.example.benefit.util.ResultSuccess
 import com.example.benefit.util.SizeUtils
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_fill_card_ask_friends_transfer.*
 import kotlinx.android.synthetic.main.fragment_fill_from_any_card_transfer.*
 import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.*
 import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.cardsPagerSmall
@@ -151,7 +152,8 @@ class TransferToCardTransactionFragment :
                 viewModel.cardsResp.value!![cardsPagerSmall.currentItem].balance?.dropLast(2)!!
                     .toInt() > text.toString()
                     .toInt()
-            tvMinAmount.isVisible = text?.toString()?.toInt() ?: 0 < 1000
+            tvMinAmount.isVisible =
+                if (text.isNullOrBlank()) false else text.toString().toInt() < 1000
         }
 
     }
