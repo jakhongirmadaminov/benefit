@@ -2,16 +2,16 @@ package com.example.benefit.ui.main.pin
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import com.example.benefit.R
 import com.example.benefit.ui.auth.AuthActivity
+import com.example.benefit.ui.base.BaseActivity
 import com.example.benefit.util.AppPrefs
 import com.example.benefit.util.loadImageUrl
 import kotlinx.android.synthetic.main.activity_pin.*
 
-class PinActivity : AppCompatActivity() {
+class PinActivity : BaseActivity() {
 
 
     private var isBiometricSupported = false
