@@ -36,6 +36,7 @@ import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import java.text.DecimalFormat
 import javax.inject.Inject
+import kotlin.collections.set
 
 const val ARG_CARDS = "CARDS"
 
@@ -58,9 +59,7 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity(), OnChartValueSelect
         subscribeObservers()
         viewModel.getPartnerCategories()
 
-        viewModel.getExpensesAndAnalytics(
-            myCards[0].id!!
-        )
+        viewModel.getExpensesAndAnalytics(myCards[0].id!!)
     }
 
     private fun setupViews() {
@@ -73,8 +72,9 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity(), OnChartValueSelect
 
 
     private fun attachListeners() {
-
-
+        swipeRefresh.setOnRefreshListener {
+            selectTag(tagsAdapter.getItem(0) as CardTagItem, myCards[0])
+        }
     }
 
 
@@ -103,7 +103,7 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity(), OnChartValueSelect
         }
 
         viewModel.analyticsReportLoading.observe(this) {
-
+            swipeRefresh.isRefreshing = it
         }
 
         viewModel.totalExpenseReportLoading.observe(this) {
@@ -136,20 +136,23 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity(), OnChartValueSelect
 
     val tagsAdapter = GroupAdapter<GroupieViewHolder>()
     private fun setupCardTags() {
-
         myCards.forEachIndexed { index, cardDTO ->
             val cardItem = CardTagItem(cardDTO) { cardItem, card ->
-                for (i in 0 until tagsAdapter.itemCount) {
-                    (tagsAdapter.getItem(i) as CardTagItem).selected = false
-                }
-                cardItem.selected = true
-                tagsAdapter.notifyDataSetChanged()
-                viewModel.getExpensesAndAnalytics(card.id!!)
+                selectTag(cardItem, card)
             }
             cardItem.selected = index == 0
             tagsAdapter.add(cardItem)
         }
 
+    }
+
+    private fun selectTag(cardItem: CardTagItem, card: CardDTO) {
+        for (i in 0 until tagsAdapter.itemCount) {
+            (tagsAdapter.getItem(i) as CardTagItem).selected = false
+        }
+        cardItem.selected = true
+        tagsAdapter.notifyDataSetChanged()
+        viewModel.getExpensesAndAnalytics(card.id!!)
     }
 
 
@@ -169,11 +172,11 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity(), OnChartValueSelect
         chartView2.llMonths.children.forEachIndexed { index, view ->
             (view as? TextView)?.text =
                 DateTimeFormat.forPattern("MMM")
-                    .print(DateTime(DateTime.now().year, 6 + index, 1, 0, 0))
+                    .print(DateTime(DateTime.now().year, 6 + index + 1, 1, 0, 0))
         }
 
-        makeChart(chartView.chart, value.drop(6))
-        makeChart(chartView2.chart, value.dropLast(6))
+        makeChart(chartView.chart, value.dropLast(6))
+        makeChart(chartView2.chart, value.drop(6))
 
         chartPager.addView(chartView)
         chartPager.addView(chartView2)
@@ -189,17 +192,36 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity(), OnChartValueSelect
             0
         )
         chartPager.pageMargin = SizeUtils.dpToPx(this, 26).toInt()
-        chartPager.currentItem = 1
+        chartPager.currentItem = if (DateTime.now().monthOfYear < 7) 0 else 1
+        val todayBarIndex = DateTime.now().monthOfYear - 1
+
+        if (todayBarIndex < 6) {
+            chartView.chart.highlightValue(
+                chartView.chart.highlighter.getHighlight(
+                    todayBarIndex.toFloat(),
+                    value[todayBarIndex].outcome_total.toFloat()
+                ), true
+            )
+        } else {
+            chartView.chart.highlightValue(
+                chartView.chart.highlighter.getHighlight(
+                    todayBarIndex + 6.toFloat(),
+                    value[todayBarIndex + 6].outcome_total.toFloat()
+                ), true
+            )
+        }
+
     }
 
     private fun makeChart(chart: BarChart, value: List<TransactionInOutDTO>) {
         val entries = ArrayList<BarEntry>()
-        value.reversed().forEachIndexed { index, item ->
-            // turn your data into Entry objects
-            entries.add(BarEntry(index.toFloat(), item.outcome_total.toFloat()))
+        if (value.any { it.outcome_total.toFloat() > 0 }) {
+            value.forEachIndexed { index, item ->
+                entries.add(BarEntry(index.toFloat(), item.outcome_total.toFloat()))
+            }
         }
 
-        val dataSet = BarDataSet(entries, "") // add entries to dataset
+        val dataSet = BarDataSet(entries, "")
         dataSet.setDrawIcons(false)
         dataSet.setDrawValues(false)
         dataSet.label = ""
@@ -277,13 +299,13 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity(), OnChartValueSelect
     private fun showExpenses(barIndex: Int) {
         if (chartPager.currentItem == 0) {
             loadCategorizedExpenses(
-                (viewModel.transactionsAnalyticsResp.value as ResultSuccess).value[11 - barIndex],
+                (viewModel.transactionsAnalyticsResp.value as ResultSuccess).value[barIndex],
                 barIndex
             )
         } else {
             loadCategorizedExpenses(
-                (viewModel.transactionsAnalyticsResp.value as ResultSuccess).value[5 - barIndex],
-                barIndex+5
+                (viewModel.transactionsAnalyticsResp.value as ResultSuccess).value[barIndex + 6],
+                barIndex + 6
             )
         }
     }
@@ -293,23 +315,21 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity(), OnChartValueSelect
 
         list.forEach { transaction ->
             transaction.partner?.let { partner ->
-                expensesByCategoryMap[partner.category_id!!]?.plus(transaction.amountWithoutTiyin!!)
-                    ?: run {
-                        expensesByCategoryMap[partner.category_id] =
-                            transaction.amountWithoutTiyin!!.toLong()
-                    }
+                if (expensesByCategoryMap[partner.category_id!!] == null) {
+                    expensesByCategoryMap[partner.category_id] = transaction.amountWithoutTiyin
+                } else {
+                    expensesByCategoryMap[partner.category_id] =
+                        expensesByCategoryMap[partner.category_id]!! + transaction.amountWithoutTiyin
+                }
             }
         }
 
-        var totalExpense = 0L
-        expensesByCategoryMap.values.forEach {
-            totalExpense += it
-        }
+        val totalExpense =
+            (viewModel.transactionsReportResp.value as ResultSuccess).value[monthIndex].outcome_total / 100
 
         tvExpenses.text = getString(R.string.sums, DecimalFormat("#,###").format(totalExpense))
         tvSpentExpensesForMonth.text =
-            getString(R.string.expense_for_month) + " " + if (DateTime.now().monthOfYear - monthIndex - 1 >= 0) Constants.MONTHS[AppPrefs.language]!![DateTime.now().monthOfYear - monthIndex - 1]
-            else Constants.MONTHS[AppPrefs.language]!![DateTime.now().monthOfYear - monthIndex - 1 + 12]
+            getString(R.string.expense_for_month) + " " + Constants.MONTHS[AppPrefs.language]!![monthIndex]
 
 
         for (i in 0 until categoriesAdapter.itemCount) {

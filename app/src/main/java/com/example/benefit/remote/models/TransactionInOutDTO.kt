@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class TransactionInOutDTO(
     @SerializedName("income_total") val income_total: Long,
-    @SerializedName("outcome_total") val outcome_total: Long
+    @SerializedName("outcome_total") var outcome_total: Long
 ) : Parcelable
 
 data class TransactionInOutDTOList(val list: ArrayList<TransactionInOutDTO>) :

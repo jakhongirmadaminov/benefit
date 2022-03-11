@@ -144,7 +144,6 @@ class TransactionsHistoryActivity : BaseActivity(), OnChartValueSelectedListener
         val chartView = layoutInflater.inflate(R.layout.item_line_chart, null)
         val chartView2 = layoutInflater.inflate(R.layout.item_line_chart, null)
 
-        chartView2.rbMonth6.isChecked = true
         chartView.llMonths.children.forEachIndexed { index, view ->
             (view as? TextView)?.text =
                 DateTimeFormat.forPattern("MMM")
@@ -154,7 +153,7 @@ class TransactionsHistoryActivity : BaseActivity(), OnChartValueSelectedListener
         chartView2.llMonths.children.forEachIndexed { index, view ->
             (view as? TextView)?.text =
                 DateTimeFormat.forPattern("MMM")
-                    .print(DateTime(DateTime.now().year, 6 + index, 1, 0, 0))
+                    .print(DateTime(DateTime.now().year, 6 + index + 1, 1, 0, 0))
         }
 
         chartView.radioGroup.children.forEachIndexed { index, view ->
@@ -180,8 +179,8 @@ class TransactionsHistoryActivity : BaseActivity(), OnChartValueSelectedListener
 
 
 
-        makeChart(chartView.chart, value.drop(6))
-        makeChart(chartView2.chart, value.dropLast(6))
+        makeChart(chartView.chart, value.dropLast(6))
+        makeChart(chartView2.chart, value.drop(6))
 
         chartPager.addView(chartView)
         chartPager.addView(chartView2)
@@ -197,8 +196,10 @@ class TransactionsHistoryActivity : BaseActivity(), OnChartValueSelectedListener
             0
         )
         chartPager.pageMargin = SizeUtils.dpToPx(this, 26).toInt()
-        chartPager.currentItem = 1
+        chartPager.currentItem = if (DateTime.now().monthOfYear < 7) 0 else 1
         loadTransactions((viewModel.transactionsAnalyticsResp.value as ResultSuccess).value[0])
+
+        showExpenses(DateTime.now().monthOfYear - 1)
     }
 
     override fun onValueSelected(e: Entry?, h: Highlight?) {
@@ -294,18 +295,18 @@ class TransactionsHistoryActivity : BaseActivity(), OnChartValueSelectedListener
 
     private fun makeChart(chart: LineChart, value: List<TransactionInOutDTO>) {
         val entries = ArrayList<Entry>()
-        value.reversed().forEachIndexed { index, item ->
-            // turn your data into Entry objects
-            entries.add(
-                Entry(
-                    index.toFloat(),
-                    if (cbMonthSpent.isChecked) item.outcome_total.toFloat() else item.income_total.toFloat()
+        if (value.any { (cbMonthSpent.isChecked && it.outcome_total.toFloat() > 0) || (!cbMonthSpent.isChecked && it.income_total.toFloat() > 0) }) {
+            value.forEachIndexed { index, item ->
+                entries.add(
+                    Entry(
+                        index.toFloat(),
+                        if (cbMonthSpent.isChecked) item.outcome_total.toFloat() else item.income_total.toFloat()
+                    )
                 )
-            )
+            }
         }
 
-
-        val dataSet = LineDataSet(entries, "") // add entries to dataset
+        val dataSet = LineDataSet(entries, "")
 //        dataSet.color = ContextCompat.getColor(this, R.color.colorAccent)
 //        dataSet.setValueTextColor()
 

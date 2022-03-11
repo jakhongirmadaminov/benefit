@@ -44,8 +44,18 @@ class TransactionsHistoryViewModel @Inject constructor(val apiService: AuthApiSe
                     getFormattedResponse(totalExpenseReportLoading) {
                         apiService.transactionsInOut(
                             cardId,
-                            DateTimeFormat.forPattern("yyyy${1+i}01").print(DateTime.now()).toInt(),
-                            DateTimeFormat.forPattern("yyyy${1+i}31").print(DateTime.now()).toInt()
+                            DateTimeFormat.forPattern("yyyyMMdd")
+                                .print(
+                                    DateTime.now().withMonthOfYear(i + 1).dayOfMonth()
+                                        .withMinimumValue()
+                                )
+                                .toInt(),
+                            DateTimeFormat.forPattern("yyyyMMdd")
+                                .print(
+                                    DateTime.now().withMonthOfYear(i + 1).dayOfMonth()
+                                        .withMaximumValue()
+                                )
+                                .toInt()
                         )
                     }
                 })
@@ -59,8 +69,14 @@ class TransactionsHistoryViewModel @Inject constructor(val apiService: AuthApiSe
                     getFormattedResponse(analyticsReportLoading) {
                         apiService.transactionsAnalytics(
                             cardId,
-                            DateTimeFormat.forPattern("yyyy${1+i}01").print(DateTime.now()).toInt(),
-                            DateTimeFormat.forPattern("yyyy${1+i}31").print(DateTime.now()).toInt()
+                            DateTimeFormat.forPattern("yyyyMMdd").print(
+                                DateTime.now().withMonthOfYear(i + 1).dayOfMonth()
+                                    .withMinimumValue()
+                            ).toInt(),
+                            DateTimeFormat.forPattern("yyyyMMdd").print(
+                                DateTime.now().withMonthOfYear(i + 1).dayOfMonth()
+                                    .withMaximumValue()
+                            ).toInt()
                         )
                     }
                 })

@@ -45,9 +45,9 @@ class ExpensesByCategoriesViewModel @Inject constructor(
 
 
     fun getExpensesAndAnalytics(cardId: Long) {
+        analyticsReportLoading.postValue(true)
         viewModelScope.launch(IO) {
             val thisMonthsStartDateTime = DateTime.now().dayOfMonth().withMinimumValue()
-
             val monthlyAnalyticsReportMap =
                 arrayListOf<Deferred<ResultWrapper<TransactionInOutDTO>>>()
 
@@ -56,13 +56,18 @@ class ExpensesByCategoriesViewModel @Inject constructor(
                     getFormattedResponse(totalExpenseReportLoading) {
                         apiService.transactionsInOut(
                             cardId,
-                            DateTimeFormat.forPattern("yyyy${1+i}01").print(DateTime.now()).toInt(),
-                            DateTimeFormat.forPattern("yyyy${1+i}31").print(DateTime.now()).toInt()
+                            DateTimeFormat.forPattern("yyyyMMdd").print(
+                                DateTime.now().withMonthOfYear(i + 1).dayOfMonth()
+                                    .withMinimumValue()
+                            ).toInt(),
+                            DateTimeFormat.forPattern("yyyyMMdd").print(
+                                DateTime.now().withMonthOfYear(i + 1).dayOfMonth()
+                                    .withMaximumValue()
+                            ).toInt()
                         )
                     }
                 })
             }
-
 
             val monthlyTransactionsReport = monthlyAnalyticsReportMap.awaitAll()
 
@@ -73,10 +78,6 @@ class ExpensesByCategoriesViewModel @Inject constructor(
                 }
             }
 
-            transactionsReportResp.postValue(ResultSuccess(monthlyTransactionsReport.map {
-                (it as ResultSuccess).value
-            }))
-
             val monthlyAnalyticsMap =
                 arrayListOf<Deferred<ResultWrapper<List<TransactionAnalyticsContainerDTO>>>>()
 
@@ -85,8 +86,14 @@ class ExpensesByCategoriesViewModel @Inject constructor(
                     getFormattedResponse(analyticsReportLoading) {
                         apiService.transactionsAnalytics(
                             cardId,
-                            DateTimeFormat.forPattern("yyyy${1+i}01").print(DateTime.now()).toInt(),
-                            DateTimeFormat.forPattern("yyyy${2+i}31").print(DateTime.now()).toInt()
+                            DateTimeFormat.forPattern("yyyyMMdd").print(
+                                DateTime.now().withMonthOfYear(i + 1).dayOfMonth()
+                                    .withMinimumValue()
+                            ).toInt(),
+                            DateTimeFormat.forPattern("yyyyMMdd").print(
+                                DateTime.now().withMonthOfYear(i + 1).dayOfMonth()
+                                    .withMaximumValue()
+                            ).toInt()
                         )
                     }
                 })
@@ -101,8 +108,12 @@ class ExpensesByCategoriesViewModel @Inject constructor(
                 }
             }
 
+            analyticsReportLoading.postValue(false)
             transactionsAnalyticsResp.postValue(ResultSuccess(monthlyTransactions.map {
                 (it as ResultSuccess).value.last().content
+            }))
+            transactionsReportResp.postValue(ResultSuccess(monthlyTransactionsReport.map {
+                (it as ResultSuccess).value
             }))
         }
     }

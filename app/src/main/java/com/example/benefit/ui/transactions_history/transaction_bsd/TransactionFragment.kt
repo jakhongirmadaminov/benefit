@@ -14,7 +14,6 @@ import androidx.core.view.children
 import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.remote.models.TransactionAnalyticsDTO
@@ -37,7 +36,6 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_transaction.*
-import kotlinx.android.synthetic.main.fragment_transaction.chartPager
 import kotlinx.android.synthetic.main.item_line_chart.view.*
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
@@ -49,13 +47,10 @@ class TransactionFragment : BaseFragment(R.layout.fragment_transaction),
     override fun onAttach(context: Context) {
         super.onAttach(context)
         transactionDTO = requireArguments().getParcelable(TransactionBSD.ARG_TRANSACTION_DTO)!!
-//        transactionsReport =
-//            requireArguments().getParcelableArrayList(TransactionBSD.ARG_TRANSACTIONS_REPORT)
     }
 
     private var selectedMonthOffset = 0
     lateinit var transactionDTO: TransactionAnalyticsDTO
-    private val viewModel: TransactionViewModel by viewModels()
     private val activityViewModel: TransactionsHistoryViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -131,21 +126,22 @@ class TransactionFragment : BaseFragment(R.layout.fragment_transaction),
         val chartView = layoutInflater.inflate(R.layout.item_line_chart, null)
         val chartView2 = layoutInflater.inflate(R.layout.item_line_chart, null)
 
-        chartView2.rbMonth6.isChecked = true
         chartView.llMonths.children.forEachIndexed { index, view ->
             (view as? TextView)?.text =
-                DateTimeFormat.forPattern("MMM").print(DateTime.now().minusMonths(11 - index))
+                DateTimeFormat.forPattern("MMM")
+                    .print(DateTime(DateTime.now().year, index + 1, 1, 0, 0))
         }
 
         chartView2.llMonths.children.forEachIndexed { index, view ->
             (view as? TextView)?.text =
-                DateTimeFormat.forPattern("MMM").print(DateTime.now().minusMonths(5 - index))
+                DateTimeFormat.forPattern("MMM")
+                    .print(DateTime(DateTime.now().year, 6 + index + 1, 1, 0, 0))
         }
 
         chartView.radioGroup.children.forEachIndexed { index, view ->
             (view as RadioButton).setOnCheckedChangeListener { compoundButton, b ->
                 if (b) {
-                    selectedMonthOffset = 11 - index
+                    selectedMonthOffset = index
                     loadTransactions(
                         (activityViewModel.transactionsAnalyticsResp.value as ResultSuccess).value[selectedMonthOffset]
                     )
@@ -155,7 +151,7 @@ class TransactionFragment : BaseFragment(R.layout.fragment_transaction),
         chartView2.radioGroup.children.forEachIndexed { index, view ->
             (view as RadioButton).setOnCheckedChangeListener { compoundButton, b ->
                 if (b) {
-                    selectedMonthOffset = 5 - index
+                    selectedMonthOffset = index + 5
                     loadTransactions(
                         (activityViewModel.transactionsAnalyticsResp.value as ResultSuccess).value[selectedMonthOffset]
                     )
@@ -165,8 +161,8 @@ class TransactionFragment : BaseFragment(R.layout.fragment_transaction),
 
 
 
-        makeChart(chartView.chart, value.drop(6))
-        makeChart(chartView2.chart, value.dropLast(6))
+        makeChart(chartView.chart, value.dropLast(6))
+        makeChart(chartView2.chart, value.drop(6))
 
         chartPager.addView(chartView)
         chartPager.addView(chartView2)
@@ -182,8 +178,10 @@ class TransactionFragment : BaseFragment(R.layout.fragment_transaction),
             0
         )
         chartPager.pageMargin = SizeUtils.dpToPx(requireActivity(), 26).toInt()
-        chartPager.currentItem = 1
+        chartPager.currentItem = if (DateTime.now().monthOfYear < 7) 0 else 1
         loadTransactions((activityViewModel.transactionsAnalyticsResp.value as ResultSuccess).value[0])
+        showExpenses(DateTime.now().monthOfYear - 1)
+
     }
 
     override fun onValueSelected(e: Entry?, h: Highlight?) {
@@ -197,12 +195,12 @@ class TransactionFragment : BaseFragment(R.layout.fragment_transaction),
             chartPager[0].radioGroup.children.forEachIndexed { index, view ->
                 (view as RadioButton).isChecked = index == barIndex
             }
-            selectedMonthOffset = 11 - barIndex
+            selectedMonthOffset = barIndex
         } else {
             chartPager[1].radioGroup.children.forEachIndexed { index, view ->
                 (view as RadioButton).isChecked = index == barIndex
             }
-            selectedMonthOffset = 5 - barIndex
+            selectedMonthOffset = barIndex + 5
         }
         loadTransactions((activityViewModel.transactionsAnalyticsResp.value as ResultSuccess).value[selectedMonthOffset])
     }
@@ -217,7 +215,7 @@ class TransactionFragment : BaseFragment(R.layout.fragment_transaction),
         transactionsAdapter.clear()
         var dateString: Int? = null
         value.forEach {
-            if (!it.isCredit!! && transactionDTO.merchant == it.merchant) {
+            if (transactionDTO.merchant == it.merchant) {
                 if (it.udate != dateString) {
                     transactionsAdapter.add(ItemTransactionDate(it.udate!!))
                     dateString = it.udate
@@ -230,52 +228,30 @@ class TransactionFragment : BaseFragment(R.layout.fragment_transaction),
         var totalIncome = 0L
         value.forEach {
             if (!it.isCredit!!) {
-                totalExpense += it.amountWithoutTiyin ?: 0
+                totalExpense += it.amountWithoutTiyin
             } else if (it.isCredit) {
-                totalIncome += it.amountWithoutTiyin ?: 0
+                totalIncome += it.amountWithoutTiyin
             }
         }
-//        tvIncomeOnMonthAmount.text =
-//            getString(R.string.sums, DecimalFormat("#,###").format(totalIncome))
-//        lblIncomeOnMonth.text =
-//            getString(R.string.income_for_month) + " " + if (DateTime.now().monthOfYear - selectedMonthOffset - 1 >= 0) Constants.MONTHS[AppPrefs.language]!![DateTime.now().monthOfYear - selectedMonthOffset - 1]
-//            else Constants.MONTHS[AppPrefs.language]!![DateTime.now().monthOfYear - selectedMonthOffset - 1 + 12]
-//
-//        tvSpentOnMonthAmount.text =
-//            getString(R.string.sums, DecimalFormat("#,###").format(totalExpense))
-//        lblSpentOnMonth.text =
-//            getString(R.string.expense_for_month) + " " + if (DateTime.now().monthOfYear - selectedMonthOffset - 1 >= 0) Constants.MONTHS[AppPrefs.language]!![DateTime.now().monthOfYear - selectedMonthOffset - 1]
-//            else Constants.MONTHS[AppPrefs.language]!![DateTime.now().monthOfYear - selectedMonthOffset - 1 + 12]
-
-
     }
-
-
-    val tagsAdapter = GroupAdapter<GroupieViewHolder>()
 
 
     private fun makeChart(chart: LineChart, value: List<ArrayList<TransactionAnalyticsDTO>>) {
         val entries = ArrayList<Entry>()
+        if (value.any { transactions ->
+                transactions.sumOf { it.amountWithoutTiyin }.toFloat() > 0
+            }) {
 
-        value.reversed().forEachIndexed { index, item ->
-
-            var total = 0L
-            value.reversed()[index].forEach {
-             if ( transactionDTO.merchant == it.merchant)   total += it.amountWithoutTiyin!!
+            value.forEachIndexed { index, item ->
+                var total = 0L
+                value[index].forEach {
+                    if (transactionDTO.merchant == it.merchant) total += it.amountWithoutTiyin!!
+                }
+                entries.add(Entry(index.toFloat(), total.toFloat()))
             }
-            // turn your data into Entry objects
-            entries.add(
-                Entry(
-                    index.toFloat(),
-                    total.toFloat()
-                )
-            )
         }
 
-
-        val dataSet = LineDataSet(entries, "") // add entries to dataset
-//        dataSet.color = ContextCompat.getColor(this, R.color.colorAccent)
-//        dataSet.setValueTextColor()
+        val dataSet = LineDataSet(entries, "")
 
         dataSet.mode = LineDataSet.Mode.HORIZONTAL_BEZIER
         dataSet.cubicIntensity = 0.3F
@@ -298,7 +274,6 @@ class TransactionFragment : BaseFragment(R.layout.fragment_transaction),
 
         val lineData = LineData(dataSet)
 
-
         chart.data = lineData
         chart.setOnChartValueSelectedListener(this)
 
@@ -311,7 +286,6 @@ class TransactionFragment : BaseFragment(R.layout.fragment_transaction),
         xAxis.setDrawLabels(false)
         xAxis.position = XAxis.XAxisPosition.BOTTOM_INSIDE
         xAxis.setDrawLimitLinesBehindData(false)
-
 
         val yAxisLeft = chart.axisLeft
         yAxisLeft.disableGridDashedLine()
@@ -338,7 +312,6 @@ class TransactionFragment : BaseFragment(R.layout.fragment_transaction),
         chart.setGridBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.peach))
         chart.legend.isEnabled = false
         chart.invalidate() // refresh
-
 
     }
 
