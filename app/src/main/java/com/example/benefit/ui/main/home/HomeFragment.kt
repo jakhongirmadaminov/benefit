@@ -4,12 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.PagerAdapter
 import com.example.benefit.R
 import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.remote.models.EPaymentType
+import com.example.benefit.remote.models.LoanBody
 import com.example.benefit.remote.models.PaynetCategory
 import com.example.benefit.stories.data.StoryUser
 import com.example.benefit.stories.screen.EXTRA_STORIES
@@ -42,7 +44,9 @@ import com.rd.utils.DensityUtils.dpToPx
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.item_action_card_one.view.*
+import kotlinx.android.synthetic.main.item_action_card_three.view.*
+import kotlinx.android.synthetic.main.item_action_card_two.view.*
 import kotlinx.android.synthetic.main.item_card.view.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -67,13 +71,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         viewModel.getPaynetCategories()
         viewModel.getStories()
         viewModel.getMyCards()
-
-        viewModel.supremeCard?.let { supremeCard ->
-            loansViewModel.getLoanIdByPan(supremeCard.panOpen!!)
-        } ?: run {
-//            page_two.isVisible = false
-
-        }
+        setupActionCards()
 
     }
 
@@ -82,18 +80,16 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         loansViewModel.respLoanInfo.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is ResultError -> {
-//                    page_two.isVisible = false
+                    setupActionCards()
                 }
                 is ResultSuccess -> {
-//                    page_two.isVisible = true
-                    page_two.setOnClickListener {
-                        Intent(requireActivity(), LoansChartActivity::class.java).apply {
-                            putExtra(EXTRA_LOAN_INFO, response.value.responseBody)
-                            putExtra(EXTRA_CARD, viewModel.supremeCard)
-                        }
-                    }
+                    setupActionCards(response.value.responseBody)
                 }
             }
+        }
+
+        loansViewModel.isLoading.observe(viewLifecycleOwner) {
+            progressActionCards.isVisible = it
         }
 
         viewModel.isLoadingPaynetCategories.observe(viewLifecycleOwner) {
@@ -222,12 +218,26 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             setupCardsPager(it)
         }
 
+        viewModel.supremeCard.observe(viewLifecycleOwner) { supremeCard ->
+            supremeCard?.let {
+                loansViewModel.getLoanIdByPan(it.panOpen!!)
+            } ?: run {
+                setupActionCards()
+            }
+        }
+
     }
 
-    private fun attachListeners() {
-
-        page_one.setOnClickListener {
-
+    private fun setupActionCards(loan: LoanBody? = null) {
+        servicesPager.offscreenPageLimit = 10
+        servicesPager.clipToPadding = false
+        servicesPager.setPadding(dpToPx(26), 0, dpToPx(26), 0)
+        servicesPager.pageMargin = dpToPx(15)
+        servicesPager.adapter = null
+        servicesPager.removeAllViews()
+        val actionViews = arrayListOf<View>()
+        val cardOne = layoutInflater.inflate(R.layout.item_action_card_one, null)
+        cardOne.setOnClickListener {
             val dialog = DialogCashBack()
             childFragmentManager.setFragmentResultListener(
                 KEY_GO_TO_LIST,
@@ -237,19 +247,42 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             }
             dialog.show(childFragmentManager, "")
         }
+        cardOne.cardOvalCashback.setBackgroundResource(R.drawable.shape_oval_yellow)
 
-//        page_two.setOnClickListener {
-//            viewModel.supremeCard?.let { supremeCard ->
-//                startActivity(
-//                    Intent(requireActivity(), LoansChartActivity::class.java).apply {
-//                        putExtra(EXTRA_LOAN_INFO, supremeCard)
-//                        putExtra(EXTRA_CARD, supremeCard)
-//                    })
-//            } ?: run {
-//                val dialog = DialogYouHaveNoSupremeCard()
-//                dialog.show(childFragmentManager, "")
-//            }
-//        }
+        viewModel.getBftBalance().onEach { bftAmount ->
+            cardOne.tvBFTAmount.text = (bftAmount?.toString() ?: "") + " BFT"
+        }.launchIn(lifecycleScope)
+        actionViews.add(cardOne)
+        servicesPager.addView(cardOne)
+
+        loan?.let {
+            val cardTwo = layoutInflater.inflate(R.layout.item_action_card_two, null)
+            cardTwo.setOnClickListener {
+                Intent(requireActivity(), LoansChartActivity::class.java).apply {
+                    putExtra(EXTRA_LOAN_INFO, loan)
+                    putExtra(EXTRA_CARD, viewModel.supremeCard.value)
+                }
+            }
+            cardTwo.cardOvalLoans.setBackgroundResource(R.drawable.shape_oval_yellow)
+            actionViews.add(cardTwo)
+            servicesPager.addView(cardTwo)
+        }
+
+
+        var cardThree = layoutInflater.inflate(R.layout.item_action_card_three, null)
+        cardThree.setOnClickListener {
+            Intent(requireActivity(), LoansChartActivity::class.java).apply {
+                putExtra(EXTRA_LOAN_INFO, loan)
+                putExtra(EXTRA_CARD, viewModel.supremeCard.value)
+            }
+        }
+        cardThree.cardOvalMessage.setBackgroundResource(R.drawable.shape_oval_yellow)
+        actionViews.add(cardThree)
+        servicesPager.addView(cardThree)
+        servicesPager.adapter = WizardPagerAdapter(actionViews)
+    }
+
+    private fun attachListeners() {
         cardBranches.setOnClickListener {
             startActivity(Intent(requireActivity(), BranchesAtmsActivity::class.java))
         }
@@ -309,16 +342,10 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             viewModel.supremeCard?.let { supremeCard ->
                 startActivity(
                     Intent(requireActivity(), LoanActivity::class.java).apply {
-                        putExtra(EXTRA_CARD, supremeCard)
+                        putExtra(EXTRA_CARD, supremeCard.value)
                     })
             } ?: run {
                 val dialog = DialogYouHaveNoSupremeCard()
-//                childFragmentManager.setFragmentResultListener(
-//                    KEY_ADD_CARD,
-//                    viewLifecycleOwner,
-//                    { requestKey, result ->
-//                        AddCardBSD().show(childFragmentManager, "")
-//                    })
                 dialog.show(childFragmentManager, "")
             }
         }
@@ -334,15 +361,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         cardOvalExpenses.setBackgroundResource(R.drawable.shape_oval)
         cardOvalBranches.setBackgroundResource(R.drawable.shape_oval)
         cardOvalLimits.setBackgroundResource(R.drawable.shape_oval)
-        cardOvalMessage.setBackgroundResource(R.drawable.shape_oval_yellow)
-        cardOvalLoans.setBackgroundResource(R.drawable.shape_oval_yellow)
-        cardOvalCashback.setBackgroundResource(R.drawable.shape_oval_yellow)
 
-        setupServicesPager()
-
-        viewModel.getBftBalance().onEach { bftAmount ->
-            page_one.tvBFTAmount.text = (bftAmount?.toString() ?: "") + " BFT"
-        }.launchIn(lifecycleScope)
 
     }
 
@@ -393,15 +412,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         return view
     }
 
-    private fun setupServicesPager() {
-        servicesPager.adapter = WizardPagerAdapter(listOf(page_one, page_two, page_three))
-        servicesPager.offscreenPageLimit = 10
-        servicesPager.clipToPadding = false
-        servicesPager.setPadding(dpToPx(26), 0, dpToPx(26), 0)
-        servicesPager.pageMargin = dpToPx(15)
-
-
-    }
 
     class WizardPagerAdapter(val views: List<View>) : PagerAdapter() {
         override fun instantiateItem(collection: ViewGroup, position: Int): Any {

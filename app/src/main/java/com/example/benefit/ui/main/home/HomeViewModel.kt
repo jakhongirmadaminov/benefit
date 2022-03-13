@@ -51,7 +51,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    var supremeCard: CardDTO? = null
+    var supremeCard = MutableLiveData<CardDTO?>(null)
     val cardsResp = MutableLiveData<List<CardDTO>>()
     val isLoadingCards = MutableLiveData<Boolean>()
     val signInRequired = MutableLiveData<Boolean>()
@@ -68,7 +68,7 @@ class HomeViewModel @Inject constructor(
                     }
                     is ResultSuccess -> {
                         cardsResp.value = response.value.getProperly()
-                        supremeCard = cardsResp.value?.find { it.isSupreme() }
+                        supremeCard.postValue(cardsResp.value?.find { it.isSupreme() })
                     }
                 }.exhaustive
             }

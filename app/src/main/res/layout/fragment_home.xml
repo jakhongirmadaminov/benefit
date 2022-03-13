@@ -52,256 +52,27 @@
             app:piv_unselectedColor="@color/bg_grey"
             app:piv_viewPager="@id/cardsPager" />
 
-<!--        <androidx.cardview.widget.CardView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="100dp"-->
-<!--            android:layout_marginLeft="26dp"-->
-<!--            android:layout_marginTop="15dp"-->
-<!--            android:layout_marginRight="26dp"-->
-<!--            app:cardCornerRadius="10dp">-->
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:background="@drawable/gradient_black">-->
-
-<!--                <ImageView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginLeft="20dp"-->
-<!--                    android:layout_marginTop="15dp"-->
-<!--                    android:layout_marginRight="10dp"-->
-<!--                    android:src="@drawable/ic_bell_ringing" />-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/tvNotification"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="15dp"-->
-<!--                    android:layout_marginRight="10dp"-->
-<!--                    android:fontFamily="sans-serif"-->
-<!--                    android:maxLines="4"-->
-<!--                    android:text="Станислав! Новая карта Benefit Zoom готова! Свяжитесь со службой технической поддержки и согласуйте с оператором место и время доставки"-->
-<!--                    android:textColor="#ffffff"-->
-<!--                    android:textSize="14sp"-->
-<!--                    android:textStyle="normal" />-->
-
-<!--            </LinearLayout>-->
-
-<!--        </androidx.cardview.widget.CardView>-->
-
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/servicesPager"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:layout_marginTop="15dp">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/page_one"
+            <ProgressBar
+                android:id="@+id/progressActionCards"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/servicesPager"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginLeft="26dp"
-                android:layout_marginTop="15dp"
-
-                android:layout_marginRight="26dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:selectableItemBackground"
-                app:cardCornerRadius="10dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/gradient_blue">
-
-                    <TextView
-                        android:id="@+id/cashbackTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="24dp"
-                        android:layout_marginTop="24dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/cashback_sum"
-                        android:textColor="@color/dark_blue"
-                        android:textSize="14sp"
-                        android:textStyle="normal"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/tvBFTAmount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="24dp"
-                        android:fontFamily="sans-serif"
-                        tools:text="193 000 BFT"
-                        android:textColor="#ffffff"
-                        android:textSize="22sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/cashbackTitle" />
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cardOvalCashback"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginRight="30dp"
-                        app:cardBackgroundColor="@color/yellow"
-                        app:cardElevation="2dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_fast_forward" />
-
-
-                    </androidx.cardview.widget.CardView>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/page_two"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginLeft="26dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="26dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:selectableItemBackground"
-                app:cardCornerRadius="10dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/gradient_turquoise">
-
-                    <TextView
-                        android:id="@+id/loansTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="24dp"
-                        android:layout_marginTop="24dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/loan_repayment"
-                        android:textColor="@color/dark_blue"
-                        android:textSize="14sp"
-                        android:textStyle="normal"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/tvLoanSum"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="24dp"
-                        android:fontFamily="sans-serif"
-                        tools:text="106 000 UZS"
-                        android:textColor="#ffffff"
-                        android:textSize="22sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/loansTitle" />
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cardOvalLoans"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginRight="30dp"
-                        app:cardBackgroundColor="@color/yellow"
-                        app:cardElevation="2dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_card" />
-
-
-                    </androidx.cardview.widget.CardView>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/page_three"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginLeft="26dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="26dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:selectableItemBackground"
-                app:cardCornerRadius="10dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/gradient_fuchsia">
-
-                    <TextView
-                        android:id="@+id/serviceTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="24dp"
-                        android:layout_marginTop="24dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/support_team"
-                        android:textColor="@color/dark_blue"
-                        android:textSize="14sp"
-                        android:textStyle="normal"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="24dp"
-                        android:fontFamily="sans-serif"
-                        android:text="24/7"
-                        android:textColor="#ffffff"
-                        android:textSize="22sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/serviceTitle" />
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cardOvalMessage"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginRight="30dp"
-                        app:cardBackgroundColor="@color/yellow"
-                        app:cardElevation="2dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_message_big" />
-
-
-                    </androidx.cardview.widget.CardView>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-        </androidx.viewpager.widget.ViewPager>
+                android:layout_height="100dp"/>
+        </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"

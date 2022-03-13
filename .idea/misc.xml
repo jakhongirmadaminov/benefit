@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/fragment_home.xml" value="0.18414387031408308" />
+        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/item_action_card_one.xml" value="0.18414387031408308" />
+        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/item_action_card_three.xml" value="0.16574074074074074" />
+        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/item_action_card_two.xml" value="0.16574074074074074" />
         <entry key="..\:/Users/User/.gradle/caches/transforms-2/files-2.1/e49cd0f582c58b9bf4fbe370e313b25e/jetified-PinEditTextField-1.2.6/res/drawable/text_handle.xml" value="0.1835" />
         <entry key="..\:/Users/User/AppData/Local/Android/Sdk/platforms/android-29/data/res/layout/simple_spinner_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.166" />
