@@ -11,18 +11,18 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:elevation="0dp"
+        android:animateLayoutChanges="true"
         android:elevation="0dp"
-        android:animateLayoutChanges="true">
+        app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tool_bar"
-            app:elevation="0dp"
-            android:elevation="0dp"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:elevation="0dp"
             android:theme="@style/ToolBarStyle"
             app:contentInsetLeft="0dp"
+            app:elevation="0dp"
             app:layout_scrollFlags="scroll|enterAlways">
 
             <LinearLayout
@@ -46,10 +46,10 @@
                     android:id="@+id/icMore"
                     android:layout_width="?android:actionBarSize"
                     android:layout_height="match_parent"
-                    android:padding="15dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:selectableItemBackground"
+                    android:padding="15dp"
                     android:src="@drawable/ic_three_dots" />
 
             </LinearLayout>
@@ -90,10 +90,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    app:cgProgress="0.9"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:cgProgress="0.9" />
 
 
                 <TextView
@@ -163,8 +163,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
-                    android:background="@drawable/gradient_purple_dark">
+                    android:background="@drawable/gradient_purple_dark"
+                    android:paddingBottom="5dp">
 
 
                     <LinearLayout

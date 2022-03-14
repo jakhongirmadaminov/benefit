@@ -18,7 +18,6 @@ import com.example.benefit.remote.models.TransactionAnalyticsDTO
 import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.branches_atms.BranchesAtmsActivity
 import com.example.benefit.ui.main.home.HomeFragment
-import com.example.benefit.ui.transactions_history.transaction_bsd.TransactionBSD
 import com.example.benefit.ui.viewgroups.ItemLoading
 import com.example.benefit.ui.viewgroups.ItemTransaction
 import com.example.benefit.ui.viewgroups.ItemTransactionDate
@@ -34,10 +33,12 @@ import java.text.DecimalFormat
 class FillCardFragment : BaseFragment(R.layout.fragment_fill_card) {
 
     companion object {
+        const val ARG_IS_LOAN = "IS_LOAN"
         const val ARG_CARD = "CARD"
         const val ARG_CARDS = "CARDS"
     }
 
+    private var isLoan: Boolean = false
     private val latestDepositsAdapter = GroupAdapter<GroupieViewHolder>()
     private val viewModel: FillCardViewModel by viewModels()
     lateinit var cardBeingFilled: CardDTO
@@ -47,6 +48,7 @@ class FillCardFragment : BaseFragment(R.layout.fragment_fill_card) {
         super.onAttach(context)
         cardBeingFilled = requireArguments().getParcelable(ARG_CARD)!!
         selectableCards = requireArguments().getParcelableArrayList(ARG_CARDS)!!
+        isLoan = requireArguments().getBoolean(ARG_IS_LOAN)
     }
 
 
@@ -67,7 +69,7 @@ class FillCardFragment : BaseFragment(R.layout.fragment_fill_card) {
         llFromOwnCards.isVisible = selectableCards.size > 1
 
         cardsPager.adapter = null
-        val cardViews = selectableCards.map {
+        val cardViews = (if (isLoan) listOf(cardBeingFilled) else selectableCards).map {
             val cardView = layoutInflater.inflate(R.layout.item_card_small, null)
             cardView.cardName.text = it.card_title
             cardView.tvAmount.text =
@@ -153,13 +155,15 @@ class FillCardFragment : BaseFragment(R.layout.fragment_fill_card) {
                 latestDepositsAdapter.add(ItemTransactionDate(it.udate!!))
                 dateString = it.udate
             }
-            latestDepositsAdapter.add(ItemTransaction(it) /*{
+            latestDepositsAdapter.add(
+                ItemTransaction(it) /*{
                 val dialog = TransactionBSD()
                 dialog.arguments = Bundle().apply {
                     putParcelable(TransactionBSD.ARG_TRANSACTION_DTO, it)
                 }
                 dialog.show(childFragmentManager, "")
-            }*/)
+            }*/
+            )
         }
     }
 

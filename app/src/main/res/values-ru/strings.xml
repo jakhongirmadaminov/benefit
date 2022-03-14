@@ -104,7 +104,7 @@
     <string name="current_limit">Текущий лимит</string>
     <string name="confirmed_limit">Одобренный лимит</string>
     <string name="for_period">На срок</string>
-    <string name="used">used</string>
+    <string name="used">Использовано</string>
     <string name="rate">Ставка</string>
     <string name="active_until">Действует до</string>
     <string name="more_details">Подробнее</string>

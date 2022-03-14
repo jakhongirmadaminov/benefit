@@ -14,12 +14,14 @@ import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.ui.main.BenefitBSD
 import com.example.benefit.ui.main.fill_card.FillCardFragment.Companion.ARG_CARD
 import com.example.benefit.ui.main.fill_card.FillCardFragment.Companion.ARG_CARDS
+import com.example.benefit.ui.main.fill_card.FillCardFragment.Companion.ARG_IS_LOAN
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.bsd_fill_card.*
 
 @AndroidEntryPoint
 class FillCardBSD : BenefitBSD() {
 
+    private var isLoan: Boolean = false
     private val viewModel: FillCardViewModel by viewModels()
     var cardBeingFilled: CardDTO? = null
     var selectableCards: List<CardDTO>? = null
@@ -27,6 +29,7 @@ class FillCardBSD : BenefitBSD() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         cardBeingFilled = arguments?.getParcelable(ARG_CARD)
+        isLoan = arguments?.getBoolean(ARG_IS_LOAN) ?: false
         selectableCards = arguments?.getParcelableArrayList(ARG_CARDS)
     }
 
@@ -45,6 +48,7 @@ class FillCardBSD : BenefitBSD() {
             (childFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).findNavController()
                 .setGraph(R.navigation.fill_card_nav_graph, Bundle().apply {
                     putParcelable(ARG_CARD, cardBeingFilled)
+                    putBoolean(ARG_IS_LOAN, isLoan)
                     putParcelableArrayList(ARG_CARDS, ArrayList(selectableCards!!))
                 })
         }
@@ -60,6 +64,7 @@ class FillCardBSD : BenefitBSD() {
             (childFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).findNavController()
                 .setGraph(R.navigation.fill_card_nav_graph, Bundle().apply {
                     putParcelable(ARG_CARD, cardBeingFilled ?: it[0])
+                    putBoolean(ARG_IS_LOAN, isLoan)
                     putParcelableArrayList(ARG_CARDS, ArrayList(it))
                 })
         }

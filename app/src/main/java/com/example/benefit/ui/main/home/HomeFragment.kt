@@ -258,23 +258,21 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         loan?.let {
             val cardTwo = layoutInflater.inflate(R.layout.item_action_card_two, null)
             cardTwo.setOnClickListener {
-                Intent(requireActivity(), LoansChartActivity::class.java).apply {
+                start<LoansChartActivity> {
                     putExtra(EXTRA_LOAN_INFO, loan)
                     putExtra(EXTRA_CARD, viewModel.supremeCard.value)
                 }
             }
+            cardTwo.tvLoanSum.text = DecimalFormat("#,###").format(it.depPime!!) + " UZS"
             cardTwo.cardOvalLoans.setBackgroundResource(R.drawable.shape_oval_yellow)
             actionViews.add(cardTwo)
             servicesPager.addView(cardTwo)
         }
 
 
-        var cardThree = layoutInflater.inflate(R.layout.item_action_card_three, null)
+        val cardThree = layoutInflater.inflate(R.layout.item_action_card_three, null)
         cardThree.setOnClickListener {
-            Intent(requireActivity(), LoansChartActivity::class.java).apply {
-                putExtra(EXTRA_LOAN_INFO, loan)
-                putExtra(EXTRA_CARD, viewModel.supremeCard.value)
-            }
+
         }
         cardThree.cardOvalMessage.setBackgroundResource(R.drawable.shape_oval_yellow)
         actionViews.add(cardThree)
@@ -339,10 +337,10 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
         cardLimits.setOnClickListener {
 
-            viewModel.supremeCard?.let { supremeCard ->
+            viewModel.supremeCard.value?.let { supremeCard ->
                 startActivity(
                     Intent(requireActivity(), LoanActivity::class.java).apply {
-                        putExtra(EXTRA_CARD, supremeCard.value)
+                        putExtra(EXTRA_CARD, supremeCard)
                     })
             } ?: run {
                 val dialog = DialogYouHaveNoSupremeCard()
@@ -361,7 +359,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         cardOvalExpenses.setBackgroundResource(R.drawable.shape_oval)
         cardOvalBranches.setBackgroundResource(R.drawable.shape_oval)
         cardOvalLimits.setBackgroundResource(R.drawable.shape_oval)
-
 
     }
 
