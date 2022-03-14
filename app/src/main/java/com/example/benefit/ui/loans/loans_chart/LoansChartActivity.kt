@@ -9,6 +9,9 @@ import com.example.benefit.ui.main.fill_card.FillCardBSD
 import com.example.benefit.ui.main.fill_card.FillCardFragment
 import com.example.benefit.ui.transactions_history.TransactionsHistoryActivity.Companion.EXTRA_CARD
 import kotlinx.android.synthetic.main.activity_loans_chart.*
+import org.joda.time.DateTime
+import org.joda.time.Days
+import org.joda.time.format.DateTimeFormat
 import java.text.DecimalFormat
 
 val EXTRA_LOAN_INFO = "LOAN_INFO"
@@ -38,8 +41,13 @@ class LoansChartActivity : BaseActionbarActivity() {
         tvRate.text = "18% " + getString(R.string.yearly)
         tvMainLoan.text = DecimalFormat("#,###").format(loanInfo.sumLoan!!) + " UZS"
 //        tvForPay.text =   DecimalFormat("#,###").format(loanInfo.sumLoan!!) + " UZS"
+        val closeDate =
+            DateTimeFormat.forPattern(("dd.MM.yyyy")).parseDateTime(loanInfo.closeDate!!)
+        val startDate = closeDate.minusDays(365)
 
-        circularProgress.setProgress((loanInfo.depPime!! / loanInfo.sumLoan!!).toFloat())
+        val daysPassed = Days.daysBetween(startDate.withTimeAtStartOfDay(), DateTime.now().withTimeAtStartOfDay()).days
+
+        circularProgress.setProgress(daysPassed/365f)
 
     }
 

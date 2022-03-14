@@ -53,9 +53,9 @@
 
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/swipeRefresh">
+        android:layout_height="match_parent">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -171,10 +171,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif"
+                        android:text="@string/twelve_months"
                         android:textColor="#ffffff"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        tools:text="12 месяцев" />
+                        android:textStyle="bold" />
 
 
                     <TextView
