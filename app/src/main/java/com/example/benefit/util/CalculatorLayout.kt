@@ -32,7 +32,10 @@ class CalculatorLayout constructor(context: Context, attrs: AttributeSet) :
         tvEight.setOnClickListener { edtSum?.append("8") }
         tvNine.setOnClickListener { edtSum?.append("9") }
         tvZero.setOnClickListener { edtSum?.append("0") }
-        tvMinus.setOnClickListener { edtSum?.append(" - ") }
+        tvMinus.setOnClickListener {
+            edtSum?.text?.get
+            edtSum?.append(" - ")
+        }
         tvPlus.setOnClickListener { edtSum?.append(" + ") }
         tvMultiply.setOnClickListener { edtSum?.append(" * ") }
         tvDivide.setOnClickListener { edtSum?.append(" / ") }

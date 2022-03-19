@@ -288,7 +288,8 @@
             android:layout_marginRight="26dp"
             android:clickable="true"
             android:focusable="true"
-            android:foreground="?android:selectableItemBackground">
+            android:foreground="?android:selectableItemBackground"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/icGap"
