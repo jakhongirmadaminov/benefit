@@ -49,6 +49,7 @@
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_create_regular_payment.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_create_regular_payment_end.xml" value="0.33" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_device_code.xml" value="0.29483695652173914" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_fill_card.xml" value="0.2617753623188406" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_fill_card_ask_friends.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_fill_card_ask_friends_transfer.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_fill_from_any_card.xml" value="0.2708333333333333" />
@@ -68,7 +69,7 @@
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_phone.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_profile.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_reg_card_activation.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_regular_payment.xml" value="0.22" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_regular_payment.xml" value="0.2" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_settings_code.xml" value="0.29483695652173914" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_settings_main.xml" value="0.1" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_story_display.xml" value="0.2875905797101449" />

@@ -25,6 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:id="@+id/line"
         android:src="@drawable/rectangle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,10 +75,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:fontFamily="sans-serif"
-            tools:text="SQB"
             android:textColor="#ffffff"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="SQB" />
 
         <TextView
             android:id="@+id/tvCardEndNum"
@@ -85,10 +86,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:fontFamily="sans-serif"
-            tools:text="*7102"
             android:textColor="#b8ffffff"
             android:textSize="14sp"
-            android:textStyle="normal" />
+            android:textStyle="normal"
+            tools:text="*7102" />
 
         <TextView
             android:id="@+id/tvAmount"
@@ -98,10 +99,10 @@
             android:layout_weight="1"
             android:fontFamily="sans-serif"
             android:gravity="end"
-            tools:text="430 000 UZS"
             android:textColor="#ffffff"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="430 000 UZS" />
 
     </LinearLayout>
 
@@ -141,13 +142,12 @@
         app:layout_constraintTop_toBottomOf="@id/cardsPagerSmall" />
 
     <TextView
-        android:id="@+id/tvMinAmount"
+        android:id="@+id/tvTotalSum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:fontFamily="sans-serif-light"
-        android:text="@string/minimum_sum_is"
-        android:textColor="#e94040"
+        tools:text="Итого: "
+        android:textColor="@color/textlightGrey"
         android:textSize="14sp"
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@id/edtSum"

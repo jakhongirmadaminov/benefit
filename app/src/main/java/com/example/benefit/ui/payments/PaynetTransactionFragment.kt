@@ -21,14 +21,8 @@ import com.example.benefit.ui.base.BaseFragment
 import com.example.benefit.ui.main.home.HomeFragment
 import com.example.benefit.util.RequestState
 import com.example.benefit.util.SizeUtils
-import com.example.benefit.util.isNumeric
 import com.example.benefit.util.loadImageUrl
-import kotlinx.android.synthetic.main.fragment_fill_card_ask_friends_transfer.*
 import kotlinx.android.synthetic.main.fragment_paynet_transfer.*
-import kotlinx.android.synthetic.main.fragment_paynet_transfer.edtSum
-import kotlinx.android.synthetic.main.fragment_paynet_transfer.ivBack
-import kotlinx.android.synthetic.main.fragment_paynet_transfer.tvFill
-import kotlinx.android.synthetic.main.fragment_paynet_transfer.tvMinAmount
 import kotlinx.android.synthetic.main.item_card_small.view.*
 import kotlinx.android.synthetic.main.transaction_loading.*
 import kotlinx.android.synthetic.main.transaction_success.*
@@ -52,6 +46,7 @@ class PaynetTransactionFragment : BaseFragment(R.layout.fragment_paynet_transfer
 
     private fun setupViews() {
         layoutCalculator.edtSum = edtSum
+        layoutCalculator.footerTextView = tvMinAmount
         tvServiceName.text = args.paynetMerchant.titleShort
         tvServiceFullName.text = args.paynetMerchant.title
         tvCategoryName.text = args.paynetMerchant.getLocalizedCatgName()
@@ -147,38 +142,34 @@ class PaynetTransactionFragment : BaseFragment(R.layout.fragment_paynet_transfer
                 fields.append("\"${it.name}\":")
                 fields.append("\"${it.userSelection}\",")
             }
-            fields.append("\"${sharedViewModel.transferAmountKey}\":")
-            fields.append("\"${edtSum.text.toString().toInt()}\"")
+            fields.append("\"${SUMMA_SERVICE_FIELD}\":")/*sharedViewModel.transferAmountKey*/
+            fields.append("\"${layoutCalculator.amount}\"")
 
             if (cardsPagerSmall.currentItem == 0) {
                 viewModel.payWithCashback(
                     serviceId = args.paynetMerchant.own_id!!,
                     providerId = args.paynetMerchant.category_id!!,
                     fields = fields.toString(),
-                    edtSum.text.toString().toInt(),
+                    layoutCalculator.amount,
                 )
             } else {
                 viewModel.pay(
                     serviceId = args.paynetMerchant.own_id!!,
                     providerId = args.paynetMerchant.category_id!!,
                     fields = fields.toString(),
-                    edtSum.text.toString().toInt(),
+                    layoutCalculator.amount,
                     viewModel.bftAndMyCardsPair.value!!.second.getProperly()[cardsPagerSmall.currentItem].id!!
                 )
             }
         }
 
         edtSum.doOnTextChanged { text, start, before, count ->
-            if (text.isNullOrBlank() || !text.toString().isNumeric()) {
-                tvFill.isEnabled = false
-                return@doOnTextChanged
-            }
-            tvFill.isEnabled =
-                viewModel.bftAndMyCardsPair.value!!.second.getProperly()[cardsPagerSmall.currentItem].balance?.dropLast(
-                    2
-                )!!.toInt() > text.toString().toInt()
-            tvMinAmount.isVisible =
-                if (text.isNullOrBlank()) false else text.toString().toInt() < 1000
+            tvFill.isEnabled = layoutCalculator.amount > 0 &&
+                    viewModel.bftAndMyCardsPair.value!!.second.getProperly()[cardsPagerSmall.currentItem].balance?.dropLast(
+                        2
+                    )!!.toInt() > layoutCalculator.amount
+//            tvMinAmount.isVisible =
+//                if (text.isNullOrBlank()) false else text.toString().toInt() < 1000
         }
 
     }

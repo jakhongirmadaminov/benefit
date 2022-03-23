@@ -4,6 +4,9 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.core.widget.doOnTextChanged
 import com.example.benefit.R
 import com.notkamui.keval.Keval
 import kotlinx.android.synthetic.main.layout_calculator.view.*
@@ -11,9 +14,48 @@ import kotlinx.android.synthetic.main.layout_calculator.view.*
 
 class CalculatorLayout constructor(context: Context, attrs: AttributeSet) :
     LinearLayout(context, attrs) {
+    var amount = 0
 
-
+    var footerTextView: TextView? = null
     var edtSum: EditText? = null
+        set(value) {
+            field = value
+            edtSum?.doOnTextChanged { text, start, before, count ->
+                text?.let {
+                    footerTextView?.apply {
+                        amount = if (it.indexOfAny(charArrayOf('*', '/', '-', '+')) >= 0) {
+                            try {
+                                Keval.eval(text.toString()).toInt()
+                            } catch (e: Exception) {
+                                0
+                            }
+                        } else {
+                            if (text.isNullOrBlank()) 0 else text.toString().trim().toInt()
+                        }
+                        if (amount < 1000) {
+                            amount = 0
+                            setTextColor(ContextCompat.getColor(context, R.color.error_red))
+                            setText(R.string.minimum_sum_is)
+                        } else {
+                            setTextColor(ContextCompat.getColor(context, R.color.textlightGrey))
+                            setText(
+                                context.getString(R.string.comission) + ": " + "0.5%" + "\n" +
+                                        context.getString(R.string.total) + ": " + (amount + amount * 0.005).toString()
+                            )
+                        }
+                    }
+                } ?: run {
+                    footerTextView?.apply {
+                        setTextColor(ContextCompat.getColor(context, R.color.textlightGrey))
+                        setText(
+                            context.getString(R.string.comission) + ": " + "0.5%" + "\n" +
+                                    context.getString(R.string.total) + ": " + (amount + amount * 0.005).toString()
+                        )
+                    }
+                    amount = 0
+                }
+            }
+        }
 
     init {
         inflate(context, R.layout.layout_calculator, this)
@@ -31,7 +73,7 @@ class CalculatorLayout constructor(context: Context, attrs: AttributeSet) :
         tvSeven.setOnClickListener { edtSum?.append("7") }
         tvEight.setOnClickListener { edtSum?.append("8") }
         tvNine.setOnClickListener { edtSum?.append("9") }
-        tvZero.setOnClickListener { edtSum?.append("0") }
+        tvZero.setOnClickListener { if (!edtSum?.text.isNullOrBlank()) edtSum?.append("0") }
         tvMinus.setOnClickListener { edtSum?.append(" - ") }
         tvPlus.setOnClickListener { edtSum?.append(" + ") }
         tvMultiply.setOnClickListener { edtSum?.append(" * ") }

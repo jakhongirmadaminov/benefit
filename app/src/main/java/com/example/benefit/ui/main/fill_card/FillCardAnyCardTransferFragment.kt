@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
@@ -19,13 +20,7 @@ import com.example.benefit.util.ResultError
 import com.example.benefit.util.ResultSuccess
 import com.example.benefit.util.SizeUtils
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_fill_card_ask_friends_transfer.*
 import kotlinx.android.synthetic.main.fragment_fill_from_any_card_transfer.*
-import kotlinx.android.synthetic.main.fragment_fill_from_any_card_transfer.clParent
-import kotlinx.android.synthetic.main.fragment_fill_from_any_card_transfer.edtSum
-import kotlinx.android.synthetic.main.fragment_fill_from_any_card_transfer.ivBack
-import kotlinx.android.synthetic.main.fragment_fill_from_any_card_transfer.tvFill
-import kotlinx.android.synthetic.main.fragment_fill_from_any_card_transfer.tvMinAmount
 import kotlinx.android.synthetic.main.item_card_small.view.*
 import kotlinx.android.synthetic.main.transaction_loading.*
 import kotlinx.android.synthetic.main.transaction_success.*
@@ -106,7 +101,7 @@ class FillCardAnyCardTransferFragment @Inject constructor() :
 
         tvFill.setOnClickListener {
             viewModel.p2pPan2Id(
-                edtSum.text.toString().toInt(),
+                layoutCalculator.amount,
                 navArgs.cards!![cardToIndex].id!!,
                 navArgs.targetCard!!.pan!!,
                 navArgs.targetCard!!.expiry!!.substring(2)
@@ -118,9 +113,12 @@ class FillCardAnyCardTransferFragment @Inject constructor() :
         }
 
         edtSum.doOnTextChanged { text, start, before, count ->
-            tvFill.isEnabled = text != null && text.isNotBlank() && !text.contains(" ")
-            tvMinAmount.isVisible =
-                if (text.isNullOrBlank()) false else text.toString().toInt() < 1000
+            tvFill.isEnabled = layoutCalculator.amount > 0
+//            tvMinAmount.isVisible =
+//                if (text.isNullOrBlank()) false else text.toString().toInt() < 1000
+
+//            tvComissions.isVisible = !tvMinAmount.isVisible
+//            tvTotalSum.isVisible = !tvMinAmount.isVisible
         }
 
     }
@@ -132,6 +130,14 @@ class FillCardAnyCardTransferFragment @Inject constructor() :
         tvBankName.text = navArgs.targetCard!!.fullName
 
         layoutCalculator.edtSum = edtSum
+        layoutCalculator.footerTextView = tvTotalSum
+
+        clParent.layoutParams = clParent.layoutParams.apply {
+            height = SizeUtils.getScreenHeight(requireActivity()) - SizeUtils.getActionBarHeight(
+                requireActivity()
+            )
+        }
+
         val cardViews = navArgs.cards?.map {
             val cardView = layoutInflater.inflate(R.layout.item_card_small, null)
             cardView.cardName.text = it.card_title

@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.benefit.R
 import com.example.benefit.remote.models.CardDTO
 import com.example.benefit.ui.main.BenefitBSD
+import com.example.benefit.ui.main.BenefitFixedHeightBSD
 import com.example.benefit.ui.main.fill_card.FillCardFragment.Companion.ARG_CARD
 import com.example.benefit.ui.main.fill_card.FillCardFragment.Companion.ARG_CARDS
 import com.example.benefit.ui.main.fill_card.FillCardFragment.Companion.ARG_IS_LOAN
@@ -19,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.bsd_fill_card.*
 
 @AndroidEntryPoint
-class FillCardBSD : BenefitBSD() {
+class FillCardBSD : BenefitFixedHeightBSD() {
 
     private var isLoan: Boolean = false
     private val viewModel: FillCardViewModel by viewModels()

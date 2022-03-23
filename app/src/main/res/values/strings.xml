@@ -253,5 +253,8 @@
     <string name="card_not_found">Card not found!</string>
     <string name="twelve_months">12 месяцев</string>
     <string name="authorize_again">Пожалуйста, авторизуйтесь заного.</string>
+    <string name="comissions_five_percent">Комиссия: 0.5%</string>
+    <string name="total">Итого</string>
+    <string name="comission">Комиссия</string>
 
 </resources>

@@ -118,6 +118,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
+    <TextView
+        android:id="@+id/tvTotalSum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        tools:text="Итого: "
+        android:textColor="@color/textlightGrey"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@id/edtSum"
+        app:layout_constraintTop_toBottomOf="@id/edtSum" />
+
     <include
         layout="@layout/transaction_loading"
         tools:visibility="gone" />

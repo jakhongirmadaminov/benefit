@@ -19,16 +19,7 @@ import com.example.benefit.util.ResultError
 import com.example.benefit.util.ResultSuccess
 import com.example.benefit.util.SizeUtils
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_fill_card_ask_friends_transfer.*
-import kotlinx.android.synthetic.main.fragment_fill_from_any_card_transfer.*
 import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.*
-import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.cardsPagerSmall
-import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.clParent
-import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.edtSum
-import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.ivBack
-import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.layoutCalculator
-import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.tvFill
-import kotlinx.android.synthetic.main.fragment_transfer_to_card_transaction.tvMinAmount
 import kotlinx.android.synthetic.main.item_card_small.view.*
 import kotlinx.android.synthetic.main.transaction_loading.*
 import kotlinx.android.synthetic.main.transaction_success.*
@@ -55,6 +46,7 @@ class TransferToCardTransactionFragment :
 
     private fun setupViews() {
         layoutCalculator.edtSum = edtSum
+        layoutCalculator.footerTextView = tvMinAmount
         tvCardOwner.text = args.cardP2pTarget.fullName
         tvCardNumber.text = args.cardP2pTarget.pan
     }
@@ -93,15 +85,15 @@ class TransferToCardTransactionFragment :
             }
         }
 
-        viewModel.errorMessage.observe(viewLifecycleOwner, {
+        viewModel.errorMessage.observe(viewLifecycleOwner) {
 //            lblYoullReceiveCode.text = it ?: return@observe
 //            lblYoullReceiveCode.setTextColor(Color.RED)
-        })
+        }
 
 
-        viewModel.cardsResp.observe(viewLifecycleOwner, {
+        viewModel.cardsResp.observe(viewLifecycleOwner) {
             setupCardsPager(it)
-        })
+        }
 
 
     }
@@ -112,7 +104,8 @@ class TransferToCardTransactionFragment :
         val cards = cardsDTO.map {
             val cardView = layoutInflater.inflate(R.layout.item_card_small, null)
             cardView.cardName.text = it.card_title
-            cardView.tvAmount.text =   DecimalFormat("#,###").format(it.balance?.dropLast(2)?.toInt()) + " UZS"
+            cardView.tvAmount.text =
+                DecimalFormat("#,###").format(it.balance?.dropLast(2)?.toInt()) + " UZS"
             cardView.tvCardEndNum.text = "*" + it.panHidden!!.substring(it.panHidden!!.length - 4)
             it.setMiniBackgroundInto(cardView.ivCardBg)
             cardsPagerSmall.addView(cardView)
@@ -143,17 +136,14 @@ class TransferToCardTransactionFragment :
             viewModel.transferToCard(
                 viewModel.cardsResp.value!![cardsPagerSmall.currentItem].id!!,
                 args.cardP2pTarget,
-                edtSum.text.toString().toInt()
+                layoutCalculator.amount
             )
         }
 
         edtSum.doOnTextChanged { text, start, before, count ->
             tvFill.isEnabled =
                 viewModel.cardsResp.value!![cardsPagerSmall.currentItem].balance?.dropLast(2)!!
-                    .toInt() > text.toString()
-                    .toInt()
-            tvMinAmount.isVisible =
-                if (text.isNullOrBlank()) false else text.toString().toInt() < 1000
+                    .toInt() > layoutCalculator.amount
         }
 
     }

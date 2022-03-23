@@ -76,7 +76,7 @@
         android:id="@+id/paynetTransaction"
         android:name="com.example.benefit.ui.payments.PaynetTransactionFragment"
         android:label=""
-        tools:layout="@layout/fragment_payment_transfer">
+        tools:layout="@layout/fragment_paynet_transfer">
         <argument
             android:name="paynetMerchant"
             app:argType="com.example.benefit.remote.models.PaynetMerchant" />

@@ -18,26 +18,12 @@ import com.example.benefit.ui.main.home.HomeFragment
 import com.example.benefit.util.ResultError
 import com.example.benefit.util.ResultSuccess
 import com.example.benefit.util.SizeUtils
-import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_fill_card_ask_friends_transfer.*
-import kotlinx.android.synthetic.main.fragment_fill_from_any_card_transfer.*
 import kotlinx.android.synthetic.main.fragment_fill_from_my_cards.*
-import kotlinx.android.synthetic.main.fragment_fill_from_my_cards.cardsToPagerSmall
-import kotlinx.android.synthetic.main.fragment_fill_from_my_cards.clParent
-import kotlinx.android.synthetic.main.fragment_fill_from_my_cards.edtSum
-import kotlinx.android.synthetic.main.fragment_fill_from_my_cards.ivBack
-import kotlinx.android.synthetic.main.fragment_fill_from_my_cards.layoutCalculator
-import kotlinx.android.synthetic.main.fragment_fill_from_my_cards.tvFill
-import kotlinx.android.synthetic.main.fragment_fill_from_my_cards.tvMinAmount
 import kotlinx.android.synthetic.main.item_card_small.view.*
-import kotlinx.android.synthetic.main.layout_calculator.*
-import kotlinx.android.synthetic.main.layout_calculator.view.*
 import kotlinx.android.synthetic.main.transaction_loading.*
 import kotlinx.android.synthetic.main.transaction_success.*
 import java.text.DecimalFormat
-import java.util.*
 
 class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_cards) {
 
@@ -61,17 +47,12 @@ class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_
         attachListeners()
         subscribeObservers()
         clParent.layoutParams = clParent.layoutParams.apply { height = vHeight }
-//        (((parentFragment as NavHostFragment).parentFragment as FillCardBSD).dialog!! as BottomSheetDialog).behavior.isHideable =
-//            false
-//        (((parentFragment as NavHostFragment).parentFragment as FillCardBSD).dialog!! as BottomSheetDialog).behavior.isDraggable =
-//            false
-
     }
 
     private fun setupViews() {
 //        setupCalculatorView()
         layoutCalculator.edtSum = edtSum
-
+        layoutCalculator.footerTextView = tvTotalSum
         val cardViews = navArgs.cards?.map {
             val cardView = layoutInflater.inflate(R.layout.item_card_small, null)
             cardView.cardName.text = it.card_title
@@ -169,38 +150,6 @@ class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_
         })
 
     }
-//
-//    private fun setupCalculatorView() {
-//        tvOne.setOnClickListener { edtSum.append("1") }
-//        tvTwo.setOnClickListener { edtSum.append("2") }
-//        tvThree.setOnClickListener { edtSum.append("3") }
-//        tvFour.setOnClickListener { edtSum.append("4") }
-//        tvFive.setOnClickListener { edtSum.append("5") }
-//        tvSix.setOnClickListener { edtSum.append("6") }
-//        tvSeven.setOnClickListener { edtSum.append("7") }
-//        tvEight.setOnClickListener { edtSum.append("8") }
-//        tvNine.setOnClickListener { edtSum.append("9") }
-//        tvZero.setOnClickListener { edtSum.append("0") }
-//        tvMinus.setOnClickListener { edtSum.append(" - ") }
-//        tvPlus.setOnClickListener { edtSum.append(" + ") }
-//        tvMultiply.setOnClickListener { edtSum.append(" * ") }
-//        tvDivide.setOnClickListener { edtSum.append(" / ") }
-//        tvEquals.setOnClickListener {
-//            if (edtSum.text.isNotBlank()) {
-//                try {
-//                    edtSum.setText(Keval.eval(edtSum.text.toString()).toInt().toString())
-//                } catch (e: Exception) {
-//
-//                }
-//            }
-//        }
-//
-//        backspace.setOnClickListener {
-//            if (edtSum.text.isNotBlank()) {
-//                edtSum.setText(edtSum.text.dropLast(1))
-//            }
-//        }
-//    }
 
     private fun subscribeObservers() {
 
@@ -235,7 +184,7 @@ class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_
     private fun attachListeners() {
         tvFill.setOnClickListener {
             viewModel.p2pId2Id(
-                edtSum.text.toString().toInt(),
+                layoutCalculator.amount,
                 navArgs.cards!![cardFromIndex].own_id!!,
                 navArgs.cards!![cardToIndex].own_id!!
             )
@@ -256,9 +205,7 @@ class FillCardFromMyCardsFragment : BaseFragment(R.layout.fragment_fill_from_my_
         }
 
         edtSum.doOnTextChanged { text, start, before, count ->
-            tvFill.isEnabled = text != null && text.isNotBlank() && !text.contains(" ")
-            tvMinAmount.isVisible =
-                if (text.isNullOrBlank()) false else text.toString().toInt() < 1000
+            tvFill.isEnabled = layoutCalculator.amount > 0
         }
     }
 

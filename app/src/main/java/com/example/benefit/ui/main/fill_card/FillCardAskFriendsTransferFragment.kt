@@ -68,7 +68,7 @@ class FillCardAskFriendsTransferFragment @Inject constructor() :
 
     private fun setupViews() {
         calcLayout.edtSum = edtSum
-
+        calcLayout.footerTextView = tvMinAmount
         setupSelectedContacts()
         setupCardPager()
 
