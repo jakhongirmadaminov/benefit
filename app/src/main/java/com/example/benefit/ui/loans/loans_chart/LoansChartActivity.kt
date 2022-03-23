@@ -37,10 +37,10 @@ class LoansChartActivity : BaseActionbarActivity() {
 
     private fun setupViews() {
 
-        tvLoanPaidAmount.text = DecimalFormat("#,###").format(loanInfo.sumLoan!!) + " UZS"
-        tvRate.text = "18% " + getString(R.string.yearly)
-        tvMainLoan.text = DecimalFormat("#,###").format(loanInfo.sumLoan!!) + " UZS"
-//        tvForPay.text =   DecimalFormat("#,###").format(loanInfo.sumLoan!!) + " UZS"
+        tvLoanPaidAmount.text = DecimalFormat("#,###").format(loanInfo.depPime!!) + " UZS"
+        tvRate.text = DecimalFormat("#,###").format(loanInfo.perCurr!!) + " UZS"
+        tvMainLoan.text = DecimalFormat("#,###").format(loanInfo.depPime!!) + " UZS"
+        tvForPay.text =   DecimalFormat("#,###").format(loanInfo.perCurr!!) + " UZS"
         val closeDate =
             DateTimeFormat.forPattern(("dd.MM.yyyy")).parseDateTime(loanInfo.closeDate!!)
         val startDate = closeDate.minusDays(365)

@@ -101,11 +101,18 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         viewModel.signInRequired.observe(viewLifecycleOwner) {
             when (it ?: return@observe) {
                 true -> {
-                    AppPrefs.edit {
-                        token = null
+                    val dialog = DialogAuthNeeded()
+                    childFragmentManager.setFragmentResultListener(
+                        KEY_NEED_AUTHORIZATION,
+                        viewLifecycleOwner
+                    ) { requestKey, result ->
+                        AppPrefs.edit {
+                            token = null
+                        }
+                        start<AuthActivity>()
+                        requireActivity().finish()
                     }
-                    start<AuthActivity>()
-                    requireActivity().finish()
+                    dialog.show(childFragmentManager, "")
                 }
                 else -> {
                 }
@@ -263,7 +270,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                     putExtra(EXTRA_CARD, viewModel.supremeCard.value)
                 }
             }
-            cardTwo.tvLoanSum.text = DecimalFormat("#,###").format(it.depPime!!) + " UZS"
+            cardTwo.tvLoanSum.text = DecimalFormat("#,###").format(it.perCurr!!) + " UZS"
             cardTwo.cardOvalLoans.setBackgroundResource(R.drawable.shape_oval_yellow)
             actionViews.add(cardTwo)
             servicesPager.addView(cardTwo)

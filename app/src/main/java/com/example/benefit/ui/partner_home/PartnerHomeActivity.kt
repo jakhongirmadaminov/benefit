@@ -11,8 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.benefit.R
 import com.example.benefit.remote.models.Partner
 import com.example.benefit.remote.models.PartnerPhotoDTO
-import com.example.benefit.stories.screen.EXTRA_STORIES
-import com.example.benefit.stories.screen.StoryActivity
+import com.example.benefit.stories.screen.PageChangeListener
 import com.example.benefit.ui.base.BaseActivity
 import com.example.benefit.ui.main.home.HomeFragment
 import com.example.benefit.ui.partners_map.PartnerOnMapActivity
@@ -110,6 +109,20 @@ class PartnerHomeActivity : BaseActivity() {
         imagesPager.adapter = HomeFragment.WizardPagerAdapter(imagesPager.children.toList())
         imagesPager.offscreenPageLimit = 10
         imagesPager.currentItem = 0
+        tvImageCount.text = "1/${imagesPager.childCount}"
+
+        imagesPager.addOnPageChangeListener(
+            object : PageChangeListener() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    tvImageCount.text = "${position + 1}/${imagesPager.childCount}"
+                }
+
+                override fun onPageScrollCanceled() {
+                }
+
+            }
+        )
     }
 
 

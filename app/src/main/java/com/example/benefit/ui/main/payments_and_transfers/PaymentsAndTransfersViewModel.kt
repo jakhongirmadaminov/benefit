@@ -16,7 +16,10 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class PaymentsAndTransfersViewModel @Inject constructor(private val userRemote: UserRemote, private val authApi: AuthApiService) : ViewModel() {
+class PaymentsAndTransfersViewModel @Inject constructor(
+    private val userRemote: UserRemote,
+    private val authApi: AuthApiService
+) : ViewModel() {
 
     val cardsResp = MutableLiveData<List<CardDTO>>()
     val isLoadingCards = MutableLiveData<Boolean>()
@@ -25,7 +28,7 @@ class PaymentsAndTransfersViewModel @Inject constructor(private val userRemote: 
 
     fun getMyCards() {
         isLoadingCards.value = true
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(IO) {
             val response = userRemote.getMyCards()
             withContext(Dispatchers.Main) {
                 isLoadingCards.value = false

@@ -14,6 +14,9 @@ import com.example.benefit.util.ResultError
 import com.example.benefit.util.ResultSuccess
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_loan.*
+import org.joda.time.DateTime
+import org.joda.time.Days
+import org.joda.time.format.DateTimeFormat
 import java.text.DecimalFormat
 
 
@@ -61,6 +64,15 @@ class LoanActivity : BaseActionbarActivity() {
             DecimalFormat("#,###").format(value.responseBody!!.depPime!!) + " UZS"
         tvDeadline.text = value.responseBody.closeDate!!
         tvRate.text = "18% " + getString(R.string.yearly)
+        val closeDate =
+            DateTimeFormat.forPattern(("dd.MM.yyyy")).parseDateTime(value.responseBody.closeDate)
+        val startDate = closeDate.minusDays(365)
+
+        val daysPassed = Days.daysBetween(
+            startDate.withTimeAtStartOfDay(),
+            DateTime.now().withTimeAtStartOfDay()
+        ).days
+        progress.progress = 100 * daysPassed / 365
 
         btnDetails.setOnClickListener {
             startActivity(Intent(this, LoansChartActivity::class.java).apply {
