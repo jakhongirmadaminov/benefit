@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.layout_calculator.view.*
 class CalculatorLayout constructor(context: Context, attrs: AttributeSet) :
     LinearLayout(context, attrs) {
     var amount = 0
+    var minAmount = 1000
 
     var footerTextView: TextView? = null
     var edtSum: EditText? = null
@@ -32,10 +33,15 @@ class CalculatorLayout constructor(context: Context, attrs: AttributeSet) :
                         } else {
                             if (text.isNullOrBlank()) 0 else text.toString().trim().toInt()
                         }
-                        if (amount < 1000) {
+                        if (amount < minAmount) {
                             amount = 0
                             setTextColor(ContextCompat.getColor(context, R.color.error_red))
-                            setText(R.string.minimum_sum_is)
+                            setText(
+                                context.getString(
+                                    R.string.minimum_sum_is,
+                                    minAmount.toString()
+                                )
+                            )
                         } else {
                             setTextColor(ContextCompat.getColor(context, R.color.textlightGrey))
                             setText(

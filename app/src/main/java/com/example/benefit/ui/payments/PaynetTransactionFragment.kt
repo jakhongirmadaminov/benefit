@@ -47,6 +47,7 @@ class PaynetTransactionFragment : BaseFragment(R.layout.fragment_paynet_transfer
     private fun setupViews() {
         layoutCalculator.edtSum = edtSum
         layoutCalculator.footerTextView = tvMinAmount
+        layoutCalculator.minAmount = 500
         tvServiceName.text = args.paynetMerchant.titleShort
         tvServiceFullName.text = args.paynetMerchant.title
         tvCategoryName.text = args.paynetMerchant.getLocalizedCatgName()

@@ -65,16 +65,16 @@ class SettingsLangFragment : BaseFragment(R.layout.fragment_settings_lang) {
             rbUz.isChecked = false
             rbEn.isChecked = false
         }
-        llUzbek.setOnClickListener {
-            rbUz.isChecked = true
-            rbRu.isChecked = false
-            rbEn.isChecked = false
-        }
-        llEnglish.setOnClickListener {
-            rbEn.isChecked = true
-            rbRu.isChecked = false
-            rbUz.isChecked = false
-        }
+//        llUzbek.setOnClickListener {
+//            rbUz.isChecked = true
+//            rbRu.isChecked = false
+//            rbEn.isChecked = false
+//        }
+//        llEnglish.setOnClickListener {
+//            rbEn.isChecked = true
+//            rbRu.isChecked = false
+//            rbUz.isChecked = false
+//        }
 
     }
 

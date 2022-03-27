@@ -38,12 +38,12 @@
                     android:textStyle="bold" />
 
 
-                <ImageView
-                    android:id="@+id/icMore"
-                    android:layout_width="?android:actionBarSize"
-                    android:layout_height="match_parent"
-                    android:padding="15dp"
-                    android:src="@drawable/ic_three_dots" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/icMore"-->
+<!--                    android:layout_width="?android:actionBarSize"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:padding="15dp"-->
+<!--                    android:src="@drawable/ic_three_dots" />-->
 
             </LinearLayout>
 
@@ -85,7 +85,8 @@
                     android:layout_marginLeft="26dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginRight="26dp"
-                    android:background="@drawable/gradient_orange"
+                    android:background="@drawable/cb_orange_gray"
+                    android:clickable="false"
                     android:text="@string/new_limit"
                     android:textAllCaps="false"
                     android:textColor="@color/white"

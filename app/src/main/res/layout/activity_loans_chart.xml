@@ -42,15 +42,15 @@
                     android:textStyle="bold" />
 
 
-                <ImageView
-                    android:id="@+id/icMore"
-                    android:layout_width="?android:actionBarSize"
-                    android:layout_height="match_parent"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:selectableItemBackground"
-                    android:padding="15dp"
-                    android:src="@drawable/ic_three_dots" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/icMore"-->
+<!--                    android:layout_width="?android:actionBarSize"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:clickable="true"-->
+<!--                    android:focusable="true"-->
+<!--                    android:foreground="?android:selectableItemBackground"-->
+<!--                    android:padding="15dp"-->
+<!--                    android:src="@drawable/ic_three_dots" />-->
 
             </LinearLayout>
 

@@ -87,7 +87,6 @@
         android:hint="0"
         android:imeOptions="actionDone"
         android:inputType="number"
-        android:text="500"
         android:textColor="@color/black"
         android:textSize="30sp"
         app:layout_constraintTop_toBottomOf="@id/cardsToPagerSmall" />

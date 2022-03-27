@@ -144,7 +144,7 @@
     <string name="transfer_from_card">Перевод с карты</string>
     <string name="take_card_photo">Сфотографировать карту</string>
     <string name="enter_card_number">Введите номер карты</string>
-    <string name="minimum_sum_is">Минимальная сумма 1000 сум</string>
+    <string name="minimum_sum_is">Минимальная сумма %1$s сум</string>
     <string name="search">Найти</string>
     <string name="from_contacts">Из телефонной книги</string>
     <string name="search_friends_nearby">Поиск друзей\nпоблизости...</string>
