@@ -452,5 +452,11 @@ interface AuthApiService {
     ): PlainResp
 
 
+    @GET("api/partner/view/{partnerId}")
+    suspend fun getPartnerInfo(
+        @Path(value = "partnerId", encoded = true) partnerId: Long,
+    ): RespFormat<Partner>
+
+
 }
 

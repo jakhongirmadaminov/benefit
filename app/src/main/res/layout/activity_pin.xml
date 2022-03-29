@@ -331,7 +331,7 @@
             android:gravity="center">
 
             <ImageView
-                android:id="@+id/ivTouchId"
+                android:id="@+id/ivBackSpace"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:clickable="true"
@@ -339,7 +339,7 @@
                 android:foreground="@drawable/round_ripple"
                 android:gravity="center"
                 android:padding="15dp"
-                android:src="@drawable/ic_touch_id"
+                android:src="@drawable/ic_backspace"
                 android:text="1"
                 android:textColor="@color/primary_text"
                 android:textSize="20dp"

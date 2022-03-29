@@ -53,7 +53,7 @@ data class LikedUserDTO(
     @SerializedName("partner_id") val partner_id: Long? = null,
     @SerializedName("user_id") val user_id: Long? = null,
     @SerializedName("type") val type: Int? = null,
-    @SerializedName("created") val created: String? = null,
+    @SerializedName("created") val created: Long? = null,
     @SerializedName("user_name") val user_name: String? = null,
     @SerializedName("user_image") val user_image: String? = null,
     @SerializedName("created_text") val created_text: String? = null,

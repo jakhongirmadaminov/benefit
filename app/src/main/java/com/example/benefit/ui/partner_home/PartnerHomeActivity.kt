@@ -9,7 +9,6 @@ import androidx.activity.viewModels
 import androidx.core.view.children
 import androidx.lifecycle.lifecycleScope
 import com.example.benefit.R
-import com.example.benefit.remote.models.Partner
 import com.example.benefit.remote.models.PartnerPhotoDTO
 import com.example.benefit.stories.screen.PageChangeListener
 import com.example.benefit.ui.base.BaseActivity
@@ -27,7 +26,6 @@ import splitties.activities.start
 
 class PartnerHomeActivity : BaseActivity() {
 
-    lateinit var partner: Partner
 
     private val viewModel by viewModels<PartnerHomeViewModel>()
 
@@ -38,28 +36,34 @@ class PartnerHomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_partner_home)
-        partner = intent.getParcelableExtra(EXTRA_PARTNER)!!
-        setupViews()
+        viewModel.partner.value = intent.getParcelableExtra(EXTRA_PARTNER)!!
         attachListeners()
+        subscribeObservers()
 
+    }
+
+    private fun subscribeObservers() {
+        viewModel.partner.observe(this) {
+            setupViews()
+        }
     }
 
     private fun setupViews() {
 
-        setupImagePager(partner.photos_array)
-        ivBrandLogo.loadImageUrl(partner.icon_image!!)
-        tvBrandName.text = partner.title
-        tvContentDesc.text = partner.desc_ru
-        tvContentTitle.text = partner.title
-        tvBrandSubtitle.text = partner.type_name
-//        tvCashBackPercentage.text = partner.title
+        setupImagePager(viewModel.partner.value?.photos_array)
+        ivBrandLogo.loadImageUrl(viewModel.partner.value?.icon_image!!)
+        tvBrandName.text = viewModel.partner.value?.title
+        tvContentDesc.text = viewModel.partner.value?.desc_ru
+        tvContentTitle.text = viewModel.partner.value?.title
+        tvBrandSubtitle.text = viewModel.partner.value?.type_name
+//        tvCashBackPercentage.text = viewModel.partner.value?.title
 
-        tvLikeCount.text = "+" + partner.likes_count?.toString()
+        tvLikeCount.text = "+" + viewModel.partner.value?.likes_count?.toString()
 
         addLikedUserAvatars()
 
 
-        viewModel.partnerStoriesFlow(partnerId = partner.id).onEach { stories ->
+        viewModel.partnerStoriesFlow(partnerId = viewModel.partner.value!!.id).onEach { stories ->
             cardImg.setOnClickListener {
 //                start<StoryActivity> {
 //                    putExtra(EXTRA_STORIES, stories)
@@ -72,12 +76,13 @@ class PartnerHomeActivity : BaseActivity() {
 
     private fun addLikedUserAvatars() {
         var avatarCount = 0
-        partner.last_likes?.forEach {
+        likedPplContainer.removeAllViews()
+        viewModel.partner.value?.last_likes?.forEach {
             it.user_image?.let { image ->
                 likedPplContainer.addView(ImageView(this).apply {
                     layoutParams = LinearLayout.LayoutParams(
-                        SizeUtils.dpToPx(context, 40).toInt(),
-                        SizeUtils.dpToPx(context, 40).toInt()
+                        SizeUtils.dpToPx(context, 30).toInt(),
+                        SizeUtils.dpToPx(context, 30).toInt()
                     ).apply {
                         marginStart = -SizeUtils.dpToPx(context, 20).toInt()
                     }
@@ -133,18 +138,18 @@ class PartnerHomeActivity : BaseActivity() {
 
         ivCall.setOnClickListener {
             startActivity(Intent(Intent.ACTION_DIAL).apply {
-                data = Uri.parse("tel:${partner.phone}")
+                data = Uri.parse("tel:${viewModel.partner.value?.phone}")
             })
         }
 
         cbLike.setOnCheckedChangeListener { buttonView, isChecked ->
-            viewModel.sendLikeOrDislike(isChecked, partnerId = partner.id)
+            viewModel.sendLikeOrDislike(isChecked, partnerId = viewModel.partner.value!!.id)
         }
 
         ivMap.setOnClickListener {
-            partner.coords_array?.lat?.let {
+            viewModel.partner.value?.coords_array?.lat?.let {
                 start<PartnerOnMapActivity> {
-                    putExtra(EXTRA_PARTNER, partner)
+                    putExtra(EXTRA_PARTNER, viewModel.partner.value)
                 }
             }
         }

@@ -103,6 +103,12 @@ class TransactionFragment : BaseFragment(R.layout.fragment_transaction),
                 )
             )
         }
+
+        ivSharePayment.setOnClickListener {
+
+
+        }
+
         ivSelectCategories.setOnClickListener {
             findNavController().navigate(
                 TransactionFragmentDirections.actionTransactionFragmentToTransactionSelectCategoryFragment(

@@ -2,7 +2,6 @@ package com.example.benefit.ui.main.pin
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import com.example.benefit.R
 import com.example.benefit.ui.auth.AuthActivity
@@ -26,7 +25,7 @@ class PinActivity : BaseActivity() {
         if (isBiometricSupported) {
             showBioPrompt()
         } else {
-            ivTouchId.isVisible = false
+//            ivTouchId.isVisible = false
         }
 
     }
@@ -51,8 +50,11 @@ class PinActivity : BaseActivity() {
     }
 
     private fun attachListeners() {
-        ivTouchId.setOnClickListener {
-            showBioPrompt()
+//        ivTouchId.setOnClickListener {
+//            showBioPrompt()
+//        }
+        ivBackSpace.setOnClickListener {
+            backSpace()
         }
 
         tvZero.setOnClickListener {
@@ -129,6 +131,10 @@ class PinActivity : BaseActivity() {
 
     private fun appendToPin(s: String) {
         pinView.append(s)
+    }
+
+    private fun backSpace() {
+        pinView.setText(pinView.text?.dropLast(1))
     }
 
     override fun onBackPressed() {
