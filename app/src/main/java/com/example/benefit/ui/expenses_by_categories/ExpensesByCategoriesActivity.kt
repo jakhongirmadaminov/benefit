@@ -165,14 +165,16 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity(), OnChartValueSelect
 
         chartView.llMonths.children.forEachIndexed { index, view ->
             (view as? TextView)?.text =
-                DateTimeFormat.forPattern("MMM")
-                    .print(DateTime(DateTime.now().year, index + 1, 1, 0, 0))
+                Constants.MONTHS[AppPrefs.language!!]!![index].substring(0,3).uppercase()
+//                DateTimeFormat.forPattern("MMM")
+//                    .print(DateTime(DateTime.now().year, index + 1, 1, 0, 0))
         }
 
         chartView2.llMonths.children.forEachIndexed { index, view ->
             (view as? TextView)?.text =
-                DateTimeFormat.forPattern("MMM")
-                    .print(DateTime(DateTime.now().year, 6 + index + 1, 1, 0, 0))
+                Constants.MONTHS[AppPrefs.language!!]!![index+6].substring(0,3).uppercase()
+//                DateTimeFormat.forPattern("MMM")
+//                    .print(DateTime(DateTime.now().year, 6 + index + 1, 1, 0, 0))
         }
 
         makeChart(chartView.chart, value.dropLast(6))

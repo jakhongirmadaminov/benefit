@@ -22,9 +22,7 @@ import com.example.benefit.ui.main.home.HomeFragment
 import com.example.benefit.ui.transactions_history.TransactionsHistoryViewModel
 import com.example.benefit.ui.viewgroups.ItemTransaction
 import com.example.benefit.ui.viewgroups.ItemTransactionDate
-import com.example.benefit.util.ResultSuccess
-import com.example.benefit.util.SizeUtils
-import com.example.benefit.util.loadImageUrl
+import com.example.benefit.util.*
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -38,7 +36,6 @@ import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_transaction.*
 import kotlinx.android.synthetic.main.item_line_chart.view.*
 import org.joda.time.DateTime
-import org.joda.time.format.DateTimeFormat
 import java.text.DecimalFormat
 
 class TransactionFragment : BaseFragment(R.layout.fragment_transaction),
@@ -134,14 +131,16 @@ class TransactionFragment : BaseFragment(R.layout.fragment_transaction),
 
         chartView.llMonths.children.forEachIndexed { index, view ->
             (view as? TextView)?.text =
-                DateTimeFormat.forPattern("MMM")
-                    .print(DateTime(DateTime.now().year, index + 1, 1, 0, 0))
+                Constants.MONTHS[AppPrefs.language!!]!![index].substring(0, 3).uppercase()
+//            DateTimeFormat.forPattern("MMM")
+//                    .print(DateTime(DateTime.now().year, index + 1, 1, 0, 0))
         }
 
         chartView2.llMonths.children.forEachIndexed { index, view ->
             (view as? TextView)?.text =
-                DateTimeFormat.forPattern("MMM")
-                    .print(DateTime(DateTime.now().year, 6 + index + 1, 1, 0, 0))
+                Constants.MONTHS[AppPrefs.language!!]!![index + 6].substring(0, 3).uppercase()
+//            DateTimeFormat.forPattern("MMM")
+//                    .print(DateTime(DateTime.now().year, 6 + index + 1, 1, 0, 0))
         }
 
         chartView.radioGroup.children.forEachIndexed { index, view ->
