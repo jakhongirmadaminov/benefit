@@ -170,11 +170,22 @@ class FillMerchantsFieldsFragment @Inject constructor() :
                         paymentServiceFields.addView(view)
                     }
                 }
-
-
+                else -> {
+                    val view =
+                        layoutInflater.inflate(R.layout.item_paynet_service_field_string, null)
+                            .apply {
+                                lblTitle.text =
+                                    if (AppPrefs.language == UZ) serviceField.titleUz else serviceField.titleRu
+//                                viewModel.fields.add(edtInput)
+                                edtInput.doOnTextChanged { text, start, before, count ->
+                                    text?.let {
+                                        setFieldValue(service, index, it.toString())
+                                    }
+                                }
+                            }
+                    paymentServiceFields.addView(view)
+                }
             }
-
-
         }
 
 //        putFieldCheckCallbacks(service)
