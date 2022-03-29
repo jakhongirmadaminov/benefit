@@ -167,15 +167,15 @@
                     app:layout_constraintTop_toBottomOf="@id/icPeople" />
 
 
-                <ImageView
-                    android:id="@+id/icCloseInviteCard"
-                    android:layout_width="?android:actionBarSize"
-                    android:layout_height="?android:actionBarSize"
-                    android:padding="15dp"
-                    android:src="@drawable/ic_clear"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/bg_grey" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/icCloseInviteCard"-->
+<!--                    android:layout_width="?android:actionBarSize"-->
+<!--                    android:layout_height="?android:actionBarSize"-->
+<!--                    android:padding="15dp"-->
+<!--                    android:src="@drawable/ic_clear"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:tint="@color/bg_grey" />-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
