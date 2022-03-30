@@ -104,7 +104,7 @@
     <string name="current_limit">Текущий лимит</string>
     <string name="confirmed_limit">Одобренный лимит</string>
     <string name="for_period">На срок</string>
-    <string name="used">used</string>
+    <string name="used">Использовано</string>
     <string name="rate">Ставка</string>
     <string name="active_until">Действует до</string>
     <string name="more_details">Подробнее</string>
@@ -222,7 +222,7 @@
     <string name="transfer_amount">Сумма перевода: %1$s сум</string>
     <string name="commissions_amount">Комиссия: %1$s сум</string>
     <string name="you_have_no_supreme_card">У вас нет карты Supreme!</string>
-    <string name="available_amount">Available amount</string>
+    <string name="available_amount">Доступный лимит</string>
     <string name="yearly">годовых</string>
     <string name="ok">Ok</string>
     <string name="new_game">Новая игра</string>

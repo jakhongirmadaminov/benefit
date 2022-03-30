@@ -22,9 +22,11 @@ class ItemTransaction(val obj: TransactionAnalyticsDTO, val onClick: (() -> Unit
 
         viewHolder.itemView.tvMinus.isVisible = obj.isCredit == false
 
-        obj.partner?.image?.let {
-            viewHolder.itemView.icBankLogo.loadImageUrl(it)
-        }
+//        obj.partner?.image?.let {
+//            viewHolder.itemView.icBankLogo.loadImageUrl(it)
+//        }
+//        viewHolder.itemView.icBankLogo.setImageResource(if(obj.isCredit == true && ) R.drawable.ic_income else if(obj.))
+
         viewHolder.itemView.tvTransactionType.text = TransTypeTranslator.translate(obj.transType)
 
         onClick?.let { click ->
