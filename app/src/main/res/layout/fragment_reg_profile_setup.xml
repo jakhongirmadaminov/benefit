@@ -310,7 +310,7 @@
         tools:visibility="visible" />
 
 
-    <com.example.benefit.util.ButtonMain
+    <uz.magnumactive.benefit.util.ButtonMain
         android:id="@+id/btnReady"
         style="@style/ButtonMainStyle"
         android:layout_width="match_parent"

@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/createRegularPaymentFragment"
-        android:name="com.example.benefit.ui.regular_payment.CreateRegularPaymentFragment"
+        android:name="uz.magnumactive.benefit.ui.regular_payment.CreateRegularPaymentFragment"
         android:label=""
         tools:layout="@layout/fragment_create_regular_payment">
 
@@ -33,13 +33,13 @@
 
     <fragment
         android:id="@+id/selectMerchantFragment"
-        android:name="com.example.benefit.ui.regular_payment.CreateRegularPaymentSelectMerchantFragment"
+        android:name="uz.magnumactive.benefit.ui.regular_payment.CreateRegularPaymentSelectMerchantFragment"
         android:label=""
         tools:layout="@layout/fragment_payment_merchants">
 
         <argument
             android:name="paynetCategory"
-            app:argType="com.example.benefit.remote.models.PaynetCategory" />
+            app:argType="uz.magnumactive.benefit.remote.models.PaynetCategory" />
         <action
             android:id="@+id/action_selectMerchantFragment_to_createRegPaymentEndFragment"
             app:destination="@id/createRegPaymentEndFragment" />
@@ -49,27 +49,27 @@
 
     <fragment
         android:id="@+id/createRegPaymentHowItWorksFragment"
-        android:name="com.example.benefit.ui.regular_payment.CreateRegularPaymentHowItWorksFragment"
+        android:name="uz.magnumactive.benefit.ui.regular_payment.CreateRegularPaymentHowItWorksFragment"
         android:label=""
         tools:layout="@layout/fragment_create_regular_payment_how_it_works" />
 
     <fragment
         android:id="@+id/createRegPaymentEndFragment"
-        android:name="com.example.benefit.ui.regular_payment.CreateRegularPaymentEnd"
+        android:name="uz.magnumactive.benefit.ui.regular_payment.CreateRegularPaymentEnd"
         android:label=""
         tools:layout="@layout/fragment_create_regular_payment_end">
 
         <argument
             android:name="paymentDTO"
             android:defaultValue="@null"
-            app:argType="com.example.benefit.remote.models.AutoPaymentDTO"
+            app:argType="uz.magnumactive.benefit.remote.models.AutoPaymentDTO"
             app:nullable="true" />
 
 
         <argument
             android:name="merchantDTO"
             android:defaultValue="@null"
-            app:argType="com.example.benefit.remote.models.PaynetMerchant"
+            app:argType="uz.magnumactive.benefit.remote.models.PaynetMerchant"
             app:nullable="true" />
 
     </fragment>

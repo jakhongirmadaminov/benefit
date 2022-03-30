@@ -81,7 +81,7 @@
         tools:text="Оплачено" />
 
 
-    <com.example.benefit.util.ButtonMain
+    <uz.magnumactive.benefit.util.ButtonMain
         android:id="@+id/btnPay"
         android:layout_width="wrap_content"
         android:layout_height="30dp"

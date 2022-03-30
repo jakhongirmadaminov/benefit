@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/regPhoneFragment"
-        android:name="com.example.benefit.ui.auth.registration.RegPhoneFragment"
+        android:name="uz.magnumactive.benefit.ui.auth.registration.RegPhoneFragment"
         android:label=""
         tools:layout="@layout/fragment_reg_phone">
         <action
@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/regCodeFragment"
-        android:name="com.example.benefit.ui.auth.registration.RegCodeFragment"
+        android:name="uz.magnumactive.benefit.ui.auth.registration.RegCodeFragment"
         android:label=""
         tools:layout="@layout/fragment_reg_code" >
         <action
@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/regProfileSetupFragment"
-        android:name="com.example.benefit.ui.auth.registration.RegProfileSetupFragment"
+        android:name="uz.magnumactive.benefit.ui.auth.registration.RegProfileSetupFragment"
         android:label=""
         tools:layout="@layout/fragment_reg_profile_setup" >
         <action
@@ -42,7 +42,7 @@
 
     <fragment
         android:id="@+id/regPasswordFragment"
-        android:name="com.example.benefit.ui.auth.registration.RegPasswordFragment"
+        android:name="uz.magnumactive.benefit.ui.auth.registration.RegPasswordFragment"
         android:label=""
         tools:layout="@layout/fragment_reg_password" >
         <action
@@ -52,7 +52,7 @@
 
     <fragment
         android:id="@+id/regCardActivationFragment"
-        android:name="com.example.benefit.ui.auth.registration.RegCardActivationFragment"
+        android:name="uz.magnumactive.benefit.ui.auth.registration.RegCardActivationFragment"
         android:label=""
         tools:layout="@layout/fragment_reg_card_activation" >
         <action
@@ -88,7 +88,7 @@
     </fragment>
     <fragment
         android:id="@+id/regEndFragment"
-        android:name="com.example.benefit.ui.auth.registration.RegEndFragment"
+        android:name="uz.magnumactive.benefit.ui.auth.registration.RegEndFragment"
         android:label=""
         tools:layout="@layout/fragment_reg_end" />
 

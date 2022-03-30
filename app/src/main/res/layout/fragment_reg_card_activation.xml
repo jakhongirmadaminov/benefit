@@ -237,7 +237,7 @@
                 app:layout_constraintTop_toBottomOf="@id/edtCardName" />
 
 
-            <com.example.benefit.util.ButtonMain
+            <uz.magnumactive.benefit.util.ButtonMain
                 android:id="@+id/btnActivate"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"

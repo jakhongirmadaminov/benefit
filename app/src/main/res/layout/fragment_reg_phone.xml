@@ -183,7 +183,7 @@
         app:layout_constraintTop_toTopOf="@id/lblYoullReceiveCode" />
 
 
-    <com.example.benefit.util.ButtonMain
+    <uz.magnumactive.benefit.util.ButtonMain
         android:id="@+id/btnGetCode"
         style="@style/ButtonMainStyle"
         android:layout_width="match_parent"

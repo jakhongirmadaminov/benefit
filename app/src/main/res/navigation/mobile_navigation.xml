@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.benefit.ui.main.home.HomeFragment"
+        android:name="uz.magnumactive.benefit.ui.main.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_partners_category"
-        android:name="com.example.benefit.ui.main.partners_category.PartnersCategoryFragment"
+        android:name="uz.magnumactive.benefit.ui.main.partners_category.PartnersCategoryFragment"
         android:label="@string/partners_category"
         tools:layout="@layout/fragment_partners_category" />
 
     <fragment
         android:id="@+id/nav_payments"
-        android:name="com.example.benefit.ui.main.payments_and_transfers.PaymentsAndTransfersFragment"
+        android:name="uz.magnumactive.benefit.ui.main.payments_and_transfers.PaymentsAndTransfersFragment"
         android:label="@string/payments_and_transfers"
         tools:layout="@layout/fragment_payments_and_transfers" />
 
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.example.benefit.ui.main.profile.ProfileFragment"
+        android:name="uz.magnumactive.benefit.ui.main.profile.ProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

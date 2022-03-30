@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/settingsMainFragment"
-        android:name="com.example.benefit.ui.main.profile.settings_bsd.SettingsMainFragment"
+        android:name="uz.magnumactive.benefit.ui.main.profile.settings_bsd.SettingsMainFragment"
         android:label=""
         tools:layout="@layout/fragment_settings_main">
 
@@ -36,13 +36,13 @@
 
     <fragment
         android:id="@+id/settingsLangFragment"
-        android:name="com.example.benefit.ui.main.profile.settings_bsd.SettingsLangFragment"
+        android:name="uz.magnumactive.benefit.ui.main.profile.settings_bsd.SettingsLangFragment"
         android:label=""
         tools:layout="@layout/fragment_settings_lang"></fragment>
 
     <fragment
         android:id="@+id/settingsCodeFragment"
-        android:name="com.example.benefit.ui.main.profile.settings_bsd.SettingsCodeFragment"
+        android:name="uz.magnumactive.benefit.ui.main.profile.settings_bsd.SettingsCodeFragment"
         android:label=""
         tools:layout="@layout/fragment_settings_code">
         <action
@@ -56,19 +56,19 @@
 
     <fragment
         android:id="@+id/settingsNewCodeFragment"
-        android:name="com.example.benefit.ui.main.profile.settings_bsd.SettingsNewCodeFragment"
+        android:name="uz.magnumactive.benefit.ui.main.profile.settings_bsd.SettingsNewCodeFragment"
         android:label=""
         tools:layout="@layout/fragment_settings_new_code"></fragment>
 
     <fragment
         android:id="@+id/settingsPhoneFragment"
-        android:name="com.example.benefit.ui.main.profile.settings_bsd.SettingsPhoneFragment"
+        android:name="uz.magnumactive.benefit.ui.main.profile.settings_bsd.SettingsPhoneFragment"
         android:label=""
         tools:layout="@layout/fragment_settings_phone"></fragment>
 
     <fragment
         android:id="@+id/settingsChangeCodeFragment"
-        android:name="com.example.benefit.ui.main.profile.settings_bsd.SettingsChangeCodeFragment"
+        android:name="uz.magnumactive.benefit.ui.main.profile.settings_bsd.SettingsChangeCodeFragment"
         android:label=""
         tools:layout="@layout/fragment_settings_change_code">
         <action

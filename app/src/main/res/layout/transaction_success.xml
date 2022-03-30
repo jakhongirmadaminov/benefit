@@ -124,7 +124,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvTransferAmount" />
 
-        <com.example.benefit.util.ButtonMain
+        <uz.magnumactive.benefit.util.ButtonMain
             android:id="@+id/btnClose"
             android:layout_width="match_parent"
             android:layout_height="40dp"

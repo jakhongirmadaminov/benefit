@@ -8,17 +8,17 @@
 
     <fragment
         android:id="@+id/transactionFragment"
-        android:name="com.example.benefit.ui.transactions_history.transaction_bsd.TransactionFragment"
+        android:name="uz.magnumactive.benefit.ui.transactions_history.transaction_bsd.TransactionFragment"
         android:label=""
         tools:layout="@layout/fragment_transaction">
 
         <argument
             android:name="transactionDTO"
-            app:argType="com.example.benefit.remote.models.TransactionAnalyticsDTO" />
+            app:argType="uz.magnumactive.benefit.remote.models.TransactionAnalyticsDTO" />
 
         <argument
             android:name="transactionsReport"
-            app:argType="com.example.benefit.remote.models.TransactionInOutDTOList" />
+            app:argType="uz.magnumactive.benefit.remote.models.TransactionInOutDTOList" />
 
         <action
             android:id="@+id/action_transactionFragment_to_transactionMoreInfoFragment"
@@ -47,13 +47,13 @@
 
     <fragment
         android:id="@+id/transactionMoreInfoFragment"
-        android:name="com.example.benefit.ui.transactions_history.transaction_bsd.TransactionMoreInfoFragment"
+        android:name="uz.magnumactive.benefit.ui.transactions_history.transaction_bsd.TransactionMoreInfoFragment"
         android:label=""
         tools:layout="@layout/fragment_transaction_more_info">
 
         <argument
             android:name="transactionDTO"
-            app:argType="com.example.benefit.remote.models.TransactionAnalyticsDTO" />
+            app:argType="uz.magnumactive.benefit.remote.models.TransactionAnalyticsDTO" />
 
         <!--        <action-->
         <!--            android:id="@+id/action_transactionFragment_to_cardMakeDepositFromAnyCardFragment"-->
@@ -66,13 +66,13 @@
 
     <fragment
         android:id="@+id/transactionSelectCategoryFragment"
-        android:name="com.example.benefit.ui.transactions_history.transaction_bsd.TransactionSelectCategoryFragment"
+        android:name="uz.magnumactive.benefit.ui.transactions_history.transaction_bsd.TransactionSelectCategoryFragment"
         android:label=""
         tools:layout="@layout/fragment_transaction_select_category">
 
         <argument
             android:name="transactionDTO"
-            app:argType="com.example.benefit.remote.models.TransactionAnalyticsDTO" />
+            app:argType="uz.magnumactive.benefit.remote.models.TransactionAnalyticsDTO" />
 
         <!--        <action-->
         <!--            android:id="@+id/action_transactionFragment_to_cardMakeDepositFromAnyCardFragment"-->
@@ -86,13 +86,13 @@
 
     <fragment
         android:id="@+id/transactionSharePaymentFragment"
-        android:name="com.example.benefit.ui.transactions_history.transaction_bsd.TransactionSharePaymentFragment"
+        android:name="uz.magnumactive.benefit.ui.transactions_history.transaction_bsd.TransactionSharePaymentFragment"
         android:label=""
         tools:layout="@layout/fragment_transaction_share_payment">
 
         <argument
             android:name="transactionDTO"
-            app:argType="com.example.benefit.remote.models.TransactionAnalyticsDTO" />
+            app:argType="uz.magnumactive.benefit.remote.models.TransactionAnalyticsDTO" />
         <action
             android:id="@+id/action_transactionSharePaymentFragment_to_transactionSharePaymentSelectedFragment"
             app:destination="@id/transactionSharePaymentSelectedFragment"
@@ -117,13 +117,13 @@
 
     <fragment
         android:id="@+id/transactionSharePaymentSelectedFragment"
-        android:name="com.example.benefit.ui.transactions_history.transaction_bsd.TransactionSharePaymentSelectedFragment"
+        android:name="uz.magnumactive.benefit.ui.transactions_history.transaction_bsd.TransactionSharePaymentSelectedFragment"
         android:label=""
         tools:layout="@layout/fragment_transaction_share_payment_selected">
 
         <argument
             android:name="contacts"
-            app:argType="com.example.benefit.remote.models.Friends" />
+            app:argType="uz.magnumactive.benefit.remote.models.Friends" />
         <action
             android:id="@+id/action_transactionSharePaymentSelectedFragment_to_transactionSharePaymentEndFragment"
             app:destination="@id/transactionSharePaymentEndFragment" />
@@ -139,13 +139,13 @@
 
     <fragment
         android:id="@+id/transactionSharePaymentEndFragment"
-        android:name="com.example.benefit.ui.transactions_history.transaction_bsd.TransactionSharePaymentEndFragment"
+        android:name="uz.magnumactive.benefit.ui.transactions_history.transaction_bsd.TransactionSharePaymentEndFragment"
         android:label=""
         tools:layout="@layout/fragment_transaction_share_payment_end">
 
         <argument
             android:name="contacts"
-            app:argType="com.example.benefit.remote.models.Friends" />
+            app:argType="uz.magnumactive.benefit.remote.models.Friends" />
 
         <!--        <action-->
         <!--            android:id="@+id/action_transactionFragment_to_cardMakeDepositFromAnyCardFragment"-->
@@ -158,13 +158,13 @@
 
     <fragment
         android:id="@+id/transactionSearchFriendNearbyFragment"
-        android:name="com.example.benefit.ui.transactions_history.transaction_bsd.TransactionSearchFriendNearbyFragment"
+        android:name="uz.magnumactive.benefit.ui.transactions_history.transaction_bsd.TransactionSearchFriendNearbyFragment"
         android:label=""
         tools:layout="@layout/fragment_transaction_search_friends_nearby">
 
 <!--        <argument-->
 <!--            android:name="contacts"-->
-<!--            app:argType="com.example.benefit.remote.models.Friends" />-->
+<!--            app:argType="uz.magnumactive.benefit.remote.models.Friends" />-->
 
         <!--        <action-->
         <!--            android:id="@+id/action_transactionFragment_to_cardMakeDepositFromAnyCardFragment"-->

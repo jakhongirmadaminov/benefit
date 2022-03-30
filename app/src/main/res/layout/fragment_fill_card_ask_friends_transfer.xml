@@ -104,7 +104,7 @@
         app:layout_constraintStart_toStartOf="@id/edtSum"
         app:layout_constraintTop_toBottomOf="@id/edtSum" />
 
-    <com.example.benefit.util.CalculatorLayout
+    <uz.magnumactive.benefit.util.CalculatorLayout
         android:id="@+id/calcLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

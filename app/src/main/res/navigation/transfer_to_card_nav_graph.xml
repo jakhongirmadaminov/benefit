@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/transferToCardFragment"
-        android:name="com.example.benefit.ui.main.transfer_to_card.TransferToCardFragment"
+        android:name="uz.magnumactive.benefit.ui.main.transfer_to_card.TransferToCardFragment"
         android:label=""
         tools:layout="@layout/fragment_transfer_to_card">
 
@@ -27,13 +27,13 @@
 
     <fragment
         android:id="@+id/transferToCardTransactionFragment"
-        android:name="com.example.benefit.ui.main.transfer_to_card.TransferToCardTransactionFragment"
+        android:name="uz.magnumactive.benefit.ui.main.transfer_to_card.TransferToCardTransactionFragment"
         android:label=""
         tools:layout="@layout/fragment_transfer_to_card_transaction">
 
         <argument
             android:name="card_p2p_target"
-            app:argType="com.example.benefit.remote.models.CardP2PDTO"
+            app:argType="uz.magnumactive.benefit.remote.models.CardP2PDTO"
             app:nullable="false" />
 
     </fragment>

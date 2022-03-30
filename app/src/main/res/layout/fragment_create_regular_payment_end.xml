@@ -81,7 +81,7 @@
             />
 
 
-        <com.example.benefit.util.TextButtonMain
+        <uz.magnumactive.benefit.util.TextButtonMain
             android:id="@+id/tvCreateRegPayment"
             android:layout_width="wrap_content"
             android:layout_height="?android:actionBarSize"

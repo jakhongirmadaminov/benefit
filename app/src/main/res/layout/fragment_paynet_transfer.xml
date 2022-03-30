@@ -32,7 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.example.benefit.util.TextButtonMain
+    <uz.magnumactive.benefit.util.TextButtonMain
         android:id="@+id/tvFill"
         android:layout_width="wrap_content"
         android:layout_height="?android:actionBarSize"
@@ -187,7 +187,7 @@
         app:layout_constraintStart_toStartOf="@id/edtSum"
         app:layout_constraintTop_toBottomOf="@id/edtSum" />
 
-    <com.example.benefit.util.CalculatorLayout
+    <uz.magnumactive.benefit.util.CalculatorLayout
         android:id="@+id/layoutCalculator"
         android:layout_width="match_parent"
         android:layout_height="0dp"

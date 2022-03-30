@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/paymentsFragment"
-        android:name="com.example.benefit.ui.payments.PaymentsFragment"
+        android:name="uz.magnumactive.benefit.ui.payments.PaymentsFragment"
         android:label=""
         tools:layout="@layout/fragment_payments">
 
@@ -37,19 +37,19 @@
 
     <!--    <fragment-->
     <!--        android:id="@+id/createRegPaymentHowItWorksFragment"-->
-    <!--        android:name="com.example.benefit.ui.regular_payment.CreateRegularPaymentHowItWorksFragment"-->
+    <!--        android:name="uz.magnumactive.benefit.ui.regular_payment.CreateRegularPaymentHowItWorksFragment"-->
     <!--        android:label=""-->
     <!--        tools:layout="@layout/fragment_create_regular_payment_how_it_works" />-->
 
     <fragment
         android:id="@+id/selectMerchantFragment"
-        android:name="com.example.benefit.ui.payments.SelectMerchantsFragment"
+        android:name="uz.magnumactive.benefit.ui.payments.SelectMerchantsFragment"
         android:label=""
         tools:layout="@layout/fragment_payment_merchants">
 
         <argument
             android:name="paynetCategory"
-            app:argType="com.example.benefit.remote.models.PaynetCategory" />
+            app:argType="uz.magnumactive.benefit.remote.models.PaynetCategory" />
         <action
             android:id="@+id/action_selectMerchantFragment_to_fillMerchantFields"
             app:destination="@id/fillMerchantFields" />
@@ -58,13 +58,13 @@
 
     <fragment
         android:id="@+id/fillMerchantFields"
-        android:name="com.example.benefit.ui.payments.FillMerchantsFieldsFragment"
+        android:name="uz.magnumactive.benefit.ui.payments.FillMerchantsFieldsFragment"
         android:label=""
         tools:layout="@layout/fragment_fill_merchant_fields">
 
         <argument
             android:name="paynetMerchant"
-            app:argType="com.example.benefit.remote.models.PaynetMerchant" />
+            app:argType="uz.magnumactive.benefit.remote.models.PaynetMerchant" />
         <action
             android:id="@+id/action_fillMerchantFields_to_paynetTransaction"
             app:destination="@id/paynetTransaction" />
@@ -74,16 +74,16 @@
 
     <fragment
         android:id="@+id/paynetTransaction"
-        android:name="com.example.benefit.ui.payments.PaynetTransactionFragment"
+        android:name="uz.magnumactive.benefit.ui.payments.PaynetTransactionFragment"
         android:label=""
         tools:layout="@layout/fragment_paynet_transfer">
         <argument
             android:name="paynetMerchant"
-            app:argType="com.example.benefit.remote.models.PaynetMerchant" />
+            app:argType="uz.magnumactive.benefit.remote.models.PaynetMerchant" />
 
         <argument
             android:name="serviceFields"
-            app:argType="com.example.benefit.remote.models.ServiceFields" />
+            app:argType="uz.magnumactive.benefit.remote.models.ServiceFields" />
 
     </fragment>
 

@@ -72,7 +72,7 @@
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/ivLogo" />
 
-        <com.example.benefit.util.ButtonMain
+        <uz.magnumactive.benefit.util.ButtonMain
             android:id="@+id/btnPay"
             android:layout_width="match_parent"
             android:layout_height="40dp"

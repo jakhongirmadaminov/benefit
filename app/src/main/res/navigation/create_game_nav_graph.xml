@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/createGameFragment"
-        android:name="com.example.benefit.ui.gap.create_game.CreateGameFragment"
+        android:name="uz.magnumactive.benefit.ui.gap.create_game.CreateGameFragment"
         tools:layout="@layout/fragment_create_game">
 
         <action
@@ -19,14 +19,14 @@
 
     <fragment
         android:id="@+id/findFriendsFragment"
-        android:name="com.example.benefit.ui.gap.create_game.FindFriendsFragment"
+        android:name="uz.magnumactive.benefit.ui.gap.create_game.FindFriendsFragment"
         tools:layout="@layout/fragment_find_friends">
 
     </fragment>
 
     <!--    <fragment-->
     <!--        android:id="@+id/selectContactFragment"-->
-    <!--        android:name="com.example.benefit.ui.gap.create_game.CreateGameFragment"-->
+    <!--        android:name="uz.magnumactive.benefit.ui.gap.create_game.CreateGameFragment"-->
     <!--        tools:layout="@layout/fragment_create_game">-->
 
 

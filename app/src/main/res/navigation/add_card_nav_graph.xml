@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/regCardActivationFragment"
-        android:name="com.example.benefit.ui.auth.registration.RegCardActivationFragment"
+        android:name="uz.magnumactive.benefit.ui.auth.registration.RegCardActivationFragment"
         android:label=""
         tools:layout="@layout/fragment_reg_card_activation">
 
@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/cardConfirm"
-        android:name="com.example.benefit.ui.auth.login.SmsCodeFragment"
+        android:name="uz.magnumactive.benefit.ui.auth.login.SmsCodeFragment"
         android:label=""
         tools:layout="@layout/fragment_code">
 
@@ -58,7 +58,7 @@
 
     <fragment
         android:id="@+id/regEndFragment"
-        android:name="com.example.benefit.ui.auth.registration.RegEndFragment"
+        android:name="uz.magnumactive.benefit.ui.auth.registration.RegEndFragment"
         android:label=""
         tools:layout="@layout/fragment_reg_end" />
 

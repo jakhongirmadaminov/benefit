@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/phoneFragment"
-        android:name="com.example.benefit.ui.auth.login.PhoneFragment"
+        android:name="uz.magnumactive.benefit.ui.auth.login.PhoneFragment"
         android:label=""
         tools:layout="@layout/fragment_phone">
         <action
@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/codeFragment"
-        android:name="com.example.benefit.ui.auth.login.SmsCodeFragment"
+        android:name="uz.magnumactive.benefit.ui.auth.login.SmsCodeFragment"
         android:label=""
         tools:layout="@layout/fragment_code">
 
@@ -57,7 +57,7 @@
 
     <fragment
         android:id="@+id/deviceCodeFragment"
-        android:name="com.example.benefit.ui.auth.login.DeviceCodeFragment"
+        android:name="uz.magnumactive.benefit.ui.auth.login.DeviceCodeFragment"
         android:label=""
         tools:layout="@layout/fragment_device_code" />
 

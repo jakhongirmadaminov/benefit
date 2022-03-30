@@ -60,7 +60,7 @@
             android:src="@drawable/cashback_bg"
             app:layout_constraintBottom_toBottomOf="parent" />
 
-        <com.example.benefit.util.ButtonMain
+        <uz.magnumactive.benefit.util.ButtonMain
             android:id="@+id/btnGoToList"
             style="@style/ButtonMainStyle"
             android:layout_width="match_parent"
