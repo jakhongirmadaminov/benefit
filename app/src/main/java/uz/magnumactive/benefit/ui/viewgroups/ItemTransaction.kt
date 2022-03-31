@@ -2,13 +2,12 @@ package uz.magnumactive.benefit.ui.viewgroups
 
 import android.util.TypedValue
 import androidx.core.view.isVisible
-import uz.magnumactive.benefit.R
-import uz.magnumactive.benefit.remote.models.TransactionAnalyticsDTO
-import uz.magnumactive.benefit.util.TransTypeTranslator
-import uz.magnumactive.benefit.util.loadImageUrl
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_transaction.view.*
+import uz.magnumactive.benefit.R
+import uz.magnumactive.benefit.remote.models.TransactionAnalyticsDTO
+import uz.magnumactive.benefit.util.TransTypeTranslator
 import java.text.DecimalFormat
 
 
@@ -25,8 +24,16 @@ class ItemTransaction(val obj: TransactionAnalyticsDTO, val onClick: (() -> Unit
 //        obj.partner?.image?.let {
 //            viewHolder.itemView.icBankLogo.loadImageUrl(it)
 //        }
-//        viewHolder.itemView.icBankLogo.setImageResource(if(obj.isCredit == true && ) R.drawable.ic_income else if(obj.))
 
+        val transactionImage =
+            if (obj.merchantName?.contains("P2P") == true || obj.merchantName?.contains("PAYME") == true) {
+                R.drawable.ic_transfer
+            } else if (obj.isCredit == true) {
+                R.drawable.ic_income
+            } else {
+                R.drawable.ic_expense
+            }
+        viewHolder.itemView.icBankLogo.setImageResource(transactionImage)
         viewHolder.itemView.tvTransactionType.text = TransTypeTranslator.translate(obj.transType)
 
         onClick?.let { click ->

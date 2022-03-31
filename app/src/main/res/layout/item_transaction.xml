@@ -25,7 +25,7 @@
         android:fontFamily="sans-serif-light"
         android:textColor="#000000"
         android:textSize="16sp"
-        android:textStyle="normal"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/tvBankName"
         app:layout_constraintEnd_toStartOf="@id/tvMinus"
         app:layout_constraintStart_toEndOf="@id/icBankLogo"

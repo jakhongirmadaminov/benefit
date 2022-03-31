@@ -26,7 +26,7 @@ object AppPrefs : Preferences("myPrefs") {
     var userId by intPref(0)
 
     @ExperimentalSplittiesApi
-    var language by stringPref("uz")
+    var language by stringPref("ru")
 
     @ExperimentalSplittiesApi
     var phoneNumber by stringOrNullPref(null)
