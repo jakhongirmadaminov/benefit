@@ -1,21 +1,24 @@
 package uz.magnumactive.benefit.ui.main
 
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import uz.magnumactive.benefit.R
-import uz.magnumactive.benefit.ui.auth.AuthActivity
-import uz.magnumactive.benefit.ui.base.BaseActivity
-import uz.magnumactive.benefit.util.AppPrefs
-import uz.magnumactive.benefit.util.ContextUtils.setLocale
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import splitties.activities.start
 import splitties.experimental.ExperimentalSplittiesApi
+import uz.magnumactive.benefit.R
+import uz.magnumactive.benefit.ui.auth.AuthActivity
+import uz.magnumactive.benefit.ui.base.BaseActivity
+import uz.magnumactive.benefit.util.AppPrefs
+import uz.magnumactive.benefit.util.ContextUtils.setLocale
 
 @ExperimentalSplittiesApi
 class MainActivity : BaseActivity() {
@@ -26,6 +29,7 @@ class MainActivity : BaseActivity() {
     }
 
     private var pinTimerJob: Job? = null
+    private val viewModel: MainViewModel by viewModels()
 
     var isGoingDeposit = false
     var isJustLoggedIn = false
@@ -50,9 +54,18 @@ class MainActivity : BaseActivity() {
         if (AppPrefs.token.isNullOrBlank()) {
             start<AuthActivity>()
             finish()
-        }/* else if (shouldEnterPin()) {
-            startActivity(Intent(this, PinActivity::class.java))
-        }*/
+        }else{
+            FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w("TAG", "Fetching FCM registration token failed", task.exception)
+                    return@OnCompleteListener
+                }
+
+                // Get new FCM registration token
+                val token = task.result
+                viewModel.sendFCMToken(token)
+            })
+        }
 
     }
 

@@ -1,13 +1,13 @@
 package uz.magnumactive.benefit.remote
 
-import uz.magnumactive.benefit.remote.models.*
-import uz.magnumactive.benefit.stories.data.Story
-import uz.magnumactive.benefit.util.AppPrefs
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 import splitties.experimental.ExperimentalSplittiesApi
+import uz.magnumactive.benefit.remote.models.*
+import uz.magnumactive.benefit.stories.data.Story
+import uz.magnumactive.benefit.util.AppPrefs
 
 /**
  * Defines the abstract methods used for interacting with the Bufferoo API
@@ -442,6 +442,14 @@ interface AuthApiService {
         @Field("partner_id") partner_id: Long,
         @Field("user_id") user_id: Int = AppPrefs.userId,
         @Field("user_token") user_token: String = AppPrefs.userToken ?: "",
+    ): PlainResp
+
+    @POST("api/message/token")
+    @FormUrlEncoded
+    suspend fun sendFirebaseFCMToken(
+        @Field("token") token: String,
+        @Field("user_id") user_id: Int = AppPrefs.userId,
+        @Field("device_type") device_type: String = "Android",
     ): PlainResp
 
     @GET("api/partners/story/{partnerId}/{fromMillis}/{toMillis}")

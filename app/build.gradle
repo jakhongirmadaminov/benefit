@@ -105,4 +105,6 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:5.0.1'
     implementation 'com.github.poovamraj:PinEditTextField:1.2.6'
     implementation platform('com.google.firebase:firebase-bom:29.2.1')
+    implementation("com.google.firebase:firebase-messaging-ktx")
+
 }
