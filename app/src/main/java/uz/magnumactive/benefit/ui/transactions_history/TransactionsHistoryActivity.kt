@@ -170,7 +170,7 @@ class TransactionsHistoryActivity : BaseActivity(), OnChartValueSelectedListener
         chartView2.radioGroup.children.forEachIndexed { index, view ->
             (view as RadioButton).setOnCheckedChangeListener { compoundButton, b ->
                 if (b) {
-                    selectedMonthOffset = index + 5
+                    selectedMonthOffset = index + 6
                     loadTransactions(
                         (viewModel.transactionsAnalyticsResp.value as ResultSuccess).value[selectedMonthOffset]
                     )
@@ -225,7 +225,7 @@ class TransactionsHistoryActivity : BaseActivity(), OnChartValueSelectedListener
             chartPager[1].radioGroup.children.forEachIndexed { index, view ->
                 (view as RadioButton).isChecked = index == barIndex
             }
-            selectedMonthOffset = barIndex + 5
+            selectedMonthOffset = barIndex + 6
         }
         loadTransactions((viewModel.transactionsAnalyticsResp.value as ResultSuccess).value[selectedMonthOffset])
     }
@@ -262,14 +262,12 @@ class TransactionsHistoryActivity : BaseActivity(), OnChartValueSelectedListener
         tvIncomeOnMonthAmount.text =
             getString(R.string.sums, DecimalFormat("#,###").format(totalIncome))
         lblIncomeOnMonth.text =
-            getString(R.string.income_for_month) + " " + if (DateTime.now().monthOfYear - selectedMonthOffset - 1 >= 0) Constants.MONTHS[AppPrefs.language]!![DateTime.now().monthOfYear - selectedMonthOffset - 1]
-            else Constants.MONTHS[AppPrefs.language]!![DateTime.now().monthOfYear - selectedMonthOffset - 1 + 12]
+            getString(R.string.income_for_month) + " " + Constants.MONTHS[AppPrefs.language]!![selectedMonthOffset]
 
         tvSpentOnMonthAmount.text =
             getString(R.string.sums, DecimalFormat("#,###").format(totalExpense))
         lblSpentOnMonth.text =
-            getString(R.string.expense_for_month) + " " + if (DateTime.now().monthOfYear - selectedMonthOffset - 1 >= 0) Constants.MONTHS[AppPrefs.language]!![DateTime.now().monthOfYear - selectedMonthOffset - 1]
-            else Constants.MONTHS[AppPrefs.language]!![DateTime.now().monthOfYear - selectedMonthOffset - 1 + 12]
+            getString(R.string.expense_for_month) + " " + Constants.MONTHS[AppPrefs.language]!![selectedMonthOffset]
 
 
     }

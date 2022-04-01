@@ -9,6 +9,7 @@ import uz.magnumactive.benefit.ui.base.BaseActivity
 import uz.magnumactive.benefit.util.AppPrefs
 import uz.magnumactive.benefit.util.loadImageUrl
 import kotlinx.android.synthetic.main.activity_pin.*
+import uz.magnumactive.benefit.util.Constants
 
 class PinActivity : BaseActivity() {
 

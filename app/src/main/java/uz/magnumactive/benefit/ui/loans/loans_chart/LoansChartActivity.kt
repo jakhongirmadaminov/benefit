@@ -1,16 +1,18 @@
 package uz.magnumactive.benefit.ui.loans.loans_chart
 
 import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_loans_chart.*
+import org.joda.time.DateTime
+import org.joda.time.Days
+import org.joda.time.format.DateTimeFormat
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.CardDTO
 import uz.magnumactive.benefit.remote.models.LoanBody
 import uz.magnumactive.benefit.ui.base.BaseActionbarActivity
 import uz.magnumactive.benefit.ui.main.fill_card.FillCardBSD
 import uz.magnumactive.benefit.ui.main.fill_card.FillCardFragment
-import kotlinx.android.synthetic.main.activity_loans_chart.*
-import org.joda.time.DateTime
-import org.joda.time.Days
-import org.joda.time.format.DateTimeFormat
+import uz.magnumactive.benefit.util.AppPrefs
+import uz.magnumactive.benefit.util.Constants
 import java.text.DecimalFormat
 
 val EXTRA_LOAN_INFO = "LOAN_INFO"
@@ -39,14 +41,19 @@ class LoansChartActivity : BaseActionbarActivity() {
         tvLoanPaidAmount.text = DecimalFormat("#,###").format(loanInfo.depPime!!) + " UZS"
         tvRate.text = DecimalFormat("#,###").format(loanInfo.perCurr!!) + " UZS"
         tvMainLoan.text = DecimalFormat("#,###").format(loanInfo.depPime!!) + " UZS"
-        tvForPay.text =   DecimalFormat("#,###").format(loanInfo.perCurr!!) + " UZS"
+        tvForPay.text = DecimalFormat("#,###").format(loanInfo.perCurr!!) + " UZS"
+        tvCurrentMonth.text =
+            Constants.MONTHS[AppPrefs.language!!]!![DateTime.now().monthOfYear - 1]
         val closeDate =
             DateTimeFormat.forPattern(("dd.MM.yyyy")).parseDateTime(loanInfo.closeDate!!)
         val startDate = closeDate.minusDays(365)
 
-        val daysPassed = Days.daysBetween(startDate.withTimeAtStartOfDay(), DateTime.now().withTimeAtStartOfDay()).days
+        val daysPassed = Days.daysBetween(
+            startDate.withTimeAtStartOfDay(),
+            DateTime.now().withTimeAtStartOfDay()
+        ).days
 
-        circularProgress.setProgress(daysPassed/365f)
+        circularProgress.setProgress(daysPassed / 365f)
 
     }
 

@@ -5,17 +5,17 @@ import android.graphics.Bitmap
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import uz.magnumactive.benefit.remote.AuthApiService
-import uz.magnumactive.benefit.remote.models.ReqUserInfo
-import uz.magnumactive.benefit.remote.models.RespUserInfo
-import uz.magnumactive.benefit.remote.repository.UserRemote
-import uz.magnumactive.benefit.util.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import splitties.preferences.edit
+import uz.magnumactive.benefit.remote.AuthApiService
+import uz.magnumactive.benefit.remote.models.ReqUserInfo
+import uz.magnumactive.benefit.remote.models.RespUserInfo
+import uz.magnumactive.benefit.remote.repository.UserRemote
+import uz.magnumactive.benefit.util.*
 import java.math.BigInteger
 import javax.inject.Inject
 
@@ -82,7 +82,7 @@ class SetingsMainViewModel @Inject constructor(
                     }
                     is ResultSuccess -> {
                         AppPrefs.edit {
-                            avatar = Constants.BASE_URL + "upload" + response.value.avatar
+                            avatar = response.value.avatar
                         }
                         uploadAvatarResp.value = response.value
                         isLoading.value = false

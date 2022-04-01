@@ -256,5 +256,7 @@
     <string name="comissions_five_percent">Комиссия: 0.5%</string>
     <string name="total">Итого</string>
     <string name="comission">Комиссия</string>
+    <string name="expense">Перевод на карту</string>
+    <string name="income">Пополнение</string>
 
 </resources>

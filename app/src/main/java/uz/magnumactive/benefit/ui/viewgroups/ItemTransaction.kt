@@ -7,7 +7,6 @@ import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_transaction.view.*
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.TransactionAnalyticsDTO
-import uz.magnumactive.benefit.util.TransTypeTranslator
 import java.text.DecimalFormat
 
 
@@ -27,14 +26,19 @@ class ItemTransaction(val obj: TransactionAnalyticsDTO, val onClick: (() -> Unit
 
         val transactionImage =
             if (obj.merchantName?.contains("P2P") == true || obj.merchantName?.contains("PAYME") == true) {
+                viewHolder.itemView.tvTransactionType.text =
+                    viewHolder.itemView.context.getString(R.string.transfer_from_card)
                 R.drawable.ic_transfer
             } else if (obj.isCredit == true) {
+                viewHolder.itemView.tvTransactionType.text =
+                    viewHolder.itemView.context.getString(R.string.income)
                 R.drawable.ic_income
             } else {
+                viewHolder.itemView.tvTransactionType.text =
+                    viewHolder.itemView.context.getString(R.string.expense)
                 R.drawable.ic_expense
             }
         viewHolder.itemView.icBankLogo.setImageResource(transactionImage)
-        viewHolder.itemView.tvTransactionType.text = TransTypeTranslator.translate(obj.transType)
 
         onClick?.let { click ->
             viewHolder.itemView.isClickable = true

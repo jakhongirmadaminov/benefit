@@ -105,10 +105,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
-            android:name=".ui.analytics.AnalyticsActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
-        <activity
             android:name=".ui.loans.LoanActivity"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />

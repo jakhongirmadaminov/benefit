@@ -32,18 +32,11 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif"
                     android:gravity="center"
+                    android:layout_marginEnd="?attr/actionBarSize"
                     android:text="@string/limits"
                     android:textColor="#000000"
                     android:textSize="20sp"
                     android:textStyle="bold" />
-
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/icMore"-->
-<!--                    android:layout_width="?android:actionBarSize"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:padding="15dp"-->
-<!--                    android:src="@drawable/ic_three_dots" />-->
 
             </LinearLayout>
 
