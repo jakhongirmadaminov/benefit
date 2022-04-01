@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "78109613796",
+    "project_id": "benefit-bank-1bf67",
+    "storage_bucket": "benefit-bank-1bf67.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78109613796:android:8835c7da04524ef20356f1",
+        "android_client_info": {
+          "package_name": "uz.magnumactive.benefit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "78109613796-elab6sfcqvtg58oi7nu40prfkk43r06q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPMgcIyZLhLMbQVk9HaVopZQpJTmLldgg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "78109613796-elab6sfcqvtg58oi7nu40prfkk43r06q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
