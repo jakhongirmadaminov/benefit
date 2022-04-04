@@ -30,6 +30,7 @@
 
         <activity
             android:name=".ui.main.MainActivity"
+            android:exported="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar"
@@ -43,6 +44,7 @@
 
         <activity
             android:name=".ui.gap.gap_chart.GapChartActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar">
 
@@ -55,19 +57,27 @@
         </activity>
         <activity
             android:name=".ui.gap.GapActivity"
+
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.main.pin.PinActivity"
+
+            android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".stories.screen.StoryActivity"
+
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.loans.loans_chart.LoansChartActivity"
+
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar">
 
@@ -80,10 +90,12 @@
 
         <activity
             android:name=".ui.select_card_type.SelectCardTypeActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.expenses_by_categories.ExpensesByCategoriesActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar">
 
@@ -94,35 +106,46 @@
         </activity>
         <activity
             android:name=".ui.partners_map.PartnersMapActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.partners_map.PartnerOnMapActivity"
+
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.branches_atms.BranchesAtmsActivity"
+
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.loans.LoanActivity"
+
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.selected_partners_category.SelectedPartnersCategoryActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.partner_home.PartnerHomeActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.transactions_history.TransactionsHistoryActivity"
+            android:exported="false"
             android:label=""
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.auth.AuthActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar">
 
@@ -134,6 +157,7 @@
 
         <activity
             android:name=".ui.order_card.OrderCardActivity"
+            android:exported="false"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar">
