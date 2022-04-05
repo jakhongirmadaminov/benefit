@@ -1,6 +1,7 @@
 package uz.magnumactive.benefit.ui.main.home
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,18 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.PagerAdapter
+import com.rd.utils.DensityUtils.dpToPx
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
+import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.item_action_card_one.view.*
+import kotlinx.android.synthetic.main.item_action_card_three.view.*
+import kotlinx.android.synthetic.main.item_action_card_two.view.*
+import kotlinx.android.synthetic.main.item_card.view.*
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import splitties.fragments.start
+import splitties.preferences.edit
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.CardDTO
 import uz.magnumactive.benefit.remote.models.EPaymentType
@@ -40,18 +53,6 @@ import uz.magnumactive.benefit.ui.viewgroups.ItemStory
 import uz.magnumactive.benefit.util.AppPrefs
 import uz.magnumactive.benefit.util.ResultError
 import uz.magnumactive.benefit.util.ResultSuccess
-import com.rd.utils.DensityUtils.dpToPx
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.item_action_card_one.view.*
-import kotlinx.android.synthetic.main.item_action_card_three.view.*
-import kotlinx.android.synthetic.main.item_action_card_two.view.*
-import kotlinx.android.synthetic.main.item_card.view.*
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import splitties.fragments.start
-import splitties.preferences.edit
 import java.text.DecimalFormat
 
 
@@ -279,7 +280,9 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
         val cardThree = layoutInflater.inflate(R.layout.item_action_card_three, null)
         cardThree.setOnClickListener {
-
+            startActivity(Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse("https://t.me/Benefitapp_bot")
+            })
         }
         cardThree.cardOvalMessage.setBackgroundResource(R.drawable.shape_oval_yellow)
         actionViews.add(cardThree)
