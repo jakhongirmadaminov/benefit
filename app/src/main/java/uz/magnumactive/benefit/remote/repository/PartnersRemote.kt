@@ -11,6 +11,6 @@ interface PartnersRemote {
     suspend fun getPartnersCategory(): ResultWrapper<List<PartnerCategoryDTO>>
     suspend fun getPartnersForCategory(id: Int): ResultWrapper<List<PartnerCategoryDTO>>
     suspend fun getAllBankBranches(): ResultWrapper<List<BankBranchDTO>>
-    suspend fun getPartnersByCategoryId(id: Int): ResultWrapper<List<Partner>>
+    suspend fun getPartnersByCategoryId(id: Long): ResultWrapper<List<Partner>>
 
 }

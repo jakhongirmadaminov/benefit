@@ -92,7 +92,7 @@ interface AuthApiService {
 
     @GET("api/partners/category/{id}")
     suspend fun getPartnersByCategory(
-        @Path(value = "id", encoded = true) id: Int
+        @Path(value = "id", encoded = true) id: Long
     ): RespFormat<RespPartnerInCategory>
 
     @GET("api/news")
@@ -452,6 +452,23 @@ interface AuthApiService {
         @Field("device_type") device_type: String = "Android",
     ): PlainResp
 
+    @POST("api/other/myfriends")
+    @FormUrlEncoded
+    suspend fun myFriends(
+        @Field("user_id") user_id: Int = AppPrefs.userId,
+        @Field("device_type") device_type: String = "Android",
+    ): PlainResp
+
+    @POST("api/transactions/send")
+    @FormUrlEncoded
+    suspend fun addDividesTransaction(
+        @Field("owner_user_id") owner_user_id: Long,
+        @Field("utrnno_id") utrnno_id: Long,
+        @Field("utrnno_amount_id") utrnno_amount_id: Long,
+        @Field("divide") divide: String,
+        @Field("device_type") device_type: String = "Android",
+    ): PlainResp
+
     @GET("api/partners/story/{partnerId}/{fromMillis}/{toMillis}")
     suspend fun getPartnerStories(
         @Path(value = "partnerId", encoded = true) partnerId: Long,
@@ -463,6 +480,11 @@ interface AuthApiService {
     @GET("api/partner/view/{partnerId}")
     suspend fun getPartnerInfo(
         @Path(value = "partnerId", encoded = true) partnerId: Long,
+    ): RespFormat<Partner>
+
+    @GET("api/transactions/sender-list/{user_id}")
+    suspend fun mySentDivides(
+        @Path(value = "user_id", encoded = true) user_id: Long,
     ): RespFormat<Partner>
 
 

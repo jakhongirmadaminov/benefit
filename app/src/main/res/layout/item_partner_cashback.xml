@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clParent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="26dp"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:selectableItemBackground"
-    android:id="@+id/clParent"
+    android:paddingLeft="26dp"
     android:paddingRight="26dp">
 
 
@@ -59,14 +60,14 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:fontFamily="sans-serif"
-        android:text="SPA - салон"
         android:textColor="#cc5c5c5c"
         android:textSize="14dp"
         android:textStyle="normal"
         app:layout_constraintBottom_toTopOf="@id/tvCashBackPercentage"
         app:layout_constraintStart_toStartOf="@id/tvBrand"
         app:layout_constraintTop_toBottomOf="@id/tvBrand"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="SPA - салон" />
 
 
     <TextView
@@ -76,14 +77,14 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
         android:fontFamily="sans-serif"
-        android:text="5% кэшбэк"
         android:textColor="@color/black"
         android:textSize="14dp"
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/tvBrand"
         app:layout_constraintTop_toBottomOf="@id/tvCategoryName"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="5% кэшбэк" />
 
 
     <TextView

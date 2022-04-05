@@ -83,9 +83,9 @@ class PartnerHomeActivity : BaseActivity() {
                     layoutParams = LinearLayout.LayoutParams(
                         SizeUtils.dpToPx(context, 30).toInt(),
                         SizeUtils.dpToPx(context, 30).toInt()
-                    ).apply {
+                    )/*.apply {
                         marginStart = -SizeUtils.dpToPx(context, 20).toInt()
-                    }
+                    }*/
                     scaleType = ImageView.ScaleType.CENTER_CROP
                     loadCircularImage(image.removeSuffix("/"), 2f)
                 })

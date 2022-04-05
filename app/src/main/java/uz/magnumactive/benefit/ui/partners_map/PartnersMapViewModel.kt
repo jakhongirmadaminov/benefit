@@ -23,7 +23,7 @@ class PartnersMapViewModel @Inject constructor(private val partnersRepository: P
     var isLoading = SingleLiveEvent<Boolean>()
     val partnersResp = SingleLiveEvent<List<Partner>>()
 
-    fun getPartnersForCategory(id: Int) {
+    fun getPartnersForCategory(id: Long) {
         viewModelScope.launch(Dispatchers.IO) {
             val response = partnersRepository.getPartnersByCategoryId(id)
             withContext(Dispatchers.Main) {

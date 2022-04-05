@@ -20,7 +20,7 @@ class SelectedPartnersCategoryViewModel @Inject constructor(private val partners
     ViewModel() {
 
 
-    fun getPartnersForCategory(id: Int) {
+    fun getPartnersForCategory(id: Long) {
         viewModelScope.launch(Dispatchers.IO) {
             val response = partnersRepository.getPartnersByCategoryId(id)
             withContext(Dispatchers.Main) {

@@ -258,5 +258,6 @@
     <string name="comission">Комиссия</string>
     <string name="expense">Перевод на карту</string>
     <string name="income">Пополнение</string>
+    <string name="benefit_installment">Рассрочка по карте Benefit Supreme</string>
 
 </resources>

@@ -312,7 +312,7 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity(), OnChartValueSelect
     }
 
     private fun loadCategorizedExpenses(list: List<TransactionAnalyticsDTO>, monthIndex: Int) {
-        val expensesByCategoryMap = hashMapOf<Int, Long>()
+        val expensesByCategoryMap = hashMapOf<Long, Long>()
 
         list.forEach { transaction ->
             transaction.partner?.let { partner ->

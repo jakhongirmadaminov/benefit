@@ -32,7 +32,7 @@ class PartnersMapActivity : BaseActivity(), OnMapReadyCallback {
     private lateinit var gMap: GoogleMap
     private val adapter = GroupAdapter<GroupieViewHolder>()
     var categories: ArrayList<PartnerCategoryDTO>? = null
-    var selectedCategoryId: Int? = null
+    var selectedCategoryId: Long? = null
 
     companion object {
         const val EXTRA_CATEGORIES = "CATEGORIES"
@@ -49,7 +49,7 @@ class PartnersMapActivity : BaseActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
         categories = intent.getParcelableArrayListExtra(EXTRA_CATEGORIES)
-        selectedCategoryId = intent.extras?.get(EXTRA_CATEGORY_ID) as Int?
+        selectedCategoryId = intent.extras?.get(EXTRA_CATEGORY_ID) as Long?
         setupViews()
         attachListeners()
         subscribeObservers()

@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class PartnerCategoryDTO(
-    @SerializedName("id") val id: Int,
+    @SerializedName("id") val id: Long,
     @SerializedName("created_at") val created_at: Int,
     @SerializedName("updated_at") val updated_at: Int,
     @SerializedName("title_ru") val title_ru: String,

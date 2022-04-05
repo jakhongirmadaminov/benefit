@@ -28,7 +28,7 @@
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_partners_map.xml" value="0.25" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_pin.xml" value="0.1" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_select_card_type.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_selected_partners_category.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_selected_partners_category.xml" value="0.22" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_story.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_transactions_history.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_add_card.xml" value="0.36666666666666664" />
@@ -88,6 +88,7 @@
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_line_chart.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_merchants.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_news_and_promos.xml" value="0.11911231884057971" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_partner_cashback.xml" value="0.28804347826086957" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_partner_image.xml" value="0.2608695652173913" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_payment.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_payment_square.xml" value="0.18697916666666667" />
