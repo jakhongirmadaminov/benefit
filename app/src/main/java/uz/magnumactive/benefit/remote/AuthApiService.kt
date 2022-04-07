@@ -461,12 +461,11 @@ interface AuthApiService {
     @POST("api/transactions/send")
     @FormUrlEncoded
     suspend fun addDividesTransaction(
-        @Field("owner_user_id") owner_user_id: Long,
         @Field("utrnno_id") utrnno_id: Long,
         @Field("utrnno_amount_id") utrnno_amount_id: Long,
         @Field("divide") divide: String,
-        @Field("device_type") device_type: String = "Android",
-    ): PlainResp
+        @Field("owner_user_id") owner_user_id: Long = AppPrefs.userId,
+    ): RespFormat<PlainResp>
 
     @GET("api/partners/story/{partnerId}/{fromMillis}/{toMillis}")
     suspend fun getPartnerStories(

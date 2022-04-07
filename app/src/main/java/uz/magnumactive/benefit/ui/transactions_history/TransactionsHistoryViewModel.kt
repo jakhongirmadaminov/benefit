@@ -112,10 +112,5 @@ class TransactionsHistoryViewModel @Inject constructor(val apiService: AuthApiSe
         }
     }
 
-    fun shareTransaction(utrnno: Long, amountWithoutTiyin: Long, divisionScript: String) {
-
-
-    }
-
 
 }

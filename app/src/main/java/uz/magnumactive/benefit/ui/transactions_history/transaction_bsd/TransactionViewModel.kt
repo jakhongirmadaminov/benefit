@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import uz.magnumactive.benefit.remote.AuthApiService
 import uz.magnumactive.benefit.remote.models.BenefitContactDTO
 import uz.magnumactive.benefit.remote.models.BenefitFriends
-import uz.magnumactive.benefit.remote.models.MyFriendDTO
+import uz.magnumactive.benefit.remote.models.PlainResp
 import uz.magnumactive.benefit.util.RequestState
 import uz.magnumactive.benefit.util.makeRequest
 import javax.inject.Inject
@@ -34,13 +34,19 @@ class TransactionViewModel @Inject constructor(private val authApi: AuthApiServi
     }
 
 
+    val shareResponse = MutableLiveData<RequestState<PlainResp>>()
 
-//    val friendsResp = MutableLiveData<RequestState<List<MyFriendDTO>>>()
-//
-//    fun getFriends() {
-//        viewModelScope.launch {
-//            makeRequest(friendsResp) { authApi.myFriends() }
-//        }
-//    }
+    fun shareTransaction(utrnno: Long, amountWithoutTiyin: Long, divisionScript: String) {
+        viewModelScope.launch {
+            makeRequest(shareResponse) {
+                authApi.addDividesTransaction(
+                    utrnno_id = utrnno, utrnno_amount_id = amountWithoutTiyin,
+                    divide = divisionScript
+                )
+            }
+        }
+
+    }
+
 
 }

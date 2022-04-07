@@ -10,6 +10,7 @@ import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.BenefitContactDTO
 import uz.magnumactive.benefit.util.AppPrefs
 import uz.magnumactive.benefit.util.Constants
+import uz.magnumactive.benefit.util.loadCircleImageUrl
 import uz.magnumactive.benefit.util.loadImageUrl
 
 class FriendItemWithAmount(
@@ -17,46 +18,48 @@ class FriendItemWithAmount(
     var onAmountChanged: () -> Unit
 ) : Item() {
 
-    var edtAmount: EditText? = null
+    var amountEditText: EditText? = null
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        edtAmount = viewHolder.itemView.edtAmount
-        edtAmount?.setText(friend.payingAmount?.toString() ?: "")
-        edtAmount?.doOnTextChanged { text, start, before, count ->
-            friend.payingAmount = text.toString().toIntOrNull() ?: 0
-            onAmountChanged()
-        }
-        viewHolder.itemView.tvNameLastName.text = friend.fullname
-        if (friend.isMe) {
-            viewHolder.itemView.cardPhoto.setBackgroundColor(
-                ContextCompat.getColor(
-                    viewHolder.itemView.context,
-                    R.color.colorAccent
+
+        viewHolder.itemView.apply {
+            amountEditText = edtAmount
+            edtAmount?.setText(friend.payingAmount?.toString() ?: "")
+            edtAmount?.doOnTextChanged { text, start, before, count ->
+                friend.payingAmount = text.toString().toIntOrNull() ?: 0
+                onAmountChanged()
+            }
+            tvNameLastName.text = friend.fullname
+            if (friend.isMe) {
+                cardPhoto.setCardBackgroundColor(
+                    ContextCompat.getColor(
+                        context,
+                        R.color.colorAccent
+                    )
                 )
-            )
-            viewHolder.itemView.photo.loadImageUrl(AppPrefs.avatar!!)
-        } else {
-            viewHolder.itemView.cardPhoto.setBackgroundColor(
-                ContextCompat.getColor(
-                    viewHolder.itemView.context,
-                    R.color.white
+                photo.loadCircleImageUrl(AppPrefs.avatar!!)
+            } else {
+                cardPhoto.setCardBackgroundColor(
+                    ContextCompat.getColor(
+                        context,
+                        R.color.white
+                    )
                 )
-            )
-            viewHolder.itemView.photo.loadImageUrl(
-                Constants.BASE_URL + friend.avatar_link?.removeSuffix("/")
-            )
+                photo.loadCircleImageUrl(Constants.BASE_URL + friend.avatar_link?.removeSuffix("/"))
+            }
         }
+
     }
 
     override fun unbind(viewHolder: GroupieViewHolder) {
         super.unbind(viewHolder)
-        edtAmount = null
+        amountEditText = null
     }
 
     override fun getLayout() = R.layout.item_contact_with_share_amount
 
     fun setAmount(equalizedAmount: Long) {
-        edtAmount?.setText(equalizedAmount.toString())
+        amountEditText?.setText(equalizedAmount.toString())
     }
 
 

@@ -2,19 +2,26 @@ package uz.magnumactive.benefit.ui.transactions_history.transaction_bsd
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_transaction_share_payment_end.*
+import kotlinx.android.synthetic.main.transaction_loading.*
+import kotlinx.android.synthetic.main.transaction_success.*
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.BenefitContactDTO
 import uz.magnumactive.benefit.ui.base.BaseFragment
 import uz.magnumactive.benefit.ui.transactions_history.TransactionsHistoryViewModel
 import uz.magnumactive.benefit.ui.viewgroups.FriendItemWithAmount
 import uz.magnumactive.benefit.util.AppPrefs
+import uz.magnumactive.benefit.util.RequestState
 import uz.magnumactive.benefit.util.SizeUtils
 import java.text.DecimalFormat
 import javax.inject.Inject
@@ -30,6 +37,7 @@ class TransactionSharePaymentEndFragment @Inject constructor() :
     private val adapter = GroupAdapter<GroupieViewHolder>()
     val args: TransactionSharePaymentEndFragmentArgs by navArgs()
     private val activityViewModel: TransactionsHistoryViewModel by activityViewModels()
+    private val viewModel: TransactionViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,6 +50,17 @@ class TransactionSharePaymentEndFragment @Inject constructor() :
     }
 
     private fun setupViews() {
+
+        clTopUpSuccess.layoutParams = clTopUpSuccess.layoutParams.apply {
+            height = SizeUtils.getScreenHeight(requireActivity()) - SizeUtils.getActionBarHeight(
+                requireActivity()
+            )
+        }
+        clTopUpLoading.layoutParams = clTopUpSuccess.layoutParams.apply {
+            height = SizeUtils.getScreenHeight(requireActivity()) - SizeUtils.getActionBarHeight(
+                requireActivity()
+            )
+        }
 
         tvTotalSum.text =
             getString(R.string.sum) + ": " + args.transactionDTO.amountWithoutTiyin + " UZS"
@@ -119,13 +138,33 @@ class TransactionSharePaymentEndFragment @Inject constructor() :
             remainder >= 0 && activityViewModel.payersList.none { it.payingAmount == null || it.payingAmount!! <= 0 }
     }
 
-
     private fun subscribeObservers() {
 
+        viewModel.shareResponse.observe(viewLifecycleOwner) {
+            when (it) {
+                is RequestState.Error -> {
+                    clTopUpSuccess.isVisible = false
+                    clTopUpLoading.isVisible = false
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+                RequestState.Loading -> {
+                    clTopUpSuccess.isVisible = false
+                    clTopUpLoading.isVisible = true
 
+                }
+                is RequestState.Success -> {
+                    clTopUpSuccess.isVisible = true
+                    clTopUpLoading.isVisible = false
+                }
+            }
+        }
     }
 
     private fun attachListeners() {
+        btnClose.setOnClickListener {
+            ((parentFragment as NavHostFragment).parentFragment as TransactionBSD).dismiss()
+        }
+
         ivBack.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -133,7 +172,7 @@ class TransactionSharePaymentEndFragment @Inject constructor() :
 
         tvShare.setOnClickListener {
             val divisionScript = ""
-            activityViewModel.shareTransaction(
+            viewModel.shareTransaction(
                 args.transactionDTO.utrnno!!,
                 args.transactionDTO.amountWithoutTiyin,
                 divisionScript

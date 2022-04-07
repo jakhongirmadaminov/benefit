@@ -9,6 +9,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
@@ -37,7 +38,7 @@ class TransactionSharePaymentFragment @Inject constructor() :
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
     val args: TransactionSharePaymentFragmentArgs by navArgs()
-    private val viewModel: TransactionViewModel by activityViewModels()
+    private val viewModel: TransactionViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -146,7 +147,6 @@ class TransactionSharePaymentFragment @Inject constructor() :
 //        }
 
         tvSelect.setOnClickListener {
-            println("SSSS" + viewModel.selectedContacts)
             findNavController().navigate(
                 TransactionSharePaymentFragmentDirections.actionTransactionSharePaymentFragmentToTransactionSharePaymentEndFragment(
                     viewModel.selectedContacts,
