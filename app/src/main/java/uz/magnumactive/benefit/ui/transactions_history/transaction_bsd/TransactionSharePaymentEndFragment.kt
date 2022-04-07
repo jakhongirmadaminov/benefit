@@ -58,7 +58,14 @@ class TransactionSharePaymentEndFragment @Inject constructor() :
                 requireActivity()
             )
         }
-
+        lblTopUpSuccess.text = getString(R.string.transaction_divided_successfully)
+        lblSearching.text = getString(R.string.transaction_being_divided)
+        tvTransferAmount.text =
+            getString(
+                R.string.divided_sum,
+                DecimalFormat("#,###").format(args.transactionDTO.amountWithoutTiyin)
+            )
+        tvCommissions.isVisible = false
 
 
 

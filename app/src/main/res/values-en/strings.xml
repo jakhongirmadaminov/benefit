@@ -262,5 +262,8 @@
     <string name="from_phone_contacts">Из телефонной книги</string>
     <string name="sharing_with_whom">С кем делим</string>
     <string name="left_amount">Осталось</string>
+    <string name="transaction_divided_successfully">Счёт успешно разделён</string>
+    <string name="divided_sum">Сумма счёта: %1$s UZS</string>
+    <string name="transaction_being_divided">Разделение счета</string>
 
 </resources>
