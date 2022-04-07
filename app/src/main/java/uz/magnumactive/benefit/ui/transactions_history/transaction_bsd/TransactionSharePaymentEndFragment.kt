@@ -5,7 +5,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -18,7 +17,6 @@ import kotlinx.android.synthetic.main.transaction_success.*
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.BenefitContactDTO
 import uz.magnumactive.benefit.ui.base.BaseFragment
-import uz.magnumactive.benefit.ui.transactions_history.TransactionsHistoryViewModel
 import uz.magnumactive.benefit.ui.viewgroups.FriendItemWithAmount
 import uz.magnumactive.benefit.util.AppPrefs
 import uz.magnumactive.benefit.util.RequestState
@@ -36,7 +34,6 @@ class TransactionSharePaymentEndFragment @Inject constructor() :
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
     val args: TransactionSharePaymentEndFragmentArgs by navArgs()
-    private val activityViewModel: TransactionsHistoryViewModel by activityViewModels()
     private val viewModel: TransactionViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,6 +59,9 @@ class TransactionSharePaymentEndFragment @Inject constructor() :
             )
         }
 
+
+
+
         tvTotalSum.text =
             getString(R.string.sum) + ": " + args.transactionDTO.amountWithoutTiyin + " UZS"
 
@@ -85,8 +85,8 @@ class TransactionSharePaymentEndFragment @Inject constructor() :
         rvPaymentSharingContacts.adapter = adapter
         adapter.clear()
 
-        activityViewModel.payersList.clear()
-        activityViewModel.payersList.add(
+        viewModel.payersList.clear()
+        viewModel.payersList.add(
             BenefitContactDTO(
                 AppPrefs.userId,
                 AppPrefs.phoneNumber,
@@ -95,9 +95,9 @@ class TransactionSharePaymentEndFragment @Inject constructor() :
                 isMe = true,
             )
         )
-        activityViewModel.payersList.addAll(args.contacts)
+        viewModel.payersList.addAll(args.contacts)
 
-        activityViewModel.payersList.forEachIndexed { index, friend ->
+        viewModel.payersList.forEachIndexed { index, friend ->
             friend.payingAmount = null
             adapter.add(FriendItemWithAmount(friend) {
                 calculateLeftAmount()
@@ -111,7 +111,7 @@ class TransactionSharePaymentEndFragment @Inject constructor() :
     private fun calculateLeftAmount() {
 
         remainder =
-            (args.transactionDTO.amountWithoutTiyin - activityViewModel.payersList.sumOf {
+            (args.transactionDTO.amountWithoutTiyin - viewModel.payersList.sumOf {
                 it.payingAmount ?: 0
             })
 
@@ -135,7 +135,7 @@ class TransactionSharePaymentEndFragment @Inject constructor() :
     private fun updateShareButtonState() {
 
         tvShare.isEnabled =
-            remainder >= 0 && activityViewModel.payersList.none { it.payingAmount == null || it.payingAmount!! <= 0 }
+            remainder >= 0 && viewModel.payersList.none { it.payingAmount == null || it.payingAmount!! <= 0 }
     }
 
     private fun subscribeObservers() {
@@ -168,14 +168,10 @@ class TransactionSharePaymentEndFragment @Inject constructor() :
         ivBack.setOnClickListener {
             findNavController().popBackStack()
         }
-
-
         tvShare.setOnClickListener {
-            val divisionScript = ""
             viewModel.shareTransaction(
                 args.transactionDTO.utrnno!!,
                 args.transactionDTO.amountWithoutTiyin,
-                divisionScript
             )
         }
 

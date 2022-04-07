@@ -32,7 +32,6 @@ class TransactionsHistoryViewModel @Inject constructor(val apiService: AuthApiSe
         MutableLiveData<ResultWrapper<ArrayList<ArrayList<TransactionAnalyticsDTO>>>>()
 
 
-    var payersList = arrayListOf<BenefitContactDTO>()
 
     fun getTransactionsHistory(cardId: Long) {
         viewModelScope.launch(Dispatchers.IO) {

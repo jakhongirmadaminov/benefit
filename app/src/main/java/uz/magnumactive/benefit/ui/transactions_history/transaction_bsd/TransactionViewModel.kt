@@ -24,6 +24,7 @@ class TransactionViewModel @Inject constructor(private val authApi: AuthApiServi
 
     val availableContacts = MutableLiveData<RequestState<List<BenefitContactDTO>>>()
     var selectedContacts = BenefitFriends()
+    var payersList = arrayListOf<BenefitContactDTO>()
 
     fun checkMyContacts(contactsList: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -36,7 +37,14 @@ class TransactionViewModel @Inject constructor(private val authApi: AuthApiServi
 
     val shareResponse = MutableLiveData<RequestState<PlainResp>>()
 
-    fun shareTransaction(utrnno: Long, amountWithoutTiyin: Long, divisionScript: String) {
+    fun shareTransaction(utrnno: Long, amountWithoutTiyin: Long) {
+
+        val divisionScript = payersList.filterIndexed { index, benefitContactDTO ->
+            index > 0
+        }.joinToString(",") {
+            "${it.user_id}:${it.payingAmount}"
+        }
+
         viewModelScope.launch {
             makeRequest(shareResponse) {
                 authApi.addDividesTransaction(
