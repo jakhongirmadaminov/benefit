@@ -259,5 +259,8 @@
     <string name="expense">Перевод на карту</string>
     <string name="income">Пополнение</string>
     <string name="benefit_installment">Рассрочка по карте Benefit Supreme</string>
+    <string name="from_phone_contacts">Из телефонной книги</string>
+    <string name="sharing_with_whom">С кем делим</string>
+    <string name="left_amount">Осталось</string>
 
 </resources>

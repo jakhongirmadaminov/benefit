@@ -4,7 +4,12 @@ package uz.magnumactive.benefit.ui.transactions_history
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.*
+import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
 import uz.magnumactive.benefit.remote.AuthApiService
+import uz.magnumactive.benefit.remote.models.BenefitContactDTO
 import uz.magnumactive.benefit.remote.models.TransactionAnalyticsContainerDTO
 import uz.magnumactive.benefit.remote.models.TransactionAnalyticsDTO
 import uz.magnumactive.benefit.remote.models.TransactionInOutDTO
@@ -12,10 +17,6 @@ import uz.magnumactive.benefit.util.ResultError
 import uz.magnumactive.benefit.util.ResultSuccess
 import uz.magnumactive.benefit.util.ResultWrapper
 import uz.magnumactive.benefit.util.getFormattedResponse
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.*
-import org.joda.time.DateTime
-import org.joda.time.format.DateTimeFormat
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,6 +31,8 @@ class TransactionsHistoryViewModel @Inject constructor(val apiService: AuthApiSe
     val transactionsAnalyticsResp =
         MutableLiveData<ResultWrapper<ArrayList<ArrayList<TransactionAnalyticsDTO>>>>()
 
+
+    var payersList = arrayListOf<BenefitContactDTO>()
 
     fun getTransactionsHistory(cardId: Long) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -107,6 +110,11 @@ class TransactionsHistoryViewModel @Inject constructor(val apiService: AuthApiSe
             isLoading.postValue(false)
 
         }
+    }
+
+    fun shareTransaction(utrnno: Long, amountWithoutTiyin: Long, divisionScript: String) {
+
+
     }
 
 

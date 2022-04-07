@@ -1,10 +1,10 @@
 package uz.magnumactive.benefit.remote.models
 
 import android.os.Parcelable
-import uz.magnumactive.benefit.util.Constants
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import org.joda.time.format.DateTimeFormat
+import uz.magnumactive.benefit.util.Constants
 
 @Parcelize
 data class TransactionAnalyticsContainerDTO(@SerializedName("content") val content: ArrayList<TransactionAnalyticsDTO>) :
@@ -40,7 +40,7 @@ data class TransactionAnalyticsDTO(
 //    "category_name":{"title_ru":"","title_en":"","title_uz":""}
 
     val amountWithoutTiyin: Long
-        get() = if (reqamt != null && reqamt > 10) reqamt?.toString()?.dropLast(2)?.toLong() else 0
+        get() = if (reqamt != null && reqamt > 10) reqamt.toString().dropLast(2).toLong() else 0
 
 
     val dateFormatted: String?

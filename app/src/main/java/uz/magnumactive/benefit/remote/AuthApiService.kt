@@ -20,7 +20,7 @@ interface AuthApiService {
 //    @FormUrlEncoded
 //    suspend fun transactionHistory(
 //        @Field("per-page") per_page: Int = 15,
-//        @Field("user_id") user_id: Int = AppPrefs.userId,
+//        @Field("user_id") user_id: Long = AppPrefs.userId,
 //    ):  RespFormat<TransactionHistory>
 
     @POST("api/card/report")
@@ -62,7 +62,7 @@ interface AuthApiService {
         @Field("summa") summa: Int,
         @Field("card_id") card_id: Long,
         @Field("user_token") user_token: String = AppPrefs.userToken!!,
-        @Field("user_id") user_id: Int = AppPrefs.userId
+        @Field("user_id") user_id: Long = AppPrefs.userId
     ): RespFormat<PaynetPaymentResponse>
 
 
@@ -74,7 +74,7 @@ interface AuthApiService {
         @Field("fields") fields: String,
         @Field("summa") summa: Int,
         @Field("user_token") user_token: String = AppPrefs.userToken!!,
-        @Field("user_id") user_id: Int = AppPrefs.userId
+        @Field("user_id") user_id: Long = AppPrefs.userId
     ): RespFormat<PaynetPaymentResponse>
 
     @GET("api/paynet/providers")
@@ -106,7 +106,7 @@ interface AuthApiService {
 
     @POST("api/user/profile")
     @FormUrlEncoded
-    suspend fun getUserInfo(@Field("id") id: Int): RespFormat<ReqUserInfo>
+    suspend fun getUserInfo(@Field("id") id: Long): RespFormat<ReqUserInfo>
 
     @POST("api/card/info")
     @FormUrlEncoded
@@ -192,7 +192,7 @@ interface AuthApiService {
     @FormUrlEncoded
     suspend fun getMyReferralLink(
         @Field("user_token") user_token: String = AppPrefs.userToken!!,
-        @Field("user_id") user_id: Int = AppPrefs.userId
+        @Field("user_id") user_id: Long = AppPrefs.userId
     ): RespMyReferralLink
 
     @POST("api/ordercard/one")
@@ -201,7 +201,7 @@ interface AuthApiService {
         @Field("type_id") type_id: Int,
         @Field("is_agree") is_agree: Boolean = true,
         @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
-        @Field("user_id") user_id: Int = AppPrefs.userId
+        @Field("user_id") user_id: Long = AppPrefs.userId
     ): RespFormat<RespAcceptTerms>
 
 
@@ -217,7 +217,7 @@ interface AuthApiService {
     suspend fun addPassportPhoto(
         @Part("order_card_id") order_card_id: Long,
         @Part image: MultipartBody.Part,
-        @Part("user_id") user_id: Int = AppPrefs.userId,
+        @Part("user_id") user_id: Long = AppPrefs.userId,
         @Part("user_auth") user_auth: String = AppPrefs.userToken!!
     ): RespFormat<RespAcceptTerms>
 
@@ -226,7 +226,7 @@ interface AuthApiService {
     suspend fun addPhotoWithPassport(
         @Part("order_card_id") order_card_id: Long,
         @Part image: MultipartBody.Part,
-        @Part("user_id") user_id: Int = AppPrefs.userId,
+        @Part("user_id") user_id: Long = AppPrefs.userId,
         @Part("user_auth") user_auth: String = AppPrefs.userToken!!
     ): RespFormat<RespAcceptTerms>
 
@@ -244,7 +244,7 @@ interface AuthApiService {
         @Field("order_card_id") order_card_id: Long,
         @Field("adress_text") adress_text: String,
         @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
-        @Field("user_id") user_id: Int = AppPrefs.userId
+        @Field("user_id") user_id: Long = AppPrefs.userId
     ): RespFormat<RespAcceptTerms>
 
     @POST("api/ordercard/seven")
@@ -253,7 +253,7 @@ interface AuthApiService {
         @Field("order_card_id") order_card_id: Long,
         @Field("summa") summa: String,
         @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
-        @Field("user_id") user_id: Int = AppPrefs.userId
+        @Field("user_id") user_id: Long = AppPrefs.userId
     ): RespFormat<RespAcceptTerms>
 
     @POST("api/ordercard/close")
@@ -262,7 +262,7 @@ interface AuthApiService {
         @Field("order_card_id") order_card_id: Long,
         @Field("status") status: Int = 1,
         @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
-        @Field("user_id") user_id: Int = AppPrefs.userId
+        @Field("user_id") user_id: Long = AppPrefs.userId
     ): RespFormat<RespAcceptTerms>
 
 
@@ -271,7 +271,7 @@ interface AuthApiService {
     @FormUrlEncoded
     suspend fun getMyCards(
         @Field("user_token") user_auth: String = AppPrefs.userToken!!,
-        @Field("user_id") user_id: Int = AppPrefs.userId
+        @Field("user_id") user_id: Long = AppPrefs.userId
     ): RespFormat<MyCardsResp>
 
 
@@ -288,7 +288,7 @@ interface AuthApiService {
         @Field("background_id") background_id: Int,
         @Field("card_id") card_id: Long,
         @Field("user_token") user_auth: String = AppPrefs.userToken!!,
-        @Field("user_id") user_id: Int = AppPrefs.userId
+        @Field("user_id") user_id: Long = AppPrefs.userId
     ): RespFormat<RespChangeCardTitle>
 
     @POST("api/card/transhistory")
@@ -319,7 +319,7 @@ interface AuthApiService {
     suspend fun changePassword(
         @Field("phone_number") phone_number: String,
         @Field("password") password: String,
-        @Field("user_id") user_id: Int
+        @Field("user_id") user_id: Long
     ): RespFormat<PlainResp>
 
     @GET("api/other/branches")
@@ -379,7 +379,7 @@ interface AuthApiService {
     @FormUrlEncoded
     suspend fun getBenefitFriends(
         @Field("phone_array") phone_array: String,
-        @Field("user_id") user_id: Int = AppPrefs.userId
+        @Field("user_id") user_id: Long = AppPrefs.userId
     ): RespFormat<List<BenefitContactDTO>>
 
     @POST("api/gap/start")
@@ -391,16 +391,16 @@ interface AuthApiService {
         @Field("is_notif") is_notif: String,
         @Field("is_period") is_period: String,
         @Field("members") members: String,
-        @Field("user_id") user_id: Int = AppPrefs.userId
+        @Field("user_id") user_id: Long = AppPrefs.userId
     ): RespFormat<GapGameDTO>
 
     @POST("api/user/cashback")
     @FormUrlEncoded
-    suspend fun getBftInfo(@Field("user_id") user_id: Int = AppPrefs.userId): RespFormat<BftInfoDTO>
+    suspend fun getBftInfo(@Field("user_id") user_id: Long = AppPrefs.userId): RespFormat<BftInfoDTO>
 
     @POST("api/autopayments/my")
     @FormUrlEncoded
-    suspend fun getMyAutoPayments(@Field("user_id") user_id: Int = AppPrefs.userId): RespFormat<List<AutoPaymentDTO>>
+    suspend fun getMyAutoPayments(@Field("user_id") user_id: Long = AppPrefs.userId): RespFormat<List<AutoPaymentDTO>>
 
 
     @POST("api/autopayments/save")
@@ -416,7 +416,7 @@ interface AuthApiService {
         @Field("is_notify") is_notify: Boolean,
         @Field("from_cashback") from_cashback: Boolean,
         @Field("near_date") near_date: Long,
-        @Field("user_id") user_id: Int = AppPrefs.userId
+        @Field("user_id") user_id: Long = AppPrefs.userId
     ): RespFormat<PlainResp>
 
     @POST("api/partners/useraction")
@@ -424,14 +424,14 @@ interface AuthApiService {
     suspend fun likePartner(
         @Field("partner_id") partner_id: Long,
         @Field("type") type: String = "like",
-        @Field("user_id") user_id: Int = AppPrefs.userId
+        @Field("user_id") user_id: Long = AppPrefs.userId
     ): RespFormat<PlainResp>
 
     @POST("api/autopayments/trash")
     @FormUrlEncoded
     suspend fun deleteRegularPayment(
         @Field("id") id: Int,
-        @Field("user_id") user_id: Int = AppPrefs.userId
+        @Field("user_id") user_id: Long = AppPrefs.userId
     ): RespFormat<PlainResp>
 
 
@@ -440,7 +440,7 @@ interface AuthApiService {
     suspend fun likeOrDislikePartner(
         @Field("type") type: String,
         @Field("partner_id") partner_id: Long,
-        @Field("user_id") user_id: Int = AppPrefs.userId,
+        @Field("user_id") user_id: Long = AppPrefs.userId,
         @Field("user_token") user_token: String = AppPrefs.userToken ?: "",
     ): PlainResp
 
@@ -448,16 +448,15 @@ interface AuthApiService {
     @FormUrlEncoded
     suspend fun sendFirebaseFCMToken(
         @Field("token") token: String,
-        @Field("user_id") user_id: Int = AppPrefs.userId,
+        @Field("user_id") user_id: Long = AppPrefs.userId,
         @Field("device_type") device_type: String = "Android",
     ): PlainResp
 
     @POST("api/other/myfriends")
     @FormUrlEncoded
     suspend fun myFriends(
-        @Field("user_id") user_id: Int = AppPrefs.userId,
-        @Field("device_type") device_type: String = "Android",
-    ): PlainResp
+        @Field("user_id") user_id: Long = AppPrefs.userId,
+    ): RespFormat<List<MyFriendDTO>>
 
     @POST("api/transactions/send")
     @FormUrlEncoded

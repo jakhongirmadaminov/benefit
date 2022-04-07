@@ -1,6 +1,5 @@
 package uz.magnumactive.benefit.ui.main.profile.settings_bsd
 
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -41,7 +40,7 @@ class SettingsMainFragment : BaseFragment(R.layout.fragment_settings_main),
     private fun setupViews() {
 
         AppPrefs.avatar?.let {
-            ivPhoto.loadImageUrl(it)
+            ivPhoto.loadCircleImageUrl(it)
         } ?: run {
             ivPhoto.setImageResource(R.drawable.ic_avatar_sample)
         }
@@ -110,15 +109,14 @@ class SettingsMainFragment : BaseFragment(R.layout.fragment_settings_main),
 
         tvReady.setOnClickListener {
             viewModel.updateUserInfo(edtSurname.text.toString(), edtName.text.toString())
-            selectedBitmap?.let { viewModel.uploadAvatar(it) }
         }
 
     }
 
-    var selectedBitmap: Bitmap? = null
     override fun onSingleImageSelected(uri: Uri, tag: String?) {
-        selectedBitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, uri)
-        ivPhoto.loadBitmap(selectedBitmap!!)
+        viewModel.selectedBitmap =
+            MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, uri)
+        ivPhoto.loadCircleBitmap(viewModel.selectedBitmap!!)
     }
 
     override fun loadImage(imageUri: Uri, ivImage: ImageView) {

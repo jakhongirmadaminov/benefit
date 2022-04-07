@@ -14,7 +14,7 @@ interface UserRemote {
         password: String,
         phone_number: String,
         user_token: String,
-        user_id: Int
+        user_id: Long
     ): ResultWrapper<RespUserInfo>
 
     suspend fun loginCode(
@@ -23,7 +23,7 @@ interface UserRemote {
 
     suspend fun resendCode(phoneNum: String): ResultWrapper<String>
     suspend fun checkcode(
-        user_token: String, user_id: Int, phone_number: String, sms_code: String
+        user_token: String, user_id: Long, phone_number: String, sms_code: String
     ): ResultWrapper<RespUserInfo>
 
     suspend fun paymentCategories(): ResultWrapper<List<PaynetCategory>>

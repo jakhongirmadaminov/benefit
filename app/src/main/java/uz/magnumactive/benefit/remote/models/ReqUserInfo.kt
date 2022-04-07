@@ -9,6 +9,6 @@ data class ReqUserInfo(
     @SerializedName("last_name") var last_name: String,
     @SerializedName("gender") var gender: String?,
     @SerializedName("birth_day") var birth_day: BigInteger?,
-    @SerializedName("user_id") var user_id: Int = AppPrefs.userId,
+    @SerializedName("user_id") var user_id: Long = AppPrefs.userId,
     @SerializedName("user_token") var user_token: String = AppPrefs.userToken!!
 )

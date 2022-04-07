@@ -6,16 +6,16 @@ package uz.magnumactive.benefit.ui.auth.registration
 import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import uz.magnumactive.benefit.remote.models.RegPhoneResp
-import uz.magnumactive.benefit.remote.models.RespAddCard
-import uz.magnumactive.benefit.remote.models.RespUserInfo
-import uz.magnumactive.benefit.remote.repository.UserRemote
-import uz.magnumactive.benefit.util.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import splitties.preferences.edit
+import uz.magnumactive.benefit.remote.models.RegPhoneResp
+import uz.magnumactive.benefit.remote.models.RespAddCard
+import uz.magnumactive.benefit.remote.models.RespUserInfo
+import uz.magnumactive.benefit.remote.repository.UserRemote
+import uz.magnumactive.benefit.util.*
 import java.math.BigInteger
 import javax.inject.Inject
 
@@ -146,7 +146,7 @@ class RegistrationViewModel @Inject constructor(private val userRemote: UserRemo
                     }
                     is ResultSuccess -> {
                         AppPrefs.edit {
-                            avatar = Constants.BASE_URL + "upload/" + response.value.avatar
+                            avatar = response.value.avatar
                         }
                         uploadAvatarResp.value = response.value
                         isLoading.value = false

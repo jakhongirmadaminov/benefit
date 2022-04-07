@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class CardBankDTO(
-    @SerializedName("api_user_id") val api_user_id: Int? = null,
+    @SerializedName("api_user_id") val api_user_id: Long? = null,
     @SerializedName("api_user_token") val api_user_token: String? = null,
     @SerializedName("background_id") val background_id: Int? = null,
     @SerializedName("background_link") val background_link: String? = null,

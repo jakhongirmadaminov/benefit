@@ -7,6 +7,10 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
+import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.item_currency.view.*
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.CurrencyDTO
 import uz.magnumactive.benefit.remote.models.NewsDTO
@@ -15,13 +19,7 @@ import uz.magnumactive.benefit.ui.base.BaseFragment
 import uz.magnumactive.benefit.ui.main.profile.settings_bsd.SettingsBSD
 import uz.magnumactive.benefit.ui.viewgroups.ItemLoading
 import uz.magnumactive.benefit.ui.viewgroups.ItemNewsAndPromos
-import uz.magnumactive.benefit.util.AppPrefs
-import uz.magnumactive.benefit.util.RequestState
-import uz.magnumactive.benefit.util.loadDrawableCircleCrop
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import kotlinx.android.synthetic.main.fragment_profile.*
-import kotlinx.android.synthetic.main.item_currency.view.*
+import uz.magnumactive.benefit.util.*
 
 
 class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
@@ -124,6 +122,11 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     }
 
     private fun setupViews() {
+
+        AppPrefs.avatar?.let {
+            ivPhoto.loadCircleImageUrl(it)
+        }
+
         tvNameLastName.text = AppPrefs.firstName + " " + AppPrefs.lastName
         cardPhoto.setBackgroundResource(R.drawable.shape_round_window_bg_color)
         cardPhotoIcon.setBackgroundResource(R.drawable.shape_round_window_bg_color)

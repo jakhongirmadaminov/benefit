@@ -45,6 +45,7 @@ class SetingsMainViewModel @Inject constructor(
         isLoading.value = true
         viewModelScope.launch(IO) {
             val response = userRemote.updateUserInfo(name, lastName, gender, dob)
+
             withContext(Dispatchers.Main) {
                 when (response) {
                     is ResultError -> {
@@ -60,8 +61,14 @@ class SetingsMainViewModel @Inject constructor(
                             }
                             this.dobMillis = dobMillis
                         }
-                        uploadUserInfoResp.value = response.value
-                        isLoading.value = false
+                        selectedBitmap?.let {
+                            uploadAvatar(it) {
+                                uploadUserInfoResp.postValue(response.value)
+                            }
+                        } ?: run {
+                            isLoading.value = false
+                            uploadUserInfoResp.value = response.value
+                        }
                     }
                 }.exhaustive
             }
@@ -69,8 +76,8 @@ class SetingsMainViewModel @Inject constructor(
     }
 
     var uploadAvatarResp = SingleLiveEvent<RespUserInfo>()
-
-    fun uploadAvatar(bitmap: Bitmap) {
+    var selectedBitmap: Bitmap? = null
+    fun uploadAvatar(bitmap: Bitmap, onAvatarUploadCompleted: () -> Unit) {
         isLoading.value = true
         viewModelScope.launch(IO) {
             val response = userRemote.uploadAvatar(bitmap)
@@ -88,6 +95,7 @@ class SetingsMainViewModel @Inject constructor(
                         isLoading.value = false
                     }
                 }.exhaustive
+                onAvatarUploadCompleted()
             }
         }
     }

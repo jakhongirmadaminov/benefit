@@ -23,7 +23,7 @@ object AppPrefs : Preferences("myPrefs") {
     var userToken by stringOrNullPref(null)
 
     @ExperimentalSplittiesApi
-    var userId by intPref(0)
+    var userId by longPref(0L)
 
     @ExperimentalSplittiesApi
     var language by stringPref("ru")

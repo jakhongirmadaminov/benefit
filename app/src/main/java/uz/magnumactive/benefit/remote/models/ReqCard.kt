@@ -9,5 +9,5 @@ data class ReqCard(
     @SerializedName("title") val title: String,
     @SerializedName("expiry") val expiry: String,
     @SerializedName("user_token") val user_token: String = AppPrefs.userToken!!,
-    @SerializedName("user_id") val user_id: Int = AppPrefs.userId
+    @SerializedName("user_id") val user_id: Long = AppPrefs.userId
 )

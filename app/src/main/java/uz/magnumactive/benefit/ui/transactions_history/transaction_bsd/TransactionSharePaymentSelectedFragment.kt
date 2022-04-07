@@ -58,9 +58,9 @@ class TransactionSharePaymentSelectedFragment @Inject constructor() :
     private fun populateSelectedList() {
         horizontalAdapter.clear()
         for (i in 0 until adapter.itemCount) {
-            if ((adapter.getItem(i) as FriendItem).friend.isChecked) horizontalAdapter.add(
-                FriendItemImgName((adapter.getItem(i) as FriendItem).friend)
-            )
+//            if ((adapter.getItem(i) as FriendItem).friend.isChecked) horizontalAdapter.add(
+//                FriendItemImgName((adapter.getItem(i) as FriendItem).friend)
+//            )
         }
         tvSelected.text = getString(R.string.selected) + " " + horizontalAdapter.itemCount
     }
@@ -89,11 +89,11 @@ class TransactionSharePaymentSelectedFragment @Inject constructor() :
                 for (i in 0 until horizontalAdapter.itemCount) {
                     contacts.add((horizontalAdapter.getItem(i) as FriendItemImgName).friend)
                 }
-                findNavController().navigate(
-                    TransactionSharePaymentSelectedFragmentDirections.actionTransactionSharePaymentSelectedFragmentToTransactionSharePaymentEndFragment(
-                        contacts
-                    )
-                )
+//                findNavController().navigate(
+//                    TransactionSharePaymentSelectedFragmentDirections.actionTransactionSharePaymentSelectedFragmentToTransactionSharePaymentEndFragment(
+//                        contacts
+//                    )
+//                )
             }
 
 

@@ -10,10 +10,10 @@ import androidx.navigation.fragment.findNavController
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.TransactionAnalyticsDTO
 import uz.magnumactive.benefit.remote.models.TransactionInOutDTO
-import uz.magnumactive.benefit.ui.main.BenefitBSD
+import uz.magnumactive.benefit.ui.main.BenefitFixedHeightBSD
 
 
-class TransactionBSD : BenefitBSD() {
+class TransactionBSD : BenefitFixedHeightBSD() {
 
     companion object {
         const val ARG_TRANSACTION_DTO = "TRANSACTION_DTO"

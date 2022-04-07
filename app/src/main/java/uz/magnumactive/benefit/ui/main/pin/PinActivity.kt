@@ -10,6 +10,7 @@ import uz.magnumactive.benefit.util.AppPrefs
 import uz.magnumactive.benefit.util.loadImageUrl
 import kotlinx.android.synthetic.main.activity_pin.*
 import uz.magnumactive.benefit.util.Constants
+import uz.magnumactive.benefit.util.loadCircleImageUrl
 
 class PinActivity : BaseActivity() {
 
@@ -43,7 +44,7 @@ class PinActivity : BaseActivity() {
 
     private fun setupViews() {
         AppPrefs.avatar?.let {
-            ivProfile.loadImageUrl(it)
+            ivProfile.loadCircleImageUrl(it)
         } ?: run {
             ivProfile.setImageResource(R.drawable.ic_avatar_sample)
         }

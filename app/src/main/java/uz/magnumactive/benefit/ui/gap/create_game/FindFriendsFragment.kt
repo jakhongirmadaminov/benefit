@@ -13,6 +13,9 @@ import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import androidx.navigation.fragment.findNavController
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
+import kotlinx.android.synthetic.main.fragment_find_friends.*
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.BenefitContactDTO
 import uz.magnumactive.benefit.remote.models.BenefitFriends
@@ -20,9 +23,6 @@ import uz.magnumactive.benefit.ui.base.BaseFragment
 import uz.magnumactive.benefit.ui.main.fill_card.REQ_CODE_READ_CONTACTS
 import uz.magnumactive.benefit.ui.viewgroups.BenefitFriendItem
 import uz.magnumactive.benefit.util.RequestState
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import kotlinx.android.synthetic.main.fragment_find_friends.*
 import javax.inject.Inject
 
 

@@ -104,6 +104,9 @@
         <action
             android:id="@+id/action_transactionSharePaymentFragment_to_transactionSearchFriendNearbyFragment"
             app:destination="@id/transactionSearchFriendNearbyFragment" />
+        <action
+            android:id="@+id/action_transactionSharePaymentFragment_to_transactionSharePaymentEndFragment"
+            app:destination="@id/transactionSharePaymentEndFragment" />
 
         <!--        <action-->
         <!--            android:id="@+id/action_transactionFragment_to_cardMakeDepositFromAnyCardFragment"-->
@@ -123,7 +126,7 @@
 
         <argument
             android:name="contacts"
-            app:argType="uz.magnumactive.benefit.remote.models.Friends" />
+            app:argType="uz.magnumactive.benefit.remote.models.BenefitFriends" />
         <action
             android:id="@+id/action_transactionSharePaymentSelectedFragment_to_transactionSharePaymentEndFragment"
             app:destination="@id/transactionSharePaymentEndFragment" />
@@ -145,8 +148,12 @@
 
         <argument
             android:name="contacts"
-            app:argType="uz.magnumactive.benefit.remote.models.Friends" />
+            app:argType="uz.magnumactive.benefit.remote.models.BenefitFriends" />
 
+
+        <argument
+            android:name="transactionDTO"
+            app:argType="uz.magnumactive.benefit.remote.models.TransactionAnalyticsDTO" />
         <!--        <action-->
         <!--            android:id="@+id/action_transactionFragment_to_cardMakeDepositFromAnyCardFragment"-->
         <!--            app:destination="@id/cardMakeDepositFromAnyCardFragment"-->

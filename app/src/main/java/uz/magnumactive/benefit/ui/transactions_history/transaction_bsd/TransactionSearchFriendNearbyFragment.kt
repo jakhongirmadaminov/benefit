@@ -67,9 +67,9 @@ class TransactionSearchFriendNearbyFragment @Inject constructor() :
         )
 
         contacts.forEach {
-            adapter.add(FriendItem(it) {
-                populateSelectedList()
-            })
+//            adapter.add(FriendItem(it) {
+//                populateSelectedList()
+//            })
         }
         populateSelectedList()
 
@@ -78,9 +78,9 @@ class TransactionSearchFriendNearbyFragment @Inject constructor() :
     private fun populateSelectedList() {
         horizontalAdapter.clear()
         for (i in 0 until adapter.itemCount) {
-            if ((adapter.getItem(i) as FriendItem).friend.isChecked) horizontalAdapter.add(
-                FriendItemImgName((adapter.getItem(i) as FriendItem).friend)
-            )
+//            if ((adapter.getItem(i) as FriendItem).friend.isChecked) horizontalAdapter.add(
+//                FriendItemImgName((adapter.getItem(i) as FriendItem).friend)
+//            )
         }
 
         if (horizontalAdapter.itemCount == 0) {
@@ -118,11 +118,11 @@ class TransactionSearchFriendNearbyFragment @Inject constructor() :
                 for (i in 0 until horizontalAdapter.itemCount) {
                     contacts.add((horizontalAdapter.getItem(i) as FriendItemImgName).friend)
                 }
-                findNavController().navigate(
-                    TransactionSearchFriendNearbyFragmentDirections.actionTransactionSearchFriendNearbyFragmentToTransactionSharePaymentEndFragment(
-                        contacts
-                    )
-                )
+//                findNavController().navigate(
+//                    TransactionSearchFriendNearbyFragmentDirections.actionTransactionSearchFriendNearbyFragmentToTransactionSharePaymentEndFragment(
+//                        contacts
+//                    )
+//                )
             }
 
 

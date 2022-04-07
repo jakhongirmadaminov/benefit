@@ -40,7 +40,7 @@ class UserRemoteImpl @Inject constructor(
         password: String,
         phone_number: String,
         user_token: String,
-        user_id: Int
+        user_id: Long
     ) = getFormattedResponse { apiService.setPassword(phone_number, password, user_token, user_id) }
 
     override suspend fun loginCode(device_code: String) =
@@ -61,7 +61,7 @@ class UserRemoteImpl @Inject constructor(
 
     override suspend fun checkcode(
         user_token: String,
-        user_id: Int,
+        user_id: Long,
         phone_number: String,
         sms_code: String
     ) = getFormattedResponse { apiService.checkcode(user_token, user_id, phone_number, sms_code) }

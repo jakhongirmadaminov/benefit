@@ -1,28 +1,46 @@
 package uz.magnumactive.benefit.ui.transactions_history.transaction_bsd
 
 
-import androidx.lifecycle.ViewModel
-import uz.magnumactive.benefit.remote.UserRemoteImpl
-
 /**
  * Created by jahon on 03-Sep-20
- */import javax.inject.Inject
+ */
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import uz.magnumactive.benefit.remote.AuthApiService
+import uz.magnumactive.benefit.remote.models.BenefitContactDTO
+import uz.magnumactive.benefit.remote.models.BenefitFriends
+import uz.magnumactive.benefit.remote.models.MyFriendDTO
+import uz.magnumactive.benefit.util.RequestState
+import uz.magnumactive.benefit.util.makeRequest
+import javax.inject.Inject
 
 @HiltViewModel
-class TransactionViewModel @Inject constructor(private val userRemoteImpl: UserRemoteImpl) :
-    ViewModel() {
+class TransactionViewModel @Inject constructor(private val authApi: AuthApiService) : ViewModel() {
 
-//    val loginResp = SingleLiveEvent<ResultWrapper<String>>()
-//    fun login(phoneNumber: String) {
-//        loginResp.value = InProgress
-//        viewModelScope.launch(Dispatchers.IO) {
-//            val response = userRemoteImpl.login(phoneNumber)
-//            withContext(Dispatchers.Main) {
-//                loginResp.value = response
-//            }
+
+    val availableContacts = MutableLiveData<RequestState<List<BenefitContactDTO>>>()
+    var selectedContacts = BenefitFriends()
+
+    fun checkMyContacts(contactsList: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            makeRequest(availableContacts) {
+                authApi.getBenefitFriends(contactsList)
+            }
+        }
+    }
+
+
+
+//    val friendsResp = MutableLiveData<RequestState<List<MyFriendDTO>>>()
+//
+//    fun getFriends() {
+//        viewModelScope.launch {
+//            makeRequest(friendsResp) { authApi.myFriends() }
 //        }
 //    }
-
 
 }

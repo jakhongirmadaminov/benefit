@@ -3,7 +3,6 @@ package uz.magnumactive.benefit.remote.models
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
-import java.util.*
 
 @Parcelize
 data class BenefitContactDTO(
@@ -12,6 +11,8 @@ data class BenefitContactDTO(
     @SerializedName("fullname") val fullname: String? = null,
     @SerializedName("avatar_link") val avatar_link: String? = null,
     var isChecked: Boolean = false,
+    var isMe: Boolean = false,
+    var payingAmount: Int? = null,
 ) : Parcelable {
 
     override fun equals(other: Any?): Boolean {

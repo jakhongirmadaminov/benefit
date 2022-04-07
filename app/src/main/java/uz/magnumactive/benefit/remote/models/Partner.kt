@@ -29,7 +29,7 @@ data class Partner(
     @SerializedName("type") val type: Int? = null,
     @SerializedName("type_name") val type_name: String? = null,
     @SerializedName("updated_at") val updated_at: Int? = null,
-    @SerializedName("user_id") val user_id: Int? = null,
+    @SerializedName("user_id") val user_id: Long? = null,
     @SerializedName("likes_count") val likes_count: Int? = null,
     @SerializedName("photos_array") val photos_array: List<PartnerPhotoDTO>? = null,
     @SerializedName("last_likes") val last_likes: List<LikedUserDTO>? = null,

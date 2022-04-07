@@ -34,7 +34,7 @@ interface ApiService {
         @Field("phone_number") phone_number: String,
         @Field("password") password: String,
         @Field("user_token") user_token: String,
-        @Field("user_id") user_id: Int
+        @Field("user_id") user_id: Long
     ): RespFormat<RespUserInfo>
 
     @POST("api/user/loginsms")
@@ -48,14 +48,14 @@ interface ApiService {
     suspend fun termsAccept(
         @Field("is_agree") is_agree: Boolean = true,
         @Field("user_auth") user_auth: String = AppPrefs.userToken!!,
-        @Field("user_id") user_id: Int = AppPrefs.userId,
+        @Field("user_id") user_id: Long = AppPrefs.userId,
     ): RespAcceptTerms
 
     @POST("api/user/checkcode")
     @FormUrlEncoded
     suspend fun checkcode(
         @Field("user_token") user_token: String,
-        @Field("user_id") user_id: Int,
+        @Field("user_id") user_id: Long,
         @Field("phone_number") phone_number: String,
         @Field("sms_code") sms_code: String
     ): RespFormat<RespUserInfo>
