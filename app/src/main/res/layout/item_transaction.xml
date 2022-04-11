@@ -26,25 +26,24 @@
         android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/tvBankName"
         app:layout_constraintEnd_toStartOf="@id/tvMinus"
         app:layout_constraintStart_toEndOf="@id/icBankLogo"
         app:layout_constraintTop_toTopOf="@id/icBankLogo"
         tools:text="@string/transfer_from_card" />
 
-    <TextView
-        android:id="@+id/tvBankName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:fontFamily="sans-serif"
-        android:textColor="#ab5c5c5c"
-        android:textSize="14sp"
-        android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="@id/icBankLogo"
-        app:layout_constraintStart_toEndOf="@id/icBankLogo"
-        app:layout_constraintTop_toBottomOf="@id/tvTransactionType"
-        tools:text="Asia Alliance Bank" />
+<!--    <TextView-->
+<!--        android:id="@+id/tvBankName"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        android:fontFamily="sans-serif"-->
+<!--        android:textColor="#ab5c5c5c"-->
+<!--        android:textSize="14sp"-->
+<!--        android:textStyle="normal"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/icBankLogo"-->
+<!--        app:layout_constraintStart_toEndOf="@id/icBankLogo"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/tvTransactionType"-->
+<!--        tools:text="Asia Alliance Bank" />-->
 
 
     <TextView

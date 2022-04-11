@@ -8,15 +8,15 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import com.redmadrobot.inputmask.MaskedTextChangedListener
+import com.redmadrobot.inputmask.MaskedTextChangedListener.Companion.installOn
+import kotlinx.android.synthetic.main.fragment_reg_card_activation.*
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.ui.base.BaseFragment
 import uz.magnumactive.benefit.ui.main.MainActivity
 import uz.magnumactive.benefit.ui.main.home.bsd_add_card.AddCardBSD
 import uz.magnumactive.benefit.ui.order_card.OrderCardActivity
 import uz.magnumactive.benefit.ui.select_card_type.SelectCardTypeActivity
-import com.redmadrobot.inputmask.MaskedTextChangedListener
-import com.redmadrobot.inputmask.MaskedTextChangedListener.Companion.installOn
-import kotlinx.android.synthetic.main.fragment_reg_card_activation.*
 
 /**
  * Created by jahon on 03-Sep-20
@@ -63,7 +63,8 @@ class RegCardActivationFragment : BaseFragment(R.layout.fragment_reg_card_activa
             }
         }
 
-        viewModel.errorMessage.observe(viewLifecycleOwner
+        viewModel.errorMessage.observe(
+            viewLifecycleOwner
         ) {
             tvInfo.visibility = View.VISIBLE
             tvInfo.text = it ?: return@observe
@@ -134,12 +135,13 @@ class RegCardActivationFragment : BaseFragment(R.layout.fragment_reg_card_activa
         }
 
         tvNext.setOnClickListener {
-            if ((parentFragment is RegistrationBSD)) {
-                (parentFragment as RegistrationBSD).dismiss()
+            ((parentFragment as NavHostFragment).parentFragment as? RegistrationBSD)?.let {
+                it.dismiss()
                 startActivity(Intent(requireActivity(), MainActivity::class.java).apply {
                     putExtra(MainActivity.IS_JUST_LOGGED_IN, true)
                 })
-            } else if ((parentFragment is AddCardBSD)) (parentFragment as AddCardBSD).dismiss()
+            }
+            ((parentFragment as NavHostFragment).parentFragment as? AddCardBSD)?.dismiss()
         }
 
         btnOrderCard.setOnClickListener {

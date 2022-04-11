@@ -16,7 +16,7 @@ class ItemTransaction(val obj: TransactionAnalyticsDTO, val onClick: (() -> Unit
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.tvAmount.text =
             DecimalFormat("#,###").format(obj.amountWithoutTiyin) + " UZS"
-        viewHolder.itemView.tvBankName.text = obj.merchantName
+        viewHolder.itemView.tvTransactionType.text = obj.merchantName
 
         viewHolder.itemView.tvMinus.isVisible = obj.isCredit == false
 
@@ -26,16 +26,16 @@ class ItemTransaction(val obj: TransactionAnalyticsDTO, val onClick: (() -> Unit
 
         val transactionImage =
             if (obj.merchantName?.contains("P2P") == true || obj.merchantName?.contains("PAYME") == true) {
-                viewHolder.itemView.tvTransactionType.text =
-                    viewHolder.itemView.context.getString(R.string.transfer_from_card)
+//                viewHolder.itemView.tvTransactionType.text =
+//                    viewHolder.itemView.context.getString(R.string.transfer_from_card)
                 R.drawable.ic_transfer
             } else if (obj.isCredit == true) {
-                viewHolder.itemView.tvTransactionType.text =
-                    viewHolder.itemView.context.getString(R.string.income)
+//                viewHolder.itemView.tvTransactionType.text =
+//                    viewHolder.itemView.context.getString(R.string.income)
                 R.drawable.ic_income
             } else {
-                viewHolder.itemView.tvTransactionType.text =
-                    viewHolder.itemView.context.getString(R.string.expense)
+//                viewHolder.itemView.tvTransactionType.text =
+//                    viewHolder.itemView.context.getString(R.string.expense)
                 R.drawable.ic_expense
             }
         viewHolder.itemView.icBankLogo.setImageResource(transactionImage)
