@@ -7,10 +7,9 @@ import android.view.ViewGroup
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.ui.main.BenefitBSD
 import androidx.fragment.app.viewModels
+import uz.magnumactive.benefit.ui.main.BenefitFixedHeightBSD
 
-class LoginBSD : BenefitBSD() {
-
-    private val viewModel: LoginViewModel by viewModels()
+class LoginBSD : BenefitFixedHeightBSD() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

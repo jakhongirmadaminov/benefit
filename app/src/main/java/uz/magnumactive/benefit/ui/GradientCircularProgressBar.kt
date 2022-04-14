@@ -279,7 +279,7 @@ class GradientCircularProgressBar(ctx: Context, attrs: AttributeSet) : View(ctx,
             baseArcRect.centerX(),
             baseArcRect.centerY(),
             progressColorList,
-            floatArrayOf(0.0F, 0.6F, 0.8F, 1.0F)
+            floatArrayOf(0.0F, 0.3F, 0.6F, 1.0F)
         )
         //Make the gradient start from 90 degrees
         val matrix = Matrix()

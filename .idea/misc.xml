@@ -31,16 +31,17 @@
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_selected_partners_category.xml" value="0.22" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_story.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_transactions_history.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_add_card.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_add_card.xml" value="0.26515151515151514" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_create_game.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_create_regular_payment.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_fill_card.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_fill_card.xml" value="0.26515151515151514" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_game_rules.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_invite_friend.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_login.xml" value="0.16" />
-        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_payments.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_payments.xml" value="0.26515151515151514" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_payments_and_transfers.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_registration.xml" value="0.2617753623188406" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_transfer_to_card.xml" value="0.264945652173913" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/dialog_cashback.xml" value="0.2875905797101449" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/dialog_month_selector.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/dialog_need_authorization.xml" value="0.2708333333333333" />
