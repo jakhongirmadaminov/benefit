@@ -6,7 +6,8 @@ package uz.magnumactive.benefit.util
 object Constants {
 
 //    const val BASE_URL = "http://benefitbank.uz/"
-    const val BASE_URL = "http://sys.benefitbank.uz/"
+    const val BASE_URL = "http://sys.bnft.uz/"
+//    const val BASE_URL = "http://sys.benefitbank.uz/"
 
 //    const val FILE_PROVIDER = "uz.magnumactive.benefit.fileprovider"
 
