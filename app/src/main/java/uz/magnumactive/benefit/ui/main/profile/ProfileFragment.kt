@@ -17,9 +17,13 @@ import uz.magnumactive.benefit.remote.models.NewsDTO
 import uz.magnumactive.benefit.ui.auth.AuthActivity
 import uz.magnumactive.benefit.ui.base.BaseFragment
 import uz.magnumactive.benefit.ui.main.profile.settings_bsd.SettingsBSD
+import uz.magnumactive.benefit.ui.viewgroups.ItemCenteredTextGrey
 import uz.magnumactive.benefit.ui.viewgroups.ItemLoading
 import uz.magnumactive.benefit.ui.viewgroups.ItemNewsAndPromos
-import uz.magnumactive.benefit.util.*
+import uz.magnumactive.benefit.util.AppPrefs
+import uz.magnumactive.benefit.util.RequestState
+import uz.magnumactive.benefit.util.loadCircleImageUrl
+import uz.magnumactive.benefit.util.loadDrawableCircleCrop
 
 
 class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
@@ -97,9 +101,14 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     private fun populateNews(value: List<NewsDTO>) {
         newsAdapter.clear()
-        value.forEach {
-            newsAdapter.add(ItemNewsAndPromos(it) { link ->
-            })
+
+        if (value.isEmpty()) {
+            newsAdapter.add(ItemCenteredTextGrey(getString(R.string.temporarily_absent)))
+        } else {
+            value.forEach {
+                newsAdapter.add(ItemNewsAndPromos(it) { link ->
+                })
+            }
         }
     }
 
