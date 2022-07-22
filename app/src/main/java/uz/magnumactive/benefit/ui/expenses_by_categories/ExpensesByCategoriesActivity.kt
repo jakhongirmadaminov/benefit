@@ -207,7 +207,7 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity(), OnChartValueSelect
             chartView.chart.highlightValue(
                 chartView.chart.highlighter.getHighlight(
                     todayBarIndex + 6.toFloat(),
-                    value[todayBarIndex + 6].outcome_total.toFloat()
+                    value[todayBarIndex + 5].outcome_total.toFloat()
                 ), true
             )
         }

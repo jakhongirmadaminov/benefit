@@ -15,7 +15,7 @@
         android:layout_marginLeft="26dp"
         android:layout_marginRight="26dp"
         android:fontFamily="sans-serif"
-        android:text="@string/categories"
+        android:text="@string/purchases"
         android:textColor="#000000"
         android:textSize="26sp"
         android:textStyle="bold"

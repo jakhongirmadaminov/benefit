@@ -225,7 +225,7 @@ class TransactionsHistoryActivity : BaseActivity(), OnChartValueSelectedListener
             chartPager[1].radioGroup.children.forEachIndexed { index, view ->
                 (view as RadioButton).isChecked = index == barIndex
             }
-            selectedMonthOffset = barIndex + 6
+            selectedMonthOffset = barIndex + 5
         }
         loadTransactions((viewModel.transactionsAnalyticsResp.value as ResultSuccess).value[selectedMonthOffset])
     }

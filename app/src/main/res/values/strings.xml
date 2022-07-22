@@ -266,5 +266,6 @@
     <string name="divided_sum">Сумма счёта: %1$s UZS</string>
     <string name="transaction_being_divided">Разделение счета</string>
     <string name="temporarily_absent">Временно отсутствуют</string>
+    <string name="purchases">Покупки</string>
 
 </resources>
