@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/activity_partner_home.xml" value="0.14537037037037037" />
+        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/fragment_partners_category.xml" value="0.1" />
+        <entry key="..\:/Users/MJ/AndroidStudioProjects/benefit/app/src/main/res/layout/item_benefit_market.xml" value="0.13796296296296295" />
         <entry key="..\:/Users/User/.gradle/caches/transforms-2/files-2.1/e49cd0f582c58b9bf4fbe370e313b25e/jetified-PinEditTextField-1.2.6/res/drawable/text_handle.xml" value="0.1835" />
         <entry key="..\:/Users/User/AppData/Local/Android/Sdk/platforms/android-29/data/res/layout/simple_spinner_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.166" />
@@ -188,7 +191,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -15,14 +15,6 @@ import uz.magnumactive.benefit.util.AppPrefs
 @ExperimentalSplittiesApi
 interface AuthApiService {
 
-
-//    @POST("api/card/phistory")
-//    @FormUrlEncoded
-//    suspend fun transactionHistory(
-//        @Field("per-page") per_page: Int = 15,
-//        @Field("user_id") user_id: Long = AppPrefs.userId,
-//    ):  RespFormat<TransactionHistory>
-
     @POST("api/card/report")
     @FormUrlEncoded
     suspend fun transactionsInOut(
@@ -485,6 +477,94 @@ interface AuthApiService {
         @Path(value = "user_id", encoded = true) user_id: Long,
     ): RespFormat<Partner>
 
+
+    // BENEFIT marketplace
+    @GET("api/market/all-category")
+    suspend fun getMarketplaceCategories(): RespFormat<List<MarketPlaceCategoryObj>>
+
+    @GET("api/market/{category_id}")
+    suspend fun getMarketProductsByCategory(
+        @Path(value = "category_id", encoded = true) category_id: Long,
+    ): RespFormat<Partner>
+
+    @GET("api/market/main-sales")
+    suspend fun getMarketMainSales(): RespFormat<Partner>
+
+    @GET("api/market/view/{id}")
+    suspend fun getProductDetails(
+        @Path(value = "id", encoded = true) id: Long,
+    ): RespFormat<Partner>
+
+    @POST("api/market/my-basket")
+    @FormUrlEncoded
+    suspend fun getBasketList(
+        @Field("user_id") user_id: Long = AppPrefs.userId,
+    ): RespFormat<Partner>
+
+    @POST("api/market/clean-basket/{user_id}")
+    @FormUrlEncoded
+    suspend fun cleanBasket(
+        @Path(value = "user_id", encoded = true) user_id: Long = AppPrefs.userId,
+        @Field(value = "user_id", encoded = true) userId: Long = AppPrefs.userId,
+        @Field(value = "item_id", encoded = true) item_id: Long,
+    ): RespFormat<Partner>
+
+    @POST("api/market/mincount-basket")
+    @FormUrlEncoded
+    suspend fun removeItemFromBasket(
+        @Field(value = "user_id", encoded = true) user_id: Long = AppPrefs.userId,
+        @Field(value = "item_id", encoded = true) item_id: Long,
+        @Field("count") count: Int = 1,
+    ): RespFormat<Partner>
+
+    @POST("api/market/pluscount-basket")
+    @FormUrlEncoded
+    suspend fun addToBasket(
+        @Field("user_id") user_id: Long = AppPrefs.userId,
+        @Field("item_id") item_id: Long,
+        @Field("count") count: Int = 1,
+    ): RespFormat<Partner>
+
+    @POST("api/market/mincount-basket")
+    @FormUrlEncoded
+    suspend fun marketBeforeOrder(
+        @Field(value = "user_id", encoded = true) user_id: Long = AppPrefs.userId,
+    ): RespFormat<Partner>
+
+    @POST("api/market/create-order")
+    @FormUrlEncoded
+    suspend fun marketCreateOrder(
+        @Field(value = "user_id", encoded = true) user_id: Long = AppPrefs.userId,
+        @Field(value = "address", encoded = true) address: String,
+        @Field(value = "lat", encoded = true) lat: Double,
+        @Field(value = "lan", encoded = true) lan: Double,
+        @Field(value = "card_id", encoded = true) card_id: Long,
+    ): RespFormat<Partner>
+
+    @POST("api/market/pay-order")
+    @FormUrlEncoded
+    suspend fun marketPayOrder(
+        @Field(value = "user_id", encoded = true) user_id: Long = AppPrefs.userId,
+        @Field(value = "order_id", encoded = true) order_id: Long,
+    ): RespFormat<Partner>
+
+    @POST("api/market/active-order")
+    @FormUrlEncoded
+    suspend fun myMarketActiveOrders(
+        @Field(value = "user_id", encoded = true) user_id: Long = AppPrefs.userId,
+    ): RespFormat<Partner>
+
+    @POST("api/market/history-order")
+    @FormUrlEncoded
+    suspend fun myMarketHistoryOrders(
+        @Field(value = "user_id", encoded = true) user_id: Long = AppPrefs.userId,
+    ): RespFormat<Partner>
+
+    @POST("api/market/detail-order")
+    @FormUrlEncoded
+    suspend fun myMarketOrderDetails(
+        @Field(value = "order_id", encoded = true) order_id: Long,
+    ): RespFormat<Partner>
 
 }
 

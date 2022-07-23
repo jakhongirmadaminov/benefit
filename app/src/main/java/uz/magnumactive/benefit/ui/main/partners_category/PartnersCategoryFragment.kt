@@ -5,15 +5,18 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
+import kotlinx.android.synthetic.main.fragment_partners_category.*
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.PartnerCategoryDTO
 import uz.magnumactive.benefit.ui.base.BaseFragment
 import uz.magnumactive.benefit.ui.partners_map.PartnersMapActivity
+import uz.magnumactive.benefit.ui.viewgroups.BenefitMarketItem
 import uz.magnumactive.benefit.ui.viewgroups.ItemPartnerCategory
-import uz.magnumactive.benefit.util.*
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import kotlinx.android.synthetic.main.fragment_partners_category.*
+import uz.magnumactive.benefit.util.ResultError
+import uz.magnumactive.benefit.util.ResultSuccess
+import uz.magnumactive.benefit.util.exhaustive
 
 
 class PartnersCategoryFragment : BaseFragment(R.layout.fragment_partners_category) {
@@ -25,6 +28,7 @@ class PartnersCategoryFragment : BaseFragment(R.layout.fragment_partners_categor
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getPartners()
+        viewModel.getMarketCategories()
 
         setupViews()
         attachListeners()
@@ -44,12 +48,12 @@ class PartnersCategoryFragment : BaseFragment(R.layout.fragment_partners_categor
 
     private fun setupViews() {
         rvPartners.adapter = adapter
+        rvMarket.adapter = marketPlaceAdapter
     }
 
     private fun subscribeObservers() {
         viewModel.partnersResp.observe(viewLifecycleOwner, Observer {
             val response = it ?: return@Observer
-
             when (response) {
                 is ResultError -> {
                     ivMap.visibility = View.INVISIBLE
@@ -65,12 +69,23 @@ class PartnersCategoryFragment : BaseFragment(R.layout.fragment_partners_categor
 //                    adapter.notifyDataSetChanged()
 //                }
             }.exhaustive
-
-
         })
+
+        viewModel.marketplaceCategories.observe(viewLifecycleOwner) { categories ->
+            categories ?: return@observe
+            marketPlaceAdapter.apply {
+                clear()
+                categories.forEach {
+                    add(BenefitMarketItem(it))
+                }
+                notifyDataSetChanged()
+            }
+        }
+
     }
 
     val adapter = GroupAdapter<GroupieViewHolder>()
+    private val marketPlaceAdapter = GroupAdapter<GroupieViewHolder>()
 
     private fun loadData(response: List<PartnerCategoryDTO>) {
         adapter.clear()

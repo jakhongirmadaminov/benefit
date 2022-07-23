@@ -267,5 +267,7 @@
     <string name="transaction_being_divided">Разделение счета</string>
     <string name="temporarily_absent">Временно отсутствуют</string>
     <string name="purchases">Покупки</string>
+    <string name="benefit_partners">Партнеры Benefit</string>
+    <string name="benefit_market_place">Benefit Market</string>
 
 </resources>
