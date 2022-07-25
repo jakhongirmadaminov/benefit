@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.fragment_partners_category.*
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.PartnerCategoryDTO
 import uz.magnumactive.benefit.ui.base.BaseFragment
+import uz.magnumactive.benefit.ui.marketplace.MarketActivity
 import uz.magnumactive.benefit.ui.partners_map.PartnersMapActivity
 import uz.magnumactive.benefit.ui.viewgroups.BenefitMarketItem
 import uz.magnumactive.benefit.ui.viewgroups.ItemPartnerCategory
@@ -43,6 +44,10 @@ class PartnersCategoryFragment : BaseFragment(R.layout.fragment_partners_categor
                     ArrayList((viewModel.partnersResp.value!! as ResultSuccess).value)
                 )
             })
+        }
+
+        llMarketPlace.setOnClickListener {
+            startActivity(Intent(requireActivity(), MarketActivity::class.java).apply { })
         }
     }
 

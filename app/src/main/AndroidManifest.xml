@@ -27,56 +27,47 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar"
             android:windowSoftInputMode="adjustNothing">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.gap.gap_chart.GapChartActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar">
 
-            <!--                         <intent-filter>-->
-            <!--                         <action android:name="android.intent.action.MAIN" />-->
-            <!--                         <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--                         </intent-filter>-->
-
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
 
         </activity>
         <activity
             android:name=".ui.gap.GapActivity"
-
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.main.pin.PinActivity"
-
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".stories.screen.StoryActivity"
-
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.loans.loans_chart.LoansChartActivity"
-
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar">
@@ -88,6 +79,12 @@
             <!-- </intent-filter> -->
         </activity>
 
+        <activity
+            android:name=".ui.marketplace.MarketActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:label=""
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.select_card_type.SelectCardTypeActivity"
             android:exported="false"
@@ -111,19 +108,16 @@
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.partners_map.PartnerOnMapActivity"
-
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.branches_atms.BranchesAtmsActivity"
-
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.loans.LoanActivity"
-
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
@@ -149,12 +143,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar">
 
-            <!--             <intent-filter>-->
-            <!--             <action android:name="android.intent.action.MAIN" />-->
-            <!--             <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--             </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
-
         <activity
             android:name=".ui.order_card.OrderCardActivity"
             android:exported="false"
@@ -169,7 +162,7 @@
         </activity>
 
         <service
-            android:name="MyFirebaseMessagingService"
+            android:name=".MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

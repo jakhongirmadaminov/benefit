@@ -55,7 +55,6 @@
             android:id="@+id/ivChevron"
             android:layout_width="?android:actionBarSize"
             android:layout_height="?android:actionBarSize"
-            android:foreground="?android:selectableItemBackground"
             android:padding="15dp"
             android:src="@drawable/ic_baseline_chevron_right_24"
             app:layout_constraintEnd_toEndOf="parent"
@@ -72,9 +71,8 @@
         android:orientation="horizontal"
         android:padding="15dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_benefit_market">
+        tools:listitem="@layout/item_benefit_market"/>
 
-    </androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
         android:layout_width="match_parent"

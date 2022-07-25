@@ -269,5 +269,12 @@
     <string name="purchases">Покупки</string>
     <string name="benefit_partners">Партнеры Benefit</string>
     <string name="benefit_market_place">Benefit Market</string>
+    <string name="catalog">Каталог</string>
+    <string name="orders">Заказы</string>
+    <string name="favourites">Избранное</string>
+    <string name="product_catalog">Каталог товаров</string>
+    <string name="discounts_and_promotions">Скидки и акции</string>
+    <string name="favourite_products">Избранные товары</string>
+    <string name="market">Market</string>
 
 </resources>
