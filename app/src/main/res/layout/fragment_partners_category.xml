@@ -1,137 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
     tools:context=".ui.main.partners_category.PartnersCategoryFragment">
 
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="26dp"
-        android:layout_marginLeft="26dp"
-        android:layout_marginRight="26dp"
-        android:fontFamily="sans-serif"
-        android:gravity="center_horizontal"
-        android:paddingEnd="?android:actionBarSize"
-        android:text="@string/purchases"
-        android:textColor="#000000"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <LinearLayout
-        android:id="@+id/llMarketPlace"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:focusable="true"
-        android:foreground="?android:selectableItemBackground"
-        android:gravity="center_vertical">
-
-        <TextView
-            android:id="@+id/tvBenefitMarketPlace"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="26dp"
-            android:layout_marginRight="26dp"
-            android:layout_weight="1"
-            android:fontFamily="sans-serif"
-            android:text="@string/benefit_market_place"
-            android:textColor="#000000"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <ImageView
-            android:id="@+id/ivChevron"
-            android:layout_width="?android:actionBarSize"
-            android:layout_height="?android:actionBarSize"
-            android:padding="15dp"
-            android:src="@drawable/ic_baseline_chevron_right_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvMarket"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:orientation="horizontal"
-        android:padding="15dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_benefit_market"/>
-
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvBenefitPartners"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/llMarketPlace"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="26dp"
-            android:layout_marginLeft="26dp"
-            android:layout_marginRight="26dp"
-            android:layout_weight="1"
-            android:fontFamily="sans-serif"
-            android:text="@string/benefit_partners"
-            android:textColor="#000000"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <ImageView
-            android:id="@+id/ivMap"
-            android:layout_width="?android:actionBarSize"
-            android:layout_height="?android:actionBarSize"
-            android:layout_margin="11dp"
-            android:clickable="true"
             android:focusable="true"
             android:foreground="?android:selectableItemBackground"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvBenefitMarketPlace"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="26dp"
+                android:layout_marginRight="26dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:text="@string/benefit_market_place"
+                android:textColor="#000000"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/ivChevron"
+                android:layout_width="?android:actionBarSize"
+                android:layout_height="?android:actionBarSize"
+                android:padding="15dp"
+                android:src="@drawable/ic_baseline_chevron_right_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMarket"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
             android:padding="15dp"
-            android:src="@drawable/ic_map_sheet"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_benefit_market" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvBenefitPartners"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="26dp"
+                android:layout_marginLeft="26dp"
+                android:layout_marginRight="26dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:text="@string/benefit_partners"
+                android:textColor="#000000"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/ivMap"
+                android:layout_width="?android:actionBarSize"
+                android:layout_height="?android:actionBarSize"
+                android:layout_margin="11dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:padding="15dp"
+                android:src="@drawable/ic_map_sheet"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="26dp"
+            android:background="@drawable/selector_grey"
+            android:drawableStart="@drawable/ic_baseline_search_24"
+            android:drawablePadding="10dp"
+            android:hint="@string/search"
+            android:paddingStart="10dp"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPartners"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/searchView" />
 
     </LinearLayout>
-
-    <EditText
-        android:id="@+id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_margin="26dp"
-        android:background="@drawable/selector_grey"
-        android:drawableLeft="@drawable/ic_baseline_search_24"
-        android:drawablePadding="10dp"
-        android:hint="@string/search"
-        android:paddingLeft="10dp"
-        app:layout_constraintTop_toBottomOf="@id/title" />
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvPartners"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchView"
-        app:layout_constraintVertical_weight="1" />
-
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>
