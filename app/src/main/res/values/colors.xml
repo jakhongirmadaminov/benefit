@@ -26,6 +26,7 @@
     <color name="blood_red">#C10016</color>
     <color name="dark_">#252525</color>
     <color name="ripple">#33000000</color>
+    <color name="red_transparent_80">#CCFF0404</color>
 
 
 </resources><!---->

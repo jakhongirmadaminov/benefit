@@ -488,7 +488,7 @@ interface AuthApiService {
     ): RespFormat<Partner>
 
     @GET("api/market/main-sales")
-    suspend fun getMarketMainSales(): RespFormat<Partner>
+    suspend fun getMarketMainSales(): RespFormat<List<MarketProductDTO>>
 
     @GET("api/market/view/{id}")
     suspend fun getProductDetails(
@@ -565,6 +565,12 @@ interface AuthApiService {
     suspend fun myMarketOrderDetails(
         @Field(value = "order_id", encoded = true) order_id: Long,
     ): RespFormat<Partner>
+
+    @POST("api/market/index")
+    @FormUrlEncoded
+    suspend fun allMarketProducts(
+        @Field(value = "order_id", encoded = true) order_id: Long,
+    ): RespFormat<List<MarketProductDTO>>
 
 }
 

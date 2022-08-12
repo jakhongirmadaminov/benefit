@@ -1,4 +1,4 @@
-package uz.magnumactive.benefit.ui.marketplace
+package uz.magnumactive.benefit.ui.marketplace.favourite
 
 import android.os.Bundle
 import android.view.View
@@ -7,7 +7,7 @@ import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.ui.base.BaseFragment
 
 
-class CatalogFragment : BaseFragment(R.layout.fragment_catalog) {
+class FavouritesFragment : BaseFragment(R.layout.fragment_favourites) {
 
 //    private val adapter = GroupAdapter<GroupieViewHolder>()
 //    val viewModel: PaymentsAndTransfersViewModel by viewModels()

@@ -1,4 +1,4 @@
-package uz.magnumactive.benefit.ui.marketplace
+package uz.magnumactive.benefit.ui.marketplace.orders
 
 import android.os.Bundle
 import android.view.View

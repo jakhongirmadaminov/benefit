@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/nav_catalog"
-        android:name="uz.magnumactive.benefit.ui.marketplace.CatalogFragment"
+        android:name="uz.magnumactive.benefit.ui.marketplace.catalog.CatalogFragment"
         android:label="@string/catalog"
         tools:layout="@layout/fragment_catalog" />
 
     <fragment
         android:id="@+id/nav_orders"
-        android:name="uz.magnumactive.benefit.ui.marketplace.OrdersFragment"
+        android:name="uz.magnumactive.benefit.ui.marketplace.orders.OrdersFragment"
         android:label="@string/orders"
         tools:layout="@layout/fragment_orders" />
 
     <fragment
         android:id="@+id/nav_favourites"
-        android:name="uz.magnumactive.benefit.ui.marketplace.FavouritesFragment"
+        android:name="uz.magnumactive.benefit.ui.marketplace.favourite.FavouritesFragment"
         android:label="@string/favourites"
         tools:layout="@layout/fragment_favourites" />
 
