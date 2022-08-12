@@ -278,5 +278,6 @@
     <string name="market">Market</string>
     <string name="active">Активные</string>
     <string name="history">История</string>
+    <string name="list_empty">Список пуст</string>
 
 </resources>
