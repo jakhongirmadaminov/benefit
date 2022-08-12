@@ -9,16 +9,6 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.lifecycle.Observer
-import uz.magnumactive.benefit.R
-import uz.magnumactive.benefit.remote.models.CardDTO
-import uz.magnumactive.benefit.remote.models.PartnerCategoryDTO
-import uz.magnumactive.benefit.remote.models.TransactionAnalyticsDTO
-import uz.magnumactive.benefit.remote.models.TransactionInOutDTO
-import uz.magnumactive.benefit.ui.base.BaseActionbarActivity
-import uz.magnumactive.benefit.ui.main.home.HomeFragment
-import uz.magnumactive.benefit.ui.viewgroups.CardTagItem
-import uz.magnumactive.benefit.ui.viewgroups.ItemCategorySmall
-import uz.magnumactive.benefit.util.*
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -33,6 +23,16 @@ import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_expenses_by_categories.*
 import kotlinx.android.synthetic.main.item_bar_chart.view.*
 import org.joda.time.DateTime
+import uz.magnumactive.benefit.R
+import uz.magnumactive.benefit.remote.models.CardDTO
+import uz.magnumactive.benefit.remote.models.PartnerCategoryDTO
+import uz.magnumactive.benefit.remote.models.TransactionAnalyticsDTO
+import uz.magnumactive.benefit.remote.models.TransactionInOutDTO
+import uz.magnumactive.benefit.ui.base.BaseActionbarActivity
+import uz.magnumactive.benefit.ui.main.home.HomeFragment
+import uz.magnumactive.benefit.ui.viewgroups.CardTagItem
+import uz.magnumactive.benefit.ui.viewgroups.ItemCategorySmall
+import uz.magnumactive.benefit.util.*
 import java.text.DecimalFormat
 import javax.inject.Inject
 import kotlin.collections.set
@@ -164,14 +164,14 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity(), OnChartValueSelect
 
         chartView.llMonths.children.forEachIndexed { index, view ->
             (view as? TextView)?.text =
-                Constants.MONTHS[AppPrefs.language!!]!![index].substring(0,3).uppercase()
+                Constants.MONTHS[AppPrefs.language!!]!![index].substring(0, 3).uppercase()
 //                DateTimeFormat.forPattern("MMM")
 //                    .print(DateTime(DateTime.now().year, index + 1, 1, 0, 0))
         }
 
         chartView2.llMonths.children.forEachIndexed { index, view ->
             (view as? TextView)?.text =
-                Constants.MONTHS[AppPrefs.language!!]!![index+6].substring(0,3).uppercase()
+                Constants.MONTHS[AppPrefs.language!!]!![index + 6].substring(0, 3).uppercase()
 //                DateTimeFormat.forPattern("MMM")
 //                    .print(DateTime(DateTime.now().year, 6 + index + 1, 1, 0, 0))
         }
@@ -197,19 +197,9 @@ class ExpensesByCategoriesActivity : BaseActionbarActivity(), OnChartValueSelect
         val todayBarIndex = DateTime.now().monthOfYear - 1
 
         if (todayBarIndex < 6) {
-            chartView.chart.highlightValue(
-                chartView.chart.highlighter.getHighlight(
-                    todayBarIndex.toFloat(),
-                    value[todayBarIndex].outcome_total.toFloat()
-                ), true
-            )
+            chartView2.chart.highlightValue(todayBarIndex.toFloat(), 0, true)
         } else {
-            chartView.chart.highlightValue(
-                chartView.chart.highlighter.getHighlight(
-                    todayBarIndex + 6.toFloat(),
-                    value[todayBarIndex + 5].outcome_total.toFloat()
-                ), true
-            )
+            chartView2.chart.highlightValue(todayBarIndex - 6f, 0, true)
         }
 
     }
