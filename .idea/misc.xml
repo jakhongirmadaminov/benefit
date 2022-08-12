@@ -17,6 +17,9 @@
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/drawable/rb_orange.xml" value="0.2740740740740741" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/drawable/round_ripple.xml" value="0.167" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/drawable/selector_btn_main.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/drawable/selector_grey_rounded.xml" value="0.1275" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/drawable/selector_orange.xml" value="0.1275" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/drawable/selector_radiobg_orange.xml" value="0.1275" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/drawable/shape_grey_rounded.xml" value="0.31851851851851853" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/drawable/shape_oval_grey.xml" value="0.1835" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/drawable/shape_oval_grey_darker.xml" value="0.1835" />
@@ -60,6 +63,7 @@
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/dialog_month_selector.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/dialog_need_authorization.xml" value="0.2708333333333333" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/dialog_please_add_card.xml" value="0.2708333333333333" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_active_orders.xml" value="0.2905711695376247" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_card_notifications.xml" value="0.2" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_catalog.xml" value="0.30012825994014536" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_code.xml" value="0.29483695652173914" />
@@ -77,8 +81,9 @@
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_fill_from_my_cards.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_fill_merchant_fields.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_find_friends.xml" value="0.25" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_history_orders.xml" value="0.2905711695376247" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_home.xml" value="0.12681159420289856" />
-        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_orders.xml" value="0.30012825994014536" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_orders.xml" value="0.22" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_partners_category.xml" value="0.2" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_payment_merchants.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_payment_transfer.xml" value="0.20520833333333333" />

@@ -276,5 +276,7 @@
     <string name="discounts_and_promotions">Скидки и акции</string>
     <string name="favourite_products">Избранные товары</string>
     <string name="market">Market</string>
+    <string name="active">Активные</string>
+    <string name="history">История</string>
 
 </resources>
