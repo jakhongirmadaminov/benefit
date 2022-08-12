@@ -9,9 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_gap_chart.*
 import kotlinx.android.synthetic.main.activity_market.*
-import kotlinx.android.synthetic.main.activity_market.tool_bar
 import uz.magnumactive.benefit.R
 
 @AndroidEntryPoint
@@ -40,5 +38,8 @@ class MarketActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    fun setTitle(title:String){
+        tvTitle.text = title
+    }
 
 }

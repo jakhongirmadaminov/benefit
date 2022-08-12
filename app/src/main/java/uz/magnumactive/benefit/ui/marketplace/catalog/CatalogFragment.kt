@@ -10,6 +10,7 @@ import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.MarketPlaceCategoryObj
 import uz.magnumactive.benefit.remote.models.MarketProductDTO
 import uz.magnumactive.benefit.ui.base.BaseFragment
+import uz.magnumactive.benefit.ui.marketplace.MarketActivity
 import uz.magnumactive.benefit.ui.viewgroups.MarketCatalogItem
 import uz.magnumactive.benefit.ui.viewgroups.MarketSaleItem
 import uz.magnumactive.benefit.util.RequestState
@@ -81,5 +82,10 @@ class CatalogFragment : BaseFragment(R.layout.fragment_catalog) {
 
     private fun attachListeners() {
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as MarketActivity).setTitle(getString(R.string.market))
     }
 }

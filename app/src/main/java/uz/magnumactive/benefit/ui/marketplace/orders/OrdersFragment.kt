@@ -8,6 +8,7 @@ import androidx.viewpager2.widget.ViewPager2
 import kotlinx.android.synthetic.main.fragment_orders.*
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.ui.base.BaseFragment
+import uz.magnumactive.benefit.ui.marketplace.MarketActivity
 
 
 class OrdersFragment : BaseFragment(R.layout.fragment_orders) {
@@ -24,6 +25,11 @@ class OrdersFragment : BaseFragment(R.layout.fragment_orders) {
         setupViews()
         attachListeners()
         subscribeObservers()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as MarketActivity).setTitle(getString(R.string.orders))
     }
 
     private fun subscribeObservers() {

@@ -5,6 +5,7 @@ import android.view.View
 import kotlinx.android.synthetic.main.fragment_payments_and_transfers.*
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.ui.base.BaseFragment
+import uz.magnumactive.benefit.ui.marketplace.MarketActivity
 
 
 class FavouritesFragment : BaseFragment(R.layout.fragment_favourites) {
@@ -33,5 +34,12 @@ class FavouritesFragment : BaseFragment(R.layout.fragment_favourites) {
 
     private fun attachListeners() {
 
+    }
+
+
+
+    override fun onResume() {
+        super.onResume()
+        (activity as MarketActivity).setTitle(getString(R.string.favourites))
     }
 }
