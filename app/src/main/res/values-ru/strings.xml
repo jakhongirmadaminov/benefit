@@ -279,5 +279,9 @@
     <string name="active">Активные</string>
     <string name="history">История</string>
     <string name="list_empty">Список пуст</string>
+    <string name="sort">Сортировать</string>
+    <string name="products_with_discount">Товары со скидкой</string>
+    <string name="price_ascending">Сначала с низкой стоимостью</string>
+    <string name="price_descending">Сначала с высокой стоимостью</string>
 
 </resources>
