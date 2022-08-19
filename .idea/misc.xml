@@ -40,6 +40,7 @@
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_loans_chart.xml" value="0.1" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_market.xml" value="0.1569046601111586" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_market_selected_category.xml" value="0.1936978683966636" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_order_card.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_partner_home.xml" value="0.3207070707070707" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_partner_on_map.xml" value="0.291213768115942" />
@@ -107,9 +108,11 @@
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_transaction_share_payment_end.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_transaction_share_payment_selected.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/fragment_transfer_to_card_transaction.xml" value="0.2708333333333333" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/grid_item_market_product.xml" value="0.22" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_action_card_two.xml" value="0.2848731884057971" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_bar_chart.xml" value="0.2708333333333333" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_benefit_market.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_card_tag.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_centered_text_grey.xml" value="0.22" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_contact_square.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_contact_with_cb.xml" value="0.5" />

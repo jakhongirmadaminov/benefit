@@ -3,6 +3,7 @@
     package="uz.magnumactive.benefit">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -81,6 +82,13 @@
 
         <activity
             android:name=".ui.marketplace.MarketActivity"
+            android:exported="false"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".ui.marketplace.selected_category.MarketSelectedCategoryActivity"
             android:exported="false"
             android:label=""
             android:screenOrientation="portrait"
