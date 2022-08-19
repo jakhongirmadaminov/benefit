@@ -8,43 +8,54 @@ import kotlinx.android.synthetic.main.bsd_market_filter.*
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.ui.main.BenefitBSD
 
-class MarketFilterBSD : BenefitBSD() {
-
-    var selected = FilterEnum.SALE
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        selected = arguments?.getSerializable(ARG_SELECTED_OPTION) as FilterEnum
-    }
+class MarketFilterBSD(
+    val filterSelection: FilterEnum,
+    val onSelectedListener: IOnMarketFilterItemSelected
+) : BenefitBSD() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.bsd_market_filter, null)
+        return inflater.inflate(R.layout.bsd_market_filter, null)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        when (filterSelection) {
+            FilterEnum.SALE -> {
+                filterRadioGroup.check(R.id.rbSale)
+            }
+            FilterEnum.POPULAR -> {
+                filterRadioGroup.check(R.id.rbPopular)
+            }
+            FilterEnum.ASCENDING -> {
+                filterRadioGroup.check(R.id.rbPriceAscending)
+            }
+            FilterEnum.DESCENDING -> {
+                filterRadioGroup.check(R.id.rbPriceDescending)
+            }
+        }
 
         filterRadioGroup.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 R.id.rbSale -> {
-
+                    onSelectedListener.onItemSelected(FilterEnum.SALE)
                 }
                 R.id.rbPopular -> {
-
+                    onSelectedListener.onItemSelected(FilterEnum.POPULAR)
                 }
                 R.id.rbPriceAscending -> {
-
+                    onSelectedListener.onItemSelected(FilterEnum.ASCENDING)
                 }
                 R.id.rbPriceDescending -> {
-
+                    onSelectedListener.onItemSelected(FilterEnum.DESCENDING)
                 }
             }
+            dismiss()
         }
-
-        return view
     }
-
 
     companion object {
         const val ARG_SELECTED_OPTION = "SELECTED_OPTION"
@@ -55,6 +66,10 @@ class MarketFilterBSD : BenefitBSD() {
         POPULAR,
         ASCENDING,
         DESCENDING
+    }
+
+    interface IOnMarketFilterItemSelected {
+        fun onItemSelected(item: FilterEnum)
     }
 
 }

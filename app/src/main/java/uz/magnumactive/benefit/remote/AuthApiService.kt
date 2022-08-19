@@ -488,6 +488,12 @@ interface AuthApiService {
         @Query(value = "type", encoded = true) type: Int = 0,
     ): RespFormat<List<MarketProductDTO>>
 
+    @GET("api/market/all-subcategory")
+    suspend fun getSubCategory(
+        @Query(value = "category_id", encoded = true) category_id: Long,
+        @Query(value = "type", encoded = true) type: Int = 0,
+    ): RespFormat<MarketAllSubCategoryDTO>
+
     @GET("api/market/main-sales")
     suspend fun getMarketMainSales(): RespFormat<List<MarketProductDTO>>
 

@@ -96,7 +96,7 @@
         android:clipToPadding="false"
         android:orientation="horizontal"
         android:paddingHorizontal="26dp"
-        android:paddingVertical="10dp"
+        android:layout_marginBottom="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_card_tag" />
 
