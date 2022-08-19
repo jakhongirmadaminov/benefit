@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class MarketPlaceCategoryObj(
     @SerializedName("id")
-    val id: Int?,
+    val id: Long?,
     @SerializedName("image")
     val image: String?,
     @SerializedName("icon_image")
@@ -25,7 +25,7 @@ data class MarketPlaceCategoryObj(
 @Parcelize
 data class Sub(
     @SerializedName("id")
-    val id: Int?,
+    val id: Long?,
     @SerializedName("prior")
     val prior: Int?,
     @SerializedName("title")

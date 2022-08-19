@@ -1,5 +1,6 @@
 package uz.magnumactive.benefit.ui.marketplace.catalog
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -11,6 +12,8 @@ import uz.magnumactive.benefit.remote.models.MarketPlaceCategoryObj
 import uz.magnumactive.benefit.remote.models.MarketProductDTO
 import uz.magnumactive.benefit.ui.base.BaseFragment
 import uz.magnumactive.benefit.ui.marketplace.MarketActivity
+import uz.magnumactive.benefit.ui.marketplace.selected_category.MarketSelectedCategoryActivity
+import uz.magnumactive.benefit.ui.marketplace.selected_category.MarketSelectedCategoryActivity.Companion.SELECTED_CATEGORY
 import uz.magnumactive.benefit.ui.viewgroups.MarketCatalogItem
 import uz.magnumactive.benefit.ui.viewgroups.MarketSaleItem
 import uz.magnumactive.benefit.util.RequestState
@@ -68,7 +71,12 @@ class CatalogFragment : BaseFragment(R.layout.fragment_catalog) {
     private fun loadCategories(result: List<MarketPlaceCategoryObj>) {
         categoriesAdapter.clear()
         result.forEach {
-            categoriesAdapter.add(MarketCatalogItem(it))
+            categoriesAdapter.add(MarketCatalogItem(it) {
+                requireContext().startActivity(
+                    Intent(requireActivity(), MarketSelectedCategoryActivity::class.java).apply {
+                        putExtra(SELECTED_CATEGORY, it)
+                    })
+            })
         }
     }
 
