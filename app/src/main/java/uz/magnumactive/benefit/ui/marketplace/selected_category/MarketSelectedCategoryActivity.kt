@@ -2,13 +2,15 @@ package uz.magnumactive.benefit.ui.marketplace.selected_category
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.recyclerview.widget.RecyclerView
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import kotlinx.android.synthetic.main.activity_gap_chart.*
+import kotlinx.android.synthetic.main.activity_gap_chart.tool_bar
+import kotlinx.android.synthetic.main.activity_market_selected_category.*
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.MarketPlaceCategoryObj
+import uz.magnumactive.benefit.remote.models.MarketProductDTO
 import uz.magnumactive.benefit.ui.base.BaseActionbarActivity
+import uz.magnumactive.benefit.ui.viewgroups.MarketGridProductItem
 import uz.magnumactive.benefit.util.RequestState
 
 
@@ -28,8 +30,14 @@ class MarketSelectedCategoryActivity : BaseActionbarActivity() {
         selectedCatg = intent.getParcelableExtra(SELECTED_CATEGORY)!!
 
         viewModel.getProductsForCategory(selectedCatg.id!!)
-
+        viewModel.getSubcategoriesFor(selectedCatg.id!!)
+        setupView()
         subscribeObservers()
+    }
+
+    private fun setupView() {
+
+        rvProducts.adapter = categoryProductsAdapter
     }
 
     private fun subscribeObservers() {
@@ -46,8 +54,14 @@ class MarketSelectedCategoryActivity : BaseActionbarActivity() {
         }
     }
 
-    private fun loadProducts(value: List<MarketPlaceCategoryObj>) {
+    private fun loadProducts(value: List<MarketProductDTO>) {
         categoryProductsAdapter.clear()
+        value.forEach {
+            categoryProductsAdapter.add(MarketGridProductItem(it){
+
+            })
+        }
+        categoryProductsAdapter.notifyDataSetChanged()
 
     }
 

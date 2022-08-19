@@ -17,19 +17,18 @@ class MarketSelectedCategoryViewModel @Inject constructor(private val authClient
     ViewModel() {
 
 
-    val categoryProductsResult = MutableLiveData<RequestState<List<MarketPlaceCategoryObj>>>()
-    val saleItemsResult = MutableLiveData<RequestState<List<MarketProductDTO>>>()
+    val subCategories = MutableLiveData<RequestState<List<MarketPlaceCategoryObj>>>()
+    val categoryProductsResult = MutableLiveData<RequestState<List<MarketProductDTO>>>()
 
     fun getProductsForCategory(id: Long) {
         viewModelScope.launch {
             makeRequest(categoryProductsResult) { authClient.getMarketProductsByCategory(id) }
         }
     }
-
-//    fun getSaleItems() {
-//        viewModelScope.launch {
-//            makeRequest(saleItemsResult) { authClient.getMarketMainSales() }
-//        }
-//    }
+    fun getSubcategoriesFor(id: Long) {
+        viewModelScope.launch {
+            makeRequest(categoryProductsResult) { authClient.getMarketProductsByCategory(id) }
+        }
+    }
 
 }

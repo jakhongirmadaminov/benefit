@@ -486,7 +486,7 @@ interface AuthApiService {
     suspend fun getMarketProductsByCategory(
         @Query(value = "category_id", encoded = true) category_id: Long,
         @Query(value = "type", encoded = true) type: Int = 0,
-    ): RespFormat<List<MarketPlaceCategoryObj>>
+    ): RespFormat<List<MarketProductDTO>>
 
     @GET("api/market/main-sales")
     suspend fun getMarketMainSales(): RespFormat<List<MarketProductDTO>>
