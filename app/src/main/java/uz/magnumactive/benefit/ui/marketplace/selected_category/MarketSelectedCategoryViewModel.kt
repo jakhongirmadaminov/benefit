@@ -7,7 +7,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import uz.magnumactive.benefit.remote.AuthApiService
 import uz.magnumactive.benefit.remote.models.MarketAllSubCategoryDTO
-import uz.magnumactive.benefit.remote.models.MarketPlaceCategoryObj
 import uz.magnumactive.benefit.remote.models.MarketProductDTO
 import uz.magnumactive.benefit.util.RequestState
 import uz.magnumactive.benefit.util.makeRequest
@@ -26,6 +25,13 @@ class MarketSelectedCategoryViewModel @Inject constructor(private val authClient
             makeRequest(categoryProductsResult) { authClient.getMarketProductsByCategory(id) }
         }
     }
+
+    fun getProductsForSubCategory(id: Long, subId: Long) {
+        viewModelScope.launch {
+            makeRequest(categoryProductsResult) { authClient.getMarketProductsByCategory(id, subId) }
+        }
+    }
+
     fun getSubcategoriesFor(id: Long) {
         viewModelScope.launch {
             makeRequest(subCategories) { authClient.getSubCategory(id) }

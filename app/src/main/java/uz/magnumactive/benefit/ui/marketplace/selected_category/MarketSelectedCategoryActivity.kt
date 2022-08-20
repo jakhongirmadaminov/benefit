@@ -109,7 +109,7 @@ class MarketSelectedCategoryActivity : BaseActionbarActivity() {
         }
         cardItem.selected = true
         categoryTagsAdapter.notifyDataSetChanged()
-        viewModel.getProductsForCategory(subCategory.id!!)
+        viewModel.getProductsForSubCategory(selectedCatg.id!!, subCategory.id!!)
     }
 
     private fun loadProducts(value: List<MarketProductDTO>) {
