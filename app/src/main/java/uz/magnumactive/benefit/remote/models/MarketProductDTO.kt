@@ -13,7 +13,7 @@ data class MarketProductDTO(
     @SerializedName("created_at")
     val createdAt: Int? = null,
     @SerializedName("id")
-    val id: Int? = null,
+    val id: Long? = null,
     @SerializedName("old_summa")
     val oldSumma: Int? = null,
 //    @SerializedName("params")
@@ -26,6 +26,8 @@ data class MarketProductDTO(
     val salePercent: Int? = null,
     @SerializedName("sales_count")
     val salesCount: Int? = null,
+//    @SerializedName("real_summa")
+//    val real_summa: Int? = null,
     @SerializedName("seen_count")
     val seenCount: Int? = null,
     @SerializedName("shop_category_id")

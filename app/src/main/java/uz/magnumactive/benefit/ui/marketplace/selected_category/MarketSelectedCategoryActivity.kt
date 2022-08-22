@@ -12,10 +12,12 @@ import kotlinx.android.synthetic.main.activity_market_selected_category.*
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.MarketAllSubCategoryDTO
 import uz.magnumactive.benefit.remote.models.MarketCategoryDTO
-import uz.magnumactive.benefit.remote.models.MarketPlaceCategoryObj
 import uz.magnumactive.benefit.remote.models.MarketProductDTO
+import uz.magnumactive.benefit.remote.models.TypeName
 import uz.magnumactive.benefit.ui.base.BaseActionbarActivity
 import uz.magnumactive.benefit.ui.marketplace.dialogs.MarketFilterBSD
+import uz.magnumactive.benefit.ui.marketplace.dialogs.MarketProductDetailsBSD
+import uz.magnumactive.benefit.ui.viewgroups.ItemLoading
 import uz.magnumactive.benefit.ui.viewgroups.MarketGridProductItem
 import uz.magnumactive.benefit.ui.viewgroups.MarketSubCategoryTagItem
 import uz.magnumactive.benefit.ui.viewgroups.ProductListEmptyItem
@@ -24,21 +26,19 @@ import uz.magnumactive.benefit.util.RequestState
 
 class MarketSelectedCategoryActivity : BaseActionbarActivity() {
 
-    lateinit var selectedCatg: MarketPlaceCategoryObj
-    val categoryProductsAdapter = GroupAdapter<GroupieViewHolder>()
-    val categoryTagsAdapter = GroupAdapter<GroupieViewHolder>()
+    private val categoryProductsAdapter = GroupAdapter<GroupieViewHolder>()
+    private val categoryTagsAdapter = GroupAdapter<GroupieViewHolder>()
     private val viewModel: MarketSelectedCategoryViewModel by viewModels()
-    var filterSelection = MarketFilterBSD.FilterEnum.SALE
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_market_selected_category)
         setSupportActionBar(tool_bar)
         super.onCreate(savedInstanceState)
 //        tvTitle.text = intent.
-        selectedCatg = intent.getParcelableExtra(SELECTED_CATEGORY)!!
+        viewModel.selectedCatg = intent.getParcelableExtra(SELECTED_CATEGORY)!!
 
-        viewModel.getProductsForCategory(selectedCatg.id!!)
-        viewModel.getSubcategoriesFor(selectedCatg.id!!)
+        viewModel.getProductsForCategory()
+        viewModel.getSubcategoriesFor()
         setupView()
         attachListeners()
         subscribeObservers()
@@ -47,10 +47,10 @@ class MarketSelectedCategoryActivity : BaseActionbarActivity() {
     private fun attachListeners() {
         ivFilter.setOnClickListener {
             val filterBsd = MarketFilterBSD(
-                filterSelection,
+                viewModel.filterSelection,
                 object : MarketFilterBSD.IOnMarketFilterItemSelected {
                     override fun onItemSelected(item: MarketFilterBSD.FilterEnum) {
-                        filterSelection = item
+                        viewModel.filterSelection = item
                     }
                 })
             filterBsd.show(supportFragmentManager, "")
@@ -68,8 +68,14 @@ class MarketSelectedCategoryActivity : BaseActionbarActivity() {
         viewModel.categoryProductsResult.observe(this) {
             val resp = it ?: return@observe
             when (resp) {
-                is RequestState.Error -> {}
-                RequestState.Loading -> {}
+                is RequestState.Error -> {
+                    categoryProductsAdapter.clear()
+                }
+                RequestState.Loading -> {
+                    categoryProductsAdapter.clear()
+                    rvProducts.layoutManager = LinearLayoutManager(this)
+                    categoryProductsAdapter.add(ItemLoading())
+                }
                 is RequestState.Success -> {
                     loadProducts(resp.value)
                 }
@@ -79,8 +85,10 @@ class MarketSelectedCategoryActivity : BaseActionbarActivity() {
         viewModel.subCategories.observe(this) {
             val resp = it ?: return@observe
             when (resp) {
-                is RequestState.Error -> {}
-                RequestState.Loading -> {}
+                is RequestState.Error -> {
+                }
+                RequestState.Loading -> {
+                }
                 is RequestState.Success -> {
                     loadSubCategories(resp.value)
                 }
@@ -90,26 +98,40 @@ class MarketSelectedCategoryActivity : BaseActionbarActivity() {
 
     private fun loadSubCategories(value: MarketAllSubCategoryDTO) {
         categoryTagsAdapter.clear()
-        value.subCategory?.forEachIndexed { index, item ->
-            val tagItem = MarketSubCategoryTagItem(item) { tagItem, subCategory ->
-                selectTag(tagItem, subCategory)
+        value.subCategory?.let { subCategory ->
+            if (subCategory.isNotEmpty()) {
+                val tagItem = MarketSubCategoryTagItem(
+                    MarketCategoryDTO(
+                        title = TypeName(
+                            getString(R.string.all),
+                            getString(R.string.all),
+                            getString(R.string.all)
+                        )
+                    )
+                ) { tagItem, _ ->
+                    viewModel.selectedSubCatg = null
+                    selectTag(tagItem)
+                }
+                tagItem.selected = true
+                categoryTagsAdapter.add(tagItem)
             }
-            tagItem.selected = index == 0
-            categoryTagsAdapter.add(tagItem)
+            subCategory.forEach { item ->
+                val tagItem = MarketSubCategoryTagItem(item) { tagItem, subCategory ->
+                    selectTag(tagItem)
+                    viewModel.selectedSubCatg = subCategory
+                }
+                categoryTagsAdapter.add(tagItem)
+            }
         }
         categoryTagsAdapter.notifyDataSetChanged()
-
-
     }
 
-
-    private fun selectTag(cardItem: MarketSubCategoryTagItem, subCategory: MarketCategoryDTO) {
+    private fun selectTag(cardItem: MarketSubCategoryTagItem) {
         for (i in 0 until categoryTagsAdapter.itemCount) {
             (categoryTagsAdapter.getItem(i) as MarketSubCategoryTagItem).selected = false
         }
         cardItem.selected = true
         categoryTagsAdapter.notifyDataSetChanged()
-        viewModel.getProductsForSubCategory(selectedCatg.id!!, subCategory.id!!)
     }
 
     private fun loadProducts(value: List<MarketProductDTO>) {
@@ -117,8 +139,16 @@ class MarketSelectedCategoryActivity : BaseActionbarActivity() {
         if (value.isNotEmpty()) {
             rvProducts.layoutManager = GridLayoutManager(this, 2, VERTICAL, false)
             value.forEach {
-                categoryProductsAdapter.add(MarketGridProductItem(it) {
-                })
+                categoryProductsAdapter.add(
+                    MarketGridProductItem(it,
+                        onClick = {
+                            val detailsBSD = MarketProductDetailsBSD(it)
+                            detailsBSD.show(supportFragmentManager, "")
+                        },
+                        onAddToCart = {
+
+                        })
+                )
             }
         } else {
             rvProducts.layoutManager = LinearLayoutManager(this)

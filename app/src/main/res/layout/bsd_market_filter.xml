@@ -40,10 +40,19 @@
         android:layout_marginBottom="32dp">
 
         <RadioButton
+            android:id="@+id/rbLatest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/rb_orange"
+            android:paddingStart="16dp"
+            android:text="@string/products_latest" />
+
+        <RadioButton
             android:id="@+id/rbSale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@drawable/rb_orange"
+            android:layout_marginTop="16dp"
             android:paddingStart="16dp"
             android:text="@string/products_with_discount" />
 
@@ -55,7 +64,7 @@
             android:layout_marginTop="16dp"
             android:button="@drawable/rb_orange"
             android:paddingStart="16dp"
-            android:text="@string/products_with_discount" />
+            android:text="@string/products_popular" />
 
 
         <RadioButton

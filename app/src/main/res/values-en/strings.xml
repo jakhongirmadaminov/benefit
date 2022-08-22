@@ -283,5 +283,8 @@
     <string name="products_with_discount">Товары со скидкой</string>
     <string name="price_ascending">Сначала с низкой стоимостью</string>
     <string name="price_descending">Сначала с высокой стоимостью</string>
+    <string name="all">Все</string>
+    <string name="products_popular">Популярные товары</string>
+    <string name="products_latest">Последние товары</string>
 
 </resources>

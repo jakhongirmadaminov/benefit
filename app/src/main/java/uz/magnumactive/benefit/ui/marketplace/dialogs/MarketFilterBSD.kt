@@ -24,6 +24,9 @@ class MarketFilterBSD(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         when (filterSelection) {
+            FilterEnum.LATEST -> {
+                filterRadioGroup.check(R.id.rbLatest)
+            }
             FilterEnum.SALE -> {
                 filterRadioGroup.check(R.id.rbSale)
             }
@@ -40,6 +43,9 @@ class MarketFilterBSD(
 
         filterRadioGroup.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
+                R.id.rbLatest -> {
+                    onSelectedListener.onItemSelected(FilterEnum.LATEST)
+                }
                 R.id.rbSale -> {
                     onSelectedListener.onItemSelected(FilterEnum.SALE)
                 }
@@ -61,11 +67,12 @@ class MarketFilterBSD(
         const val ARG_SELECTED_OPTION = "SELECTED_OPTION"
     }
 
-    enum class FilterEnum {
-        SALE,
-        POPULAR,
-        ASCENDING,
-        DESCENDING
+    enum class FilterEnum(val type: Int) {
+        LATEST(0),
+        SALE(1),
+        POPULAR(2),
+        ASCENDING(3),
+        DESCENDING(4)
     }
 
     interface IOnMarketFilterItemSelected {

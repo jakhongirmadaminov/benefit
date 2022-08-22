@@ -498,9 +498,10 @@ interface AuthApiService {
     @GET("api/market/main-sales")
     suspend fun getMarketMainSales(): RespFormat<List<MarketProductDTO>>
 
-    @GET("api/market/view/{id}")
+    @GET("api/market/view")
     suspend fun getProductDetails(
-        @Path(value = "id", encoded = true) id: Long,
+        @Query(value = "id", encoded = true) id: Long,
+        @Query(value = "user_id", encoded = true) userId: Long = AppPrefs.userId,
     ): RespFormat<Partner>
 
     @POST("api/market/my-basket")
