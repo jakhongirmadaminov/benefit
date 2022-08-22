@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:paddingVertical="4dp">
+
+    <TextView
+        android:id="@+id/tvSpecLabel"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="1dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_spec_label"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:padding="6dp"
+        android:textColor="@color/black_opacity_seventy"
+        android:textFontWeight="400"
+        android:textSize="14dp"
+        tools:text="Model" />
+
+
+    <TextView
+        android:id="@+id/tvSpecValue"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="1dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_spec_value"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:padding="6dp"
+        android:textColor="@color/black_opacity_seventy"
+        android:textFontWeight="400"
+        android:textSize="14dp"
+        tools:text="Model" />
+
+</LinearLayout>

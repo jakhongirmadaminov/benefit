@@ -34,8 +34,8 @@ class MarketSelectedCategoryActivity : BaseActionbarActivity() {
         setContentView(R.layout.activity_market_selected_category)
         setSupportActionBar(tool_bar)
         super.onCreate(savedInstanceState)
-//        tvTitle.text = intent.
         viewModel.selectedCatg = intent.getParcelableExtra(SELECTED_CATEGORY)!!
+        tvTitle.text = viewModel.selectedCatg.title?.getLocalized()
 
         viewModel.getProductsForCategory()
         viewModel.getSubcategoriesFor()

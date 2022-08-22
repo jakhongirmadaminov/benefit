@@ -502,7 +502,7 @@ interface AuthApiService {
     suspend fun getProductDetails(
         @Query(value = "id", encoded = true) id: Long,
         @Query(value = "user_id", encoded = true) userId: Long = AppPrefs.userId,
-    ): RespFormat<Partner>
+    ): RespFormat<MarketProductDetailsDTO>
 
     @POST("api/market/my-basket")
     @FormUrlEncoded

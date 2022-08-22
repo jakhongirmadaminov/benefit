@@ -5,6 +5,8 @@
     <color name="colorAccent">#f15b40</color>
     <color name="black">#000000</color>
     <color name="black_opacity_ten">#1A000000</color>
+    <color name="black_opacity_seventy">#B3000000</color>
+    <color name="black_opacity_forty">#66000000</color>
     <color name="white_opacity_ten">#1Affffff</color>
     <color name="white_opacity_sixty">#99ffffff</color>
     <color name="white">#ffffff</color>
@@ -27,6 +29,7 @@
     <color name="dark_">#252525</color>
     <color name="ripple">#33000000</color>
     <color name="red_transparent_80">#CCFF0404</color>
+    <color name="black_opacity_eighty">#CC000000</color>
 
 
 </resources><!---->

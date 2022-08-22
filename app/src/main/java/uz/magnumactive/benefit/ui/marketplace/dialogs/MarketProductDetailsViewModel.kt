@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import uz.magnumactive.benefit.remote.AuthApiService
-import uz.magnumactive.benefit.remote.models.Partner
+import uz.magnumactive.benefit.remote.models.MarketProductDetailsDTO
 import uz.magnumactive.benefit.util.RequestState
 import uz.magnumactive.benefit.util.makeRequest
 import javax.inject.Inject
@@ -16,7 +16,9 @@ class MarketProductDetailsViewModel @Inject constructor(private val authClient: 
     ViewModel() {
 
 
-    val details = MutableLiveData<RequestState<Partner>>()
+    val details = MutableLiveData<RequestState<MarketProductDetailsDTO>>()
+
+    val count = MutableLiveData(1)
 
     fun getProductDetails(id: Long) {
         viewModelScope.launch {

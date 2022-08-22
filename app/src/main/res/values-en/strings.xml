@@ -286,5 +286,8 @@
     <string name="all">Все</string>
     <string name="products_popular">Популярные товары</string>
     <string name="products_latest">Последние товары</string>
+    <string name="specifications">Характеристики</string>
+    <string name="description">Описание</string>
+    <string name="add_to_cart">Добавить в корзину</string>
 
 </resources>

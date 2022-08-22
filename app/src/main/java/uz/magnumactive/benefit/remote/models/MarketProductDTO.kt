@@ -16,8 +16,8 @@ data class MarketProductDTO(
     val id: Long? = null,
     @SerializedName("old_summa")
     val oldSumma: Int? = null,
-//    @SerializedName("params")
-//    val params: List<Any>? = null,
+    @SerializedName("params")
+    val params: List<MarketProductParamDTO>? = null,
     @SerializedName("photos")
     val photos: List<MarketProductPhotoDTO>? = null,
     @SerializedName("real_summa")

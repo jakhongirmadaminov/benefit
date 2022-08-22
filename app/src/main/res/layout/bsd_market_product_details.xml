@@ -1,27 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@drawable/shape_top_rounded"
-    android:orientation="vertical"
-    android:paddingHorizontal="32dp">
+    android:orientation="vertical">
+
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:src="@drawable/rectangle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp"
-        android:indeterminate="true" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:indeterminate="true" />
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/imagePager"
+                android:layout_width="match_parent"
+                android:layout_height="220dp" />
+
+            <com.rd.PageIndicatorView
+                android:id="@+id/pageIndicatorView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardTypesPager"
+                app:piv_animationType="scale"
+                app:piv_count="1"
+                app:piv_dynamicCount="true"
+                app:piv_interactiveAnimation="true"
+                app:piv_selectedColor="@color/colorAccent"
+                app:piv_unselectedColor="@color/bg_grey"
+                app:piv_viewPager="@id/cardTypesPager" />
+
+
+            <TextView
+                android:id="@+id/tvProductTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="26dp"
+                android:fontFamily="sans-serif"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                tools:text="Микроволновая печь Indesit HS-234" />
+
+            <TextView
+                android:id="@+id/lblDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="26dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/description"
+                android:textColor="@color/black_opacity_seventy"
+                android:textFontWeight="500"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="26dp"
+                android:layout_marginEnd="26dp"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/black_opacity_eighty"
+                android:textFontWeight="300"
+                android:textSize="14dp"
+                tools:text="Description" />
+
+
+            <TextView
+                android:id="@+id/lblSpecs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="26dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/specifications"
+                android:textColor="@color/black_opacity_seventy"
+                android:textFontWeight="500"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/specsGrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:orientation="vertical"
+                android:paddingHorizontal="26dp" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/lblTotalSum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginEnd="26dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/total"
+                    android:textColor="@color/black_opacity_forty"
+                    android:textFontWeight="400"
+                    android:textSize="14dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvTotalSum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="26dp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="#000000"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/lblTotalSum"
+                    app:layout_constraintTop_toBottomOf="@id/lblTotalSum"
+                    tools:text="4 000 0000 UZS" />
+
+
+                <ImageView
+                    android:id="@+id/ivMinus"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/selector_btn_add_to_cart_minus"
+                    android:foreground="?android:selectableItemBackgroundBorderless"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_sharp_remove_24"
+                    app:layout_constraintBottom_toBottomOf="@id/ivPlus"
+                    app:layout_constraintEnd_toStartOf="@id/tvCount"
+                    app:layout_constraintTop_toTopOf="@id/ivPlus"
+                    app:tint="@color/black" />
+
+
+                <TextView
+                    android:id="@+id/tvCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="sans-serif"
+                    android:text="1"
+                    android:textColor="@color/black_opacity_seventy"
+                    android:textFontWeight="700"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/ivPlus"
+                    app:layout_constraintEnd_toStartOf="@id/ivPlus"
+                    app:layout_constraintTop_toTopOf="@id/ivPlus"
+                    tools:text="4" />
+
+                <ImageView
+                    android:id="@+id/ivPlus"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginEnd="26dp"
+                    android:background="@drawable/selector_btn_add_to_cart_plus"
+                    android:foreground="?android:selectableItemBackgroundBorderless"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_baseline_add_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btnAddToCart"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="26dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="?android:actionBarSize"
+                android:foreground="?android:selectableItemBackground"
+                android:textAllCaps="false"
+                app:cardBackgroundColor="@color/colorAccent"
+                app:cardCornerRadius="50dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:text="@string/add_to_cart"
+                    android:textColor="@color/white"
+                    android:textFontWeight="400"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>
