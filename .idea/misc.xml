@@ -141,6 +141,7 @@
         <entry key="app/src/main/res/layout/dialog_please_add_card.xml" value="0.2" />
         <entry key="app/src/main/res/layout/dialog_stories.xml" value="0.20925925925925926" />
         <entry key="app/src/main/res/layout/dialog_you_have_no_supreme_card.xml" value="0.14722222222222223" />
+        <entry key="app/src/main/res/layout/fragment_active_orders.xml" value="0.20516304347826086" />
         <entry key="app/src/main/res/layout/fragment_card_change_design.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_card_notifications.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_card_options.xml" value="0.1" />
