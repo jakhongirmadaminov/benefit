@@ -5,16 +5,11 @@
       <map>
         <entry key="..\:/Users/User/.gradle/caches/transforms-2/files-2.1/e49cd0f582c58b9bf4fbe370e313b25e/jetified-PinEditTextField-1.2.6/res/drawable/text_handle.xml" value="0.1835" />
         <entry key="..\:/Users/User/AppData/Local/Android/Sdk/platforms/android-29/data/res/layout/simple_spinner_item.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/drawable/bg_spec_label.xml" value="0.145" />
-        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/drawable/bg_spec_value.xml" value="0.146" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.166" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.3101851851851852" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/drawable/rb_orange.xml" value="0.2740740740740741" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/drawable/round_ripple.xml" value="0.167" />
-        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/drawable/selector_btn_add_to_cart_minus.xml" value="0.1465" />
-        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/drawable/selector_btn_add_to_cart_plus.xml" value="0.1625" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/drawable/selector_btn_main.xml" value="0.22135416666666666" />
-        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/drawable/selector_orange.xml" value="0.1465" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/drawable/shape_grey_rounded.xml" value="0.31851851851851853" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/drawable/shape_oval_grey.xml" value="0.1835" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/drawable/shape_oval_grey_darker.xml" value="0.1835" />
@@ -27,13 +22,12 @@
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_loan.xml" value="0.1" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_loans_chart.xml" value="0.1" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_market_selected_category.xml" value="0.22" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_order_card.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_partner_home.xml" value="0.3207070707070707" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_partner_on_map.xml" value="0.291213768115942" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_partners_map.xml" value="0.25" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_pin.xml" value="0.1" />
-        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_select_card_type.xml" value="0.22" />
+        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_select_card_type.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_selected_partners_category.xml" value="0.22" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_story.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/activity_transactions_history.xml" value="0.36666666666666664" />
@@ -44,7 +38,6 @@
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_game_rules.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_invite_friend.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_login.xml" value="0.16" />
-        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_market_product_details.xml" value="0.25" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_payments.xml" value="0.26515151515151514" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_payments_and_transfers.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/bsd_registration.xml" value="0.2617753623188406" />
@@ -112,9 +105,6 @@
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_paynet_service_field_phone.xml" value="0.196875" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_paynet_service_field_spinner.xml" value="0.19895833333333332" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_paynet_service_field_string.xml" value="0.25" />
-        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_product_image.xml" value="0.10731081658828559" />
-        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_product_param.xml" value="0.25" />
-        <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_product_param_label.xml" value="0.1115861479264643" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_transaction.xml" value="0.10054347826086957" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/item_transaction_date.xml" value="0.28804347826086957" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/layout_calculator.xml" value="0.17831813576494426" />
@@ -130,6 +120,7 @@
         <entry key="app/src/main/res/layout/activity_loan.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_loans_chart.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3614583333333333" />
+        <entry key="app/src/main/res/layout/activity_market_search_result.xml" value="0.20516304347826086" />
         <entry key="app/src/main/res/layout/activity_market_selected_category.xml" value="0.15625" />
         <entry key="app/src/main/res/layout/activity_order_card.xml" value="0.11296296296296296" />
         <entry key="app/src/main/res/layout/activity_partner_home.xml" value="0.12314814814814815" />
@@ -188,6 +179,8 @@
         <entry key="app/src/main/res/layout/fragment_transfer_to_card.xml" value="0.24077496666746054" />
         <entry key="app/src/main/res/layout/fragment_transfer_to_card_transaction.xml" value="0.17777777777777778" />
         <entry key="app/src/main/res/layout/grid_item_market_product.xml" value="0.20516304347826086" />
+        <entry key="app/src/main/res/layout/item_active_order.xml" value="0.20516304347826086" />
+        <entry key="app/src/main/res/layout/item_active_order_product_entry.xml" value="0.20516304347826086" />
         <entry key="app/src/main/res/layout/item_add_card.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/item_card.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_card_small.xml" value="0.22401847575057737" />

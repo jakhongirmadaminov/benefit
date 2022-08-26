@@ -289,5 +289,6 @@
     <string name="specifications">Характеристики</string>
     <string name="description">Описание</string>
     <string name="add_to_cart">Добавить в корзину</string>
+    <string name="search_results">Результаты поиска</string>
 
 </resources>
