@@ -2,36 +2,30 @@ package uz.magnumactive.benefit.ui.marketplace.orders
 
 import android.os.Bundle
 import android.view.View
-import kotlinx.android.synthetic.main.fragment_payments_and_transfers.*
+import androidx.fragment.app.viewModels
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
+import kotlinx.android.synthetic.main.fragment_history_orders.*
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.ui.base.BaseFragment
+import uz.magnumactive.benefit.ui.viewgroups.ItemHistoryOrder
 
 
 class HistoryOrdersFragment : BaseFragment(R.layout.fragment_history_orders) {
 
-//    private val adapter = GroupAdapter<GroupieViewHolder>()
-//    val viewModel: PaymentsAndTransfersViewModel by viewModels()
+    private val adapter = GroupAdapter<GroupieViewHolder>()
+    val viewModel: HistoryOrdersViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        viewModel.getMyCards()
-//        viewModel.getMyAutoPayments()
-
-        setupViews()
-        attachListeners()
+        viewModel.getHistoryOrders()
         subscribeObservers()
     }
 
-    private fun subscribeObservers() {
-
+    fun subscribeObservers() {
+        setupRVObservers(viewModel.historyOrders, rvHistoryOrders, adapter) {
+            ItemHistoryOrder(it)
+        }
     }
 
-    private fun setupViews() {
-
-    }
-
-
-    private fun attachListeners() {
-
-    }
 }

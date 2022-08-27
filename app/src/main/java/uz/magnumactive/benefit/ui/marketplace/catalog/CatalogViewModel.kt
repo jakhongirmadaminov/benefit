@@ -8,6 +8,7 @@ import kotlinx.coroutines.launch
 import uz.magnumactive.benefit.remote.AuthApiService
 import uz.magnumactive.benefit.remote.models.MarketPlaceCategoryObj
 import uz.magnumactive.benefit.remote.models.MarketProductDTO
+import uz.magnumactive.benefit.remote.models.SearchResultDTO
 import uz.magnumactive.benefit.util.RequestState
 import uz.magnumactive.benefit.util.makeRequest
 import javax.inject.Inject
@@ -15,6 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CatalogViewModel @Inject constructor(private val authClient: AuthApiService) : ViewModel() {
 
+    val searchResult = MutableLiveData<RequestState<SearchResultDTO>>()
     val catalogResult = MutableLiveData<RequestState<List<MarketPlaceCategoryObj>>>()
     val saleItemsResult = MutableLiveData<RequestState<List<MarketProductDTO>>>()
 
@@ -27,6 +29,12 @@ class CatalogViewModel @Inject constructor(private val authClient: AuthApiServic
     fun getSaleItems() {
         viewModelScope.launch {
             makeRequest(saleItemsResult) { authClient.getMarketMainSales() }
+        }
+    }
+
+    fun search(query: String) {
+        viewModelScope.launch {
+            makeRequest(searchResult) { authClient.searchProducts(query) }
         }
     }
 

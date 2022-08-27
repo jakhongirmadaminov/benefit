@@ -29,8 +29,6 @@ class ActiveOrdersFragment : BaseFragment(R.layout.fragment_active_orders) {
         }
     }
 
-
-
     private fun attachListeners() {
 
     }

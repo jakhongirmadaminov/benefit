@@ -7,19 +7,20 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import uz.magnumactive.benefit.remote.AuthApiService
 import uz.magnumactive.benefit.remote.models.ActiveOrderDTO
+import uz.magnumactive.benefit.remote.models.HistoryOrderDTO
 import uz.magnumactive.benefit.util.RequestState
 import uz.magnumactive.benefit.util.makeRequest
 import javax.inject.Inject
 
 @HiltViewModel
-class ActiveOrdersViewModel @Inject constructor(val apiService: AuthApiService) : ViewModel() {
+    class HistoryOrdersViewModel @Inject constructor(val apiService: AuthApiService) : ViewModel() {
 
 
-    val activeOrders = MutableLiveData<RequestState<List<ActiveOrderDTO>>>()
+    val historyOrders = MutableLiveData<RequestState<List<HistoryOrderDTO>>>()
 
 
-    fun getActiveOrders() {
-        viewModelScope.launch { makeRequest(activeOrders) { apiService.getActiveOrders() } }
+    fun getHistoryOrders() {
+        viewModelScope.launch { makeRequest(historyOrders) { apiService.getHistoryOrders() } }
     }
 
 

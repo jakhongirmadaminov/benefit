@@ -561,13 +561,13 @@ interface AuthApiService {
     @FormUrlEncoded
     suspend fun getActiveOrders(
         @Field(value = "user_id", encoded = true) user_id: Long = AppPrefs.userId,
-    ): RespFormat<ActiveOrderResultDTO>
+    ): RespFormat<List<ActiveOrderDTO>>
 
     @POST("api/market/history-order")
     @FormUrlEncoded
-    suspend fun myMarketHistoryOrders(
+    suspend fun getHistoryOrders(
         @Field(value = "user_id", encoded = true) user_id: Long = AppPrefs.userId,
-    ): RespFormat<Partner>
+    ): RespFormat<List<HistoryOrderDTO>>
 
     @POST("api/market/detail-order")
     @FormUrlEncoded
@@ -579,6 +579,19 @@ interface AuthApiService {
     @FormUrlEncoded
     suspend fun allMarketProducts(
         @Field(value = "order_id", encoded = true) order_id: Long,
+    ): RespFormat<List<MarketProductDTO>>
+
+    @GET("api/market/search-product")
+    suspend fun searchProducts(
+        @Query(value = "q", encoded = true) query: String,
+        @Query(value = "lang", encoded = true) lang: String = AppPrefs.language,
+    ): RespFormat<SearchResultDTO>
+
+    @GET("api/market/search-product-cat")
+    suspend fun searchProductsInCategory(
+        @Query(value = "q", encoded = true) query: String,
+        @Query(value = "cat-id", encoded = true) categoryId: Long,
+        @Query(value = "lang", encoded = true) lang: String = AppPrefs.language,
     ): RespFormat<List<MarketProductDTO>>
 
 }
