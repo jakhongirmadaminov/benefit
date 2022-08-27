@@ -19,25 +19,17 @@ class ActiveOrdersFragment : BaseFragment(R.layout.fragment_active_orders) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getActiveOrders()
-        setupViews()
         attachListeners()
         subscribeObservers()
     }
 
-     fun subscribeObservers() {
-        setupRVObservers(
-            viewModel.activeOrders,
-            progress,
-            rvActiveOrders,
-            adapter,
-        ) {
+    fun subscribeObservers() {
+        setupRVObservers(viewModel.activeOrders, rvActiveOrders, adapter) {
             ItemActiveOrder(it)
         }
     }
 
-    private fun setupViews() {
-        rvActiveOrders.adapter = adapter
-    }
+
 
     private fun attachListeners() {
 

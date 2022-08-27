@@ -20,7 +20,7 @@ import uz.magnumactive.benefit.ui.marketplace.dialogs.MarketProductDetailsBSD
 import uz.magnumactive.benefit.ui.viewgroups.ItemLoading
 import uz.magnumactive.benefit.ui.viewgroups.MarketGridProductItem
 import uz.magnumactive.benefit.ui.viewgroups.MarketSubCategoryTagItem
-import uz.magnumactive.benefit.ui.viewgroups.ProductListEmptyItem
+import uz.magnumactive.benefit.ui.viewgroups.ItemProductListEmpty
 import uz.magnumactive.benefit.util.RequestState
 
 
@@ -152,7 +152,7 @@ class MarketSelectedCategoryActivity : BaseActionbarActivity() {
             }
         } else {
             rvProducts.layoutManager = LinearLayoutManager(this)
-            categoryProductsAdapter.add(ProductListEmptyItem())
+            categoryProductsAdapter.add(ItemProductListEmpty())
         }
         categoryProductsAdapter.notifyDataSetChanged()
     }

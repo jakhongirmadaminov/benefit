@@ -4,7 +4,7 @@ import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import uz.magnumactive.benefit.R
 
-class ProductListEmptyItem : Item() {
+class ItemProductListEmpty : Item() {
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
     }

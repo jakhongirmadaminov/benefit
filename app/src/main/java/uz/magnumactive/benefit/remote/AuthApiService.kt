@@ -561,7 +561,7 @@ interface AuthApiService {
     @FormUrlEncoded
     suspend fun getActiveOrders(
         @Field(value = "user_id", encoded = true) user_id: Long = AppPrefs.userId,
-    ): RespFormat<List<ActiveOrderDTO>>
+    ): RespFormat<ActiveOrderResultDTO>
 
     @POST("api/market/history-order")
     @FormUrlEncoded
