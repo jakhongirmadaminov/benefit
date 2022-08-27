@@ -6,7 +6,7 @@ import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.ActiveOrderDTO
 import uz.magnumactive.benefit.remote.models.HistoryOrderDTO
 
-class ItemHistoryOrder(list: List<HistoryOrderDTO>) : Item() {
+class ItemHistoryOrder(val obj: HistoryOrderDTO) : Item() {
 
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {

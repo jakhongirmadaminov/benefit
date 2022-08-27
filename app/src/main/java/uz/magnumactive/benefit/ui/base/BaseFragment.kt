@@ -31,7 +31,7 @@ abstract class BaseFragment(@LayoutRes layout: Int) : Fragment(layout) {
 //    }
 
     fun <T> setupRVObservers(
-        observable: LiveData<RequestState<T>>,
+        observable: LiveData<RequestState<List<T>>>,
         recyclerView: RecyclerView,
         adapter: GroupAdapter<GroupieViewHolder>,
         createItem: (obj: T) -> Item
@@ -50,10 +50,12 @@ abstract class BaseFragment(@LayoutRes layout: Int) : Fragment(layout) {
                 }
                 is RequestState.Success -> {
                     adapter.clear()
-                    val result = (resp.value as List<T>)
+                    val result = resp.value
                     if (result.isNotEmpty()) {
                         recyclerView.layoutManager = GridLayoutManager(context, 2)
-                        result.forEach { adapter.add(createItem(it)) }
+                        result.forEach {
+                            adapter.add(createItem(it))
+                        }
                     } else {
                         recyclerView.layoutManager = LinearLayoutManager(context)
                         adapter.add(ItemProductListEmpty())

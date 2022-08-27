@@ -5,7 +5,7 @@ import com.xwray.groupie.kotlinandroidextensions.Item
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.ActiveOrderDTO
 
-class ItemActiveOrder(list: List<ActiveOrderDTO>) : Item() {
+class ItemActiveOrder(list: ActiveOrderDTO) : Item() {
 
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {

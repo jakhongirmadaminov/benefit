@@ -19,7 +19,7 @@ class FavouriteViewModel @Inject constructor(private val authClient: AuthApiServ
 
     fun getFavourites() {
         viewModelScope.launch {
-            makeRequest(favouritesResult) { authClient.getMarketMainSales() }
+            makeRequest(favouritesResult) { authClient.getFavourites() }
         }
     }
 
