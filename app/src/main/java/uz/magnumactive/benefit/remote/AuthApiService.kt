@@ -517,6 +517,13 @@ interface AuthApiService {
         @Field("user_id") user_id: Long = AppPrefs.userId,
     ): RespFormat<List<MarketProductDTO>>
 
+    @POST("api/market/add-elect")
+    @FormUrlEncoded
+    suspend fun addToFavourites(
+        @Field("item_id") item_id: Long,
+        @Field("user_id") user_id: Long = AppPrefs.userId,
+    ): RespFormat<Any>
+
     @POST("api/market/clean-basket/{user_id}")
     @FormUrlEncoded
     suspend fun cleanBasket(

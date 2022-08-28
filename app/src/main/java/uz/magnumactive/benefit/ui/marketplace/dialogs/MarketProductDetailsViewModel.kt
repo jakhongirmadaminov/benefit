@@ -17,12 +17,18 @@ class MarketProductDetailsViewModel @Inject constructor(private val authClient: 
 
 
     val details = MutableLiveData<RequestState<MarketProductDetailsDTO>>()
+    val addToFavResult = MutableLiveData<RequestState<Any>>()
 
     val count = MutableLiveData(1)
 
     fun getProductDetails(id: Long) {
         viewModelScope.launch {
             makeRequest(details) { authClient.getProductDetails(id) }
+        }
+    }
+    fun addToFavourites(id: Long) {
+        viewModelScope.launch {
+            makeRequest(addToFavResult) { authClient.addToFavourites(id) }
         }
     }
 }
