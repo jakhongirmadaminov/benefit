@@ -111,6 +111,9 @@
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/layout_success.xml" value="0.2477355072463768" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/transaction_loading.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/transaction_success.xml" value="0.16574074074074074" />
+        <entry key="app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.1315" />
+        <entry key="app/src/main/res/drawable/selector_heart.xml" value="0.1315" />
+        <entry key="app/src/main/res/drawable/selector_like.xml" value="0.1315" />
         <entry key="app/src/main/res/drawable/selector_rounded_top_corners.xml" value="0.22962962962962963" />
         <entry key="app/src/main/res/drawable/shape_top_rounded.xml" value="0.24259259259259258" />
         <entry key="app/src/main/res/drawable/shape_white_rounded_calculator_bg.xml" value="0.35555555555555557" />

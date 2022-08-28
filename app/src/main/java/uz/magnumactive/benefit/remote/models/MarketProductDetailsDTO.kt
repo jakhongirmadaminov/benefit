@@ -7,8 +7,8 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class MarketProductDetailsDTO(
     @SerializedName("in_elected")
-    val inCart: Boolean? = null,
+    val isInFavourites: Boolean? = null,
     @SerializedName("product")
     val product: MarketProductDTO? = null,
 
-) : Parcelable
+    ) : Parcelable

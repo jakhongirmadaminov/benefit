@@ -26,9 +26,16 @@ class MarketProductDetailsViewModel @Inject constructor(private val authClient: 
             makeRequest(details) { authClient.getProductDetails(id) }
         }
     }
+
     fun addToFavourites(id: Long) {
         viewModelScope.launch {
             makeRequest(addToFavResult) { authClient.addToFavourites(id) }
+        }
+    }
+
+    fun removeFromFavorites(id: Long) {
+        viewModelScope.launch {
+            makeRequest(addToFavResult) { authClient.removeFromFavourites(id) }
         }
     }
 }

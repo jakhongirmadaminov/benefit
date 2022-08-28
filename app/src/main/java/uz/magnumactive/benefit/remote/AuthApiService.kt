@@ -514,12 +514,20 @@ interface AuthApiService {
     @POST("api/market/my-elect")
     @FormUrlEncoded
     suspend fun getFavourites(
+        @Query("user_id") userId: Long = AppPrefs.userId,
         @Field("user_id") user_id: Long = AppPrefs.userId,
-    ): RespFormat<List<MarketProductDTO>>
+    ): RespFormat<List<MarketFavouriteProductDTO>>
 
     @POST("api/market/add-elect")
     @FormUrlEncoded
     suspend fun addToFavourites(
+        @Field("item_id") item_id: Long,
+        @Field("user_id") user_id: Long = AppPrefs.userId,
+    ): RespFormat<Any>
+
+    @POST("api/market/delete-elect")
+    @FormUrlEncoded
+    suspend fun removeFromFavourites(
         @Field("item_id") item_id: Long,
         @Field("user_id") user_id: Long = AppPrefs.userId,
     ): RespFormat<Any>

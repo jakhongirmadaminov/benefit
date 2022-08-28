@@ -45,6 +45,14 @@ class MarketProductDetailsBSD(val obj: MarketProductDTO) : BenefitFixedHeightBSD
 
     private fun attachListeners() {
 
+        cbFavourite.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                viewModel.addToFavourites(details!!.product!!.id!!)
+            } else {
+                viewModel.removeFromFavorites(details!!.product!!.id!!)
+            }
+        }
+
         btnAddToCart.setOnClickListener {
 
         }
@@ -64,7 +72,6 @@ class MarketProductDetailsBSD(val obj: MarketProductDTO) : BenefitFixedHeightBSD
 
         }
 
-
     }
 
     private fun setupView() {
@@ -73,6 +80,16 @@ class MarketProductDetailsBSD(val obj: MarketProductDTO) : BenefitFixedHeightBSD
     }
 
     private fun subscribeObservers() {
+
+        viewModel.addToFavResult.observe(viewLifecycleOwner) {
+            val resp = it ?: return@observe
+
+            when (resp) {
+                is RequestState.Error -> {}
+                RequestState.Loading -> {}
+                is RequestState.Success -> {}
+            }
+        }
 
         viewModel.count.observe(viewLifecycleOwner) { count ->
             tvCount.text = count.toString()
@@ -102,6 +119,8 @@ class MarketProductDetailsBSD(val obj: MarketProductDTO) : BenefitFixedHeightBSD
     }
 
     private fun loadDetails() {
+        cbFavourite.isChecked = details?.isInFavourites ?: false
+
         details?.product?.apply {
             val imageViews = arrayListOf<View>()
 

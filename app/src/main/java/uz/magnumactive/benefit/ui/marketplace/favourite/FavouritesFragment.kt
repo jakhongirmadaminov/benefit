@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.fragment_favourites.*
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.ui.base.BaseFragment
 import uz.magnumactive.benefit.ui.marketplace.MarketActivity
+import uz.magnumactive.benefit.ui.marketplace.dialogs.MarketProductDetailsBSD
 import uz.magnumactive.benefit.ui.viewgroups.MarketFavouriteItem
 
 
@@ -23,7 +24,14 @@ class FavouritesFragment : BaseFragment(R.layout.fragment_favourites) {
 
         attachListeners()
         setupRVObservers(viewModel.favouritesResult, rvFavourites, adapter, createItem = {
-            MarketFavouriteItem(it)
+            MarketFavouriteItem(it,
+                onClick = {
+                    val dialog = MarketProductDetailsBSD(it.itemInfo!!)
+                    dialog.show(childFragmentManager, "")
+                },
+                onAddToCart = {
+
+                })
         })
     }
 
