@@ -72,10 +72,11 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="26dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
         android:foreground="?android:selectableItemBackground"
         app:cardBackgroundColor="@color/colorAccent"
         app:cardCornerRadius="50dp"
-        app:layout_constraintBottom_toTopOf="@id/nav_view">
+        app:layout_constraintTop_toBottomOf="@id/nav_view">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

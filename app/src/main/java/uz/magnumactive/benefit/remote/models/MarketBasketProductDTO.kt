@@ -5,13 +5,13 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class MarketFavouriteProductDTO(
-    @SerializedName("created_at")
+data class MarketBasketProductDTO(
+    @SerializedName("created")
     val createdAt: Int? = null,
     @SerializedName("id")
     val id: Long? = null,
     @SerializedName("count")
-    val count: Int? = null,
+    var count: Int? = null,
     @SerializedName("item_info")
     val itemInfo: MarketProductDTO? = null,
 ) : Parcelable

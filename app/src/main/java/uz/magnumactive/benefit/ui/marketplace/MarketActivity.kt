@@ -14,7 +14,7 @@ import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_market.*
 import uz.magnumactive.benefit.R
-import uz.magnumactive.benefit.remote.models.MyCartResultDTO
+import uz.magnumactive.benefit.remote.models.MyBasketResultDTO
 import uz.magnumactive.benefit.ui.base.BaseActivity
 import uz.magnumactive.benefit.util.RequestState
 import java.text.DecimalFormat
@@ -89,7 +89,7 @@ class MarketActivity : BaseActivity() {
     }
 
 
-    private fun setupCartCard(value: MyCartResultDTO) {
+    private fun setupCartCard(value: MyBasketResultDTO) {
         val newConstraints = ConstraintSet()
         newConstraints.clone(container)
         if (value.products == null || value.products.isEmpty()) {

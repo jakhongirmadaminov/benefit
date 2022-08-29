@@ -508,7 +508,7 @@ interface AuthApiService {
     @FormUrlEncoded
     suspend fun getBasketList(
         @Field("user_id") user_id: Long = AppPrefs.userId,
-    ): RespFormat<MyCartResultDTO>
+    ): RespFormat<MyBasketResultDTO>
 
 
     @POST("api/market/my-elect")
@@ -532,13 +532,12 @@ interface AuthApiService {
         @Field("user_id") user_id: Long = AppPrefs.userId,
     ): RespFormat<Any>
 
-    @POST("api/market/clean-basket/{user_id}")
+    @POST("api/market/clean-basket")
     @FormUrlEncoded
     suspend fun cleanBasket(
-        @Path(value = "user_id", encoded = true) user_id: Long = AppPrefs.userId,
+        @Query(value = "user_id", encoded = true) user_id: Long = AppPrefs.userId,
         @Field(value = "user_id", encoded = true) userId: Long = AppPrefs.userId,
-        @Field(value = "item_id", encoded = true) item_id: Long,
-    ): RespFormat<Partner>
+    ): RespFormat<MyBasketResultDTO>
 
     @POST("api/market/mincount-basket")
     @FormUrlEncoded
@@ -546,7 +545,7 @@ interface AuthApiService {
         @Field(value = "item_id", encoded = true) item_id: Long,
         @Field("count") count: Int = 1,
         @Field(value = "user_id", encoded = true) user_id: Long = AppPrefs.userId,
-    ): RespFormat<Any>
+    ): RespFormat<MyBasketResultDTO>
 
     @POST("api/market/pluscount-basket")
     @FormUrlEncoded
@@ -554,7 +553,7 @@ interface AuthApiService {
         @Field("item_id") item_id: Long,
         @Field("count") count: Int = 1,
         @Field("user_id") user_id: Long = AppPrefs.userId,
-    ): RespFormat<Any>
+    ): RespFormat<MyBasketResultDTO>
 
     @POST("api/market/mincount-basket")
     @FormUrlEncoded

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="10dp">
 
 
     <TextView
@@ -11,8 +12,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="26dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="26dp"
         android:fontFamily="sans-serif"
+        android:maxLines="2"
         android:textColor="@color/primary_text"
         android:textFontWeight="400"
         android:textSize="16dp"
@@ -57,14 +60,28 @@
         android:id="@+id/ivPlus"
         android:layout_width="35dp"
         android:layout_height="35dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="26dp"
         android:background="@drawable/selector_btn_add_to_cart_plus"
         android:foreground="?android:selectableItemBackgroundBorderless"
         android:padding="5dp"
         android:src="@drawable/ic_baseline_add_24"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvEntrySum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="26dp"
+        android:fontFamily="sans-serif"
+        android:textColor="#000000"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivPlus"
+        tools:text="4 000 0000 UZS" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
