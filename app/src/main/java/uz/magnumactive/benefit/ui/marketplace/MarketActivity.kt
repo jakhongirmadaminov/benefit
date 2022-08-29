@@ -1,19 +1,32 @@
 package uz.magnumactive.benefit.ui.marketplace
 
+import android.animation.LayoutTransition.CHANGING
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_market.*
 import uz.magnumactive.benefit.R
+import uz.magnumactive.benefit.remote.models.MarketProductDTO
+import uz.magnumactive.benefit.util.RequestState
+import java.text.DecimalFormat
 
 @AndroidEntryPoint
 class MarketActivity : AppCompatActivity() {
+
+
+//    val addedToCart by Delegates.observable(ArrayList<MarketProductDTO>()) { property, oldValue, newValue ->
+//
+//    }
+
+    val viewModel: MarketActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +42,30 @@ class MarketActivity : AppCompatActivity() {
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             window.statusBarColor = Color.WHITE
         }
+
+        container.layoutTransition.enableTransitionType(CHANGING)
+
+        subscribeObservers()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getMyCart()
+    }
+
+    private fun subscribeObservers() {
+
+        viewModel.myCart.observe(this) {
+            val resp = it ?: return@observe
+            when (resp) {
+                is RequestState.Error -> {}
+                RequestState.Loading -> {}
+                is RequestState.Success -> {
+                    setupCartCard(resp.value)
+                }
+            }
+        }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -38,8 +75,48 @@ class MarketActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun setTitle(title:String){
+    fun setTitle(title: String) {
         tvTitle.text = title
     }
+
+
+    private fun setupCartCard(value: List<MarketProductDTO>) {
+        val newConstraints = ConstraintSet()
+        newConstraints.clone(container)
+        if (value.isEmpty()) {
+            newConstraints.connect(
+                R.id.nav_view,
+                ConstraintSet.BOTTOM,
+                R.id.cardAddedToCart,
+                ConstraintSet.TOP
+            )
+        } else {
+            setupCartCard(value)
+            newConstraints.connect(
+                R.id.nav_view,
+                ConstraintSet.TOP,
+                R.id.cardAddedToCart,
+                ConstraintSet.BOTTOM
+            )
+            tvCartCount.text = value.size.toString()
+            tvCartTotal.text =
+                DecimalFormat("#,###").format(value.sumOf { it.realSumma!! }) + " UZS"
+        }
+        container.setConstraintSet(newConstraints)
+    }
+
+
+//    fun addProductToCart(product: MarketProductDTO) {
+//        if (!addedToCart.contains(product)) {
+//            addedToCart.add(product)
+//        }
+//        viewModel
+//    }
+//
+//    fun removeProductFromCart(product: MarketProductDTO) {
+//        if (addedToCart.contains(product)) {
+//            addedToCart.remove(product)
+//        }
+//    }
 
 }

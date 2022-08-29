@@ -46,4 +46,12 @@ data class MarketProductDTO(
     val updatedAt: Int? = null,
     @SerializedName("warehouse_count")
     val warehouseCount: Int? = null
-) : Parcelable
+) : Parcelable {
+
+    override fun equals(other: Any?): Boolean {
+        return when (other) {
+            is MarketProductDTO -> this.id == other.id
+            else -> false
+        }
+    }
+}

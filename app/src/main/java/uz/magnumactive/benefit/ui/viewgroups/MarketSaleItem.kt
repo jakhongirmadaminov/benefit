@@ -7,7 +7,11 @@ import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.MarketProductDTO
 import uz.magnumactive.benefit.util.loadImageUrl
 
-class MarketSaleItem(val obj: MarketProductDTO) : Item() {
+class MarketSaleItem(
+    val obj: MarketProductDTO,
+    val onClick: () -> Unit,
+    val onAddToCart: () -> Unit
+) : Item() {
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
 
@@ -20,6 +24,8 @@ class MarketSaleItem(val obj: MarketProductDTO) : Item() {
 
             tvItemTitle.text = obj.title?.getLocalized()
 
+            cardProduct.setOnClickListener { onClick() }
+            btnAddToCard.setOnClickListener { onAddToCart() }
         }
 
     }

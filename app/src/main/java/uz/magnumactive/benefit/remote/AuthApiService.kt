@@ -508,7 +508,7 @@ interface AuthApiService {
     @FormUrlEncoded
     suspend fun getBasketList(
         @Field("user_id") user_id: Long = AppPrefs.userId,
-    ): RespFormat<Partner>
+    ): RespFormat<List<MarketProductDTO>>
 
 
     @POST("api/market/my-elect")
@@ -543,18 +543,18 @@ interface AuthApiService {
     @POST("api/market/mincount-basket")
     @FormUrlEncoded
     suspend fun removeItemFromBasket(
-        @Field(value = "user_id", encoded = true) user_id: Long = AppPrefs.userId,
         @Field(value = "item_id", encoded = true) item_id: Long,
         @Field("count") count: Int = 1,
-    ): RespFormat<Partner>
+        @Field(value = "user_id", encoded = true) user_id: Long = AppPrefs.userId,
+    ): RespFormat<Any>
 
     @POST("api/market/pluscount-basket")
     @FormUrlEncoded
     suspend fun addToBasket(
-        @Field("user_id") user_id: Long = AppPrefs.userId,
         @Field("item_id") item_id: Long,
         @Field("count") count: Int = 1,
-    ): RespFormat<Partner>
+        @Field("user_id") user_id: Long = AppPrefs.userId,
+    ): RespFormat<Any>
 
     @POST("api/market/mincount-basket")
     @FormUrlEncoded

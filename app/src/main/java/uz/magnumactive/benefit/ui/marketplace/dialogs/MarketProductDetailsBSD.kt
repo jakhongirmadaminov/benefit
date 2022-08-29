@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.bsd_market_product_details.*
 import kotlinx.android.synthetic.main.item_product_image.view.*
@@ -54,7 +55,7 @@ class MarketProductDetailsBSD(val obj: MarketProductDTO) : BenefitFixedHeightBSD
         }
 
         btnAddToCart.setOnClickListener {
-
+            details?.product?.let { viewModel.addToCart(it.id!!, 1) }
         }
 
         ivPlus.setOnClickListener {
@@ -80,6 +81,19 @@ class MarketProductDetailsBSD(val obj: MarketProductDTO) : BenefitFixedHeightBSD
     }
 
     private fun subscribeObservers() {
+
+        viewModel.addToCartResp.observe(viewLifecycleOwner) {
+            val resp = it ?: return@observe
+            when (resp) {
+                is RequestState.Error -> {
+                    Snackbar.make(parent, R.string.error, Snackbar.LENGTH_SHORT)
+                }
+                RequestState.Loading -> {}
+                is RequestState.Success -> {
+                    Snackbar.make(parent, R.string.added_to_cart, Snackbar.LENGTH_SHORT)
+                }
+            }
+        }
 
         viewModel.addToFavResult.observe(viewLifecycleOwner) {
             val resp = it ?: return@observe

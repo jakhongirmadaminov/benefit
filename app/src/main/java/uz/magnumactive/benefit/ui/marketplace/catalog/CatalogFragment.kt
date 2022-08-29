@@ -8,6 +8,7 @@ import android.widget.TextView.OnEditorActionListener
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
+import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_catalog.*
@@ -87,12 +88,29 @@ class CatalogFragment : BaseFragment(R.layout.fragment_catalog) {
             }
         }
 
+        viewModel.addToCartResp.observe(viewLifecycleOwner) {
+            val resp = it ?: return@observe
+            when (resp) {
+                is RequestState.Error -> {
+                    Snackbar.make(parent, R.string.error, Snackbar.LENGTH_SHORT)
+                }
+                RequestState.Loading -> {}
+                is RequestState.Success -> {
+                    (requireActivity() as MarketActivity).viewModel.getMyCart()
+                    Snackbar.make(parent, R.string.added_to_cart, Snackbar.LENGTH_SHORT)
+                }
+            }
+        }
+
     }
 
     private fun loadSaleItems(result: List<MarketProductDTO>) {
         saleItemsAdapter.clear()
         result.forEach {
-            saleItemsAdapter.add(MarketSaleItem(it))
+            saleItemsAdapter.add(MarketSaleItem(it,
+                onClick = { },
+                onAddToCart = { viewModel.addToCart(it.id!!, 1) }
+            ))
         }
 
     }

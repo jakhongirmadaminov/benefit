@@ -7,13 +7,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import uz.magnumactive.benefit.remote.AuthApiService
 import uz.magnumactive.benefit.remote.models.MarketProductDetailsDTO
+import uz.magnumactive.benefit.ui.marketplace.BasketViewModel
 import uz.magnumactive.benefit.util.RequestState
 import uz.magnumactive.benefit.util.makeRequest
 import javax.inject.Inject
 
 @HiltViewModel
 class MarketProductDetailsViewModel @Inject constructor(private val authClient: AuthApiService) :
-    ViewModel() {
+    BasketViewModel(authClient) {
 
 
     val details = MutableLiveData<RequestState<MarketProductDetailsDTO>>()

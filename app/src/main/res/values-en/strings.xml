@@ -290,5 +290,7 @@
     <string name="description">Описание</string>
     <string name="add_to_cart">Добавить в корзину</string>
     <string name="search_results">Результаты поиска</string>
+    <string name="added">Добавлено</string>
+    <string name="added_to_cart">Добавлено в корзину</string>
 
 </resources>
