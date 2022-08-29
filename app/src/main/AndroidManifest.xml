@@ -87,6 +87,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar"
             android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".ui.marketplace.BasketActivity"
+            android:exported="false"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar"
+            android:windowSoftInputMode="adjustNothing" />
 
         <activity
             android:name=".ui.marketplace.search_result.SearchResultActivity"

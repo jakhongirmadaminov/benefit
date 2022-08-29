@@ -508,7 +508,7 @@ interface AuthApiService {
     @FormUrlEncoded
     suspend fun getBasketList(
         @Field("user_id") user_id: Long = AppPrefs.userId,
-    ): RespFormat<List<MarketProductDTO>>
+    ): RespFormat<MyCartResultDTO>
 
 
     @POST("api/market/my-elect")

@@ -5,6 +5,7 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
+import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_gap_chart.tool_bar
@@ -18,9 +19,9 @@ import uz.magnumactive.benefit.ui.base.BaseActionbarActivity
 import uz.magnumactive.benefit.ui.marketplace.dialogs.MarketFilterBSD
 import uz.magnumactive.benefit.ui.marketplace.dialogs.MarketProductDetailsBSD
 import uz.magnumactive.benefit.ui.viewgroups.ItemLoading
+import uz.magnumactive.benefit.ui.viewgroups.ItemProductListEmpty
 import uz.magnumactive.benefit.ui.viewgroups.MarketGridProductItem
 import uz.magnumactive.benefit.ui.viewgroups.MarketSubCategoryTagItem
-import uz.magnumactive.benefit.ui.viewgroups.ItemProductListEmpty
 import uz.magnumactive.benefit.util.RequestState
 
 
@@ -64,6 +65,20 @@ class MarketSelectedCategoryActivity : BaseActionbarActivity() {
     }
 
     private fun subscribeObservers() {
+
+        viewModel.addToCartResp.observe(this) {
+            val resp = it ?: return@observe
+            when (resp) {
+                is RequestState.Error -> {
+                    Snackbar.make(llParent, R.string.error, Snackbar.LENGTH_SHORT).show()
+                }
+                RequestState.Loading -> {}
+                is RequestState.Success -> {
+                    viewModel.getMyCart()
+                    Snackbar.make(llParent, R.string.added_to_cart, Snackbar.LENGTH_SHORT).show()
+                }
+            }
+        }
 
         viewModel.categoryProductsResult.observe(this) {
             val resp = it ?: return@observe
@@ -146,7 +161,7 @@ class MarketSelectedCategoryActivity : BaseActionbarActivity() {
                             detailsBSD.show(supportFragmentManager, "")
                         },
                         onAddToCart = {
-
+                            viewModel.addToCart(it.id!!, 1)
                         })
                 )
             }

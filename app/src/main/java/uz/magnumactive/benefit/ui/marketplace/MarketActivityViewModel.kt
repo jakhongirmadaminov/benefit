@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MarketActivityViewModel @Inject constructor(authApi: AuthApiService) :
-    BasketViewModel(authApi) {
+    BaseBasketViewModel(authApi) {
 
 
 }

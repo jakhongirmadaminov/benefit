@@ -1,25 +1,26 @@
 package uz.magnumactive.benefit.ui.marketplace
 
 import android.animation.LayoutTransition.CHANGING
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_market.*
 import uz.magnumactive.benefit.R
-import uz.magnumactive.benefit.remote.models.MarketProductDTO
+import uz.magnumactive.benefit.remote.models.MyCartResultDTO
+import uz.magnumactive.benefit.ui.base.BaseActivity
 import uz.magnumactive.benefit.util.RequestState
 import java.text.DecimalFormat
 
 @AndroidEntryPoint
-class MarketActivity : AppCompatActivity() {
+class MarketActivity : BaseActivity() {
 
 
 //    val addedToCart by Delegates.observable(ArrayList<MarketProductDTO>()) { property, oldValue, newValue ->
@@ -45,7 +46,15 @@ class MarketActivity : AppCompatActivity() {
 
         container.layoutTransition.enableTransitionType(CHANGING)
 
+        attachListeners()
         subscribeObservers()
+    }
+
+    private fun attachListeners() {
+
+        cardAddedToCart.setOnClickListener {
+            startActivity(Intent(this, BasketActivity::class.java))
+        }
     }
 
     override fun onResume() {
@@ -80,27 +89,26 @@ class MarketActivity : AppCompatActivity() {
     }
 
 
-    private fun setupCartCard(value: List<MarketProductDTO>) {
+    private fun setupCartCard(value: MyCartResultDTO) {
         val newConstraints = ConstraintSet()
         newConstraints.clone(container)
-        if (value.isEmpty()) {
+        if (value.products == null || value.products.isEmpty()) {
             newConstraints.connect(
-                R.id.nav_view,
-                ConstraintSet.BOTTOM,
                 R.id.cardAddedToCart,
-                ConstraintSet.TOP
-            )
-        } else {
-            setupCartCard(value)
-            newConstraints.connect(
-                R.id.nav_view,
                 ConstraintSet.TOP,
-                R.id.cardAddedToCart,
+                R.id.nav_view,
                 ConstraintSet.BOTTOM
             )
-            tvCartCount.text = value.size.toString()
+        } else {
+            newConstraints.connect(
+                R.id.cardAddedToCart,
+                ConstraintSet.BOTTOM,
+                R.id.nav_view,
+                ConstraintSet.TOP
+            )
+            tvCartCount.text = value.products.size.toString()
             tvCartTotal.text =
-                DecimalFormat("#,###").format(value.sumOf { it.realSumma!! }) + " UZS"
+                DecimalFormat("#,###").format(value.totalSum) + " UZS"
         }
         container.setConstraintSet(newConstraints)
     }

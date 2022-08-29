@@ -292,5 +292,6 @@
     <string name="search_results">Результаты поиска</string>
     <string name="added">Добавлено</string>
     <string name="added_to_cart">Добавлено в корзину</string>
+    <string name="basket">Корзина</string>
 
 </resources>

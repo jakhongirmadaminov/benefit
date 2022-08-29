@@ -30,7 +30,7 @@ class App : Application(), Application.ActivityLifecycleCallbacks {
             simpleCache = SimpleCache(cacheDir, leastRecentlyUsedCacheEvictor, databaseProvider)
         }
 
-        if (uz.magnumactive.benefit.BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
         registerActivityLifecycleCallbacks(this)

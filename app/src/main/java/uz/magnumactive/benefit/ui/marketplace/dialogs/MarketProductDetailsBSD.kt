@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.bsd_market_product_details.*
 import kotlinx.android.synthetic.main.item_product_image.view.*
@@ -86,11 +87,11 @@ class MarketProductDetailsBSD(val obj: MarketProductDTO) : BenefitFixedHeightBSD
             val resp = it ?: return@observe
             when (resp) {
                 is RequestState.Error -> {
-                    Snackbar.make(parent, R.string.error, Snackbar.LENGTH_SHORT)
+                    Toast.makeText(requireContext(), R.string.error, LENGTH_SHORT).show()
                 }
                 RequestState.Loading -> {}
                 is RequestState.Success -> {
-                    Snackbar.make(parent, R.string.added_to_cart, Snackbar.LENGTH_SHORT)
+                    Toast.makeText(requireContext(), R.string.added_to_cart, LENGTH_SHORT).show()
                 }
             }
         }

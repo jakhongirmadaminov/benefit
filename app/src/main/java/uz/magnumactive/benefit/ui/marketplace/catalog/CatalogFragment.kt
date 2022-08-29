@@ -92,12 +92,12 @@ class CatalogFragment : BaseFragment(R.layout.fragment_catalog) {
             val resp = it ?: return@observe
             when (resp) {
                 is RequestState.Error -> {
-                    Snackbar.make(parent, R.string.error, Snackbar.LENGTH_SHORT)
+                    Snackbar.make(parent, R.string.error, Snackbar.LENGTH_SHORT).show()
                 }
                 RequestState.Loading -> {}
                 is RequestState.Success -> {
                     (requireActivity() as MarketActivity).viewModel.getMyCart()
-                    Snackbar.make(parent, R.string.added_to_cart, Snackbar.LENGTH_SHORT)
+                    Snackbar.make(parent, R.string.added_to_cart, Snackbar.LENGTH_SHORT).show()
                 }
             }
         }
