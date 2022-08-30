@@ -1,9 +1,11 @@
 package uz.magnumactive.benefit.ui.marketplace.cart
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
@@ -119,6 +121,7 @@ class BasketActivity : BaseActionbarActivity() {
         tvGrandTotal.text = DecimalFormat("#,###").format(value.totalSum) + " UZS"
         if (!value.list.isNullOrEmpty()) {
             lblAdded.isEnabled = true
+            lblAdded.setTextColor(Color.WHITE)
             ivCleanBasket.visibility = View.VISIBLE
             val cartEntries = arrayListOf<ItemCartEntry>()
             value.list.forEach {
@@ -142,6 +145,7 @@ class BasketActivity : BaseActionbarActivity() {
             }
             adapter.update(cartEntries)
         } else {
+            lblAdded.setTextColor(ContextCompat.getColor(this, R.color.primary_text))
             lblAdded.isEnabled = false
             ivCleanBasket.visibility = View.INVISIBLE
             adapter.clear()
