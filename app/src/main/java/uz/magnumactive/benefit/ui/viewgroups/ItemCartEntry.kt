@@ -9,8 +9,8 @@ import java.text.DecimalFormat
 
 class ItemCartEntry(
     val obj: MarketBasketProductDTO,
-    val onInCrease: (ItemCartEntry) -> Unit,
-    val onDecrease: (ItemCartEntry) -> Unit
+    val onInCrease: () -> Unit,
+    val onDecrease: () -> Unit
 ) : Item() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
 
@@ -20,10 +20,10 @@ class ItemCartEntry(
                 DecimalFormat("#,###").format(obj.itemInfo?.realSumma!! * obj.count!!) + " UZS"
             tvCount.text = obj.count.toString()
             ivMinus.setOnClickListener {
-                    onDecrease(this@ItemCartEntry)
+                    onDecrease()
             }
             ivPlus.setOnClickListener {
-                onInCrease(this@ItemCartEntry)
+                onInCrease()
             }
         }
 

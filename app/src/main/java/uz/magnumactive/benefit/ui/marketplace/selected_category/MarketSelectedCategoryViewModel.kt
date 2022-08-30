@@ -9,7 +9,7 @@ import uz.magnumactive.benefit.remote.models.MarketAllSubCategoryDTO
 import uz.magnumactive.benefit.remote.models.MarketCategoryDTO
 import uz.magnumactive.benefit.remote.models.MarketPlaceCategoryObj
 import uz.magnumactive.benefit.remote.models.MarketProductDTO
-import uz.magnumactive.benefit.ui.marketplace.BaseBasketViewModel
+import uz.magnumactive.benefit.ui.marketplace.cart.BaseBasketViewModel
 import uz.magnumactive.benefit.ui.marketplace.dialogs.MarketFilterBSD
 import uz.magnumactive.benefit.util.RequestState
 import uz.magnumactive.benefit.util.makeRequest

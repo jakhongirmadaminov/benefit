@@ -8,7 +8,7 @@ import uz.magnumactive.benefit.remote.AuthApiService
 import uz.magnumactive.benefit.remote.models.MarketPlaceCategoryObj
 import uz.magnumactive.benefit.remote.models.MarketProductDTO
 import uz.magnumactive.benefit.remote.models.SearchResultDTO
-import uz.magnumactive.benefit.ui.marketplace.BaseBasketViewModel
+import uz.magnumactive.benefit.ui.marketplace.cart.BaseBasketViewModel
 import uz.magnumactive.benefit.util.RequestState
 import uz.magnumactive.benefit.util.makeRequest
 import javax.inject.Inject

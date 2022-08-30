@@ -1,6 +1,8 @@
-package uz.magnumactive.benefit.ui.marketplace
+package uz.magnumactive.benefit.ui.marketplace.cart
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
@@ -10,15 +12,16 @@ import kotlinx.android.synthetic.main.activity_gap_chart.tool_bar
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.MyBasketResultDTO
 import uz.magnumactive.benefit.ui.base.BaseActionbarActivity
+import uz.magnumactive.benefit.ui.marketplace.place_order.PlaceOrderActivity
 import uz.magnumactive.benefit.ui.viewgroups.ItemCartEntry
 import uz.magnumactive.benefit.ui.viewgroups.ItemProductListEmpty
 import uz.magnumactive.benefit.util.RequestState
+import java.text.DecimalFormat
 
 class BasketActivity : BaseActionbarActivity() {
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
     val viewModel: BasketViewModel by viewModels()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_basket)
@@ -32,7 +35,6 @@ class BasketActivity : BaseActionbarActivity() {
     }
 
     private fun attachListeners() {
-
         swipeRefresh.setOnRefreshListener {
             viewModel.getMyCart()
         }
@@ -40,14 +42,15 @@ class BasketActivity : BaseActionbarActivity() {
         ivCleanBasket.setOnClickListener {
             viewModel.cleanBasket()
         }
+        cardAddedToCart.setOnClickListener {
+            startActivity(Intent(this, PlaceOrderActivity::class.java))
+        }
     }
 
     private fun setupView() {
         rvCart.adapter = adapter
 
     }
-
-//    var manipulatingItem: Pair<ItemCartEntry, Int>? = null
 
     fun subscribeObservers() {
 
@@ -62,7 +65,6 @@ class BasketActivity : BaseActionbarActivity() {
                 }
                 is RequestState.Success -> {
                     viewModel.getMyCart()
-//                    loadData(resp.value)
                 }
             }
         }
@@ -78,16 +80,8 @@ class BasketActivity : BaseActionbarActivity() {
                 }
                 is RequestState.Success -> {
                     viewModel.getMyCart()
-//                    loadData(resp.value)
-
-//                    manipulatingItem?.let {
-//                        it.first.obj.count = it.first.obj.count?.plus(it.second)
-//                        adapter.notifyItemChanged(it.first.getPosition(it.first))
-//                    }
                 }
             }
-
-//            manipulatingItem = null
         }
 
         viewModel.removeFromCartResp.observe(this) { requestState ->
@@ -101,15 +95,8 @@ class BasketActivity : BaseActionbarActivity() {
                 }
                 is RequestState.Success -> {
                     viewModel.getMyCart()
-                    //                    loadData(resp.value)
-//                    manipulatingItem?.let {
-//                        it.first.obj.count = it.first.obj.count?.plus(it.second)
-//                        adapter.notifyItemChanged(it.first.getPosition(it.first))
-//                    }
                 }
             }
-
-//            manipulatingItem = null
         }
 
         viewModel.myCart.observe(this) {
@@ -129,24 +116,24 @@ class BasketActivity : BaseActionbarActivity() {
     }
 
     private fun loadData(value: MyBasketResultDTO) {
+        tvGrandTotal.text = DecimalFormat("#,###").format(value.totalSum) + " UZS"
         if (!value.list.isNullOrEmpty()) {
+            ivCleanBasket.visibility = View.VISIBLE
             val cartEntries = arrayListOf<ItemCartEntry>()
             value.list.forEach {
                 cartEntries.add(
                     ItemCartEntry(it,
-                        onInCrease = { itemCartEntry ->
+                        onInCrease = {
                             if (viewModel.addToCartResp.value !is RequestState.Loading
                                 && viewModel.removeFromCartResp.value !is RequestState.Loading
                             ) {
-//                                manipulatingItem = Pair(itemCartEntry, 1)
                                 viewModel.addToCart(it.itemInfo?.id!!, 1)
                             }
                         },
-                        onDecrease = { itemCartEntry ->
+                        onDecrease = {
                             if (viewModel.addToCartResp.value !is RequestState.Loading
                                 && viewModel.removeFromCartResp.value !is RequestState.Loading
                             ) {
-//                                manipulatingItem = Pair(itemCartEntry, -1)
                                 viewModel.removeFromCart(it.itemInfo?.id!!, 1)
                             }
                         })
@@ -154,6 +141,7 @@ class BasketActivity : BaseActionbarActivity() {
             }
             adapter.update(cartEntries)
         } else {
+            ivCleanBasket.visibility = View.INVISIBLE
             adapter.clear()
             adapter.add(ItemProductListEmpty())
         }

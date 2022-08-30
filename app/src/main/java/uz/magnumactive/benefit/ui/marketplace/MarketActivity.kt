@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_market.*
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.MyBasketResultDTO
 import uz.magnumactive.benefit.ui.base.BaseActivity
+import uz.magnumactive.benefit.ui.marketplace.cart.BasketActivity
 import uz.magnumactive.benefit.util.RequestState
 import java.text.DecimalFormat
 
@@ -121,19 +122,5 @@ class MarketActivity : BaseActivity() {
         container.setConstraintSet(newConstraints)
         cardAddedToCart.requestLayout()
     }
-
-
-//    fun addProductToCart(product: MarketProductDTO) {
-//        if (!addedToCart.contains(product)) {
-//            addedToCart.add(product)
-//        }
-//        viewModel
-//    }
-//
-//    fun removeProductFromCart(product: MarketProductDTO) {
-//        if (addedToCart.contains(product)) {
-//            addedToCart.remove(product)
-//        }
-//    }
 
 }

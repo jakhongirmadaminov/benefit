@@ -15,7 +15,7 @@
         android:layout_marginTop="6dp"
         android:layout_marginEnd="26dp"
         android:fontFamily="sans-serif"
-        android:maxLines="2"
+        android:maxLines="3"
         android:textColor="@color/primary_text"
         android:textFontWeight="400"
         android:textSize="16dp"

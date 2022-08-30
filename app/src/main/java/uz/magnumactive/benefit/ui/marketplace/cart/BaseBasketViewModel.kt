@@ -1,4 +1,4 @@
-package uz.magnumactive.benefit.ui.marketplace
+package uz.magnumactive.benefit.ui.marketplace.cart
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,9 +19,7 @@ open class BaseBasketViewModel(val api: AuthApiService) : ViewModel() {
     val addToCartResp = MutableLiveData<RequestState<MyBasketResultDTO>>()
     fun addToCart(id: Long, count: Int) {
         viewModelScope.launch {
-            makeRequest(addToCartResp) {
-                api.addToBasket(id, count)
-            }
+            makeRequest(addToCartResp) { api.addToBasket(id, count) }
         }
     }
 

@@ -88,7 +88,14 @@
             android:theme="@style/NoActionBar"
             android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name=".ui.marketplace.BasketActivity"
+            android:name=".ui.marketplace.cart.BasketActivity"
+            android:exported="false"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".ui.marketplace.place_order.PlaceOrderActivity"
             android:exported="false"
             android:label=""
             android:screenOrientation="portrait"
