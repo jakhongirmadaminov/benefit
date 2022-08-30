@@ -61,7 +61,8 @@ class BasketActivity : BaseActionbarActivity() {
                 RequestState.Loading -> {
                 }
                 is RequestState.Success -> {
-                    loadData(resp.value)
+                    viewModel.getMyCart()
+//                    loadData(resp.value)
                 }
             }
         }
@@ -76,7 +77,8 @@ class BasketActivity : BaseActionbarActivity() {
                 RequestState.Loading -> {
                 }
                 is RequestState.Success -> {
-                    loadData(resp.value)
+                    viewModel.getMyCart()
+//                    loadData(resp.value)
 
 //                    manipulatingItem?.let {
 //                        it.first.obj.count = it.first.obj.count?.plus(it.second)
@@ -98,7 +100,8 @@ class BasketActivity : BaseActionbarActivity() {
                 RequestState.Loading -> {
                 }
                 is RequestState.Success -> {
-                    loadData(resp.value)
+                    viewModel.getMyCart()
+                    //                    loadData(resp.value)
 //                    manipulatingItem?.let {
 //                        it.first.obj.count = it.first.obj.count?.plus(it.second)
 //                        adapter.notifyItemChanged(it.first.getPosition(it.first))
@@ -126,9 +129,9 @@ class BasketActivity : BaseActionbarActivity() {
     }
 
     private fun loadData(value: MyBasketResultDTO) {
-        if (!value.products.isNullOrEmpty()) {
+        if (!value.list.isNullOrEmpty()) {
             val cartEntries = arrayListOf<ItemCartEntry>()
-            value.products.forEach {
+            value.list.forEach {
                 cartEntries.add(
                     ItemCartEntry(it,
                         onInCrease = { itemCartEntry ->
@@ -136,7 +139,7 @@ class BasketActivity : BaseActionbarActivity() {
                                 && viewModel.removeFromCartResp.value !is RequestState.Loading
                             ) {
 //                                manipulatingItem = Pair(itemCartEntry, 1)
-                                viewModel.addToCart(it.id!!, 1)
+                                viewModel.addToCart(it.itemInfo?.id!!, 1)
                             }
                         },
                         onDecrease = { itemCartEntry ->
@@ -144,7 +147,7 @@ class BasketActivity : BaseActionbarActivity() {
                                 && viewModel.removeFromCartResp.value !is RequestState.Loading
                             ) {
 //                                manipulatingItem = Pair(itemCartEntry, -1)
-                                viewModel.removeFromCart(it.id!!, 1)
+                                viewModel.removeFromCart(it.itemInfo?.id!!, 1)
                             }
                         })
                 )

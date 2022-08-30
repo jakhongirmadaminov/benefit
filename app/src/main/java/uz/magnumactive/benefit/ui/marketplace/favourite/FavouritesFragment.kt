@@ -33,7 +33,7 @@ class FavouritesFragment : BaseFragment(R.layout.fragment_favourites) {
                     dialog.show(childFragmentManager, "")
                 },
                 onAddToCart = {
-                    viewModel.addToCart(it.id!!, 1)
+                    viewModel.addToCart(it.itemInfo?.id!!, 1)
                 })
         })
     }

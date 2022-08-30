@@ -7,5 +7,5 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class MyBasketResultDTO(
     @SerializedName("total_summa") val totalSum: Int? = null,
-    @SerializedName("list") val products: List<MarketBasketProductDTO>? = null
+    @SerializedName("list") val list: List<MarketBasketProductDTO>? = null
 ) : Parcelable

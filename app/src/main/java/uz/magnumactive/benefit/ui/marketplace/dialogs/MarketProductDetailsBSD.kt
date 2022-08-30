@@ -56,7 +56,7 @@ class MarketProductDetailsBSD(val obj: MarketProductDTO) : BenefitFixedHeightBSD
         }
 
         btnAddToCart.setOnClickListener {
-            details?.product?.let { viewModel.addToCart(it.id!!, 1) }
+            details?.product?.let { viewModel.addToCart(it.id!!, viewModel.count.value!!) }
         }
 
         ivPlus.setOnClickListener {

@@ -20,9 +20,7 @@ class ItemCartEntry(
                 DecimalFormat("#,###").format(obj.itemInfo?.realSumma!! * obj.count!!) + " UZS"
             tvCount.text = obj.count.toString()
             ivMinus.setOnClickListener {
-                if (obj.count!! > 1) {
                     onDecrease(this@ItemCartEntry)
-                }
             }
             ivPlus.setOnClickListener {
                 onInCrease(this@ItemCartEntry)

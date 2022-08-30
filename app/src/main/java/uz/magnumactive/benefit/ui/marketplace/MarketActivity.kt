@@ -92,12 +92,16 @@ class MarketActivity : BaseActivity() {
     private fun setupCartCard(value: MyBasketResultDTO) {
         val newConstraints = ConstraintSet()
         newConstraints.clone(container)
-        if (value.products == null || value.products.isEmpty()) {
+        if (value.list == null || value.list.isEmpty()) {
             newConstraints.connect(
                 R.id.cardAddedToCart,
                 ConstraintSet.TOP,
                 R.id.nav_view,
                 ConstraintSet.BOTTOM
+            )
+            newConstraints.clear(
+                R.id.cardAddedToCart,
+                ConstraintSet.BOTTOM,
             )
         } else {
             newConstraints.connect(
@@ -106,11 +110,16 @@ class MarketActivity : BaseActivity() {
                 R.id.nav_view,
                 ConstraintSet.TOP
             )
-            tvCartCount.text = value.products.size.toString()
+            newConstraints.clear(
+                R.id.cardAddedToCart,
+                ConstraintSet.TOP,
+            )
+            tvCartCount.text = value.list.size.toString()
             tvCartTotal.text =
                 DecimalFormat("#,###").format(value.totalSum) + " UZS"
         }
         container.setConstraintSet(newConstraints)
+        cardAddedToCart.requestLayout()
     }
 
 
