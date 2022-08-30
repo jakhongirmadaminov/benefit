@@ -42,7 +42,7 @@ class BasketActivity : BaseActionbarActivity() {
         ivCleanBasket.setOnClickListener {
             viewModel.cleanBasket()
         }
-        cardAddedToCart.setOnClickListener {
+        lblAdded.setOnClickListener {
             startActivity(Intent(this, PlaceOrderActivity::class.java))
         }
     }
@@ -118,6 +118,7 @@ class BasketActivity : BaseActionbarActivity() {
     private fun loadData(value: MyBasketResultDTO) {
         tvGrandTotal.text = DecimalFormat("#,###").format(value.totalSum) + " UZS"
         if (!value.list.isNullOrEmpty()) {
+            lblAdded.isEnabled = true
             ivCleanBasket.visibility = View.VISIBLE
             val cartEntries = arrayListOf<ItemCartEntry>()
             value.list.forEach {
@@ -141,6 +142,7 @@ class BasketActivity : BaseActionbarActivity() {
             }
             adapter.update(cartEntries)
         } else {
+            lblAdded.isEnabled = false
             ivCleanBasket.visibility = View.INVISIBLE
             adapter.clear()
             adapter.add(ItemProductListEmpty())

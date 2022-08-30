@@ -112,10 +112,21 @@
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/transaction_loading.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/StudioProjects/benefit/app/src/main/res/layout/transaction_success.xml" value="0.16574074074074074" />
         <entry key="app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.1315" />
+        <entry key="app/src/main/res/drawable/selector_btn_main.xml" value="0.1315" />
+        <entry key="app/src/main/res/drawable/selector_btn_main_round.xml" value="0.1315" />
+        <entry key="app/src/main/res/drawable/selector_grey.xml" value="0.1315" />
+        <entry key="app/src/main/res/drawable/selector_grey_round.xml" value="0.1315" />
+        <entry key="app/src/main/res/drawable/selector_grey_rounded.xml" value="0.1315" />
         <entry key="app/src/main/res/drawable/selector_heart.xml" value="0.1315" />
         <entry key="app/src/main/res/drawable/selector_like.xml" value="0.1315" />
+        <entry key="app/src/main/res/drawable/selector_orange.xml" value="0.1315" />
+        <entry key="app/src/main/res/drawable/selector_orange_round.xml" value="0.1315" />
+        <entry key="app/src/main/res/drawable/selector_radiobg_orange.xml" value="0.1315" />
+        <entry key="app/src/main/res/drawable/selector_right_more_rounded.xml" value="0.1315" />
         <entry key="app/src/main/res/drawable/selector_round_corners_orange.xml" value="0.1315" />
         <entry key="app/src/main/res/drawable/selector_rounded_top_corners.xml" value="0.22962962962962963" />
+        <entry key="app/src/main/res/drawable/selector_rounded_top_corners_grey.xml" value="0.1315" />
+        <entry key="app/src/main/res/drawable/selector_stroke_accent.xml" value="0.1315" />
         <entry key="app/src/main/res/drawable/shape_oval.xml" value="0.1315" />
         <entry key="app/src/main/res/drawable/shape_oval_orange.xml" value="0.1315" />
         <entry key="app/src/main/res/drawable/shape_top_rounded.xml" value="0.24259259259259258" />
@@ -192,6 +203,7 @@
         <entry key="app/src/main/res/layout/fragment_transfer_to_card_transaction.xml" value="0.17777777777777778" />
         <entry key="app/src/main/res/layout/grid_item_market_product.xml" value="0.20516304347826086" />
         <entry key="app/src/main/res/layout/item_active_order.xml" value="0.20516304347826086" />
+        <entry key="app/src/main/res/layout/item_active_order_entry.xml" value="0.1546875" />
         <entry key="app/src/main/res/layout/item_active_order_product_entry.xml" value="0.20516304347826086" />
         <entry key="app/src/main/res/layout/item_add_card.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/item_card.xml" value="0.25" />

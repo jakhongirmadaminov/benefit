@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import uz.magnumactive.benefit.remote.AuthApiService
-import uz.magnumactive.benefit.remote.models.ActiveOrderDTO
 import uz.magnumactive.benefit.remote.models.HistoryOrderDTO
 import uz.magnumactive.benefit.util.RequestState
 import uz.magnumactive.benefit.util.makeRequest

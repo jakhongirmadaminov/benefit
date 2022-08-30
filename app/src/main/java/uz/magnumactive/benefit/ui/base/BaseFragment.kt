@@ -34,7 +34,8 @@ abstract class BaseFragment(@LayoutRes layout: Int) : Fragment(layout) {
         observable: LiveData<RequestState<List<T>>>,
         recyclerView: RecyclerView,
         adapter: GroupAdapter<GroupieViewHolder>,
-        createItem: (obj: T) -> Item
+        layoutManager: RecyclerView.LayoutManager = GridLayoutManager(context, 2),
+        createItem: (obj: T) -> Item,
     ) {
         recyclerView.adapter = adapter
         observable.observe(viewLifecycleOwner) { requestState ->
@@ -52,7 +53,7 @@ abstract class BaseFragment(@LayoutRes layout: Int) : Fragment(layout) {
                     adapter.clear()
                     val result = resp.value
                     if (result.isNotEmpty()) {
-                        recyclerView.layoutManager = GridLayoutManager(context, 2)
+                        recyclerView.layoutManager = layoutManager
                         result.forEach {
                             adapter.add(createItem(it))
                         }

@@ -24,7 +24,13 @@ class ActiveOrdersFragment : BaseFragment(R.layout.fragment_active_orders) {
     }
 
     fun subscribeObservers() {
-        setupRVObservers(viewModel.activeOrders, rvActiveOrders, adapter) {
+
+        setupRVObservers(
+            viewModel.activeOrders,
+            rvActiveOrders,
+            adapter,
+            rvActiveOrders.layoutManager!!
+        ) {
             ItemActiveOrder(it)
         }
     }
