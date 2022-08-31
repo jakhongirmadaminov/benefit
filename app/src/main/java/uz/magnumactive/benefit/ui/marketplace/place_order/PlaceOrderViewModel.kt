@@ -3,6 +3,7 @@ package uz.magnumactive.benefit.ui.marketplace.place_order
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import uz.magnumactive.benefit.remote.AuthApiService
@@ -16,6 +17,7 @@ class PlaceOrderViewModel @Inject constructor(val authApi: AuthApiService) : Vie
 
 
     val preparedOrderResp = MutableLiveData<RequestState<PreparedOrderDTO>>()
+    var selectedLatLng: LatLng? = null
 
     fun getPreparedOrder() {
         viewModelScope.launch {

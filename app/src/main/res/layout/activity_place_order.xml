@@ -326,7 +326,7 @@
                         android:layout_marginHorizontal="26dp"
                         android:layout_marginVertical="37dp"
                         android:background="@drawable/selector_btn_main_round"
-                        android:enabled="true"
+                        android:enabled="false"
                         android:gravity="center"
                         android:text="@string/pay_purchase"
                         android:textSize="18dp"

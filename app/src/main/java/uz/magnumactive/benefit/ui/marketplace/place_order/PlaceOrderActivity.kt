@@ -1,5 +1,6 @@
 package uz.magnumactive.benefit.ui.marketplace.place_order
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -16,6 +17,7 @@ class PlaceOrderActivity : BaseActionbarActivity() {
 
 
     private val viewModel: PlaceOrderViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_place_order)
@@ -64,12 +66,17 @@ class PlaceOrderActivity : BaseActionbarActivity() {
     private fun attachListeners() {
 
         payPurchase.setOnClickListener {
+            viewModel.selectedLatLng?.let {
 
+            }
         }
 
         ivSetAddress.setOnClickListener {
-            val mapDialog = SelectAddressOnMapBSD { latLng, s ->
-
+            val mapDialog = SelectAddressOnMapBSD { latLng, locationString ->
+                tvAddress.text = locationString
+                viewModel.selectedLatLng = latLng
+                payPurchase.myEnabled(true)
+                payPurchase.setTextColor(Color.WHITE)
             }
             mapDialog.show(supportFragmentManager, "")
         }
