@@ -590,6 +590,12 @@ interface AuthApiService {
         @Field(value = "user_id", encoded = true) user_id: Long = AppPrefs.userId,
     ): RespFormat<List<HistoryOrderDTO>>
 
+    @POST("api/market/before-order")
+    @FormUrlEncoded
+    suspend fun prepareOrder(
+        @Field(value = "user_id", encoded = true) user_id: Long = AppPrefs.userId,
+    ): RespFormat<PreparedOrderDTO>
+
     @POST("api/market/detail-order")
     @FormUrlEncoded
     suspend fun myMarketOrderDetails(

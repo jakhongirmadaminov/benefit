@@ -294,5 +294,13 @@
     <string name="added_to_cart">Добавлено в корзину</string>
     <string name="basket">Корзина</string>
     <string name="place_order">Оформить заказ</string>
+    <string name="delivery_address">Адрес доставки</string>
+    <string name="delivery_time">Время доставки</string>
+    <string name="delivery_days">%1$s дня</string>
+    <string name="delivery_time_desc">Предварительно наш оператор свяжется с вами, чтобы уточнить время и адрес доставки</string>
+    <string name="with_bank_card">Банковской картой</string>
+    <string name="order_">Заказ</string>
+    <string name="delivery">Доставка</string>
+    <string name="pay_purchase">Оплатить покупку</string>
 
 </resources>
