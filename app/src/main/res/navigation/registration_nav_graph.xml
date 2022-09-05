@@ -82,6 +82,12 @@
                 app:argType="string"
                 app:nullable="true" />
 
+            <argument
+                android:name="isFromMarketPlace"
+                app:argType="boolean"
+                android:defaultValue="false"
+                app:nullable="false" />
+
         </action>
 
 

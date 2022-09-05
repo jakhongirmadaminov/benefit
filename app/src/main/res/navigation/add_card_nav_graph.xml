@@ -46,6 +46,12 @@
             app:argType="string"
             app:nullable="true" />
 
+        <argument
+            android:name="isFromMarketPlace"
+            android:defaultValue="false"
+            app:argType="boolean"
+            app:nullable="false" />
+
         <action
             android:id="@+id/action_cardConfirm_to_regEndFragment"
             app:destination="@id/regEndFragment"

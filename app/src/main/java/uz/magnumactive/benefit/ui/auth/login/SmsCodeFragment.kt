@@ -18,6 +18,8 @@ import splitties.experimental.ExperimentalSplittiesApi
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.ui.auth.registration.ResponseState
 import uz.magnumactive.benefit.ui.base.BaseFragment
+import uz.magnumactive.benefit.ui.main.home.bsd_add_card.AddCardBSD
+import uz.magnumactive.benefit.ui.main.home.bsd_add_card.IS_FROM_MARKETPLACE
 import uz.magnumactive.benefit.util.ResultError
 import uz.magnumactive.benefit.util.ResultSuccess
 import java.sql.Time
@@ -65,11 +67,23 @@ class SmsCodeFragment : BaseFragment(R.layout.fragment_code) {
         })
 
         viewModel.confirmNewCardResp.observe(viewLifecycleOwner, Observer {
-            when (it ?: return@Observer) {
+            val resp = it ?: return@Observer
+            when (resp) {
                 is ResultError -> {
                 }
                 is ResultSuccess -> {
-                    findNavController().navigate(R.id.action_cardConfirm_to_regEndFragment)
+                    val isFromMarketplace = arguments?.getBoolean(IS_FROM_MARKETPLACE) ?: false
+
+                    if (isFromMarketplace) {
+                        (parentFragment as? AddCardBSD)?.cardAdded?.invoke()
+                        (parentFragment as? AddCardBSD)?.dismiss()
+
+                    } else {
+                        findNavController().navigate(
+                            R.id.action_cardConfirm_to_regEndFragment,
+                        )
+                    }
+
                 }
             }
         })

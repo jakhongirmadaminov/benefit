@@ -5,10 +5,10 @@ import android.os.Parcelable
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import uz.magnumactive.benefit.R
-import uz.magnumactive.benefit.util.loadImageUrl
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
+import uz.magnumactive.benefit.R
+import uz.magnumactive.benefit.util.loadImageUrl
 
 @Parcelize
 data class CardDTO(
@@ -27,7 +27,8 @@ data class CardDTO(
     @SerializedName("pan") val panHidden: String? = null,
     @SerializedName("card_pan") val panOpen: String? = null,
     @SerializedName("phone") val phone: String? = null,
-    @SerializedName("status") val status: Int? = null
+    @SerializedName("status") val status: Int? = null,
+    var isChecked: Boolean = false
 ) : Parcelable {
 //
 //    val balanceWithoutTiyin: String?

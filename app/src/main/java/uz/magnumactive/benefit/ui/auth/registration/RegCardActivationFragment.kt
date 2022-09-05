@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment
@@ -15,6 +16,7 @@ import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.ui.base.BaseFragment
 import uz.magnumactive.benefit.ui.main.MainActivity
 import uz.magnumactive.benefit.ui.main.home.bsd_add_card.AddCardBSD
+import uz.magnumactive.benefit.ui.main.home.bsd_add_card.IS_FROM_MARKETPLACE
 import uz.magnumactive.benefit.ui.order_card.OrderCardActivity
 import uz.magnumactive.benefit.ui.select_card_type.SelectCardTypeActivity
 
@@ -43,7 +45,8 @@ class RegCardActivationFragment : BaseFragment(R.layout.fragment_reg_card_activa
             val action =
                 RegCardActivationFragmentDirections.actionRegCardActivationFragmentToCardConfirm(
                     result.cardId,
-                    null
+                    null,
+                    arguments?.getBoolean(IS_FROM_MARKETPLACE) ?: false
                 )
             findNavController().navigate(action)
         }
@@ -108,6 +111,14 @@ class RegCardActivationFragment : BaseFragment(R.layout.fragment_reg_card_activa
         edtExpiryDate.hint = "01/01"
         edtExpiryDate.onFocusChangeListener = listener2
         edtExpiryDate.addTextChangedListener(listener2)
+
+        val isFromMarketplace = arguments?.getBoolean(IS_FROM_MARKETPLACE) ?: false
+        if (isFromMarketplace) {
+            title.text = getString(R.string.add_card)
+            btnActivate.text = getString(R.string.add)
+        }
+        btnOrderCard.isVisible = !isFromMarketplace
+
     }
 
     private fun attachListeners() {

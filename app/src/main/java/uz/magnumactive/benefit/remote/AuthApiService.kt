@@ -564,12 +564,12 @@ interface AuthApiService {
     @POST("api/market/create-order")
     @FormUrlEncoded
     suspend fun marketCreateOrder(
-        @Field(value = "user_id", encoded = true) user_id: Long = AppPrefs.userId,
         @Field(value = "address", encoded = true) address: String,
         @Field(value = "lat", encoded = true) lat: Double,
         @Field(value = "lan", encoded = true) lan: Double,
         @Field(value = "card_id", encoded = true) card_id: Long,
-    ): RespFormat<Partner>
+        @Field(value = "user_id", encoded = true) user_id: Long = AppPrefs.userId,
+    ): RespFormat<Any>
 
     @POST("api/market/pay-order")
     @FormUrlEncoded

@@ -302,5 +302,8 @@
     <string name="order_">Заказ</string>
     <string name="delivery">Доставка</string>
     <string name="pay_purchase">Оплатить покупку</string>
+    <string name="add_card">Добавить карту</string>
+    <string name="add">Добавить</string>
+    <string name="order_placement_success">Платеж успешно проведен</string>
 
 </resources>
