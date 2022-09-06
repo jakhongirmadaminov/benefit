@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.fragment_partners_category.*
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.PartnerCategoryDTO
 import uz.magnumactive.benefit.ui.base.BaseFragment
+import uz.magnumactive.benefit.ui.marketplace.EXTRA_SELECTED_MARKET_CATEGORY
 import uz.magnumactive.benefit.ui.marketplace.MarketActivity
 import uz.magnumactive.benefit.ui.partners_map.PartnersMapActivity
 import uz.magnumactive.benefit.ui.viewgroups.BenefitMarketItem
@@ -81,7 +82,11 @@ class PartnersCategoryFragment : BaseFragment(R.layout.fragment_partners_categor
             marketPlaceAdapter.apply {
                 clear()
                 categories.forEach {
-                    add(BenefitMarketItem(it))
+                    add(BenefitMarketItem(it) {
+                        startActivity(Intent(requireActivity(), MarketActivity::class.java).apply {
+                            putExtra(EXTRA_SELECTED_MARKET_CATEGORY, it)
+                        })
+                    })
                 }
                 notifyDataSetChanged()
             }

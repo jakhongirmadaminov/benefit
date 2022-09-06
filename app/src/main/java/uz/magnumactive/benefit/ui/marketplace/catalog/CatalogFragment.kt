@@ -16,6 +16,7 @@ import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.MarketPlaceCategoryObj
 import uz.magnumactive.benefit.remote.models.MarketProductDTO
 import uz.magnumactive.benefit.ui.base.BaseFragment
+import uz.magnumactive.benefit.ui.marketplace.EXTRA_SELECTED_MARKET_CATEGORY
 import uz.magnumactive.benefit.ui.marketplace.MarketActivity
 import uz.magnumactive.benefit.ui.marketplace.search_result.SearchResultActivity
 import uz.magnumactive.benefit.ui.marketplace.selected_category.MarketSelectedCategoryActivity
@@ -36,6 +37,14 @@ class CatalogFragment : BaseFragment(R.layout.fragment_catalog) {
         viewModel.getCatalog()
         viewModel.getSaleItems()
 
+        arguments?.getParcelable<MarketPlaceCategoryObj>(EXTRA_SELECTED_MARKET_CATEGORY)
+            ?.let {
+                startActivity(
+                    Intent(
+                        requireActivity(),
+                        MarketSelectedCategoryActivity::class.java
+                    ).apply { putExtra(SELECTED_CATEGORY, it) })
+            }
         setupViews()
         attachListeners()
         subscribeObservers()

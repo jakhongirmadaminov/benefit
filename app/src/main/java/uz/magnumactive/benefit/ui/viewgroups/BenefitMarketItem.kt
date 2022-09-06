@@ -7,7 +7,7 @@ import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.MarketPlaceCategoryObj
 import uz.magnumactive.benefit.util.loadImageUrl
 
-class BenefitMarketItem(var marketItem: MarketPlaceCategoryObj) : Item() {
+class BenefitMarketItem(var marketItem: MarketPlaceCategoryObj, val onClick: () -> Unit) : Item() {
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.apply {
@@ -16,7 +16,7 @@ class BenefitMarketItem(var marketItem: MarketPlaceCategoryObj) : Item() {
             }
             tvMarketItemTitle.text = marketItem.title?.getLocalized()
             cardMarketItem.setOnClickListener {
-
+                onClick()
             }
         }
 

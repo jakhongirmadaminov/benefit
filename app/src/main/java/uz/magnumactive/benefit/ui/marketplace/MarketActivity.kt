@@ -20,13 +20,11 @@ import uz.magnumactive.benefit.ui.marketplace.cart.BasketActivity
 import uz.magnumactive.benefit.util.RequestState
 import java.text.DecimalFormat
 
+
+const val EXTRA_SELECTED_MARKET_CATEGORY = "EXTRA_SELECTED_MARKET_CATEGORY"
+
 @AndroidEntryPoint
 class MarketActivity : BaseActivity() {
-
-
-//    val addedToCart by Delegates.observable(ArrayList<MarketProductDTO>()) { property, oldValue, newValue ->
-//
-//    }
 
     val viewModel: MarketActivityViewModel by viewModels()
 
@@ -35,7 +33,9 @@ class MarketActivity : BaseActivity() {
         setContentView(R.layout.activity_market)
         setSupportActionBar(tool_bar)
 
-        val navController = findNavController(R.id.nav_host_fragment)
+        val navController = findNavController(R.id.nav_host_fragment).apply {
+            setGraph(R.navigation.market_navigation, intent.extras)
+        }
         nav_view.setupWithNavController(navController)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)

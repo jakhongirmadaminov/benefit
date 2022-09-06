@@ -117,6 +117,8 @@ class RegCardActivationFragment : BaseFragment(R.layout.fragment_reg_card_activa
             title.text = getString(R.string.add_card)
             btnActivate.text = getString(R.string.add)
         }
+        tvNext.isVisible = !isFromMarketplace
+        ivBack.isVisible = !isFromMarketplace
         btnOrderCard.isVisible = !isFromMarketplace
 
     }
