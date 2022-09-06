@@ -18,8 +18,8 @@
 
             <ImageView
                 android:id="@+id/ivBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="?android:actionBarSize"
+                android:layout_height="?android:actionBarSize"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:selectableItemBackground"
@@ -61,6 +61,7 @@
                 android:id="@+id/title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="?android:actionBarSize"
                 android:layout_marginTop="20dp"
                 android:fontFamily="sans-serif"
                 android:text="@string/card_activation"
@@ -68,7 +69,7 @@
                 android:textSize="26sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/tvNext"
-                app:layout_constraintStart_toEndOf="@id/ivBack"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
