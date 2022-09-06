@@ -14,7 +14,8 @@ import java.text.DecimalFormat
 class MarketFavouriteItem(
     val obj: MarketFavouriteProductDTO,
     val onClick: () -> Unit,
-    val onAddToCart: () -> Unit
+    val onAddToCart: () -> Unit,
+    val removeFromFavourites: () -> Unit,
 ) : Item() {
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
@@ -45,6 +46,9 @@ class MarketFavouriteItem(
                 }
                 btnAddToCard.setOnClickListener {
                     onAddToCart()
+                }
+                btnRemove.setOnClickListener {
+                    removeFromFavourites()
                 }
             }
         }

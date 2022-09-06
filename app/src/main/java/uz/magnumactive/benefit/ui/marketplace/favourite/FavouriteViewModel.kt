@@ -23,5 +23,14 @@ class FavouriteViewModel @Inject constructor(private val authClient: AuthApiServ
     }
 
 
+    val removeFromFavResp = MutableLiveData<RequestState<Any>>()
+
+    fun removeFromFav(id: Long) {
+        viewModelScope.launch {
+            makeRequest(removeFromFavResp) { authClient.removeFromFavourites(id) }
+        }
+    }
+
+
 
 }

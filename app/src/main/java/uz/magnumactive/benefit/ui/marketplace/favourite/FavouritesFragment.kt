@@ -34,6 +34,9 @@ class FavouritesFragment : BaseFragment(R.layout.fragment_favourites) {
                 },
                 onAddToCart = {
                     viewModel.addToCart(it.itemInfo?.id!!, 1)
+                },
+                removeFromFavourites = {
+                    viewModel.removeFromFav(it.itemInfo?.id!!)
                 })
         })
     }
@@ -50,6 +53,19 @@ class FavouritesFragment : BaseFragment(R.layout.fragment_favourites) {
                 is RequestState.Success -> {
                     (requireActivity() as MarketActivity).viewModel.getMyCart()
                     Snackbar.make(parent, R.string.added_to_cart, Snackbar.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        viewModel.removeFromFavResp.observe(viewLifecycleOwner) {
+            val resp = it ?: return@observe
+            when (resp) {
+                is RequestState.Error -> {
+                    Snackbar.make(parent, R.string.error, Snackbar.LENGTH_SHORT).show()
+                }
+                RequestState.Loading -> {}
+                is RequestState.Success -> {
+                    viewModel.getFavourites()
                 }
             }
         }
