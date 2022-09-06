@@ -1,7 +1,13 @@
 package uz.magnumactive.benefit.ui.marketplace.selected_category
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
@@ -10,6 +16,8 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_gap_chart.tool_bar
 import kotlinx.android.synthetic.main.activity_market_selected_category.*
+import kotlinx.android.synthetic.main.activity_market_selected_category.ivClear
+import kotlinx.android.synthetic.main.activity_market_selected_category.searchView
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.MarketAllSubCategoryDTO
 import uz.magnumactive.benefit.remote.models.MarketCategoryDTO
@@ -18,6 +26,7 @@ import uz.magnumactive.benefit.remote.models.TypeName
 import uz.magnumactive.benefit.ui.base.BaseActionbarActivity
 import uz.magnumactive.benefit.ui.marketplace.dialogs.MarketFilterBSD
 import uz.magnumactive.benefit.ui.marketplace.dialogs.MarketProductDetailsBSD
+import uz.magnumactive.benefit.ui.marketplace.search_result.SearchResultActivity
 import uz.magnumactive.benefit.ui.viewgroups.ItemLoading
 import uz.magnumactive.benefit.ui.viewgroups.ItemProductListEmpty
 import uz.magnumactive.benefit.ui.viewgroups.MarketGridProductItem
@@ -56,12 +65,29 @@ class MarketSelectedCategoryActivity : BaseActionbarActivity() {
                 })
             filterBsd.show(supportFragmentManager, "")
         }
+
+        searchView.doOnTextChanged { text, start, before, count ->
+            ivClear.isVisible = !text.isNullOrEmpty()
+        }
+
+        searchView.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                viewModel.search(searchView.text.toString())
+                return@OnEditorActionListener true
+            }
+            false
+        })
+
+        ivClear.setOnClickListener {
+            searchView.text.clear()
+        }
     }
 
     private fun setupView() {
 
         rvProducts.adapter = categoryProductsAdapter
         rvTags.adapter = categoryTagsAdapter
+
     }
 
     private fun subscribeObservers() {
@@ -106,6 +132,27 @@ class MarketSelectedCategoryActivity : BaseActionbarActivity() {
                 }
                 is RequestState.Success -> {
                     loadSubCategories(resp.value)
+                }
+            }
+        }
+
+        viewModel.searchResult.observe(this) {
+            when (it) {
+                is RequestState.Error -> {
+                    searchProgress.visibility = View.INVISIBLE
+                }
+                RequestState.Loading -> {
+                    searchProgress.visibility = View.VISIBLE
+                }
+                is RequestState.Success -> {
+                    searchProgress.visibility = View.INVISIBLE
+                    startActivity(
+                        Intent(this, SearchResultActivity::class.java).apply {
+                            putParcelableArrayListExtra(
+                                SearchResultActivity.SEARCH_RESULT,
+                                ArrayList(it.value.result)
+                            )
+                        })
                 }
             }
         }

@@ -5,10 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import uz.magnumactive.benefit.remote.AuthApiService
-import uz.magnumactive.benefit.remote.models.MarketAllSubCategoryDTO
-import uz.magnumactive.benefit.remote.models.MarketCategoryDTO
-import uz.magnumactive.benefit.remote.models.MarketPlaceCategoryObj
-import uz.magnumactive.benefit.remote.models.MarketProductDTO
+import uz.magnumactive.benefit.remote.models.*
 import uz.magnumactive.benefit.ui.marketplace.cart.BaseBasketViewModel
 import uz.magnumactive.benefit.ui.marketplace.dialogs.MarketFilterBSD
 import uz.magnumactive.benefit.util.RequestState
@@ -20,6 +17,7 @@ class MarketSelectedCategoryViewModel @Inject constructor(private val authClient
     BaseBasketViewModel(authClient) {
 
     lateinit var selectedCatg: MarketPlaceCategoryObj
+    val searchResult = MutableLiveData<RequestState<SearchResultDTO>>()
 
     var selectedSubCatg: MarketCategoryDTO? = null
         set(value) {
@@ -31,7 +29,6 @@ class MarketSelectedCategoryViewModel @Inject constructor(private val authClient
             field = value
             getProductsForCategory()
         }
-
 
     val subCategories = MutableLiveData<RequestState<MarketAllSubCategoryDTO>>()
     val categoryProductsResult = MutableLiveData<RequestState<List<MarketProductDTO>>>()
@@ -48,10 +45,15 @@ class MarketSelectedCategoryViewModel @Inject constructor(private val authClient
         }
     }
 
-
     fun getSubcategoriesFor() {
         viewModelScope.launch {
             makeRequest(subCategories) { authClient.getSubCategory(selectedCatg.id!!) }
+        }
+    }
+
+    fun search(query: String) {
+        viewModelScope.launch {
+            makeRequest(searchResult) { authClient.searchProducts(query) }
         }
     }
 
