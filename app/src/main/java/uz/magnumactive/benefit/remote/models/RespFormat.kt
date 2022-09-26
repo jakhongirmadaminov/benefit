@@ -24,3 +24,10 @@ data class ResultBody<T>(
     @SerializedName("error") val error: ErrorBody? = null,
     @SerializedName("data") val data: T? = null
 )
+
+data class PagedBody<T>(
+    @SerializedName("per-page") val perPage: Int? = null,
+    @SerializedName("total-element") val totalCount: Int? = null,
+    @SerializedName("total-page") val pageCount: Double? = null,
+    @SerializedName("data") val data: List<T>? = null,
+)

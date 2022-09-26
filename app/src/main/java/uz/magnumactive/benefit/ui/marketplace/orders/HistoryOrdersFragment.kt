@@ -18,8 +18,12 @@ class HistoryOrdersFragment : BaseFragment(R.layout.fragment_history_orders) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getHistoryOrders()
         subscribeObservers()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getHistoryOrders()
     }
 
     fun subscribeObservers() {

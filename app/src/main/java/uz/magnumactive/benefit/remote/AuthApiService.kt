@@ -485,9 +485,19 @@ interface AuthApiService {
     @GET("api/market/category")
     suspend fun getMarketProductsByCategory(
         @Query(value = "category_id", encoded = true) category_id: Long,
-        @Query(value = "category_sub_id", encoded = true) category_sub_id: Long? = null,
         @Query(value = "type", encoded = true) type: Int = 0,
+        @Query(value = "page", encoded = true) page: Int? = null,
+        @Query(value = "per-page", encoded = true) perPage: Int = 30,
     ): RespFormat<List<MarketProductDTO>>
+
+    @GET("api/market/category-sub")
+    suspend fun getMarketProductsByCategoryWithSub(
+        @Query(value = "category_id", encoded = true) category_id: Long,
+        @Query(value = "category_sub_id", encoded = true) category_sub_id: Long? = null,
+        @Query(value = "page", encoded = true) page: Int? = null,
+        @Query(value = "per-page", encoded = true) perPage: Int = 30,
+        @Query(value = "type", encoded = true) type: Int = 0,
+    ): RespFormat<PagedBody<MarketProductDTO>>
 
     @GET("api/market/all-subcategory")
     suspend fun getSubCategory(

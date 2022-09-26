@@ -18,6 +18,7 @@ import uz.magnumactive.benefit.remote.models.MarketProductDTO
 import uz.magnumactive.benefit.ui.base.BaseFragment
 import uz.magnumactive.benefit.ui.marketplace.EXTRA_SELECTED_MARKET_CATEGORY
 import uz.magnumactive.benefit.ui.marketplace.MarketActivity
+import uz.magnumactive.benefit.ui.marketplace.dialogs.MarketProductDetailsBSD
 import uz.magnumactive.benefit.ui.marketplace.search_result.SearchResultActivity
 import uz.magnumactive.benefit.ui.marketplace.selected_category.MarketSelectedCategoryActivity
 import uz.magnumactive.benefit.ui.marketplace.selected_category.MarketSelectedCategoryActivity.Companion.SELECTED_CATEGORY
@@ -115,13 +116,18 @@ class CatalogFragment : BaseFragment(R.layout.fragment_catalog) {
 
     private fun loadSaleItems(result: List<MarketProductDTO>) {
         saleItemsAdapter.clear()
+        llMarketPlace.isVisible = result.isNotEmpty()
+        rvMarket.isVisible = result.isNotEmpty()
+
         result.forEach {
             saleItemsAdapter.add(MarketSaleItem(it,
-                onClick = { },
+                onClick = {
+                    val dialog = MarketProductDetailsBSD(it)
+                    dialog.show(childFragmentManager, "")
+                },
                 onAddToCart = { viewModel.addToCart(it.id!!, 1) }
             ))
         }
-
     }
 
     private fun loadCategories(result: List<MarketPlaceCategoryObj>) {

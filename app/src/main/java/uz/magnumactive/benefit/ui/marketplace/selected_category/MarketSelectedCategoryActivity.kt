@@ -8,35 +8,30 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_gap_chart.tool_bar
 import kotlinx.android.synthetic.main.activity_market_selected_category.*
-import kotlinx.android.synthetic.main.activity_market_selected_category.ivClear
-import kotlinx.android.synthetic.main.activity_market_selected_category.searchView
+import kotlinx.coroutines.launch
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.MarketAllSubCategoryDTO
 import uz.magnumactive.benefit.remote.models.MarketCategoryDTO
-import uz.magnumactive.benefit.remote.models.MarketProductDTO
 import uz.magnumactive.benefit.remote.models.TypeName
 import uz.magnumactive.benefit.ui.base.BaseActionbarActivity
 import uz.magnumactive.benefit.ui.marketplace.dialogs.MarketFilterBSD
 import uz.magnumactive.benefit.ui.marketplace.dialogs.MarketProductDetailsBSD
 import uz.magnumactive.benefit.ui.marketplace.search_result.SearchResultActivity
-import uz.magnumactive.benefit.ui.viewgroups.ItemLoading
-import uz.magnumactive.benefit.ui.viewgroups.ItemProductListEmpty
-import uz.magnumactive.benefit.ui.viewgroups.MarketGridProductItem
 import uz.magnumactive.benefit.ui.viewgroups.MarketSubCategoryTagItem
 import uz.magnumactive.benefit.util.RequestState
 
 
 class MarketSelectedCategoryActivity : BaseActionbarActivity() {
 
-    private val categoryProductsAdapter = GroupAdapter<GroupieViewHolder>()
+    //    private val categoryProductsAdapter = GroupAdapter<GroupieViewHolder>()
+    private lateinit var adapter: MarketProductPagingAdapter
     private val categoryTagsAdapter = GroupAdapter<GroupieViewHolder>()
     private val viewModel: MarketSelectedCategoryViewModel by viewModels()
 
@@ -47,14 +42,30 @@ class MarketSelectedCategoryActivity : BaseActionbarActivity() {
         viewModel.selectedCatg = intent.getParcelableExtra(SELECTED_CATEGORY)!!
         tvTitle.text = viewModel.selectedCatg.title?.getLocalized()
 
-        viewModel.getProductsForCategory()
-        viewModel.getSubcategoriesFor()
         setupView()
         attachListeners()
         subscribeObservers()
+
+        viewModel.getProductsForCategory()
+        viewModel.getSubcategoriesFor()
+
     }
 
     private fun attachListeners() {
+
+        adapter.addLoadStateListener { loadState ->
+            if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1) {
+                rvProducts?.isVisible = false
+                emptyView?.isVisible = true
+                searchProgress.visibility = View.INVISIBLE
+            } else if (loadState.source.refresh is LoadState.Loading) {
+                searchProgress.visibility = View.VISIBLE
+            } else {
+                searchProgress.visibility = View.INVISIBLE
+                rvProducts?.isVisible = true
+                emptyView?.isVisible = false
+            }
+        }
         ivFilter.setOnClickListener {
             val filterBsd = MarketFilterBSD(
                 viewModel.filterSelection,
@@ -84,8 +95,14 @@ class MarketSelectedCategoryActivity : BaseActionbarActivity() {
     }
 
     private fun setupView() {
-
-        rvProducts.adapter = categoryProductsAdapter
+        adapter = MarketProductPagingAdapter(this,
+            onClick = {
+                val detailsBSD = MarketProductDetailsBSD(it)
+                detailsBSD.show(supportFragmentManager, "")
+            }, onAddToCart = {
+                viewModel.addToCart(it.id!!, 1)
+            })
+        rvProducts.adapter = adapter
         rvTags.adapter = categoryTagsAdapter
 
     }
@@ -108,19 +125,26 @@ class MarketSelectedCategoryActivity : BaseActionbarActivity() {
 
         viewModel.categoryProductsResult.observe(this) {
             val resp = it ?: return@observe
-            when (resp) {
-                is RequestState.Error -> {
-                    categoryProductsAdapter.clear()
-                }
-                RequestState.Loading -> {
-                    categoryProductsAdapter.clear()
-                    rvProducts.layoutManager = LinearLayoutManager(this)
-                    categoryProductsAdapter.add(ItemLoading())
-                }
-                is RequestState.Success -> {
-                    loadProducts(resp.value)
-                }
+
+
+
+            lifecycleScope.launch {
+                adapter.submitData(resp)
+                adapter.notifyDataSetChanged()
             }
+            //            when (resp) {
+//                is RequestState.Error -> {
+//                    categoryProductsAdapter.clear()
+//                }
+//                RequestState.Loading -> {
+//                    categoryProductsAdapter.clear()
+//                    rvProducts.layoutManager = LinearLayoutManager(this)
+//                    categoryProductsAdapter.add(ItemLoading())
+//                }
+//                is RequestState.Success -> {
+//                    loadProducts(resp.value)
+//                }
+//            }
         }
 
         viewModel.subCategories.observe(this) {
@@ -196,28 +220,28 @@ class MarketSelectedCategoryActivity : BaseActionbarActivity() {
         categoryTagsAdapter.notifyDataSetChanged()
     }
 
-    private fun loadProducts(value: List<MarketProductDTO>) {
-        categoryProductsAdapter.clear()
-        if (value.isNotEmpty()) {
-            rvProducts.layoutManager = GridLayoutManager(this, 2, VERTICAL, false)
-            value.forEach {
-                categoryProductsAdapter.add(
-                    MarketGridProductItem(it,
-                        onClick = {
-                            val detailsBSD = MarketProductDetailsBSD(it)
-                            detailsBSD.show(supportFragmentManager, "")
-                        },
-                        onAddToCart = {
-                            viewModel.addToCart(it.id!!, 1)
-                        })
-                )
-            }
-        } else {
-            rvProducts.layoutManager = LinearLayoutManager(this)
-            categoryProductsAdapter.add(ItemProductListEmpty())
-        }
-        categoryProductsAdapter.notifyDataSetChanged()
-    }
+//    private fun loadProducts(value: List<MarketProductDTO>) {
+//        categoryProductsAdapter.clear()
+//        if (value.isNotEmpty()) {
+//            rvProducts.layoutManager = GridLayoutManager(this, 2, VERTICAL, false)
+//            value.forEach {
+//                categoryProductsAdapter.add(
+//                    MarketGridProductItem(it,
+//                        onClick = {
+//                            val detailsBSD = MarketProductDetailsBSD(it)
+//                            detailsBSD.show(supportFragmentManager, "")
+//                        },
+//                        onAddToCart = {
+//                            viewModel.addToCart(it.id!!, 1)
+//                        })
+//                )
+//            }
+//        } else {
+//            rvProducts.layoutManager = LinearLayoutManager(this)
+//            categoryProductsAdapter.add(ItemProductListEmpty())
+//        }
+//        categoryProductsAdapter.notifyDataSetChanged()
+//    }
 
     companion object {
         const val SELECTED_CATEGORY = "SELECTED_CATEGORY"

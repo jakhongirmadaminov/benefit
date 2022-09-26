@@ -125,4 +125,11 @@ class PlaceOrderActivity : BaseActionbarActivity() {
             payPurchase.setTextColor(ContextCompat.getColor(this, R.color.textlightGrey))
         }
     }
+
+    companion object{
+        const val ORDER_PLACEMENT_SUCCESS= 232
+    }
+
 }
+
+

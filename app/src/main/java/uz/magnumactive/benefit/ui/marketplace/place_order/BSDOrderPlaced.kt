@@ -1,5 +1,6 @@
 package uz.magnumactive.benefit.ui.marketplace.place_order
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,7 @@ class BSDOrderPlaced : BenefitBSD() {
         super.onViewCreated(view, savedInstanceState)
         isCancelable = false
         tvClose.setOnClickListener {
+            requireActivity().setResult(Activity.RESULT_OK)
             requireActivity().finish()
             dismiss()
         }
