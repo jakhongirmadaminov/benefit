@@ -344,20 +344,18 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             }
         }
 
-
-        cardLimits.setOnClickListener {
-
-            viewModel.supremeCard.value?.let { supremeCard ->
-                startActivity(
-                    Intent(requireActivity(), LoanActivity::class.java).apply {
-                        putExtra(EXTRA_CARD, supremeCard)
-                    })
-            } ?: run {
-                val dialog = DialogYouHaveNoSupremeCard()
-                dialog.show(childFragmentManager, "")
-            }
-        }
-
+//        cardLimits.setOnClickListener {
+//
+//            viewModel.supremeCard.value?.let { supremeCard ->
+//                startActivity(
+//                    Intent(requireActivity(), LoanActivity::class.java).apply {
+//                        putExtra(EXTRA_CARD, supremeCard)
+//                    })
+//            } ?: run {
+//                val dialog = DialogYouHaveNoSupremeCard()
+//                dialog.show(childFragmentManager, "")
+//            }
+//        }
 
     }
 
@@ -368,7 +366,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         cardOval.setBackgroundResource(R.drawable.shape_oval)
         cardOvalExpenses.setBackgroundResource(R.drawable.shape_oval)
         cardOvalBranches.setBackgroundResource(R.drawable.shape_oval)
-        cardOvalLimits.setBackgroundResource(R.drawable.shape_oval)
+//        cardOvalLimits.setBackgroundResource(R.drawable.shape_oval)
 
     }
 
