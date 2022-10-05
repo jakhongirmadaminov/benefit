@@ -10,12 +10,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.asksira.bsimagepicker.BSImagePicker
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.fragment_reg_profile_setup.*
 import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.ui.base.BaseFragment
 import uz.magnumactive.benefit.util.AppPrefs
 import uz.magnumactive.benefit.util.Constants.MONTHS
 import uz.magnumactive.benefit.util.loadBitmap
-import kotlinx.android.synthetic.main.fragment_reg_profile_setup.*
 import java.util.*
 import javax.inject.Inject
 
@@ -122,7 +122,6 @@ class RegProfileSetupFragment @Inject constructor() :
     private fun validateFields() {
 
         btnReady.myEnabled(
-            viewModel.uploadAvatarResp.value != null &&
                     dob != null &&
                     !edtName.text.isNullOrBlank() &&
                     !edtLastName.text.isNullOrBlank()
