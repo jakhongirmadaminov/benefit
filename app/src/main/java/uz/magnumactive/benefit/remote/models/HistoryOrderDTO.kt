@@ -1,5 +1,5 @@
-package uz.magnumactive.benefit.remote.models
-
-class HistoryOrderDTO {
-
-}
+//package uz.magnumactive.benefit.remote.models
+//
+//data class HistoryOrderDTO (
+//
+//        )

@@ -12,7 +12,8 @@ import uz.magnumactive.benefit.util.makeRequest
 import javax.inject.Inject
 
 @HiltViewModel
-class FavouriteViewModel @Inject constructor(private val authClient: AuthApiService)  : BaseBasketViewModel(authClient) {
+class FavouriteViewModel @Inject constructor(private val authClient: AuthApiService) :
+    BaseBasketViewModel(authClient) {
 
     val favouritesResult = MutableLiveData<RequestState<List<MarketFavouriteProductDTO>>>()
 
@@ -31,6 +32,13 @@ class FavouriteViewModel @Inject constructor(private val authClient: AuthApiServ
         }
     }
 
+
+    val removeAllFromFavResp = MutableLiveData<RequestState<Any>>()
+    fun removeAllFromFav() {
+        viewModelScope.launch {
+            makeRequest(removeAllFromFavResp) { authClient.removeAllFromFavourites() }
+        }
+    }
 
 
 }

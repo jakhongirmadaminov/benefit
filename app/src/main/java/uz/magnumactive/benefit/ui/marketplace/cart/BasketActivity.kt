@@ -5,8 +5,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import androidx.activity.result.ActivityResultCallback
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -41,6 +39,12 @@ class BasketActivity : BaseActionbarActivity() {
     }
 
     private fun attachListeners() {
+        val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                viewModel.getMyCart()
+            }
+        }
+
         swipeRefresh.setOnRefreshListener {
             viewModel.getMyCart()
         }
@@ -49,11 +53,7 @@ class BasketActivity : BaseActionbarActivity() {
             viewModel.cleanBasket()
         }
         lblAdded.setOnClickListener {
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-                if(it.resultCode == Activity.RESULT_OK){
-                    viewModel.getMyCart()
-                }
-            }.launch(Intent(this, PlaceOrderActivity::class.java))
+            launcher.launch(Intent(this, PlaceOrderActivity::class.java))
         }
     }
 

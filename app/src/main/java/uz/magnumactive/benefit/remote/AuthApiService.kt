@@ -542,6 +542,13 @@ interface AuthApiService {
         @Field("user_id") user_id: Long = AppPrefs.userId,
     ): RespFormat<Any>
 
+    @POST("api/market/clean-elect")
+    @FormUrlEncoded
+    suspend fun removeAllFromFavourites(
+        @Query(value = "user_id", encoded = true) user_id: Long = AppPrefs.userId,
+        @Field("user_id") userid: Long = AppPrefs.userId,
+    ): RespFormat<Any>
+
     @POST("api/market/clean-basket")
     @FormUrlEncoded
     suspend fun cleanBasket(
@@ -598,7 +605,7 @@ interface AuthApiService {
     @FormUrlEncoded
     suspend fun getHistoryOrders(
         @Field(value = "user_id", encoded = true) user_id: Long = AppPrefs.userId,
-    ): RespFormat<List<HistoryOrderDTO>>
+    ): RespFormat<List<ActiveOrderDTO>>
 
     @POST("api/market/before-order")
     @FormUrlEncoded

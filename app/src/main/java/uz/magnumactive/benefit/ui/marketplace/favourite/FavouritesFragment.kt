@@ -2,6 +2,7 @@ package uz.magnumactive.benefit.ui.marketplace.favourite
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
@@ -39,6 +40,20 @@ class FavouritesFragment : BaseFragment(R.layout.fragment_favourites) {
                     viewModel.removeFromFav(it.itemInfo?.id!!)
                 })
         })
+
+        viewModel.favouritesResult.observe(viewLifecycleOwner) { requestState ->
+            val resp = requestState ?: return@observe
+            when (resp) {
+                is RequestState.Success -> {
+                    (requireActivity() as MarketActivity).setFavCleanVisibility(resp.value.isNotEmpty())
+                }
+                else -> {}
+            }
+        }
+    }
+
+    fun onCleanFavsClick() {
+        viewModel.removeAllFromFav()
     }
 
     private fun subscribeObservers() {
@@ -47,10 +62,15 @@ class FavouritesFragment : BaseFragment(R.layout.fragment_favourites) {
             val resp = it ?: return@observe
             when (resp) {
                 is RequestState.Error -> {
+                    progress.isVisible = false
                     Snackbar.make(parent, R.string.error, Snackbar.LENGTH_SHORT).show()
                 }
-                RequestState.Loading -> {}
+                RequestState.Loading -> {
+                    progress.isVisible = true
+
+                }
                 is RequestState.Success -> {
+                    progress.isVisible = false
                     (requireActivity() as MarketActivity).viewModel.getMyCart()
                     Snackbar.make(parent, R.string.added_to_cart, Snackbar.LENGTH_SHORT).show()
                 }
@@ -61,14 +81,36 @@ class FavouritesFragment : BaseFragment(R.layout.fragment_favourites) {
             val resp = it ?: return@observe
             when (resp) {
                 is RequestState.Error -> {
+                    progress.isVisible = false
                     Snackbar.make(parent, R.string.error, Snackbar.LENGTH_SHORT).show()
                 }
-                RequestState.Loading -> {}
+                RequestState.Loading -> {
+                    progress.isVisible = true
+                }
                 is RequestState.Success -> {
+                    progress.isVisible = false
                     viewModel.getFavourites()
                 }
             }
         }
+
+        viewModel.removeAllFromFavResp.observe(viewLifecycleOwner) {
+            val resp = it ?: return@observe
+            when (resp) {
+                is RequestState.Error -> {
+                    progress.isVisible = false
+                    Snackbar.make(parent, R.string.error, Snackbar.LENGTH_SHORT).show()
+                }
+                RequestState.Loading -> {
+                    progress.isVisible = true
+                }
+                is RequestState.Success -> {
+                    progress.isVisible = false
+                    viewModel.getFavourites()
+                }
+            }
+        }
+
     }
 
     private fun attachListeners() {

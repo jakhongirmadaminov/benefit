@@ -9,6 +9,8 @@ import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.view.isVisible
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,6 +19,7 @@ import uz.magnumactive.benefit.R
 import uz.magnumactive.benefit.remote.models.MyBasketResultDTO
 import uz.magnumactive.benefit.ui.base.BaseActivity
 import uz.magnumactive.benefit.ui.marketplace.cart.BasketActivity
+import uz.magnumactive.benefit.ui.marketplace.favourite.FavouritesFragment
 import uz.magnumactive.benefit.util.RequestState
 import java.text.DecimalFormat
 
@@ -27,13 +30,13 @@ const val EXTRA_SELECTED_MARKET_CATEGORY = "EXTRA_SELECTED_MARKET_CATEGORY"
 class MarketActivity : BaseActivity() {
 
     val viewModel: MarketActivityViewModel by viewModels()
-
+    lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_market)
         setSupportActionBar(tool_bar)
 
-        val navController = findNavController(R.id.nav_host_fragment).apply {
+        navController = findNavController(R.id.nav_host_fragment).apply {
             setGraph(R.navigation.market_navigation, intent.extras)
         }
         nav_view.setupWithNavController(navController)
@@ -47,6 +50,10 @@ class MarketActivity : BaseActivity() {
 
         container.layoutTransition.enableTransitionType(CHANGING)
 
+
+//        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+//            ivCleanFavs.isVisible = destination.id == R.id.nav_favourites
+//        }
         attachListeners()
         subscribeObservers()
     }
@@ -56,6 +63,17 @@ class MarketActivity : BaseActivity() {
         cardAddedToCart.setOnClickListener {
             startActivity(Intent(this, BasketActivity::class.java))
         }
+
+        ivCleanFavs.setOnClickListener {
+            val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+            navHostFragment?.childFragmentManager?.fragments?.get(0)?.let {
+                (it as? FavouritesFragment)?.onCleanFavsClick()
+            }
+        }
+    }
+
+    fun setFavCleanVisibility(isVisible: Boolean) {
+        ivCleanFavs.isVisible = isVisible
     }
 
     override fun onResume() {

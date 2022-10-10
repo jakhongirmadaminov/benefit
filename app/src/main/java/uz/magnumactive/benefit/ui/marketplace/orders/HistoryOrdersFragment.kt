@@ -3,6 +3,7 @@ package uz.magnumactive.benefit.ui.marketplace.orders
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_history_orders.*
@@ -27,7 +28,12 @@ class HistoryOrdersFragment : BaseFragment(R.layout.fragment_history_orders) {
     }
 
     fun subscribeObservers() {
-        setupRVObservers(viewModel.historyOrders, rvHistoryOrders, adapter) {
+        setupRVObservers(
+            viewModel.historyOrders,
+            rvHistoryOrders,
+            adapter,
+            LinearLayoutManager(context)
+        ) {
             ItemHistoryOrder(it)
         }
     }
