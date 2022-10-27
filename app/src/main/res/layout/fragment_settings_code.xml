@@ -70,7 +70,7 @@
         android:layout_marginRight="42dp"
         android:fontFamily="sans-serif-light"
         android:gravity="center"
-        android:text="В течении минуты на указанный номер +998903505593 вы получите 4-значный смс-код"
+        android:text="В течении минуты мы отправим 4-значный смс-код на указанный номер"
         android:textColor="#cc5c5c5c"
         android:textSize="14sp"
         android:textStyle="normal"
